@@ -1,0 +1,48 @@
+
+<!-- <div class="pointerCursor" (click)="collapseExpand()">
+   Accordion Header {{accordionExpanded}}
+   <input type="checkbox" name="vehicle1" value="Bike"> I have a bike<br>
+</div>
+<div *ngIf="accordionExpanded">
+    <div  *ngFor="let option of options" >
+       <div *ngIf="option.item_id == 1">
+          <input type="checkbox" name="vehicle" value="Bike">{{option.item_text}}<br>
+       </div>
+       <div *ngIf="option.item_id == 2">
+          <custom-accordion [options]="option.item_Source"></custom-accordion>
+       </div>
+    </div>
+</div> -->
+
+<!-- <div style="width:500px;border:1px solid green" (click)="toggleAccordion()">
+    <input type="checkbox" name="vehicle1" value="Bike"> I have a bike<br>
+  </div>
+  <div *ngIf="isOpen">
+      <div *ngFor="let option of options" style="margin-left:30px">
+        <div *ngIf="!option.children">
+           <input type="checkbox" [value]="option.id">{{option.value}}
+        </div>
+        <div *ngIf="option.children">
+            <custom-accordion [options]="option.children" [toggle]="isOpen"></custom-accordion>
+        </div>
+      </div>
+  </div> -->
+  <div [attr.id]="'accordion_' + i + loopCount" *ngFor="let option of options; let i = index;">
+      <div class="card">
+          <div class="card-header">
+              <h5 class="mb-0">
+                  <input type="checkbox" [(ngModel)]="option.selected"  (change)="checkAll(option)" /> {{option.value}} {{'row' +  i + loopCount}}
+                     <a role="button" data-toggle="collapse" [attr.href]="'#collapseOne_' + i + loopCount" *ngIf="option.children">
+                  accordion
+                </a>
+              </h5>
+          </div>
+          <div [attr.id]="'collapseOne_' + i + loopCount" class="collapse" >
+              <div class="card-body">
+                <custom-accordion [options]="option.children" [loopCount]="loopCount + i + 1"></custom-accordion>
+              </div>
+          </div>
+      </div>
+  </div>
+
+

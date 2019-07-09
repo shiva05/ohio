@@ -1,0 +1,26 @@
+<button>Update Search</button>
+<div class="col-md-12">
+  <div class="col-md-10">
+    <div class="col-md-10">
+      <div  *ngFor="let item of FilterSummaryData">
+          <div *ngIf="item.fieldType == 1">
+              <div>
+                <label>{{item.fieldName}} :</label>
+                <label>{{item.fieldValue}}</label> |
+              </div>
+          </div>
+          <div *ngIf="item.fieldType == 2">
+                <label>{{item.fieldAcadamicName}} : </label>
+                <label>{{item.fieldAcadamicValue}}</label> |
+                <label>{{item.fieldGradeName}} :</label>
+                <label>{{item.fieldGradeValue}}</label> |
+                <label>{{item.fieldClusterName}} :</label>
+                <label>{{item.fieldClusterValue}}</label> |
+                <label>{{item.fieldStandardNumberName}} :</label>
+                <label>{{item.fieldStandardNumberValue}}</label>
+          </div>
+      </div>
+
+    </div>
+  </div>
+</div>

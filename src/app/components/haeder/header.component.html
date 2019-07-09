@@ -1,0 +1,49 @@
+<!-- <div class="header">
+  <a href="#default" class="logo">Standard By Design</a>
+  <div class="header-right">
+    <a class="active" (click)="goToPage('Search')" >Search</a>
+    <a  (click)="goToPage('SearchResults')" >Search Results </a>
+    <a  (click)="goToPage('Report')" >Report</a>
+  </div>
+</div> -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #730015;">
+  <a class="navbar-brand" href="#">Standard By Design</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="active" (click)="goToPage('Search')">Search</a>
+      </li>
+      <li class="nav-item">
+        <a (click)="goToPage('SearchResults')">Search Results </a>
+      </li>
+      <li class="nav-item">
+        <a (click)="goToPage('Report')">Report</a>
+      </li>
+    </ul>
+
+    <!-- Right-side of Navbar -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link"><img src="../../assets/social-media-btn/facebook.png" /></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"><img src="../../assets/social-media-btn/twitter.png" /></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"><img src="../../assets/social-media-btn/youtube.png" /></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"><img src="../../assets/social-media-btn/linkedin.png" /></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"><img src="../../assets/social-media-btn/rss.png" /></a>
+      </li>
+    </ul>
+
+  </div>
+</nav>

@@ -1,0 +1,178 @@
+<!-- <div>
+  <div class="col-md-12">
+    <div class="col-md-6">
+        <div class="col-md-3">
+            <label>Key words</label>
+            <input type="text"[(ngModel)]="selectedKeyword" >
+          </div>
+    </div>
+    <div class="col-md-6">
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <label>Career field</label>
+      <ng-multiselect-dropdown class="multiselect-large" [data]="careers" [(ngModel)]="selectedCareer" [settings]="dropdownSettings"
+        (onSelectAll)="onSelectAll($event)">
+      </ng-multiselect-dropdown>
+    </div>
+    <div class="col-md-6">
+      <label>Acadamic subjects</label>
+      <ng-multiselect-dropdown class="" [data]="acadamicSubjects" [(ngModel)]="selectedAcadamicSubjects" [settings]="dropdownSettings" (onSelect)="onAcadamicSubjectSelect($event)"
+        (onSelectAll)="onSelectAll($event)">
+      </ng-multiselect-dropdown>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <div class="col-md-3">
+        <label>Standards</label>
+        <ng-multiselect-dropdown class="multiselect-large" [data]="stadards" [(ngModel)]="selectedStandards" [settings]="dropdownSettings"
+          (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="col-md-3">
+        <label>Outcome</label>
+        <ng-multiselect-dropdown class="" [data]="outcomes" [(ngModel)]="selectedOutcome" [settings]="dropdownSettings"
+          (onSelectAll)="onSelectAll($event)">
+        </ng-multiselect-dropdown>
+      </div>
+    </div>
+    <div class="col-md-6" *ngFor="let policy of selectedAcadamicSubjects;let i = index;" >
+          <label>{{ policy.item_text}}</label>
+          <div class="col-md-12">
+            <div class="col-md-4">
+                <label>Grade</label>
+                <ng-multiselect-dropdown class="" [data]="grades" [(ngModel)]="selectedGrades[i]" [settings]="dropdownSettings" (onSelect)="onGradeSelect(selectedGrades[i],policy)"
+                (onSelectAll)="onSelectAll($event)">
+              </ng-multiselect-dropdown>
+            </div>
+            <div class="col-md-4">
+                <label>Cluster</label>
+                <ng-multiselect-dropdown class="" [data]="clusters" [(ngModel)]="selectedClusters[i]" [settings]="dropdownSettings" (onSelect)="onClusterSelect(selectedClusters[i],policy)"
+                (onSelectAll)="onSelectAll($event)">
+              </ng-multiselect-dropdown>
+            </div>
+            <div class="col-md-4">
+                <label>Standard Number</label>
+                <ng-multiselect-dropdown class="" [data]="standardNumbers" [(ngModel)]="selectedStandardNumbers[i]" [settings]="dropdownSettings" (onSelect)="onStandardNumberSelect(selectedStandardNumbers[i],policy)"
+                (onSelectAll)="onSelectAll($event)">
+              </ng-multiselect-dropdown>
+            </div>
+          </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+      <div class="col-md-6">
+        <div class="col-md-3">
+          <label>Competency Number</label>
+          <input type="text" [(ngModel)]="selectedCompetencyNumber">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-6">
+          <div class="col-md-3">
+
+          </div>
+        </div>
+        <div  class="col-md-6">
+          <div class="col-md-3">
+
+          </div>
+          <div class="col-md-3">
+              <button>Cancel</button>
+              <button (click)="search()">Search</button>
+          </div>
+        </div>
+      </div>
+</div> -->
+
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 search-header">
+      <h4>Search</h4>
+    </div>
+    <!-- End of Row -->
+  </div>
+  <div class="row">
+    <!-- Search Form Begin -->
+    <section class="search-form col-md-12">
+      <div class="form-group col-md-6">
+        <label for="keywordInput">Keywords</label>
+        <input type="search" class="form-control" id="keywordInput" placeholder="Keywords . . .">
+      </div>
+
+      <hr>
+
+      <!-- Dropdown row -->
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label>Career field</label>
+          <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="careers" [(ngModel)]="selectedCareer"
+            [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+          </ng-multiselect-dropdown>
+        </div>
+        <div class="form-group col-md-6">
+          <label>Acadamic subjects</label>
+          <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="acadamicSubjects" [(ngModel)]="selectedAcadamicSubjects"
+            [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+          </ng-multiselect-dropdown>
+        </div>
+        <div *ngFor="let policy of selectedAcadamicSubjects;let i = index;">
+          <div class="form-group col-md-6">
+            <label>Grade</label>
+            <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="grades" [(ngModel)]="selectedGrades[i]" [settings]="dropdownSettings"
+              (onSelect)="onClusterSelect(selectedClusters[i],policy)" (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown>
+          </div>
+          <div class="form-group col-md-3">
+            <label>Cluster</label>
+            <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="clusters" [(ngModel)]="selectedClusters[i]" [settings]="dropdownSettings"
+              (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown>
+          </div>
+          <div class="form-group col-md-3">
+            <label>Standard Number</label>
+            <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="standardNumbers" [(ngModel)]="selectedStandardNumbers[i]" [settings]="dropdownSettings"
+              (onSelect)="onStandardNumberSelect(selectedStandardNumbers[i],policy)" (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown>
+          </div>
+        </div>`
+        <div class="form-group col-md-3">
+          <label>Standards</label>
+          <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="stadards" [(ngModel)]="selectedStandards"
+            [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+          </ng-multiselect-dropdown>
+        </div>
+        <div class="form-group col-md-3">
+          <label>Outcome</label>
+          <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="outcomes" [(ngModel)]="selectedOutcome"
+            [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+          </ng-multiselect-dropdown>
+        </div>
+        <!-- End Dropdown Row -->
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="competencyInput">Competency Number</label>
+        <input type="search" class="form-control" id="competencyInput" placeholder="Competency . . .">
+      </div>
+
+      <!-- Button Row -->
+      <div class="row button-row">
+        <button type="button" class="btn btn-outline-secondary col-md-2 offset-md-7 button-space">Cancel</button>
+        <button type="button" class="btn btn-info col-md-2" [routerLink]="['/results']"
+        (click)="search()">Search</button>
+      </div>
+
+
+    </section>
+
+  </div>
+
+  <!-- End of Container -->
+</div>
+

@@ -1,0 +1,20 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.nav-item {
+  color: white;
+  overflow: hidden;
+}
+.nav-item a {
+  color: white;
+  padding: 0 10px 0 10px;
+  font-size: 18px;
+}
+.nav-item a:hover {
+  color: white;
+}
+
+.nav-item a.active {
+  color: white;
+}
