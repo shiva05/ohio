@@ -44,6 +44,13 @@
         <a class="nav-link"><img src="../../assets/social-media-btn/rss.png" /></a>
       </li>
     </ul>
+    <h3>Tutorials</h3>
+    <ul>
+      <button (click)="addTutorial()"></button>
+      <li *ngFor="let test of tests | async">
+        <a [href]="test.url" target="_blank">{{ test.name }}</a>
+      </li>
+    </ul>
 
   </div>
 </nav>
