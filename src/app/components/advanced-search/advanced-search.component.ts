@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import * as util from 'util';
 
-import { SearchSchoolStandardsService } from '../../_services/search-school-standards/search-school-standards.service';
+//import { SearchSchoolStandardsService } from '../../_services/search-school-standards/search-school-standards.service';
 
 @Component({
   selector: 'advanced-search',
@@ -14,8 +14,7 @@ import { SearchSchoolStandardsService } from '../../_services/search-school-stan
 export class AdvancedSearchComponent implements OnInit {
 
   constructor(private httpService: HttpClient,
-              private ref: ChangeDetectorRef,
-              private searchSchoolStandardsService: SearchSchoolStandardsService) { }
+              private ref: ChangeDetectorRef) { }
 
   disabled = false;
   ShowFilter = true;

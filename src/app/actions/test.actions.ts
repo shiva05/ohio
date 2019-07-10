@@ -4,6 +4,13 @@ import { Test } from './../models/test.model'
 
 export const ADD_TEST       = '[TEST] Add'
 export const REMOVE_TEST    = '[TEST] Remove'
+export const LOAD_TEST    = '[TEST] Load'
+
+export class LoadTest implements Action {
+  readonly type = LOAD_TEST
+
+
+}
 
 export class AddTest implements Action {
   readonly type = ADD_TEST
@@ -17,4 +24,5 @@ export class RemoveTest implements Action {
   constructor(public payload: number) {}
 }
 
-export type Actions = AddTest | RemoveTest
+
+export type Actions = AddTest | RemoveTest | LoadTest

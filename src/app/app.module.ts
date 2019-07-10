@@ -10,11 +10,13 @@ import { AdvancedSearchComponent} from './components/advanced-search/advanced-se
 import { CustomAccordionComponent } from './components/custom-accordion/custom-accordion.component';
 import { FilterSummaryComponent } from './components/filter-summary/filter-summary.component';
 import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { TestService } from '../app/services/test.service';
 // import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
 import {testReducer } from './reducers/test.reducer';
+import { TestEffects } from './effects/test.effect';
 
 
 
@@ -28,6 +30,7 @@ import {testReducer } from './reducers/test.reducer';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     NgMultiSelectDropDownModule.forRoot(),
     FormsModule,
@@ -35,10 +38,10 @@ import {testReducer } from './reducers/test.reducer';
     // StoreModule.forRoot(reducers, { metaReducers }),
     StoreModule.forRoot({test: testReducer}),
     StoreDevtoolsModule.instrument({maxAge:100,name:'tng1'}),
-    EffectsModule.forRoot([AppEffects])
+    EffectsModule.forRoot([TestEffects])
 
   ],
-  providers: [],
+  providers: [TestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -29,6 +29,7 @@ export class HeaderComponent {
  addTutorial(name, url) {
 
   this.store.dispatch(new TestActions.AddTest({name :'Test State',url:'google.com'}));
+
 }
 
 }
