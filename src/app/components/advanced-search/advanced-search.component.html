@@ -88,8 +88,6 @@
       </div>
 </div> -->
 
-
-
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12 search-header">
@@ -121,26 +119,34 @@
             [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
           </ng-multiselect-dropdown>
         </div>
+      </div>
+
+        <!-- Dynamic dropdowns of Academic subjects -->
+        <div class="row">
         <div *ngFor="let policy of selectedAcadamicSubjects;let i = index;">
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-12">
             <label>Grade</label>
             <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="grades" [(ngModel)]="selectedGrades[i]" [settings]="dropdownSettings"
               (onSelect)="onClusterSelect(selectedClusters[i],policy)" (onSelectAll)="onSelectAll($event)">
             </ng-multiselect-dropdown>
           </div>
-          <div class="form-group col-md-3">
+          <div class="form-group col-md-12">
             <label>Cluster</label>
             <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="clusters" [(ngModel)]="selectedClusters[i]" [settings]="dropdownSettings"
               (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
             </ng-multiselect-dropdown>
           </div>
-          <div class="form-group col-md-3">
+          <div class="form-group col-md-12">
             <label>Standard Number</label>
             <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="standardNumbers" [(ngModel)]="selectedStandardNumbers[i]" [settings]="dropdownSettings"
               (onSelect)="onStandardNumberSelect(selectedStandardNumbers[i],policy)" (onSelectAll)="onSelectAll($event)">
             </ng-multiselect-dropdown>
           </div>
-        </div>`
+          <!-- End of Dynamic dropdowns of Academic subjects -->
+        </div>
+      </div>
+
+      <div class="row">
         <div class="form-group col-md-3">
           <label>Standards</label>
           <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="stadards" [(ngModel)]="selectedStandards"
@@ -156,6 +162,8 @@
         <!-- End Dropdown Row -->
       </div>
 
+
+    
       <div class="form-group col-md-6">
         <label for="competencyInput">Competency Number</label>
         <input type="search" class="form-control" id="competencyInput" placeholder="Competency . . .">

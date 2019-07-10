@@ -1,0 +1,25 @@
+.filter-header h4 {
+    color: #700017;
+    margin: 30px 0 30px 0;
+}
+hr {
+    border: 1px solid white;
+}
+.filter-form {
+    color: white;
+    background-color: #700017;
+    padding: 20px 15px 25px 15px;
+    margin: 0;
+}
+.button-space {
+    margin-right: 10px;
+}
+label {
+    white-space: pre;
+}
+.float-right {
+    float: right;
+}
+.update-search {
+    padding: 10px 20px 10px 20px;
+}
