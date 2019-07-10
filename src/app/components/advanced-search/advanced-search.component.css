@@ -1,21 +1,5 @@
-
-/*
-.dropdown-btn {
-  color: white;
-  background-color: aliceblue;
-}
-.multiselect-dropdown {
-  color: white;
-  background-color: aliceblue;
-}
-.multiSelect {
-  color: white;
-  background-color: aliceblue;
-} */
-
-
 .search-header h4 {
-    color: darkred;
+    color: #700017;
     margin: 30px 0 30px 0;
 }
 hr {
@@ -24,7 +8,7 @@ hr {
 }
 .search-form {
     color: white;
-    background-color: darkred;
+    background-color: #700017;
     padding: 20px 15px 25px 15px;
     margin: 0;
 }

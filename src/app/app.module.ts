@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import {HeaderComponent } from './components/haeder/header.component';
+import {HeaderComponent } from './components/header/header.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AdvancedSearchComponent} from './components/advanced-search/advanced-search.component';
 import { CustomAccordionComponent } from './components/custom-accordion/custom-accordion.component';
@@ -27,6 +28,7 @@ import { AppEffects } from './app.effects';
     NgMultiSelectDropDownModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([AppEffects])
   ],

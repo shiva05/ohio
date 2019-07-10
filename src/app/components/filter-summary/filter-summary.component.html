@@ -1,26 +1,41 @@
-<button>Update Search</button>
-<div class="col-md-12">
-  <div class="col-md-10">
-    <div class="col-md-10">
-      <div  *ngFor="let item of FilterSummaryData">
-          <div *ngIf="item.fieldType == 1">
-              <div>
-                <label>{{item.fieldName}} :</label>
-                <label>{{item.fieldValue}}</label> |
-              </div>
-          </div>
-          <div *ngIf="item.fieldType == 2">
-                <label>{{item.fieldAcadamicName}} : </label>
-                <label>{{item.fieldAcadamicValue}}</label> |
-                <label>{{item.fieldGradeName}} :</label>
-                <label>{{item.fieldGradeValue}}</label> |
-                <label>{{item.fieldClusterName}} :</label>
-                <label>{{item.fieldClusterValue}}</label> |
-                <label>{{item.fieldStandardNumberName}} :</label>
-                <label>{{item.fieldStandardNumberValue}}</label>
-          </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 filter-header">
+      <h4>Search Criteria</h4>
+    </div>
+    <!-- End of Row -->
+  </div>
+  <div class="row">
+    <!-- filter Form Begin -->
+    <section class="filter-form col-md-12">
+
+
+
+      <button class="float-right btn btn-info update-search">Update Search</button>
+
+
+      <div class="col-md-12">
+          <span *ngFor="let item of FilterSummaryData; let i = index">
+            <span *ngIf="item.fieldType == 1">
+              <span *ngIf="i != item.length && i != 0"> | </span>
+              <label>{{item.fieldName}}: </label>
+              <span class="badge badge-light">{{item.fieldValue}}</span> 
+            </span>
+            <span *ngIf="item.fieldType == 2">
+              <hr>
+              <label>{{item.fieldAcadamicName}}: </label>
+              <span class="badge badge-light">{{item.fieldAcadamicValue}}</span> |
+              <label>{{item.fieldGradeName}}: </label>
+              <span class="badge badge-light">{{item.fieldGradeValue}}</span> |
+              <label>{{item.fieldClusterName}}: </label>
+              <span class="badge badge-light">{{item.fieldClusterValue}}</span> |
+              <label>{{item.fieldStandardNumberName}}: </label>
+              <span class="badge badge-light">{{item.fieldStandardNumberValue}}</span>
+            </span>
+        </span>
       </div>
 
-    </div>
+
+    </section>
   </div>
 </div>
