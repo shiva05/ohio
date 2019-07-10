@@ -19,7 +19,6 @@ export class TestEffects {
         mergeMap(() => this.testService.getAll()
           .pipe(
           map(
-
             movies =>
              ({ type:testActions.LOAD_TEST })),
           catchError(() => of({ type: '[Movies API] Movies Loaded Error' }))

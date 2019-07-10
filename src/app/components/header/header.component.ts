@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import  {Store } from '@ngrx/store';
-import  {Test} from './../../models/test.model';
+import { Store } from '@ngrx/store';
+import { Test } from './../../models/test.model';
 import { AppState } from './../../app.state';
-import * as TestActions  from './../../actions/test.actions';
+import * as TestActions from './../../actions/test.actions';
 
 
 @Component({
@@ -13,17 +13,17 @@ import * as TestActions  from './../../actions/test.actions';
   styleUrls: ['./header.component.css']
 })
 
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
-   tests :Observable<Test[]>;
+  tests: Observable<Test[]>;
   @Output() onPageSelect = new EventEmitter<any>();
   ngOnInit() {
 
   }
-  goToPage(org){
+  goToPage(org) {
     this.onPageSelect.emit(org);
   }
- constructor(private store:Store<AppState>){
+  constructor(private store: Store<AppState>) {
     this.tests = store.select('test');
  }
  addTutorial(name, url) {

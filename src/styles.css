@@ -1,5 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+/* These must be !important or they get overwritten on compile */
 .multiselect-dropdown .dropdown-btn {
-    color: white;
+    color: black;
+    font-weight: 500 !important;
     background-color: white;
+    line-height: 45px !important;
+    height: 60px !important;
+}
+.multiselect-dropdown .dropdown-btn .selected-item {
+    color: black !important;
+    font-weight: 600 !important;
+    border: 1px solid white !important;
+    background: white !important;
+}
+.multiselect-dropdown .dropdown-btn .selected-item a {
+    color: black !important;
 }
