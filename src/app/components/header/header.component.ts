@@ -25,9 +25,11 @@ export class HeaderComponent implements OnInit {
   }
   constructor(private store: Store<AppState>) {
     this.tests = store.select('test');
-  }
-  addTutorial(name, url) {
-    this.store.dispatch(new TestActions.AddTest({ name: 'Test State', url: 'google.com' }));
-  }
+ }
+ addTutorial(name, url) {
+
+  this.store.dispatch(new TestActions.AddTest({name :'Test State',url:'google.com'}));
+
+}
 
 }

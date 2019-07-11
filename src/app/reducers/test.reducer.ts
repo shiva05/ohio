@@ -12,6 +12,8 @@ export function testReducer(state :Test[] = [initialState] ,Action :TestActions.
   switch(Action.type){
     case TestActions.ADD_TEST:
       return [...state,Action.payload];
+    case TestActions.LOAD_TEST:
+      return state;
     default:
       return state;
   }
