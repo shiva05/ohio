@@ -16,7 +16,9 @@ import { TestService } from '../app/services/test.service';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
 import {testReducer } from './reducers/test.reducer';
+import {advancedSearchReducer } from './reducers/advanced-search.reducer';
 import { TestEffects } from './effects/test.effect';
+import { AdvancedSearchEffects } from './effects/advanced-search.effect';
 
 
 
@@ -36,9 +38,9 @@ import { TestEffects } from './effects/test.effect';
     FormsModule,
     ReactiveFormsModule,
     // StoreModule.forRoot(reducers, { metaReducers }),
-    StoreModule.forRoot({test: testReducer}),
+    StoreModule.forRoot({test: testReducer,advancedSearch:advancedSearchReducer}),
     StoreDevtoolsModule.instrument({maxAge:100,name:'tng1'}),
-    EffectsModule.forRoot([TestEffects])
+    EffectsModule.forRoot([TestEffects,AdvancedSearchEffects])
 
   ],
   providers: [TestService],
