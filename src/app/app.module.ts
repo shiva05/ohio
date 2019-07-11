@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AdvancedSearchComponent} from './components/advanced-search/advanced-search.component';
 import { CustomAccordionComponent } from './components/custom-accordion/custom-accordion.component';
 import { FilterSummaryComponent } from './components/filter-summary/filter-summary.component';
@@ -33,7 +32,6 @@ import { testReducer } from './reducers/test.reducer';
     NgMultiSelectDropDownModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    AngularFontAwesomeModule,
     // StoreModule.forRoot(reducers, { metaReducers }),
     StoreModule.forRoot({test: testReducer}),
     StoreDevtoolsModule.instrument({maxAge: 100, name: 'tng1'}),

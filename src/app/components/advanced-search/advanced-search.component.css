@@ -12,8 +12,14 @@ hr {
     padding: 20px 15px 25px 15px;
     margin: 0;
 }
+.btn {
+    height: 60px;
+}
 .button-space {
-    margin-right: 10px;
+    margin-right: 20px;
+}
+.button-row {
+    margin: 40px 20px 40px 20px;
 }
 .form-control {
     height: 60px;
