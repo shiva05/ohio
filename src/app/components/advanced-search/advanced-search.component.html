@@ -103,6 +103,7 @@
         <div class="form-group col-md-6">
           <label for="keywordInput">Keywords</label>
           <input type="search" class="form-control" id="keywordInput" placeholder="Keywords . . .">
+          <i id="filtersubmit" class="fa fa-search fa-2x"></i>
         </div>
       </div>
 
@@ -125,20 +126,23 @@
         </div>
 
 
-        <div class="col-md-6 col-md-pull-6">
-          <div class="form-group col-md-12">
-            <label>Standards</label>
-            <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="stadards" [(ngModel)]="selectedStandards"
-              [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
-            </ng-multiselect-dropdown>
+        <div class="col-md-6 no-gutters">
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>Standards</label>
+              <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="stadards" [(ngModel)]="selectedStandards"
+                [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+              </ng-multiselect-dropdown>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Outcome</label>
+              <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="outcomes" [(ngModel)]="selectedOutcome"
+                [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+              </ng-multiselect-dropdown>
+            </div>
+            <!-- End Dropdown Row -->
           </div>
-          <div class="form-group col-md-12">
-            <label>Outcome</label>
-            <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="outcomes" [(ngModel)]="selectedOutcome"
-              [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
-            </ng-multiselect-dropdown>
-          </div>
-          <!-- End Dropdown Row -->
+
 
 
 
