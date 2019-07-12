@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Input, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnInit, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import * as util from 'util';
@@ -8,12 +8,13 @@ import { Observable } from 'rxjs/Observable';
 import { MetaData } from './../../models/meta-data.model';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 
-//import { SearchSchoolStandardsService } from '../../_services/search-school-standards/search-school-standards.service';
+// import { SearchSchoolStandardsService } from '../../_services/search-school-standards/search-school-standards.service';
 
 @Component({
   selector: 'advanced-search',
   templateUrl: './advanced-search.component.html',
-  styleUrls: ['./advanced-search.component.css']
+  styleUrls: ['./advanced-search.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class AdvancedSearchComponent implements OnInit {
@@ -43,8 +44,8 @@ export class AdvancedSearchComponent implements OnInit {
   metaData: Observable<MetaData>;
 
   constructor(private httpService: HttpClient,
-    private ref: ChangeDetectorRef, private store: Store<AppState>) {
-    //this.metaData = store.select('metaData');
+              private ref: ChangeDetectorRef, private store: Store<AppState>) {
+    // this.metaData = store.select('metaData');
     this.store.dispatch({type: AdvancedSearchActions.LOAD_META_DATA});
   }
   ngOnInit() {
