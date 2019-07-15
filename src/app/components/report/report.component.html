@@ -1,0 +1,95 @@
+<div>
+  <div class="col-md-12">
+    <div class="col-md-3">
+      Results
+    </div>
+    <div class="col-md-6">
+
+    </div>
+    <div class="col-md-3">
+      <span>
+        Reinforcement
+      </span>
+      <span>
+        Enrichment
+      </span>
+      <span>
+        Application
+      </span>
+    </div>
+    <div *ngFor="let result of results">
+      <h2>{{result.title}}</h2>
+      <table>
+        <tr>
+          <td>
+            <span>Career Field </span>
+          </td>
+          <td>
+            <span>{{result.careerField}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span>Strand</span>
+          </td>
+          <td>
+            <span>{{result.outcome}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span>Outcome</span>
+          </td>
+          <td>
+            <span>{{result.outcome}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span>Competency</span>
+          </td>
+          <td>
+            <span>{{result.competency}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span>Academic Subject</span>
+          </td>
+          <td>
+            <span>{{result.academicSubject}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span>Domain</span>
+          </td>
+          <td>
+            <span>{{result.domain}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span>Grade</span>
+          </td>
+          <td>
+            <span>{{result.grade}}</span>
+          </td>
+        </tr>
+      </table>
+      <div>
+          <span>Standards</span>
+          <table>
+            <tr *ngFor="let  standard of result.standards">
+              <td>
+                <span>{{standard.standardType}}</span>
+              </td>
+              <td>
+                  <span>{{standard.standardDesc}}</span>
+                </td>
+            </tr>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,6 +10,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AdvancedSearchComponent} from './components/advanced-search/advanced-search.component';
 import { CustomAccordionComponent } from './components/custom-accordion/custom-accordion.component';
 import { FilterSummaryComponent } from './components/filter-summary/filter-summary.component';
+import { ReportComponent } from './components/report/report.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TestService } from '../app/services/test.service';
@@ -29,7 +30,8 @@ import { AdvancedSearchEffects } from './effects/advanced-search.effect';
     HeaderComponent,
     AdvancedSearchComponent,
     CustomAccordionComponent,
-    FilterSummaryComponent
+    FilterSummaryComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,
