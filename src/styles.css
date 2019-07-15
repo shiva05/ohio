@@ -18,11 +18,11 @@
 .multiselect-dropdown .dropdown-btn .selected-item a {
     color: black !important;
 }
-.multiselect-dropdown .dropdown-list .multiselect-item-checkbox > input[type="checkbox"] div::before {
+.multiselect-dropdown .dropdown-list .multiselect-item-checkbox > input[type="checkbox"] + div::before {
     border: 1px solid #700017 !important;
     background-color: white !important;
 }
-.multiselect-dropdown .dropdown-list .multiselect-item-checkbox > input[type="checkbox"]:checked div::before {
+.multiselect-dropdown .dropdown-list .multiselect-item-checkbox > input[type="checkbox"]:checked + div::before {
     border: 1px solid #700017 !important;
     background-color: #700017 !important;
 }
