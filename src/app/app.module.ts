@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { AdvancedSearchComponent} from './components/advanced-search/advanced-search.component';
+import { AdvancedSearchComponent } from './components/advanced-search/advanced-search.component';
 import { CustomAccordionComponent } from './components/custom-accordion/custom-accordion.component';
 import { FilterSummaryComponent } from './components/filter-summary/filter-summary.component';
 import { ReportComponent } from './components/report/report.component';
@@ -17,11 +17,12 @@ import { TestService } from '../app/services/test.service';
 // import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
-import {testReducer } from './reducers/test.reducer';
-import {advancedSearchReducer } from './reducers/advanced-search.reducer';
+import { testReducer } from './reducers/test.reducer';
+import { advancedSearchReducer } from './reducers/advanced-search.reducer';
 import { TestEffects } from './effects/test.effect';
 import { AdvancedSearchEffects } from './effects/advanced-search.effect';
-
+import { reportReducer } from './reducers/report.reducer';
+import { ReportEffects } from './effects/report.effects';
 
 
 @NgModule({
@@ -42,9 +43,9 @@ import { AdvancedSearchEffects } from './effects/advanced-search.effect';
     ReactiveFormsModule,
     AngularFontAwesomeModule,
     // StoreModule.forRoot(reducers, { metaReducers }),
-    StoreModule.forRoot({test: testReducer, advancedSearch: advancedSearchReducer}),
-    StoreDevtoolsModule.instrument({maxAge: 100, name: 'tng1'}),
-    EffectsModule.forRoot([TestEffects, AdvancedSearchEffects])
+    StoreModule.forRoot({ test: testReducer, advancedSearch: advancedSearchReducer, report: reportReducer }),
+    StoreDevtoolsModule.instrument({ maxAge: 100, name: 'tng1' }),
+    EffectsModule.forRoot([TestEffects, AdvancedSearchEffects, ReportEffects])
 
   ],
   providers: [TestService],
