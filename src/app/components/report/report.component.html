@@ -1,95 +1,103 @@
-<div>
-  <div class="col-md-12">
-    <div class="col-md-3">
-      Results
-    </div>
-    <div class="col-md-6">
 
-    </div>
-    <div class="col-md-3">
-      <span>
-        Reinforcement
-      </span>
-      <span>
-        Enrichment
-      </span>
-      <span>
-        Application
-      </span>
-    </div>
-    <div *ngFor="let result of results">
-      <h2>{{result.title}}</h2>
-      <table>
-        <tr>
-          <td>
-            <span>Career Field </span>
-          </td>
-          <td>
-            <span>{{result.careerField}}</span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span>Strand</span>
-          </td>
-          <td>
-            <span>{{result.outcome}}</span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span>Outcome</span>
-          </td>
-          <td>
-            <span>{{result.outcome}}</span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span>Competency</span>
-          </td>
-          <td>
-            <span>{{result.competency}}</span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span>Academic Subject</span>
-          </td>
-          <td>
-            <span>{{result.academicSubject}}</span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span>Domain</span>
-          </td>
-          <td>
-            <span>{{result.domain}}</span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span>Grade</span>
-          </td>
-          <td>
-            <span>{{result.grade}}</span>
-          </td>
-        </tr>
-      </table>
-      <div>
-          <span>Standards</span>
-          <table>
-            <tr *ngFor="let  standard of result.standards">
-              <td>
-                <span>{{standard.standardType}}</span>
-              </td>
-              <td>
-                  <span>{{standard.standardDesc}}</span>
-                </td>
-            </tr>
-          </table>
+<div class="reports col-md-12">
+    <div class="col-md-12">
+      <div class="row reports-head">
+      <div class="reports-head-left col-md-3">
+        <h1>Results </h1>
+      </div>
+
+      <div class="reports-head-right">
+        <div class="reports-head-right-each">
+            <span class="legend-reinforcement">R</span>
+          Reinforcement
+        </div>
+        <div  class="reports-head-right-each">
+            <span class="legend-enrichment">E</span>
+          Enrichment
+        </div>
+        <div  class="reports-head-right-each">
+            <span class="legend-application">A</span>
+          Application
+        </div>
       </div>
     </div>
+      <div class="reports-each col-md-12"  *ngFor="let result of results">
+        <h2>{{result.title}}</h2>
+        <div class="row">
+
+        <div class="reports-each-top col-md-12">
+          <div class="reports-content">
+
+          <div class="reports-content-each">
+
+            <span class="reports-content-each-left">Career Field</span>
+
+            <span class="reports-content-each-right reports-blue">{{result.careerField}}</span>
+
+        </div>
+          <div class="reports-content-each">
+
+              <span class="reports-content-each-left">Strand</span>
+
+              <span class="reports-content-each-right">{{result.outcome}}</span>
+
+          </div>
+          <div class="reports-content-each">
+            <span class="reports-content-each-left">
+              Outcome
+            </span>
+            <span class="reports-content-each-right">
+              {{result.outcome}}
+            </span>
+          </div>
+          <div class="reports-content-each">
+            <span class="reports-content-each-left">Competency</span>
+
+            <span class="reports-content-each-right">{{result.competency}}</span>
+
+          </div>
+          <div class="reports-content-each">
+            <span class="reports-content-each-left">Academic Subject</span>
+
+            <span class="reports-content-each-right reports-green">{{result.academicSubject}}</span>
+
+          </div>
+
+          <div class="reports-content-each">
+            <span class="reports-content-each-left">Domain</span>
+
+            <span class="reports-content-each-right">{{result.domain}}</span>
+
+          </div>
+          <div class="reports-content-each">
+            <span class="reports-content-each-left">Grade</span>
+
+            <span class="reports-content-each-right">{{result.grade}}</span>
+
+          </div>
+
+
+
+
+        </div>
+         </div>
+        <div class="reports-each-bottom col-md-12">
+            <h3>Standards:</h3>
+            <div class="reports-standards">
+              <div class="reports-standards-each" *ngFor="let  standard of result.standards">
+                <span class="reports-standards-each-left">
+               <span class="legend-application">
+                  {{standard.standardType}}
+                </span>
+                </span>
+                <span class="reports-standards-each-right">
+                    {{standard.standardDesc}}
+                  </span>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    </div>
   </div>
-</div>
+
