@@ -21,28 +21,34 @@ export interface Standard {
 export interface ReportData {
   reportRecords: ReportRecord[]
 }
-const initialReportState =[ {
 
-  title: '',
-  strand: '',
-  careerField: '',
-  outcome: '',
-  competency: '',
-  domain: '',
-  grade: '',
-  academicSubject: '',
-  standards: []
+const initialState : ReportData = {
+  reportRecords :[
+    {
+      title: '',
+      strand: '',
+      careerField: '',
+      outcome: '',
+      competency: '',
+      domain: '',
+      grade: '',
+      academicSubject: '',
+      standards: []
+    }
+  ]
+
+}
 
 
-}];
-
-
-export function reportReducer(state: ReportData[] =[{reportRecords:initialReportState}], Action: ReportActions.Actions) {
+export function reportReducer(state= initialState, Action: ReportActions.Actions) {
   switch (Action.type) {
     case ReportActions.LOAD_REPORT_DATA_SUCCESS:
-      return [...state, Action.payload];
+      return {};
     case ReportActions.LOAD_REPORT_DATA_FAILURE:
-      return [...state, Action.payload];
+
+      return {
+        reportRecords : Action.payload
+      };
     default:
       return state;
   }

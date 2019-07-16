@@ -16,19 +16,30 @@ export interface MetaData {
 }
 
 const initialState: MetaData = {
-  academicSubjects:[],
+  academicSubjects: [],
   standards: [],
   careers: [],
   outcomes: [],
   grades: [],
   standardNumbers: []
 };
-export function advancedSearchReducer(state :MetaData[] = [initialState] ,Action :AdvancedSearchActions.Actions){
+export function advancedSearchReducer(state = initialState ,Action :AdvancedSearchActions.Actions){
   switch(Action.type){
     case AdvancedSearchActions.LOAD_META_DATA_SUCCESS:
-      return [...state,Action.payload];
+      return {academicSubjects:Action.payload.academicSubjects,
+        standards:Action.payload.standards,
+        careers:Action.payload.careers,
+        outcomes:Action.payload.outcomes,
+        standardNumbers:Action.payload.standardNumbers
+      };
     case AdvancedSearchActions.LOAD_META_DATA_FAILURE:
-    return [...state,Action.payload];
+    debugger
+    return {academicSubjects:Action.payload.academicSubjects,
+      standards:Action.payload.standards,
+      careers:Action.payload.careers,
+      outcomes:Action.payload.outcomes,
+      standardNumbers:Action.payload.standardNumbers
+    };
     default:
       return state;
   }
