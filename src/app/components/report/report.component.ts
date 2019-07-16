@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Test } from './../../models/test.model';
 import { AppState } from './../../app.state';
 import * as TestActions from './../../actions/test.actions';
-
+import * as ReportsActions from './../../actions/report.actions';
 
 @Component({
   selector: 'report',
@@ -16,6 +16,10 @@ import * as TestActions from './../../actions/test.actions';
 export class ReportComponent implements OnInit {
 
   results: any = [];
+  constructor(private store: Store<AppState>) {
+    // this.metaData = store.select('metaData');
+    this.store.dispatch({ type: ReportsActions.LOAD_REPORT_DATA });
+  }
   ngOnInit() {
     var result = {
       title: 'Store Mechanical systems fluids and waste products',
