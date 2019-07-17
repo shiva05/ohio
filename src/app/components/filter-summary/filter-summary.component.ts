@@ -15,7 +15,7 @@ export class FilterSummaryComponent implements OnInit {
   @Input() FilterSummary;
   FilterSummaryKeys: any;
   FilterSummaryData: any = [];
-
+  @Output() onPageSelect = new EventEmitter<any>();
 
   ngOnInit() {
     this.FilterSummaryKeys =
@@ -57,6 +57,9 @@ export class FilterSummaryComponent implements OnInit {
         }
       ];
     this.formatSearchDataToSummary();
+  }
+  goToPage(org) {
+    this.onPageSelect.emit(org);
   }
   formatSearchDataToSummary() {
     const source = { selectedKeyword: 'hi', selectedAcadamicSubjects: [{ item_id: 1, item_text: 'Maths', grade: [{ item_id: 3, item_text: 'G2' }], cluster: [{ item_id: 4, item_text: 'Test3' }], standardNumber: [{ item_id: 5, item_text: 'Number4' }] }, { item_id: 2, item_text: 'Sciences', grade: [{ item_id: 3, item_text: 'G2' }], cluster: [{ item_id: 4, item_text: 'Test3' }], standardNumber: [{ item_id: 7, item_text: 'Number6' }] }], selectedStandards: [{ item_id: 1, item_text: 'Business operation' }, { item_id: 2, item_text: 'Software operation' }, { item_id: 3, item_text: 'artificial' }], selectedOutcome: [{ item_id: 1, item_text: 'Maths' }, { item_id: 2, item_text: 'Sciences' }], selectedCompetencyNumber: 'hi', selectedCareers: [{ item_id: 3, item_text: 'Postman' }, { item_id: 4, item_text: 'Delivery boy' }] };

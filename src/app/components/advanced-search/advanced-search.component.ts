@@ -49,6 +49,7 @@ export class AdvancedSearchComponent implements OnInit {
     // this.metaData = store.select('metaData');
     this.store.dispatch({type: AdvancedSearchActions.LOAD_META_DATA});
   }
+  @Output() onPageSelect = new EventEmitter<any>();
   ngOnInit() {
     this.store.select('advancedSearch').subscribe(data => {
       this.metaData = data;
@@ -75,6 +76,7 @@ export class AdvancedSearchComponent implements OnInit {
   }
 
   search() {
+    this.goToPage('SearchResults');
     this.searchObj = JSON.stringify({
       selectedKeyword: this.selectedKeyword,
       selectedAcadamicSubjects: this.selectedAcadamicSubjects,
@@ -88,6 +90,9 @@ export class AdvancedSearchComponent implements OnInit {
   onAcadamicSubjectSelect() {
     console.log('hi');
 
+  }
+  goToPage(org) {
+    this.onPageSelect.emit(org);
   }
   onGradeSelect(grade, acasub) {
     this.selectedAcadamicSubjects.forEach(element => {

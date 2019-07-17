@@ -12,6 +12,7 @@ export class CustomAccordionComponent implements OnInit {
 
   @Input() options;
   @Input() loopCount;
+  @Output() onPageSelect = new EventEmitter<any>();
   constructor() { }
   isOpen = false;
 
@@ -33,6 +34,9 @@ export class CustomAccordionComponent implements OnInit {
   }
   toggleAccordion() {
     this.isOpen = !this.isOpen;
+  }
+  goToPage(org) {
+    this.onPageSelect.emit(org);
   }
 }
 
