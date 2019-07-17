@@ -35,6 +35,7 @@ export class AdvancedSearchComponent implements OnInit {
   selectedAcadamicSubjects: any = [];
   selectedStandards: any = [];
   selectedOutcome: any = [];
+  selectedCompetencyNumbers : any =[];
   selectedGrades: any = [];
   selectedClusters: any = [];
   selectedStandardNumbers: any = [];

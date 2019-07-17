@@ -62,7 +62,7 @@ export class FilterSummaryComponent implements OnInit {
     this.onPageSelect.emit(org);
   }
   formatSearchDataToSummary() {
-    const source = { selectedKeyword: 'hi', selectedAcadamicSubjects: [{ item_id: 1, item_text: 'Maths', grade: [{ item_id: 3, item_text: 'G2' }], cluster: [{ item_id: 4, item_text: 'Test3' }], standardNumber: [{ item_id: 5, item_text: 'Number4' }] }, { item_id: 2, item_text: 'Sciences', grade: [{ item_id: 3, item_text: 'G2' }], cluster: [{ item_id: 4, item_text: 'Test3' }], standardNumber: [{ item_id: 7, item_text: 'Number6' }] }], selectedStandards: [{ item_id: 1, item_text: 'Business operation' }, { item_id: 2, item_text: 'Software operation' }, { item_id: 3, item_text: 'artificial' }], selectedOutcome: [{ item_id: 1, item_text: 'Maths' }, { item_id: 2, item_text: 'Sciences' }], selectedCompetencyNumber: 'hi', selectedCareers: [{ item_id: 3, item_text: 'Postman' }, { item_id: 4, item_text: 'Delivery boy' }] };
+    const source =  {"selectedKeyword":"Test","selectedAcadamicSubjects":[{"item_id":1,"item_text":"Math","grade":[{"item_id":3,"item_text":"Geometry"}],"cluster":[{"item_id":3,"item_text":"Circles"}],"standardNumber":[{"item_id":1,"item_text":"G.C.4"}]}],"selectedStandards":[{"item_id":4,"item_text":"Electrical"}],"selectedOutcome":[{"item_id":1,"item_text":"Motors and Power"}],"selectedCareers":[{"item_id":3,"item_text":"Construction"}]};
     this.FilterSummaryKeys.forEach(element => {
       if (element.fieldType === '1') {
         if (source[element.fieldKey]) {
