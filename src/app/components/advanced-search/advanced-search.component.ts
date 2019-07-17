@@ -41,6 +41,7 @@ export class AdvancedSearchComponent implements OnInit {
   dropdownSettings: any = {};
   searchObj: any;
   selectedCompetencyNumber: any;
+  competencyNumbers :any;
   metaData: Observable<MetaData>;
 
   constructor(private httpService: HttpClient,
@@ -59,6 +60,7 @@ export class AdvancedSearchComponent implements OnInit {
       this.grades =this.metaData['grades'];
       this.clusters =this.metaData['clusters'];
       this.standardNumbers =this.metaData['standardNumbers'];
+      this.competencyNumbers =this.metaData['competencyNumbers'];
 
     });
     this.dropdownSettings = {

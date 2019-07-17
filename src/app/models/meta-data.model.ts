@@ -5,6 +5,7 @@ import { Outcome } from './outcome.model';
 import { Grade } from './grade.model';
 import { StandardNumber } from './standard-number.model';
 import { Cluster } from './cluster.model';
+import { CompetencyNumber } from './competency-number.model';
 
 
 export interface MetaData {
@@ -14,6 +15,7 @@ export interface MetaData {
   outcomes: Outcome[],
   grades: Grade[],
   standardNumbers: StandardNumber[],
-  clusters :Cluster[]
+  clusters :Cluster[],
+  competencyNumbers : CompetencyNumber[]
 }
 

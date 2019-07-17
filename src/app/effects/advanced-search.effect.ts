@@ -76,6 +76,12 @@ export class AdvancedSearchEffects {
     { item_id: 8, item_text: '7' }
   ];
 
+    const competencyNumbers = [
+      { item_id: 1, item_text: '245' },
+      { item_id: 3, item_text: '246' },
+      { item_id: 4, item_text: '247' },
+    ];
+
     const clusters = [
     { item_id: 1, item_text: 'Geometric Measurement and Dimension' },
     { item_id: 2, item_text: 'Modeling with Geometry' },
@@ -99,7 +105,8 @@ export class AdvancedSearchEffects {
       outcomes,
       grades,
       standardNumbers,
-      clusters
+      clusters,
+      competencyNumbers
     };
   }
 
