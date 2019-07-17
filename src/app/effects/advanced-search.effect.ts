@@ -104,7 +104,8 @@ export class AdvancedSearchEffects {
       careers: careers,
       outcomes: outcomes,
       grades: grades,
-      standardNumbers: standardNumbers
+      standardNumbers: standardNumbers,
+      clusters:clusters
     };
   }
 

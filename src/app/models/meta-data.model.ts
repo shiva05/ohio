@@ -4,6 +4,7 @@ import { Career } from './career.model';
 import { Outcome } from './outcome.model';
 import { Grade } from './grade.model';
 import { StandardNumber } from './standard-number.model';
+import { Cluster } from './cluster.model';
 
 
 export interface MetaData {
@@ -12,6 +13,7 @@ export interface MetaData {
   careers: Career[],
   outcomes: Outcome[],
   grades: Grade[],
-  standardNumbers: StandardNumber[]
+  standardNumbers: StandardNumber[],
+  clusters :Cluster[]
 }
 

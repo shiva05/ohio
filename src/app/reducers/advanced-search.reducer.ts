@@ -30,15 +30,19 @@ export function advancedSearchReducer(state = initialState ,Action :AdvancedSear
         standards:Action.payload.standards,
         careers:Action.payload.careers,
         outcomes:Action.payload.outcomes,
-        standardNumbers:Action.payload.standardNumbers
+        standardNumbers:Action.payload.standardNumbers,
+        grades:Action.payload.grades,
+        cluster:Action.payload.clusters
       };
     case AdvancedSearchActions.LOAD_META_DATA_FAILURE:
-    debugger
+
     return {academicSubjects:Action.payload.academicSubjects,
       standards:Action.payload.standards,
       careers:Action.payload.careers,
       outcomes:Action.payload.outcomes,
-      standardNumbers:Action.payload.standardNumbers
+      standardNumbers:Action.payload.standardNumbers,
+      grades:Action.payload.grades,
+      clusters:Action.payload.clusters
     };
     default:
       return state;
