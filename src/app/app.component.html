@@ -1,10 +1,10 @@
 <header (onPageSelect)="onPageSelect($event)"></header>
 
-<advanced-search *ngIf="showAdvancedSearch" ></advanced-search>
+<advanced-search (onPageSelect)="onPageSelect($event)"  *ngIf="showAdvancedSearch" ></advanced-search>
 
-<filter-summary  *ngIf="showSearchResults"  [FilterSummary]="FilterSummary"></filter-summary>
+<filter-summary (onPageSelect)="onPageSelect($event)" *ngIf="showSearchResults"  [FilterSummary]="FilterSummary"></filter-summary>
 
-<custom-accordion *ngIf="showSearchResults" [options]="List" [loopCount]="loopNumber"></custom-accordion>
+<custom-accordion (onPageSelect)="onPageSelect($event)" *ngIf="showSearchResults" [options]="List" [loopCount]="loopNumber"></custom-accordion>
 
 <report *ngIf="showReport" ></report>
 
