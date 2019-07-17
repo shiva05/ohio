@@ -48,7 +48,6 @@ export class ReportEffects {
           { standardType: 'E', standardDesc: '1.R1.11-12.1 Cite strong and through texual evidence' }
         ]
     };
-    debugger
     this.results.push(result);
     this.results.push(result);
     this.results.push(result);

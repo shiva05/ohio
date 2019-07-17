@@ -1,5 +1,5 @@
 <div class="col-md-12 main">
-    <h1>Search  </h1>  
+    <h1>Search  </h1>
 
   <ul class="nav nav-tabs">
     <li class="nav-item">
@@ -37,7 +37,7 @@
         </div>
         <div class="form-group col-md-6">
           <label>Acadamic Subjects</label>
-          <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="acadamicSubjects"
+          <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="academicSubjects"
             [(ngModel)]="selectedAcadamicSubjects" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
             (onSelectAll)="onSelectAll($event)">
           </ng-multiselect-dropdown>
@@ -76,8 +76,8 @@
         <div class="col-md-6 col-md-push-6">
           <div class="row dynamic-academics" *ngFor="let policy of selectedAcadamicSubjects;let i = index;">
             <h3>{{policy.item_text}}</h3>
-            
-            <div class="row">               
+
+            <div class="row">
             <div class="col-md-4">
               <label>Grade</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="grades" [(ngModel)]="selectedGrades[i]"
@@ -109,11 +109,11 @@
 
       <!-- Button Row -->
       <div class="row button-row button-space">
-        <div class="col-md-12 nopad"> 
+        <div class="col-md-12 nopad">
             <button type="button" class="btn btn-info btn-search  float-right col-md-2" [routerLink]="['/results']"
             (click)="search()">Search</button>
         <button type="button" class="btn btn-outline-secondary btn-cancel col-md-2 float-right button-space">Cancel</button>
-        
+
         </div>
       </div>
 
@@ -130,9 +130,9 @@
           <i id="filtersubmit" class="fa fa-search fa-2x"></i>
         </div>
       </div>
-    
+
       <hr>
-    
+
       <!-- Dropdown row -->
       <div class="row">
         <div class="form-group col-md-6">
@@ -143,16 +143,16 @@
         </div>
         <div class="form-group col-md-6">
           <label>Acadamic Subjects</label>
-          <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="acadamicSubjects" [(ngModel)]="selectedAcadamicSubjects"
+          <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="academicSubjects" [(ngModel)]="selectedAcadamicSubjects"
             [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
           </ng-multiselect-dropdown>
         </div>
-    
-    
+
+
         <div class="col-md-6 no-gutters">
           <div class="row">
             <div class="form-group col-md-6">
-              <label>Standards</label>
+              <label>Strands</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="stadards" [(ngModel)]="selectedStandards"
                 [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
               </ng-multiselect-dropdown>
@@ -165,23 +165,23 @@
             </div>
             <!-- End Dropdown Row -->
           </div>
-    
-    
-    
-    
+
+
+
+
           <div class="form-group col-md-12">
             <label for="competencyInput">Competency Number</label>
             <input type="search" class="form-control" id="competencyInput" placeholder="Competency . . .">
           </div>
         </div>
-    
-    
-    
+
+
+
         <!-- Dynamic dropdowns of Academic subjects -->
         <div class="col-md-6 col-md-push-6">
           <div class="row dynamic-academics" *ngFor="let policy of selectedAcadamicSubjects;let i = index;">
             <h3>{{policy.item_text}}</h3>
-<div class="row"> 
+<div class="row">
       <div class="col-md-4">
               <label>Grade</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="grades" [(ngModel)]="selectedGrades[i]"
@@ -209,20 +209,20 @@
         </div>
         <!-- END OF PUSH/PULLED COLUMNS -->
       </div>
-    
-    
+
+
       <!-- Button Row -->
       <div class="row button-row button-space">
-          <div class="col-md-12 nopad"> 
+          <div class="col-md-12 nopad">
               <button type="button" class="btn btn-info btn-search  float-right col-md-2" [routerLink]="['/results']"
               (click)="search()">Search</button>
           <button type="button" class="btn btn-outline-secondary btn-cancel col-md-2 float-right button-space">Cancel</button>
-          
+
           </div>
         </div>
-    
+
     </div>
-  </div> 
- 
-  <!-- End of Container --> 
+  </div>
+
+  <!-- End of Container -->
 </div>
