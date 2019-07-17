@@ -5,6 +5,7 @@ import { Career } from './../models/career.model';
 import { Outcome } from './../models/outcome.model';
 import { Grade } from './../models/grade.model';
 import { StandardNumber } from './../models/standard-number.model';
+import { CompetencyNumber } from './../models/competency-number.model';
 
 export interface MetaData {
   academicSubjects: AcademicSubject[],
@@ -32,7 +33,8 @@ export function advancedSearchReducer(state = initialState ,Action :AdvancedSear
         outcomes:Action.payload.outcomes,
         standardNumbers:Action.payload.standardNumbers,
         grades:Action.payload.grades,
-        cluster:Action.payload.clusters
+        cluster:Action.payload.clusters,
+        competencyNumbers : Action.payload.competencyNumbers
       };
     case AdvancedSearchActions.LOAD_META_DATA_FAILURE:
 
@@ -42,7 +44,8 @@ export function advancedSearchReducer(state = initialState ,Action :AdvancedSear
       outcomes:Action.payload.outcomes,
       standardNumbers:Action.payload.standardNumbers,
       grades:Action.payload.grades,
-      clusters:Action.payload.clusters
+      clusters:Action.payload.clusters,
+      competencyNumbers : Action.payload.competencyNumbers
     };
     default:
       return state;

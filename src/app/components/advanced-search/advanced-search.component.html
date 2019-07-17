@@ -66,7 +66,9 @@
 
           <div class="form-group col-md-12">
             <label for="competencyInput">Competency Number</label>
-            <input type="search" class="form-control" id="competencyInput" placeholder="Competency . . .">
+            <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="competencyNumbers" [(ngModel)]="selectedOutcome" [settings]="dropdownSettings"
+              (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown>
           </div>
         </div>
 
@@ -167,11 +169,11 @@
           </div>
 
 
-
-
           <div class="form-group col-md-12">
             <label for="competencyInput">Competency Number</label>
-            <input type="search" class="form-control" id="competencyInput" placeholder="Competency . . .">
+            <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="competencyNumbers" [(ngModel)]="selectedStandards"
+            [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+          </ng-multiselect-dropdown>
           </div>
         </div>
 
