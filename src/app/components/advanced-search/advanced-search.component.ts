@@ -41,7 +41,7 @@ export class AdvancedSearchComponent implements OnInit {
   dropdownSettings: any = {};
   searchObj: any;
   selectedCompetencyNumber: any;
-  competencyNumbers :any;
+  competencyNumbers: any;
   metaData: Observable<MetaData>;
 
   constructor(private httpService: HttpClient,
@@ -53,15 +53,15 @@ export class AdvancedSearchComponent implements OnInit {
   ngOnInit() {
     this.store.select('advancedSearch').subscribe(data => {
       this.metaData = data;
-      this.careers =this.metaData['careers'];
+      this.careers = this.metaData['careers'];
       debugger
-      this.academicSubjects =this.metaData['academicSubjects'];
-      this.stadards =this.metaData['standards'];
-      this.outcomes =this.metaData['outcomes'];
-      this.grades =this.metaData['grades'];
-      this.clusters =this.metaData['clusters'];
-      this.standardNumbers =this.metaData['standardNumbers'];
-      this.competencyNumbers =this.metaData['competencyNumbers'];
+      this.academicSubjects = this.metaData['academicSubjects'];
+      this.stadards = this.metaData['standards'];
+      this.outcomes = this.metaData['outcomes'];
+      this.grades = this.metaData['grades'];
+      this.clusters = this.metaData['clusters'];
+      this.standardNumbers = this.metaData['standardNumbers'];
+      this.competencyNumbers = this.metaData['competencyNumbers'];
 
     });
     this.dropdownSettings = {
