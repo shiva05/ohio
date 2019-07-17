@@ -1,11 +1,5 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12 search-header">
-      <h4>Search</h4>
-    </div>
-    <!-- End of Row -->
-  </div>
-
+<div class="col-md-12 main">
+    <h1>Search  </h1>  
 
   <ul class="nav nav-tabs">
     <li class="nav-item">
@@ -36,13 +30,13 @@
       <!-- Dropdown row -->
       <div class="row">
         <div class="form-group col-md-6">
-          <label>Career field</label>
+          <label>Career Field</label>
           <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="careers" [(ngModel)]="selectedCareer"
             [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
           </ng-multiselect-dropdown>
         </div>
         <div class="form-group col-md-6">
-          <label>Acadamic subjects</label>
+          <label>Acadamic Subjects</label>
           <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="acadamicSubjects"
             [(ngModel)]="selectedAcadamicSubjects" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
             (onSelectAll)="onSelectAll($event)">
@@ -81,8 +75,9 @@
         <!-- Dynamic dropdowns of Academic subjects -->
         <div class="col-md-6 col-md-push-6">
           <div class="row dynamic-academics" *ngFor="let policy of selectedAcadamicSubjects;let i = index;">
-            <h3 class="col-md-12">{{policy.item_text}}</h3>
-            <hr class="col-md-12">
+            <h3>{{policy.item_text}}</h3>
+            
+            <div class="row">               
             <div class="col-md-4">
               <label>Grade</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="grades" [(ngModel)]="selectedGrades[i]"
@@ -103,7 +98,7 @@
                 (onSelect)="onStandardNumberSelect(selectedStandardNumbers[i],policy)"
                 (onSelectAll)="onSelectAll($event)">
               </ng-multiselect-dropdown>
-            </div>
+            </div> </div>
             <!-- End of Dynamic dropdowns of Academic subjects -->
           </div>
           <!-- End of CareerField and Academic row -->
@@ -114,9 +109,12 @@
 
       <!-- Button Row -->
       <div class="row button-row button-space">
-        <button type="button" class="btn btn-outline-secondary col-md-2 offset-md-7 button-space">Cancel</button>
-        <button type="button" class="btn btn-info col-md-2" [routerLink]="['/results']"
-          (click)="search()">Search</button>
+        <div class="col-md-12 nopad"> 
+            <button type="button" class="btn btn-info btn-search  float-right col-md-2" [routerLink]="['/results']"
+            (click)="search()">Search</button>
+        <button type="button" class="btn btn-outline-secondary btn-cancel col-md-2 float-right button-space">Cancel</button>
+        
+        </div>
       </div>
 
     </div>
@@ -138,13 +136,13 @@
       <!-- Dropdown row -->
       <div class="row">
         <div class="form-group col-md-6">
-          <label>Career field</label>
+          <label>Career Field </label>
           <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="careers" [(ngModel)]="selectedCareer"
             [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
           </ng-multiselect-dropdown>
         </div>
         <div class="form-group col-md-6">
-          <label>Acadamic subjects</label>
+          <label>Acadamic Subjects</label>
           <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="acadamicSubjects" [(ngModel)]="selectedAcadamicSubjects"
             [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
           </ng-multiselect-dropdown>
@@ -182,9 +180,9 @@
         <!-- Dynamic dropdowns of Academic subjects -->
         <div class="col-md-6 col-md-push-6">
           <div class="row dynamic-academics" *ngFor="let policy of selectedAcadamicSubjects;let i = index;">
-            <h3 class="col-md-12">{{policy.item_text}}</h3>
-            <hr class="col-md-12">
-            <div class="col-md-4">
+            <h3>{{policy.item_text}}</h3>
+<div class="row"> 
+      <div class="col-md-4">
               <label>Grade</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="grades" [(ngModel)]="selectedGrades[i]"
                 [settings]="dropdownSettings" (onSelect)="onClusterSelect(selectedClusters[i],policy)"
@@ -204,6 +202,7 @@
                 (onSelect)="onStandardNumberSelect(selectedStandardNumbers[i],policy)" (onSelectAll)="onSelectAll($event)">
               </ng-multiselect-dropdown>
             </div>
+          </div>
             <!-- End of Dynamic dropdowns of Academic subjects -->
           </div>
           <!-- End of CareerField and Academic row -->
@@ -214,12 +213,16 @@
     
       <!-- Button Row -->
       <div class="row button-row button-space">
-        <button type="button" class="btn btn-outline-secondary col-md-2 offset-md-7 button-space">Cancel</button>
-        <button type="button" class="btn btn-info col-md-2" [routerLink]="['/results']" (click)="search()">Search</button>
-      </div>
+          <div class="col-md-12 nopad"> 
+              <button type="button" class="btn btn-info btn-search  float-right col-md-2" [routerLink]="['/results']"
+              (click)="search()">Search</button>
+          <button type="button" class="btn btn-outline-secondary btn-cancel col-md-2 float-right button-space">Cancel</button>
+          
+          </div>
+        </div>
     
     </div>
-  </div>
-
-  <!-- End of Container -->
+  </div> 
+ 
+  <!-- End of Container --> 
 </div>

@@ -18,9 +18,7 @@ hr {
 .button-space {
     margin-right: 20px;
 }
-.button-row {
-    margin: 40px 20px 40px 20px;
-}
+
 .form-control {
     height: 60px;
 }
@@ -28,11 +26,20 @@ hr {
     background-color: white;
 }
 .dynamic-academics {
-    margin: 40px 20px 10px 20px;
+    margin: 0 0 15px 0;
+    width: 100%;
+    display: block;
 }
-h3 {
-    margin: 15px 3px 0px 3px;
+.dynamic-academics h3{
+border-bottom: 1px solid #fff;
+padding-bottom: 10px;
+display: block;
+width: 100%;
+font-size: 20px;
+font-family: 'Lato', sans-serif;
 }
+
+
 #filtersubmit {
     float: right;
     margin-right: 23px;

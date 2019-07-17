@@ -1,6 +1,7 @@
 .reports{
   padding-top:20px;
   padding-bottom: 20px;
+  font-family: 'Serifa-Reg';
   }
   .reports-head h1{
       color: #700017;
@@ -23,6 +24,7 @@
     float: left;
     margin: 0 0 0 20px;
     color: #700017;
+    font-family: 'Lato', sans-serif ;
   }
   .reports-each{
       background: #F2F2F2;
@@ -60,6 +62,8 @@
       background: #D8D8D8;
       border: #D8D8D8 solid 1px;
       padding: 5px;
+      font-size: 16px;
+      font-weight: 600;
   }
 
   .reports-blue{
@@ -79,6 +83,8 @@
       vertical-align: top;
       border: #D8D8D8 solid 1px;
       padding: 5px;
+      font-size: 14px;
+      font-weight: 600;
   }
 
 

@@ -1,20 +1,11 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12 filter-header">
-      <h4>Search Criteria</h4>
-    </div>
-    <!-- End of Row -->
-  </div>
+<div class="col-md-12 main">
+    <h1>Search Criteria</h1>
   <div class="row">
     <!-- filter Form Begin -->
     <section class="filter-form col-md-12">
+<div class="search-filter"> 
 
-
-
-      <button class="float-right btn btn-info update-search">Update Search <i class="fa fa-angle-double-down"></i></button>
-
-
-      <div class="col-md-12">
+      <div class="search-filter-left">
           <span *ngFor="let item of FilterSummaryData; let i = index">
             <span *ngIf="item.fieldType == 1">
               <span *ngIf="i != item.length && i != 0"> | </span>
@@ -34,8 +25,34 @@
             </span>
         </span>
       </div>
-
+      <div class="search-filter-right"> 
+      <button>Update Search <i class="fa fa-angle-double-down"></i></button>
+    </div></div>
 
     </section>
+
+    <div class="col-md-12 search-results">
+
+        <div class="search-results-head row">
+            <div class="col-md-10 search-results-head-left"> <h3>Search Results</h3> 
+            <p> Found 210 Alignments for your search criteria</p>
+            </div>
+            <div class="col-md-2 search-results-head-right">
+            <button>Toggle Alignments &nbsp; <i class="fa fa-exchange"></i></button>    
+            </div>
+        </div>
+        
+        <div class="search-accordion"> 
+            <div class="search-accordion-head row">
+              <div class="col-md-4">CAREER FIELDS</div>
+              <div class="col-md-2">&nbsp;</div>
+              <div class="col-md-3">ACADEMIC SUBJECTS</div>
+              <div class="col-md-2">ALIGNMENTS</div>
+              <div class="col-md-1">&nbsp;</div>
+            </div>
+            </div> </div>
+
+
   </div>
 </div>
+
