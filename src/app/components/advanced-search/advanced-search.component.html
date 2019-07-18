@@ -20,7 +20,7 @@
         <!-- Search Form Begin -->
         <div class="form-group col-md-6">
           <label for="keywordInput">Keywords</label>
-          <input type="search" class="form-control" id="keywordInput" placeholder="Keywords . . .">
+          <input type="search" class="form-control" id="keywordInput" placeholder="Keywords . . ."  [(ngModel)]="selectedKeyword">
           <i id="filtersubmit" class="fa fa-search fa-2x"></i>
         </div>
       </div>
@@ -66,7 +66,7 @@
 
           <div class="form-group col-md-12">
             <label for="competencyInput">Competency Number</label>
-            <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="competencyNumbers" [(ngModel)]="selectedOutcome" [settings]="dropdownSettings"
+            <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="competencyNumbers" [(ngModel)]="selectedCompetencyNumbers" [settings]="dropdownSettings"
               (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
             </ng-multiselect-dropdown>
           </div>
@@ -83,14 +83,14 @@
             <div class="col-md-4">
               <label>Grade</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="grades" [(ngModel)]="selectedGrades[i]"
-                [settings]="dropdownSettings" (onSelect)="onClusterSelect(selectedClusters[i],policy)"
+                [settings]="dropdownSettings" (onSelect)="onGradeSelect(selectedGrades[i],policy)"
                 (onSelectAll)="onSelectAll($event)">
               </ng-multiselect-dropdown>
             </div>
             <div class="col-md-4">
               <label>Cluster</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="clusters" [(ngModel)]="selectedClusters[i]"
-                [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                [settings]="dropdownSettings" (onSelect)="onClusterSelect(selectedClusters[i],policy)" (onSelectAll)="onSelectAll($event)">
               </ng-multiselect-dropdown>
             </div>
             <div class="col-md-4">
@@ -128,7 +128,7 @@
         <!-- Search Form Begin -->
         <div class="form-group col-md-6">
           <label for="keywordInput">Keywords</label>
-          <input type="search" class="form-control" id="keywordInput" placeholder="Keywords . . .">
+          <input type="search" class="form-control" id="keywordInput"  placeholder="Keywords . . .">
           <i id="filtersubmit" class="fa fa-search fa-2x"></i>
         </div>
       </div>
@@ -171,7 +171,7 @@
 
           <div class="form-group col-md-12">
             <label for="competencyInput">Competency Number</label>
-            <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="competencyNumbers" [(ngModel)]="selectedStandards"
+            <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="competencyNumbers" [(ngModel)]="selectedCompetencyNumbers"
             [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
           </ng-multiselect-dropdown>
           </div>
@@ -187,14 +187,14 @@
       <div class="col-md-4">
               <label>Grade</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="grades" [(ngModel)]="selectedGrades[i]"
-                [settings]="dropdownSettings" (onSelect)="onClusterSelect(selectedClusters[i],policy)"
+                [settings]="dropdownSettings" (onSelect)="onClusterSelect(selectedGrades[i],policy)"
                 (onSelectAll)="onSelectAll($event)">
               </ng-multiselect-dropdown>
             </div>
             <div class="col-md-4">
               <label>Cluster</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="clusters" [(ngModel)]="selectedClusters[i]"
-                [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                [settings]="dropdownSettings" (onSelect)="onGradeSelect(selectedClusters[i],policy)" (onSelectAll)="onSelectAll($event)">
               </ng-multiselect-dropdown>
             </div>
             <div class="col-md-4">
