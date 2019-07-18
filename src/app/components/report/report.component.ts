@@ -22,26 +22,38 @@ export class ReportComponent implements OnInit {
   }
   ngOnInit() {
     var result = {
-      title: 'Store Mechanical systems fluids and waste products',
-      strand:'2. safety tools',
-      careerField: 'Trasportation',
-      outcome: 'General Maintenance',
-      competency: '2.4.12 Store Mechanical systems fluids and waste products',
-      academicSubject: 'ELA',
-      domain: 'Reading for information',
-      grade: '11-12',
+      title: 'Find surface area and volume for three‐dimensional objects, accurate to a specified level of precision',
+      strand:'Planning and Design',
+      careerField: 'Construction',
+      outcome: 'Construction Math',
+      competency: 'Find surface area and volume for three‐dimensional objects, accurate to a specified level of precision',
+      academicSubject: 'Math',
+      domain: 'Circles',
+      grade: 'Geometry',
       standards:
         [
-          { standardType: 'A', standardDesc: '1.R1.11-12.1 Cite strong and through texual evidence' },
-          { standardType: 'R', standardDesc: '1.R1.11-12.1 Cite strong and through texual evidence' },
-          { standardType: 'E', standardDesc: '1.R1.11-12.1 Cite strong and through texual evidence' },
-          { standardType: 'E', standardDesc: '1.R1.11-12.1 Cite strong and through texual evidence' }
+          { standardType: 'A', standardDesc: 'G.C.4' },
+          { standardType: 'R', standardDesc: 'G.C.5' },
+          { standardType: 'E', standardDesc: 'G.C.6' }
         ]
     };
     this.results.push(result);
-    this.results.push(result);
-    this.results.push(result);
-    this.results.push(result);
-    this.results.push(result);
+    var result1 = {
+      title: 'Use economic indicators to identify economic trends and conditions (e.g., inflation, interest rate fluctuations, unemployment rates).',
+      strand:'Business Operations/21st Century Skills',
+      careerField: 'Construction',
+      outcome: 'Principles of Business Economics',
+      competency: 'Use economic indicators to identify economic trends and conditions (e.g., inflation, interest rate fluctuations, unemployment rates).',
+      academicSubject: 'Math',
+      domain: 'Circles',
+      grade: 'Geometry',
+      standards:
+        [
+          { standardType: 'A', standardDesc: 'G.C.1' },
+          { standardType: 'R', standardDesc: 'G.C.2' },
+          { standardType: 'E', standardDesc: 'G.C.3' }
+        ]
+    };
+    this.results.push(result1);
   }
 }
