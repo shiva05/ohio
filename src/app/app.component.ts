@@ -20,23 +20,36 @@ export class AppComponent implements OnInit {
     console.log('hear init hapenned ');
     this.showAdvancedSearch = true;
     this.loopNumber = 1;
-    this.childArray1 = [{id: 1, value: 'item1'},
-    {id: 2, value: 'item2'},
-    {id: 3, value: 'item3'},
-    {id: 4, value: 'item4'},
-    {id: 5, value: 'item5'}];
+    this.childArray1 = [
+      { id: 1, academicSubject: 'Math', value: 'Select materials and lay out rough\u2010in wiring runs according to specifications, drawings and code requirements.'},
+      { id: 2, academicSubject: 'Math', value: 'Lay out and install conduit or cable runs, raceways and cable systems.'}
+  ];
 
-    this.childArray = [{id: 1, value: 'item1'},
-    {id: 2, value: 'item2'},
-    {id: 3, value: 'item3'},
-    {id: 4, value: 'item4'},
-    {id: 5, children: JSON.parse(JSON.stringify(this.childArray1))}];
+    this.childArray = [
+      { id: 1, academicSubject: 'Math', value: 'Planning and Design'},
+      { id: 2, academicSubject: 'Math', value: 'Business Operations\/21st Century Skills'},
+      { id: 3, academicSubject: 'Math', value: 'Construction and Facility Management'},
+      { id: 4, academicSubject: 'Math', value: 'Electrical', children: JSON.parse(JSON.stringify(this.childArray1))},
+      { id: 5, academicSubject: 'Math', value: 'Environmental Systems and Plumbing'},
+      { id: 6, academicSubject: 'Math', value: 'Structural Construction' },
+      { id: 7, academicSubject: 'Math', value: 'Safety, Tools, and Equipment' }
+  ];
 
-    this.List = [{id: 1, value: 'item1'},
-    {id: 2, value: 'item2'},
-    {id: 3, value: 'item3', children: JSON.parse(JSON.stringify(this.childArray))},
-    {id: 4, value: 'item4'},
-    {id: 5, value: 'item5', children: JSON.parse(JSON.stringify(this.childArray))}];
+    this.List = [
+      { id: 1, academicSubject: 'Science', value: 'Hospitality and Tourism' },
+      { id: 2, academicSubject: 'Social', value: 'Business, Marketing, and Finance' },
+      { id: 3, academicSubject: 'Science', value: 'Agriculture and Environmental Science' },
+      { id: 4, academicSubject: 'Science', value: 'Engineering and Science Technologies' },
+      { id: 5, academicSubject: 'Math', value: 'Manufacturing' },
+      { id: 6, academicSubject: 'Social', value: 'Education and Training' },
+      { id: 7, academicSubject: 'Math', value: 'Construction', children: JSON.parse(JSON.stringify(this.childArray)) },
+      { id: 8, academicSubject: 'Math', value: 'Transportation' },
+      { id: 9, academicSubject: 'Social', value: 'Human Services' },
+      { id: 10, academicSubject: 'Social', value: 'Law & Public Safety' },
+      { id: 11, academicSubject: 'Math', value: 'Information Technology' },
+      { id: 12, academicSubject: 'ELA', value: 'Arts and Communication' },
+      { id: 13, academicSubject: 'Science', value: 'Health Science' }
+    ];
   }
   onItemSelect(item: any) {
     console.log('on item slplselect', item);

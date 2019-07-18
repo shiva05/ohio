@@ -17,6 +17,7 @@ export class CustomAccordionComponent implements OnInit {
   isOpen = false;
 
   ngOnInit() {
+    console.log(this.options);
   }
   checkAll(option) {
     if (option.children) {
