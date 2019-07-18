@@ -3,9 +3,9 @@
       <div class="card">
           <div class="card-header">
              <div class="row">
-               <div class="col-md-4"><input type="checkbox" [(ngModel)]="option.selected"  (change)="checkAll(option)" /> &nbsp; Arts and Communication</div>
+               <div class="col-md-4"><input type="checkbox" [(ngModel)]="option.selected"  (change)="checkAll(option)" /> &nbsp; {{option.value}}</div>
                <div class="col-md-2"><i class="fa fa-long-arrow-right search-right-arrow" aria-hidden="true"></i></div>
-               <div class="col-md-3 cg">ELA</div>
+               <div class="col-md-3 cg">{{ option.academicSubject }}</div>
                <div class="col-md-2"> <span class="bubble-green">10 </span>  </div>
                <div class="col-md-1">
                     <a role="button" data-toggle="collapse" [attr.href]="'#collapseOne_' + i + loopCount" *ngIf="option.children">
