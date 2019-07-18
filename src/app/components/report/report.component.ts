@@ -16,6 +16,7 @@ import * as ReportsActions from './../../actions/report.actions';
 export class ReportComponent implements OnInit {
 
   results: any = [];
+  @Output() onPageSelect = new EventEmitter<any>();
   constructor(private store: Store<AppState>) {
     // this.metaData = store.select('metaData');
     this.store.dispatch({ type: ReportsActions.LOAD_REPORT_DATA });
@@ -55,5 +56,8 @@ export class ReportComponent implements OnInit {
         ]
     };
     this.results.push(result1);
+  }
+  goToPage(org) {
+    this.onPageSelect.emit(org);
   }
 }

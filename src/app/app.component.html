@@ -15,6 +15,6 @@
     </div>
   </div>
 
-<report *ngIf="showReport" ></report>
+<report (onPageSelect)="onPageSelect($event)" *ngIf="showReport" ></report>
 
 <router-outlet></router-outlet>
