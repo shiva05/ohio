@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,6 +15,10 @@ export class AppComponent implements OnInit {
   loopNumber: any;
   showAdvancedSearch = false; showSearchResults = false;
   showReport = false;
+
+  constructor(private translate: TranslateService) {
+    translate.setDefaultLang('en');
+  }
 
   ngOnInit() {
     console.log('hear init hapenned ');

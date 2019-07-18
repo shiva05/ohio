@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
@@ -23,7 +23,9 @@ import { TestEffects } from './effects/test.effect';
 import { AdvancedSearchEffects } from './effects/advanced-search.effect';
 import { reportReducer } from './reducers/report.reducer';
 import { ReportEffects } from './effects/report.effects';
-
+// import ngx-translate and the http loader
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,15 @@ import { ReportEffects } from './effects/report.effects';
     FormsModule,
     ReactiveFormsModule,
     AngularFontAwesomeModule,
+    // ngx-translate and the loader module
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     // StoreModule.forRoot(reducers, { metaReducers }),
     StoreModule.forRoot({ test: testReducer, advancedSearch: advancedSearchReducer, report: reportReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 100, name: 'tng1' }),
@@ -52,3 +63,8 @@ import { ReportEffects } from './effects/report.effects';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// required for AOT(Ahead of Time) compilation (Translation Module)
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

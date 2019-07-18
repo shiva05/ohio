@@ -1,12 +1,12 @@
 <div class="col-md-12 main">
-    <h1>Search  </h1>
+    <h1>{{ 'SearchFields.Search' | translate }}  </h1>
 
   <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" href="#home">Alignment</a>
+      <a class="nav-link active" data-toggle="tab" href="#home">{{ 'SearchFields.Alignment' | translate }}</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#profile">Courses</a>
+      <a class="nav-link" data-toggle="tab" href="#profile">{{ 'SearchFields.Courses' | translate }}</a>
     </li>
   </ul>
 
@@ -19,8 +19,8 @@
       <div class="row">
         <!-- Search Form Begin -->
         <div class="form-group col-md-6">
-          <label for="keywordInput">Keywords</label>
-          <input type="search" class="form-control" id="keywordInput" placeholder="Keywords . . ."  [(ngModel)]="selectedKeyword">
+          <label for="keywordInput">{{ 'SearchFields.Keywords' | translate }}</label>
+          <input type="search" class="form-control" id="keywordInput" placeholder="{{ 'SearchFields.Keywords' | translate }} . . ."  [(ngModel)]="selectedKeyword">
           <i id="filtersubmit" class="fa fa-search fa-2x"></i>
         </div>
       </div>
@@ -30,13 +30,13 @@
       <!-- Dropdown row -->
       <div class="row">
         <div class="form-group col-md-6">
-          <label>Career Field</label>
+          <label>{{ 'SearchFields.CareerField' | translate }}</label>
           <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="careers" [(ngModel)]="selectedCareer"
             [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
           </ng-multiselect-dropdown>
         </div>
         <div class="form-group col-md-6">
-          <label>Acadamic Subjects</label>
+          <label>{{ 'SearchFields.AcademicSubjects' | translate }}</label>
           <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="academicSubjects"
             [(ngModel)]="selectedAcadamicSubjects" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
             (onSelectAll)="onSelectAll($event)">
@@ -47,13 +47,13 @@
         <div class="col-md-6 no-gutters">
           <div class="row">
             <div class="form-group col-md-6">
-              <label>Standards</label>
+              <label>{{ 'SearchFields.Strands' | translate }}</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="stadards" [(ngModel)]="selectedStandards"
                 [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
               </ng-multiselect-dropdown>
             </div>
             <div class="form-group col-md-6">
-              <label>Outcome</label>
+              <label>{{ 'SearchFields.Outcomes' | translate }}</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="outcomes" [(ngModel)]="selectedOutcome"
                 [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
               </ng-multiselect-dropdown>
@@ -65,7 +65,7 @@
 
 
           <div class="form-group col-md-12">
-            <label for="competencyInput">Competency Number</label>
+            <label for="competencyInput">{{ 'SearchFields.CompetencyNumber' | translate }}</label>
             <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="competencyNumbers" [(ngModel)]="selectedCompetencyNumbers" [settings]="dropdownSettings"
               (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
             </ng-multiselect-dropdown>
@@ -81,20 +81,20 @@
 
             <div class="row">
             <div class="col-md-4">
-              <label>Grade</label>
+              <label>{{ 'SearchFields.Grade' | translate }}</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="grades" [(ngModel)]="selectedGrades[i]"
                 [settings]="dropdownSettings" (onSelect)="onGradeSelect(selectedGrades[i],policy)"
                 (onSelectAll)="onSelectAll($event)">
               </ng-multiselect-dropdown>
             </div>
             <div class="col-md-4">
-              <label>Cluster</label>
+              <label>{{ 'SearchFields.Cluster' | translate }}</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="clusters" [(ngModel)]="selectedClusters[i]"
                 [settings]="dropdownSettings" (onSelect)="onClusterSelect(selectedClusters[i],policy)" (onSelectAll)="onSelectAll($event)">
               </ng-multiselect-dropdown>
             </div>
             <div class="col-md-4">
-              <label>Standard Number</label>
+              <label>{{ 'SearchFields.StandardNumber' | translate }}</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="standardNumbers"
                 [(ngModel)]="selectedStandardNumbers[i]" [settings]="dropdownSettings"
                 (onSelect)="onStandardNumberSelect(selectedStandardNumbers[i],policy)"
@@ -113,8 +113,8 @@
       <div class="row button-row button-space">
         <div class="col-md-12 nopad">
             <button type="button" class="btn btn-info btn-search  float-right col-md-2" [routerLink]="['/results']"
-            (click)="search()">Search</button>
-        <button type="button" class="btn btn-outline-secondary btn-cancel col-md-2 float-right button-space">Cancel</button>
+            (click)="search()">{{ 'SearchFields.Search' | translate }}</button>
+        <button type="button" class="btn btn-outline-secondary btn-cancel col-md-2 float-right button-space">{{ 'SearchFields.Cancel' | translate }}</button>
 
         </div>
       </div>
@@ -127,7 +127,7 @@
       <div class="row">
         <!-- Search Form Begin -->
         <div class="form-group col-md-6">
-          <label for="keywordInput">Keywords</label>
+          <label for="keywordInput">{{ 'SearchFields.Keywords' | translate }}</label>
           <input type="search" class="form-control" id="keywordInput"  placeholder="Keywords . . .">
           <i id="filtersubmit" class="fa fa-search fa-2x"></i>
         </div>
@@ -138,13 +138,13 @@
       <!-- Dropdown row -->
       <div class="row">
         <div class="form-group col-md-6">
-          <label>Career Field </label>
+          <label>{{ 'SearchFields.CareerField' | translate }}</label>
           <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="careers" [(ngModel)]="selectedCareer"
             [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
           </ng-multiselect-dropdown>
         </div>
         <div class="form-group col-md-6">
-          <label>Acadamic Subjects</label>
+          <label>{{ 'SearchFields.AcademicSubjects' | translate }}</label>
           <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="academicSubjects" [(ngModel)]="selectedAcadamicSubjects"
             [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
           </ng-multiselect-dropdown>
@@ -154,13 +154,13 @@
         <div class="col-md-6 no-gutters">
           <div class="row">
             <div class="form-group col-md-6">
-              <label>Strands</label>
+              <label>{{ 'SearchFields.Strands' | translate }}</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="stadards" [(ngModel)]="selectedStandards"
                 [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
               </ng-multiselect-dropdown>
             </div>
             <div class="form-group col-md-6">
-              <label>Outcome</label>
+              <label>{{ 'SearchFields.Outcomes' | translate }}</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="outcomes" [(ngModel)]="selectedOutcome"
                 [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
               </ng-multiselect-dropdown>
@@ -170,7 +170,7 @@
 
 
           <div class="form-group col-md-12">
-            <label for="competencyInput">Competency Number</label>
+            <label for="competencyInput">{{ 'SearchFields.CompetencyNumber' | translate }}</label>
             <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="competencyNumbers" [(ngModel)]="selectedCompetencyNumbers"
             [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
           </ng-multiselect-dropdown>
@@ -185,20 +185,20 @@
             <h3>{{policy.item_text}}</h3>
 <div class="row">
       <div class="col-md-4">
-              <label>Grade</label>
+              <label>{{ 'SearchFields.Grade' | translate }}</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="grades" [(ngModel)]="selectedGrades[i]"
                 [settings]="dropdownSettings" (onSelect)="onClusterSelect(selectedGrades[i],policy)"
                 (onSelectAll)="onSelectAll($event)">
               </ng-multiselect-dropdown>
             </div>
             <div class="col-md-4">
-              <label>Cluster</label>
+              <label>{{ 'SearchFields.Cluster' | translate }}</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="clusters" [(ngModel)]="selectedClusters[i]"
                 [settings]="dropdownSettings" (onSelect)="onGradeSelect(selectedClusters[i],policy)" (onSelectAll)="onSelectAll($event)">
               </ng-multiselect-dropdown>
             </div>
             <div class="col-md-4">
-              <label>Standard Number</label>
+              <label>{{ 'SearchFields.StandardNumber' | translate }}</label>
               <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="standardNumbers"
                 [(ngModel)]="selectedStandardNumbers[i]" [settings]="dropdownSettings"
                 (onSelect)="onStandardNumberSelect(selectedStandardNumbers[i],policy)" (onSelectAll)="onSelectAll($event)">
@@ -217,8 +217,8 @@
       <div class="row button-row button-space">
           <div class="col-md-12 nopad">
               <button type="button" class="btn btn-info btn-search  float-right col-md-2" [routerLink]="['/results']"
-              (click)="search()">Search</button>
-          <button type="button" class="btn btn-outline-secondary btn-cancel col-md-2 float-right button-space">Cancel</button>
+              (click)="search()">{{ 'SearchFields.Search' | translate }}</button>
+          <button type="button" class="btn btn-outline-secondary btn-cancel col-md-2 float-right button-space">{{ 'SearchFields.Cancel' | translate }}</button>
 
           </div>
         </div>

@@ -1,0 +1,44 @@
+{
+    "SearchFields": {
+        "Keywords": "Keywords",
+        "CareerField": "Career Field",
+        "AcademicSubjects": "Academic Subjects",
+        "Strands": "Strands",
+        "Outcomes": "Outcomes",
+        "CompetencyNumber": "Competency Number",
+        "Alignment": "Alignment",
+        "Courses": "Courses",
+        "Grade": "Grade",
+        "Cluster": "Cluster",
+        "StandardNumber": "Standard Number",
+        "Search": "Search",
+        "Cancel": "Cancel"
+    },
+    "FilterResults": {
+        "SearchCriteria": "Search Criteria",
+        "UpdateSearch": "Update Search"
+    },
+    "SearchResults": {
+        "SearchResults": "Search Results",
+        "CareerFields": "Career Fields",
+        "AcademicSubject": "Academic Subject",
+        "Alignment": "Alignment",
+        "ToggleAlignments": "Toggle Alignments"
+    },
+    "ReportFields": {
+        "Results": "Results",
+        "CareerField": "Career Field",
+        "Strand": "Strand",
+        "Outcome": "Outcome",
+        "Competency": "Competency",
+        "AcademicSubject": "Academic Subject",
+        "Cluster": "Cluster",
+        "Grade": "Grade",
+        "Standards": "Standards",
+        "Reinforcement": "Reinforcement",
+        "Enrichment": "Enrichment",
+        "Application": "Application",
+        "Generate": "Generate",
+        "Cancel": "Cancel"
+    }
+}

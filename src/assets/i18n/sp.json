@@ -1,0 +1,44 @@
+{
+    "SearchFields": {
+        "Keywords": "Palabras clave",
+        "CareerField": "Campo ocupacional",
+        "AcademicSubjects": "Sujetos académicos",
+        "Strands": "Hebras",
+        "Outcomes": "Resultados",
+        "CompetencyNumber": "Número de Competencia",
+        "Alignment": "Alineación",
+        "Courses": "Cursos",
+        "Grade": "Grado",
+        "Cluster": "Racimo",
+        "StandardNumber": "Número estándar",
+        "Search": "Buscar",
+        "Cancel": "Cancelar"
+    },
+    "FilterResults": {
+        "SearchCriteria": "Criterio de búsqueda",
+        "UpdateSearch": "Actualizar búsqueda"
+    },
+    "SearchResults": {
+        "SearchResults": "Resultados de la búsqueda",
+        "CareerFields": "Campo ocupacional",
+        "AcademicSubject": "Sujetos académicos",
+        "Alignment": "Alineación",
+        "ToggleAlignments": "Alineaciones de palanca"
+    },
+    "ReportFields": {
+        "Results": "Resultados",
+        "CareerField": "Campo ocupacional",
+        "Strand": "Hebra",
+        "Outcome": "Resultado",
+        "Competency": "Competencia",
+        "AcademicSubject": "Sujetos académicos",
+        "Cluster": "Racimo",
+        "Grade": "Grado",
+        "Standards": "Normas",
+        "Reinforcement": "Reforzamiento",
+        "Enrichment": "Enriquecimiento",
+        "Application": "Solicitud",
+        "Generate": "Generar",
+        "Cancel": "Cancelar"
+    }
+}
