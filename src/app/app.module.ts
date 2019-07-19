@@ -27,6 +27,7 @@ import { ReportEffects } from './effects/report.effects';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { ReportListComponent } from './components/report-list/report-list.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SearchResultsComponent } from './components/search-results/search-resul
     CustomAccordionComponent,
     FilterSummaryComponent,
     ReportComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    ReportListComponent
   ],
   imports: [
     BrowserModule,

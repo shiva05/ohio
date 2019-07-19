@@ -1,0 +1,99 @@
+<div class="col-md-12">
+    <div class="row reports-head">
+        <div class="reports-head-left col-md-3">
+            <h1>{{ 'ReportFields.Results' | translate }}</h1>
+        </div>
+
+        <div class="reports-head-right">
+            <div class="reports-head-right-each">
+                <span class="legend-reinforcement">R</span>
+                {{ 'ReportFields.Reinforcement' | translate }}
+            </div>
+            <div class="reports-head-right-each">
+                <span class="legend-enrichment">E</span>
+                {{ 'ReportFields.Enrichment' | translate }}
+            </div>
+            <div class="reports-head-right-each">
+                <span class="legend-application">A</span>
+                {{ 'ReportFields.Application' | translate }}
+            </div>
+        </div>
+    </div>
+    <div class="reports-each col-md-12" *ngFor="let result of results">
+        <h2>{{result.title}}</h2>
+        <div class="row">
+
+            <div class="reports-each-top col-md-12">
+                <div class="reports-content">
+
+                    <div class="reports-content-each">
+
+                        <span class="reports-content-each-left">{{ 'ReportFields.CareerField' | translate }}</span>
+
+                        <span class="reports-content-each-right reports-blue">{{result.careerField}}</span>
+
+                    </div>
+                    <div class="reports-content-each">
+
+                        <span class="reports-content-each-left">{{ 'ReportFields.Strand' | translate }}</span>
+
+                        <span class="reports-content-each-right">{{result.strand}}</span>
+
+                    </div>
+                    <div class="reports-content-each">
+                        <span class="reports-content-each-left">
+                            {{ 'ReportFields.Outcome' | translate }}
+                        </span>
+                        <span class="reports-content-each-right">
+                            {{result.outcome}}
+                        </span>
+                    </div>
+                    <div class="reports-content-each">
+                        <span class="reports-content-each-left">{{ 'ReportFields.Competency' | translate }}</span>
+
+                        <span class="reports-content-each-right">{{result.competency}}</span>
+
+                    </div>
+                    <div class="reports-content-each">
+                        <span class="reports-content-each-left">{{ 'ReportFields.AcademicSubject' | translate }}</span>
+
+                        <span class="reports-content-each-right reports-green">{{result.academicSubject}}</span>
+
+                    </div>
+
+                    <div class="reports-content-each">
+                        <span class="reports-content-each-left">{{ 'ReportFields.Cluster' | translate }}</span>
+
+                        <span class="reports-content-each-right">{{result.domain}}</span>
+
+                    </div>
+                    <div class="reports-content-each">
+                        <span class="reports-content-each-left">{{ 'ReportFields.Grade' | translate }}</span>
+
+                        <span class="reports-content-each-right">{{result.grade}}</span>
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+            <div class="reports-each-bottom col-md-12">
+                <h3>{{ 'ReportFields.Standards' | translate }}:</h3>
+                <div class="reports-standards">
+                    <div class="reports-standards-each" *ngFor="let  standard of result.standards">
+                        <span class="reports-standards-each-left">
+                            <span class="legend-application">
+                                {{standard.standardType}}
+                            </span>
+                        </span>
+                        <span class="reports-standards-each-right">
+                            {{standard.standardDesc}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
