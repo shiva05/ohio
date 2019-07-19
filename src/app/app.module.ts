@@ -26,6 +26,7 @@ import { ReportEffects } from './effects/report.effects';
 // import ngx-translate and the http loader
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { SearchResultsComponent } from './components/search-results/search-results.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
     AdvancedSearchComponent,
     CustomAccordionComponent,
     FilterSummaryComponent,
-    ReportComponent
+    ReportComponent,
+    SearchResultsComponent
   ],
   imports: [
     BrowserModule,
