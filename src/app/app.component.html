@@ -1,6 +1,6 @@
 <header (onPageSelect)="onPageSelect($event)"></header>
 
-<advanced-search (onPageSelect)="onPageSelect($event)"  *ngIf="showAdvancedSearch" ></advanced-search>
+<advanced-search (onPageSelect)="onPageSelect($event)"  *ngIf="showAdvancedSearch"></advanced-search>
 
 <filter-summary (onPageSelect)="onPageSelect($event)" *ngIf="showSearchResults"  [FilterSummary]="FilterSummary"></filter-summary>
 
@@ -8,7 +8,7 @@
 
 <div class="row button-row button-space" *ngIf="showSearchResults" >
     <div class="col-md-12 nopad">
-        <button type="button" class="btn btn-info btn-search  float-right col-md-2" [routerLink]="['/results']"
+        <button type="button" class="btn btn-info btn-search  float-right col-md-2"
         (click)="onPageSelect('Report')">Generate</button>
     <button type="button" class="btn btn-outline-secondary btn-cancel-black col-md-2 float-right button-space" (click)="onPageSelect('Search')">Cancel</button>
 

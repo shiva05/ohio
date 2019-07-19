@@ -1,11 +1,11 @@
 <div class="col-md-12 main">
-    <h1>{{ 'FilterResults.SearchCriteria' | translate }}</h1>
+  <h1>{{ 'FilterResults.SearchCriteria' | translate }}</h1>
   <div class="row">
     <!-- filter Form Begin -->
     <section class="filter-form col-md-12">
-<div class="search-filter">
+      <div class="search-filter">
 
-      <div class="search-filter-left">
+        <div class="search-filter-left">
           <span *ngFor="let item of FilterSummaryData; let i = index">
             <span *ngIf="item.fieldType == 1">
               <span *ngIf="i != item.length && i != 0"> | </span>
@@ -23,36 +23,39 @@
               <label>{{item.fieldStandardNumberName}}: </label>
               <span class="badge badge-light">{{item.fieldStandardNumberValue}}</span>
             </span>
-        </span>
+          </span>
+        </div>
+        <div class="search-filter-right">
+          <button (click)="this.goToPage('Search');">{{ 'FilterResults.UpdateSearch' | translate }}<i
+              class="fa fa-angle-double-down"></i></button>
+        </div>
       </div>
-      <div class="search-filter-right">
-      <button (click)="this.goToPage('Search');">{{ 'FilterResults.UpdateSearch' | translate }}<i class="fa fa-angle-double-down"></i></button>
-    </div></div>
 
     </section>
 
     <div class="col-md-12 search-results">
 
-        <div class="search-results-head row">
-            <div class="col-md-10 search-results-head-left"> <h3>{{ 'SearchResults.SearchResults' | translate }}</h3>
-            <p> Found 210 Alignments for your search criteria</p>
-            </div>
-            <div class="col-md-2 search-results-head-right">
-            <button>{{ 'SearchResults.ToggleAlignments' | translate }} &nbsp; <i class="fa fa-exchange"></i></button>
-            </div>
+      <div class="search-results-head row">
+        <div class="col-md-10 search-results-head-left">
+          <h3>{{ 'SearchResults.SearchResults' | translate }}</h3>
+          <p> Found 210 Alignments for your search criteria</p>
         </div>
+        <div class="col-md-2 search-results-head-right">
+          <button>{{ 'SearchResults.ToggleAlignments' | translate }} &nbsp; <i class="fa fa-exchange"></i></button>
+        </div>
+      </div>
 
-        <div class="search-accordion">
-            <div class="search-accordion-head row">
-              <div class="col-md-4">{{ 'SearchResults.CareerFields' | translate }}</div>
-              <div class="col-md-2">&nbsp;</div>
-              <div class="col-md-3">{{ 'SearchResults.AcademicSubject' | translate }}</div>
-              <div class="col-md-2">{{ 'SearchResults.Alignment' | translate }}</div>
-              <div class="col-md-1">&nbsp;</div>
-            </div>
-            </div> </div>
+      <div class="search-accordion">
+        <div class="search-accordion-head row">
+          <div class="col-md-4">{{ 'SearchResults.CareerFields' | translate }}</div>
+          <div class="col-md-2">&nbsp;</div>
+          <div class="col-md-3">{{ 'SearchResults.AcademicSubject' | translate }}</div>
+          <div class="col-md-2">{{ 'SearchResults.Alignment' | translate }}</div>
+          <div class="col-md-1">&nbsp;</div>
+        </div>
+      </div>
+    </div>
 
 
   </div>
 </div>
-

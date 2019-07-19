@@ -24,8 +24,10 @@ import { AdvancedSearchEffects } from './effects/advanced-search.effect';
 import { reportReducer } from './reducers/report.reducer';
 import { ReportEffects } from './effects/report.effects';
 // import ngx-translate and the http loader
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AlignmentSearchComponent } from './components/alignment-search/alignment-search.component';
+import { CourseSearchComponent } from './components/course-search/course-search.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
     AdvancedSearchComponent,
     CustomAccordionComponent,
     FilterSummaryComponent,
-    ReportComponent
+    ReportComponent,
+    AlignmentSearchComponent,
+    CourseSearchComponent
   ],
   imports: [
     BrowserModule,
