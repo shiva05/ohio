@@ -13,13 +13,13 @@
 
   <div id="myTabContent" class="row tab-content">
     <div id="home" class="search-form col-md-12 tab-pane fade show active">
-      <app-alignment-search (click)="this.goToPage('SearchResults');"></app-alignment-search>
+      <app-alignment-search (onPageSelect)="onPageSelect($event)"></app-alignment-search>
     </div>
 
 
     <!-- Courses Tab -->
     <div id="profile" class="search-form col-md-12 tab-pane fade">
-      <app-course-search (click)="this.goToPage('SearchResults');"></app-course-search>
+      <app-course-search (onPageSelect)="onPageSelect($event)"></app-course-search>
 
     </div>
 
