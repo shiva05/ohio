@@ -16,6 +16,7 @@ import * as TestActions from './../../actions/test.actions';
 export class HeaderComponent implements OnInit {
 
   tests: Observable<Test[]>;
+
   @Output() onPageSelect = new EventEmitter<any>();
   ngOnInit() {
 
@@ -25,11 +26,11 @@ export class HeaderComponent implements OnInit {
   }
   constructor(private store: Store<AppState>) {
     this.tests = store.select('test');
- }
- addTutorial(name, url) {
+  }
+  addTutorial(name, url) {
 
-  this.store.dispatch(new TestActions.AddTest({name :'Test State',url:'google.com'}));
+    this.store.dispatch(new TestActions.AddTest({ name: 'Test State', url: 'google.com' }));
 
-}
+  }
 
 }

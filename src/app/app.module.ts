@@ -30,6 +30,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AlignmentSearchComponent } from './components/alignment-search/alignment-search.component';
 import { CourseSearchComponent } from './components/course-search/course-search.component';
 import { ReportListComponent } from './components/report-list/report-list.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ReportListComponent } from './components/report-list/report-list.compon
     SearchResultsComponent,
     AlignmentSearchComponent,
     CourseSearchComponent,
-    ReportListComponent
+    ReportListComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
