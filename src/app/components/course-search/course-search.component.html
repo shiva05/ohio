@@ -8,7 +8,7 @@
               <span class="ohio-field-label">{{ 'CourseFields.Keywords' | translate }}</span>
             
               <div class="input-group">
-                    <input type="search" class="ohio-field-input" id="keywordInput" placeholder="Keywords . . .">
+                    <input type="search" class="ohio-field-input" id="keywordInput" placeholder="Course . . .">
 
                 <span class="input-group-addon">
                     <i class="fa fa-search" aria-hidden="true"></i>
@@ -23,7 +23,7 @@
                   <span class="ohio-field-label">{{ 'CourseFields.Keywords' | translate }}</span>
                 
                   <div class="input-group">
-                        <input type="search" class="ohio-field-input" id="keywordInput" placeholder="Keywords . . .">
+                        <input type="search" class="ohio-field-input" id="keywordInput" placeholder="Course . . .">
     
                     <span class="input-group-addon">
                         <i class="fa fa-search" aria-hidden="true"></i>
@@ -64,15 +64,7 @@
             </div>           
         </div>
             <!-- End Dropdown Row -->
-            <div class="row"> 
-            <div class="form-group col-md-6">
-                    <label for="competencyInput">{{ 'CourseFields.CompetencyNumber' | translate }}</label>
-                    <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="competencyNumbers"
-                        [(ngModel)]="selectedCompetencyNumbers" [settings]="dropdownSettings"
-                        (onSelectAll)="onSelectAll($event)">
-                    </ng-multiselect-dropdown>
-                </div>
-            </div>  </div>
+             </div>
 
             <div class="col-md-6">
                     <div class="dynamic-academics" *ngFor="let policy of selectedAcadamicSubjects;let i = index;">
