@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   loopNumber: any;
   showAdvancedSearch = false; showSearchResults = false;
   showReport = false; showHomePage = true;
-  showAlignmentSearch = false; showCourseSearch = false;
+  showAlignmentSearch = false; showCourseSearch = false; showExport = false;
 
   constructor(private translate: TranslateService) {
     translate.setDefaultLang('en');
@@ -73,6 +73,7 @@ export class AppComponent implements OnInit {
     this.showHomePage = false;
     this.showAlignmentSearch = false;
     this.showCourseSearch = false;
+    this.showExport = false;
 
     if (org === 'Search') {
       this.showAdvancedSearch = true;
@@ -86,6 +87,8 @@ export class AppComponent implements OnInit {
       this.showAlignmentSearch = true;
     } else if (org === 'SearchCourse') {
       this.showCourseSearch = true;
+    } else if (org === 'Export') {
+      this.showExport = true;
     }
   }
 }

@@ -31,6 +31,7 @@ import { AlignmentSearchComponent } from './components/alignment-search/alignmen
 import { CourseSearchComponent } from './components/course-search/course-search.component';
 import { ReportListComponent } from './components/report-list/report-list.component';
 import { HomeComponent } from './components/home/home.component';
+import { ExportComponent } from './components/export/export.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { HomeComponent } from './components/home/home.component';
     AlignmentSearchComponent,
     CourseSearchComponent,
     ReportListComponent,
-    HomeComponent
+    HomeComponent,
+    ExportComponent
   ],
   imports: [
     BrowserModule,
