@@ -1,7 +1,8 @@
 <div class="custom-header">
   <img alt="" src="../../assets/images/ohio-logo.png" />
 </div>
-<nav class="navbar navbar-expand-lg navbar-dark navbar-color">
+
+<!-- <nav class="navbar navbar-expand-lg navbar-dark navbar-color">
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
@@ -15,27 +16,46 @@
         <a class="active" (click)="goToPage('SearchCourse')">Search Course</a>
       </li>
 
-      <!-- <li class="nav-item">
+      <li class="nav-item">
         <a class="active" (click)="goToPage('Search')">Search</a>
-      </li> -->
-      <!-- <li class="nav-item">
+      </li>
+      <li class="nav-item">
         <a (click)="goToPage('SearchResults')">Search</a>
-      </li> -->
+      </li>
 
 
       <li class="nav-item">
         <a (click)="goToPage('Report')">Admin</a>
       </li>
-      <!-- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          Dropdown link
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Link 1</a>
-          <a class="dropdown-item" href="#">Link 2</a>
-          <a class="dropdown-item" href="#">Link 3</a>
-        </div>
-      </li> -->
+     
     </ul>
   </div>
+</nav> -->
+
+<nav class="navbar">
+ 
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a (click)="goToPage('Home')">Home <span class="sr-only">(current)</span></a></li>      
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Search <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#" (click)="goToPage('SearchCourse')">Course Search</a></li>
+            <li><a href="#" (click)="goToPage('SearchAlignment')">Alignment Search</a></li>
+         
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin  <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Export </a></li>
+         
+          </ul>
+        </li>
+
+
+      </ul>  
+      
+    </div>
+
 </nav>
