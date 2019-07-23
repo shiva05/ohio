@@ -123,22 +123,22 @@
       text-align: center;
   }
 
-  .legend-reinforcement{
-      background: #347AA9;
-      border-radius: 4px;
-      padding:0;
-      color: #fff;
-      width: 30px;
-      display:  inline-block;
-          text-align: center;
-      }
+.legend-reinforcement{
+    background: #347AA9;
+    border-radius: 4px;
+    padding:0;
+    color: #fff;
+    width: 30px;
+    display:  inline-block;
+        text-align: center;
+}
 
-      .legend-enrichment{
-          background: #B5DC10;
-          border-radius: 4px;
-          padding:0;
-          color: #fff;
-          width: 30px;
-          display:  inline-block;
-              text-align: center;
-          }
+.legend-enrichment{
+    background: #B5DC10;
+    border-radius: 4px;
+    padding:0;
+    color: #fff;
+    width: 30px;
+    display:  inline-block;
+        text-align: center;
+}

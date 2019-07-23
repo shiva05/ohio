@@ -62,7 +62,7 @@ export class FilterSummaryComponent implements OnInit {
     this.onPageSelect.emit(org);
   }
   formatSearchDataToSummary() {
-    const source =  {"selectedKeyword":"Test","selectedAcadamicSubjects":[{"item_id":1,"item_text":"Math","grade":[{"item_id":3,"item_text":"Geometry"}],"cluster":[{"item_id":3,"item_text":"Circles"}],"standardNumber":[{"item_id":1,"item_text":"G.C.4"}]}],"selectedStandards":[{"item_id":4,"item_text":"Electrical"}],"selectedOutcome":[{"item_id":1,"item_text":"Motors and Power"}],"selectedCareers":[{"item_id":3,"item_text":"Construction"}]};
+    const source =  {selectedKeyword: "Test",selectedAcadamicSubjects: [{item_id: 1, item_text: 'Math', grade: [{item_id: 3, item_text: 'Geometry'}], cluster: [{item_id: 3, item_text: 'Circles'}], standardNumber: [{item_id: 1, item_text: 'G.C.4'}]}], selectedStandards: [{item_id: 4, item_text: 'Electrical'}], selectedOutcome: [{item_id: 1, item_text: 'Motors and Power'}], selectedCareers: [{item_id: 3, item_text: 'Construction'}]};
     this.FilterSummaryKeys.forEach(element => {
       if (element.fieldType === '1') {
         if (source[element.fieldKey]) {

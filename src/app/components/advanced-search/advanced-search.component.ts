@@ -25,8 +25,8 @@ export class AdvancedSearchComponent {
     // this.metaData = store.select('metaData');
     this.store.dispatch({type: AdvancedSearchActions.LOAD_META_DATA});
   }
-  @Output()onPageSelect = new EventEmitter<any>();
-
+  @Output() onPageSelect = new EventEmitter<any>();
+  
   goToPage(org) {
     this.onPageSelect.emit(org);
   }

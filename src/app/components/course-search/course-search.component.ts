@@ -72,7 +72,6 @@ export class CourseSearchComponent implements OnInit {
   }
 
   search() {
-    this.goToPage('SearchResults');
     this.searchObj = JSON.stringify({
       selectedKeyword: this.selectedKeyword,
       selectedAcadamicSubjects: this.selectedAcadamicSubjects,
@@ -82,6 +81,7 @@ export class CourseSearchComponent implements OnInit {
       selectedCareers: this.selectedCareer
     });
     console.log(this.searchObj);
+    this.goToPage('SearchResults');
   }
   onAcadamicSubjectSelect() {
     console.log('hi');

@@ -14,7 +14,6 @@ import * as ReportsActions from './../../actions/report.actions';
 })
 export class ReportListComponent implements OnInit {
 
-
   results: any = [];
   @Output() onPageSelect = new EventEmitter<any>();
   constructor(private store: Store<AppState>) {
