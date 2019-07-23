@@ -14,6 +14,23 @@
         "Search": "Search",
         "Cancel": "Cancel"
     },
+
+    "CourseFields": {
+        "Keywords": "Course Id",
+        "CareerField": "Career Field",
+        "AcademicSubjects": "Academic Subjects",
+        "Strands": "Strands",
+        "Outcomes": "Outcomes",
+        "CompetencyNumber": "Competency Number",
+        "Alignment": "Alignment",
+        "Courses": "Courses",
+        "Grade": "Grade",
+        "Cluster": "Cluster",
+        "StandardNumber": "Standard Number",
+        "Search": "Search",
+        "Cancel": "Cancel"
+    },
+
     "FilterResults": {
         "SearchCriteria": "Search Criteria",
         "UpdateSearch": "Update Search"

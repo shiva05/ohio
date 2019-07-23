@@ -21,12 +21,12 @@ export class AdvancedSearchComponent {
 
 
   constructor(private httpService: HttpClient,
-              private ref: ChangeDetectorRef, private store: Store<AppState>) {
+    private ref: ChangeDetectorRef, private store: Store<AppState>) {
     // this.metaData = store.select('metaData');
-    this.store.dispatch({type: AdvancedSearchActions.LOAD_META_DATA});
+    this.store.dispatch({ type: AdvancedSearchActions.LOAD_META_DATA });
   }
   @Output() onPageSelect = new EventEmitter<any>();
-  
+
   goToPage(org) {
     this.onPageSelect.emit(org);
   }

@@ -1,16 +1,27 @@
-<!-- Alignment Tab -->
-
+<div class="col-md-12 main"> 
+        <h1>Alignment  Search </h1>
+        <div class="searchmain"> 
 <div class="row">
-    <!-- Search Form Begin -->
-    <div class="form-group col-md-6">
-        <label for="keywordInput">{{ 'SearchFields.Keywords' | translate }}</label>
-        <input type="search" class="form-control" id="keywordInput"
-            placeholder="{{ 'SearchFields.Keywords' | translate }} . . ." [(ngModel)]="selectedKeyword">
-        <i id="filtersubmit" class="fa fa-search fa-2x"></i>
-    </div>
-</div>
+    <!-- Search Form Begin -->  
+    <div class="col-md-6">
+            <label  for="keywordInput" class="ohio-field-status" for="field-example-8">
+              <span class="ohio-field-label">{{ 'SearchFields.Keywords' | translate }}</span>
+            
+              <div class="input-group">
+                    <input type="search" class="ohio-field-input" id="keywordInput"
+                    placeholder="{{ 'SearchFields.Keywords' | translate }} . . ." [(ngModel)]="selectedKeyword">
 
-<hr>
+                <span class="input-group-addon">
+                    <i id="filtersubmit"  class="fa fa-search" aria-hidden="true"></i>
+        </span>
+              </div>
+            
+            </label>
+          </div>
+
+
+
+</div>
 
 <!-- Dropdown row -->
 <div class="row">
@@ -29,7 +40,7 @@
     </div>
 
 
-    <div class="col-md-6 no-gutters">
+    <div class="col-md-6">
         <div class="row">
             <div class="form-group col-md-6">
                 <label>{{ 'SearchFields.Strands' | translate }}</label>
@@ -48,21 +59,21 @@
 
 
 
-
+        <div class="row">
         <div class="form-group col-md-12">
             <label for="competencyInput">{{ 'SearchFields.CompetencyNumber' | translate }}</label>
             <ng-multiselect-dropdown [ngClass]="multiSelect" [data]="competencyNumbers"
                 [(ngModel)]="selectedCompetencyNumbers" [settings]="dropdownSettings"
                 (onSelectAll)="onSelectAll($event)">
             </ng-multiselect-dropdown>
-        </div>
+        </div> </div>
     </div>
 
 
 
     <!-- Dynamic dropdowns of Academic subjects -->
-    <div class="col-md-6 col-md-push-6">
-        <div class="row dynamic-academics" *ngFor="let policy of selectedAcadamicSubjects;let i = index;">
+    <div class="col-md-6">
+        <div class="dynamic-academics" *ngFor="let policy of selectedAcadamicSubjects;let i = index;">
             <h3>{{policy.item_text}}</h3>
 
             <div class="row">
@@ -98,11 +109,11 @@
 
 
 <!-- Button Row -->
-<div class="row button-row button-space">
-    <div class="col-md-12 nopad">
-        <button type="button" class="btn btn-info btn-search  float-right col-md-2" 
+<div class="row">
+        <div class="pull-right search-btn">
+        <button type="button" class="ohio-button large but-gap" 
             (click)="search()">{{ 'SearchFields.Search' | translate }}</button>
         <button type="button"
-            class="btn btn-outline-secondary btn-cancel col-md-2 float-right button-space">{{ 'SearchFields.Cancel' | translate }}</button>
+            class="ohio-button large but-gap  secondary">{{ 'SearchFields.Cancel' | translate }}</button>
     </div>
-</div>
+</div> </div>

@@ -14,30 +14,32 @@ export class AppComponent implements OnInit {
   someParamKid: any;
   loopNumber: any;
   showAdvancedSearch = false; showSearchResults = false;
-  showReport = false;
+  showReport = false; showHomePage = true;
+  showAlignmentSearch = false; showCourseSearch = false; showExport = false;
 
   constructor(private translate: TranslateService) {
     translate.setDefaultLang('en');
   }
 
   ngOnInit() {
-    console.log('hear init hapenned ');
-    this.showAdvancedSearch = true;
+    this.showAdvancedSearch = false;
+    this.showHomePage = true;
     this.loopNumber = 1;
+
     this.childArray1 = [
-      { id: 1, academicSubject: 'Math', value: 'Select materials and lay out rough\u2010in wiring runs according to specifications, drawings and code requirements.'},
-      { id: 2, academicSubject: 'Math', value: 'Lay out and install conduit or cable runs, raceways and cable systems.'}
-  ];
+      { id: 1, academicSubject: 'Math', value: 'Select materials and lay out rough\u2010in wiring runs according to specifications, drawings and code requirements.' },
+      { id: 2, academicSubject: 'Math', value: 'Lay out and install conduit or cable runs, raceways and cable systems.' }
+    ];
 
     this.childArray = [
-      { id: 1, academicSubject: 'Math', value: 'Planning and Design'},
-      { id: 2, academicSubject: 'Math', value: 'Business Operations\/21st Century Skills'},
-      { id: 3, academicSubject: 'Math', value: 'Construction and Facility Management'},
-      { id: 4, academicSubject: 'Math', value: 'Electrical', children: JSON.parse(JSON.stringify(this.childArray1))},
-      { id: 5, academicSubject: 'Math', value: 'Environmental Systems and Plumbing'},
+      { id: 1, academicSubject: 'Math', value: 'Planning and Design' },
+      { id: 2, academicSubject: 'Math', value: 'Business Operations\/21st Century Skills' },
+      { id: 3, academicSubject: 'Math', value: 'Construction and Facility Management' },
+      { id: 4, academicSubject: 'Math', value: 'Electrical', children: JSON.parse(JSON.stringify(this.childArray1)) },
+      { id: 5, academicSubject: 'Math', value: 'Environmental Systems and Plumbing' },
       { id: 6, academicSubject: 'Math', value: 'Structural Construction' },
       { id: 7, academicSubject: 'Math', value: 'Safety, Tools, and Equipment' }
-  ];
+    ];
 
     this.List = [
       { id: 1, academicSubject: 'Science', value: 'Hospitality and Tourism' },
@@ -55,24 +57,38 @@ export class AppComponent implements OnInit {
       { id: 13, academicSubject: 'Science', value: 'Health Science' }
     ];
   }
+
   onItemSelect(item: any) {
     console.log('on item slplselect', item);
   }
+
   onSelectAll(item: any) {
     console.log('on select all', item);
   }
+
   onPageSelect(org) {
     this.showAdvancedSearch = false;
     this.showSearchResults = false;
     this.showReport = false;
+    this.showHomePage = false;
+    this.showAlignmentSearch = false;
+    this.showCourseSearch = false;
+    this.showExport = false;
+
     if (org === 'Search') {
       this.showAdvancedSearch = true;
-    }
-    if (org === 'SearchResults') {
+    } else if (org === 'SearchResults') {
       this.showSearchResults = true;
-    }
-    if (org === 'Report') {
+    } else if (org === 'Report') {
       this.showReport = true;
+    } else if (org === 'Home') {
+      this.showHomePage = true;
+    } else if (org === 'SearchAlignment') {
+      this.showAlignmentSearch = true;
+    } else if (org === 'SearchCourse') {
+      this.showCourseSearch = true;
+    } else if (org === 'Export') {
+      this.showExport = true;
     }
   }
 }

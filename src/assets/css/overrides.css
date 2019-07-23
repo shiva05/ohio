@@ -20,6 +20,10 @@ h1{
     font-family: 'Serifa-Reg';
 }
 
+.dn{
+    display: none !important
+}
+
 .nopad{
 padding: 0px !important;
 }
@@ -28,7 +32,21 @@ padding: 0px !important;
     margin: 0px !important;
     }
 
+.navbar{
+    background: #700017;
+    border-radius: 0 !important;
+    margin-bottom: 0 !important;
+}
 
+.nav li a{
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.nav li a:hover,.nav li a:focus, .nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
+    background-color: transparent !important;
+}
 
 
 
@@ -169,12 +187,35 @@ font-size: 16px;
 
     }
 
-    .btn-cancel{
-        color: #fff !important;
-        border-color: #fff !important;
-        }
+.btn-cancel{
+color: #fff !important;
+border-color: #fff !important;
+}
 
-        .btn-cancel-black{
-            color: #000 !important;
-            border-color: #000 !important;
-            }
+.btn-cancel-black{
+    color: #000 !important;
+    border-color: #000 !important;
+    }
+
+
+.home{
+    font-family: 'Lato', sans-serif;
+    font-size: 16px ;   
+}
+
+
+
+
+.home p{
+    margin-bottom: 15px;
+
+}
+
+.searchmain{
+    background: #f2f2f2;
+    padding: 15px;
+}
+
+.search-btn{
+    margin: 15px 0 0 0
+}
