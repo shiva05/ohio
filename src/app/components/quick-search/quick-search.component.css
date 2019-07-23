@@ -1,0 +1,35 @@
+
+.quick-search-title {
+    color: white;
+    margin: 30px 0 30px 0;
+}
+label {
+    color: white;
+    margin: 10px 0 10px 0;
+}
+.quick-search {
+    background-color: darkred;
+    margin: 0;
+}
+.quick-search-layer {
+    background-color: darkred;
+    padding: 20px 15px 25px 15px;
+    margin: 30px 0 50px 0;
+}
+.button-row {
+    width: 90%;
+    margin: 20px 7% 20px 7%;
+}
+.btn {
+    margin: 15px;
+}
+.quick-search-title {
+    padding: 15px;
+}
+.sub-header-1 {
+    margin: 50px 15% 50px 15%;
+    text-align: center;
+}
+.sub-header-1 h4 {
+    color: darkred;
+}

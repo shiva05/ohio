@@ -32,6 +32,7 @@ import { CourseSearchComponent } from './components/course-search/course-search.
 import { ReportListComponent } from './components/report-list/report-list.component';
 import { HomeComponent } from './components/home/home.component';
 import { ExportComponent } from './components/export/export.component';
+import { QuickSearchComponent } from './components/quick-search/quick-search.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ExportComponent } from './components/export/export.component';
     CourseSearchComponent,
     ReportListComponent,
     HomeComponent,
-    ExportComponent
+    ExportComponent,
+    QuickSearchComponent
   ],
   imports: [
     BrowserModule,
