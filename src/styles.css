@@ -8,9 +8,9 @@
 .multiselect-dropdown .dropdown-btn {
     color: black;
     font-weight: 500 !important;
-    background-color: white;
-    line-height: 45px !important;
-    height: 60px !important;
+    background-color: #f2f2f2;
+    line-height: 25px !important;
+    height: 40px !important;
 }
 .multiselect-dropdown .dropdown-btn .selected-item {
     color: black !important;
@@ -28,4 +28,18 @@
 .multiselect-dropdown .dropdown-list .multiselect-item-checkbox > input[type="checkbox"]:checked + div::before {
     border: 1px solid #700017 !important;
     background-color: #700017 !important;
+}
+
+.form-group label{
+    color: #525051;
+    display: inline-block;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    margin-left: 15px;
+    width: 100%;
+}
+.but-gap{
+    margin: 0 15px 0 0;
 }

@@ -20,6 +20,10 @@ h1{
     font-family: 'Serifa-Reg';
 }
 
+.dn{
+    display: none !important
+}
+
 .nopad{
 padding: 0px !important;
 }
@@ -31,6 +35,7 @@ padding: 0px !important;
 .navbar{
     background: #700017;
     border-radius: 0 !important;
+    margin-bottom: 0 !important;
 }
 
 .nav li a{
@@ -39,9 +44,10 @@ padding: 0px !important;
     cursor: pointer;
 }
 
-.nav li a:hover,.nav li a:focus{
+.nav li a:hover,.nav li a:focus, .nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
     background-color: transparent !important;
 }
+
 
 
 .custom-header{
@@ -198,12 +204,18 @@ border-color: #fff !important;
 }
 
 
-.home h1{
-    font-family: 'Serifa-Reg';    
-}
 
 
 .home p{
     margin-bottom: 15px;
 
+}
+
+.searchmain{
+    background: #f2f2f2;
+    padding: 15px;
+}
+
+.search-btn{
+    margin: 15px 0 0 0
 }
