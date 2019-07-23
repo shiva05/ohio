@@ -4,6 +4,10 @@
 
 <advanced-search (onPageSelect)="onPageSelect($event)" *ngIf="showAdvancedSearch"></advanced-search>
 
+<app-alignment-search (onPageSelect)="onPageSelect($event)" *ngIf="showAlignmentSearch"></app-alignment-search>
+
+<app-course-search (onPageSelect)="onPageSelect($event)" *ngIf="showCourseSearch"></app-course-search>
+
 <!-- <filter-summary (onPageSelect)="onPageSelect($event)" *ngIf="showSearchResults"  [FilterSummary]="FilterSummary"></filter-summary>
 
 <custom-accordion (onPageSelect)="onPageSelect($event)" *ngIf="showSearchResults" [options]="List" [loopCount]="loopNumber"></custom-accordion>
