@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<!-- <div class="col-md-12">
   <div class="search-accordion-each"  [attr.id]="'accordion_' + i + loopCount" *ngFor="let option of options; let i = index;">
       <div class="card">
           <div class="card-header">
@@ -10,13 +10,7 @@
                <div class="col-md-1">
                     <a role="button" data-toggle="collapse" [attr.href]="'#collapseOne_' + i + loopCount" *ngIf="option.children">
                         <i class="fa fa-angle-down search-down-arrow" aria-hidden="true"></i>
-
                 </a></div>
-
-                   <!-- {{option.value}} {{'row' +  i + loopCount}} -->
-
-
-
               </div>
           </div>
           <div [attr.id]="'collapseOne_' + i + loopCount" class="collapse" >
@@ -26,7 +20,49 @@
           </div>
       </div>
   </div>
+</div> -->
 
+<div class="col-md-12">
+  <ul class="list-group">
+      <li class="list-group-item" *ngFor="let item of data.ParentChildchecklist">
+          <input type="checkbox" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}"
+              (ngModelChange)="parentCheckBox(item)" />
+          {{item.value}}
+          <span (click)="expandCollapse(item)"><i class="fas fa-chevron-up"
+                  *ngIf="item.isClosed;else isCollapsed"></i>
+              <ng-template #isCollapsed><i class="fas fa-chevron-down"></i></ng-template>
+          </span>
+
+          <div class="child-list" [hidden]="item.isClosed">
+              <ul class="list-group level-two">
+                  <li class="list-group-item level-two" *ngFor="let itemChild of item.parentChildList">
+                      <input type="checkbox" [(ngModel)]="itemChild.isSelected" name="list_name_child"
+                          value="{{itemChild.id}}" (ngModelChange)="parentChildCheckBox(item, itemChild)" />
+                      {{itemChild.value}}
+
+                      <span (click)="expandChildCollapse(itemChild)" *ngIf="itemChild.childList">
+                          <i class="fas fa-chevron-up"
+                              *ngIf="itemChild.isChildClosed;else isChildClosed"></i>
+                          <ng-template #isChildClosed><i class="fas fa-chevron-down"></i></ng-template>
+                      </span>
+
+                      <div class="child-list" [hidden]="itemChild.isChildClosed" *ngIf="itemChild.childList">
+                          <ul class="list-group level-two">
+                              <li class="list-group-item level-two" *ngFor="let items of itemChild.childList">
+                                  <input type="checkbox" [(ngModel)]="items.isSelected" name="list_name_child"
+                                      value="{{items.id}}" (ngModelChange)="childCheckBox(item, itemChild)" />
+                                  {{items.value}}
+                              </li>
+                          </ul>
+                      </div>
+
+                  </li>
+              </ul>
+          </div>
+      </li>
+  </ul>
+  <!-- <button type="button" class="btn btn-info update-search" style="width: 12%; margin-left: 10px;"
+      (click)="getCheckedValues(data.ParentChildchecklist)" value="Search">Search</button> -->
 </div>
 
 

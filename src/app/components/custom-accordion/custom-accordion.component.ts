@@ -9,35 +9,113 @@ import { FormGroup } from '@angular/forms';
 })
 
 export class CustomAccordionComponent implements OnInit {
-
-  @Input() options;
-  @Input() loopCount;
-  @Output() onPageSelect = new EventEmitter<any>();
-  constructor() { }
-  isOpen = false;
+  data: any;
 
   ngOnInit() {
+    this.data = {};
+
+    // // List object having hierarchy of parents and its children
+    this.data.ParentChildchecklist = [
+      {
+        id: 1, value: 'Parent - 1', isClosed: true,
+        parentChildList: [
+          { id: 1, value: 'PChild - 1' },
+          {
+            id: 2, value: 'PChild - 2', isChildClosed: true,
+            childList: [
+              { id: 1, value: 'Child 1' },
+              { id: 2, value: 'Child 2' }
+            ]
+          }
+        ]
+      },
+      {
+        id: 2, value: 'Parent - 2', isClosed: true,
+        parentChildList: [
+          { id: 1, value: 'PChild - 1' },
+          {
+            id: 2, value: 'PChild - 2', isChildClosed: true,
+            childList: [
+              { id: 1, value: 'Child 1' },
+              { id: 2, value: 'Child 2' }
+            ]
+          }
+        ]
+      },
+      {
+        id: 3, value: 'Parent - 3', isClosed: true,
+        parentChildList: [
+          { id: 1, value: 'PChild - 1' },
+          {
+            id: 2, value: 'PChild - 2', isChildClosed: true,
+            childList: [
+              { id: 1, value: 'Child 1' },
+              { id: 2, value: 'Child 2' }
+            ]
+          }
+        ]
+      }
+    ];
   }
 
-  checkAll(option) {
-    if (option.children) {
-        this.loop(option.children, option);
+  // Click event on parent checkbox
+  parentCheckBox(parentObj) {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < parentObj.parentChildList.length; i++) {
+      parentObj.parentChildList[i].isSelected = parentObj.isSelected;
+      if (parentObj.parentChildList[i].childList) {
+        // tslint:disable-next-line:prefer-for-of
+        for (let j = 0; j < parentObj.parentChildList[i].childList.length; j++) {
+          parentObj.parentChildList[i].childList[j].isSelected = parentObj.isSelected;
+        }
+      }
     }
   }
 
-  loop(list, option) {
-    list.forEach(item => {
-      item.selected = option.selected ? true : false;
-      if (item.children) {
-        this.loop(item.children, item);
+  // Click event on Parent Child Checkbox
+  parentChildCheckBox(parent, parentObj) {
+    // tslint:disable-next-line:only-arrow-functions
+    parent.isSelected = parent.parentChildList.every(function (itemChild: any) {
+      return itemChild.isSelected === true;
+    });
+
+    if (parentObj.childList) {
+      if (parentObj.isSelected) {
+        parentObj.childList.forEach(item => {
+          item.isSelected = true;
+        });
+      } else {
+        parentObj.childList.forEach(item => {
+          item.isSelected = false;
+        });
       }
+    }
+  }
+
+  // Click event on Child Checkbox
+  childCheckBox(parent, parentObj) {
+    // tslint:disable-next-line:only-arrow-functions
+    parentObj.isSelected = parentObj.childList.every(function (itemChild: any) {
+      return itemChild.isSelected === true;
+    });
+    // tslint:disable-next-line:only-arrow-functions
+    parent.isSelected = parent.parentChildList.every(function (itemChild: any) {
+      return itemChild.isSelected === true;
     });
   }
-  toggleAccordion() {
-    this.isOpen = !this.isOpen;
+
+  // Expand/Collapse event on each parent
+  expandCollapse(obj) {
+    obj.isClosed = !obj.isClosed;
   }
-  goToPage(org) {
-    this.onPageSelect.emit(org);
+
+  // Expand/Collapse event on each parent
+  expandChildCollapse(obj) {
+    obj.isChildClosed = !obj.isChildClosed;
+  }
+
+  getCheckedValues(item) {
+    console.log(item);
   }
 }
-
+  
