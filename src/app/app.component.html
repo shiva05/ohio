@@ -15,21 +15,15 @@
 <!-- <iframe id="iframesummons" [src]="iFrameSummonsSrc" style="width: 50%; height:500px" frameborder="0" allowfullscreen>
   <p>Your browser does not support iframes.</p>
 </iframe> -->
-
-<filter-summary (onPageSelect)="onPageSelect($event)" *ngIf="showSearchResults" [FilterSummary]="FilterSummary">
+<div class=" main" *ngIf="showSearchResults"> 
+<filter-summary (onPageSelect)="onPageSelect($event)"  [FilterSummary]="FilterSummary">
 </filter-summary>
+<div class="col-md-12"> 
 
-<custom-accordion (onPageSelect)="onPageSelect($event)" *ngIf="showSearchResults"></custom-accordion>
-
-<div class="row button-row button-space" *ngIf="showSearchResults">
-  <div class="col-md-12 nopad">
-    <button type="button" class="btn btn-info btn-search  float-right col-md-2"
-      (click)="onPageSelect('Report')">Generate</button>
-    <button type="button" class="btn btn-outline-secondary btn-cancel-black col-md-2 float-right button-space"
-      (click)="onPageSelect('Search')">Cancel</button>
-
-  </div>
+<custom-accordion (onPageSelect)="onPageSelect($event)"></custom-accordion>
 </div>
+</div>
+
 
 <report (onPageSelect)="onPageSelect($event)" *ngIf="showReport"></report>
 

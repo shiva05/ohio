@@ -39,12 +39,3 @@ font-size: 20px;
 font-family: 'Lato', sans-serif;
 }
 
-
-#filtersubmit {
-    float: right;
-    margin-right: 23px;
-    margin-top: -45px;
-    position: relative;
-    z-index: 2;
-    color: #700017;
- }

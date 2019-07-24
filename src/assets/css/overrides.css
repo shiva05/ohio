@@ -98,12 +98,33 @@ padding: 0px !important;
    }
 
 .search-accordion-each{
+    
+    border-radius: 0 !important;
     margin: 0 0 10px 0;
-}
-.search-accordion-each .card{
-border: 0px;
+    border: 0px !important;   
+    font-size: 18px;
+    font-family: 'Lato', sans-serif ; 
+    font-weight: 600;    
+    display: block;
 }
 
+
+
+
+
+.search-accordion-each-inner{
+background: #f2f2f2;
+padding: 10px;
+}
+.level-two .list-group-item{
+    border: 0px !important;   
+    padding: 10px 10px;
+}
+
+.level-three .list-group-item{
+    border: 0px !important;   
+    padding: 10px 0px;
+}
 .search-accordion-each .card-header{
     border: 0px;
     background:#F2F2F2 ;
@@ -123,12 +144,24 @@ border: 0px;
     font-family: Serifa-Reg;
     font-weight: 600;
 }
+.search-accordion-head *{
+    font-family: Serifa-Reg;
+    font-size: 18px;
+}
 .cg{
     color: #5E8000 !important;
 }
 
 .bubble-green{
     background: #5E8000 !important;
+    color: #fff;
+    padding: 6px 35px;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+.bubble-blue{
+    background: #0B5688 !important;
     color: #fff;
     padding: 6px 35px;
     font-weight: 600;
@@ -218,4 +251,8 @@ border-color: #fff !important;
 
 .search-btn{
     margin: 15px 0 0 0
+}
+
+.accordion-btn{
+    margin: 15px 0;
 }
