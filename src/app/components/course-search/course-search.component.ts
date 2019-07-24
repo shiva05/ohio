@@ -43,7 +43,7 @@ export class CourseSearchComponent implements OnInit {
   metaData: Observable<MetaData>;
 
   constructor(private httpService: HttpClient,
-              private ref: ChangeDetectorRef, private store: Store<AppState>) {
+    private ref: ChangeDetectorRef, private store: Store<AppState>) {
     // this.metaData = store.select('metaData');
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_META_DATA });
   }
