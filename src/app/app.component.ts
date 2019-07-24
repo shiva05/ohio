@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.iFrameSummonsSrc = this.sanitizer.bypassSecurityTrustResourceUrl('https://jms.ocourts.com');
+    // this.iFrameSummonsSrc = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.google.com');
     this.showAdvancedSearch = false;
     this.showHomePage = true;
     this.loopNumber = 1;
