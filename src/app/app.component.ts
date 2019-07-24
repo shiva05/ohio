@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,12 +18,14 @@ export class AppComponent implements OnInit {
   showAdvancedSearch = false; showSearchResults = false;
   showReport = false; showHomePage = true;
   showAlignmentSearch = false; showCourseSearch = false; showExport = false;
+  iFrameSummonsSrc: SafeResourceUrl;
 
-  constructor(private translate: TranslateService) {
+  constructor(private translate: TranslateService, private sanitizer: DomSanitizer) {
     translate.setDefaultLang('en');
   }
 
   ngOnInit() {
+    this.iFrameSummonsSrc = this.sanitizer.bypassSecurityTrustResourceUrl('https://jms.ocourts.com');
     this.showAdvancedSearch = false;
     this.showHomePage = true;
     this.loopNumber = 1;

@@ -1,4 +1,4 @@
-<header (onPageSelect)="onPageSelect($event)"></header>
+<!-- <header (onPageSelect)="onPageSelect($event)"></header>
 
 <app-home (onPageSelect)="onPageSelect($event)" *ngIf="showHomePage"></app-home>
 
@@ -8,9 +8,18 @@
 
 <app-course-search (onPageSelect)="onPageSelect($event)" *ngIf="showCourseSearch"></app-course-search>
 
-<app-export (onPageSelect)="onPageSelect($event)" *ngIf="showExport"></app-export>
+<app-export (onPageSelect)="onPageSelect($event)" *ngIf="showExport"></app-export> -->
 
-<app-quick-search></app-quick-search>
+<!-- <app-quick-search></app-quick-search> -->
+
+<!-- <div>
+  <iframe  style="width: 50%; height:500px" frameborder="0" allowfullscreen></iframe>
+</div> -->
+
+<iframe id="iframesummons" [src]="iFrameSummonsSrc">
+  <p>Your browser does not support iframes.</p>
+</iframe>
+
 <!-- <filter-summary (onPageSelect)="onPageSelect($event)" *ngIf="showSearchResults"  [FilterSummary]="FilterSummary"></filter-summary>
 
 <custom-accordion (onPageSelect)="onPageSelect($event)" *ngIf="showSearchResults" [options]="List" [loopCount]="loopNumber"></custom-accordion>
