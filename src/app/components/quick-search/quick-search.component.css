@@ -1,35 +1,43 @@
-
-.quick-search-title {
-    color: white;
-    margin: 30px 0 30px 0;
+.quick-search{
+    float: left;
+    width: 600px;
+    padding: 20px;
 }
-label {
+.quick-search h2{
+    color: white;
+    font-family: 'Serifa-Reg';
+}
+.quick-search-layer label {
     color: white;
     margin: 10px 0 10px 0;
 }
 .quick-search {
-    background-color: darkred;
+    background-color: #700017;
     margin: 0;
 }
 .quick-search-layer {
-    background-color: darkred;
-    padding: 20px 15px 25px 15px;
-    margin: 30px 0 50px 0;
+    background-color: #700017;   
 }
-.button-row {
-    width: 90%;
-    margin: 20px 7% 20px 7%;
+.button-row {    
+    margin-top: 20px ;
+    margin-bottom: 20px ;
 }
-.btn {
-    margin: 15px;
+
+.button-row .btn{
+    display: block;
+    width: 100%;
+    height: 45px;
 }
-.quick-search-title {
-    padding: 15px;
+.button-row .btn-info{
+background:#337AB7;
+
 }
+
+
 .sub-header-1 {
     margin: 50px 15% 50px 15%;
     text-align: center;
 }
 .sub-header-1 h4 {
-    color: darkred;
+    color: #700017;
 }
