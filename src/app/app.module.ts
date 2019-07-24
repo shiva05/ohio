@@ -33,7 +33,11 @@ import { ReportListComponent } from './components/report-list/report-list.compon
 import { HomeComponent } from './components/home/home.component';
 import { ExportComponent } from './components/export/export.component';
 import { QuickSearchComponent } from './components/quick-search/quick-search.component';
+import { RouterModule, Routes } from '@angular/router';
 
+export const appRoutes: Routes = [
+  { path: 'quick-search', component: QuickSearchComponent }
+];
 @NgModule({
   declarations: [
     AppComponent,
