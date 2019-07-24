@@ -13,6 +13,8 @@ export class CustomAccordionComponent implements OnInit {
   childList: any = [];
   parentChildList: any = [];
 
+  @Output() onPageSelect = new EventEmitter<any>();
+
   ngOnInit() {
     this.data = {};
 
@@ -108,6 +110,14 @@ export class CustomAccordionComponent implements OnInit {
 
   getCheckedValues(item) {
     console.log(item);
+  }
+
+  getSelect(obj) {
+    this.goToPage(obj);
+  }
+
+  goToPage(org) {
+    this.onPageSelect.emit(org);
   }
 }
 
