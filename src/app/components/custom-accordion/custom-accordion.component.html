@@ -57,17 +57,20 @@
 
 <div class="col-md-12 nopad" *ngIf="careerToAcademic">
   <ul class="list-group search-accordion">
-    <li class="list-group-item search-accordion-each" *ngFor="let item of data.ParentChildchecklist">
+    <li class="list-group-item search-accordion-each" *ngFor="let item of data.ParentChildchecklist; index as i">
       <!-- add class for making accordion 'accordion-active' -->
       <div class="row search-accordion-each-inner">
         <div class="col-md-6">
-          <span class="accordion-checbox">
-
-            <input type="checkbox" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}"
-              (ngModelChange)="parentCheckBox(item)" />
-          </span>
+          <div class="accordion-checbox ">
+            <span class="ohio-checkbox checkbox checkbox-success">
+              <input type="checkbox" class="ohio-checkbox-el" id="checkbox_{{i}}" [(ngModel)]="item.isSelected"
+                name="list_name" value="{{item.id}}" (ngModelChange)="parentCheckBox(item)" />
+              <label for="checkbox_{{i}}"></label>
+            </span>
+          </div>
           <span class="level-one-title"> {{item.value}}</span>
         </div>
+
         <div class="col-md-1 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
         <div class="col-md-3 cg">{{item.academicSubject}}</div>
         <div class="col-md-1"> <span class="accordion-bubble bubble-green">10 </span> </div>
@@ -80,13 +83,17 @@
       </div>
       <div class="child-list" [hidden]="item.isClosed">
         <ul class="list-group level-two">
-          <li class="level-two-inner" *ngFor="let itemChild of item.parentChildList">
+          <li class="level-two-inner" *ngFor="let itemChild of item.parentChildList; index as j">
             <div class="row">
               <div class="col-md-6">
-                <span class="accordion-checbox">
-                  <input type="checkbox" [(ngModel)]="itemChild.isSelected" name="list_name_child"
-                    value="{{itemChild.id}}" (ngModelChange)="parentChildCheckBox(item, itemChild)" />
-                </span>
+                <div class="accordion-checbox">
+                  <span class="ohio-checkbox checkbox checkbox-success">
+                    <input type="checkbox" class="ohio-checkbox-el" id="parentChildCheckbox_{{j}}"
+                      [(ngModel)]="itemChild.isSelected" name="list_name_child" value="{{itemChild.id}}"
+                      (ngModelChange)="parentChildCheckBox(item, itemChild)" />
+                    <label for="parentChildCheckbox_{{j}}"></label>
+                  </span>
+                </div>
                 <span class="level-two-title">
                   {{itemChild.value}}
                 </span>
@@ -104,19 +111,20 @@
             </div>
             <div class="child-list" [hidden]="itemChild.isChildClosed" *ngIf="itemChild.childList">
               <ul class="list-group level-three">
-                <li class="list-group-item level-three" *ngFor="let items of itemChild.childList">
-
-
+                <li class="list-group-item level-three" *ngFor="let items of itemChild.childList; index as k">
                   <div class="row">
                     <div class="col-md-6">
-                      <span class="accordion-checbox">
-                        <input type="checkbox" [(ngModel)]="items.isSelected" name="list_name_child"
-                          value="{{items.id}}" (ngModelChange)="childCheckBox(item, itemChild)" />
-                      </span>
+                      <div class="accordion-checbox">
+                        <span class="ohio-checkbox checkbox checkbox-success">
+                          <input type="checkbox" class="ohio-checkbox-el" id="childCheckbox_{{k}}"
+                            [(ngModel)]="items.isSelected" name="list_name_child" value="{{items.id}}"
+                            (ngModelChange)="childCheckBox(item, itemChild)" />
+                          <label for="childCheckbox_{{k}}"></label>
+                        </span>
+                      </div>
                       <span class="level-three-title">
                         {{items.value}}
                       </span>
-
                     </div>
                     <div class="col-md-1"> &nbsp;</div>
                     <div class="col-md-3 cg"> {{items.academicSubject}}</div>
