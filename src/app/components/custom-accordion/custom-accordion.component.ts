@@ -12,6 +12,8 @@ export class CustomAccordionComponent implements OnInit {
   data: any;
   childList: any = [];
   parentChildList: any = [];
+  careerToAcademic: boolean = true;
+  academicToCareer: boolean = false;
 
   @Output() onPageSelect = new EventEmitter<any>();
 
@@ -118,6 +120,16 @@ export class CustomAccordionComponent implements OnInit {
 
   goToPage(org) {
     this.onPageSelect.emit(org);
+  }
+
+  onToggleClick(value) {
+    if (value) {
+      this.careerToAcademic = false;
+      this.academicToCareer = true;
+    } else {
+      this.careerToAcademic = true;
+      this.academicToCareer = false;
+    }
   }
 }
 

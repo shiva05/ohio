@@ -29,73 +29,106 @@
       <p> Found 210 Alignments for your search criteria</p>
     </div>
     <div class="col-md-2 search-results-head-right">
-      <button>{{ 'SearchResults.ToggleAlignments' | translate }} &nbsp; <i class="fa fa-exchange"></i></button>
+      <button (click)="onToggleClick(careerToAcademic)">{{ 'SearchResults.ToggleAlignments' | translate }} &nbsp; <i
+          class="fa fa-exchange"></i></button>
     </div>
   </div>
 
-  <div class="search-accordion">
+  <div class="search-accordion" *ngIf="careerToAcademic">
     <div class="search-accordion-head row">
-      <div class="col-md-4">{{ 'SearchResults.CareerFields' | translate }}</div>
-      <div class="col-md-2">&nbsp;</div>
+      <div class="col-md-6">{{ 'SearchResults.CareerFields' | translate }}</div>
+      <div class="col-md-1">&nbsp;</div>
       <div class="col-md-3">{{ 'SearchResults.AcademicSubject' | translate }}</div>
-      <div class="col-md-2">{{ 'SearchResults.Alignment' | translate }}</div>
+      <div class="col-md-1">{{ 'SearchResults.Alignment' | translate }}</div>
+      <div class="col-md-1">&nbsp;</div>
+    </div>
+  </div>
+
+  <div class="search-accordion" *ngIf="academicToCareer">
+    <div class="search-accordion-head row">
+      <div class="col-md-3">{{ 'SearchResults.AcademicSubject' | translate }}</div>
+      <div class="col-md-1">&nbsp;</div>
+      <div class="col-md-6">{{ 'SearchResults.CareerFields' | translate }}</div>
+      <div class="col-md-1">{{ 'SearchResults.Alignment' | translate }}</div>
       <div class="col-md-1">&nbsp;</div>
     </div>
   </div>
 </div>
 
-<div class="col-md-12 nopad">
+<div class="col-md-12 nopad" *ngIf="careerToAcademic">
   <ul class="list-group search-accordion">
-    <li class="list-group-item search-accordion-each" *ngFor="let item of data.ParentChildchecklist">
+    <li class="list-group-item search-accordion-each" *ngFor="let item of data.ParentChildchecklist; index as i">
+      <!-- add class for making accordion 'accordion-active' -->
       <div class="row search-accordion-each-inner">
-        <div class="col-md-4">
-          <input type="checkbox" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}"
-            (ngModelChange)="parentCheckBox(item)" />
-          {{item.value}}
+        <div class="col-md-6">
+          <div class="accordion-checbox ">
+            <span class="ohio-checkbox checkbox checkbox-success">
+              <input type="checkbox" class="ohio-checkbox-el" id="checkbox_{{i}}" [(ngModel)]="item.isSelected"
+                name="list_name" value="{{item.id}}" (ngModelChange)="parentCheckBox(item)" />
+              <label for="checkbox_{{i}}"></label>
+            </span>
+          </div>
+          <span class="level-one-title"> {{item.value}}</span>
         </div>
-        <div class="col-md-2"><i class="fa fa-long-arrow-right search-right-arrow" aria-hidden="true"></i></div>
+
+        <div class="col-md-1 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
         <div class="col-md-3 cg">{{item.academicSubject}}</div>
-        <div class="col-md-2"> <span class="bubble-green">10 </span> </div>
-        <div class="col-md-1">
-          <span (click)="expandCollapse(item)"><i class="fas fa-chevron-up" *ngIf="item.isClosed;else isCollapsed"></i>
-            <ng-template #isCollapsed><i class="fas fa-chevron-down"></i></ng-template>
+        <div class="col-md-1"> <span class="accordion-bubble bubble-green">10 </span> </div>
+        <div class="col-md-1 accordion-down-arrow">
+          <span (click)="expandCollapse(item)" *ngIf="item.parentChildList">
+            <i class="fas fa-chevron-down" *ngIf="item.isClosed;else isCollapsed"></i>
+            <ng-template #isCollapsed><i class="fas fa-chevron-up"></i></ng-template>
           </span>
         </div>
       </div>
       <div class="child-list" [hidden]="item.isClosed">
         <ul class="list-group level-two">
-          <li class="list-group-item level-two" *ngFor="let itemChild of item.parentChildList">
+          <li class="level-two-inner" *ngFor="let itemChild of item.parentChildList; index as j">
             <div class="row">
-              <div class="col-md-4">
-                <input type="checkbox" [(ngModel)]="itemChild.isSelected" name="list_name_child"
-                  value="{{itemChild.id}}" (ngModelChange)="parentChildCheckBox(item, itemChild)" />
-                {{itemChild.value}}
+              <div class="col-md-6">
+                <div class="accordion-checbox">
+                  <span class="ohio-checkbox checkbox checkbox-success">
+                    <input type="checkbox" class="ohio-checkbox-el" id="parentChildCheckbox_{{j}}"
+                      [(ngModel)]="itemChild.isSelected" name="list_name_child" value="{{itemChild.id}}"
+                      (ngModelChange)="parentChildCheckBox(item, itemChild)" />
+                    <label for="parentChildCheckbox_{{j}}"></label>
+                  </span>
+                </div>
+                <span class="level-two-title">
+                  {{itemChild.value}}
+                </span>
               </div>
-              <div class="col-md-2"> &nbsp;</div>
+              <div class="col-md-1"> &nbsp;</div>
               <div class="col-md-3 cg"> {{itemChild.academicSubject}}</div>
-              <div class="col-md-2"> <span class="bubble-blue">20 </span> </div>
-              <div class="col-md-1">
+              <div class="col-md-1"> <span class="accordion-bubble bubble-blue">20 </span> </div>
+              <div class="col-md-1 accordion-down-arrow">
 
                 <span (click)="expandChildCollapse(itemChild)" *ngIf="itemChild.childList">
-                  <i class="fas fa-chevron-up" *ngIf="itemChild.isChildClosed;else isChildClosed"></i>
-                  <ng-template #isChildClosed><i class="fas fa-chevron-down"></i></ng-template>
+                  <i class="fas fa-chevron-down" *ngIf="itemChild.isChildClosed;else isChildClosed"></i>
+                  <ng-template #isChildClosed><i class="fas fa-chevron-up"></i></ng-template>
                 </span>
               </div>
             </div>
             <div class="child-list" [hidden]="itemChild.isChildClosed" *ngIf="itemChild.childList">
               <ul class="list-group level-three">
-                <li class="list-group-item level-three" *ngFor="let items of itemChild.childList">
-
-
+                <li class="list-group-item level-three" *ngFor="let items of itemChild.childList; index as k">
                   <div class="row">
-                    <div class="col-md-4">
-                      <input type="checkbox" [(ngModel)]="items.isSelected" name="list_name_child" value="{{items.id}}"
-                        (ngModelChange)="childCheckBox(item, itemChild)" />
-                      {{items.value}}
+                    <div class="col-md-6">
+                      <div class="accordion-checbox">
+                        <span class="ohio-checkbox checkbox checkbox-success">
+                          <input type="checkbox" class="ohio-checkbox-el" id="childCheckbox_{{k}}"
+                            [(ngModel)]="items.isSelected" name="list_name_child" value="{{items.id}}"
+                            (ngModelChange)="childCheckBox(item, itemChild)" />
+                          <label for="childCheckbox_{{k}}"></label>
+                        </span>
+                      </div>
+                      <span class="level-three-title">
+                        {{items.value}}
+                      </span>
                     </div>
-                    <div class="col-md-2"> &nbsp;</div>
+                    <div class="col-md-1"> &nbsp;</div>
                     <div class="col-md-3 cg"> {{items.academicSubject}}</div>
-                    <div class="col-md-2"> <span class="bubble-blue">20 </span> </div>
+                    <div class="col-md-1"> <span class="accordion-bubble bubble-blue-color">3</span> </div>
                     <div class="col-md-1">
                       &nbsp;
                     </div>
@@ -108,9 +141,98 @@
       </div>
     </li>
   </ul>
-  <!-- <button type="button" class="btn btn-info update-search" style="width: 12%; margin-left: 10px;"
-      (click)="getCheckedValues(data.ParentChildchecklist)" value="Search">Search</button> -->
 </div>
+
+<div class="col-md-12 nopad" *ngIf="academicToCareer">
+  <ul class="list-group search-accordion">
+    <li class="list-group-item search-accordion-each" *ngFor="let item of data.ParentChildchecklist">
+      <!-- add class for making accordion 'accordion-active' -->
+      <div class="row search-accordion-each-inner">
+        <div class="col-md-3 cg">
+          <span class="accordion-checbox">
+            <input type="checkbox" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}"
+              (ngModelChange)="parentCheckBox(item)" />
+          </span>
+          <span class="level-one-title"> {{item.academicSubject}}</span>
+        </div>
+
+        <div class="col-md-1 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
+        <div class="col-md-6">
+          <span class="level-one-title"> {{item.value}}</span>
+        </div>
+
+        <div class="col-md-1"> <span class="accordion-bubble bubble-green">10 </span> </div>
+        <div class="col-md-1 accordion-down-arrow">
+          <span (click)="expandCollapse(item)" *ngIf="item.parentChildList">
+            <i class="fas fa-chevron-down" *ngIf="item.isClosed;else isCollapsed"></i>
+            <ng-template #isCollapsed><i class="fas fa-chevron-up"></i></ng-template>
+          </span>
+        </div>
+      </div>
+      <div class="child-list" [hidden]="item.isClosed">
+        <ul class="list-group level-two">
+          <li class="level-two-inner" *ngFor="let itemChild of item.parentChildList">
+            <div class="row">
+              <div class="col-md-3 cg">
+                <span class="accordion-checbox">
+                  <input type="checkbox" [(ngModel)]="itemChild.isSelected" name="list_name_child"
+                    value="{{itemChild.id}}" (ngModelChange)="parentChildCheckBox(item, itemChild)" />
+                </span>
+                <span class="level-two-title">
+                  {{itemChild.academicSubject}}
+                </span>
+              </div>
+              <div class="col-md-1"> &nbsp;</div>
+              <div class="col-md-6">
+                <span class="level-two-title">
+                  {{itemChild.value}}
+                </span>
+              </div>
+
+              <div class="col-md-1"> <span class="accordion-bubble bubble-blue">20 </span> </div>
+              <div class="col-md-1 accordion-down-arrow">
+                <span (click)="expandChildCollapse(itemChild)" *ngIf="itemChild.childList">
+                  <i class="fas fa-chevron-down" *ngIf="itemChild.isChildClosed;else isChildClosed"></i>
+                  <ng-template #isChildClosed><i class="fas fa-chevron-up"></i></ng-template>
+                </span>
+              </div>
+            </div>
+            <div class="child-list" [hidden]="itemChild.isChildClosed" *ngIf="itemChild.childList">
+              <ul class="list-group level-three">
+                <li class="list-group-item level-three" *ngFor="let items of itemChild.childList">
+                  <div class="row">
+                    <div class="col-md-3 cg">
+                      <span class="accordion-checbox">
+                        <input type="checkbox" [(ngModel)]="items.isSelected" name="list_name_child"
+                          value="{{items.id}}" (ngModelChange)="childCheckBox(item, itemChild)" />
+                      </span>
+                      <span class="level-three-title">
+                        {{items.academicSubject}}
+                      </span>
+                    </div>
+                    <div class="col-md-1"> &nbsp;</div>
+
+                    <div class="col-md-6">
+                      <span class="level-three-title">
+                        {{items.value}}
+                      </span>
+                    </div>
+
+                    <div class="col-md-1"> <span class="accordion-bubble bubble-blue-color">3</span> </div>
+                    <div class="col-md-1">
+                      &nbsp;
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</div>
+
 <div class="pull-right accordion-btn">
   <button type="button" class="ohio-button large but-gap" (click)="getSelect('Report')">Generate</button>
   <button type="button" class="ohio-button large but-gap  secondary" (click)="getSelect('Search')">Cancel</button>
