@@ -34,6 +34,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ExportComponent } from './components/export/export.component';
 import { QuickSearchComponent } from './components/quick-search/quick-search.component';
 import { RouterModule, Routes } from '@angular/router';
+import { MainComponent } from './components/main/main.component';
 
 export const appRoutes: Routes = [
   { path: 'quick-search', component: QuickSearchComponent }
@@ -52,7 +53,8 @@ export const appRoutes: Routes = [
     ReportListComponent,
     HomeComponent,
     ExportComponent,
-    QuickSearchComponent
+    QuickSearchComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
