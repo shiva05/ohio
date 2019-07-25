@@ -32,9 +32,12 @@ export class ReportListComponent implements OnInit {
       grade: 'Geometry',
       standards:
         [
-          { standardType: 'A', standardDesc: 'G.C.4' },
-          { standardType: 'R', standardDesc: 'G.C.5' },
-          { standardType: 'E', standardDesc: 'G.C.6' }
+          { standardType: 'A', standardDesc: '1. RI.11-12.1 Cite strong and thorough textual evidence to support analysis of what the text says explicitly as well as inferences drawn from the text, including determining where the text leaves matters uncertain ' },
+          {
+            standardType: 'R', standardDesc: `2. RI.11-12.2 Analyze informational text development.
+            a. Determine two or more central ideas of a text and analyze their development over the course of the text, including how they interact and build on one another.
+            b.Craft an informative abstract that delineates how the central ideas of a text interact and build on one another` },
+          { standardType: 'E', standardDesc: '3. RI.11-12.3 Cite strong and thorough textual evidence to support analysis of what the text says explicitly as well as inferences drawn from the text, including determining where the text leaves matters uncertain' }
         ]
     };
     this.results.push(result);
@@ -49,9 +52,12 @@ export class ReportListComponent implements OnInit {
       grade: 'Geometry',
       standards:
         [
-          { standardType: 'A', standardDesc: 'G.C.1' },
-          { standardType: 'R', standardDesc: 'G.C.2' },
-          { standardType: 'E', standardDesc: 'G.C.3' }
+          { standardType: 'A', standardDesc: '1. RI.11-12.1 Cite strong and thorough textual evidence to support analysis of what the text says explicitly as well as inferences drawn from the text, including determining where the text leaves matters uncertain ' },
+          {
+            standardType: 'R', standardDesc: `2. RI.11-12.2 Analyze informational text development.
+            a. Determine two or more central ideas of a text and analyze their development over the course of the text, including how they interact and build on one another.
+            b.Craft an informative abstract that delineates how the central ideas of a text interact and build on one another` },
+          { standardType: 'E', standardDesc: '3. RI.11-12.3 Cite strong and thorough textual evidence to support analysis of what the text says explicitly as well as inferences drawn from the text, including determining where the text leaves matters uncertain' }
         ]
     };
     this.results.push(result1);
