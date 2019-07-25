@@ -336,3 +336,6 @@ border-color: #fff !important;
     color:#700017;
 }
 
+.radio, .checkbox {
+    margin: 2px !important;
+}
