@@ -27,7 +27,7 @@
       <li class="nav-item">
         <a (click)="goToPage('Report')">Admin</a>
       </li>
-     
+
     </ul>
   </div>
 </nav> -->
@@ -41,8 +41,12 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
           aria-expanded="false">Search <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#" (click)="goToPage('SearchCourse')">Course Search</a></li>
-          <li><a href="#" (click)="goToPage('SearchAlignment')">Alignment Search</a></li>
+          <li>
+            <a href="#" (click)="goToPage('SearchAlignment')">Alignment Search</a>
+          </li>
+          <li>
+            <a href="#" (click)="goToPage('SearchCourse')">Course Search</a>
+          </li>
         </ul>
       </li>
       <li class="dropdown">
