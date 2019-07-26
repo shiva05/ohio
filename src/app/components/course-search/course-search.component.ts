@@ -42,12 +42,13 @@ export class CourseSearchComponent implements OnInit {
   competencyNumbers: any;
   metaData: Observable<MetaData>;
 
-  constructor(private httpService: HttpClient,
-    private ref: ChangeDetectorRef, private store: Store<AppState>) {
+  constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>) {
     // this.metaData = store.select('metaData');
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_META_DATA });
   }
+
   @Output() onPageSelect = new EventEmitter<any>();
+
   ngOnInit() {
     this.store.select('advancedSearch').subscribe(data => {
       this.metaData = data;
@@ -68,7 +69,6 @@ export class CourseSearchComponent implements OnInit {
       itemsShowLimit: 1,
       allowSearchFilter: true
     };
-
   }
 
   search() {
@@ -81,15 +81,18 @@ export class CourseSearchComponent implements OnInit {
       selectedCareers: this.selectedCareer
     });
     console.log(this.searchObj);
+    localStorage.setItem('searchLable', 'SearchCourse');
     this.goToPage('SearchResults');
   }
+
   onAcadamicSubjectSelect() {
     console.log('hi');
-
   }
+
   goToPage(org) {
     this.onPageSelect.emit(org);
   }
+
   onGradeSelect(grade, acasub) {
     this.selectedAcadamicSubjects.forEach(element => {
       if (element.item_id === acasub.item_id) {

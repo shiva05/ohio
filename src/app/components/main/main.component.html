@@ -16,7 +16,7 @@
   <p>Your browser does not support iframes.</p>
 </iframe> -->
 
-<div class=" main" *ngIf="showSearchResults">
+<div class="main" *ngIf="showSearchResults">
   <filter-summary (onPageSelect)="onPageSelect($event)" [FilterSummary]="FilterSummary"></filter-summary>
   <div class="col-md-12">
     <custom-accordion (onPageSelect)="onPageSelect($event)"></custom-accordion>
