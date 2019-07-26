@@ -15,6 +15,7 @@ export class FilterSummaryComponent implements OnInit {
   @Input() FilterSummary;
   FilterSummaryKeys: any;
   FilterSummaryData: any = [];
+
   @Output() onPageSelect = new EventEmitter<any>();
 
   ngOnInit() {
@@ -36,8 +37,8 @@ export class FilterSummaryComponent implements OnInit {
           fieldType: '1'
         },
         {
-          fieldName: 'Competency Number',
-          fieldKey: 'selectedCompetencyNumber',
+          fieldName: 'Competency',
+          fieldKey: 'selectedCompetency',
           fieldType: '1'
         },
         {
@@ -58,11 +59,41 @@ export class FilterSummaryComponent implements OnInit {
       ];
     this.formatSearchDataToSummary();
   }
-  goToPage(org) {
-    this.onPageSelect.emit(org);
+
+  goBackToSearch() {
+    const lable = localStorage.getItem('searchLable');
+    this.onPageSelect.emit(lable);
   }
+
   formatSearchDataToSummary() {
-    const source =  {selectedKeyword: "Test",selectedAcadamicSubjects: [{item_id: 1, item_text: 'Math', grade: [{item_id: 3, item_text: 'Geometry'}], cluster: [{item_id: 3, item_text: 'Circles'}], standardNumber: [{item_id: 1, item_text: 'G.C.4'}]}], selectedStandards: [{item_id: 4, item_text: 'Electrical'}], selectedOutcome: [{item_id: 1, item_text: 'Motors and Power'}], selectedCareers: [{item_id: 3, item_text: 'Construction'}]};
+    const source = {
+      selectedKeyword: 'Test',
+      selectedAcadamicSubjects: [
+        {
+          item_id: 1, item_text: 'Math',
+          grade: [
+            { item_id: 3, item_text: 'Geometry' }
+          ],
+          cluster: [
+            { item_id: 3, item_text: 'Circles' }
+          ],
+          standardNumber: [
+            { item_id: 1, item_text: 'G.C.4' }
+          ]
+        }],
+      selectedStandards: [
+        { item_id: 4, item_text: 'Electrical' }
+      ],
+      selectedOutcome: [
+        { item_id: 1, item_text: 'Motors and Power' }
+      ],
+      selectedCareers: [
+        { item_id: 3, item_text: 'Construction' }
+      ],
+      selectedCompetency: [
+        { item_id: 3, item_text: 'Assess the roles of nonprofit and for-profit businesses' }
+      ]
+    };
     this.FilterSummaryKeys.forEach(element => {
       if (element.fieldType === '1') {
         if (source[element.fieldKey]) {

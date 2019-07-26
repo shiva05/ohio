@@ -83,6 +83,7 @@ export class AlignmentSearchComponent implements OnInit {
       selectedCareers: this.selectedCareer
     });
     console.log(this.searchObj);
+    localStorage.setItem('searchLable', 'SearchAlignment');
     this.goToPage('SearchResults');
   }
 
