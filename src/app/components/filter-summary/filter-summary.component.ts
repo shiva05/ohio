@@ -121,7 +121,7 @@ export class FilterSummaryComponent implements OnInit {
         }
       }
     });
-    console.log(this.FilterSummaryData);
+    // console.log(this.FilterSummaryData);
   }
   getFormatedName(arg) {
     let result;

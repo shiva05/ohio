@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-
 
 @Component({
   selector: 'custom-accordion',
@@ -16,6 +14,8 @@ export class CustomAccordionComponent implements OnInit {
   academicToCareer: boolean = false;
 
   @Output() onPageSelect = new EventEmitter<any>();
+
+  constructor() { }
 
   ngOnInit() {
     this.data = {};
@@ -111,7 +111,7 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   getCheckedValues(item) {
-    console.log(item);
+    // console.log(item);
   }
 
   getSelect(obj) {
