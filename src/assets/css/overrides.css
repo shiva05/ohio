@@ -339,3 +339,6 @@ border-color: #fff !important;
 .radio, .checkbox {
     margin: 2px !important;
 }
+.dropdown-menu>li>a{
+    color: #333 !important;
+}
