@@ -77,21 +77,21 @@
             <h3>{{policy.item_text}}</h3>
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="form-group col-md-4">
                     <label>{{ 'SearchFields.Grade' | translate }}</label>
                     <ng-multiselect-dropdown [ngClass]="" [data]="grades" [(ngModel)]="selectedGrades[i]"
                         [settings]="dropdownSettings" (onSelect)="onGradeSelect(selectedGrades[i],policy)"
                         >
                     </ng-multiselect-dropdown>
                 </div>
-                <div class="col-md-4">
+                <div class="form-group col-md-4">
                     <label>{{ 'SearchFields.Cluster' | translate }}</label>
                     <ng-multiselect-dropdown [ngClass]="" [data]="clusters" [(ngModel)]="selectedClusters[i]"
                         [settings]="dropdownSettings" (onSelect)="onClusterSelect(selectedClusters[i],policy)"
                         >
                     </ng-multiselect-dropdown>
                 </div>
-                <div class="col-md-4">
+                <div class="form-group col-md-4">
                     <label>{{ 'SearchFields.StandardNumber' | translate }}</label>
                     <ng-multiselect-dropdown [ngClass]="" [data]="standardNumbers"
                         [(ngModel)]="selectedStandardNumbers[i]" [settings]="dropdownSettings"

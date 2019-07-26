@@ -20,6 +20,13 @@ label {
 .float-right {
     float: right;
 }
-.update-search {
-    padding: 10px 20px 10px 20px;
+.search-filter-right {
+   margin-top: 30px;
+}
+.label-space {
+    margin: 7px;
+}
+.badge {
+    padding: 5px;
+    margin: 7px;
 }
