@@ -57,7 +57,8 @@
 
 <div class="col-md-12 nopad" *ngIf="careerToAcademic">
   <ul class="list-group search-accordion">
-    <li class="list-group-item search-accordion-each" *ngFor="let item of data.ParentChildchecklist; index as i">
+    <li class="list-group-item search-accordion-each" [ngClass]="(item.isClosed) ? 'accordion-active' : ''"
+      *ngFor="let item of data.ParentChildchecklist; index as i">
       <!-- add class for making accordion 'accordion-active' -->
       <div class="row search-accordion-each-inner">
         <div class="col-md-6">
@@ -75,13 +76,13 @@
         <div class="col-md-3 cg">{{item.academicSubject}}</div>
         <div class="col-md-1"> <span class="accordion-bubble bubble-green">10 </span> </div>
         <div class="col-md-1 accordion-down-arrow">
-          <span (click)="expandCollapse(item)" *ngIf="item.parentChildList">
-            <i class="fas fa-chevron-down" *ngIf="item.isClosed;else isCollapsed"></i>
-            <ng-template #isCollapsed><i class="fas fa-chevron-up"></i></ng-template>
+          <span (click)="expandCollapse(item)">
+            <i class="fas fa-chevron-up" *ngIf="item.isClosed;else isCollapsed"></i>
+            <ng-template #isCollapsed><i class="fas fa-chevron-down"></i></ng-template>
           </span>
         </div>
       </div>
-      <div class="child-list" [hidden]="item.isClosed">
+      <div class="child-list" [hidden]="!item.isClosed">
         <ul class="list-group level-two">
           <li class="level-two-inner" *ngFor="let itemChild of item.parentChildList; index as j">
             <div class="row">
@@ -104,12 +105,12 @@
               <div class="col-md-1 accordion-down-arrow">
 
                 <span (click)="expandChildCollapse(itemChild)" *ngIf="itemChild.childList">
-                  <i class="fas fa-chevron-down" *ngIf="itemChild.isChildClosed;else isChildClosed"></i>
-                  <ng-template #isChildClosed><i class="fas fa-chevron-up"></i></ng-template>
+                  <i class="fas fa-chevron-up" *ngIf="itemChild.isChildClosed;else isChildClosed"></i>
+                  <ng-template #isChildClosed><i class="fas fa-chevron-down"></i></ng-template>
                 </span>
               </div>
             </div>
-            <div class="child-list" [hidden]="itemChild.isChildClosed" *ngIf="itemChild.childList">
+            <div class="child-list" [hidden]="!itemChild.isChildClosed" *ngIf="itemChild.childList">
               <ul class="list-group level-three">
                 <li class="list-group-item level-three" *ngFor="let items of itemChild.childList; index as k">
                   <div class="row">

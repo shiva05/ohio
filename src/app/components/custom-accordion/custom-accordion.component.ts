@@ -30,7 +30,7 @@ export class CustomAccordionComponent implements OnInit {
       { id: 1, academicSubject: 'Math', value: 'Planning and Design' },
       { id: 2, academicSubject: 'Math', value: 'Business Operations\/21st Century Skills' },
       { id: 3, academicSubject: 'Math', value: 'Construction and Facility Management' },
-      { id: 4, academicSubject: 'Math', value: 'Electrical', isChildClosed: true, childList: JSON.parse(JSON.stringify(this.childList)) },
+      { id: 4, academicSubject: 'Math', value: 'Electrical', childList: JSON.parse(JSON.stringify(this.childList)) },
       { id: 5, academicSubject: 'Math', value: 'Environmental Systems and Plumbing' },
       { id: 6, academicSubject: 'Math', value: 'Structural Construction' },
       { id: 7, academicSubject: 'Math', value: 'Safety, Tools, and Equipment' }
@@ -44,7 +44,7 @@ export class CustomAccordionComponent implements OnInit {
       { id: 4, academicSubject: 'Science', value: 'Engineering and Science Technologies' },
       { id: 5, academicSubject: 'Math', value: 'Manufacturing' },
       { id: 6, academicSubject: 'Social', value: 'Education and Training' },
-      { id: 7, academicSubject: 'Math', value: 'Construction', isClosed: true, parentChildList: JSON.parse(JSON.stringify(this.parentChildList)) },
+      { id: 7, academicSubject: 'Math', value: 'Construction', parentChildList: JSON.parse(JSON.stringify(this.parentChildList)) },
       { id: 8, academicSubject: 'Math', value: 'Transportation' },
       { id: 9, academicSubject: 'Social', value: 'Human Services' },
       { id: 10, academicSubject: 'Social', value: 'Law & Public Safety' },
