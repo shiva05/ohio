@@ -60,9 +60,10 @@
     position: absolute;
     top: 7px;
     right: 7px;
+    color: #fff;
 }
 
-.main.myapp .app-container .close-container a {
+.main.myapp .app-container .close-container:hover{
     color: #fff;
 }
 
