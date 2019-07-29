@@ -403,6 +403,6 @@ border-color: #fff !important;
 .multiselect-dropdown .dropdown-btn .selected-item{
         white-space: nowrap;        
         overflow: hidden;
-        width: calc(100% - 60px);
+        max-width: calc(100% - 60px);
         text-overflow: ellipsis;
     }
