@@ -4,15 +4,15 @@
     <!-- filter Form Begin -->
     <section class="filter-form col-md-12">
       <div class="search-filter">
-
         <div class="search-filter-left">
-          <span *ngFor="let item of FilterSummaryData; let i = index">
+          <div class="filter"> 
+          <span class="filter-each" *ngFor="let item of FilterSummaryData; let i = index">
             <span *ngIf="item.fieldType == 1">
               <span *ngIf="i != item.length && i != 0"> | </span>
               <label>{{item.fieldName}}: </label>
               <span class="badge badge-light">{{item.fieldValue}}</span>
             </span>
-            <span *ngIf="item.fieldType == 2">
+            <div class="filter-each" *ngIf="item.fieldType == 2">
               <hr>
               <label>{{item.fieldAcadamicName}}: </label>
               <span class="badge badge-light">{{item.fieldAcadamicValue}}</span> |
@@ -22,14 +22,21 @@
               <span class="badge badge-light">{{item.fieldClusterValue}}</span> |
               <label>{{item.fieldStandardNumberName}}: </label>
               <span class="badge badge-light">{{item.fieldStandardNumberValue}}</span>
-            </span>
+            </div>
           </span>
         </div>
+        </div>
         <div class="search-filter-right">
-          <button (click)="goBackToSearch()">{{ 'FilterResults.UpdateSearch' | translate }}<i
-              class="fa fa-angle-double-down"></i></button>
+          <button (click)="goBackToSearch()">{{ 'FilterResults.UpdateSearch' | translate }}
+            <i class="fa fa-angle-double-down"></i></button>
         </div>
       </div>
+      <div class="search-seemore"> 
+        <h3>Click to see more</h3> 
+        <a href="#"> <i class="fa fa-angle-double-up"></i> </a> 
+
+      </div>
+
 
     </section>
 
