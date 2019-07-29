@@ -35,10 +35,10 @@ import { ExportComponent } from './components/export/export.component';
 import { QuickSearchComponent } from './components/quick-search/quick-search.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
+import { LoginComponent } from './components/login/login.component';
+import { MyAppComponent } from './components/my-app/my-app.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
-export const appRoutes: Routes = [
-  { path: 'quick-search', component: QuickSearchComponent }
-];
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +54,10 @@ export const appRoutes: Routes = [
     HomeComponent,
     ExportComponent,
     QuickSearchComponent,
-    MainComponent
+    MainComponent,
+    LoginComponent,
+    MyAppComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
