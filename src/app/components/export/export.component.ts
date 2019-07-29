@@ -7,6 +7,7 @@ import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 })
 export class ExportComponent implements OnInit {
   dropdownSettings: any = {};
+  uploadedFile: any;
 
   constructor() { }
 
@@ -27,26 +28,7 @@ export class ExportComponent implements OnInit {
     this.onPageSelect.emit(org);
   }
 
-  checkfile(uploadedFile) {
-    const validExts = new Array('.xlsx', '.xls');
-    let fileExt = uploadedFile.value;
-    fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
-    console.log(fileExt);
-    if (validExts.indexOf(fileExt) < 0) {
-      alert('Invalid file selected, valid files are of ' +
-        validExts.toString() + ' types.');
-      return false;
-    } else {
-      return true;
-    }
-  }
-
   import() {
-    const uploadedFile = document.getElementById('excel-upload') || {};
-    this.checkfile(uploadedFile);
-
     // TODO: write function
-    console.log(uploadedFile);
-    console.log('Import function ran');
   }
 }
