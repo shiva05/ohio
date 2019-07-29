@@ -3,30 +3,30 @@
   <div class="row">
     <!-- filter Form Begin -->
     <section class="filter-form col-md-12">
-      <div class="search-filter">
+      <div class="search-filter row">
 
-        <div class="search-filter-left">
+        <div class="col-md-9">
           <span *ngFor="let item of FilterSummaryData; let i = index">
             <span *ngIf="item.fieldType == 1">
               <span *ngIf="i != item.length && i != 0"> | </span>
-              <label>{{item.fieldName}}: </label>
+              <label class="label-space">{{item.fieldName}}: </label>
               <span class="badge badge-light">{{item.fieldValue}}</span>
             </span>
             <span *ngIf="item.fieldType == 2">
               <hr>
-              <label>{{item.fieldAcadamicName}}: </label>
+              <label class="label-space">{{item.fieldAcadamicName}}: </label>
               <span class="badge badge-light">{{item.fieldAcadamicValue}}</span> |
-              <label>{{item.fieldGradeName}}: </label>
+              <label class="label-space">{{item.fieldGradeName}}: </label>
               <span class="badge badge-light">{{item.fieldGradeValue}}</span> |
-              <label>{{item.fieldClusterName}}: </label>
+              <label class="label-space">{{item.fieldClusterName}}: </label>
               <span class="badge badge-light">{{item.fieldClusterValue}}</span> |
-              <label>{{item.fieldStandardNumberName}}: </label>
+              <label class="label-space">{{item.fieldStandardNumberName}}: </label>
               <span class="badge badge-light">{{item.fieldStandardNumberValue}}</span>
             </span>
           </span>
         </div>
-        <div class="search-filter-right">
-          <button (click)="goBackToSearch()">{{ 'FilterResults.UpdateSearch' | translate }} &nbsp;<i
+        <div class="search-filter-right col-md-3">
+          <button class="update-search" (click)="goBackToSearch()">{{ 'FilterResults.UpdateSearch' | translate }}<i
               style="padding-left:10px" class="fa fa-angle-double-down"></i></button>
         </div>
       </div>
