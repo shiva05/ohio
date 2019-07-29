@@ -24,6 +24,9 @@ h1{
     display: none !important
 }
 
+.pr{
+    position: relative;
+}
 .nopad{
 padding: 0px !important;
 }
@@ -395,3 +398,11 @@ border-color: #fff !important;
 .img-overlay h2{
     font-family: 'Serifa-Reg';   
 }
+
+
+.multiselect-dropdown .dropdown-btn .selected-item{
+        white-space: nowrap;        
+        overflow: hidden;
+        max-width: calc(100% - 60px);
+        text-overflow: ellipsis;
+    }
