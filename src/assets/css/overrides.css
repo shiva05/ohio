@@ -391,3 +391,7 @@ border-color: #fff !important;
 .search-seemore a:hover, .search-seemore a:focus{
     color: #fff;
 }
+
+.img-overlay h2{
+    font-family: 'Serifa-Reg';   
+}
