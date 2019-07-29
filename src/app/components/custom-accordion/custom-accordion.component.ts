@@ -122,6 +122,11 @@ export class CustomAccordionComponent implements OnInit {
     this.onPageSelect.emit(org);
   }
 
+  goBackToSearch() {
+    const lable = localStorage.getItem('searchLable');
+    this.onPageSelect.emit(lable);
+  }
+
   onToggleClick(value) {
     if (value) {
       this.careerToAcademic = false;
