@@ -36,13 +36,13 @@ import { QuickSearchComponent } from './components/quick-search/quick-search.com
 import { AlignmentSearchFiltersComponent } from './components/alignment-search-filters/alignment-search-filters';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
+import { LoginComponent } from './components/login/login.component';
+import { MyAppComponent } from './components/my-app/my-app.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { QuickSearchEffects } from 'src/app/effects/quick-search.effect';
 import { quickSearchReducer } from 'src/app/reducers/quick-search.reducer';
 import { CourseSearchFiltersComponent } from './components/course-search-filters/course-search-filters.component';
 
-export const appRoutes: Routes = [
-  { path: 'quick-search', component: QuickSearchComponent }
-];
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +59,9 @@ export const appRoutes: Routes = [
     ExportComponent,
     QuickSearchComponent,
     MainComponent,
+    LoginComponent,
+    MyAppComponent,
+    PageNotFoundComponent
     AlignmentSearchFiltersComponent,
     CourseSearchFiltersComponent
   ],
