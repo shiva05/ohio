@@ -46,9 +46,10 @@ export class AdvancedSearchEffects {
   ];
 
     const acadamicSubjects = [ // There is no academic Subjects in the Data
-    { item_id: 1, item_text: 'Computer Science' },
-    { item_id: 2, item_text: 'Math' },
-    { item_id: 3, item_text: 'Science' }
+      { item_id: 3, item_text: 'ELA' },
+      { item_id: 1, item_text: 'Math' },
+      { item_id: 2, item_text: 'Science' },
+      { item_id: 4, item_text: 'Social' }
   ];
 
     const strands = [      // Based on Construction
@@ -67,8 +68,6 @@ export class AdvancedSearchEffects {
   ];
 
     const grades = [
-    { item_id: 8, item_text: '7' },
-    { item_id: 1, item_text: '8' },
     { item_id: 5, item_text: 'Algebra' },
     { item_id: 7, item_text: 'Functions' },
     { item_id: 3, item_text: 'Geometry' },
