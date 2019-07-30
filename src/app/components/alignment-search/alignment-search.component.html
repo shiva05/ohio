@@ -1,5 +1,6 @@
-<app-alignment-search-filters></app-alignment-search-filters>
-<filter-summary (onPageSelect)="onPageSelect($event)" [FilterSummary]="FilterSummary"></filter-summary>
+<app-alignment-search-filters  (onPageSelect)="onPageSelect($event)"  *ngIf="showAsFilter" ></app-alignment-search-filters>
+<filter-summary (onPageSelect)="onPageSelect($event)"  *ngIf="showAsResults"></filter-summary>
 <div class="col-md-12">
-  <custom-accordion (onPageSelect)="onPageSelect($event)"></custom-accordion>
+  <custom-accordion (onPageSelect)="onPageSelect($event)"  *ngIf="showAsResults"></custom-accordion>
 </div>
+<report (onPageSelect)="onPageSelect($event)" *ngIf="showAsReport"></report>
