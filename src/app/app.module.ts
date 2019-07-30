@@ -35,6 +35,8 @@ import { ExportComponent } from './components/export/export.component';
 import { QuickSearchComponent } from './components/quick-search/quick-search.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
+import { QuickSearchEffects } from 'src/app/effects/quick-search.effect';
+import { quickSearchReducer } from 'src/app/reducers/quick-search.reducer';
 
 export const appRoutes: Routes = [
   { path: 'quick-search', component: QuickSearchComponent }
@@ -74,9 +76,9 @@ export const appRoutes: Routes = [
       }
     }),
     // StoreModule.forRoot(reducers, { metaReducers }),
-    StoreModule.forRoot({ test: testReducer, advancedSearch: advancedSearchReducer, report: reportReducer }),
+    StoreModule.forRoot({ test: testReducer, advancedSearch: advancedSearchReducer, report: reportReducer ,quickSearch :quickSearchReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 100, name: 'tng1' }),
-    EffectsModule.forRoot([TestEffects, AdvancedSearchEffects, ReportEffects])
+    EffectsModule.forRoot([TestEffects, AdvancedSearchEffects, ReportEffects ,QuickSearchEffects])
 
   ],
   providers: [TestService],
