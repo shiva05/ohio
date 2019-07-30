@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { switchMap } from 'rxjs/operators';
 import { map, mergeMap, catchError } from 'rxjs/operators';
-import * as testActions from './../actions/test.actions';
 import * as advancedSearchActions from './../actions/advanced-search.actions';
 import { AdvancedSearchService } from './../services/advanced-search.service';
-import { TestService } from './../services/test.service';
 import { of } from 'rxjs';
 import { debug } from 'util';
 

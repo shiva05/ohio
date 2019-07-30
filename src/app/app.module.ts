@@ -13,13 +13,13 @@ import { FilterSummaryComponent } from './components/filter-summary/filter-summa
 import { ReportComponent } from './components/report/report.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { TestService } from '../app/services/test.service';
+
 // import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
-import { testReducer } from './reducers/test.reducer';
+
 import { advancedSearchReducer } from './reducers/advanced-search.reducer';
-import { TestEffects } from './effects/test.effect';
+
 import { AdvancedSearchEffects } from './effects/advanced-search.effect';
 import { reportReducer } from './reducers/report.reducer';
 import { ReportEffects } from './effects/report.effects';
@@ -61,7 +61,7 @@ import { CourseSearchFiltersComponent } from './components/course-search-filters
     MainComponent,
     LoginComponent,
     MyAppComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
     AlignmentSearchFiltersComponent,
     CourseSearchFiltersComponent
   ],
@@ -83,12 +83,12 @@ import { CourseSearchFiltersComponent } from './components/course-search-filters
       }
     }),
     // StoreModule.forRoot(reducers, { metaReducers }),
-    StoreModule.forRoot({ test: testReducer, advancedSearch: advancedSearchReducer, report: reportReducer ,quickSearch :quickSearchReducer}),
+    StoreModule.forRoot({  advancedSearch: advancedSearchReducer, report: reportReducer ,quickSearch :quickSearchReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 100, name: 'tng1' }),
-    EffectsModule.forRoot([TestEffects, AdvancedSearchEffects, ReportEffects ,QuickSearchEffects])
+    EffectsModule.forRoot([ AdvancedSearchEffects, ReportEffects ,QuickSearchEffects])
 
   ],
-  providers: [TestService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

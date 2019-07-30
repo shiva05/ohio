@@ -2,9 +2,8 @@ import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
-import { Test } from './../../models/test.model';
+
 import { AppState } from './../../app.state';
-import * as TestActions from './../../actions/test.actions';
 import * as ReportsActions from './../../actions/report.actions';
 
 @Component({
