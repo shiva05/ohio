@@ -33,10 +33,12 @@ import { ReportListComponent } from './components/report-list/report-list.compon
 import { HomeComponent } from './components/home/home.component';
 import { ExportComponent } from './components/export/export.component';
 import { QuickSearchComponent } from './components/quick-search/quick-search.component';
+import { AlignmentSearchFiltersComponent } from './components/alignment-search-filters/alignment-search-filters';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
 import { QuickSearchEffects } from 'src/app/effects/quick-search.effect';
 import { quickSearchReducer } from 'src/app/reducers/quick-search.reducer';
+import { CourseSearchFiltersComponent } from './components/course-search-filters/course-search-filters.component';
 
 export const appRoutes: Routes = [
   { path: 'quick-search', component: QuickSearchComponent }
@@ -56,7 +58,9 @@ export const appRoutes: Routes = [
     HomeComponent,
     ExportComponent,
     QuickSearchComponent,
-    MainComponent
+    MainComponent,
+    AlignmentSearchFiltersComponent,
+    CourseSearchFiltersComponent
   ],
   imports: [
     BrowserModule,

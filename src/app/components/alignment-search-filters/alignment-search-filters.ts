@@ -9,11 +9,11 @@ import { MetaData } from './../../models/meta-data.model';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 
 @Component({
-  selector: 'app-course-search',
-  templateUrl: './course-search.component.html',
-  styleUrls: ['./course-search.component.css']
+  selector: 'app-alignment-search-filters',
+  templateUrl: './alignment-search-filters.html',
+  styleUrls: []
 })
-export class CourseSearchComponent implements OnInit {
+export class AlignmentSearchFiltersComponent implements OnInit {
 
 
   disabled = false;
@@ -41,15 +41,13 @@ export class CourseSearchComponent implements OnInit {
   selectedCompetencyNumber: any;
   competencyNumbers: any;
   metaData: Observable<MetaData>;
-  showCsFilter = true;
-  showCsResults = false;
-  showCsReport = false;
 
   constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>) {
     // this.metaData = store.select('metaData');
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_META_DATA });
   }
 
+  @Output() onPageSelect = new EventEmitter<any>();
 
   ngOnInit() {
     this.store.select('advancedSearch').subscribe(data => {
@@ -71,9 +69,11 @@ export class CourseSearchComponent implements OnInit {
       itemsShowLimit: 1,
       allowSearchFilter: true
     };
+
   }
 
   search() {
+    this.goToPage('SearchResults');
     this.searchObj = JSON.stringify({
       selectedKeyword: this.selectedKeyword,
       selectedAcadamicSubjects: this.selectedAcadamicSubjects,
@@ -83,7 +83,7 @@ export class CourseSearchComponent implements OnInit {
       selectedCareers: this.selectedCareer
     });
     console.log(this.searchObj);
-    localStorage.setItem('searchLable', 'SearchCourse');
+    localStorage.setItem('searchLable', 'SearchAlignment');
     this.goToPage('SearchResults');
   }
 
@@ -92,7 +92,7 @@ export class CourseSearchComponent implements OnInit {
   }
 
   goToPage(org) {
-
+    this.onPageSelect.emit(org);
   }
 
   onGradeSelect(grade, acasub) {
@@ -106,20 +106,7 @@ export class CourseSearchComponent implements OnInit {
         }
       }
     });
-  }
-  onPageSelect(org) {
-    this.showCsFilter = false;
-    this.showCsResults = false;
-    this.showCsReport = false;
-
-
-    if (org === 'Search') {
-      this.showCsFilter = true;
-    } else if (org === 'SearchResults') {
-      this.showCsResults = true;
-    } else if (org === 'Report') {
-      this.showCsReport = true;
-    }
+    console.log(this.selectedAcadamicSubjects);
   }
   onClusterSelect(cluster, acasub) {
     this.selectedAcadamicSubjects.forEach(element => {
@@ -132,6 +119,7 @@ export class CourseSearchComponent implements OnInit {
         }
       }
     });
+    console.log(this.selectedAcadamicSubjects);
   }
   onStandardNumberSelect(standardNumbers, acasub) {
     this.selectedAcadamicSubjects.forEach(element => {
@@ -144,6 +132,6 @@ export class CourseSearchComponent implements OnInit {
         }
       }
     });
+    console.log(this.selectedAcadamicSubjects);
   }
-
 }
