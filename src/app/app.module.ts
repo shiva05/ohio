@@ -38,6 +38,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
 import { QuickSearchEffects } from 'src/app/effects/quick-search.effect';
 import { quickSearchReducer } from 'src/app/reducers/quick-search.reducer';
+import { CourseSearchFiltersComponent } from './components/course-search-filters/course-search-filters.component';
 
 export const appRoutes: Routes = [
   { path: 'quick-search', component: QuickSearchComponent }
@@ -58,7 +59,8 @@ export const appRoutes: Routes = [
     ExportComponent,
     QuickSearchComponent,
     MainComponent,
-    AlignmentSearchFiltersComponent
+    AlignmentSearchFiltersComponent,
+    CourseSearchFiltersComponent
   ],
   imports: [
     BrowserModule,
