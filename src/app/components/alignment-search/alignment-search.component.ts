@@ -41,13 +41,15 @@ export class AlignmentSearchComponent implements OnInit {
   selectedCompetencyNumber: any;
   competencyNumbers: any;
   metaData: Observable<MetaData>;
+  showAsFilter = true;
+  showAsResults = false;
+  showAsReport = false;
 
   constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>) {
     // this.metaData = store.select('metaData');
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_META_DATA });
   }
 
-  @Output() onPageSelect = new EventEmitter<any>();
 
   ngOnInit() {
     this.store.select('advancedSearch').subscribe(data => {
@@ -73,7 +75,6 @@ export class AlignmentSearchComponent implements OnInit {
   }
 
   search() {
-    this.goToPage('SearchResults');
     this.searchObj = JSON.stringify({
       selectedKeyword: this.selectedKeyword,
       selectedAcadamicSubjects: this.selectedAcadamicSubjects,
@@ -84,17 +85,28 @@ export class AlignmentSearchComponent implements OnInit {
     });
     console.log(this.searchObj);
     localStorage.setItem('searchLable', 'SearchAlignment');
-    this.goToPage('SearchResults');
+
   }
 
   onAcadamicSubjectSelect() {
     console.log('hi');
   }
 
-  goToPage(org) {
-    this.onPageSelect.emit(org);
-  }
 
+  onPageSelect(org) {
+    this.showAsFilter = false;
+    this.showAsResults = false;
+    this.showAsReport = false;
+
+
+    if (org === 'Search') {
+      this.showAsFilter = true;
+    } else if (org === 'SearchResults') {
+      this.showAsResults = true;
+    } else if (org === 'Report') {
+      this.showAsReport = true;
+    }
+  }
   onGradeSelect(grade, acasub) {
     this.selectedAcadamicSubjects.forEach(element => {
       if (element.item_id === acasub.item_id) {

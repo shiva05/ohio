@@ -61,8 +61,7 @@ export class FilterSummaryComponent implements OnInit {
   }
 
   goBackToSearch() {
-    const lable = localStorage.getItem('searchLable');
-    this.onPageSelect.emit(lable);
+    this.onPageSelect.emit('Search');
   }
 
   formatSearchDataToSummary() {
