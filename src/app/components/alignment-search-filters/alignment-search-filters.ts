@@ -51,7 +51,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
 
   ngOnInit() {
     this.store.select('advancedSearch').subscribe(data => {
-      this.metaData = data;
+      this.metaData = data.metaData;
       this.careers = this.metaData['careers'];
       this.academicSubjects = this.metaData['academicSubjects'];
       this.stadards = this.metaData['standards'];
@@ -74,17 +74,16 @@ export class AlignmentSearchFiltersComponent implements OnInit {
 
   search() {
     this.goToPage('SearchResults');
-    this.searchObj = JSON.stringify({
-      selectedKeyword: this.selectedKeyword,
-      selectedAcadamicSubjects: this.selectedAcadamicSubjects,
-      selectedStandards: this.selectedStandards,
-      selectedOutcome: this.selectedOutcome,
-      selectedCompetencyNumber: this.selectedCompetencyNumber,
-      selectedCareers: this.selectedCareer
-    });
-    console.log(this.searchObj);
+    this.searchObj = {
+      selectedCareers: this.selectedCareer,
+      selectedStrands: this.selectedStandards,
+      selectedOutcomes: this.selectedOutcome,
+      selectedCompetencies: this.selectedCompetencyNumbers,
+      selectedAcadamicSubjects: this.selectedAcadamicSubjects
+    };
     localStorage.setItem('searchLable', 'SearchAlignment');
     this.goToPage('SearchResults');
+    this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS ,payload:this.searchObj});
   }
 
   onAcadamicSubjectSelect() {

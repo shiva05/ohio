@@ -47,7 +47,7 @@ export class QuickSearchEffects {
     { item_id: 1, item_text: 'Math' },
     { item_id: 2, item_text: 'Science' },
     { item_id: 3, item_text: 'ELA' },
-    { item_id: 4, item_text: 'Social' }
+    { item_id: 4, item_text: 'Social Studies' }
   ];
     this.result1 = {
       academicSubjects: acadamicSubjects,

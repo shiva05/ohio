@@ -1,5 +1,5 @@
 import { AcademicSubject } from './academic-subject.model';
-import { Standard } from './standard.model';
+import { Strand } from './strand.model';
 import { Career } from './career.model';
 import { Outcome } from './outcome.model';
 import { Grade } from './grade.model';

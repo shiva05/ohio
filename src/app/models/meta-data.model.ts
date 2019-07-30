@@ -1,5 +1,5 @@
 import { AcademicSubject } from './academic-subject.model';
-import { Standard } from './standard.model';
+import { Strand } from './strand.model';
 import { Career } from './career.model';
 import { Outcome } from './outcome.model';
 import { Grade } from './grade.model';
@@ -10,7 +10,7 @@ import { CompetencyNumber } from './competency-number.model';
 
 export interface MetaData {
   academicSubjects: AcademicSubject[],
-  standards: Standard[],
+  strands: Strand[],
   careers: Career[],
   outcomes: Outcome[],
   grades: Grade[],

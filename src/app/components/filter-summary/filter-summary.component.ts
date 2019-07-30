@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { debug } from 'util';
+import { Store } from '@ngrx/store';
+import { AppState } from './../../app.state';
 
 
 @Component({
@@ -18,6 +20,10 @@ export class FilterSummaryComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
 
+  constructor(private store: Store<AppState>) {
+    // this.metaData = store.select('metaData');
+
+  }
   ngOnInit() {
     this.FilterSummaryKeys =
       [
@@ -27,18 +33,18 @@ export class FilterSummaryComponent implements OnInit {
           fieldType: '1'
         },
         {
-          fieldName: 'Standards',
-          fieldKey: 'selectedStandards',
+          fieldName: 'Strand',
+          fieldKey: 'selectedStrands',
           fieldType: '1'
         },
         {
           fieldName: 'Outcome',
-          fieldKey: 'selectedOutcome',
+          fieldKey: 'selectedOutcomes',
           fieldType: '1'
         },
         {
           fieldName: 'Competency',
-          fieldKey: 'selectedCompetency',
+          fieldKey: 'selectedCompetencies',
           fieldType: '1'
         },
         {
@@ -57,42 +63,47 @@ export class FilterSummaryComponent implements OnInit {
           fieldType: '2'
         }
       ];
-    this.formatSearchDataToSummary();
+      this.store.select('advancedSearch').subscribe(data => {
+        if(data.alignmentSearchSelectedFilters){
+          this.formatSearchDataToSummary(data.alignmentSearchSelectedFilters);
+        }
+     });
+
   }
 
   goBackToSearch() {
     this.onPageSelect.emit('Search');
   }
 
-  formatSearchDataToSummary() {
-    const source = {
-      selectedKeyword: 'Test',
-      selectedAcadamicSubjects: [
-        {
-          item_id: 1, item_text: 'Math',
-          grade: [
-            { item_id: 3, item_text: 'Geometry' }
-          ],
-          cluster: [
-            { item_id: 3, item_text: 'Circles' }
-          ],
-          standardNumber: [
-            { item_id: 1, item_text: 'G.C.4' }
-          ]
-        }],
-      selectedStandards: [
-        { item_id: 4, item_text: 'Electrical' }
-      ],
-      selectedOutcome: [
-        { item_id: 1, item_text: 'Motors and Power' }
-      ],
-      selectedCareers: [
-        { item_id: 3, item_text: 'Construction' }
-      ],
-      selectedCompetency: [
-        { item_id: 3, item_text: 'Assess the roles of nonprofit and for-profit businesses' }
-      ]
-    };
+  formatSearchDataToSummary(source) {
+    // const source = {
+    //   selectedKeyword: 'Test',
+    //   selectedAcadamicSubjects: [
+    //     {
+    //       item_id: 1, item_text: 'Math',
+    //       grade: [
+    //         { item_id: 3, item_text: 'Geometry' }
+    //       ],
+    //       cluster: [
+    //         { item_id: 3, item_text: 'Circles' }
+    //       ],
+    //       standardNumber: [
+    //         { item_id: 1, item_text: 'G.C.4' }
+    //       ]
+    //     }],
+    //   selectedStandards: [
+    //     { item_id: 4, item_text: 'Electrical' }
+    //   ],
+    //   selectedOutcome: [
+    //     { item_id: 1, item_text: 'Motors and Power' }
+    //   ],
+    //   selectedCareers: [
+    //     { item_id: 3, item_text: 'Construction' }
+    //   ],
+    //   selectedCompetency: [
+    //     { item_id: 3, item_text: 'Assess the roles of nonprofit and for-profit businesses' }
+    //   ]
+    // };
     this.FilterSummaryKeys.forEach(element => {
       if (element.fieldType === '1') {
         if (source[element.fieldKey]) {

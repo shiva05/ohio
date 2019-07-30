@@ -1,6 +1,6 @@
 import * as QuickSearchActions from '../actions/quick-search.actions';
 import { AcademicSubject } from './../models/academic-subject.model';
-import { Standard } from './../models/standard.model';
+import { Strand } from './../models/strand.model';
 import { Career } from './../models/career.model';
 import { Outcome } from './../models/outcome.model';
 import { Grade } from './../models/grade.model';

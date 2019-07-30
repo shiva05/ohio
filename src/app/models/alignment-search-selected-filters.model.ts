@@ -8,8 +8,16 @@ import { Cluster } from './cluster.model';
 import { CompetencyNumber } from './competency-number.model';
 
 
-export interface QsMetaData {
-  academicSubjects: AcademicSubject[],
-  careers: Career[]
+export interface AlignmentSearchSelectedFilters {
+  selectedCareers : Career[],
+  selectedStrands: Strand[],
+  selectedOutcomes: Outcome[],
+  selectedCompetencies :CompetencyNumber[],
+  selectedAcadamicSubjects :selectedAcademicSubject[]
+}
+export interface selectedAcademicSubject{
+    selectedGrades : Grade[],
+    selectedClusters : Cluster[]
+    selectedStandardNumbers : StandardNumber[]
 }
 
