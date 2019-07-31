@@ -1,0 +1,30 @@
+  accordionRemodel                       [m b4895d5 Merged in feature/as-leftalignment (pull request #8)
+  checkBoxes                             [m b2b8047 Merged in rewriteCSS (pull request #11)
+  feature/BeginUnitTests                 [m bfc08c3 Merged in feature/separateAdvancedSearchComponent (pull request #24)
+  feature/ExportToWord                   [m 41e78eb hiding the nav bar
+  feature/UploadFile                     [m 3744a3f Add upload page with input type file and empty function
+  feature/accordionData                  [m a669293 add static data from this.options
+  feature/accordionStyling               [m b2b8047 Merged in rewriteCSS (pull request #11)
+  feature/addResultsList                 [m 1540366 Minor fixes to routing
+  feature/addStandardDescriptionToReport [m 5dbfeb2 Add standard description to report
+  feature/buttonOrganization             [m 1ff9808 [gone] Merged in feature/jsonCorrection (pull request #16)
+  feature/deployment                     [m 6527c94 Alphabetization of dropdowns
+  feature/exportToPDF                    [m bd5c5e7 Merged in feature/CreateCompetDropdow (pull request #18)
+  feature/jsonCorrection                 [m fdd47b2 [gone] Fill in demo data
+  feature/jsonForTranslations            [m f0cd898 Switch MetaData back to string literals
+  feature/minorStyleChanges              [m b655345 Change sorting order of fields
+  feature/red-checkbox                   [m 8cae26e Change multiselect boxes to red instead of blue
+  feature/renameCourseSearch             [m 9d2f763 change course search field names
+  feature/separateAdvancedSearchComponent[m eb22e7b separate the Advanced Search component
+  feature/separateSearchResults          [m a927688 Re-add css file
+  feature/splitcCourseComponent          [m a000fef Remove vs studio gitignore files
+  feature/userAuth                       [m f28f271 Merged in master_24072019 (pull request #33)
+  homepage                               [m 9603463 Created homepage and added routing
+* [32mmaster                                 [m 94e4de1 removing unused code
+  master_24072019                        [m 8cd3781 [gone] Generate Report Button Issue
+  master_29072019                        [m 11e60b2 [behind 14] Routing from Login Page
+  master_30072019                        [m 7307134 Merge branch 'master_30072019' of https://bitbucket.org/unsungghost/standardsbydesignweb into master_30072019
+  master_local                           [m a000fef [gone] Remove vs studio gitignore files
+  printToPDFWord                         [m 984f2dd Temp Save
+  quicksearch                            [m 0b11ddf [gone] Style the quick search component
+  rewriteCSS                             [m 7be09c6 Import Ohio styling and fresh bootstrap
