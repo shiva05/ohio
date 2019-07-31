@@ -30,7 +30,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   selectedItems: any = [];
   selectedCareer: any = [];
   selectedAcadamicSubjects: any = [];
-  selectedStandards: any = [];
+  selectedStrands: any = [];
   selectedOutcome: any = [];
   selectedCompetencyNumbers: any = [];
   selectedGrades: any = [];
@@ -60,6 +60,13 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       this.clusters = this.metaData['clusters'];
       this.standardNumbers = this.metaData['standardNumbers'];
       this.competencyNumbers = this.metaData['competencyNumbers'];
+      if(data.alignmentSearchSelectedFilters){
+         this.selectedCareer = data.alignmentSearchSelectedFilters.selectedCareers;
+         this.selectedStrands = data.alignmentSearchSelectedFilters.selectedCareers;
+         this.selectedOutcome = data.alignmentSearchSelectedFilters.selectedOutcomes;
+         this.selectedCompetencyNumbers = data.alignmentSearchSelectedFilters.selectedCompetencies;
+         this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects;
+      }
     });
     this.dropdownSettings = {
       singleSelection: false,
@@ -76,7 +83,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.goToPage('SearchResults');
     this.searchObj = {
       selectedCareers: this.selectedCareer,
-      selectedStrands: this.selectedStandards,
+      selectedStrands: this.selectedStrands,
       selectedOutcomes: this.selectedOutcome,
       selectedCompetencies: this.selectedCompetencyNumbers,
       selectedAcadamicSubjects: this.selectedAcadamicSubjects
