@@ -40,6 +40,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { QuickSearchEffects } from 'src/app/effects/quick-search.effect';
 import { quickSearchReducer } from 'src/app/reducers/quick-search.reducer';
 import { CourseSearchFiltersComponent } from './components/course-search-filters/course-search-filters.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { CourseSearchFiltersComponent } from './components/course-search-filters
     MyAppComponent,
     PageNotFoundComponent,
     AlignmentSearchFiltersComponent,
-    CourseSearchFiltersComponent
+    CourseSearchFiltersComponent,
+    SearchResultsComponent
   ],
   imports: [
     BrowserModule,
