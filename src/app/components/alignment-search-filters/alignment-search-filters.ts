@@ -62,7 +62,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       this.competencyNumbers = this.metaData['competencyNumbers'];
       if(data.alignmentSearchSelectedFilters){
          this.selectedCareer = data.alignmentSearchSelectedFilters.selectedCareers;
-         this.selectedStrands = data.alignmentSearchSelectedFilters.selectedCareers;
+         this.selectedStrands = data.alignmentSearchSelectedFilters.selectedStrands;
          this.selectedOutcome = data.alignmentSearchSelectedFilters.selectedOutcomes;
          this.selectedCompetencyNumbers = data.alignmentSearchSelectedFilters.selectedCompetencies;
          this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects;
