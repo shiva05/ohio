@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-12 main">
   <h1>{{ 'FilterResults.SearchCriteria' | translate }}</h1>
   <div class="row">
     <!-- filter Form Begin -->
@@ -12,7 +12,7 @@
                 <label>{{item.fieldName}}: </label>
                 <span class="badge badge-light">{{item.fieldValue}}</span>
               </span>
-              <div class="filter-each" *ngIf="item.fieldType == 2" >
+              <div class="filter-each" *ngIf="item.fieldType == 2" [hidden]="!panelExpanded">
                 <hr>
                 <label>{{item.fieldAcadamicName}}: </label>
                 <span class="badge badge-light">{{item.fieldAcadamicValue}}</span> |
@@ -32,10 +32,10 @@
         </div>
       </div>
       <div class="search-seemore">
-        <!-- <h3>{{panelExpanded ? 'Click to see less' : 'Click to see more'}}</h3> -->
-        <!-- <a href="#" (click)="panelExpanded = !panelExpanded">
+        <h3>{{panelExpanded ? 'Click to see less' : 'Click to see more'}}</h3>
+        <a href="#" (click)="panelExpanded = !panelExpanded">
           <i [ngClass]="panelExpanded ? 'fa fa-angle-double-up' : 'fa fa-angle-double-down'"></i>
-        </a> -->
+        </a>
       </div>
     </section>
   </div>
