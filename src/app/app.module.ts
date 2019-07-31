@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { AdvancedSearchComponent } from './components/advanced-search/advanced-search.component';
 import { CustomAccordionComponent } from './components/custom-accordion/custom-accordion.component';
 import { FilterSummaryComponent } from './components/filter-summary/filter-summary.component';
 import { ReportComponent } from './components/report/report.component';
@@ -24,7 +23,6 @@ import { AdvancedSearchEffects } from './effects/advanced-search.effect';
 import { reportReducer } from './reducers/report.reducer';
 import { ReportEffects } from './effects/report.effects';
 // import ngx-translate and the http loader
-import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AlignmentSearchComponent } from './components/alignment-search/alignment-search.component';
@@ -47,11 +45,9 @@ import { CourseSearchFiltersComponent } from './components/course-search-filters
   declarations: [
     AppComponent,
     HeaderComponent,
-    AdvancedSearchComponent,
     CustomAccordionComponent,
     FilterSummaryComponent,
     ReportComponent,
-    SearchResultsComponent,
     AlignmentSearchComponent,
     CourseSearchComponent,
     ReportListComponent,
