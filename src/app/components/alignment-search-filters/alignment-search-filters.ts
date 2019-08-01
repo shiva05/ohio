@@ -78,7 +78,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       itemsShowLimit: 1,
       allowSearchFilter: true
     };
-    this.strandsDropdownSettings = {
+    this.strandDropdownSettings = {
       singleSelection: false,
       idField: 'StrandPk', textField: 'StrandName',
       selectAllText: 'Select All',
