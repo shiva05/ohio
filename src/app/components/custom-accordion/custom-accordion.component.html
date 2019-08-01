@@ -35,7 +35,7 @@
   <ul class="list-group search-accordion">
     <li class="list-group-item search-accordion-each"
       [ngClass]="(careerField.isCareerFieldClosed) ? 'accordion-active' : ''"
-      *ngFor="let careerField of data.careerField; index as i">
+      *ngFor="let careerField of data; index as i">
 
       <!-- Career Field -->
       <!-- add class dynamically if partially selected  checkbox-indeterminate -->
@@ -166,7 +166,7 @@
   <ul class="list-group search-accordion">
     <li class="list-group-item search-accordion-each"
       [ngClass]="(careerField.isCareerFieldClosed) ? 'accordion-active' : ''"
-      *ngFor="let careerField of data.careerField; index as i">
+      *ngFor="let careerField of data; index as i">
 
       <!-- Career Field -->
       <div class="row search-accordion-each-inner">

@@ -1,4 +1,7 @@
 import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.state';
+import * as SearchResultsActions from './../../actions/search-result.action';
 
 @Component({
   selector: 'custom-accordion',
@@ -16,49 +19,16 @@ export class CustomAccordionComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(private store: Store<AppState>) {
+    this.store.dispatch({ type: SearchResultsActions.LOAD_SEARCH_RESULT });
+  }
 
   ngOnInit() {
     this.data = {};
 
-    this.competency = [
-      // tslint:disable-next-line:max-line-length
-      { id: 1, academicSubject: 'Math', value: 'Use economic indicators to identify economic trends and conditions.' },
-      { id: 2, academicSubject: 'Math', value: 'Find surface area and volume for three‐dimensional objects, accurate to a specified level of precision.' }
-    ];
-
-    this.outcomes = [
-      // tslint:disable-next-line:max-line-length
-      { id: 1, academicSubject: 'Math', value: 'Select materials and lay out rough\u2010in wiring runs according to specifications, drawings and code requirements.' },
-      { id: 2, academicSubject: 'Math', value: 'Lay out and install conduit or cable runs, raceways and cable systems.', competency: JSON.parse(JSON.stringify(this.competency)) }
-    ];
-
-    this.strands = [
-      { id: 1, academicSubject: 'Math', value: 'Planning and Design' },
-      { id: 2, academicSubject: 'Math', value: 'Business Operations\/21st Century Skills' },
-      { id: 3, academicSubject: 'Math', value: 'Construction and Facility Management' },
-      { id: 4, academicSubject: 'Math', value: 'Electrical', outcomes: JSON.parse(JSON.stringify(this.outcomes)) },
-      { id: 5, academicSubject: 'Math', value: 'Environmental Systems and Plumbing' },
-      { id: 6, academicSubject: 'Math', value: 'Structural Construction' },
-      { id: 7, academicSubject: 'Math', value: 'Safety, Tools, and Equipment' }
-    ];
-
-    // List object having hierarchy of parents and its children
-    this.data.careerField = [
-      { id: 1, academicSubject: 'Science', value: 'Hospitality and Tourism' },
-      { id: 2, academicSubject: 'Social', value: 'Business, Marketing, and Finance' },
-      { id: 3, academicSubject: 'Science', value: 'Agriculture and Environmental Science' },
-      { id: 4, academicSubject: 'Science', value: 'Engineering and Science Technologies' },
-      { id: 5, academicSubject: 'Math', value: 'Manufacturing' },
-      { id: 6, academicSubject: 'Social', value: 'Education and Training' },
-      { id: 7, academicSubject: 'Math', value: 'Construction', strands: JSON.parse(JSON.stringify(this.strands)) },
-      { id: 8, academicSubject: 'Math', value: 'Transportation' },
-      { id: 9, academicSubject: 'Social', value: 'Human Services' },
-      { id: 10, academicSubject: 'Social', value: 'Law & Public Safety' },
-      { id: 11, academicSubject: 'Math', value: 'Information Technology' },
-      { id: 12, academicSubject: 'ELA', value: 'Arts and Communication' },
-      { id: 13, academicSubject: 'Science', value: 'Health Science' }
-    ];
+    this.store.select('searchResult').subscribe(response => {
+      this.data = response.searchResultList;
+    });
   }
 
   // Click event on Career Field
@@ -85,7 +55,7 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Strand Checkbox
   strandCheckBox(parent, parentObj) {
     // tslint:disable-next-line:only-arrow-functions
-    parent.isSelected = parent.strands.every(function(itemChild: any) {
+    parent.isSelected = parent.strands.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -116,19 +86,14 @@ export class CustomAccordionComponent implements OnInit {
   outcomeCheckBox(career, strands, outcome) {
 
     // tslint:disable-next-line:only-arrow-functions
-    strands.isSelected = strands.outcomes.every(function(itemChild: any) {
+    strands.isSelected = strands.outcomes.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.strands.every(function(itemChild: any) {
+    career.isSelected = career.strands.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
-
-    // tslint:disable-next-line:only-arrow-functions
-    // career.strands.isSelected = strands.outcomes.every(function (itemChild: any) {
-    //   return itemChild.isSelected === true;
-    // });
 
     if (outcome.competency) {
       if (outcome.isSelected) {
@@ -145,22 +110,18 @@ export class CustomAccordionComponent implements OnInit {
 
   // Click event on Outcome Checkbox
   competencyCheckBox(career, strand, outcome) {
-    console.log(career);
-    console.log(strand);
-    console.log(outcome);
-
     // tslint:disable-next-line:only-arrow-functions
-    outcome.isSelected = outcome.competency.every(function(itemChild: any) {
+    outcome.isSelected = outcome.competency.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    strand.isSelected = strand.outcomes.every(function(itemChild: any) {
+    strand.isSelected = strand.outcomes.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.strands.every(function(itemChild: any) {
+    career.isSelected = career.strands.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
