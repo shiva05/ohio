@@ -85,7 +85,7 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Strand Checkbox
   strandCheckBox(parent, parentObj) {
     // tslint:disable-next-line:only-arrow-functions
-    parent.isSelected = parent.strands.every(function (itemChild: any) {
+    parent.isSelected = parent.strands.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -93,9 +93,50 @@ export class CustomAccordionComponent implements OnInit {
       if (parentObj.isSelected) {
         parentObj.outcomes.forEach(item => {
           item.isSelected = true;
+          if (item.competency) {
+            item.competency.forEach(data => {
+              data.isSelected = true;
+            });
+          }
         });
       } else {
         parentObj.outcomes.forEach(item => {
+          item.isSelected = false;
+          if (item.competency) {
+            item.competency.forEach(data => {
+              data.isSelected = false;
+            });
+          }
+        });
+      }
+    }
+  }
+
+  // Click event on Outcome Checkbox
+  outcomeCheckBox(career, strands, outcome) {
+
+    // tslint:disable-next-line:only-arrow-functions
+    strands.isSelected = strands.outcomes.every(function(itemChild: any) {
+      return itemChild.isSelected === true;
+    });
+
+    // tslint:disable-next-line:only-arrow-functions
+    career.isSelected = career.strands.every(function(itemChild: any) {
+      return itemChild.isSelected === true;
+    });
+
+    // tslint:disable-next-line:only-arrow-functions
+    // career.strands.isSelected = strands.outcomes.every(function (itemChild: any) {
+    //   return itemChild.isSelected === true;
+    // });
+
+    if (outcome.competency) {
+      if (outcome.isSelected) {
+        outcome.competency.forEach(item => {
+          item.isSelected = true;
+        });
+      } else {
+        outcome.competency.forEach(item => {
           item.isSelected = false;
         });
       }
@@ -103,42 +144,25 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   // Click event on Outcome Checkbox
-  outcomeCheckBox(career, strands) {
-    // tslint:disable-next-line:only-arrow-functions
-    strands.isSelected = strands.outcomes.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
-    });
-
-    // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.strands.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
-    });
-
-    // tslint:disable-next-line:only-arrow-functions
-    career.strands.isSelected = strands.outcomes.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
-    });
-  }
-
-  // Click event on Outcome Checkbox
   competencyCheckBox(career, strand, outcome) {
     console.log(career);
     console.log(strand);
     console.log(outcome);
-    // tslint:disable-next-line:only-arrow-functions
-    // outcome.isSelected = outcome.competency.every(function (itemChild: any) {
-    //   return itemChild.isSelected === true;
-    // });
 
     // tslint:disable-next-line:only-arrow-functions
-    // career.isSelected = career.strands.outcomes.every(function (itemChild: any) {
-    //   return itemChild.isSelected === true;
-    // });
+    outcome.isSelected = outcome.competency.every(function(itemChild: any) {
+      return itemChild.isSelected === true;
+    });
 
     // tslint:disable-next-line:only-arrow-functions
-    // career.strands.isSelected = strand.outcomes.every(function (itemChild: any) {
-    //   return itemChild.isSelected === true;
-    // });
+    strand.isSelected = strand.outcomes.every(function(itemChild: any) {
+      return itemChild.isSelected === true;
+    });
+
+    // tslint:disable-next-line:only-arrow-functions
+    career.isSelected = career.strands.every(function(itemChild: any) {
+      return itemChild.isSelected === true;
+    });
   }
 
   // Expand/Collapse event on Career Field

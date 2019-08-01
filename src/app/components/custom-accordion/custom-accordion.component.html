@@ -103,7 +103,7 @@
                         <span class="ohio-checkbox checkbox checkbox-success">
                           <input type="checkbox" class="ohio-checkbox-el" id="outcomeID_{{k}}"
                             [(ngModel)]="outcome.isSelected" name="list_name_child" value="{{outcome.id}}"
-                            (ngModelChange)="outcomeCheckBox(careerField, strand)" />
+                            (ngModelChange)="outcomeCheckBox(careerField, strand, outcome)" />
                           <label for="outcomeID_{{k}}"></label>
                         </span>
                       </div>
@@ -238,7 +238,7 @@
                         <span class="ohio-checkbox checkbox checkbox-success">
                           <input type="checkbox" class="ohio-checkbox-el" id="outcomeID_{{k}}"
                             [(ngModel)]="outcome.isSelected" name="list_name_child" value="{{outcome.id}}"
-                            (ngModelChange)="outcomeCheckBox(careerField, strand)" />
+                            (ngModelChange)="outcomeCheckBox(careerField, strand, outcome)" />
                           <label for="outcomeID_{{k}}"></label>
                         </span>
                       </div>
@@ -266,7 +266,7 @@
                               <span class="ohio-checkbox checkbox checkbox-success">
                                 <input type="checkbox" class="ohio-checkbox-el" id="competencyID_{{l}}"
                                   [(ngModel)]="item.isSelected" name="list_name_child" value="{{item.id}}"
-                                  (ngModelChange)="competencyCheckBox(item, outcome)" />
+                                  (ngModelChange)="competencyCheckBox(careerField, strand, outcome)" />
                                 <label for="competencyID_{{l}}"></label>
                               </span>
                             </div>
