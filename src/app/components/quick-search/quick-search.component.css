@@ -15,11 +15,11 @@
     margin: 0;
 }
 .quick-search-layer {
-    background-color: #700017;   
+    background-color: #700017;
 }
-.search-btn {    
+.search-btn {
     margin-top: 20px ;
-    margin-bottom: 20px ;
+    margin-bottom: 100px ;
 }
 
 .search-btn .btn{
