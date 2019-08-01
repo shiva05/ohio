@@ -1,7 +1,6 @@
 .quick-search{
     float: left;
-    width: 600px;
-    padding: 20px;
+    width: 100%;
 }
 .quick-search h2{
     color: white;
@@ -18,17 +17,17 @@
 .quick-search-layer {
     background-color: #700017;   
 }
-.button-row {    
+.search-btn {    
     margin-top: 20px ;
     margin-bottom: 20px ;
 }
 
-.button-row .btn{
+.search-btn .btn{
     display: block;
     width: 100%;
     height: 45px;
 }
-.button-row .btn-info{
+.search-btn .btn-info{
 background:#337AB7;
 
 }

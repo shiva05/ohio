@@ -121,6 +121,7 @@
   width: 30px;
   display: inline-block;
       text-align: center;
+      font-family: 'Serifa-Reg';
   }
 
 .legend-reinforcement{
@@ -131,6 +132,7 @@
     width: 30px;
     display:  inline-block;
         text-align: center;
+        font-family: 'Serifa-Reg';
 }
 
 .legend-enrichment{
@@ -141,4 +143,5 @@
     width: 30px;
     display:  inline-block;
         text-align: center;
+        font-family: 'Serifa-Reg';
 }
