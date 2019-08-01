@@ -74,32 +74,121 @@
 <!-- Dynamic dropdowns of Academic subjects -->
 <div class="col-md-6">
   <div class="dynamic-academics" *ngFor="let policy of selectedAcadamicSubjects;let i = index;">
-      <h3>{{policy.item_text}}</h3>
 
-      <div class="row">
-          <div class="form-group col-md-4">
-              <label>{{ 'SearchFields.Grade' | translate }}</label>
-              <ng-multiselect-dropdown [ngClass]="" [data]="grades" [(ngModel)]="selectedGrades[i]"
-                  [settings]="dropdownSettings" (onSelect)="onGradeSelect(selectedGrades[i],policy)"
-                  >
-              </ng-multiselect-dropdown>
-          </div>
-          <div class="form-group col-md-4">
-              <label>{{ 'SearchFields.Cluster' | translate }}</label>
-              <ng-multiselect-dropdown [ngClass]="" [data]="clusters" [(ngModel)]="selectedClusters[i]"
-                  [settings]="dropdownSettings" (onSelect)="onClusterSelect(selectedClusters[i],policy)"
-                  >
-              </ng-multiselect-dropdown>
-          </div>
-          <div class="form-group col-md-4">
-              <label>{{ 'SearchFields.StandardNumber' | translate }}</label>
-              <ng-multiselect-dropdown [ngClass]="" [data]="standardNumbers"
-                  [(ngModel)]="selectedStandardNumbers[i]" [settings]="dropdownSettings"
-                  (onSelect)="onStandardNumberSelect(selectedStandardNumbers[i],policy)"
-                  >
-              </ng-multiselect-dropdown>
-          </div>
-      </div>
+    <div *ngIf="policy.item_id ==1">
+        <h3>{{policy.item_text}}</h3>
+
+              <div class="row">
+                  <div class="form-group col-md-4">
+                      <label>Grade / Subject</label>
+                      <ng-multiselect-dropdown [ngClass]="" [data]="grades" [(ngModel)]="selectedGrades[i]"
+                          [settings]="dropdownSettings" (onSelect)="onGradeSelect(selectedGrades[i],policy)"
+                          >
+                      </ng-multiselect-dropdown>
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label>Cluster</label>
+                      <ng-multiselect-dropdown [ngClass]="" [data]="clusters" [(ngModel)]="selectedClusters[i]"
+                          [settings]="dropdownSettings" (onSelect)="onClusterSelect(selectedClusters[i],policy)"
+                          >
+                      </ng-multiselect-dropdown>
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label>Standard Number</label>
+                      <ng-multiselect-dropdown [ngClass]="" [data]="standardNumbers"
+                          [(ngModel)]="selectedStandardNumbers[i]" [settings]="dropdownSettings"
+                          (onSelect)="onStandardNumberSelect(selectedStandardNumbers[i],policy)"
+                          >
+                      </ng-multiselect-dropdown>
+                  </div>
+              </div>
+    </div>
+
+    <div  *ngIf="policy.item_id ==2">
+        <h3>{{policy.item_text}}</h3>
+
+              <div class="row">
+                  <div class="form-group col-md-4">
+                      <label>Grade</label>
+                      <ng-multiselect-dropdown [ngClass]="" [data]="grades" [(ngModel)]="selectedGrades[i]"
+                          [settings]="dropdownSettings" (onSelect)="onGradeSelect(selectedGrades[i],policy)"
+                          >
+                      </ng-multiselect-dropdown>
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label>Domain</label>
+                      <ng-multiselect-dropdown [ngClass]="" [data]="clusters" [(ngModel)]="selectedClusters[i]"
+                          [settings]="dropdownSettings" (onSelect)="onClusterSelect(selectedClusters[i],policy)"
+                          >
+                      </ng-multiselect-dropdown>
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label>Standard Number</label>
+                      <ng-multiselect-dropdown [ngClass]="" [data]="standardNumbers"
+                          [(ngModel)]="selectedStandardNumbers[i]" [settings]="dropdownSettings"
+                          (onSelect)="onStandardNumberSelect(selectedStandardNumbers[i],policy)"
+                          >
+                      </ng-multiselect-dropdown>
+                  </div>
+              </div>
+    </div>
+
+    <div *ngIf="policy.item_id ==3">
+        <h3>{{policy.item_text}}</h3>
+              <div class="row">
+                  <div class="form-group col-md-4">
+                      <label>Domain</label>
+                      <ng-multiselect-dropdown [ngClass]="" [data]="grades" [(ngModel)]="selectedGrades[i]"
+                          [settings]="dropdownSettings" (onSelect)="onGradeSelect(selectedGrades[i],policy)"
+                          >
+                      </ng-multiselect-dropdown>
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label>Grade Band</label>
+                      <ng-multiselect-dropdown [ngClass]="" [data]="clusters" [(ngModel)]="selectedClusters[i]"
+                          [settings]="dropdownSettings" (onSelect)="onClusterSelect(selectedClusters[i],policy)"
+                          >
+                      </ng-multiselect-dropdown>
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label>Standard Number</label>
+                      <ng-multiselect-dropdown [ngClass]="" [data]="standardNumbers"
+                          [(ngModel)]="selectedStandardNumbers[i]" [settings]="dropdownSettings"
+                          (onSelect)="onStandardNumberSelect(selectedStandardNumbers[i],policy)"
+                          >
+                      </ng-multiselect-dropdown>
+                  </div>
+              </div>
+    </div>
+
+    <div *ngIf="policy.item_id ==4">
+        <h3>{{policy.item_text}}</h3>
+
+              <div class="row">
+                  <div class="form-group col-md-4">
+                      <label>Grade</label>
+                      <ng-multiselect-dropdown [ngClass]="" [data]="grades" [(ngModel)]="selectedGrades[i]"
+                          [settings]="dropdownSettings" (onSelect)="onGradeSelect(selectedGrades[i],policy)"
+                          >
+                      </ng-multiselect-dropdown>
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label>Domain</label>
+                      <ng-multiselect-dropdown [ngClass]="" [data]="clusters" [(ngModel)]="selectedClusters[i]"
+                          [settings]="dropdownSettings" (onSelect)="onClusterSelect(selectedClusters[i],policy)"
+                          >
+                      </ng-multiselect-dropdown>
+                  </div>
+                  <div class="form-group col-md-4">
+                      <label>Standard Number</label>
+                      <ng-multiselect-dropdown [ngClass]="" [data]="standardNumbers"
+                          [(ngModel)]="selectedStandardNumbers[i]" [settings]="dropdownSettings"
+                          (onSelect)="onStandardNumberSelect(selectedStandardNumbers[i],policy)"
+                          >
+                      </ng-multiselect-dropdown>
+                  </div>
+              </div>
+    </div>
       <!-- End of Dynamic dropdowns of Academic subjects -->
   </div>
   <!-- End of CareerField and Academic row -->
