@@ -28,7 +28,7 @@
 <div class="form-group col-md-6">
   <label>{{ 'SearchFields.CareerField' | translate }}</label>
   <ng-multiselect-dropdown [ngClass]="" [data]="careers" [(ngModel)]="selectedCareer"
-      [settings]="dropdownSettings" >
+      [settings]="careerFieldDropdownSettings" >
   </ng-multiselect-dropdown>
 </div>
 <div class="form-group col-md-6">
@@ -45,13 +45,13 @@
       <div class="form-group col-md-6">
           <label>{{ 'SearchFields.Strands' | translate }}</label>
           <ng-multiselect-dropdown [ngClass]="" [data]="stadards" [(ngModel)]="selectedStrands"
-              [settings]="dropdownSettings" >
+              [settings]="strandDropdownSettings" >
           </ng-multiselect-dropdown>
       </div>
       <div class="form-group col-md-6">
           <label>{{ 'SearchFields.Outcomes' | translate }}</label>
           <ng-multiselect-dropdown [ngClass]="" [data]="outcomes" [(ngModel)]="selectedOutcome"
-              [settings]="dropdownSettings" >
+              [settings]="outcomeDropdownSettings" >
           </ng-multiselect-dropdown>
       </div>
       <!-- End Dropdown Row -->

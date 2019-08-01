@@ -9,12 +9,7 @@ import { CompetencyNumber } from './../models/competency-number.model';
 import { Cluster } from './../models/cluster.model';
 
 export interface MetaData {
-  academicSubjects: AcademicSubject[],
-  standards: Strand[],
-  careers: Career[],
-  outcomes: Outcome[],
-  grades: Grade[],
-  standardNumbers: StandardNumber[]
+
 }
 export interface AdvancedSearchData {
   metaData : MetaData,

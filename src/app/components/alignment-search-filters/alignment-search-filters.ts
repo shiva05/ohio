@@ -36,7 +36,9 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   selectedGrades: any = [];
   selectedClusters: any = [];
   selectedStandardNumbers: any = [];
-  dropdownSettings: any = {};
+  careerFieldDropdownSettings: any = {};
+  strandDropdownSettings: any = {};
+  outcomeDropdownSettings: any = {};
   searchObj: any;
   selectedCompetencyNumber: any;
   competencyNumbers: any;
@@ -52,11 +54,11 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   ngOnInit() {
     this.store.select('advancedSearch').subscribe(data => {
       this.metaData = data.metaData;
-      this.careers = this.metaData['careers'];
+      this.careers = this.metaData['CareerFields'];
       this.academicSubjects = this.metaData['academicSubjects'];
-      this.stadards = this.metaData['standards'];
-      this.outcomes = this.metaData['outcomes'];
-      this.grades = this.metaData['grades'];
+      this.stadards = this.metaData['Strands'];
+      this.outcomes = this.metaData['Outcomes'];
+      this.grades = this.metaData['Grades'];
       this.clusters = this.metaData['clusters'];
       this.standardNumbers = this.metaData['standardNumbers'];
       this.competencyNumbers = this.metaData['competencyNumbers'];
@@ -68,9 +70,33 @@ export class AlignmentSearchFiltersComponent implements OnInit {
          this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects;
       }
     });
-    this.dropdownSettings = {
+    this.careerFieldDropdownSettings = {
       singleSelection: false,
-      idField: 'item_id', textField: 'item_text',
+      idField: 'CareerFieldId', textField: 'CareerFieldName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    };
+    this.strandsDropdownSettings = {
+      singleSelection: false,
+      idField: 'StrandPk', textField: 'StrandName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    };
+    this.outcomeDropdownSettings = {
+      singleSelection: false,
+      idField: 'OutcomePk', textField: 'OutcomeName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    };
+    this.careerFieldDropdownSettings = {
+      singleSelection: false,
+      idField: 'CareerFieldId', textField: 'CareerFieldName',
       selectAllText: 'Select All',
       unSelectAllText: 'Unselect All',
       itemsShowLimit: 1,

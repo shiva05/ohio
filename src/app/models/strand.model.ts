@@ -1,4 +1,6 @@
 export interface Strand{
-  item_id: string,
-  item_text :string
+  CareerFieldPk: number,
+  StrandId :number,
+  StrandPk:number,
+  StrandName:string
 }
