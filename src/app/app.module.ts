@@ -18,8 +18,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
 
 import { advancedSearchReducer } from './reducers/advanced-search.reducer';
+import { searchResultReducer } from './reducers/search-result.reducer';
 
 import { AdvancedSearchEffects } from './effects/advanced-search.effect';
+import { SearchResultEffects } from './effects/search-result.effect';
 import { reportReducer } from './reducers/report.reducer';
 import { ReportEffects } from './effects/report.effects';
 // import ngx-translate and the http loader
@@ -81,9 +83,9 @@ import { SearchResultsComponent } from './components/search-results/search-resul
       }
     }),
     // StoreModule.forRoot(reducers, { metaReducers }),
-    StoreModule.forRoot({  advancedSearch: advancedSearchReducer, report: reportReducer , quickSearch : quickSearchReducer}),
+    StoreModule.forRoot({ advancedSearch: advancedSearchReducer, report: reportReducer, quickSearch: quickSearchReducer, searchResult: searchResultReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 100, name: 'tng1' }),
-    EffectsModule.forRoot([ AdvancedSearchEffects, ReportEffects , QuickSearchEffects])
+    EffectsModule.forRoot([AdvancedSearchEffects, ReportEffects, QuickSearchEffects, SearchResultEffects])
 
   ],
   providers: [],

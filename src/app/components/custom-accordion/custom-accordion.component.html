@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- <div class="col-md-12">
   <div class="search-accordion-each"  [attr.id]="'accordion_' + i + loopCount" *ngFor="let option of options; let i = index;">
       <div class="card">
@@ -33,6 +34,17 @@
         <button (click)="onToggleClick(careerToAcademic)">{{ 'SearchResults.ToggleAlignments' | translate }} &nbsp; <i
             class="fa fa-exchange"></i></button>
       </div>
+=======
+<div class="col-md-12 search-results">
+  <div class="search-results-head row">
+    <div class="col-md-10 search-results-head-left">
+      <h3>{{ 'SearchResults.SearchResults' | translate }}</h3>
+      <p> Found 210 Alignments for your search criteria</p>
+    </div>
+    <div class="col-md-2 search-results-head-right">
+      <button (click)="onToggleClick(careerToAcademic)">{{ 'SearchResults.ToggleAlignments' | translate }} &nbsp; <i
+          class="fa fa-exchange"></i></button>
+>>>>>>> 3c8df4044ecbf001c9ee5148907ab296c8e40b71
     </div>
 
     <div class="search-accordion" *ngIf="careerToAcademic">
@@ -56,6 +68,7 @@
     </div>
   </div>
 
+<<<<<<< HEAD
   <div class="col-md-12 nopad" *ngIf="careerToAcademic">
     <ul class="list-group search-accordion">
       <li class="list-group-item search-accordion-each" [ngClass]="(item.isClosed) ? 'accordion-active' : ''"
@@ -243,6 +256,267 @@
       </li>
     </ul>
   </div>
+=======
+<div class="col-md-12 nopad" *ngIf="careerToAcademic">
+  <ul class="list-group search-accordion">
+    <li class="list-group-item search-accordion-each"
+      [ngClass]="(careerField.isCareerFieldClosed) ? 'accordion-active' : ''"
+      *ngFor="let careerField of data; index as i">
+
+      <!-- Career Field -->
+      <!-- add class dynamically if partially selected  checkbox-indeterminate -->
+      <div class="row search-accordion-each-inner">
+        <div class="col-md-6">
+          <div class="accordion-checbox ">
+            <span class="ohio-checkbox checkbox checkbox-success">
+              <input type="checkbox" class="ohio-checkbox-el" id="careerFieldID_{{i}}"
+                [(ngModel)]="careerField.isSelected" name="list_name" value="{{careerField.id}}"
+                (ngModelChange)="careerFieldCheckBox(careerField)" />
+              <label for="careerFieldID_{{i}}"></label>
+            </span>
+          </div>
+          <span class="level-one-title"> {{careerField.value}}</span>
+        </div>
+
+        <div class="col-md-1 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
+        <div class="col-md-3 cg">{{careerField.academicSubject}}</div>
+        <div class="col-md-1"> <span class="accordion-bubble bubble-green">10 </span> </div>
+        <div class="col-md-1 accordion-down-arrow">
+          <span (click)="expandCollapseCareerField(careerField)">
+            <i class="fas fa-chevron-up" *ngIf="careerField.isCareerFieldClosed;else isCollapsed"></i>
+            <ng-template #isCollapsed><i class="fas fa-chevron-down"></i></ng-template>
+          </span>
+        </div>
+      </div>
+
+      <!-- strands -->
+      <div class="child-list" [hidden]="!careerField.isCareerFieldClosed">
+        <ul class="list-group level-two">
+          <li class="level-two-inner" *ngFor="let strand of careerField.strands; index as j">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="accordion-checbox">
+                  <span class="ohio-checkbox checkbox checkbox-success">
+                    <input type="checkbox" class="ohio-checkbox-el" id="strandID_{{j}}" [(ngModel)]="strand.isSelected"
+                      name="list_name_child" value="{{strand.id}}"
+                      (ngModelChange)="strandCheckBox(careerField, strand)" />
+                    <label for="strandID_{{j}}"></label>
+                  </span>
+                </div>
+                <span class="level-two-title">
+                  {{strand.value}}
+                </span>
+              </div>
+              <div class="col-md-1"> &nbsp;</div>
+              <div class="col-md-3 cg"> {{strand.academicSubject}}</div>
+              <div class="col-md-1"> <span class="accordion-bubble bubble-blue">20 </span> </div>
+              <div class="col-md-1 accordion-down-arrow">
+
+                <span (click)="expandCollapseStrand(strand)" *ngIf="strand.outcomes">
+                  <i class="fas fa-chevron-up" *ngIf="strand.isStrandClosed;else isStrandClosed"></i>
+                  <ng-template #isStrandClosed><i class="fas fa-chevron-down"></i></ng-template>
+                </span>
+              </div>
+            </div>
+
+            <!-- Outcomes -->
+            <div class="child-list" [hidden]="!strand.isStrandClosed">
+              <ul class="list-group level-two">
+                <li class="level-two-inner" *ngFor="let outcome of strand.outcomes; index as k">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="accordion-checbox">
+                        <span class="ohio-checkbox checkbox checkbox-success">
+                          <input type="checkbox" class="ohio-checkbox-el" id="outcomeID_{{k}}"
+                            [(ngModel)]="outcome.isSelected" name="list_name_child" value="{{outcome.id}}"
+                            (ngModelChange)="outcomeCheckBox(careerField, strand, outcome)" />
+                          <label for="outcomeID_{{k}}"></label>
+                        </span>
+                      </div>
+                      <span class="level-two-title">
+                        {{outcome.value}}
+                      </span>
+                    </div>
+                    <div class="col-md-1"> &nbsp;</div>
+                    <div class="col-md-3 cg"> {{outcome.academicSubject}}</div>
+                    <div class="col-md-1"> <span class="accordion-bubble bubble-blue">20 </span> </div>
+                    <div class="col-md-1 accordion-down-arrow">
+
+                      <span (click)="expandCollapseOutcome(outcome)" *ngIf="outcome.competency">
+                        <i class="fas fa-chevron-up" *ngIf="outcome.isOutcomeClosed;else isOutcomeClosed"></i>
+                        <ng-template #isOutcomeClosed><i class="fas fa-chevron-down"></i></ng-template>
+                      </span>
+                    </div>
+                  </div>
+
+                  <!-- Competency -->
+                  <div class="child-list" [hidden]="!outcome.isOutcomeClosed" *ngIf="outcome.competency">
+                    <ul class="list-group level-three">
+                      <li class="list-group-item level-three" *ngFor="let item of outcome.competency; index as l">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="accordion-checbox">
+                              <span class="ohio-checkbox checkbox checkbox-success">
+                                <input type="checkbox" class="ohio-checkbox-el" id="competencyID_{{l}}"
+                                  [(ngModel)]="item.isSelected" name="list_name_child" value="{{item.id}}"
+                                  (ngModelChange)="competencyCheckBox(careerField, strand, outcome)" />
+                                <label for="competencyID_{{l}}"></label>
+                              </span>
+                            </div>
+                            <span class="level-three-title">
+                              {{item.value}}
+                            </span>
+                          </div>
+                          <div class="col-md-1"> &nbsp;</div>
+                          <div class="col-md-3 cg"> {{item.academicSubject}}</div>
+                          <div class="col-md-1"> <span class="accordion-bubble bubble-blue-color">3</span> </div>
+                          <div class="col-md-1">
+                            &nbsp;
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="col-md-12 nopad" *ngIf="academicToCareer">
+  <ul class="list-group search-accordion">
+    <li class="list-group-item search-accordion-each"
+      [ngClass]="(careerField.isCareerFieldClosed) ? 'accordion-active' : ''"
+      *ngFor="let careerField of data; index as i">
+
+      <!-- Career Field -->
+      <div class="row search-accordion-each-inner">
+        <div class="col-md-3 cg">
+          <div class="accordion-checbox ">
+            <span class="ohio-checkbox checkbox checkbox-success">
+              <input type="checkbox" class="ohio-checkbox-el" id="careerFieldID_{{i}}"
+                [(ngModel)]="careerField.isSelected" name="list_name" value="{{careerField.id}}"
+                (ngModelChange)="careerFieldCheckBox(careerField)" />
+              <label for="careerFieldID_{{i}}"></label>
+            </span>
+          </div>
+          <span class="level-one-title"> {{careerField.academicSubject}}</span>
+        </div>
+
+        <div class="col-md-1 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
+        <div class="col-md-6">
+          <span class="level-one-title"> {{careerField.value}}</span>
+        </div>
+
+        <div class="col-md-1"> <span class="accordion-bubble bubble-green">10 </span> </div>
+        <div class="col-md-1 accordion-down-arrow">
+          <span (click)="expandCollapseCareerField(careerField)">
+            <i class="fas fa-chevron-up" *ngIf="careerField.isCareerFieldClosed;else isCollapsed"></i>
+            <ng-template #isCollapsed><i class="fas fa-chevron-down"></i></ng-template>
+          </span>
+        </div>
+      </div>
+
+      <!-- strands -->
+      <div class="child-list" [hidden]="!careerField.isCareerFieldClosed">
+        <ul class="list-group level-two">
+          <li class="level-two-inner" *ngFor="let strand of careerField.strands; index as j">
+            <div class="row">
+              <div class="col-md-3 cg">
+                <div class="accordion-checbox ">
+                  <span class="ohio-checkbox checkbox checkbox-success">
+                    <input type="checkbox" class="ohio-checkbox-el" id="strandID_{{j}}" [(ngModel)]="strand.isSelected"
+                      name="list_name_child" value="{{strand.id}}"
+                      (ngModelChange)="strandCheckBox(careerField, strand)" />
+                    <label for="strandID_{{j}}"></label>
+                  </span>
+                </div>
+                <span class="level-two-title">{{strand.academicSubject}}</span>
+              </div>
+              <div class="col-md-1"> &nbsp;</div>
+              <div class="col-md-6">
+                <span class="level-two-title">
+                  {{strand.value}}
+                </span>
+              </div>
+
+              <div class="col-md-1"> <span class="accordion-bubble bubble-blue">20 </span> </div>
+              <div class="col-md-1 accordion-down-arrow">
+                <span (click)="expandCollapseStrand(strand)" *ngIf="strand.outcomes">
+                  <i class="fas fa-chevron-up" *ngIf="strand.isStrandClosed;else isStrandClosed"></i>
+                  <ng-template #isStrandClosed><i class="fas fa-chevron-down"></i></ng-template>
+                </span>
+              </div>
+            </div>
+
+            <!-- Outcomes -->
+            <div class="child-list" [hidden]="!strand.isStrandClosed">
+              <ul class="list-group level-two">
+                <li class="level-two-inner" *ngFor="let outcome of strand.outcomes; index as k">
+                  <div class="row">
+                    <div class="col-md-3 cg">
+                      <div class="accordion-checbox">
+                        <span class="ohio-checkbox checkbox checkbox-success">
+                          <input type="checkbox" class="ohio-checkbox-el" id="outcomeID_{{k}}"
+                            [(ngModel)]="outcome.isSelected" name="list_name_child" value="{{outcome.id}}"
+                            (ngModelChange)="outcomeCheckBox(careerField, strand, outcome)" />
+                          <label for="outcomeID_{{k}}"></label>
+                        </span>
+                      </div>
+                      <span class="level-two-title">{{outcome.academicSubject}}</span>
+                    </div>
+                    <div class="col-md-1"> &nbsp;</div>
+                    <div class="col-md-6">{{outcome.value}} </div>
+                    <div class="col-md-1"> <span class="accordion-bubble bubble-blue">20 </span> </div>
+                    <div class="col-md-1 accordion-down-arrow">
+
+                      <span (click)="expandCollapseOutcome(outcome)" *ngIf="outcome.competency">
+                        <i class="fas fa-chevron-up" *ngIf="outcome.isOutcomeClosed;else isOutcomeClosed"></i>
+                        <ng-template #isOutcomeClosed><i class="fas fa-chevron-down"></i></ng-template>
+                      </span>
+                    </div>
+                  </div>
+
+                  <!-- Competency -->
+                  <div class="child-list" [hidden]="!outcome.isOutcomeClosed" *ngIf="outcome.competency">
+                    <ul class="list-group level-three">
+                      <li class="list-group-item level-three" *ngFor="let item of outcome.competency; index as l">
+                        <div class="row">
+                          <div class="col-md-3 cg">
+                            <div class="accordion-checbox">
+                              <span class="ohio-checkbox checkbox checkbox-success">
+                                <input type="checkbox" class="ohio-checkbox-el" id="competencyID_{{l}}"
+                                  [(ngModel)]="item.isSelected" name="list_name_child" value="{{item.id}}"
+                                  (ngModelChange)="competencyCheckBox(careerField, strand, outcome)" />
+                                <label for="competencyID_{{l}}"></label>
+                              </span>
+                            </div>
+                            <span class="level-three-title">{{item.academicSubject}}</span>
+                          </div>
+                          <div class="col-md-1"> &nbsp;</div>
+                          <div class="col-md-6"> {{item.value}}</div>
+                          <div class="col-md-1"> <span class="accordion-bubble bubble-blue-color">3</span> </div>
+                          <div class="col-md-1">
+                            &nbsp;
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+>>>>>>> 3c8df4044ecbf001c9ee5148907ab296c8e40b71
 </div>
 
 
