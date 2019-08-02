@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { AdvancedSearchComponent } from './components/advanced-search/advanced-search.component';
 import { CustomAccordionComponent } from './components/custom-accordion/custom-accordion.component';
 import { FilterSummaryComponent } from './components/filter-summary/filter-summary.component';
 import { ReportComponent } from './components/report/report.component';
@@ -26,7 +25,6 @@ import { SearchResultEffects } from './effects/search-result.effect';
 import { reportReducer } from './reducers/report.reducer';
 import { ReportEffects } from './effects/report.effects';
 // import ngx-translate and the http loader
-import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AlignmentSearchComponent } from './components/alignment-search/alignment-search.component';
@@ -44,16 +42,15 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { QuickSearchEffects } from 'src/app/effects/quick-search.effect';
 import { quickSearchReducer } from 'src/app/reducers/quick-search.reducer';
 import { CourseSearchFiltersComponent } from './components/course-search-filters/course-search-filters.component';
+import { SearchResultsComponent } from './components/search-results/search-results.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    AdvancedSearchComponent,
     CustomAccordionComponent,
     FilterSummaryComponent,
     ReportComponent,
-    SearchResultsComponent,
     AlignmentSearchComponent,
     CourseSearchComponent,
     ReportListComponent,
@@ -65,7 +62,8 @@ import { CourseSearchFiltersComponent } from './components/course-search-filters
     MyAppComponent,
     PageNotFoundComponent,
     AlignmentSearchFiltersComponent,
-    CourseSearchFiltersComponent
+    CourseSearchFiltersComponent,
+    SearchResultsComponent
   ],
   imports: [
     BrowserModule,

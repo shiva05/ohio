@@ -292,11 +292,16 @@ border-color: #fff !important;
     margin: 15px 0 0 0
 }
 
+.report-btn{
+    margin: 15px 0;
+}
+
+
 .accordion-btn{
     margin: 15px 0;
 }
 
-.reports *{
+.reports-each *{
     font-family: 'Serifa-Reg';
   }
 
@@ -405,4 +410,9 @@ border-color: #fff !important;
         overflow: hidden;
         max-width: calc(100% - 60px);
         text-overflow: ellipsis;
+    }
+    .dynamic-academics h3{
+        font-size: 18px;
+        font-family: 'Serifa-Reg';   
+        color: #700017;
     }

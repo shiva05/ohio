@@ -1,18 +1,24 @@
-<div class="reports col-md-12">
+<div class="reports">
 
   <app-report-list></app-report-list>
 
-    <div class="row">
-        <div class="pull-right search-btn">
-            <button type="button" class="ohio-button large but-gap">
-              {{ 'ReportFields.Generate' | translate }}
-            </button>
-        <button type="button" class="ohio-button large but-gap  secondary" (click)="goToPage('Search')">
-          {{ 'ReportFields.Cancel' | translate }}
-        </button>
+  <div class="col-md-12">
+    <div class="pull-right report-btn">
+      <button type="button" class="ohio-button large but-gap">
+        Save to Profile
+      </button>
+      <a href="../../../assets/pdf/Report.pdf" download="Report.pdf">
+      <button type="button" class="ohio-button large but-gap">
+        Download
+      </button>
+      </a>
+      <button type="button" class="ohio-button large but-gap  secondary" (click)="goToPage('Search')">
+        {{ 'ReportFields.Cancel' | translate }}
+      </button>
 
-        </div>
-      </div>
-
-
+    </div>
   </div>
+
+
+
+</div>

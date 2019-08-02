@@ -8,7 +8,7 @@ import { SharedService } from '../../services/shared.service';
   styleUrls: ['./search-results.component.css']
 })
 export class SearchResultsComponent implements OnInit {
-  showReport: boolean = false;
+  showReport = false;
   data: any = [];
 
   constructor(private translate: TranslateService, private sharedData: SharedService) {
@@ -34,5 +34,4 @@ export class SearchResultsComponent implements OnInit {
       this.showReport = true;
     }
   }
-
 }

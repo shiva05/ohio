@@ -49,6 +49,10 @@ export class QuickSearchComponent implements OnInit {
   sendSearch() {
     this.sharedData.data = this.keyword;
     localStorage.setItem('sharedData', this.sharedData.data);
+
+    console.log(this.selectedCareer);
+    console.log(this.selectedAcadamicSubjects);
+
     (window as any).open('http://edu-dev-sbd.azurewebsites.net/Search', '_blank');
     // this.router.navigate(['/Search']);
   }

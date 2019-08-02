@@ -1,21 +1,21 @@
 <div class="home main row container">
 
     <div class="col-md-6">
-        <h1>Export Page </h1>
+        <h1>SBD Data Import</h1>
 
         <p id="demo"></p>
 
-        <!-- Import Dropdown -->
+        <!-- export Dropdown -->
         <div class="form-group col-md-12">
             <label>Import</label>
             <ng-multiselect-dropdown [ngClass]="" [settings]="dropdownSettings">
             </ng-multiselect-dropdown>
         </div>
 
-        <!-- Import input -->
+        <!-- export input -->
         <div class="col-md-12">
             <label class="ohio-upload-single input-group" for="excel-upload">
-                <input (change)="import()" [(ngModel)]="uploadedFile" type="file" class="ohio-upload-single-file" id="excel-upload" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                <input  [(ngModel)]="uploadedFile" type="file" class="ohio-upload-single-file" id="excel-upload" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
                 <span class="ohio-upload-single-label form-control">Choose a file</span>
                 <span class="input-group-btn">
                     <span class="ohio-upload-single-btn btn" type="button" for="excel-upload">
@@ -27,7 +27,7 @@
 
         <!-- Button Row -->
         <div class="row">
-            <div class="pull-right import-btn">
+            <div class="pull-right export-btn">
                 <button type="button" class="ohio-button large but-gap">Import</button>
                 <button type="button"
                     class="ohio-button large but-gap secondary">Cancel</button>
