@@ -1,4 +1,7 @@
 import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.state';
+import * as SearchResultsActions from './../../actions/search-result.action';
 
 @Component({
   selector: 'custom-accordion',
@@ -8,106 +11,134 @@ import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 
 export class CustomAccordionComponent implements OnInit {
   data: any;
-  childList: any = [];
-  parentChildList: any = [];
+  strands: any = [];
+  competency: any = [];
+  outcomes: any = [];
   careerToAcademic: boolean = true;
   academicToCareer: boolean = false;
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(private store: Store<AppState>) {
+    this.store.dispatch({ type: SearchResultsActions.LOAD_SEARCH_RESULT });
+  }
 
   ngOnInit() {
     this.data = {};
 
-    this.childList = [
-      // tslint:disable-next-line:max-line-length
-      { id: 1, academicSubject: 'Math', value: 'Select materials and lay out rough\u2010in wiring runs according to specifications, drawings and code requirements.' },
-      { id: 2, academicSubject: 'Math', value: 'Lay out and install conduit or cable runs, raceways and cable systems.' }
-    ];
-
-    this.parentChildList = [
-      { id: 1, academicSubject: 'Math', value: 'Planning and Design' },
-      { id: 2, academicSubject: 'Math', value: 'Business Operations\/21st Century Skills' },
-      { id: 3, academicSubject: 'Math', value: 'Construction and Facility Management' },
-      { id: 4, academicSubject: 'Math', value: 'Electrical', childList: JSON.parse(JSON.stringify(this.childList)) },
-      { id: 5, academicSubject: 'Math', value: 'Environmental Systems and Plumbing' },
-      { id: 6, academicSubject: 'Math', value: 'Structural Construction' },
-      { id: 7, academicSubject: 'Math', value: 'Safety, Tools, and Equipment' }
-    ];
-
-    // List object having hierarchy of parents and its children
-    this.data.ParentChildchecklist = [
-      { id: 1, academicSubject: 'Science', value: 'Hospitality and Tourism' },
-      { id: 2, academicSubject: 'Social', value: 'Business, Marketing, and Finance' },
-      { id: 3, academicSubject: 'Science', value: 'Agriculture and Environmental Science' },
-      { id: 4, academicSubject: 'Science', value: 'Engineering and Science Technologies' },
-      { id: 5, academicSubject: 'Math', value: 'Manufacturing' },
-      { id: 6, academicSubject: 'Social', value: 'Education and Training' },
-      { id: 7, academicSubject: 'Math', value: 'Construction', parentChildList: JSON.parse(JSON.stringify(this.parentChildList)) },
-      { id: 8, academicSubject: 'Math', value: 'Transportation' },
-      { id: 9, academicSubject: 'Social', value: 'Human Services' },
-      { id: 10, academicSubject: 'Social', value: 'Law & Public Safety' },
-      { id: 11, academicSubject: 'Math', value: 'Information Technology' },
-      { id: 12, academicSubject: 'ELA', value: 'Arts and Communication' },
-      { id: 13, academicSubject: 'Science', value: 'Health Science' }
-    ];
+    this.store.select('searchResult').subscribe(response => {
+      this.data = response.searchResultList;
+    });
   }
 
-  // Click event on parent checkbox
-  parentCheckBox(parentObj) {
+  // Click event on Career Field
+  careerFieldCheckBox(parentObj) {
     // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < parentObj.parentChildList.length; i++) {
-      parentObj.parentChildList[i].isSelected = parentObj.isSelected;
-      if (parentObj.parentChildList[i].childList) {
+    for (let i = 0; i < parentObj.strands.length; i++) {
+      parentObj.strands[i].isSelected = parentObj.isSelected;
+      if (parentObj.strands[i].outcomes) {
         // tslint:disable-next-line:prefer-for-of
-        for (let j = 0; j < parentObj.parentChildList[i].childList.length; j++) {
-          parentObj.parentChildList[i].childList[j].isSelected = parentObj.isSelected;
+        for (let j = 0; j < parentObj.strands[i].outcomes.length; j++) {
+          parentObj.strands[i].outcomes[j].isSelected = parentObj.isSelected;
+
+          if (parentObj.strands[i].outcomes[j].competency) {
+            // tslint:disable-next-line:prefer-for-of
+            for (let k = 0; k < parentObj.strands[i].outcomes[j].competency.length; k++) {
+              parentObj.strands[i].outcomes[j].competency[k].isSelected = parentObj.isSelected;
+            }
+          }
         }
       }
     }
   }
 
-  // Click event on Parent Child Checkbox
-  parentChildCheckBox(parent, parentObj) {
+  // Click event on Strand Checkbox
+  strandCheckBox(parent, parentObj) {
     // tslint:disable-next-line:only-arrow-functions
-    parent.isSelected = parent.parentChildList.every(function (itemChild: any) {
+    parent.isSelected = parent.strands.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
-    if (parentObj.childList) {
+    if (parentObj.outcomes) {
       if (parentObj.isSelected) {
-        parentObj.childList.forEach(item => {
+        parentObj.outcomes.forEach(item => {
+          item.isSelected = true;
+          if (item.competency) {
+            item.competency.forEach(data => {
+              data.isSelected = true;
+            });
+          }
+        });
+      } else {
+        parentObj.outcomes.forEach(item => {
+          item.isSelected = false;
+          if (item.competency) {
+            item.competency.forEach(data => {
+              data.isSelected = false;
+            });
+          }
+        });
+      }
+    }
+  }
+
+  // Click event on Outcome Checkbox
+  outcomeCheckBox(career, strands, outcome) {
+
+    // tslint:disable-next-line:only-arrow-functions
+    strands.isSelected = strands.outcomes.every(function (itemChild: any) {
+      return itemChild.isSelected === true;
+    });
+
+    // tslint:disable-next-line:only-arrow-functions
+    career.isSelected = career.strands.every(function (itemChild: any) {
+      return itemChild.isSelected === true;
+    });
+
+    if (outcome.competency) {
+      if (outcome.isSelected) {
+        outcome.competency.forEach(item => {
           item.isSelected = true;
         });
       } else {
-        parentObj.childList.forEach(item => {
+        outcome.competency.forEach(item => {
           item.isSelected = false;
         });
       }
     }
   }
 
-  // Click event on Child Checkbox
-  childCheckBox(parent, parentObj) {
+  // Click event on Outcome Checkbox
+  competencyCheckBox(career, strand, outcome) {
     // tslint:disable-next-line:only-arrow-functions
-    parentObj.isSelected = parentObj.childList.every(function (itemChild: any) {
+    outcome.isSelected = outcome.competency.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
+
     // tslint:disable-next-line:only-arrow-functions
-    parent.isSelected = parent.parentChildList.every(function (itemChild: any) {
+    strand.isSelected = strand.outcomes.every(function (itemChild: any) {
+      return itemChild.isSelected === true;
+    });
+
+    // tslint:disable-next-line:only-arrow-functions
+    career.isSelected = career.strands.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
 
-  // Expand/Collapse event on each parent
-  expandCollapse(obj) {
-    obj.isClosed = !obj.isClosed;
+  // Expand/Collapse event on Career Field
+  expandCollapseCareerField(obj) {
+    obj.isCareerFieldClosed = !obj.isCareerFieldClosed;
   }
 
-  // Expand/Collapse event on each parent
-  expandChildCollapse(obj) {
-    obj.isChildClosed = !obj.isChildClosed;
+  // Expand/Collapse event on Strand
+  expandCollapseStrand(obj) {
+    obj.isStrandClosed = !obj.isStrandClosed;
+  }
+
+  // Expand/Collapse event on Outcome
+  expandCollapseOutcome(obj) {
+    obj.isOutcomeClosed = !obj.isOutcomeClosed;
   }
 
   getCheckedValues(item) {

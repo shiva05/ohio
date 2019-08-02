@@ -17,6 +17,7 @@ export class FilterSummaryComponent implements OnInit {
   @Input() FilterSummary;
   FilterSummaryKeys: any;
   FilterSummaryData: any = [];
+  panelExpanded: boolean = false;
 
   @Output() onPageSelect = new EventEmitter<any>();
 
@@ -63,11 +64,11 @@ export class FilterSummaryComponent implements OnInit {
           fieldType: '2'
         }
       ];
-      this.store.select('advancedSearch').subscribe(data => {
-        if(data.alignmentSearchSelectedFilters){
-          this.formatSearchDataToSummary(data.alignmentSearchSelectedFilters);
-        }
-     });
+    this.store.select('advancedSearch').subscribe(data => {
+      if (data.alignmentSearchSelectedFilters) {
+        this.formatSearchDataToSummary(data.alignmentSearchSelectedFilters);
+      }
+    });
 
   }
 
