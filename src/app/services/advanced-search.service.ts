@@ -13,6 +13,5 @@ export class AdvancedSearchService {
 
   getMetaData() {
     return this.http.get('http://edu-dev-sbd-alignmentsearch.azurewebsites.net/api/GetAlignmentMetaData?code=E1ya26DNWM67/EJxQQKsdDR/RtTdW0bt9FIhCptxwUY4i0XUaL9quA==');
-
   }
 }

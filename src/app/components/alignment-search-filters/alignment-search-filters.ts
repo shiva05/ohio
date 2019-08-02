@@ -20,7 +20,11 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   ShowFilter = true;
   limitSelection = false;
   careers: any = [];
-  academicSubjects = [];
+  academicSubjects = [ // There is no academic Subjects in the Data
+    { item_id: 3, item_text: 'ELA' },
+    { item_id: 1, item_text: 'Math' },
+    { item_id: 2, item_text: 'Science' },
+    { item_id: 4, item_text: 'Social Studies' }];
   stadards = [];
   outcomes = [];
   grades = [];
@@ -39,6 +43,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   careerFieldDropdownSettings: any = {};
   strandDropdownSettings: any = {};
   outcomeDropdownSettings: any = {};
+  academicSubjectDropdownSettings: any = {};
   searchObj: any;
   selectedCompetencyNumber: any;
   competencyNumbers: any;
@@ -55,7 +60,6 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.store.select('advancedSearch').subscribe(data => {
       this.metaData = data.metaData;
       this.careers = this.metaData['CareerFields'];
-      this.academicSubjects = this.metaData['academicSubjects'];
       this.stadards = this.metaData['Strands'];
       this.outcomes = this.metaData['Outcomes'];
       this.grades = this.metaData['Grades'];
@@ -97,6 +101,14 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.careerFieldDropdownSettings = {
       singleSelection: false,
       idField: 'CareerFieldId', textField: 'CareerFieldName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    };
+    this.academicSubjectDropdownSettings = {
+      singleSelection: false,
+     idField: 'item_id', textField: 'item_text',
       selectAllText: 'Select All',
       unSelectAllText: 'Unselect All',
       itemsShowLimit: 1,
