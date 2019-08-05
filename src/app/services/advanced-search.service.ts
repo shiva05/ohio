@@ -9,9 +9,9 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class AdvancedSearchService {
-  constructor (private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   getMetaData() {
-    return this.http.get('http://edu-dev-sbd-alignmentsearch.azurewebsites.net/api/GetAlignmentMetaData?code=E1ya26DNWM67/EJxQQKsdDR/RtTdW0bt9FIhCptxwUY4i0XUaL9quA==');
+    return this.http.get(environment.GetAlignmentMetaData);
   }
 }
