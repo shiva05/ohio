@@ -9,10 +9,9 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class AdvancedSearchService {
-  constructor (private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   getMetaData() {
-    return this.http.get('/movies');
-
+    return this.http.get(environment.GetAlignmentMetaData);
   }
 }

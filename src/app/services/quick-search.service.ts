@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class QuickSearchService {
-  constructor (private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   getMetaData() {
     return this.http.get('/movies');

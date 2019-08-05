@@ -20,7 +20,11 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   ShowFilter = true;
   limitSelection = false;
   careers: any = [];
-  academicSubjects = [];
+  academicSubjects = [ // There is no academic Subjects in the Data
+    { item_id: 3, item_text: 'ELA' },
+    { item_id: 1, item_text: 'Math' },
+    { item_id: 2, item_text: 'Science' },
+    { item_id: 4, item_text: 'Social Studies' }];
   stadards = [];
   outcomes = [];
   grades = [];
@@ -36,7 +40,10 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   selectedGrades: any = [];
   selectedClusters: any = [];
   selectedStandardNumbers: any = [];
-  dropdownSettings: any = {};
+  careerFieldDropdownSettings: any = {};
+  strandDropdownSettings: any = {};
+  outcomeDropdownSettings: any = {};
+  academicSubjectDropdownSettings: any = {};
   searchObj: any;
   selectedCompetencyNumber: any;
   competencyNumbers: any;
@@ -52,11 +59,10 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   ngOnInit() {
     this.store.select('advancedSearch').subscribe(data => {
       this.metaData = data.metaData;
-      this.careers = this.metaData['careers'];
-      this.academicSubjects = this.metaData['academicSubjects'];
-      this.stadards = this.metaData['standards'];
-      this.outcomes = this.metaData['outcomes'];
-      this.grades = this.metaData['grades'];
+      this.careers = this.metaData['CareerFields'];
+      this.stadards = this.metaData['Strands'];
+      this.outcomes = this.metaData['Outcomes'];
+      this.grades = this.metaData['Grades'];
       this.clusters = this.metaData['clusters'];
       this.standardNumbers = this.metaData['standardNumbers'];
       this.competencyNumbers = this.metaData['competencyNumbers'];
@@ -68,9 +74,41 @@ export class AlignmentSearchFiltersComponent implements OnInit {
          this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects;
       }
     });
-    this.dropdownSettings = {
+    this.careerFieldDropdownSettings = {
       singleSelection: false,
-      idField: 'item_id', textField: 'item_text',
+      idField: 'CareerFieldId', textField: 'CareerFieldName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    };
+    this.strandDropdownSettings = {
+      singleSelection: false,
+      idField: 'StrandPk', textField: 'StrandName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    };
+    this.outcomeDropdownSettings = {
+      singleSelection: false,
+      idField: 'OutcomePk', textField: 'OutcomeName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    };
+    this.careerFieldDropdownSettings = {
+      singleSelection: false,
+      idField: 'CareerFieldId', textField: 'CareerFieldName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    };
+    this.academicSubjectDropdownSettings = {
+      singleSelection: false,
+     idField: 'item_id', textField: 'item_text',
       selectAllText: 'Select All',
       unSelectAllText: 'Unselect All',
       itemsShowLimit: 1,
