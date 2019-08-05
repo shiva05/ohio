@@ -40,6 +40,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   selectedGrades: any = [];
   selectedClusters: any = [];
   selectedStandardNumbers: any = [];
+  dropdownSettings: any = {};
   careerFieldDropdownSettings: any = {};
   strandDropdownSettings: any = {};
   outcomeDropdownSettings: any = {};
@@ -74,6 +75,14 @@ export class AlignmentSearchFiltersComponent implements OnInit {
          this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects;
       }
     });
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'CareerFieldId', textField: 'CareerFieldName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    }
     this.careerFieldDropdownSettings = {
       singleSelection: false,
       idField: 'CareerFieldId', textField: 'CareerFieldName',
