@@ -73,6 +73,9 @@
           "configurations": {
             "production": {
               "browserTarget": "StandardsByDesignWeb:build:production"
+            },
+            "qa": {
+              "browserTarget": "StandardsByDesignWeb:build:production"
             }
           }
         },
