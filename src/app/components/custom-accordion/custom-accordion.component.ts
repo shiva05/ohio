@@ -13,7 +13,7 @@ import * as SearchResultsActions from './../../actions/search-result.action';
 
 export class CustomAccordionComponent implements OnInit {
   data: any;
-  formattedData: any = {ParentChildchecklist: []};
+  formattedData: any = [];
   accordionData: any;
   childList: any = [];
   parentChildList: any = [];
@@ -39,8 +39,7 @@ export class CustomAccordionComponent implements OnInit {
         console.log(this.accordionData);
 
         if (this.accordionData) {
-          this.ParentChildchecklist = this.getAccordionData(this.accordionData);
-          this.formattedData.ParentChildchecklist = (this.ParentChildchecklist);
+          this.formattedData = this.getAccordionData();
           console.log(this.formattedData);
         }
 
@@ -50,12 +49,12 @@ export class CustomAccordionComponent implements OnInit {
       }
     );
 
-    this.data = {};
+    // this.data = {};
 
 
-    this.store.select('searchResult').subscribe(response => {
-      this.data = response.searchResultList;
-    });
+    // this.store.select('searchResult').subscribe(response => {
+    //   this.data = response.searchResultList;
+    // });
   }
 
   // Click event on Career Field
@@ -197,45 +196,47 @@ export class CustomAccordionComponent implements OnInit {
 
   getAccordionData() {
     const data = [];
+    // const ParentChildchecklist = {};
+    // data.push(ParentChildchecklist);
 
-    console.log(this.accordionData);
-
+    // tslint:disable-next-line:prefer-for-of
     for (let h = 0; h < this.accordionData.length; h++) {
       data.push({
         id: h,
         value: `${this.accordionData[h].CareerField}`,
         academicSubject: `Math`,
         parent: null,
-        parentChildList: []
+        strands: []
       });
 
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.accordionData[h].Strands.length - 1; i++) {
-        data[h].parentChildList.push({
+        data[h].strands.push({
           id: i,
           value: `${this.accordionData[h].Strands[i].StrandTitle}`,
           academicSubject: `Math`,
           parent: data[h].name,
-          childList: []
+          outcomes: []
         });
 
 
         // tslint:disable-next-line:prefer-for-of
         for (let j = 0; j < this.accordionData[h].Strands[i].Outcomes.length; j++) {
-          data[h].parentChildList[i].childList.push({
+          data[h].strands[i].outcomes.push({
             id: j,
             value: `${this.accordionData[h].Strands[i].Outcomes[j].OutcomeTitle}`,
             academicSubject: `Math`,
-            parent: data[h].parentChildList[i].name,
-            grandChildList: []
+            parent: data[h].strands[i].name,
+            competency: []
           });
 
 
           // tslint:disable-next-line:prefer-for-of
           for (let k = 0; k < this.accordionData[h].Strands[i].Outcomes[j].Competencies.length; k++) {
-            data[h].parentChildList[i].childList[j].grandChildList.push({
-              name: `${this.accordionData[h].Strands[i].Outcomes[j].Competencies[k].CompetencyTitle}`,
-              parent: null,
+            data[h].strands[i].outcomes[j].competency.push({
+              value: `${this.accordionData[h].Strands[i].Outcomes[j].Competencies[k].CompetencyTitle}`,
+              academicSubject: `Math`,
+              parent: data[h].strands[i].outcomes[j].name,
               greatGrandChildList: []
             });
           }
