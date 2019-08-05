@@ -15,9 +15,6 @@ export class CustomAccordionComponent implements OnInit {
   data: any;
   formattedData: any = [];
   accordionData: any;
-  childList: any = [];
-  parentChildList: any = [];
-  ParentChildchecklist: any = [];
   careerToAcademic = true;
   academicToCareer = false;
   strands: any = [];
