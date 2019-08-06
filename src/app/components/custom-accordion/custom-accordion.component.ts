@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import * as util from 'util';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import * as SearchResultsActions from './../../actions/search-result.action';
@@ -11,24 +13,45 @@ import * as SearchResultsActions from './../../actions/search-result.action';
 
 export class CustomAccordionComponent implements OnInit {
   data: any;
+  formattedData: any = [];
+  accordionData: any;
+  careerToAcademic = true;
+  academicToCareer = false;
   strands: any = [];
   competency: any = [];
   outcomes: any = [];
-  careerToAcademic: boolean = true;
-  academicToCareer: boolean = false;
+
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>,
+              private httpService: HttpClient) {
     this.store.dispatch({ type: SearchResultsActions.LOAD_SEARCH_RESULT });
   }
 
   ngOnInit() {
-    this.data = {};
+    this.httpService.get('../../../assets/json/CareerCompetency.json').subscribe(
+      data => {
+        this.accordionData = data;
+        console.log(this.accordionData);
 
-    this.store.select('searchResult').subscribe(response => {
-      this.data = response.searchResultList;
-    });
+        if (this.accordionData) {
+          this.formattedData = this.getAccordionData();
+          console.log(this.formattedData);
+        }
+
+      },
+      (err: HttpErrorResponse) => {
+        console.log(err.message);
+      }
+    );
+
+    // this.data = {};
+
+
+    // this.store.select('searchResult').subscribe(response => {
+    //   this.data = response.searchResultList;
+    // });
   }
 
   // Click event on Career Field
@@ -55,7 +78,7 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Strand Checkbox
   strandCheckBox(parent, parentObj) {
     // tslint:disable-next-line:only-arrow-functions
-    parent.isSelected = parent.strands.every(function (itemChild: any) {
+    parent.isSelected = parent.strands.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -86,12 +109,12 @@ export class CustomAccordionComponent implements OnInit {
   outcomeCheckBox(career, strands, outcome) {
 
     // tslint:disable-next-line:only-arrow-functions
-    strands.isSelected = strands.outcomes.every(function (itemChild: any) {
+    strands.isSelected = strands.outcomes.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.strands.every(function (itemChild: any) {
+    career.isSelected = career.strands.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -111,17 +134,17 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Outcome Checkbox
   competencyCheckBox(career, strand, outcome) {
     // tslint:disable-next-line:only-arrow-functions
-    outcome.isSelected = outcome.competency.every(function (itemChild: any) {
+    outcome.isSelected = outcome.competency.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    strand.isSelected = strand.outcomes.every(function (itemChild: any) {
+    strand.isSelected = strand.outcomes.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.strands.every(function (itemChild: any) {
+    career.isSelected = career.strands.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
@@ -167,5 +190,62 @@ export class CustomAccordionComponent implements OnInit {
       this.academicToCareer = false;
     }
   }
-}
 
+  getAccordionData() {
+    const data = [];
+    // const ParentChildchecklist = {};
+    // data.push(ParentChildchecklist);
+
+    // tslint:disable-next-line:prefer-for-of
+    for (let h = 0; h < this.accordionData.length; h++) {
+      data.push({
+        id: h,
+        value: `${this.accordionData[h].CareerField}`,
+        academicSubject: `Math`,
+        parent: null,
+        strands: []
+      });
+
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.accordionData[h].Strands.length - 1; i++) {
+        data[h].strands.push({
+          id: i,
+          value: `${this.accordionData[h].Strands[i].StrandTitle}`,
+          academicSubject: `Math`,
+          parent: data[h].name,
+          outcomes: []
+        });
+
+
+        // tslint:disable-next-line:prefer-for-of
+        for (let j = 0; j < this.accordionData[h].Strands[i].Outcomes.length; j++) {
+          data[h].strands[i].outcomes.push({
+            id: j,
+            value: `${this.accordionData[h].Strands[i].Outcomes[j].OutcomeTitle}`,
+            academicSubject: `Math`,
+            parent: data[h].strands[i].name,
+            competency: []
+          });
+
+
+          // tslint:disable-next-line:prefer-for-of
+          for (let k = 0; k < this.accordionData[h].Strands[i].Outcomes[j].Competencies.length; k++) {
+            data[h].strands[i].outcomes[j].competency.push({
+              value: `${this.accordionData[h].Strands[i].Outcomes[j].Competencies[k].CompetencyTitle}`,
+              academicSubject: `Math`,
+              parent: data[h].strands[i].outcomes[j].name,
+              greatGrandChildList: []
+            });
+          }
+
+        }
+
+
+      }
+
+    }
+    console.log(data);
+
+    return data;
+  }
+}

@@ -8,34 +8,33 @@
       <button (click)="onToggleClick(careerToAcademic)">{{ 'SearchResults.ToggleAlignments' | translate }} &nbsp; <i
           class="fa fa-exchange"></i></button>
     </div>
-  </div>
 
-  <div class="search-accordion" *ngIf="careerToAcademic">
-    <div class="search-accordion-head row">
-      <div class="col-md-6">{{ 'SearchResults.CareerFields' | translate }}</div>
-      <div class="col-md-1">&nbsp;</div>
-      <div class="col-md-3">{{ 'SearchResults.AcademicSubject' | translate }}</div>
-      <div class="col-md-1">{{ 'SearchResults.Alignment' | translate }}</div>
-      <div class="col-md-1">&nbsp;</div>
+    <div class="search-accordion" *ngIf="careerToAcademic">
+      <div class="search-accordion-head row">
+        <div class="col-md-6">{{ 'SearchResults.CareerFields' | translate }}</div>
+        <div class="col-md-1">&nbsp;</div>
+        <div class="col-md-3">{{ 'SearchResults.AcademicSubject' | translate }}</div>
+        <div class="col-md-1">{{ 'SearchResults.Alignment' | translate }}</div>
+        <div class="col-md-1">&nbsp;</div>
+      </div>
+    </div>
+
+    <div class="search-accordion" *ngIf="academicToCareer">
+      <div class="search-accordion-head row">
+        <div class="col-md-3">{{ 'SearchResults.AcademicSubject' | translate }}</div>
+        <div class="col-md-1">&nbsp;</div>
+        <div class="col-md-6">{{ 'SearchResults.CareerFields' | translate }}</div>
+        <div class="col-md-1">{{ 'SearchResults.Alignment' | translate }}</div>
+        <div class="col-md-1">&nbsp;</div>
+      </div>
     </div>
   </div>
-
-  <div class="search-accordion" *ngIf="academicToCareer">
-    <div class="search-accordion-head row">
-      <div class="col-md-3">{{ 'SearchResults.AcademicSubject' | translate }}</div>
-      <div class="col-md-1">&nbsp;</div>
-      <div class="col-md-6">{{ 'SearchResults.CareerFields' | translate }}</div>
-      <div class="col-md-1">{{ 'SearchResults.Alignment' | translate }}</div>
-      <div class="col-md-1">&nbsp;</div>
-    </div>
-  </div>
-</div>
 
 <div class="col-md-12 nopad" *ngIf="careerToAcademic">
   <ul class="list-group search-accordion">
     <li class="list-group-item search-accordion-each"
       [ngClass]="(careerField.isCareerFieldClosed) ? 'accordion-active' : ''"
-      *ngFor="let careerField of data; index as i">
+      *ngFor="let careerField of formattedData; index as i">
 
       <!-- Career Field -->
       <!-- add class dynamically if partially selected  checkbox-indeterminate -->
@@ -166,7 +165,7 @@
   <ul class="list-group search-accordion">
     <li class="list-group-item search-accordion-each"
       [ngClass]="(careerField.isCareerFieldClosed) ? 'accordion-active' : ''"
-      *ngFor="let careerField of data; index as i">
+      *ngFor="let careerField of formattedData; index as i">
 
       <!-- Career Field -->
       <div class="row search-accordion-each-inner">
@@ -291,6 +290,7 @@
     </li>
   </ul>
 </div>
+
 
 <div class="pull-right accordion-btn">
   <button type="button" class="ohio-button large but-gap" (click)="getSelect('Report')">Generate</button>

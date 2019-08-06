@@ -24,7 +24,6 @@ export class SearchResultEffects {
 
     constructor(private actions$: Actions, private searchResultService: SearchResultService) {
         const competency = [
-            // tslint:disable-next-line:max-line-length
             { id: 1, academicSubject: 'Math', value: 'Use economic indicators to identify economic trends and conditions.' },
             { id: 2, academicSubject: 'Math', value: 'Find surface area and volume for three‐dimensional objects, accurate to a specified level of precision.' }
         ];
