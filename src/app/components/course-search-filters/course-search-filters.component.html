@@ -1,105 +1,92 @@
 <div class="col-md-12">
-  <h1>Course Search </h1>
-  <div class="searchmain">
-  <div class="row">
-      <!-- Search Form Begin -->
-      <div class="col-md-6">
-              <label class="ohio-field-status" for="field-example-8">
-                <span class="ohio-field-label">{{ 'CourseFields.Keywords' | translate }}</span>
-
-                <div class="input-group">
-                      <input type="search" class="ohio-field-input" id="keywordInput" placeholder="Course . . .">
-
-                  <span class="input-group-addon">
-                      <i class="fa fa-search" aria-hidden="true"></i>
-          </span>
-                </div>
-
-              </label>
-            </div>
-
+    <h1>Course Search </h1>
+    <div class="searchmain">
+        <div class="row">
             <div class="col-md-6">
-                  <label class="ohio-field-status" for="field-example-8">
+                <label class="ohio-field-status" for="field-example-8">
                     <span class="ohio-field-label">{{ 'CourseFields.Keywords' | translate }}</span>
 
                     <div class="input-group">
-                          <input type="search" class="ohio-field-input" id="keywordInput" placeholder="Course . . .">
-
-                      <span class="input-group-addon">
-                          <i class="fa fa-search" aria-hidden="true"></i>
-              </span>
+                        <input type="search" class="ohio-field-input" id="keywordInput" placeholder="Course . . .">
+                        <span class="input-group-addon">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </span>
                     </div>
+                </label>
+            </div>
 
-                  </label>
+            <div class="col-md-6">
+                <label class="ohio-field-status" for="field-example-8">
+                    <span class="ohio-field-label">{{ 'CourseFields.Keywords' | translate }}</span>
+                    <div class="input-group">
+                        <input type="search" class="ohio-field-input" id="keywordInput" placeholder="Course . . .">
+                        <span class="input-group-addon">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <!-- Dropdown row -->
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>{{ 'CourseFields.CareerField' | translate }}</label>
+                <ng-multiselect-dropdown [ngClass]="" [data]="careerPath" [(ngModel)]="selectedCareerPath"
+                    [settings]="careerPathSettings" (onSelect)="onCareerPathSelect(selectedCareerPath)" (onDeSelect)="onCareerPathSelect(selectedCareerPath)">
+                </ng-multiselect-dropdown>
+            </div>
+            <div class="form-group col-md-6">
+                <label>{{ 'CourseFields.AcademicSubjects' | translate }}</label>
+                <ng-multiselect-dropdown [ngClass]="" [data]="academicSubjects" [(ngModel)]="selectedAcadamicSubjects"
+                    [settings]="dropdownSettings">
+                </ng-multiselect-dropdown>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>{{ 'CourseFields.Strands' | translate }}</label>
+                        <ng-multiselect-dropdown [ngClass]="" [data]="coursesDropdown" [(ngModel)]="selectedCourses"
+                            [settings]="careerPathCourseSettings">
+                        </ng-multiselect-dropdown>
+                    </div>
                 </div>
+                <!-- End Dropdown Row -->
+            </div>
 
-  </div>
+            <div class="col-md-6">
+                <div class="form-group dynamic-academics"
+                    *ngFor="let policy of selectedAcadamicSubjects;let i = index;">
+                    <h3>{{policy.item_text}}</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>{{ 'CourseFields.Grade' | translate }}</label>
+                            <ng-multiselect-dropdown [ngClass]="" [data]="grades" [(ngModel)]="selectedGrades[i]"
+                                [settings]="dropdownSettings" (onSelect)="onClusterSelect(selectedGrades[i],policy)">
+                            </ng-multiselect-dropdown>
+                        </div>
 
+                    </div>
+                    <!-- End of Dynamic dropdowns of Academic subjects -->
+                </div>
+                <!-- End of CareerField and Academic row -->
+            </div>
+        </div>
+        <!-- Dynamic dropdowns of Academic subjects -->
+        <!-- END OF PUSH/PULLED COLUMNS -->
 
-  <!-- Dropdown row -->
-  <div class="row">
-      <div class="form-group col-md-6">
-          <label>{{ 'CourseFields.CareerField' | translate }}</label>
-          <ng-multiselect-dropdown [ngClass]="" [data]="careers" [(ngModel)]="selectedCareer"
-              [settings]="dropdownSettings" >
-          </ng-multiselect-dropdown>
-      </div>
-      <div class="form-group col-md-6">
-          <label>{{ 'CourseFields.AcademicSubjects' | translate }}</label>
-          <ng-multiselect-dropdown [ngClass]="" [data]="academicSubjects"
-              [(ngModel)]="selectedAcadamicSubjects" [settings]="dropdownSettings"
-             >
-          </ng-multiselect-dropdown>
-      </div>
-  </div>
+        <!-- Button Row -->
+        <div class="row">
+            <div class="pull-right search-btn">
+                <button type="button" class="ohio-button large but-gap"
+                    (click)="search()">{{ 'CourseFields.Search' | translate }}</button>
+                <button type="button"
+                    class="ohio-button large but-gap  secondary">{{ 'CourseFields.Cancel' | translate }}</button>
+            </div>
+        </div>
 
-      <div class="row">
-          <div class="col-md-6">
-         <div class="row">
-              <div class="form-group col-md-6">
-                  <label>{{ 'CourseFields.Strands' | translate }}</label>
-                  <ng-multiselect-dropdown [ngClass]="" [data]="stadards" [(ngModel)]="selectedStandards"
-                      [settings]="dropdownSettings" >
-                  </ng-multiselect-dropdown>
-              </div>
-          </div>
-              <!-- End Dropdown Row -->
-               </div>
-
-              <div class="col-md-6">
-                      <div class="form-group dynamic-academics" *ngFor="let policy of selectedAcadamicSubjects;let i = index;">
-                          <h3>{{policy.item_text}}</h3>
-                          <div class="row">
-                              <div class="col-md-6">
-                                  <label>{{ 'CourseFields.Grade' | translate }}</label>
-                                  <ng-multiselect-dropdown [ngClass]="" [data]="grades" [(ngModel)]="selectedGrades[i]"
-                                      [settings]="dropdownSettings" (onSelect)="onClusterSelect(selectedGrades[i],policy)"
-                                     >
-                                  </ng-multiselect-dropdown>
-                              </div>
-
-                          </div>
-                          <!-- End of Dynamic dropdowns of Academic subjects -->
-                      </div>
-                      <!-- End of CareerField and Academic row -->
-                  </div>
-
-      </div>
-
-
-      <!-- Dynamic dropdowns of Academic subjects -->
-
-      <!-- END OF PUSH/PULLED COLUMNS -->
-
-
-
-  <!-- Button Row -->
-  <div class="row">
-      <div class="pull-right search-btn">
-          <button type="button" class="ohio-button large but-gap"  (click)="search()">{{ 'CourseFields.Search' | translate }}</button>
-          <button type="button" class="ohio-button large but-gap  secondary">{{ 'CourseFields.Cancel' | translate }}</button>
-
-      </div>
-  </div>
-
-  </div> </div>
+    </div>
+</div>
