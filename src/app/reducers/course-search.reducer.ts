@@ -51,7 +51,7 @@ export function courseSearchReducer(state = initialState, Action: CourseSearchAc
         case CourseSearchActions.SAVE_AS_SELECTED_FILTERS_COURSESEARCH:
             return {
                 ...state,
-                CourseSearchSelectedFilters: Action.payload
+                courseSearchSelectedFilters: Action.payload
             };
         default:
             return state;

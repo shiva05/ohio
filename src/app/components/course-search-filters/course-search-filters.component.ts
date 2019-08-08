@@ -19,12 +19,12 @@ export class CourseSearchFiltersComponent implements OnInit {
   careerPathSettings: any = {};
   careerPathCourseSettings: any = {};
   selectedCareerPath: any = [];
+  selectedCourses: any;
   searchObj: any;
   coursesDropdown: any = [];
   courseSearchData: Observable<CourseSearchData>;
 
   selectedGrades: any;
-  selectedStandards: any;
   selectedAcadamicSubjects: any;
 
   constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>) {
@@ -73,10 +73,11 @@ export class CourseSearchFiltersComponent implements OnInit {
   }
 
   search() {
-    this.searchObj = JSON.stringify({
-      selectedCareerPath: this.selectedCareerPath
-    });
-    console.log(this.searchObj);
+    this.searchObj = {
+      selectedCareerPath: this.selectedCareerPath,
+      selectedCareerPathCourses: this.selectedCourses
+    };
+    this.store.dispatch({ type: CourseSearchActions.SAVE_AS_SELECTED_FILTERS_COURSESEARCH, payload: this.searchObj });
     localStorage.setItem('searchLable', 'SearchCourse');
     this.goToPage('SearchResults');
   }
