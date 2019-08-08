@@ -17,11 +17,15 @@ import { TranslateService } from '@ngx-translate/core';
 export class QuickSearchComponent implements OnInit {
   keyword: any = '';
   careers: any = [];
-  academicSubjects = [];
+
   qsMetaData: Observable<QsMetaData>;
   dropdownSettings: any = {};
+  careerFieldDropdownSettings : any = {};
+  subjectDropdownSettings : any ={};
   selectedCareer: any = [];
   selectedAcadamicSubjects: any = [];
+  academicSubjects = [];
+    strands = [];
 
   constructor(private translate: TranslateService,private sharedData: SharedService, private router: Router,private store: Store<AppState>,private httpService: HttpClient, private ref: ChangeDetectorRef,) {
     console.log(this.sharedData);
@@ -34,15 +38,37 @@ export class QuickSearchComponent implements OnInit {
       itemsShowLimit: 1,
       allowSearchFilter: true
     };
+    this.careerFieldDropdownSettings = {
+      singleSelection: false,
+      idField: 'CareerFieldId', textField: 'CareerFieldName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    };
+    this.subjectDropdownSettings = {
+      singleSelection: false,
+      idField: 'SubjectId', textField: 'SubjectName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    };
     this.store.dispatch({ type: QuickSearchActions.LOAD_QS_META_DATA });
   }
 
   ngOnInit() {
     this.store.select('quickSearch').subscribe(data => {
-      this.qsMetaData = data;
-      this.careers = this.qsMetaData['careers'];
-      this.academicSubjects = this.qsMetaData['academicSubjects'];
-
+      this.academicSubjects =[];
+      if(data.QsMetaData){
+        this.qsMetaData = data.QsMetaData;
+        debugger
+        this.careers = this.qsMetaData['CareerFields'];
+        //this.academicSubjects = this.qsMetaData['academicSubjects'];
+        this.qsMetaData['Subjects'].forEach(element => {
+          this.academicSubjects.push({SubjectId :element.SubjectId,SubjectName :element.SubjectName})
+       });
+      }
     });
   }
 

@@ -8,23 +8,21 @@ import { StandardNumber } from './../models/standard-number.model';
 import { CompetencyNumber } from './../models/competency-number.model';
 
 export interface QsMetaData {
-  academicSubjects: AcademicSubject[],
-  careers: Career[]
+
 }
 
 const initialState: QsMetaData = {
-  academicSubjects: [],
-  careers: []
+
 };
 export function quickSearchReducer(state = initialState ,Action :QuickSearchActions.Actions){
   switch(Action.type){
     case QuickSearchActions.LOAD_QS_META_DATA_SUCCESS:
-      return {academicSubjects:Action.payload.academicSubjects,
-        careers:Action.payload.careers
+      return {  ...state,
+        QsMetaData :Action.payload
       };
     case QuickSearchActions.LOAD_QS_META_DATA_FAILURE:
-    return {academicSubjects:Action.payload.academicSubjects,
-      careers:Action.payload.careers
+    return {  ...state,
+      QsMetaData :Action.payload
     };
     default:
       return state;
