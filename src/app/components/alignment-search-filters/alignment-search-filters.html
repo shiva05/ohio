@@ -82,14 +82,22 @@
                   <div class="form-group col-md-4">
                       <label>Grade / Subject</label>
                       <ng-multiselect-dropdown [ngClass]="" [data]="gradeMathData" [(ngModel)]="selectedGradesI1" 
-                          [settings]="academicDropdownSettings" (onSelect)="onMathGradeSelect(selectedGradesI1,policy)"  (onDeSelect)="onMathGradeSelect(selectedGradesI1,policy)"
+                          [settings]="academicDropdownSettings"
+                                               (onSelect)="onMathGradeSelect(policy)"
+                                               (onDeSelect)="onMathGradeSelect(policy)"
+                                               (onSelectAll)="selectAllMathGrade(policy)"
+                                               (onDeSelectAll)="deSelectAllMathGrade(policy)"
                           >
                       </ng-multiselect-dropdown>
                   </div>
                   <div class="form-group col-md-4">
                       <label>Cluster</label>
                       <ng-multiselect-dropdown [ngClass]="" [data]="clusterMathData" [(ngModel)]="selectedClustersI1"
-                          [settings]="academicDropdownSettings" (onSelect)="onMathClusterSelect(selectedClustersI1,policy)"  (onDeSelect)="onMathClusterSelect(selectedClustersI1,policy)"
+                          [settings]="academicDropdownSettings"
+                                               (onSelect)="onMathClusterSelect(policy)"
+                                               (onDeSelect)="onMathClusterSelect(policy)"
+                                               (onSelectAll)="selectAllMathCLuster(policy)"
+                                               (onDeSelectAll)="deSelectAllMathCLuster(policy)"
                           >
                       </ng-multiselect-dropdown>
                   </div>
@@ -103,7 +111,7 @@
                   </div>
               </div>
     </div>
-
+      
     <div  *ngIf="policy.SubjectId ==2">
       <h3>{{policy.SubjectName}}</h3>
 
@@ -111,14 +119,22 @@
                   <div class="form-group col-md-4">
                       <label>Grade</label>
                       <ng-multiselect-dropdown [ngClass]="" [data]="gradeELAdata" [(ngModel)]="selectedGradesI2"
-                          [settings]="academicDropdownSettings" (onSelect)="onELAgradeSelect(selectedGradesI2,policy)" (onDeSelect)="onELAgradeSelect(selectedGradesI2,policy)"
+                          [settings]="academicDropdownSettings"
+                                               (onSelect)="onELAgradeSelect(policy)"
+                                               (onDeSelect)="onELAgradeSelect(policy)"
+                                                (onSelectAll)="selectAllELAgrade(policy)"
+                                               (onDeSelectAll)="deSelectAllELAgrade(policy)"
                           >
                       </ng-multiselect-dropdown>
                   </div>
                   <div class="form-group col-md-4">
                       <label>Domain</label>
                       <ng-multiselect-dropdown [ngClass]="" [data]="clusterELAdata" [(ngModel)]="selectedClustersI2"
-                          [settings]="academicDropdownSettings" (onSelect)="onELAclusterSelect(selectedClustersI2,policy)"  (onDeSelect)="onELAclusterSelect(selectedClustersI2,policy)"
+                          [settings]="academicDropdownSettings"
+                                               (onSelect)="onELAclusterSelect(policy)"
+                                               (onDeSelect)="onELAclusterSelect(policy)"
+                                                (onSelectAll)="selectAllELAcluster(policy)"
+                                               (onDeSelectAll)="deSelectAllELAcluster(policy)"
                           >
                       </ng-multiselect-dropdown>
                   </div>
@@ -139,14 +155,23 @@
                   <div class="form-group col-md-4">
                       <label>Domain</label>
                       <ng-multiselect-dropdown [ngClass]="" [data]="gradeScienceData" [(ngModel)]="selectedGradesI3"
-                          [settings]="academicDropdownSettings" (onSelect)="onScienceGradeSelect(selectedGradesI3,policy)" (onDeSelect)="onScienceGradeSelect(selectedGradesI3,policy)"
+                          [settings]="academicDropdownSettings"
+                                               (onSelect)="onScienceGradeSelect(policy)"
+                                               (onDeSelect)="onScienceGradeSelect(policy)"
+                                                (onSelectAll)="selectAllScienceGrade(policy)"
+                                               (onDeSelectAll)="deSelectAllScienceGrade(policy)"
                           >
+
                       </ng-multiselect-dropdown>
                   </div>
                   <div class="form-group col-md-4">
                       <label>Grade Band</label>
                       <ng-multiselect-dropdown [ngClass]="" [data]="clusterScienceData" [(ngModel)]="selectedClustersI3"
-                          [settings]="academicDropdownSettings" (onSelect)="onScienceClusterSelect(selectedClustersI3,policy)"  (onDeSelect)="onScienceClusterSelect(selectedClustersI3,policy)"
+                          [settings]="academicDropdownSettings"
+                                               (onSelect)="onScienceClusterSelect(policy)"
+                                               (onDeSelect)="onScienceClusterSelect(policy)"
+                                                 (onSelectAll)="selectAllScienceCluster(policy)"
+                                               (onDeSelectAll)="deSelectAllScienceCluster(policy)"
                           >
                       </ng-multiselect-dropdown>
                   </div>
@@ -168,20 +193,28 @@
                   <div class="form-group col-md-4">
                       <label>Grade</label>
                       <ng-multiselect-dropdown [ngClass]="" [data]="gradeSocialData" [(ngModel)]="selectedGradesI4"
-                          [settings]="academicDropdownSettings" (onSelect)="onSocialGradeSelect(selectedGradesI4,policy)"  (onDeSelect)="onSocialGradeSelect(selectedGradesI4,policy)"
+                          [settings]="academicDropdownSettings"
+                                               (onSelect)="onSocialGradeSelect(policy)"
+                                               (onDeSelect)="onSocialGradeSelect(policy)"
+                                               (onSelectAll)="selectAllSocialGrade(policy)"
+                                               (onDeSelectAll)="deSelectAllSocialGrade(policy)"
                           >
                       </ng-multiselect-dropdown>
                   </div>
                   <div class="form-group col-md-4">
                       <label>Domain</label>
                       <ng-multiselect-dropdown [ngClass]="" [data]="clusterSocialData" [(ngModel)]="selectedClustersI4"
-                          [settings]="academicDropdownSettings" (onSelect)="onSocialClusterSelect(selectedClustersI4,policy)"  (onDeSelect)="onSocialClusterSelect(selectedClustersI4,policy)"
+                          [settings]="academicDropdownSettings"
+                                               (onSelect)="onSocialClusterSelect(policy)"
+                                               (onDeSelect)="onSocialClusterSelect(policy)"
+                                                (onSelectAll)="selectAllSocialCluster(policy)"
+                                               (onDeSelectAll)="deSelectAllSocialCluster(policy)"
                           >
                       </ng-multiselect-dropdown>
                   </div>
                   <div class="form-group col-md-4">
                       <label>Standard Number</label>
-                      <ng-multiselect-dropdown [ngClass]="" [data]="clusterSocialData"
+                      <ng-multiselect-dropdown [ngClass]="" [data]="standardSocialData"
                           [(ngModel)]="selectedStandardNumbersI4" [settings]="academicDropdownSettings"
                           (onSelect)="onSocialStandardNumberSelect(selectedStandardNumbersI4,policy)"
                           >

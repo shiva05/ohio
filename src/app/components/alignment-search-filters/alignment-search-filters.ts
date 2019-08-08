@@ -376,8 +376,10 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     }
 
   }
+
+
   //Academic subjects dropdown list mapping functions
-  onMathGradeSelect(item, data) {
+  onMathGradeSelect(data) {
     this.clusterMathData = [];
     if (this.selectedGradesI1.length > 0) {
       this.selectedGradesI1.forEach((mathGrade) => {
@@ -395,7 +397,16 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       this.standardMathData = [];
     }
   }
-  onMathClusterSelect(item, data) {
+  selectAllMathGrade(data) {
+    this.selectedGradesI1 = this.gradeMathData;
+    this.onMathGradeSelect(data)
+  }
+  deSelectAllMathGrade(data) {
+    this.selectedGradesI1 = [];
+    this.onMathGradeSelect(data)
+  }
+
+  onMathClusterSelect(data) {
     this.standardMathData = [];
     if (this.selectedClustersI1.length > 0) {
       this.selectedClustersI1.forEach((mathCluster) => {
@@ -408,13 +419,23 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       this.collectingSubjectIds(this.selectedStandardNumbersI1, this.standardMathData, 'this.selectedStandardNumbersI1');
     } else {
       this.selectedStandardNumbersI1 = [];
+      this.standardMathData = [];
     }
   }
-  onMathStandardNumberSelect(item, data) {
+
+  selectAllMathCLuster(data) {
+    this.selectedClustersI1 = this.clusterMathData;
+    this.onMathClusterSelect(data)
+  }
+  deSelectAllMathCLuster(data) {
+    this.selectedClustersI1 = [];
+    this.onMathClusterSelect(data)
+  }
+  onMathStandardNumberSelect(data) {
     //console.log(item);
   }
 
-  onELAgradeSelect(item, data) {
+  onELAgradeSelect(data) {
     this.clusterELAdata = [];
     if (this.selectedGradesI2.length > 0) {
       this.selectedGradesI2.forEach((mathGrade) => {
@@ -431,7 +452,15 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       this.standardELAdata = [];
     }
   }
-  onELAclusterSelect(item, data) {
+  selectAllELAgrade(data) {
+    this.selectedGradesI2 = this.gradeELAdata;
+    this.onELAgradeSelect(data)
+  }
+  deSelectAllELAgrade(data) {
+    this.selectedGradesI2 = [];
+    this.onELAgradeSelect(data)
+  }
+  onELAclusterSelect(data) {
     this.standardELAdata = [];
     if (this.selectedClustersI2.length > 0) {
     this.selectedClustersI2.forEach((mathCluster) => {
@@ -444,13 +473,22 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.collectingSubjectIds(this.selectedStandardNumbersI2, this.standardELAdata, 'this.selectedStandardNumbersI2');
     } else {
       this.selectedStandardNumbersI2 = [];
+      this.standardELAdata = [];
     }
   }
-  onELAstandardNumberSelect(item, data) {
+  selectAllELAcluster(data) {
+    this.selectedClustersI2 = this.clusterELAdata;
+    this.onELAclusterSelect(data)
+  }
+  deSelectAllELAcluster(data) {
+    this.selectedClustersI2 = [];
+    this.onELAclusterSelect(data)
+  }
+  onELAstandardNumberSelect(data) {
     //console.log(item);
   }
 
-  onScienceGradeSelect(item, data) {
+  onScienceGradeSelect(data) {
     this.clusterScienceData = [];
     if (this.selectedGradesI3.length > 0) {
     this.selectedGradesI3.forEach((mathGrade) => {
@@ -467,7 +505,17 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       this.standardScienceData = [];
     }
   }
-  onScienceClusterSelect(item, data) {
+  selectAllScienceGrade(data) {
+    this.selectedGradesI3 = this.gradeScienceData;
+    this.onScienceGradeSelect(data)
+  }
+  deSelectAllScienceGrade(data) {
+    this.selectedGradesI3 = [];
+    this.onScienceGradeSelect(data)
+  }
+
+
+  onScienceClusterSelect(data) {
     this.standardScienceData = [];
     if (this.selectedClustersI3.length > 0) {
     this.selectedClustersI3.forEach((mathCluster) => {
@@ -480,13 +528,22 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.collectingSubjectIds(this.selectedStandardNumbersI3, this.standardScienceData, 'this.selectedStandardNumbersI3');
     } else {
       this.selectedStandardNumbersI3 = [];
+      this.standardScienceData = [];
     }
   }
-  onScienceStandardNumberSelect(item, data) {
+  selectAllScienceCluster(data) {
+    this.selectedClustersI3 = this.clusterScienceData;
+    this.onScienceClusterSelect(data)
+  }
+  deSelectAllScienceCluster(data) {
+    this.selectedClustersI3 = [];
+    this.onScienceClusterSelect(data)
+  }
+  onScienceStandardNumberSelect(data) {
     //console.log(item);
   }
 
-  onSocialGradeSelect(item, data) {
+  onSocialGradeSelect( data) {
     this.clusterSocialData = [];
     if (this.selectedGradesI4.length > 0) {
     this.selectedGradesI4.forEach((mathGrade) => {
@@ -503,7 +560,16 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       this.standardSocialData = [];
     }
   }
-  onSocialClusterSelect(item, data) {
+  selectAllSocialGrade(data) {
+    this.selectedGradesI4 = this.gradeSocialData;
+    this.onSocialGradeSelect(data)
+  }
+  deSelectAllSocialGrade(data) {
+    this.selectedGradesI4 = [];
+    this.onSocialGradeSelect(data)
+  }
+
+  onSocialClusterSelect(data) {
     this.standardSocialData = [];
     if (this.selectedClustersI4.length > 0) {
     this.selectedClustersI4.forEach((mathCluster) => {
@@ -516,12 +582,21 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.collectingSubjectIds(this.selectedStandardNumbersI4, this.standardSocialData, 'this.selectedStandardNumbersI4');
     } else {
       this.selectedStandardNumbersI4 = [];
+      this.standardSocialData = [];
     }
   }
-  onSocialStandardNumberSelect(item, data) {
+  selectAllSocialCluster(data) {
+    this.selectedClustersI4 = this.clusterSocialData;
+    this.onSocialClusterSelect(data)
+  }
+  deSelectAllSocialCluster(data) {
+    this.selectedClustersI4 = [];
+    this.onSocialClusterSelect(data)
+  }
+  onSocialStandardNumberSelect( data) {
     //console.log(item);
   }
-
+  
 
   onOutcomeSelect(outcome) {
     debugger
