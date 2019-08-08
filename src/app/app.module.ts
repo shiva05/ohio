@@ -43,6 +43,8 @@ import { QuickSearchEffects } from 'src/app/effects/quick-search.effect';
 import { quickSearchReducer } from 'src/app/reducers/quick-search.reducer';
 import { CourseSearchFiltersComponent } from './components/course-search-filters/course-search-filters.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { courseSearchReducer } from './reducers/course-search.reducer';
+import { CourseSearchEffects } from './effects/course-search.effect';
 
 @NgModule({
   declarations: [
@@ -83,9 +85,9 @@ import { SearchResultsComponent } from './components/search-results/search-resul
       }
     }),
     // StoreModule.forRoot(reducers, { metaReducers }),
-    StoreModule.forRoot({ advancedSearch: advancedSearchReducer, report: reportReducer, quickSearch: quickSearchReducer, searchResult: searchResultReducer }),
+    StoreModule.forRoot({ advancedSearch: advancedSearchReducer, report: reportReducer, quickSearch: quickSearchReducer, searchResult: searchResultReducer, courseSearch: courseSearchReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 100, name: 'tng1' }),
-    EffectsModule.forRoot([AdvancedSearchEffects, ReportEffects, QuickSearchEffects, SearchResultEffects])
+    EffectsModule.forRoot([AdvancedSearchEffects, ReportEffects, QuickSearchEffects, SearchResultEffects, CourseSearchEffects])
 
   ],
   providers: [],
