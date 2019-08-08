@@ -14,33 +14,18 @@ import * as CourseSearchActions from './../../actions/course-search.actions';
 })
 
 export class CourseSearchFiltersComponent implements OnInit {
-  disabled = false;
-  ShowFilter = true;
-  limitSelection = false;
   careerPath: any = [];
   courses: any = [];
-  academicSubjects = [];
-  stadards = [];
-  outcomes = [];
-  grades = [];
-  clusters = [];
-  standardNumbers = [];
-  selectedKeyword: any;
-  selectedItems: any = [];
-  selectedCareer: any = [];
-  selectedAcadamicSubjects: any = [];
-  selectedStandards: any = [];
-  selectedOutcome: any = [];
-  selectedCompetencyNumbers: any = [];
-  selectedGrades: any = [];
-  selectedClusters: any = [];
-  selectedStandardNumbers: any = [];
   careerPathSettings: any = {};
   careerPathCourseSettings: any = {};
+  selectedCareerPath: any = [];
   searchObj: any;
-  selectedCompetencyNumber: any;
-  competencyNumbers: any;
+  coursesDropdown: any = [];
   courseSearchData: Observable<CourseSearchData>;
+
+  selectedGrades: any;
+  selectedStandards: any;
+  selectedAcadamicSubjects: any;
 
   constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>) {
     // this.metaData = store.select('metaData');
@@ -75,63 +60,28 @@ export class CourseSearchFiltersComponent implements OnInit {
     };
   }
 
+  onCareerPathSelect(selectedPaths) {
+    const data = selectedPaths;
+    this.coursesDropdown = [];
+    this.courses.forEach(course => {
+      data.forEach(careerPath => {
+        if (course.CareerPathId === careerPath.CareerPathId) {
+          this.coursesDropdown.push(course);
+        }
+      });
+    });
+  }
+
   search() {
     this.searchObj = JSON.stringify({
-      selectedKeyword: this.selectedKeyword,
-      selectedAcadamicSubjects: this.selectedAcadamicSubjects,
-      selectedStandards: this.selectedStandards,
-      selectedOutcome: this.selectedOutcome,
-      selectedCompetencyNumber: this.selectedCompetencyNumber,
-      selectedCareers: this.selectedCareer
+      selectedCareerPath: this.selectedCareerPath
     });
     console.log(this.searchObj);
     localStorage.setItem('searchLable', 'SearchCourse');
     this.goToPage('SearchResults');
   }
 
-  onAcadamicSubjectSelect() {
-    console.log('hi');
-  }
-
   goToPage(org) {
     this.onPageSelect.emit(org);
   }
-
-  onGradeSelect(grade, acasub) {
-    this.selectedAcadamicSubjects.forEach(element => {
-      if (element.item_id === acasub.item_id) {
-        if (element.grade) {
-          element.grade.push({ item_id: grade[0].item_id, item_text: grade[0].item_text });
-        } else {
-          element.grade = [];
-          element.grade.push({ item_id: grade[0].item_id, item_text: grade[0].item_text });
-        }
-      }
-    });
-  }
-  onClusterSelect(cluster, acasub) {
-    this.selectedAcadamicSubjects.forEach(element => {
-      if (element.item_id === acasub.item_id) {
-        if (element.cluster) {
-          element.cluster.push({ item_id: cluster[0].item_id, item_text: cluster[0].item_text });
-        } else {
-          element.cluster = [];
-          element.cluster.push({ item_id: cluster[0].item_id, item_text: cluster[0].item_text });
-        }
-      }
-    });
-  }
-  onStandardNumberSelect(standardNumbers, acasub) {
-    this.selectedAcadamicSubjects.forEach(element => {
-      if (element.item_id === acasub.item_id) {
-        if (element.standardNumber) {
-          element.standardNumber.push({ item_id: standardNumbers[0].item_id, item_text: standardNumbers[0].item_text });
-        } else {
-          element.standardNumber = [];
-          element.standardNumber.push({ item_id: standardNumbers[0].item_id, item_text: standardNumbers[0].item_text });
-        }
-      }
-    });
-  }
-
 }
