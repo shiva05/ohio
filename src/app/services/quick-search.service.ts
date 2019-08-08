@@ -12,7 +12,7 @@ export class QuickSearchService {
   constructor(private http: HttpClient) {}
 
   getMetaData() {
-    return this.http.get('/movies');
+    return this.http.get(environment.GetAlignmentMetaData);
 
   }
 }
