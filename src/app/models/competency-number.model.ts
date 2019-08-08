@@ -1,4 +1,6 @@
 export interface CompetencyNumber{
-  item_id: string,
-  item_text :string
+  CompetencyPk: number,
+  CompetencyName :string,
+  OutcomePk :number,
+  CompetencyId :number
 }

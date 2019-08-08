@@ -9,7 +9,7 @@ import { debug } from 'util';
 
 @Injectable()
 export class AdvancedSearchEffects {
- result1: any;
+
   @Effect()
   loadMetaData$ =
     this.actions$.pipe(
@@ -22,6 +22,19 @@ export class AdvancedSearchEffects {
         )
       )
     );
+
+    @Effect()
+    loaCompetencyData$ =
+      this.actions$.pipe(
+        ofType(advancedSearchActions.LOAD_COMPETENCY_DATA),
+        mergeMap(result => this.advancedSearchService.getCompetencyData(result['payload'])
+          .pipe(
+          map( movies =>
+              ({ type: advancedSearchActions.LOAD_COMPETENCY_DATA_SUCCESS, payload:movies})),
+          catchError(() => of({ type: advancedSearchActions.LOAD_COMPETENCY_DATA_FAILURE, payload: result }))
+          )
+        )
+      );
 
   constructor(
     private actions$: Actions,

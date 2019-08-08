@@ -15,13 +15,13 @@
                 <div class="form-group col-md-6 col-xs-6">
                   <label>{{ 'SearchFields.CareerField' | translate }}</label>
                   <ng-multiselect-dropdown [ngClass]="" [data]="careers" name="careers" [(ngModel)]="selectedCareer"
-                      [settings]="dropdownSettings" >
+                      [settings]="careerFieldDropdownSettings" >
                   </ng-multiselect-dropdown>
                 </div>
                 <div class="form-group col-md-6 col-xs-6">
                   <label>{{ 'SearchFields.AcademicSubjects' | translate }}</label>
-                  <ng-multiselect-dropdown [ngClass]="" name="academicSubjects" [data]="academicSubjects"
-                      [(ngModel)]="selectedAcadamicSubjects" [settings]="dropdownSettings"
+                  <ng-multiselect-dropdown [ngClass]="" name="academicSubject" [data]="academicSubjects"
+                      [(ngModel)]="selectedAcadamicSubjects" [settings]="subjectDropdownSettings"
                      >
                   </ng-multiselect-dropdown>
                 </div>

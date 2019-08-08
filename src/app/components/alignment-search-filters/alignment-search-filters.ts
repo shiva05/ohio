@@ -20,16 +20,14 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   ShowFilter = true;
   limitSelection = false;
   careers: any = [];
-  academicSubjects = [ // There is no academic Subjects in the Data
-    { item_id: 3, item_text: 'ELA' },
-    { item_id: 1, item_text: 'Math' },
-    { item_id: 2, item_text: 'Science' },
-    { item_id: 4, item_text: 'Social Studies' }];
-  stadards = [];
+  academicSubjects = [];
+  strands = [];
   outcomes = [];
   grades = [];
   clusters = [];
   standardNumbers = [];
+  strandsDropdown = [];
+  outcomesDropdown = [];
   selectedKeyword: any;
   selectedItems: any = [];
   selectedCareer: any = [];
@@ -40,6 +38,8 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   selectedGrades: any = [];
   selectedClusters: any = [];
   selectedStandardNumbers: any = [];
+  dropdownSettings: any = {};
+  compitencyDropdownSettings :any ={};
   careerFieldDropdownSettings: any = {};
   strandDropdownSettings: any = {};
   outcomeDropdownSettings: any = {};
@@ -57,23 +57,14 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   @Output() onPageSelect = new EventEmitter<any>();
 
   ngOnInit() {
-    this.store.select('advancedSearch').subscribe(data => {
-      this.metaData = data.metaData;
-      this.careers = this.metaData['CareerFields'];
-      this.stadards = this.metaData['Strands'];
-      this.outcomes = this.metaData['Outcomes'];
-      this.grades = this.metaData['Grades'];
-      this.clusters = this.metaData['clusters'];
-      this.standardNumbers = this.metaData['standardNumbers'];
-      this.competencyNumbers = this.metaData['competencyNumbers'];
-      if(data.alignmentSearchSelectedFilters){
-         this.selectedCareer = data.alignmentSearchSelectedFilters.selectedCareers;
-         this.selectedStrands = data.alignmentSearchSelectedFilters.selectedStrands;
-         this.selectedOutcome = data.alignmentSearchSelectedFilters.selectedOutcomes;
-         this.selectedCompetencyNumbers = data.alignmentSearchSelectedFilters.selectedCompetencies;
-         this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects;
-      }
-    });
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'CareerFieldId', textField: 'CareerFieldName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    }
     this.careerFieldDropdownSettings = {
       singleSelection: false,
       idField: 'CareerFieldId', textField: 'CareerFieldName',
@@ -108,15 +99,87 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     };
     this.academicSubjectDropdownSettings = {
       singleSelection: false,
-     idField: 'item_id', textField: 'item_text',
+      idField: 'SubjectId', textField: 'SubjectName',
       selectAllText: 'Select All',
       unSelectAllText: 'Unselect All',
       itemsShowLimit: 1,
       allowSearchFilter: true
     };
+    this.compitencyDropdownSettings = {
+      singleSelection: false,
+      idField: 'CompetencyPk', textField: 'CompetencyName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    };
+    this.store.select('advancedSearch').subscribe(data => {
+      debugger
+      this.metaData = data.metaData;
+      this.careers = this.metaData['CareerFields'];
+      this.strands = this.metaData['Strands'];
+      this.outcomes = this.metaData['Outcomes'];
+      this.grades = this.metaData['Grades'];
+      this.clusters = this.metaData['clusters'];
+      this.standardNumbers = this.metaData['standardNumbers'];
+      this.competencyNumbers = data.competencies;
+      if(this.metaData['Subjects']){
+        this.metaData['Subjects'].forEach(element => {
+          this.academicSubjects.push({SubjectId :element.SubjectId,SubjectName :element.SubjectName});
+       });
+      }
+      if(data.alignmentSearchSelectedFilters){
+        if (data.alignmentSearchSelectedFilters.selectedCareers.length > 0) {
+          this.selectedCareer = data.alignmentSearchSelectedFilters.selectedCareers;
+        }
+        if (data.alignmentSearchSelectedFilters.selectedStrands.length > 0) {
+          this.selectedStrands = data.alignmentSearchSelectedFilters.selectedStrands;
+        }
+        if(data.alignmentSearchSelectedFilters.selectedOutcomes.length>0){
+          this.selectedOutcome = data.alignmentSearchSelectedFilters.selectedOutcomes;
+        }
+        if(data.alignmentSearchSelectedFilters.selectedCompetencies.length >0){
+          this.selectedCompetencyNumbers =  data.alignmentSearchSelectedFilters.selectedCompetencies;
+        }
+         this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length>0 ? data.alignmentSearchSelectedFilters.selectedAcadamicSubjects :[];
+      }
+    });
+
 
   }
+  isEmptyObject(obj) {
+    return (obj && (Object.keys(obj).length === 0));
+  }
+  onCareerSelect() {
+    this.strandsDropdown = [];
+    this.strands.forEach(eachStrand => {
+      this.selectedCareer.forEach(eachCareer => {
+        if (eachStrand.CareerFieldPk === eachCareer.CareerFieldId) {
+          console.log(eachStrand);
+          this.strandsDropdown.push(eachStrand);
+        }
+      });
+    });
+  }
+  onStrandSelect() {
+    this.outcomesDropdown = [];
+    this.outcomes.forEach(eachOutcome => {
+      this.selectedStrands.forEach(eachStrand => {
+        if (eachOutcome.StrandPk === eachStrand.StrandPk) {
+          console.log(eachOutcome);
+          this.outcomesDropdown.push(eachOutcome);
+        }
+      });
+    });
+    console.log(this.strandsDropdown);
+  }
 
+  onOutcomeSelect(outcome) {
+    debugger
+    // TODO: Call API
+    this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA ,payload :this.selectedOutcome});
+    console.log(this.competencyNumbers)
+  }
   search() {
     this.goToPage('SearchResults');
     this.searchObj = {
@@ -137,45 +200,5 @@ export class AlignmentSearchFiltersComponent implements OnInit {
 
   goToPage(org) {
     this.onPageSelect.emit(org);
-  }
-
-  onGradeSelect(grade, acasub) {
-    this.selectedAcadamicSubjects.forEach(element => {
-      if (element.item_id === acasub.item_id) {
-        if (element.grade) {
-          element.grade.push({ item_id: grade[0].item_id, item_text: grade[0].item_text });
-        } else {
-          element.grade = [];
-          element.grade.push({ item_id: grade[0].item_id, item_text: grade[0].item_text });
-        }
-      }
-    });
-    console.log(this.selectedAcadamicSubjects);
-  }
-  onClusterSelect(cluster, acasub) {
-    this.selectedAcadamicSubjects.forEach(element => {
-      if (element.item_id === acasub.item_id) {
-        if (element.cluster) {
-          element.cluster.push({ item_id: cluster[0].item_id, item_text: cluster[0].item_text });
-        } else {
-          element.cluster = [];
-          element.cluster.push({ item_id: cluster[0].item_id, item_text: cluster[0].item_text });
-        }
-      }
-    });
-    console.log(this.selectedAcadamicSubjects);
-  }
-  onStandardNumberSelect(standardNumbers, acasub) {
-    this.selectedAcadamicSubjects.forEach(element => {
-      if (element.item_id === acasub.item_id) {
-        if (element.standardNumber) {
-          element.standardNumber.push({ item_id: standardNumbers[0].item_id, item_text: standardNumbers[0].item_text });
-        } else {
-          element.standardNumber = [];
-          element.standardNumber.push({ item_id: standardNumbers[0].item_id, item_text: standardNumbers[0].item_text });
-        }
-      }
-    });
-    console.log(this.selectedAcadamicSubjects);
   }
 }

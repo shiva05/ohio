@@ -13,6 +13,7 @@ export interface MetaData {
 }
 export interface AdvancedSearchData {
   metaData : MetaData,
+  competencies : CompetencyNumber[],
   alignmentSearchSelectedFilters :AlignmentSearchSelectedFilters
 
 }
@@ -31,12 +32,12 @@ export interface selectedAcademicSubject{
 
 const initialState: AdvancedSearchData = {metaData :{
   academicSubjects: [],
-  standards: [],
-  careers: [],
-  outcomes: [],
-  grades: [],
-  standardNumbers: []
+  Strands: [],
+  CareerFields: [],
+  Outcomes: [],
+  Subjects :[]
 },
+competencies:[],
 alignmentSearchSelectedFilters :{
   selectedCareers : [],
   selectedStrands: [],
@@ -61,6 +62,16 @@ export function advancedSearchReducer(state = initialState ,Action :AdvancedSear
     return { ...state,
       alignmentSearchSelectedFilters :Action.payload
     };
+    case AdvancedSearchActions.LOAD_COMPETENCY_DATA_SUCCESS:
+      return {
+        ...state,
+        competencies: Action.payload
+      };
+    case AdvancedSearchActions.LOAD_COMPETENCY_DATA_FAILURE:
+      return {
+        ...state,
+        metaData: Action.payload
+      };
     default:
       return state;
   }

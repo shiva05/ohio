@@ -14,4 +14,11 @@ export class AdvancedSearchService {
   getMetaData() {
     return this.http.get(environment.GetAlignmentMetaData);
   }
+  getCompetencyData(result) {
+    var outcomeIds =[];
+    result.forEach(element => {
+      outcomeIds.push(element.OutcomePk);
+    });
+    return this.http.post(environment.GetCompetencyData,outcomeIds);
+  }
 }

@@ -18,8 +18,8 @@ export class QuickSearchEffects {
         .pipe(
         map(
           movies =>
-            ({ type: quickSearchActions.LOAD_QS_META_DATA_SUCCESS, payload: this.result1 })),
-        catchError(() => of({ type: quickSearchActions.LOAD_QS_META_DATA_SUCCESS,  payload: this.result1 }))
+            ({ type: quickSearchActions.LOAD_QS_META_DATA_SUCCESS, payload:movies})),
+        catchError((movies) => of({ type: quickSearchActions.LOAD_QS_META_DATA_SUCCESS,  payload: movies }))
         )
       )
     );
