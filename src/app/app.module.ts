@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
@@ -12,6 +12,8 @@ import { FilterSummaryComponent } from './components/filter-summary/filter-summa
 import { ReportComponent } from './components/report/report.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { LoaderService } from '../app/services/loader.service';
+import { HttpLoadInterceptor } from './services/http.interceptor';
 
 // import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
@@ -45,6 +47,7 @@ import { CourseSearchFiltersComponent } from './components/course-search-filters
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { courseSearchReducer } from './reducers/course-search.reducer';
 import { CourseSearchEffects } from './effects/course-search.effect';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,8 @@ import { CourseSearchEffects } from './effects/course-search.effect';
     PageNotFoundComponent,
     AlignmentSearchFiltersComponent,
     CourseSearchFiltersComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +94,14 @@ import { CourseSearchEffects } from './effects/course-search.effect';
     EffectsModule.forRoot([AdvancedSearchEffects, ReportEffects, QuickSearchEffects, SearchResultEffects, CourseSearchEffects])
 
   ],
-  providers: [],
+  providers: [
+    LoaderService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpLoadInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
