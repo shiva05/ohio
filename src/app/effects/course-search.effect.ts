@@ -7,15 +7,14 @@ import { of } from 'rxjs';
 
 @Injectable()
 export class CourseSearchEffects {
-    result1: any;
     @Effect()
     loadMetaData$ =
         this.actions$.pipe(
             ofType(courseSearchActions.LOAD_COURSESEARCH_DATA),
             mergeMap(result => this.courseSearchService.getMetaData()
                 .pipe(
-                    map(movies =>
-                        ({ type: courseSearchActions.LOAD_COURSESEARCH_DATA_SUCCESS, payload: movies })),
+                    map(data =>
+                        ({ type: courseSearchActions.LOAD_COURSESEARCH_DATA_SUCCESS, payload: data })),
                     catchError(() => of({ type: courseSearchActions.LOAD_COURSESEARCH_DATA_FAILURE, payload: result }))
                 )
             )

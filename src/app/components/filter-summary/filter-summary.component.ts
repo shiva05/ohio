@@ -1,9 +1,6 @@
 import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { debug } from 'util';
 import { Store } from '@ngrx/store';
 import { AppState } from './../../app.state';
-
 
 @Component({
   selector: 'filter-summary',
@@ -11,20 +8,27 @@ import { AppState } from './../../app.state';
   styleUrls: ['./filter-summary.component.css']
 })
 
-
 export class FilterSummaryComponent implements OnInit {
 
   @Input() FilterSummary;
   FilterSummaryKeys: any;
   FilterSummaryData: any = [];
   panelExpanded: boolean = false;
+  searchLable: any;
+  searchAlignment: any;
+  searchCourse: any;
+
+  filterCareerPathData: any = [];
+  filterCareerPathCourseData: any = [];
+  filterAcadamicSubjectData: any = [];
+  filterAcadamicSubjectCourseData: any = [];
 
   @Output() onPageSelect = new EventEmitter<any>();
 
   constructor(private store: Store<AppState>) {
-    // this.metaData = store.select('metaData');
-
+    this.searchLable = localStorage.getItem('searchLable');
   }
+
   ngOnInit() {
     this.FilterSummaryKeys =
       [
@@ -64,12 +68,26 @@ export class FilterSummaryComponent implements OnInit {
           fieldType: '2'
         }
       ];
-    this.store.select('advancedSearch').subscribe(data => {
-      if (data.alignmentSearchSelectedFilters) {
-        this.formatSearchDataToSummary(data.alignmentSearchSelectedFilters);
-      }
-    });
 
+    if (this.searchLable === 'SearchAlignment') {
+      this.store.select('advancedSearch').subscribe(data => {
+        if (data.alignmentSearchSelectedFilters) {
+          this.formatSearchDataToSummary(data.alignmentSearchSelectedFilters);
+        }
+      });
+
+      this.searchAlignment = true;
+      this.searchCourse = false;
+    } else {
+
+      this.store.select('courseSearch').subscribe(data => {
+        if (data.courseSearchSelectedFilters) {
+          this.formatSearchCourseData(data.courseSearchSelectedFilters);
+        }
+      });
+      this.searchAlignment = false;
+      this.searchCourse = true;
+    }
   }
 
   goBackToSearch() {
@@ -77,34 +95,6 @@ export class FilterSummaryComponent implements OnInit {
   }
 
   formatSearchDataToSummary(source) {
-    // const source = {
-    //   selectedKeyword: 'Test',
-    //   selectedAcadamicSubjects: [
-    //     {
-    //       item_id: 1, item_text: 'Math',
-    //       grade: [
-    //         { item_id: 3, item_text: 'Geometry' }
-    //       ],
-    //       cluster: [
-    //         { item_id: 3, item_text: 'Circles' }
-    //       ],
-    //       standardNumber: [
-    //         { item_id: 1, item_text: 'G.C.4' }
-    //       ]
-    //     }],
-    //   selectedStandards: [
-    //     { item_id: 4, item_text: 'Electrical' }
-    //   ],
-    //   selectedOutcome: [
-    //     { item_id: 1, item_text: 'Motors and Power' }
-    //   ],
-    //   selectedCareers: [
-    //     { item_id: 3, item_text: 'Construction' }
-    //   ],
-    //   selectedCompetency: [
-    //     { item_id: 3, item_text: 'Assess the roles of nonprofit and for-profit businesses' }
-    //   ]
-    // };
     this.FilterSummaryKeys.forEach(element => {
       if (element.fieldType === '1') {
         if (source[element.fieldKey]) {
@@ -132,8 +122,16 @@ export class FilterSummaryComponent implements OnInit {
         }
       }
     });
-    // console.log(this.FilterSummaryData);
   }
+
+  formatSearchCourseData(source) {
+    console.log(source);
+    this.filterCareerPathData = source.selectedCareerPath;
+    this.filterCareerPathCourseData = source.selectedCareerPathCourses;
+    this.filterAcadamicSubjectData = source.selectedAcademicSubject;
+    this.filterAcadamicSubjectCourseData = source.selectedAcademicSubjectCourses;
+  }
+
   getFormatedName(arg) {
     let result;
     if (arg && arg.length > 0) {
@@ -143,8 +141,5 @@ export class FilterSummaryComponent implements OnInit {
       }
       return result;
     }
-
   }
-
-
 }
