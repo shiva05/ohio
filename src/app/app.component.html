@@ -1,15 +1,4 @@
 <router-outlet></router-outlet>
 
 <!-- Loading Overlay -->
-<div id="has-overlay" *ngIf="loaderService.isLoading | async">
-    <div class="lds-roller">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
+<loading-spinner *ngIf="loaderService.isLoading | async"></loading-spinner>
