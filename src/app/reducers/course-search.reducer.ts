@@ -2,16 +2,20 @@ import * as CourseSearchActions from '../actions/course-search.actions';
 import { AcademicSubject } from '../models/academic-subject.model';
 import { CareerPath } from '../models/careerPath.model';
 import { CareerPathCourses } from '../models/careerPathCourses.model';
+import { AcademicSubjectCourses } from '../models/academic-subject-course.model';
 
 export interface CourseSearchData {
     careerPaths: CareerPath[];
     careerPathCourses: CareerPathCourses[];
     academicSubjects: AcademicSubject[];
+    academicSubjectCourses: AcademicSubjectCourses[];
 }
 
 export interface CourseSearchSelectedFilters {
     selectedCareerPath: CareerPath[];
     selectedCareerPathCourses: CareerPathCourses[];
+    selectedAcademicSubject: AcademicSubject[];
+    selectedAcademicSubjectCourses: AcademicSubjectCourses[];
 }
 
 export interface CourseSearch {
@@ -21,18 +25,21 @@ export interface CourseSearch {
 
 // tslint:disable-next-line:no-empty-interface
 export interface SelectedAcademicSubject {
-
+    courseSearchSelectedFilters: CourseSearchSelectedFilters;
 }
 
 const initialState: CourseSearch = {
     courseSearchData: {
         careerPaths: [],
         careerPathCourses: [],
-        academicSubjects: []
+        academicSubjects: [],
+        academicSubjectCourses: []
     },
     courseSearchSelectedFilters: {
         selectedCareerPath: [],
-        selectedCareerPathCourses: []
+        selectedCareerPathCourses: [],
+        selectedAcademicSubject: [],
+        selectedAcademicSubjectCourses: []
     }
 };
 

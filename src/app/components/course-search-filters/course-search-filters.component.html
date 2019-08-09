@@ -33,13 +33,17 @@
             <div class="form-group col-md-6">
                 <label>{{ 'CourseFields.CareerField' | translate }}</label>
                 <ng-multiselect-dropdown [ngClass]="" [data]="careerPath" [(ngModel)]="selectedCareerPath"
-                    [settings]="careerPathSettings" (onSelect)="onCareerPathSelect(selectedCareerPath)" (onDeSelect)="onCareerPathSelect(selectedCareerPath)">
+                    [settings]="careerPathSettings" (onSelect)="onCareerPathSelect(selectedCareerPath)"
+                    (onDeSelect)="onCareerPathSelect(selectedCareerPath)">
                 </ng-multiselect-dropdown>
             </div>
             <div class="form-group col-md-6">
                 <label>{{ 'CourseFields.AcademicSubjects' | translate }}</label>
                 <ng-multiselect-dropdown [ngClass]="" [data]="academicSubjects" [(ngModel)]="selectedAcadamicSubjects"
-                    [settings]="dropdownSettings">
+                    [settings]="academicSubjectsSettings" (onSelect)="onAcadamicSubjectSelect(selectedAcadamicSubjects)"
+                    (onDeSelect)="onAcadamicSubjectSelect(selectedAcadamicSubjects)"                    
+                    (onSelectAll)="selectAllAcademicSubject(selectedAcadamicSubjects)"
+                    (onDeSelectAll)="deSelectAllSocialCluster(selectedAcadamicSubjects)">
                 </ng-multiselect-dropdown>
             </div>
         </div>
@@ -48,7 +52,7 @@
             <div class="col-md-6">
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label>{{ 'CourseFields.Strands' | translate }}</label>
+                        <label>{{ 'CourseFields.Courses' | translate }}</label>
                         <ng-multiselect-dropdown [ngClass]="" [data]="coursesDropdown" [(ngModel)]="selectedCourses"
                             [settings]="careerPathCourseSettings">
                         </ng-multiselect-dropdown>
@@ -58,25 +62,43 @@
             </div>
 
             <div class="col-md-6">
-                <div class="form-group dynamic-academics"
-                    *ngFor="let policy of selectedAcadamicSubjects;let i = index;">
-                    <h3>{{policy.item_text}}</h3>
-                    <div class="row">
+                <div class="form-group dynamic-academics" *ngFor="let name of selectedAcadamicSubjects;let i = index;">
+                    <h3>{{name.SubjectName}}</h3>
+                    <div class="row" *ngIf="name.SubjectId == 1">
                         <div class="col-md-6">
-                            <label>{{ 'CourseFields.Grade' | translate }}</label>
-                            <ng-multiselect-dropdown [ngClass]="" [data]="grades" [(ngModel)]="selectedGrades[i]"
-                                [settings]="dropdownSettings" (onSelect)="onClusterSelect(selectedGrades[i],policy)">
+                            <label>{{ 'CourseFields.Courses' | translate }}</label>
+                            <ng-multiselect-dropdown [ngClass]="" [data]="mathsCourseName"
+                                [(ngModel)]="selectedMathsCourses" [settings]="academicSubjectCourseSettings">
                             </ng-multiselect-dropdown>
                         </div>
-
                     </div>
-                    <!-- End of Dynamic dropdowns of Academic subjects -->
+                    <div class="row" *ngIf="name.SubjectId == 2">
+                        <div class="col-md-6">
+                            <label>{{ 'CourseFields.Courses' | translate }}</label>
+                            <ng-multiselect-dropdown [ngClass]="" [data]="ELACourseName" [(ngModel)]="selectedELACourses"
+                                [settings]="academicSubjectCourseSettings">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="name.SubjectId == 3">
+                        <div class="col-md-6">
+                            <label>{{ 'CourseFields.Courses' | translate }}</label>
+                            <ng-multiselect-dropdown [ngClass]="" [data]="scienceCourseName" [(ngModel)]="selectedScienceCourses"
+                                [settings]="academicSubjectCourseSettings">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="name.SubjectId == 4">
+                        <div class="col-md-6">
+                            <label>{{ 'CourseFields.Courses' | translate }}</label>
+                            <ng-multiselect-dropdown [ngClass]="" [data]="socialCourseName" [(ngModel)]="selectedSocialCourses"
+                                [settings]="academicSubjectCourseSettings">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
                 </div>
-                <!-- End of CareerField and Academic row -->
             </div>
         </div>
-        <!-- Dynamic dropdowns of Academic subjects -->
-        <!-- END OF PUSH/PULLED COLUMNS -->
 
         <!-- Button Row -->
         <div class="row">
