@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 import { LoaderService } from './loader.service';
 
 @Injectable()
-export class LoaderInterceptor implements HttpInterceptor {
+export class HttpLoadInterceptor implements HttpInterceptor {
     private requests: HttpRequest<any>[] = [];
 
     constructor(private loaderService: LoaderService) { }

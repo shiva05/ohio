@@ -13,7 +13,7 @@ import { ReportComponent } from './components/report/report.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { LoaderService } from '../app/services/loader.service';
-import { LoaderInterceptor } from './services/http.interceptor';
+import { HttpLoadInterceptor } from './services/http.interceptor';
 
 // import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
@@ -98,7 +98,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     LoaderService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: LoaderInterceptor,
+      useClass: HttpLoadInterceptor,
       multi: true
     }
   ],
