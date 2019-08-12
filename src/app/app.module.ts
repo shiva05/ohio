@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
@@ -12,6 +12,8 @@ import { FilterSummaryComponent } from './components/filter-summary/filter-summa
 import { ReportComponent } from './components/report/report.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { LoaderService } from '../app/services/loader.service';
+import { HttpLoadInterceptor } from './services/http.interceptor';
 
 // import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
@@ -43,6 +45,9 @@ import { QuickSearchEffects } from 'src/app/effects/quick-search.effect';
 import { quickSearchReducer } from 'src/app/reducers/quick-search.reducer';
 import { CourseSearchFiltersComponent } from './components/course-search-filters/course-search-filters.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { courseSearchReducer } from './reducers/course-search.reducer';
+import { CourseSearchEffects } from './effects/course-search.effect';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +68,8 @@ import { SearchResultsComponent } from './components/search-results/search-resul
     PageNotFoundComponent,
     AlignmentSearchFiltersComponent,
     CourseSearchFiltersComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -83,12 +89,19 @@ import { SearchResultsComponent } from './components/search-results/search-resul
       }
     }),
     // StoreModule.forRoot(reducers, { metaReducers }),
-    StoreModule.forRoot({ advancedSearch: advancedSearchReducer, report: reportReducer, quickSearch: quickSearchReducer, searchResult: searchResultReducer }),
+    StoreModule.forRoot({ advancedSearch: advancedSearchReducer, report: reportReducer, quickSearch: quickSearchReducer, searchResult: searchResultReducer, courseSearch: courseSearchReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 100, name: 'tng1' }),
-    EffectsModule.forRoot([AdvancedSearchEffects, ReportEffects, QuickSearchEffects, SearchResultEffects])
+    EffectsModule.forRoot([AdvancedSearchEffects, ReportEffects, QuickSearchEffects, SearchResultEffects, CourseSearchEffects])
 
   ],
-  providers: [],
+  providers: [
+    LoaderService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpLoadInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

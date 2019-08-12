@@ -15,21 +15,14 @@ export class SearchResultsComponent implements OnInit {
     translate.setDefaultLang('en');
   }
 
-  // @Output() onPageSelect = new EventEmitter<any>();
-
   ngOnInit() {
     this.data = this.sharedData;
     console.log(this.data);
     console.log(localStorage.getItem('sharedData'));
   }
 
-  // goToPage(org) {
-  //   this.onPageSelect.emit(org);
-  // }
-
   onPageSelect(org) {
     this.showReport = false;
-
     if (org === 'Report') {
       this.showReport = true;
     }

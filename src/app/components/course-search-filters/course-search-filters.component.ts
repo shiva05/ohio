@@ -1,70 +1,95 @@
 
-import { Component, EventEmitter, Output, Input, OnInit, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import * as util from 'util';
+import { Component, EventEmitter, Output, OnInit, ChangeDetectorRef } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { AppState } from './../../app.state';
 import { Observable } from 'rxjs/Observable';
-import { MetaData } from './../../models/meta-data.model';
-import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
+import { CourseSearchData } from './../../models/courseSearch.model';
+import * as CourseSearchActions from './../../actions/course-search.actions';
 
 @Component({
   selector: 'app-course-search-filters',
   templateUrl: './course-search-filters.component.html',
   styleUrls: ['./course-search-filters.component.css']
 })
+
 export class CourseSearchFiltersComponent implements OnInit {
+  careerPath: any = [];
+  courses: any = [];
+  academicSubjects: any = [];
+  academicSubjectCourse: any = [];
 
+  careerPathSettings: any = {};
+  careerPathCourseSettings: any = {};
+  academicSubjectsSettings: any = {};
+  academicSubjectCourseSettings: any = [];
 
-  disabled = false;
-  ShowFilter = true;
-  limitSelection = false;
-  careers: any = [];
-  academicSubjects = [];
-  stadards = [];
-  outcomes = [];
-  grades = [];
-  clusters = [];
-  standardNumbers = [];
-  selectedKeyword: any;
-  selectedItems: any = [];
-  selectedCareer: any = [];
+  selectedCareerPath: any = [];
+  selectedCourses: any = [];
   selectedAcadamicSubjects: any = [];
-  selectedStandards: any = [];
-  selectedOutcome: any = [];
-  selectedCompetencyNumbers: any = [];
-  selectedGrades: any = [];
-  selectedClusters: any = [];
-  selectedStandardNumbers: any = [];
-  dropdownSettings: any = {};
+  selectedAcademicSubjectCourse: any = [];
+  selectedMathsCourses: any = [];
+  selectedELACourses: any = [];
+  selectedScienceCourses: any = [];
+  selectedSocialCourses: any = [];
+
   searchObj: any;
-  selectedCompetencyNumber: any;
-  competencyNumbers: any;
-  metaData: Observable<MetaData>;
+  coursesDropdown: any = [];
+  courseSearchData: Observable<CourseSearchData>;
+
+  mathsCourseName: any = [];
+  ELACourseName: any = [];
+  scienceCourseName: any[];
+  socialCourseName: any[];
+
+  selectedAcademicCourses: any = [];
 
   constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>) {
     // this.metaData = store.select('metaData');
-    this.store.dispatch({ type: AdvancedSearchActions.LOAD_META_DATA });
+    this.store.dispatch({ type: CourseSearchActions.LOAD_COURSESEARCH_DATA });
   }
 
   @Output() onPageSelect = new EventEmitter<any>();
 
   ngOnInit() {
-    this.store.select('advancedSearch').subscribe(data => {
-      this.metaData = data;
-      this.careers = this.metaData['careers'];
-      this.academicSubjects = this.metaData['academicSubjects'];
-      this.stadards = this.metaData['standards'];
-      this.outcomes = this.metaData['outcomes'];
-      this.grades = this.metaData['grades'];
-      this.clusters = this.metaData['clusters'];
-      this.standardNumbers = this.metaData['standardNumbers'];
-      this.competencyNumbers = this.metaData['competencyNumbers'];
+    this.store.select('courseSearch').subscribe(data => {
+      this.courseSearchData = data.courseSearchData;
+      this.careerPath = this.courseSearchData['CareerPath'];
+      this.courses = this.courseSearchData['CareerPathCourses'];
+      this.academicSubjects = this.courseSearchData['Subjects'];
+      this.academicSubjectCourse = this.courseSearchData['SubjectCourses'];
     });
-    this.dropdownSettings = {
+
+    this.careerPathSettings = {
       singleSelection: false,
-      idField: 'item_id', textField: 'item_text',
+      idField: 'CareerPathId', textField: 'CareerPathName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    };
+
+    this.careerPathCourseSettings = {
+      singleSelection: false,
+      idField: 'CourseId', textField: 'CourseName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    };
+
+    this.academicSubjectsSettings = {
+      singleSelection: false,
+      idField: 'SubjectId', textField: 'SubjectName',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    };
+
+    this.academicSubjectCourseSettings = {
+      singleSelection: false,
+      idField: 'LevelId', textField: 'LevelValue',
       selectAllText: 'Select All',
       unSelectAllText: 'Unselect All',
       itemsShowLimit: 1,
@@ -72,63 +97,66 @@ export class CourseSearchFiltersComponent implements OnInit {
     };
   }
 
-  search() {
-    this.searchObj = JSON.stringify({
-      selectedKeyword: this.selectedKeyword,
-      selectedAcadamicSubjects: this.selectedAcadamicSubjects,
-      selectedStandards: this.selectedStandards,
-      selectedOutcome: this.selectedOutcome,
-      selectedCompetencyNumber: this.selectedCompetencyNumber,
-      selectedCareers: this.selectedCareer
+  onCareerPathSelect(selectedPaths) {
+    const data = selectedPaths;
+    this.coursesDropdown = [];
+    this.courses.forEach(course => {
+      data.forEach(careerPath => {
+        if (course.CareerPathId === careerPath.CareerPathId) {
+          this.coursesDropdown.push(course);
+        }
+      });
     });
-    console.log(this.searchObj);
-    localStorage.setItem('searchLable', 'SearchCourse');
-    this.goToPage('SearchResults');
   }
 
-  onAcadamicSubjectSelect() {
-    console.log('hi');
+  onAcadamicSubjectSelect(selectedSubject) {
+    this.mathsCourseName = [];
+    this.ELACourseName = [];
+    this.scienceCourseName = [];
+    this.socialCourseName = [];
+
+    selectedSubject.forEach(sub => {
+      if (sub.SubjectId === 1) {
+        this.academicSubjectCourse[0].GradeSubjects.forEach(element => {
+          this.mathsCourseName.push(element.LevelValue);
+        });
+      } else if (sub.SubjectId === 2) {
+        this.academicSubjectCourse[1].GradeSubjects.forEach(element => {
+          this.ELACourseName.push(element.LevelValue);
+        });
+      } else if (sub.SubjectId === 3) {
+        this.academicSubjectCourse[2].GradeSubjects.forEach(element => {
+          this.scienceCourseName.push(element.LevelValue);
+        });
+      } else if (sub.SubjectId === 4) {
+        this.academicSubjectCourse[3].GradeSubjects.forEach(element => {
+          this.socialCourseName.push(element.LevelValue);
+        });
+      }
+    });
+  }
+
+  selectAllAcademicSubject(data) {
+
+  }
+
+  deSelectAllAcademicSubject(data) {
+
+  }
+
+  search() {
+    this.searchObj = {
+      selectedCareerPath: this.selectedCareerPath,
+      selectedCareerPathCourses: this.selectedCourses,
+      selectedAcademicSubject: this.selectedAcadamicSubjects,
+      selectedAcademicSubjectCourses: [this.selectedMathsCourses, this.selectedELACourses, this.selectedScienceCourses, this.selectedSocialCourses]
+    };
+    this.store.dispatch({ type: CourseSearchActions.SAVE_AS_SELECTED_FILTERS_COURSESEARCH, payload: this.searchObj });
+    localStorage.setItem('searchLable', 'SearchCourse');
+    this.goToPage('SearchResults');
   }
 
   goToPage(org) {
     this.onPageSelect.emit(org);
   }
-
-  onGradeSelect(grade, acasub) {
-    this.selectedAcadamicSubjects.forEach(element => {
-      if (element.item_id === acasub.item_id) {
-        if (element.grade) {
-          element.grade.push({ item_id: grade[0].item_id, item_text: grade[0].item_text });
-        } else {
-          element.grade = [];
-          element.grade.push({ item_id: grade[0].item_id, item_text: grade[0].item_text });
-        }
-      }
-    });
-  }
-  onClusterSelect(cluster, acasub) {
-    this.selectedAcadamicSubjects.forEach(element => {
-      if (element.item_id === acasub.item_id) {
-        if (element.cluster) {
-          element.cluster.push({ item_id: cluster[0].item_id, item_text: cluster[0].item_text });
-        } else {
-          element.cluster = [];
-          element.cluster.push({ item_id: cluster[0].item_id, item_text: cluster[0].item_text });
-        }
-      }
-    });
-  }
-  onStandardNumberSelect(standardNumbers, acasub) {
-    this.selectedAcadamicSubjects.forEach(element => {
-      if (element.item_id === acasub.item_id) {
-        if (element.standardNumber) {
-          element.standardNumber.push({ item_id: standardNumbers[0].item_id, item_text: standardNumbers[0].item_text });
-        } else {
-          element.standardNumber = [];
-          element.standardNumber.push({ item_id: standardNumbers[0].item_id, item_text: standardNumbers[0].item_text });
-        }
-      }
-    });
-  }
-
 }

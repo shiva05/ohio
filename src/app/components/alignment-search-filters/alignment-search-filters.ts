@@ -8,7 +8,6 @@ import { Observable } from 'rxjs/Observable';
 import { MetaData } from './../../models/meta-data.model';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 import { _ } from 'underscore';
-
 @Component({
   selector: 'app-alignment-search-filters',
   templateUrl: './alignment-search-filters.html',
@@ -40,7 +39,8 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   selectedClusters: any = [];
   selectedStandardNumbers: any = [];
   dropdownSettings: any = {};
-  compitencyDropdownSettings :any ={};
+  compitencyDropdownSettings: any = {};
+  academicDropdownSettings: any = {};
   careerFieldDropdownSettings: any = {};
   strandDropdownSettings: any = {};
   outcomeDropdownSettings: any = {};
@@ -124,7 +124,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       allowSearchFilter: true
     };
 
-    
+
     this.store.select('advancedSearch').subscribe(data => {
       debugger
       this.metaData = data.metaData;
@@ -170,8 +170,8 @@ export class AlignmentSearchFiltersComponent implements OnInit {
          }
       }
     });
-   
-    
+
+
   }
   isEmptyObject(obj) {
     return (obj && (Object.keys(obj).length === 0));
@@ -225,7 +225,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         }
       });
     });
-  
+
   }
 
   sendSub(item) {
@@ -239,10 +239,10 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     let tempData = this.selectedAcademicItems;
     tempData.map((subject) => {
         if (data.SubjectId === subject.SubjectId) { // comparing the selected items  level id with below statement which is the data of main object
-          subject.Level.map((mainCourse, index) => {         
+          subject.Level.map((mainCourse, index) => {
             if (data.LevelId + 1 === mainCourse.LevelId) {
               mainCourse.DropdownList = [];
-                data.SelectedItems.map((selectedItem) => {   //assigning parent level dropdown data   
+                data.SelectedItems.map((selectedItem) => {   //assigning parent level dropdown data
                   mainCourse.SubjectLevels.map((targetedDropdown) => { // setting the vakle of dropdown here
                     if (selectedItem.SubjectLevelsPk === targetedDropdown.ParentLevelPk) {
                       mainCourse.DropdownList.push(targetedDropdown);
@@ -283,10 +283,10 @@ export class AlignmentSearchFiltersComponent implements OnInit {
    // console.log(this.selectedAcademicItems);
   }
   onOutcomeSelect(outcome) {
-    debugger
+    debugger;
     // TODO: Call API
-    this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA ,payload :this.selectedOutcome});
-    console.log(this.competencyNumbers)
+    this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA , payload : this.selectedOutcome});
+    console.log(this.competencyNumbers);
   }
   search() {
     this.goToPage('SearchResults');
@@ -300,7 +300,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     };
     localStorage.setItem('searchLable', 'SearchAlignment');
     this.goToPage('SearchResults');
-    this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS ,payload:this.searchObj});
+    this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS , payload: this.searchObj});
   }
 
   onAcadamicSubjectSelect() {

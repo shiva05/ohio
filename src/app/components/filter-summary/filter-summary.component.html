@@ -1,4 +1,5 @@
-<div class="col-md-12 main">
+<!-- Alignment Search Filter Result -->
+<div class="col-md-12 main" *ngIf="searchAlignment">
   <h1>{{ 'FilterResults.SearchCriteria' | translate }}</h1>
   <div class="row">
     <!-- filter Form Begin -->
@@ -22,6 +23,56 @@
                 <span class="badge badge-light">{{item.fieldClusterValue}}</span> |
                 <label>{{item.fieldStandardNumberName}}: </label>
                 <span class="badge badge-light">{{item.fieldStandardNumberValue}}</span>
+              </div>
+            </span>
+          </div>
+        </div>
+        <div class="search-filter-right">
+          <button (click)="goBackToSearch()">{{ 'FilterResults.UpdateSearch' | translate }}
+            <i class="fa fa-angle-double-down"></i></button>
+        </div>
+      </div>
+      <div class="search-seemore">
+        <h3>{{panelExpanded ? 'Click to see less' : 'Click to see more'}}</h3>
+        <a href="#" (click)="panelExpanded = !panelExpanded">
+          <i [ngClass]="panelExpanded ? 'fa fa-angle-double-up' : 'fa fa-angle-double-down'"></i>
+        </a>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- Course Search Filter Result -->
+<div class="col-md-12 main" *ngIf="searchCourse">
+  <h1>{{ 'FilterResults.SearchCriteria' | translate }}</h1>
+  <div class="row">
+    <!-- filter Form Begin -->
+    <section class="filter-form col-md-12">
+      <div class="search-filter">
+        <div class="search-filter-left">
+          <div class="filter">
+            <span class="filter-each">
+              <span>
+                <label>{{'CourseFields.CareerField' | translate}}: </label>
+                <span class="badge badge-light">{{filterCareerPathData[0].CareerPathName}}</span>
+                <span *ngIf="filterCareerPathData.length > 1"> +{{filterCareerPathData.length - 1}} </span>
+                <span> | </span>
+              </span>
+              <span>
+                <label>{{'CourseFields.Courses' | translate}}: </label>
+                <span class="badge badge-light">{{filterCareerPathCourseData[0].CourseName}}</span>
+                <span *ngIf="filterCareerPathCourseData.length > 1"> +{{filterCareerPathCourseData.length - 1}} </span>
+              </span>
+              <div class="filter-each" [hidden]="!panelExpanded">
+                <hr>
+                <label>{{'CourseFields.AcademicSubjects' | translate}}: </label>
+                <span class="badge badge-light">{{filterAcadamicSubjectData[0].SubjectName}}</span>
+                <span *ngIf="filterAcadamicSubjectData.length > 1"> +{{filterAcadamicSubjectData.length - 1}} </span> |
+
+                <label>{{'CourseFields.Courses' | translate}}: </label>
+                <span class="badge badge-light">{{filterAcadamicSubjectCourseData[0]}}</span>
+                <span *ngIf="filterAcadamicSubjectCourseData.length > 1">
+                  +{{filterAcadamicSubjectCourseData.length - 1}} </span>
               </div>
             </span>
           </div>
