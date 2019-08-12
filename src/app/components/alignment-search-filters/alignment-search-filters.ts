@@ -48,7 +48,8 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   selectedCompetencyNumber: any;
   competencyNumbers: any;
   metaData: Observable<MetaData>;
-
+  selectedAcademicItems: any = [];
+  subjectsDefaultSettings: any = {};
   constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>) {
     // this.metaData = store.select('metaData');
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_META_DATA });
@@ -113,6 +114,16 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       itemsShowLimit: 1,
       allowSearchFilter: true
     };
+    this.subjectsDefaultSettings = {
+      singleSelection: false,
+      idField: 'SubjectLevelsPk', textField: 'LevelValue1',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    };
+
+    
     this.store.select('advancedSearch').subscribe(data => {
       debugger
       this.metaData = data.metaData;
@@ -123,10 +134,20 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       this.clusters = this.metaData['clusters'];
       this.standardNumbers = this.metaData['standardNumbers'];
       this.competencyNumbers = data.competencies;
-      if(this.metaData['Subjects']){
-        this.metaData['Subjects'].forEach(element => {
-          this.academicSubjects.push({SubjectId :element.SubjectId,SubjectName :element.SubjectName});
-       });
+      if (this.metaData['Subjects']) {
+        this.academicSubjects = this.metaData['Subjects'];
+        this.academicSubjects.forEach((subject) => {
+          subject.Level.forEach((item) => {
+            item['SelectedItems'] = {}; // to maintain the individual selected list from the dropdowns.
+            item['DropdownList'] = []; //to set the data for the dropdowns of each item of a subject.
+            if (item.LevelNumber === 1) { // to bind the data for the 1st column dropdown list.
+              item['DropdownList'] = item.SubjectLevels;
+            }
+          });
+        });
+       // this.metaData['Subjects'].forEach(element => {
+       //   this.academicSubjects.push({SubjectId :element.SubjectId,SubjectName :element.SubjectName});
+       //});
       }
       if(data.alignmentSearchSelectedFilters){
         if (data.alignmentSearchSelectedFilters.selectedCareers.length > 0) {
@@ -155,7 +176,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.strands.forEach(eachStrand => {
       this.selectedCareer.forEach(eachCareer => {
         if (eachStrand.CareerFieldPk === eachCareer.CareerFieldId) {
-          console.log(eachStrand);
+       //   console.log(eachStrand);
           this.strandsDropdown.push(eachStrand);
         }
       });
@@ -166,14 +187,70 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.outcomes.forEach(eachOutcome => {
       this.selectedStrands.forEach(eachStrand => {
         if (eachOutcome.StrandPk === eachStrand.StrandPk) {
-          console.log(eachOutcome);
+        //  console.log(eachOutcome);
           this.outcomesDropdown.push(eachOutcome);
         }
       });
     });
-    console.log(this.strandsDropdown);
+   // console.log(this.strandsDropdown);
+  }
+  onItemSelect(event) {
+    this.selectedAcademicItems = this.selectedAcadamicSubjects;
+    this.selectListCreation();
+  }
+  OnItemDeSelect(event) {
+    this.selectedAcademicItems = this.selectedAcadamicSubjects;
+    this.selectListCreation();
+  }
+  onSelectAll(event) {
+    this.selectedAcademicItems = [];
+    this.selectedAcademicItems = event;
+    this.selectListCreation();
+  }
+  onDeSelectAll(event) {
+    this.selectedAcademicItems = [];
+    this.selectedAcadamicSubjects = [];
   }
 
+  selectListCreation() {
+    this.selectedAcademicItems.forEach((e) => {
+      this.academicSubjects.forEach((ace) => {
+        if (e.SubjectId === ace.SubjectId) {
+          e['Level'] = ace.Level;
+        }
+      });
+    });
+  }
+
+  sendSub(item) {
+    console.log(item);
+  }
+
+  onSubjectLevelsSelect(data) {
+    
+    let tempData = this.selectedAcademicItems;
+    tempData.map((subject) => {
+        if (data.SubjectId === subject.SubjectId) { // comparing the selected items  level id with below statement which is the data of main object
+          subject.Level.map((mainCourse) => {         
+            if (data.LevelId + 1 === mainCourse.LevelId) {
+              mainCourse.DropdownList = [];
+                data.SelectedItems.map((selectedItem) => {   //assigning parent level dropdown data   
+                  mainCourse.SubjectLevels.map((targetedDropdown) => { // setting the vakle of dropdown here
+                    if (selectedItem.SubjectLevelsPk === targetedDropdown.ParentLevelPk) {
+                      mainCourse.DropdownList.push(targetedDropdown);
+                    }
+                  });
+                  //if (selectedItem.SubjectLevelsPk === )
+                });
+
+              }
+            });
+        }
+    });
+    this.selectedAcademicItems = tempData;
+    this.ref.detectChanges();
+    console.log(this.selectedAcademicItems);
+  }
   onOutcomeSelect(outcome) {
     debugger
     // TODO: Call API

@@ -35,6 +35,10 @@
   <label>{{ 'SearchFields.AcademicSubjects' | translate }}</label>
   <ng-multiselect-dropdown [ngClass]="" [data]="academicSubjects"
       [(ngModel)]="selectedAcadamicSubjects" [settings]="academicSubjectDropdownSettings"
+                           (onSelect)="onItemSelect($event)"
+                           (onSelectAll)="onSelectAll($event)"
+                           (onDeSelect)="OnItemDeSelect($event)"
+                         (onDeSelectAll)="onDeSelectAll($event)"
      >
   </ng-multiselect-dropdown>
 </div>
@@ -73,20 +77,20 @@
 
 <!-- Dynamic dropdowns of Academic subjects -->
 <div class="col-md-6">
-  <div class="dynamic-academics" *ngFor="let policy of selectedAcadamicSubjects;let i = index;">
+  <div class="dynamic-academics" *ngFor="let subject of selectedAcademicItems;let i = index;">
 
-    <div *ngIf="policy.item_id ==1">
-        <h3>{{policy.item_text}}</h3>
+    <div>
+      <h3>{{subject.SubjectName}}</h3>
 
               <div class="row">
-                  <div class="form-group col-md-4">
-                      <label>Grade / Subject</label>
-                      <ng-multiselect-dropdown [ngClass]="" [data]="grades" [(ngModel)]="selectedGrades[i]"
-                          [settings]="dropdownSettings" (onSelect)="onGradeSelect(selectedGrades[i],policy)"
-                          >
-                      </ng-multiselect-dropdown>
-                  </div>
-                  <div class="form-group col-md-4">
+                <div class="form-group col-md-4" *ngFor="let item of subject.Level; let sub = index;">
+                  <label>{{item.LevelName}}</label>
+                  <ng-multiselect-dropdown [ngClass]=""  id="{{i}}{{sub}}" [data]="item.DropdownList" [(ngModel)]="item.SelectedItems"
+                                           [settings]="subjectsDefaultSettings" (onSelect)="onSubjectLevelsSelect(item)"
+                                           (onDeSelect)="onSubjectLevelsSelect(item)">
+                  </ng-multiselect-dropdown>
+                </div>
+                  <!--<div class="form-group col-md-4">
                       <label>Cluster</label>
                       <ng-multiselect-dropdown [ngClass]="" [data]="clusters" [(ngModel)]="selectedClusters[i]"
                           [settings]="dropdownSettings" (onSelect)="onClusterSelect(selectedClusters[i],policy)"
@@ -100,11 +104,11 @@
                           (onSelect)="onStandardNumberSelect(selectedStandardNumbers[i],policy)"
                           >
                       </ng-multiselect-dropdown>
-                  </div>
+                  </div>-->
               </div>
     </div>
 
-    <div  *ngIf="policy.item_id ==2">
+    <!--<div  *ngIf="policy.item_id ==2">
         <h3>{{policy.item_text}}</h3>
 
               <div class="row">
@@ -188,7 +192,7 @@
                       </ng-multiselect-dropdown>
                   </div>
               </div>
-    </div>
+    </div>-->
       <!-- End of Dynamic dropdowns of Academic subjects -->
   </div>
   <!-- End of CareerField and Academic row -->
