@@ -7,6 +7,7 @@ import { AppState } from './../../app.state';
 import { Observable } from 'rxjs/Observable';
 import { MetaData } from './../../models/meta-data.model';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
+import { _ } from 'underscore';
 
 @Component({
   selector: 'app-alignment-search-filters',
