@@ -43,7 +43,7 @@ alignmentSearchSelectedFilters :{
   selectedStrands: [],
   selectedOutcomes: [],
   selectedCompetencies :[],
-  selectedAcadamicSubjects :[]
+  selectedAcadamicSubjects: []
 }
 };
 export function advancedSearchReducer(state = initialState ,Action :AdvancedSearchActions.Actions){

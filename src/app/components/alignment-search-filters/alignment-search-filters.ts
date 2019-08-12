@@ -164,10 +164,14 @@ export class AlignmentSearchFiltersComponent implements OnInit {
           this.selectedCompetencyNumbers =  data.alignmentSearchSelectedFilters.selectedCompetencies;
         }
          this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length>0 ? data.alignmentSearchSelectedFilters.selectedAcadamicSubjects :[];
+         if (data.alignmentSearchSelectedFilters.finalSelectedObject.length > 0) {
+           this.selectedAcademicItems = this.selectedAcadamicSubjects;
+           this.selectListCreation();
+         }
       }
     });
-
-
+   
+    
   }
   isEmptyObject(obj) {
     return (obj && (Object.keys(obj).length === 0));
@@ -221,6 +225,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         }
       });
     });
+  
   }
 
   sendSub(item) {
@@ -228,11 +233,13 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   }
 
   onSubjectLevelsSelect(data) {
-    
+    let dropDownSetId: any = [];
+    let selectedSetId: any = [];
+    let updatedSelectedSetId: any = [];
     let tempData = this.selectedAcademicItems;
     tempData.map((subject) => {
         if (data.SubjectId === subject.SubjectId) { // comparing the selected items  level id with below statement which is the data of main object
-          subject.Level.map((mainCourse) => {         
+          subject.Level.map((mainCourse, index) => {         
             if (data.LevelId + 1 === mainCourse.LevelId) {
               mainCourse.DropdownList = [];
                 data.SelectedItems.map((selectedItem) => {   //assigning parent level dropdown data   
@@ -242,15 +249,38 @@ export class AlignmentSearchFiltersComponent implements OnInit {
                     }
                   });
                   //if (selectedItem.SubjectLevelsPk === )
-                });
+              });
+              // to set the values of only selected list options
+                mainCourse.DropdownList.forEach((dropwdownList) => { dropDownSetId.push(dropwdownList.SubjectLevelsPk) }); //start mappiing the next dropdown
+                if (mainCourse.SelectedItems.length > 0) {
+                  mainCourse.SelectedItems.forEach((selectedList) => { selectedSetId.push(selectedList.SubjectLevelsPk) });
+                  updatedSelectedSetId = _.intersection(dropDownSetId, selectedSetId);
+                  if (updatedSelectedSetId.length === 0) {
+                    mainCourse.SelectedItems = [];
+                  } else {
+                    mainCourse.SelectedItems = [];
+                    mainCourse.SubjectLevels.forEach((set) => {
+                      updatedSelectedSetId.forEach((resId) => {
+                        if (set.SubjectLevelsPk === resId) {
+                          mainCourse.SelectedItems.push(set);
+                        }
+                      });
+                    });
+                  }
+                } else {
+                  mainCourse.SelectedItems = [];
+                } //end mappiing the next dropdown
+                this.onSubjectLevelsSelect(mainCourse);
+            }
 
-              }
-            });
+             // to remove the 3rd level values if parent lavel is empty.
+          });
+
         }
     });
     this.selectedAcademicItems = tempData;
     this.ref.detectChanges();
-    console.log(this.selectedAcademicItems);
+   // console.log(this.selectedAcademicItems);
   }
   onOutcomeSelect(outcome) {
     debugger
@@ -265,7 +295,8 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       selectedStrands: this.selectedStrands,
       selectedOutcomes: this.selectedOutcome,
       selectedCompetencies: this.selectedCompetencyNumbers,
-      selectedAcadamicSubjects: this.selectedAcadamicSubjects
+      selectedAcadamicSubjects: this.selectedAcadamicSubjects,
+      finalSelectedObject : this.selectedAcademicItems
     };
     localStorage.setItem('searchLable', 'SearchAlignment');
     this.goToPage('SearchResults');
