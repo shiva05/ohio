@@ -134,7 +134,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       this.clusters = this.metaData['clusters'];
       this.standardNumbers = this.metaData['standardNumbers'];
       this.competencyNumbers = data.competencies;
-      if (this.metaData['Subjects']) {
+      if (this.metaData['Subjects'] && data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length==0) {
         this.academicSubjects = this.metaData['Subjects'];
         this.academicSubjects.forEach((subject) => {
           subject.Level.forEach((item) => {
@@ -163,7 +163,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
           this.selectedCompetencyNumbers =  data.alignmentSearchSelectedFilters.selectedCompetencies;
         }
          this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length>0 ? data.alignmentSearchSelectedFilters.selectedAcadamicSubjects :[];
-         if (data.alignmentSearchSelectedFilters.finalSelectedObject.length > 0) {
+         if (data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0) {
            this.selectedAcademicItems = this.selectedAcadamicSubjects;
            this.selectListCreation();
          }
@@ -172,6 +172,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
 
 
   }
+
   isEmptyObject(obj) {
     return (obj && (Object.keys(obj).length === 0));
   }
