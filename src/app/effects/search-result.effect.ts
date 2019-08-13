@@ -12,7 +12,7 @@ export class SearchResultEffects {
     loadMetaData$ =
         this.actions$.pipe(
             ofType(SearchResultActions.LOAD_SEARCH_RESULT),
-            mergeMap(data => this.searchResultService.getSearchResultData()
+            mergeMap(data => this.searchResultService.getSearchResultData(data)
                 .pipe(
                     map(
                         searchData =>

@@ -15,7 +15,7 @@ export class ReportEffects {
   loadMetaData$ =
     this.actions$.pipe(
       ofType(reportActions.LOAD_REPORT_DATA),
-      mergeMap(result => this.reportService.getMetaData()
+      mergeMap(result => this.reportService.getReportData(result)
         .pipe(
         map(
           movies =>

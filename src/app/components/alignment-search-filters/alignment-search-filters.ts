@@ -126,7 +126,6 @@ export class AlignmentSearchFiltersComponent implements OnInit {
 
 
     this.store.select('advancedSearch').subscribe(data => {
-      debugger
       this.metaData = data.metaData;
       this.careers = this.metaData['CareerFields'];
       this.strands = this.metaData['Strands'];
@@ -283,13 +282,13 @@ export class AlignmentSearchFiltersComponent implements OnInit {
    // console.log(this.selectedAcademicItems);
   }
   onOutcomeSelect(outcome) {
-    debugger;
     // TODO: Call API
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA , payload : this.selectedOutcome});
     console.log(this.competencyNumbers);
   }
   search() {
     this.goToPage('SearchResults');
+    debugger
     this.searchObj = {
       selectedCareers: this.selectedCareer,
       selectedStrands: this.selectedStrands,

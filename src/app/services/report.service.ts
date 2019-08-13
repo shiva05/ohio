@@ -11,8 +11,8 @@ import { environment } from '../../environments/environment';
 export class ReportService {
   constructor(private http: HttpClient) {}
 
-  getMetaData() {
-    return this.http.get('/report');
-
+  getReportData(obj) {
+    var URL = 'https://edu-dev-sbd-commonfunctions.azurewebsites.net/api/GetCTEAlignmentSearchReport?code=Qjp8OlEY1C4fCfz6WD7F1C/nTLUkrDp2ieI7/tJJXeH9AZo4ioPauQ==';
+    return this.http.post(URL,obj);
   }
 }

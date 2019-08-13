@@ -4,6 +4,9 @@ import * as util from 'util';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import * as SearchResultsActions from './../../actions/search-result.action';
+import { SearchResultData } from './../../models/searchResult.model';
+import { Observable } from 'rxjs/Observable';
+import {SearchResultService} from '../../services/search-result.service';
 
 @Component({
   selector: 'custom-accordion',
@@ -20,40 +23,102 @@ export class CustomAccordionComponent implements OnInit {
   strands: any = [];
   competency: any = [];
   outcomes: any = [];
-
+  searchResultData: any ={};
+  searchResultDataArray: any = [];
 
   @Output() onPageSelect = new EventEmitter<any>();
 
   constructor(private store: Store<AppState>,
-              private httpService: HttpClient) {
-    this.store.dispatch({ type: SearchResultsActions.LOAD_SEARCH_RESULT });
+              private httpService: HttpClient ,private searchResultService :SearchResultService) {
   }
 
   ngOnInit() {
-    this.httpService.get('../../../assets/json/CareerCompetency.json').subscribe(
-      data => {
-        this.accordionData = data;
-        console.log(this.accordionData);
+    this.store.select('advancedSearch').subscribe(data => {
+      if (data.alignmentSearchSelectedFilters) {
 
-        if (this.accordionData) {
-          this.formattedData = this.getAccordionData();
-          console.log(this.formattedData);
-        }
+        var careerfeilds = [];
+        data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
+          careerfeilds.push(element.CareerFieldId);
+        });
 
-      },
-      (err: HttpErrorResponse) => {
-        console.log(err.message);
+        var strands = [];
+        data.alignmentSearchSelectedFilters.selectedStrands.forEach(element => {
+          strands.push(element.StrandPk);
+        });
+
+        var outcomes = [];
+        data.alignmentSearchSelectedFilters.selectedOutcomes.forEach(element => {
+          outcomes.push(element.OutcomePk);
+        });
+
+        var CompetencyIds = [];
+        data.alignmentSearchSelectedFilters.selectedCompetencies.forEach(element => {
+          CompetencyIds.push(element.CareerFieldId);
+        });
+
+
+        var subjects = [];
+        data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
+          var level1= [];
+          if(element.Level[0] && element.Level[0].SelectedItems){
+            element.Level[0].SelectedItems.forEach(element => {
+              level1.push(element.LevelValue1);
+          });
+          }
+
+          var level2= [];
+          if(element.Level[1] && element.Level[1].SelectedItems){
+            element.Level[1].SelectedItems.forEach(element => {
+                level2.push(element.LevelValue1);
+            });
+          }
+
+
+
+          var level3= [];
+          if (element.Level[3] && element.Level[3].SelectedItems) {
+            element.Level[3].SelectedItems.forEach(element => {
+              level3.push(element.LevelValue1);
+            });
+          }
+
+
+          var subject = {
+            "SubjectId": element.SubjectId,
+            "Level1Ids": level1,
+            "Level2Ids": level2,
+            "Level3Ids": level3
+          };
+          subjects.push(subject);
+        });
+
+        console.log();
+        var obj = {
+          "Keywords": "",
+          "CareerFiledIds":careerfeilds,
+          "StrandIds": strands,
+          "OutcomeIds": outcomes,
+          "CompetencyIds": CompetencyIds,
+          "Subjects":subjects,
+          "CteToAcademic": true
+        };
+        this.searchResultService.getSearchResultData(obj).subscribe(
+          data => {
+            debugger
+            this.searchResultData =data;
+            this.searchResultDataArray.push(this.searchResultData);
+            this.formatSearchResultDataArray();
+          },
+          err => {
+              // Log errors if any
+              console.log(err);
+          });
       }
-    );
-
-    // this.data = {};
-
-
-    // this.store.select('searchResult').subscribe(response => {
-    //   this.data = response.searchResultList;
-    // });
+    });
   }
+  formatSearchResultDataArray(){
 
+  }
   // Click event on Career Field
   careerFieldCheckBox(parentObj) {
     // tslint:disable-next-line:prefer-for-of
