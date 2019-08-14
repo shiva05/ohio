@@ -57,6 +57,7 @@ export class FilterSummaryComponent implements OnInit {
         data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
           console.log(element);
           const level1 = [];
+          const level1Name = element.Level[0].LevelName;
           if (element.Level[0] && element.Level[0].SelectedItems) {
             element.Level[0].SelectedItems.forEach(element => {
               level1.push(element.LevelValue1);
@@ -64,17 +65,16 @@ export class FilterSummaryComponent implements OnInit {
           }
 
           const level2 = [];
+          const level2Name = element.Level[1].LevelName;
           if (element.Level[1] && element.Level[1].SelectedItems) {
             element.Level[1].SelectedItems.forEach(element => {
               level2.push(element.LevelValue1);
             });
           }
-
-
-
           const level3 = [];
-          if (element.Level[3] && element.Level[3].SelectedItems) {
-            element.Level[3].SelectedItems.forEach(element => {
+          const level3Name = element.Level[2].LevelName;
+          if (element.Level[2] && element.Level[2].SelectedItems) {
+            element.Level[2].SelectedItems.forEach(element => {
               level3.push(element.LevelValue1);
             });
           }
@@ -82,9 +82,13 @@ export class FilterSummaryComponent implements OnInit {
 
           const subject = {
             SubjectId: element.SubjectId,
+            SubjectName :element.SubjectName,
             Level1Ids: level1,
+            level1Name :level1Name,
             Level2Ids: level2,
-            Level3Ids: level3
+            level2Name : level2Name,
+            Level3Ids: level3,
+            level3Name:level3Name
           };
           subjects.push(subject);
         });
@@ -95,7 +99,7 @@ export class FilterSummaryComponent implements OnInit {
           CareerFieldIds: careerfields,
           StrandIds: strands,
           OutcomeIds: outcomes,
-          CompetencyIds,
+          CompetencyIds :CompetencyIds,
           Subjects: subjects,
           CteToAcademic: true
         };

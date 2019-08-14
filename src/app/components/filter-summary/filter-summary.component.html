@@ -10,26 +10,35 @@
             <span class="filter-each">
               <span>
                 <label>Career Field: </label>
-                <span class="badge badge-light">{{FilterSummaryKeys.CareerFieldIds[0]}} +{{FilterSummaryKeys.CareerFieldIds.length - 1}}</span>
-              </span>
+                <span class="badge badge-light" *ngIf="FilterSummaryKeys.CareerFieldIds.length == 1">{{FilterSummaryKeys.CareerFieldIds[0]}}</span>
+              <span class="badge badge-light" *ngIf="FilterSummaryKeys.CareerFieldIds.length >1">{{FilterSummaryKeys.CareerFieldIds[0]}} +{{FilterSummaryKeys.CareerFieldIds.length - 1}}</span>
+            </span>
               <label>Strands: </label>
-              <span class="badge badge-light">{{FilterSummaryKeys.StrandIds[0]}}
-                +{{FilterSummaryKeys.StrandIds.length - 1}}
-              </span>
+              <span class="badge badge-light" *ngIf="FilterSummaryKeys.StrandIds.length == 1">{{FilterSummaryKeys.StrandIds[0]}}</span>
+              <span class="badge badge-light"*ngIf="FilterSummaryKeys.StrandIds.length > 1">{{FilterSummaryKeys.StrandIds[0]}} +{{FilterSummaryKeys.StrandIds.length - 1}}</span>
               <label>Outcomes: </label>
-              <span class="badge badge-light">{{FilterSummaryKeys.OutcomeIds[0]}}
+              <span class="badge badge-light" *ngIf="FilterSummaryKeys.OutcomeIds.length == 1">{{FilterSummaryKeys.OutcomeIds[0]}}
+              </span>
+              <span class="badge badge-light" *ngIf="FilterSummaryKeys.OutcomeIds.length > 1">{{FilterSummaryKeys.OutcomeIds[0]}}
                 +{{FilterSummaryKeys.OutcomeIds.length - 1}}
+              </span>
+              <label>Competency Numbers: </label>
+              <span class="badge badge-light" *ngIf="FilterSummaryKeys.CompetencyIds.length == 1">{{FilterSummaryKeys.CompetencyIds[0]}}
+              </span>
+              <span class="badge badge-light" *ngIf="FilterSummaryKeys.CompetencyIds.length > 1">{{FilterSummaryKeys.CompetencyIds[0]}}
+                +{{FilterSummaryKeys.CompetencyIds.length - 1}}
               </span>
 
               <div *ngIf="FilterSummaryKeys.Subjects">
                 <div class="filter-each" [hidden]="!panelExpanded" *ngFor="let item of FilterSummaryKeys.Subjects; let i = index">
                   <hr>
-                  <label>Academic Subjects: </label>
-                  <label>Grade/Subject: </label>
+                  <label>Academic Subjects :</label>
+                  <span class="badge badge-light">{{item.SubjectName}}</span> |
+                  <label>{{item.level1Name}} : </label>
                   <span class="badge badge-light">{{item.Level1Ids}}</span> |
-                  <label>Course Name: </label>
+                  <label>{{item.level2Name }} :</label>
                   <span class="badge badge-light">{{item.Level2Ids}}</span> |
-                  <label>Standard Numbers: </label>
+                  <label>{{item.level3Name}} :</label>
                   <span class="badge badge-light">{{item.Level3Ids}}</span>
                 </div>
               </div>
