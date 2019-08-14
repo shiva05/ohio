@@ -38,38 +38,38 @@ export class CustomAccordionComponent implements OnInit {
     this.store.select('advancedSearch').subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
 
-        const careerfeilds = [];
+        let careerfeilds = [];
         data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
           careerfeilds.push(element.CareerFieldId);
         });
 
-        const strands = [];
+        let strands = [];
         data.alignmentSearchSelectedFilters.selectedStrands.forEach(element => {
           strands.push(element.StrandPk);
         });
 
-        const outcomes = [];
+        let outcomes = [];
         data.alignmentSearchSelectedFilters.selectedOutcomes.forEach(element => {
           outcomes.push(element.OutcomePk);
         });
 
-        const CompetencyIds = [];
+        let CompetencyIds = [];
         data.alignmentSearchSelectedFilters.selectedCompetencies.forEach(element => {
 
           // CompetencyIds.push(element.CareerFieldId);
         });
 
 
-        const subjects = [];
+        let subjects = [];
         data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
-          const level1 = [];
+          let level1 = [];
           if (element.Level[0] && element.Level[0].SelectedItems) {
             element.Level[0].SelectedItems.forEach(element => {
               level1.push(element.LevelValue1);
           });
           }
 
-          const level2 = [];
+          let level2 = [];
           if (element.Level[1] && element.Level[1].SelectedItems) {
             element.Level[1].SelectedItems.forEach(element => {
                 level2.push(element.LevelValue1);
@@ -78,7 +78,7 @@ export class CustomAccordionComponent implements OnInit {
 
 
 
-          const level3 = [];
+          let level3 = [];
           if (element.Level[3] && element.Level[3].SelectedItems) {
             element.Level[3].SelectedItems.forEach(element => {
               level3.push(element.LevelValue1);
@@ -86,7 +86,7 @@ export class CustomAccordionComponent implements OnInit {
           }
 
 
-          const subject = {
+          let subject = {
             SubjectId: element.SubjectId,
             Level1Ids: level1,
             Level2Ids: level2,
@@ -96,7 +96,7 @@ export class CustomAccordionComponent implements OnInit {
         });
 
         console.log();
-        const obj = {
+        let obj = {
           Keywords: '',
           CareerFiledIds: careerfeilds,
           StrandIds: strands,
@@ -121,7 +121,7 @@ export class CustomAccordionComponent implements OnInit {
   formatSearchResultDataArray() {
     this.formattedSearchResultData = [];
 
-    const formattedObj = {
+    let formattedObj = {
 
     };
     // this.searchResultDataArray.forEach(element => {
@@ -266,7 +266,7 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   goBackToSearch() {
-    const lable = localStorage.getItem('searchLable');
+    let lable = localStorage.getItem('searchLable');
     this.onPageSelect.emit(lable);
   }
 
@@ -281,8 +281,8 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   getAccordionData() {
-    const data = [];
-    // const ParentChildchecklist = {};
+    let data = [];
+    // var ParentChildchecklist = {};
     // data.push(ParentChildchecklist);
 
     // tslint:disable-next-line:prefer-for-of

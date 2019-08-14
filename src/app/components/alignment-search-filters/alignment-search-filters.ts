@@ -233,10 +233,10 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   }
 
   onSubjectLevelsSelect(data) {
-    const dropDownSetId: any = [];
-    const selectedSetId: any = [];
+    let dropDownSetId: any = [];
+    let selectedSetId: any = [];
     let updatedSelectedSetId: any = [];
-    const tempData = this.selectedAcademicItems;
+    let tempData = this.selectedAcademicItems;
     tempData.map((subject) => {
         if (data.SubjectId === subject.SubjectId) { // comparing the selected items  level id with below statement which is the data of main object
           subject.Level.map((mainCourse, index) => {
