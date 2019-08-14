@@ -23,54 +23,54 @@ export class CustomAccordionComponent implements OnInit {
   strands: any = [];
   competency: any = [];
   outcomes: any = [];
-  searchResultData: any ={};
+  searchResultData: any = {};
   searchResultDataArray: any = [];
-  formattedSearchResultData : any =[];
-  finalSearchResults :any [];
+  formattedSearchResultData: any = [];
+  finalSearchResults: any [];
 
   @Output() onPageSelect = new EventEmitter<any>();
 
   constructor(private store: Store<AppState>,
-              private httpService: HttpClient ,private searchResultService :SearchResultService) {
+              private httpService: HttpClient , private searchResultService: SearchResultService) {
   }
 
   ngOnInit() {
     this.store.select('advancedSearch').subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
 
-        var careerfeilds = [];
+        const careerfeilds = [];
         data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
           careerfeilds.push(element.CareerFieldId);
         });
 
-        var strands = [];
+        const strands = [];
         data.alignmentSearchSelectedFilters.selectedStrands.forEach(element => {
           strands.push(element.StrandPk);
         });
 
-        var outcomes = [];
+        const outcomes = [];
         data.alignmentSearchSelectedFilters.selectedOutcomes.forEach(element => {
           outcomes.push(element.OutcomePk);
         });
 
-        var CompetencyIds = [];
+        const CompetencyIds = [];
         data.alignmentSearchSelectedFilters.selectedCompetencies.forEach(element => {
 
-          //CompetencyIds.push(element.CareerFieldId);
+          // CompetencyIds.push(element.CareerFieldId);
         });
 
 
-        var subjects = [];
+        const subjects = [];
         data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
-          var level1= [];
-          if(element.Level[0] && element.Level[0].SelectedItems){
+          const level1 = [];
+          if (element.Level[0] && element.Level[0].SelectedItems) {
             element.Level[0].SelectedItems.forEach(element => {
               level1.push(element.LevelValue1);
           });
           }
 
-          var level2= [];
-          if(element.Level[1] && element.Level[1].SelectedItems){
+          const level2 = [];
+          if (element.Level[1] && element.Level[1].SelectedItems) {
             element.Level[1].SelectedItems.forEach(element => {
                 level2.push(element.LevelValue1);
             });
@@ -78,7 +78,7 @@ export class CustomAccordionComponent implements OnInit {
 
 
 
-          var level3= [];
+          const level3 = [];
           if (element.Level[3] && element.Level[3].SelectedItems) {
             element.Level[3].SelectedItems.forEach(element => {
               level3.push(element.LevelValue1);
@@ -86,29 +86,28 @@ export class CustomAccordionComponent implements OnInit {
           }
 
 
-          var subject = {
-            "SubjectId": element.SubjectId,
-            "Level1Ids": level1,
-            "Level2Ids": level2,
-            "Level3Ids": level3
+          const subject = {
+            SubjectId: element.SubjectId,
+            Level1Ids: level1,
+            Level2Ids: level2,
+            Level3Ids: level3
           };
           subjects.push(subject);
         });
 
         console.log();
-        var obj = {
-          "Keywords": "",
-          "CareerFiledIds":careerfeilds,
-          "StrandIds": strands,
-          "OutcomeIds": outcomes,
-          "CompetencyIds": CompetencyIds,
-          "Subjects":subjects,
-          "CteToAcademic": true
+        const obj = {
+          Keywords: '',
+          CareerFiledIds: careerfeilds,
+          StrandIds: strands,
+          OutcomeIds: outcomes,
+          CompetencyIds,
+          Subjects: subjects,
+          CteToAcademic: true
         };
         this.searchResultService.getSearchResultData(obj).subscribe(
           data => {
-            debugger
-            this.searchResultData =data;
+            this.searchResultData = data;
             this.searchResultDataArray.push(this.searchResultData);
             this.formatSearchResultDataArray();
           },
@@ -119,10 +118,10 @@ export class CustomAccordionComponent implements OnInit {
       }
     });
   }
-  formatSearchResultDataArray(){
+  formatSearchResultDataArray() {
     this.formattedSearchResultData = [];
 
-    var formattedObj ={
+    const formattedObj = {
 
     };
     // this.searchResultDataArray.forEach(element => {

@@ -7,22 +7,31 @@
       <div class="search-filter">
         <div class="search-filter-left">
           <div class="filter">
-            <span class="filter-each" *ngFor="let item of FilterSummaryData; let i = index">
-              <span *ngIf="item.fieldType == 1">
-                <span *ngIf="i != item.length && i != 0"> | </span>
-                <label>{{item.fieldName}}: </label>
-                <span class="badge badge-light">{{item.fieldValue}}</span>
+            <span class="filter-each">
+              <span>
+                <label>Career Field: </label>
+                <span class="badge badge-light">{{FilterSummaryKeys.CareerFieldIds[0]}} +{{FilterSummaryKeys.CareerFieldIds.length - 1}}</span>
               </span>
-              <div class="filter-each" *ngIf="item.fieldType == 2" [hidden]="!panelExpanded">
-                <hr>
-                <label>{{item.fieldAcadamicName}}: </label>
-                <span class="badge badge-light">{{item.fieldAcadamicValue}}</span> |
-                <label>{{item.fieldGradeName}}: </label>
-                <span class="badge badge-light">{{item.fieldGradeValue}}</span> |
-                <label>{{item.fieldClusterName}}: </label>
-                <span class="badge badge-light">{{item.fieldClusterValue}}</span> |
-                <label>{{item.fieldStandardNumberName}}: </label>
-                <span class="badge badge-light">{{item.fieldStandardNumberValue}}</span>
+              <label>Strands: </label>
+              <span class="badge badge-light">{{FilterSummaryKeys.StrandIds[0]}}
+                +{{FilterSummaryKeys.StrandIds.length - 1}}
+              </span>
+              <label>Outcomes: </label>
+              <span class="badge badge-light">{{FilterSummaryKeys.OutcomeIds[0]}}
+                +{{FilterSummaryKeys.OutcomeIds.length - 1}}
+              </span>
+
+              <div *ngIf="FilterSummaryKeys.Subjects">
+                <div class="filter-each" [hidden]="!panelExpanded" *ngFor="let item of FilterSummaryKeys.Subjects; let i = index">
+                  <hr>
+                  <label>Academic Subjects: </label>
+                  <label>Grade/Subject: </label>
+                  <span class="badge badge-light">{{item.Level1Ids}}</span> |
+                  <label>Course Name: </label>
+                  <span class="badge badge-light">{{item.Level2Ids}}</span> |
+                  <label>Standard Numbers: </label>
+                  <span class="badge badge-light">{{item.Level3Ids}}</span>
+                </div>
               </div>
             </span>
           </div>
