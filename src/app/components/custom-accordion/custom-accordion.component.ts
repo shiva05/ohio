@@ -63,14 +63,14 @@ export class CustomAccordionComponent implements OnInit {
         var subjects = [];
         data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
           var level1= [];
-          if(element.Level[0] && element.Level[0].SelectedItems){
+          if(element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length >0){
             element.Level[0].SelectedItems.forEach(element => {
               level1.push(element.LevelValue1);
           });
           }
 
           var level2= [];
-          if(element.Level[1] && element.Level[1].SelectedItems){
+          if(element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length >0){
             element.Level[1].SelectedItems.forEach(element => {
                 level2.push(element.LevelValue1);
             });
@@ -79,7 +79,7 @@ export class CustomAccordionComponent implements OnInit {
 
 
           var level3= [];
-          if (element.Level[3] && element.Level[3].SelectedItems) {
+          if (element.Level[3] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length >0) {
             element.Level[3].SelectedItems.forEach(element => {
               level3.push(element.LevelValue1);
             });
@@ -109,7 +109,7 @@ export class CustomAccordionComponent implements OnInit {
           data => {
             debugger
             this.searchResultData =data;
-            this.searchResultDataArray.push(this.searchResultData);
+            this.searchResultDataArray.push(this.searchResultData.CareerField);
             this.formatSearchResultDataArray();
           },
           err => {
@@ -120,29 +120,8 @@ export class CustomAccordionComponent implements OnInit {
     });
   }
   formatSearchResultDataArray(){
-    this.formattedSearchResultData = [];
 
-    var formattedObj ={
 
-    };
-    // this.searchResultDataArray.forEach(element => {
-    //    element.CareerField.forEach(cf => {
-    //       cf.AcademicSubject.forEach(cfac => {
-    //         cf.Strand.forEach(st => {
-    //             st.Outcome.forEach(oc => {
-    //               var competency = [];
-    //               oc.Competency.forEach(comp => {
-    //                     var comp ={
-    //                       id :comp.CompetencyId,
-    //                       value: comp.CompetencyName
-    //                     }
-    //                     competency.push(comp);
-    //               });
-    //             });
-    //         });
-    //       });
-    //    });
-    // });
   }
   // Click event on Career Field
   careerFieldCheckBox(parentObj) {
