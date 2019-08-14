@@ -23,7 +23,7 @@ export class CourseSearchFiltersComponent implements OnInit {
   careerPathCourseSettings: any = {};
   academicSubjectsSettings: any = {};
   academicSubjectCourseSettings: any = [];
-
+  subjectsDefaultSettings: any = {};
   selectedCareerPath: any = [];
   selectedCourses: any = [];
   selectedAcadamicSubjects: any = [];
@@ -39,8 +39,9 @@ export class CourseSearchFiltersComponent implements OnInit {
 
   mathsCourseName: any = [];
   ELACourseName: any = [];
-  scienceCourseName: any[];
-  socialCourseName: any[];
+  scienceCourseName: any =[];
+  socialCourseName: any =[];
+  selectedAcademicItems: any = [];
 
   selectedAcademicCourses: any = [];
 
@@ -57,7 +58,27 @@ export class CourseSearchFiltersComponent implements OnInit {
       this.careerPath = this.courseSearchData['CareerPath'];
       this.courses = this.courseSearchData['CareerPathCourses'];
       this.academicSubjects = this.courseSearchData['Subjects'];
+     
+     
+      this.academicSubjectCourse = [];
+      // if (this.metaData['Subjects'] && data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length == 0) {
       this.academicSubjectCourse = this.courseSearchData['SubjectCourses'];
+      if (this.academicSubjectCourse != undefined) {
+        if (this.academicSubjectCourse.length > 0) {
+          this.academicSubjectCourse.forEach((subject) => {
+            subject.GradeSubjects.forEach((item) => {
+              item['SelectedItems'] = {}; // to maintain the individual selected list from the dropdowns.
+              item['DropdownList'] = item.SubjectLevels;
+            });
+          });
+        }
+      }
+
+        // this.metaData['Subjects'].forEach(element => {
+        //   this.academicSubjects.push({SubjectId :element.SubjectId,SubjectName :element.SubjectName});
+        //});
+     // }
+     // console.log(this.academicSubjectCourse);
     });
 
     this.careerPathSettings = {
@@ -87,6 +108,14 @@ export class CourseSearchFiltersComponent implements OnInit {
       allowSearchFilter: true
     };
 
+    this.subjectsDefaultSettings = {
+      singleSelection: false,
+      idField: 'GradeSubjectId', textField: 'LevelValue',
+      selectAllText: 'Select All',
+      unSelectAllText: 'Unselect All',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    };
     this.academicSubjectCourseSettings = {
       singleSelection: false,
       idField: 'LevelId', textField: 'LevelValue',
@@ -109,31 +138,63 @@ export class CourseSearchFiltersComponent implements OnInit {
     });
   }
 
-  onAcadamicSubjectSelect(selectedSubject) {
-    this.mathsCourseName = [];
-    this.ELACourseName = [];
-    this.scienceCourseName = [];
-    this.socialCourseName = [];
+  getData(data) {
+    console.log(data);
+  }
+  //onAcadamicSubjectSelect(selectedSubject) {
+  //  this.mathsCourseName = [];
+  //  this.ELACourseName = [];
+  //  this.scienceCourseName = [];
+  //  this.socialCourseName = [];
 
-    selectedSubject.forEach(sub => {
-      if (sub.SubjectId === 1) {
-        this.academicSubjectCourse[0].GradeSubjects.forEach(element => {
-          this.mathsCourseName.push(element.LevelValue);
-        });
-      } else if (sub.SubjectId === 2) {
-        this.academicSubjectCourse[1].GradeSubjects.forEach(element => {
-          this.ELACourseName.push(element.LevelValue);
-        });
-      } else if (sub.SubjectId === 3) {
-        this.academicSubjectCourse[2].GradeSubjects.forEach(element => {
-          this.scienceCourseName.push(element.LevelValue);
-        });
-      } else if (sub.SubjectId === 4) {
-        this.academicSubjectCourse[3].GradeSubjects.forEach(element => {
-          this.socialCourseName.push(element.LevelValue);
-        });
-      }
+  //  selectedSubject.forEach(sub => {
+  //    if (sub.SubjectId === 1) {
+  //      this.academicSubjectCourse[0].GradeSubjects.forEach(element => {
+  //        this.mathsCourseName.push(element.LevelValue);
+  //      });
+  //    } else if (sub.SubjectId === 2) {
+  //      this.academicSubjectCourse[1].GradeSubjects.forEach(element => {
+  //        this.ELACourseName.push(element.LevelValue);
+  //      });
+  //    } else if (sub.SubjectId === 3) {
+  //      this.academicSubjectCourse[2].GradeSubjects.forEach(element => {
+  //        this.scienceCourseName.push(element.LevelValue);
+  //      });
+  //    } else if (sub.SubjectId === 4) {
+  //      this.academicSubjectCourse[3].GradeSubjects.forEach(element => {
+  //        this.socialCourseName.push(element.LevelValue);
+  //      });
+  //    }
+  //  });
+  //}
+
+  onItemSelect(event) {
+    this.selectedAcademicItems = this.selectedAcadamicSubjects;
+    this.selectListCreation();
+  }
+  OnItemDeSelect(event) {
+    this.selectedAcademicItems = this.selectedAcadamicSubjects;
+    this.selectListCreation();
+  }
+  onSelectAll(event) {
+    this.selectedAcademicItems = [];
+    this.selectedAcademicItems = event;
+    this.selectListCreation();
+  }
+  onDeSelectAll(event) {
+    this.selectedAcademicItems = [];
+    this.selectedAcadamicSubjects = [];
+  }
+
+  selectListCreation() {
+    this.selectedAcademicItems.forEach((e) => {
+      this.academicSubjectCourse.forEach((ace) => {
+        if (e.SubjectId === ace.SubjectId) {
+          e['GradeSubjects'] = ace.GradeSubjects;
+        }
+      });
     });
+    console.log(this.selectedAcademicItems);
   }
 
   selectAllAcademicSubject(data) {
@@ -149,7 +210,8 @@ export class CourseSearchFiltersComponent implements OnInit {
       selectedCareerPath: this.selectedCareerPath,
       selectedCareerPathCourses: this.selectedCourses,
       selectedAcademicSubject: this.selectedAcadamicSubjects,
-      selectedAcademicSubjectCourses: [this.selectedMathsCourses, this.selectedELACourses, this.selectedScienceCourses, this.selectedSocialCourses]
+     // selectedAcademicSubjectCourses: [this.selectedMathsCourses, this.selectedELACourses, this.selectedScienceCourses, this.selectedSocialCourses]
+      selectedAcademicSubjectCourses : this.selectedAcademicItems
     };
     this.store.dispatch({ type: CourseSearchActions.SAVE_AS_SELECTED_FILTERS_COURSESEARCH, payload: this.searchObj });
     localStorage.setItem('searchLable', 'SearchCourse');
