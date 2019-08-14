@@ -23,44 +23,44 @@ export class CustomAccordionComponent implements OnInit {
   strands: any = [];
   competency: any = [];
   outcomes: any = [];
-  searchResultData: any ={};
+  searchResultData: any = {};
   searchResultDataArray: any = [];
-  formattedSearchResultData : any =[];
-  finalSearchResults :any [];
+  formattedSearchResultData: any = [];
+  finalSearchResults: any [];
 
   @Output() onPageSelect = new EventEmitter<any>();
 
   constructor(private store: Store<AppState>,
-              private httpService: HttpClient ,private searchResultService :SearchResultService) {
+              private httpService: HttpClient , private searchResultService: SearchResultService) {
   }
 
   ngOnInit() {
     this.store.select('advancedSearch').subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
 
-        var careerfeilds = [];
+        let careerfeilds = [];
         data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
           careerfeilds.push(element.CareerFieldId);
         });
 
-        var strands = [];
+        let strands = [];
         data.alignmentSearchSelectedFilters.selectedStrands.forEach(element => {
           strands.push(element.StrandPk);
         });
 
-        var outcomes = [];
+        let outcomes = [];
         data.alignmentSearchSelectedFilters.selectedOutcomes.forEach(element => {
           outcomes.push(element.OutcomePk);
         });
 
-        var CompetencyIds = [];
+        let CompetencyIds = [];
         data.alignmentSearchSelectedFilters.selectedCompetencies.forEach(element => {
 
-          //CompetencyIds.push(element.CareerFieldId);
+          // CompetencyIds.push(element.CareerFieldId);
         });
 
 
-        var subjects = [];
+        let subjects = [];
         data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
           var level1= [];
           if(element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length >0){
@@ -86,24 +86,24 @@ export class CustomAccordionComponent implements OnInit {
           }
 
 
-          var subject = {
-            "SubjectId": element.SubjectId,
-            "Level1Ids": level1,
-            "Level2Ids": level2,
-            "Level3Ids": level3
+          let subject = {
+            SubjectId: element.SubjectId,
+            Level1Ids: level1,
+            Level2Ids: level2,
+            Level3Ids: level3
           };
           subjects.push(subject);
         });
 
         console.log();
-        var obj = {
-          "Keywords": "",
-          "CareerFiledIds":careerfeilds,
-          "StrandIds": strands,
-          "OutcomeIds": outcomes,
-          "CompetencyIds": CompetencyIds,
-          "Subjects":subjects,
-          "CteToAcademic": true
+        let obj = {
+          Keywords: '',
+          CareerFiledIds: careerfeilds,
+          StrandIds: strands,
+          OutcomeIds: outcomes,
+          CompetencyIds,
+          Subjects: subjects,
+          CteToAcademic: true
         };
         this.searchResultService.getSearchResultData(obj).subscribe(
           data => {
@@ -246,7 +246,7 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   goBackToSearch() {
-    const lable = localStorage.getItem('searchLable');
+    let lable = localStorage.getItem('searchLable');
     this.onPageSelect.emit(lable);
   }
 
@@ -261,8 +261,8 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   getAccordionData() {
-    const data = [];
-    // const ParentChildchecklist = {};
+    let data = [];
+    // var ParentChildchecklist = {};
     // data.push(ParentChildchecklist);
 
     // tslint:disable-next-line:prefer-for-of

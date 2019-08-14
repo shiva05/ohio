@@ -82,6 +82,7 @@
     "no-output-rename": true,
     "no-outputs-metadata-property": true,
     "no-string-literal": false,
+    "prefer-const": false,
     "template-banana-in-box": true,
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,

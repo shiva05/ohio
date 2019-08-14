@@ -21,7 +21,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   limitSelection = false;
   careers: any = [];
   academicSubjects: any  = [];
-  strands :any = [];
+  strands: any = [];
   outcomes: any  = [];
   grades: any = [];
   clusters: any = [];
@@ -66,7 +66,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       unSelectAllText: 'Unselect All',
       itemsShowLimit: 1,
       allowSearchFilter: true
-    }
+    };
     this.careerFieldDropdownSettings = {
       singleSelection: false,
       idField: 'CareerFieldId', textField: 'CareerFieldName',
@@ -134,12 +134,12 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       this.clusters = this.metaData['clusters'];
       this.standardNumbers = this.metaData['standardNumbers'];
       this.competencyNumbers = data.competencies;
-      if (this.metaData['Subjects'] && data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length==0) {
+      if (this.metaData['Subjects'] && data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length == 0) {
         this.academicSubjects = this.metaData['Subjects'];
         this.academicSubjects.forEach((subject) => {
           subject.Level.forEach((item) => {
             item['SelectedItems'] = {}; // to maintain the individual selected list from the dropdowns.
-            item['DropdownList'] = []; //to set the data for the dropdowns of each item of a subject.
+            item['DropdownList'] = []; // to set the data for the dropdowns of each item of a subject.
             if (item.LevelNumber === 1) { // to bind the data for the 1st column dropdown list.
               item['DropdownList'] = item.SubjectLevels;
             }
@@ -147,23 +147,23 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         });
        // this.metaData['Subjects'].forEach(element => {
        //   this.academicSubjects.push({SubjectId :element.SubjectId,SubjectName :element.SubjectName});
-       //});
+       // });
       }
-      if(data.alignmentSearchSelectedFilters){
+      if (data.alignmentSearchSelectedFilters) {
         if (data.alignmentSearchSelectedFilters.selectedCareers.length > 0) {
           this.selectedCareer = data.alignmentSearchSelectedFilters.selectedCareers;
         }
         if (data.alignmentSearchSelectedFilters.selectedStrands.length > 0) {
           this.selectedStrands = data.alignmentSearchSelectedFilters.selectedStrands;
         }
-        if(data.alignmentSearchSelectedFilters.selectedOutcomes.length>0){
+        if (data.alignmentSearchSelectedFilters.selectedOutcomes.length > 0) {
           this.selectedOutcome = data.alignmentSearchSelectedFilters.selectedOutcomes;
         }
-        if(data.alignmentSearchSelectedFilters.selectedCompetencies.length >0){
+        if (data.alignmentSearchSelectedFilters.selectedCompetencies.length > 0) {
           this.selectedCompetencyNumbers =  data.alignmentSearchSelectedFilters.selectedCompetencies;
         }
-         this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length>0 ? data.alignmentSearchSelectedFilters.selectedAcadamicSubjects :[];
-         if (data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0) {
+        this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0 ? data.alignmentSearchSelectedFilters.selectedAcadamicSubjects : [];
+        if (data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0) {
            this.selectedAcademicItems = this.selectedAcadamicSubjects;
            this.selectListCreation();
          }
@@ -242,18 +242,18 @@ export class AlignmentSearchFiltersComponent implements OnInit {
           subject.Level.map((mainCourse, index) => {
             if (data.LevelId + 1 === mainCourse.LevelId) {
               mainCourse.DropdownList = [];
-                data.SelectedItems.map((selectedItem) => {   //assigning parent level dropdown data
+              data.SelectedItems.map((selectedItem) => {   // assigning parent level dropdown data
                   mainCourse.SubjectLevels.map((targetedDropdown) => { // setting the vakle of dropdown here
                     if (selectedItem.SubjectLevelsPk === targetedDropdown.ParentLevelPk) {
                       mainCourse.DropdownList.push(targetedDropdown);
                     }
                   });
-                  //if (selectedItem.SubjectLevelsPk === )
+                  // if (selectedItem.SubjectLevelsPk === )
               });
               // to set the values of only selected list options
-                mainCourse.DropdownList.forEach((dropwdownList) => { dropDownSetId.push(dropwdownList.SubjectLevelsPk) }); //start mappiing the next dropdown
-                if (mainCourse.SelectedItems.length > 0) {
-                  mainCourse.SelectedItems.forEach((selectedList) => { selectedSetId.push(selectedList.SubjectLevelsPk) });
+              mainCourse.DropdownList.forEach((dropwdownList) => { dropDownSetId.push(dropwdownList.SubjectLevelsPk); }); // start mappiing the next dropdown
+              if (mainCourse.SelectedItems.length > 0) {
+                  mainCourse.SelectedItems.forEach((selectedList) => { selectedSetId.push(selectedList.SubjectLevelsPk); });
                   updatedSelectedSetId = _.intersection(dropDownSetId, selectedSetId);
                   if (updatedSelectedSetId.length === 0) {
                     mainCourse.SelectedItems = [];
@@ -269,8 +269,8 @@ export class AlignmentSearchFiltersComponent implements OnInit {
                   }
                 } else {
                   mainCourse.SelectedItems = [];
-                } //end mappiing the next dropdown
-                this.onSubjectLevelsSelect(mainCourse);
+                } // end mappiing the next dropdown
+              this.onSubjectLevelsSelect(mainCourse);
             }
 
              // to remove the 3rd level values if parent lavel is empty.
@@ -289,7 +289,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   }
   search() {
     this.goToPage('SearchResults');
-    debugger
+    // debugger;
     this.searchObj = {
       selectedCareers: this.selectedCareer,
       selectedStrands: this.selectedStrands,
