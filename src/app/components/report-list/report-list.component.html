@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <div class="reports-each col-md-12" *ngFor="let result of results">
+    <div class="reports-each col-md-12" *ngFor="let result of reportListhResultData">
         <h2>{{result.title}}</h2>
         <div class="row">
 
@@ -30,14 +30,14 @@
 
                         <span class="reports-content-each-left">{{ 'ReportFields.CareerField' | translate }}</span>
 
-                        <span class="reports-content-each-right reports-blue">{{result.careerField}}</span>
+                        <span class="reports-content-each-right reports-blue">{{result.CareerFiledName}}</span>
 
                     </div>
                     <div class="reports-content-each">
 
                         <span class="reports-content-each-left">{{ 'ReportFields.Strand' | translate }}</span>
 
-                        <span class="reports-content-each-right">{{result.strand}}</span>
+                        <span class="reports-content-each-right">{{result.StrandName}}</span>
 
                     </div>
                     <div class="reports-content-each">
@@ -45,32 +45,32 @@
                             {{ 'ReportFields.Outcome' | translate }}
                         </span>
                         <span class="reports-content-each-right">
-                            {{result.outcome}}
+                            {{result.OutcomeName}}
                         </span>
                     </div>
                     <div class="reports-content-each">
                         <span class="reports-content-each-left">{{ 'ReportFields.Competency' | translate }}</span>
 
-                        <span class="reports-content-each-right">{{result.competency}}</span>
+                        <span class="reports-content-each-right">{{result.CompetencyName}}</span>
 
                     </div>
                     <div class="reports-content-each">
                         <span class="reports-content-each-left">{{ 'ReportFields.AcademicSubject' | translate }}</span>
 
-                        <span class="reports-content-each-right reports-green">{{result.academicSubject}}</span>
+                        <span class="reports-content-each-right reports-green">{{result.SubjectName}}</span>
 
                     </div>
 
                     <div class="reports-content-each">
-                        <span class="reports-content-each-left">{{ 'ReportFields.Cluster' | translate }}</span>
+                        <span class="reports-content-each-left">{{ result.DomainOrClusterTitle }}</span>
 
-                        <span class="reports-content-each-right">{{result.domain}}</span>
+                        <span class="reports-content-each-right">{{result.DomainOrClusterValue}}</span>
 
                     </div>
                     <div class="reports-content-each">
-                        <span class="reports-content-each-left">{{ 'ReportFields.Grade' | translate }}</span>
+                        <span class="reports-content-each-left">{{ result.GradeOrSubjectTitle}}</span>
 
-                        <span class="reports-content-each-right">{{result.grade}}</span>
+                        <span class="reports-content-each-right">{{result.GradeOrSubjectValue}}</span>
 
                     </div>
 

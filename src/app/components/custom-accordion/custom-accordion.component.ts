@@ -25,6 +25,8 @@ export class CustomAccordionComponent implements OnInit {
   outcomes: any = [];
   searchResultData: any ={};
   searchResultDataArray: any = [];
+  formattedSearchResultData : any =[];
+  finalSearchResults :any [];
 
   @Output() onPageSelect = new EventEmitter<any>();
 
@@ -53,7 +55,8 @@ export class CustomAccordionComponent implements OnInit {
 
         var CompetencyIds = [];
         data.alignmentSearchSelectedFilters.selectedCompetencies.forEach(element => {
-          CompetencyIds.push(element.CareerFieldId);
+
+          //CompetencyIds.push(element.CareerFieldId);
         });
 
 
@@ -117,7 +120,29 @@ export class CustomAccordionComponent implements OnInit {
     });
   }
   formatSearchResultDataArray(){
+    this.formattedSearchResultData = [];
 
+    var formattedObj ={
+
+    };
+    // this.searchResultDataArray.forEach(element => {
+    //    element.CareerField.forEach(cf => {
+    //       cf.AcademicSubject.forEach(cfac => {
+    //         cf.Strand.forEach(st => {
+    //             st.Outcome.forEach(oc => {
+    //               var competency = [];
+    //               oc.Competency.forEach(comp => {
+    //                     var comp ={
+    //                       id :comp.CompetencyId,
+    //                       value: comp.CompetencyName
+    //                     }
+    //                     competency.push(comp);
+    //               });
+    //             });
+    //         });
+    //       });
+    //    });
+    // });
   }
   // Click event on Career Field
   careerFieldCheckBox(parentObj) {

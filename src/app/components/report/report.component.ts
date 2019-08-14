@@ -42,7 +42,7 @@ export class ReportComponent {
 
         var CompetencyIds = [];
         data.alignmentSearchSelectedFilters.selectedCompetencies.forEach(element => {
-          CompetencyIds.push(element.CareerFieldId);
+          //CompetencyIds.push(element.CareerFieldId);
         });
 
 

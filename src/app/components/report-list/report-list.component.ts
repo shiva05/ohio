@@ -15,10 +15,11 @@ import {ReportService} from '../../services/report.service';
 export class ReportListComponent implements OnInit {
 
   results: any = [];
+  reportListhResultData :any =[];
   @Output() onPageSelect = new EventEmitter<any>();
   constructor(private store: Store<AppState>,private reportService :ReportService) {
     // this.metaData = store.select('metaData');
-    this.store.dispatch({ type: ReportsActions.LOAD_REPORT_DATA });
+    //this.store.dispatch({ type: ReportsActions.LOAD_REPORT_DATA });
   }
   ngOnInit() {
     this.store.select('advancedSearch').subscribe(data => {
@@ -41,7 +42,7 @@ export class ReportListComponent implements OnInit {
 
         var CompetencyIds = [];
         data.alignmentSearchSelectedFilters.selectedCompetencies.forEach(element => {
-          CompetencyIds.push(element.CareerFieldId);
+         // CompetencyIds.push(element.CareerFieldId);
         });
 
 
@@ -81,7 +82,7 @@ export class ReportListComponent implements OnInit {
         });
 
         console.log();
-        var obj = {
+        var objTemp = {
           "Keywords": "",
           "CareerFiledIds":careerfeilds,
           "StrandIds": strands,
@@ -90,9 +91,10 @@ export class ReportListComponent implements OnInit {
           "Subjects":subjects,
           "CteToAcademic": true
         };
-        this.reportService.getReportData(obj).subscribe(
+        this.reportService.getReportData(objTemp).subscribe(
           data => {
             debugger
+            this.reportListhResultData =data["Competencies"];
             // this.searchResultData =data;
             // this.searchResultDataArray.push(this.searchResultData);
             // this.formatSearchResultDataArray();
