@@ -107,8 +107,9 @@ export class CustomAccordionComponent implements OnInit {
         };
         this.searchResultService.getSearchResultData(obj).subscribe(
           data => {
+            debugger;
             this.searchResultData = data;
-            this.searchResultDataArray.push(this.searchResultData);
+            this.searchResultDataArray.push(this.searchResultData.CareerField);
             this.formatSearchResultDataArray();
           },
           err => {
@@ -119,29 +120,8 @@ export class CustomAccordionComponent implements OnInit {
     });
   }
   formatSearchResultDataArray() {
-    this.formattedSearchResultData = [];
 
-    let formattedObj = {
 
-    };
-    // this.searchResultDataArray.forEach(element => {
-    //    element.CareerField.forEach(cf => {
-    //       cf.AcademicSubject.forEach(cfac => {
-    //         cf.Strand.forEach(st => {
-    //             st.Outcome.forEach(oc => {
-    //               var competency = [];
-    //               oc.Competency.forEach(comp => {
-    //                     var comp ={
-    //                       id :comp.CompetencyId,
-    //                       value: comp.CompetencyName
-    //                     }
-    //                     competency.push(comp);
-    //               });
-    //             });
-    //         });
-    //       });
-    //    });
-    // });
   }
   // Click event on Career Field
   careerFieldCheckBox(parentObj) {
