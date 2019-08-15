@@ -22,7 +22,8 @@ export interface AlignmentSearchSelectedFilters {
   selectedStrands: Strand[],
   selectedOutcomes: Outcome[],
   selectedCompetencies :CompetencyNumber[],
-  selectedAcadamicSubjects :selectedAcademicSubject[]
+  selectedAcadamicSubjects :selectedAcademicSubject[],
+  selectedAsSearchResults :any
 }
 export interface selectedAcademicSubject{
     selectedGrades : Grade[],
@@ -43,7 +44,8 @@ alignmentSearchSelectedFilters :{
   selectedStrands: [],
   selectedOutcomes: [],
   selectedCompetencies :[],
-  selectedAcadamicSubjects: []
+  selectedAcadamicSubjects: [],
+  selectedAsSearchResults :{}
 }
 };
 export function advancedSearchReducer(state = initialState ,Action :AdvancedSearchActions.Actions){

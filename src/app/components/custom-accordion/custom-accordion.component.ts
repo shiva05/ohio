@@ -7,6 +7,7 @@ import * as SearchResultsActions from './../../actions/search-result.action';
 import { SearchResultData } from './../../models/searchResult.model';
 import { Observable } from 'rxjs/Observable';
 import {SearchResultService} from '../../services/search-result.service';
+import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 
 @Component({
   selector: 'custom-accordion',
@@ -27,6 +28,23 @@ export class CustomAccordionComponent implements OnInit {
   searchResultDataArray: any = [];
   formattedSearchResultData: any = [];
   finalSearchResults: any [];
+  alignmentSearchSelectedFilters :{};
+  reportPayload = {
+    Keywords: "",
+    CareerFiledIds:[],
+    StrandIds: [],
+    OutcomeIds: [],
+    CompetencyIds: [],
+    Subjects:[],
+    CteToAcademic: true
+  };
+  academicSubjectIds ={
+    Math :1,
+    ELA :2,
+    Science :3,
+    Social :4
+  }
+
 
   @Output() onPageSelect = new EventEmitter<any>();
 
@@ -37,7 +55,7 @@ export class CustomAccordionComponent implements OnInit {
   ngOnInit() {
     this.store.select('advancedSearch').subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
-
+        this.alignmentSearchSelectedFilters=data.alignmentSearchSelectedFilters;
         let careerfeilds = [];
         data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
           careerfeilds.push(element.CareerFieldId);
@@ -122,6 +140,28 @@ export class CustomAccordionComponent implements OnInit {
   formatSearchResultDataArray(){
 
 
+  }
+  updatePayload(obj,type){
+    this.reportPayload.Subjects =[];
+    if (type == 'competency'){
+      if(obj.CompetencyPk!==0){
+        this.reportPayload.CompetencyIds.push(obj.CompetencyPk);
+        this.reportPayload.Subjects.push({SubjectId :this.academicSubjectIds[obj.AcademicSubject[0]]});
+      }
+    }
+    if (type == 'careerField'){
+      this.reportPayload.CareerFiledIds.push(obj.CareerFieldId);
+      this.reportPayload.Subjects.push({SubjectId :this.academicSubjectIds[obj.AcademicSubject[0]]})
+    }
+    if (type == 'strand'){
+      this.reportPayload.StrandIds.push(obj.StrandPk);
+      this.reportPayload.Subjects.push({SubjectId :this.academicSubjectIds[obj.AcademicSubject[0]]})
+    }
+    if (type == 'outcome'){
+      this.reportPayload.OutcomeIds.push(obj.OutcomePk);
+      this.reportPayload.Subjects.push({SubjectId :this.academicSubjectIds[obj.AcademicSubject[0]]})
+    }
+    console.log(obj +type)
   }
   // Click event on Career Field
   careerFieldCheckBox(parentObj) {
@@ -239,6 +279,8 @@ export class CustomAccordionComponent implements OnInit {
 
   getSelect(obj) {
     this.goToPage(obj);
+    this.alignmentSearchSelectedFilters["selectedAsSearchResults"] = this.reportPayload;
+    this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS ,payload: this.alignmentSearchSelectedFilters });
   }
 
   goToPage(org) {

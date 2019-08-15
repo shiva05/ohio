@@ -58,7 +58,7 @@ export class FilterSummaryComponent implements OnInit {
           console.log(element);
           let level1 = [];
           let level1Name = element.Level[0].LevelName;
-          if (element.Level[0] && element.Level[0].SelectedItems) {
+          if (element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length>0) {
             element.Level[0].SelectedItems.forEach(element => {
               level1.push(element.LevelValue1);
             });
@@ -66,14 +66,14 @@ export class FilterSummaryComponent implements OnInit {
 
           let level2 = [];
           let level2Name = element.Level[1].LevelName;
-          if (element.Level[1] && element.Level[1].SelectedItems) {
+          if (element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length>0) {
             element.Level[1].SelectedItems.forEach(element => {
               level2.push(element.LevelValue1);
             });
           }
           let level3 = [];
           let level3Name = element.Level[2].LevelName;
-          if (element.Level[2] && element.Level[2].SelectedItems) {
+          if (element.Level[2] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length>0) {
             element.Level[2].SelectedItems.forEach(element => {
               level3.push(element.LevelValue1);
             });
