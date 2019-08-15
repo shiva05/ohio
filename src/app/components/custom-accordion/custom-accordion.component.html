@@ -53,7 +53,7 @@
 
         <div class="col-md-1 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
         <div class="col-md-3 cg">{{careerField.AcademicSubject[0]}}</div>
-        <div class="col-md-1"> <span class="accordion-bubble bubble-green">{{careerField.Alignment[0]}} </span> </div>
+        <div class="col-md-1"> <span class="accordion-bubble bubble-green" *ngIf="careerField.Alignment">{{careerField.Alignment[0]}} </span> </div>
         <div class="col-md-1 accordion-down-arrow">
           <span (click)="expandCollapseCareerField(careerField)">
             <i class="fas fa-chevron-up" *ngIf="careerField.isCareerFieldClosed;else isCollapsed"></i>
@@ -82,7 +82,7 @@
               </div>
               <div class="col-md-1"> &nbsp;</div>
               <div class="col-md-3 cg"> {{strand.AcademicSubject[0]}}</div>
-              <div class="col-md-1"> <span class="accordion-bubble bubble-blue">{{strand.Alignment[0]}} </span> </div>
+              <div class="col-md-1"> <span class="accordion-bubble bubble-blue" *ngIf="strand.Alignment">{{strand.Alignment[0]}} </span> </div>
               <div class="col-md-1 accordion-down-arrow">
 
                 <span (click)="expandCollapseStrand(strand)" *ngIf="strand.Outcome">
@@ -112,7 +112,7 @@
                     </div>
                     <div class="col-md-1"> &nbsp;</div>
                     <div class="col-md-3 cg"> {{outcome.AcademicSubject[0]}}</div>
-                    <div class="col-md-1"> <span class="accordion-bubble bubble-blue">{{outcome.Alignment[0]}} </span> </div>
+                    <div class="col-md-1"> <span class="accordion-bubble bubble-blue" *ngIf="outcome.Alignment">{{outcome.Alignment[0]}} </span> </div>
                     <div class="col-md-1 accordion-down-arrow">
 
                       <span (click)="expandCollapseOutcome(outcome)" *ngIf="outcome.Competency">
@@ -142,7 +142,7 @@
                           </div>
                           <div class="col-md-1"> &nbsp;</div>
                           <div class="col-md-3 cg"> {{item.AcademicSubject[0]}}</div>
-                          <div class="col-md-1"> <span class="accordion-bubble bubble-blue-color">{{item.Alignment[0]}} </span> </div>
+                          <div class="col-md-1"> <span class="accordion-bubble bubble-blue-color" *ngIf="item.Alignment" >{{item.Alignment[0]}} </span> </div>
                           <div class="col-md-1">
                             &nbsp;
                           </div>
