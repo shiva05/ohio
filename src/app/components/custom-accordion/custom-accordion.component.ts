@@ -29,6 +29,7 @@ export class CustomAccordionComponent implements OnInit {
   formattedSearchResultData: any = [];
   finalSearchResults: any [];
   alignmentSearchSelectedFilters :{};
+  totalSearchResults = 0;
   reportPayload = {
     Keywords: "",
     CareerFiledIds:[],
@@ -73,8 +74,7 @@ export class CustomAccordionComponent implements OnInit {
 
         let CompetencyIds = [];
         data.alignmentSearchSelectedFilters.selectedCompetencies.forEach(element => {
-
-          // CompetencyIds.push(element.CareerFieldId);
+          CompetencyIds.push(element.CompetencyPk);
         });
 
 
@@ -137,9 +137,12 @@ export class CustomAccordionComponent implements OnInit {
       }
     });
   }
-  formatSearchResultDataArray(){
-
-
+  formatSearchResultDataArray() {
+    this.searchResultDataArray.forEach(element => {
+      if(element.Alignment[0]){
+        this.totalSearchResults = element.Alignment[0];
+      }
+    });
   }
   updatePayload(obj,type){
     this.reportPayload.Subjects =[];

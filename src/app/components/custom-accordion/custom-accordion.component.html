@@ -2,7 +2,7 @@
   <div class="search-results-head row">
     <div class="col-md-10 search-results-head-left">
       <h3>{{ 'SearchResults.SearchResults' | translate }}</h3>
-      <p> Found 210 Alignments for your search criteria</p>
+      <p *ngIf="totalSearchResults"> Found {{totalSearchResults}} Alignments for your search criteria</p>
     </div>
     <div class="col-md-2 search-results-head-right">
       <button (click)="onToggleClick(careerToAcademic)">{{ 'SearchResults.ToggleAlignments' | translate }} &nbsp; <i
