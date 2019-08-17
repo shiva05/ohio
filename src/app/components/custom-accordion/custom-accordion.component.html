@@ -5,11 +5,11 @@
       <p *ngIf="totalSearchResults"> Found {{totalSearchResults}} Alignments for your search criteria</p>
     </div>
     <div class="col-md-2 search-results-head-right">
-      <button (click)="onToggleClick(careerToAcademic)">{{ 'SearchResults.ToggleAlignments' | translate }} &nbsp; <i
+      <button (click)="onToggleClick(cteToAcademic)">{{ 'SearchResults.ToggleAlignments' | translate }} &nbsp; <i
           class="fa fa-exchange"></i></button>
     </div>
 
-    <div class="search-accordion" *ngIf="careerToAcademic">
+    <div class="search-accordion" *ngIf="cteToAcademic">
       <div class="search-accordion-head row">
         <div class="col-md-6">{{ 'SearchResults.CareerFields' | translate }}</div>
         <div class="col-md-1">&nbsp;</div>
@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <div class="search-accordion" *ngIf="academicToCareer">
+    <div class="search-accordion" *ngIf="!cteToAcademic">
       <div class="search-accordion-head row">
         <div class="col-md-3">{{ 'SearchResults.AcademicSubject' | translate }}</div>
         <div class="col-md-1">&nbsp;</div>
@@ -30,7 +30,7 @@
     </div>
   </div>
 
-<div class="col-md-12 nopad" *ngIf="careerToAcademic">
+<div class="col-md-12 nopad" *ngIf="cteToAcademic">
   <ul class="list-group search-accordion">
     <li class="list-group-item search-accordion-each"
       [ngClass]="(careerField.isCareerFieldClosed) ? 'accordion-active' : ''"
@@ -53,7 +53,7 @@
 
         <div class="col-md-1 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
         <div class="col-md-3 cg">{{careerField.AcademicSubject[0]}}</div>
-        <div class="col-md-1"> <span class="accordion-bubble bubble-green" *ngIf="careerField.Alignment">{{careerField.Alignment[0]}} </span> </div>
+        <div class="col-md-1"> <span class="accordion-bubble bubble-green" *ngIf="careerField.Alignment">{{careerField.Alignment[i]}} </span> </div>
         <div class="col-md-1 accordion-down-arrow">
           <span (click)="expandCollapseCareerField(careerField)">
             <i class="fas fa-chevron-up" *ngIf="careerField.isCareerFieldClosed;else isCollapsed"></i>
@@ -161,7 +161,7 @@
   </ul>
 </div>
 
-<div class="col-md-12 nopad" *ngIf="academicToCareer">
+<div class="col-md-12 nopad" *ngIf="cteToAcademic">
   <ul class="list-group search-accordion">
     <li class="list-group-item search-accordion-each"
       [ngClass]="(careerField.isCareerFieldClosed) ? 'accordion-active' : ''"

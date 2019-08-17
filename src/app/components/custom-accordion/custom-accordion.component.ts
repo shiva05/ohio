@@ -19,8 +19,7 @@ export class CustomAccordionComponent implements OnInit {
   data: any;
   formattedData: any = [];
   accordionData: any;
-  careerToAcademic = true;
-  academicToCareer = false;
+  cteToAcademic = true;
   strands: any = [];
   competency: any = [];
   outcomes: any = [];
@@ -121,13 +120,15 @@ export class CustomAccordionComponent implements OnInit {
           OutcomeIds: outcomes,
           CompetencyIds,
           Subjects: subjects,
-          CteToAcademic: true
+          CteToAcademic: this.cteToAcademic
         };
         this.searchResultService.getSearchResultData(obj).subscribe(
           data => {
             debugger
             this.searchResultData =data;
-            this.searchResultDataArray.push(this.searchResultData.CareerField);
+            this.searchResultData.CareerField.forEach(element => {
+              this.searchResultDataArray.push(element);
+            });
             this.formatSearchResultDataArray();
           },
           err => {
@@ -140,7 +141,7 @@ export class CustomAccordionComponent implements OnInit {
   formatSearchResultDataArray() {
     this.searchResultDataArray.forEach(element => {
       if(element.Alignment[0]){
-        this.totalSearchResults = element.Alignment[0];
+        this.totalSearchResults = this.totalSearchResults  + element.Alignment[0];
       }
     });
   }
@@ -296,13 +297,8 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   onToggleClick(value) {
-    if (value) {
-      this.careerToAcademic = false;
-      this.academicToCareer = true;
-    } else {
-      this.careerToAcademic = true;
-      this.academicToCareer = false;
-    }
+    this.cteToAcademic = !this.cteToAcademic;
+    this.reportPayload.CteToAcademic = this.cteToAcademic;
   }
 
   getAccordionData() {
