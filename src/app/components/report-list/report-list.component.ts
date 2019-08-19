@@ -25,7 +25,6 @@ export class ReportListComponent implements OnInit {
         var objTemp = data.alignmentSearchSelectedFilters.selectedAsSearchResults;
         this.reportService.getReportData(objTemp).subscribe(
           data => {
-            debugger
             this.reportListhResultData = data;
           },
           err => {
