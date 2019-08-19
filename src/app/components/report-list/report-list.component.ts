@@ -35,4 +35,12 @@ export class ReportListComponent implements OnInit {
   goToPage(org) {
     this.onPageSelect.emit(org);
   }
+  calculateStrandClasses(type){
+    var strandClasses = {
+          'A':'legend-application',
+          'R':'legend-reinforcement',
+          'E':'legend-enrichment'
+    };
+    return strandClasses[type];
+}
 }

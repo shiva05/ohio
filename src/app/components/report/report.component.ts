@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { DownloadPDFService } from '../../services/download-pdf.service';
 import {ReportService} from '../../services/report.service';
 import { Store } from '@ngrx/store';
+import { DatePipe } from '@angular/common'
 
 import { AppState } from './../../app.state';
 
@@ -15,7 +16,7 @@ export class ReportComponent {
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor(private downloadPDFService: DownloadPDFService,private store: Store<AppState>){}
+  constructor(private downloadPDFService: DownloadPDFService,private store: Store<AppState>,public datepipe: DatePipe){}
 
   goToPage(org) {
     this.onPageSelect.emit(org);
@@ -44,7 +45,9 @@ export class ReportComponent {
 
       const link = document.createElement('a');
       link.href = data;
-      link.download = 'Report.pdf'; // There isn't that much of a reason to even think about what I'm doing and instead just do it because there isn't a
+
+      let dataNow =  this.datepipe.transform(new Date(), 'yyyy-MM-dd'); ;
+      link.download = 'Alignment Report ' + dataNow + '.pdf'; // There isn't that much of a reason to even think about what I'm doing and instead just do it because there isn't a
       // this is necessary as link.click() does not work on the latest firefox
       link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
 

@@ -14,7 +14,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { LoaderService } from '../app/services/loader.service';
 import { HttpLoadInterceptor } from './services/http.interceptor';
-
+import { DatePipe } from '@angular/common'
 // import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
@@ -95,6 +95,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 
   ],
   providers: [
+    DatePipe,
     LoaderService,
     {
       provide: HTTP_INTERCEPTORS,

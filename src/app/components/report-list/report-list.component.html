@@ -84,10 +84,10 @@
         <div class="reports-standards">
           <div class="reports-standards-each" *ngFor="let  standard of result.Standards">
             <span class="reports-standards-each-left">
-              <span class="legend-application">
-                {{standard.StandardType}}
-              </span>
-            </span>
+                <span  [ngClass]="calculateStrandClasses(standard.StandardType)" >
+                    {{standard.StandardType}}
+                  </span>
+                </span>
             <span class="reports-standards-each-right">
               {{standard.StandardDesc}}
             </span>
@@ -149,7 +149,7 @@
         <div class="reports-standards">
           <div class="reports-standards-each" *ngFor="let  standard of result.Competencies">
             <span class="reports-standards-each-left">
-              <span class="legend-application">
+              <span [ngClass]="calculateStrandClasses(standard.Type)">
                 {{standard.Type}}
               </span>
             </span>
