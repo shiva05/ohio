@@ -6,7 +6,7 @@ import { AppState } from 'src/app/app.state';
 import * as SearchResultsActions from './../../actions/search-result.action';
 import { SearchResultData } from './../../models/searchResult.model';
 import { Observable } from 'rxjs/Observable';
-import {SearchResultService} from '../../services/search-result.service';
+import { SearchResultService } from '../../services/search-result.service';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 
 @Component({
@@ -26,36 +26,35 @@ export class CustomAccordionComponent implements OnInit {
   searchResultData: any = {};
   searchResultDataArray: any = [];
   formattedSearchResultData: any = [];
-  finalSearchResults: any [];
-  alignmentSearchSelectedFilters :{};
+  finalSearchResults: any[];
+  alignmentSearchSelectedFilters: {};
   totalSearchResults = 0;
   reportPayload = {
     Keywords: "",
-    CareerFiledIds:[],
+    CareerFiledIds: [],
     StrandIds: [],
     OutcomeIds: [],
     CompetencyIds: [],
-    Subjects:[],
+    Subjects: [],
     CteToAcademic: true
   };
-  academicSubjectIds ={
-    Math :1,
-    ELA :2,
-    Science :3,
-    Social :4
+  academicSubjectIds = {
+    Math: 1,
+    ELA: 2,
+    Science: 3,
+    Social: 4
   }
-
 
   @Output() onPageSelect = new EventEmitter<any>();
 
   constructor(private store: Store<AppState>,
-              private httpService: HttpClient , private searchResultService: SearchResultService) {
+    private httpService: HttpClient, private searchResultService: SearchResultService) {
   }
 
   ngOnInit() {
     this.store.select('advancedSearch').subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
-        this.alignmentSearchSelectedFilters=data.alignmentSearchSelectedFilters;
+        this.alignmentSearchSelectedFilters = data.alignmentSearchSelectedFilters;
         let careerfeilds = [];
         data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
           careerfeilds.push(element.CareerFieldId);
@@ -76,32 +75,28 @@ export class CustomAccordionComponent implements OnInit {
           CompetencyIds.push(element.CompetencyPk);
         });
 
-
         let subjects = [];
         data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
-          var level1= [];
-          if(element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length >0){
+          var level1 = [];
+          if (element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length > 0) {
             element.Level[0].SelectedItems.forEach(element => {
               level1.push(element.LevelValue1);
-          });
-          }
-
-          var level2= [];
-          if(element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length >0){
-            element.Level[1].SelectedItems.forEach(element => {
-                level2.push(element.LevelValue1);
             });
           }
 
+          var level2 = [];
+          if (element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length > 0) {
+            element.Level[1].SelectedItems.forEach(element => {
+              level2.push(element.LevelValue1);
+            });
+          }
 
-
-          var level3= [];
-          if (element.Level[3] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length >0) {
+          var level3 = [];
+          if (element.Level[3] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length > 0) {
             element.Level[3].SelectedItems.forEach(element => {
               level3.push(element.LevelValue1);
             });
           }
-
 
           let subject = {
             SubjectId: element.SubjectId,
@@ -124,63 +119,65 @@ export class CustomAccordionComponent implements OnInit {
         };
         this.searchResultService.getSearchResultData(obj).subscribe(
           data => {
-            debugger
-            this.searchResultData =data;
+            this.searchResultData = data;
             this.searchResultData.CareerField.forEach(element => {
               this.searchResultDataArray.push(element);
             });
             this.formatSearchResultDataArray();
           },
           err => {
-              // Log errors if any
-              console.log(err);
+            // Log errors if any
+            console.log(err);
           });
       }
     });
   }
+
   formatSearchResultDataArray() {
     this.searchResultDataArray.forEach(element => {
-      if(element.Alignment[0]){
-        this.totalSearchResults = this.totalSearchResults  + element.Alignment[0];
+      if (element.Alignment[0]) {
+        this.totalSearchResults = this.totalSearchResults + element.Alignment[0];
       }
     });
   }
-  updatePayload(obj,type){
-    this.reportPayload.Subjects =[];
-    if (type == 'competency'){
-      if(obj.CompetencyPk!==0){
+
+  updatePayload(obj, type) {
+    this.reportPayload.Subjects = [];
+    if (type == 'competency') {
+      if (obj.CompetencyPk !== 0) {
         this.reportPayload.CompetencyIds.push(obj.CompetencyPk);
-        this.reportPayload.Subjects.push({SubjectId :this.academicSubjectIds[obj.AcademicSubject[0]]});
+        this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] });
       }
     }
-    if (type == 'careerField'){
+    if (type == 'careerField') {
       this.reportPayload.CareerFiledIds.push(obj.CareerFieldId);
-      this.reportPayload.Subjects.push({SubjectId :this.academicSubjectIds[obj.AcademicSubject[0]]})
+      this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] })
     }
-    if (type == 'strand'){
+    if (type == 'strand') {
       this.reportPayload.StrandIds.push(obj.StrandPk);
-      this.reportPayload.Subjects.push({SubjectId :this.academicSubjectIds[obj.AcademicSubject[0]]})
+      this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] })
     }
-    if (type == 'outcome'){
+    if (type == 'outcome') {
       this.reportPayload.OutcomeIds.push(obj.OutcomePk);
-      this.reportPayload.Subjects.push({SubjectId :this.academicSubjectIds[obj.AcademicSubject[0]]})
+      this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] })
     }
-    console.log(obj +type)
+    console.log(obj + type)
   }
+
   // Click event on Career Field
   careerFieldCheckBox(parentObj) {
     // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < parentObj.strands.length; i++) {
-      parentObj.strands[i].isSelected = parentObj.isSelected;
-      if (parentObj.strands[i].outcomes) {
+    for (let i = 0; i < parentObj.Strand.length; i++) {
+      parentObj.Strand[i].isSelected = parentObj.isSelected;
+      if (parentObj.Strand[i].Outcome) {
         // tslint:disable-next-line:prefer-for-of
-        for (let j = 0; j < parentObj.strands[i].outcomes.length; j++) {
-          parentObj.strands[i].outcomes[j].isSelected = parentObj.isSelected;
+        for (let j = 0; j < parentObj.Strand[i].Outcome.length; j++) {
+          parentObj.Strand[i].Outcome[j].isSelected = parentObj.isSelected;
 
-          if (parentObj.strands[i].outcomes[j].competency) {
+          if (parentObj.Strand[i].Outcome[j].Competency) {
             // tslint:disable-next-line:prefer-for-of
-            for (let k = 0; k < parentObj.strands[i].outcomes[j].competency.length; k++) {
-              parentObj.strands[i].outcomes[j].competency[k].isSelected = parentObj.isSelected;
+            for (let k = 0; k < parentObj.Strand[i].Outcome[j].Competency.length; k++) {
+              parentObj.Strand[i].Outcome[j].Competency[k].isSelected = parentObj.isSelected;
             }
           }
         }
@@ -191,25 +188,25 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Strand Checkbox
   strandCheckBox(parent, parentObj) {
     // tslint:disable-next-line:only-arrow-functions
-    parent.isSelected = parent.strands.every(function(itemChild: any) {
+    parent.isSelected = parent.Strand.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
-    if (parentObj.outcomes) {
+    if (parentObj.Outcome) {
       if (parentObj.isSelected) {
-        parentObj.outcomes.forEach(item => {
+        parentObj.Outcome.forEach(item => {
           item.isSelected = true;
-          if (item.competency) {
-            item.competency.forEach(data => {
+          if (item.Competency) {
+            item.Competency.forEach(data => {
               data.isSelected = true;
             });
           }
         });
       } else {
-        parentObj.outcomes.forEach(item => {
+        parentObj.Outcome.forEach(item => {
           item.isSelected = false;
-          if (item.competency) {
-            item.competency.forEach(data => {
+          if (item.Competency) {
+            item.Competency.forEach(data => {
               data.isSelected = false;
             });
           }
@@ -222,22 +219,22 @@ export class CustomAccordionComponent implements OnInit {
   outcomeCheckBox(career, strands, outcome) {
 
     // tslint:disable-next-line:only-arrow-functions
-    strands.isSelected = strands.outcomes.every(function(itemChild: any) {
+    strands.isSelected = strands.Outcome.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.strands.every(function(itemChild: any) {
+    career.isSelected = career.Strand.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
-    if (outcome.competency) {
+    if (outcome.Competency) {
       if (outcome.isSelected) {
-        outcome.competency.forEach(item => {
+        outcome.Competency.forEach(item => {
           item.isSelected = true;
         });
       } else {
-        outcome.competency.forEach(item => {
+        outcome.Competency.forEach(item => {
           item.isSelected = false;
         });
       }
@@ -247,17 +244,17 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Outcome Checkbox
   competencyCheckBox(career, strand, outcome) {
     // tslint:disable-next-line:only-arrow-functions
-    outcome.isSelected = outcome.competency.every(function(itemChild: any) {
+    outcome.isSelected = outcome.Competency.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    strand.isSelected = strand.outcomes.every(function(itemChild: any) {
+    strand.isSelected = strand.Outcome.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.strands.every(function(itemChild: any) {
+    career.isSelected = career.Strand.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
@@ -282,9 +279,46 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   getSelect(obj) {
+    this.reportPayload.Keywords = "";
+    this.reportPayload.CareerFiledIds = [];
+    this.reportPayload.StrandIds = [];
+    this.reportPayload.OutcomeIds = [];
+    this.reportPayload.CompetencyIds = [];
+    this.reportPayload.Subjects = [];
+    
+
+    this.searchResultDataArray.forEach(careerField => {
+      if(this.reportPayload.Subjects.length <= 0){
+        this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[careerField.AcademicSubject[0]] });
+      }
+      
+      if (careerField.isSelected) {
+        this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
+      }
+
+      careerField.Strand.forEach(stand => {
+        if (stand.isSelected) {
+          this.reportPayload.StrandIds.push(stand.StrandPk);
+        }
+
+        stand.Outcome.forEach(outcome => {
+          if (outcome.isSelected) {
+            this.reportPayload.OutcomeIds.push(outcome.OutcomePk);
+          }
+
+          outcome.Competency.forEach(competency => {
+            if (competency.isSelected) {
+              this.reportPayload.CompetencyIds.push(competency.CompetencyPk);
+            }
+          });
+        });
+      });
+    });
+
+    console.log(this.reportPayload);
     this.goToPage(obj);
     this.alignmentSearchSelectedFilters["selectedAsSearchResults"] = this.reportPayload;
-    this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS ,payload: this.alignmentSearchSelectedFilters });
+    this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.alignmentSearchSelectedFilters });
   }
 
   goToPage(org) {
