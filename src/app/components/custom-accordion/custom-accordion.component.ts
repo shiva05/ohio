@@ -30,7 +30,7 @@ export class CustomAccordionComponent implements OnInit {
   alignmentSearchSelectedFilters: {};
   totalSearchResults = 0;
   reportPayload = {
-    Keywords: "",
+    Keywords: '',
     CareerFiledIds: [],
     StrandIds: [],
     OutcomeIds: [],
@@ -43,12 +43,12 @@ export class CustomAccordionComponent implements OnInit {
     ELA: 2,
     Science: 3,
     Social: 4
-  }
+  };
 
   @Output() onPageSelect = new EventEmitter<any>();
 
   constructor(private store: Store<AppState>,
-    private httpService: HttpClient, private searchResultService: SearchResultService) {
+              private httpService: HttpClient, private searchResultService: SearchResultService) {
   }
 
   ngOnInit() {
@@ -77,21 +77,21 @@ export class CustomAccordionComponent implements OnInit {
 
         let subjects = [];
         data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
-          var level1 = [];
+          let level1 = [];
           if (element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length > 0) {
             element.Level[0].SelectedItems.forEach(element => {
               level1.push(element.LevelValue1);
             });
           }
 
-          var level2 = [];
+          let level2 = [];
           if (element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length > 0) {
             element.Level[1].SelectedItems.forEach(element => {
               level2.push(element.LevelValue1);
             });
           }
 
-          var level3 = [];
+          let level3 = [];
           if (element.Level[3] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length > 0) {
             element.Level[3].SelectedItems.forEach(element => {
               level3.push(element.LevelValue1);
@@ -151,17 +151,17 @@ export class CustomAccordionComponent implements OnInit {
     }
     if (type == 'careerField') {
       this.reportPayload.CareerFiledIds.push(obj.CareerFieldId);
-      this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] })
+      this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] });
     }
     if (type == 'strand') {
       this.reportPayload.StrandIds.push(obj.StrandPk);
-      this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] })
+      this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] });
     }
     if (type == 'outcome') {
       this.reportPayload.OutcomeIds.push(obj.OutcomePk);
-      this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] })
+      this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] });
     }
-    console.log(obj + type)
+    console.log(obj + type);
   }
 
   // Click event on Career Field
@@ -188,7 +188,7 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Strand Checkbox
   strandCheckBox(parent, parentObj) {
     // tslint:disable-next-line:only-arrow-functions
-    parent.isSelected = parent.Strand.every(function (itemChild: any) {
+    parent.isSelected = parent.Strand.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -219,12 +219,12 @@ export class CustomAccordionComponent implements OnInit {
   outcomeCheckBox(career, strands, outcome) {
 
     // tslint:disable-next-line:only-arrow-functions
-    strands.isSelected = strands.Outcome.every(function (itemChild: any) {
+    strands.isSelected = strands.Outcome.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Strand.every(function (itemChild: any) {
+    career.isSelected = career.Strand.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -244,17 +244,17 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Outcome Checkbox
   competencyCheckBox(career, strand, outcome) {
     // tslint:disable-next-line:only-arrow-functions
-    outcome.isSelected = outcome.Competency.every(function (itemChild: any) {
+    outcome.isSelected = outcome.Competency.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    strand.isSelected = strand.Outcome.every(function (itemChild: any) {
+    strand.isSelected = strand.Outcome.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Strand.every(function (itemChild: any) {
+    career.isSelected = career.Strand.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
@@ -279,19 +279,19 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   getSelect(obj) {
-    this.reportPayload.Keywords = "";
+    this.reportPayload.Keywords = '';
     this.reportPayload.CareerFiledIds = [];
     this.reportPayload.StrandIds = [];
     this.reportPayload.OutcomeIds = [];
     this.reportPayload.CompetencyIds = [];
     this.reportPayload.Subjects = [];
-    
+
 
     this.searchResultDataArray.forEach(careerField => {
-      if(this.reportPayload.Subjects.length <= 0){
+      if (this.reportPayload.Subjects.length <= 0) {
         this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[careerField.AcademicSubject[0]] });
       }
-      
+
       if (careerField.isSelected) {
         this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
       }
@@ -317,7 +317,7 @@ export class CustomAccordionComponent implements OnInit {
 
     console.log(this.reportPayload);
     this.goToPage(obj);
-    this.alignmentSearchSelectedFilters["selectedAsSearchResults"] = this.reportPayload;
+    this.alignmentSearchSelectedFilters['selectedAsSearchResults'] = this.reportPayload;
     this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.alignmentSearchSelectedFilters });
   }
 
