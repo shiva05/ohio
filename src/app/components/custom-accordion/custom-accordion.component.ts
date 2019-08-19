@@ -285,9 +285,13 @@ export class CustomAccordionComponent implements OnInit {
     this.reportPayload.OutcomeIds = [];
     this.reportPayload.CompetencyIds = [];
     this.reportPayload.Subjects = [];
-    // this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] });
+    
 
     this.searchResultDataArray.forEach(careerField => {
+      if(this.reportPayload.Subjects.length <= 0){
+        this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[careerField.AcademicSubject[0]] });
+      }
+      
       if (careerField.isSelected) {
         this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
       }
