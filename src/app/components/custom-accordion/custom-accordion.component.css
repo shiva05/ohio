@@ -18,3 +18,31 @@
   line-height: 20px;
   padding-top: 6px;
 }
+.search-results-head-right {
+  float: right;
+}
+.careerfield-each-inner {
+  padding: 20px 10px 5px 10px;
+  margin-left: 0px;
+  font-size: 16pt;
+  background-color: #F0F0F0;
+}
+.strand-each-inner {
+  padding: 20px 10px 5px 10px;
+  margin-left: 15px;
+  font-size: 14pt;
+  background-color: #F4F4F4;
+}
+.outcome-each-inner {
+  padding: 20px 10px 5px 10px;
+  margin-left: 30px;
+  font-size: 12pt;
+  background-color: #F8F8F8;
+}
+.competency-each-inner {
+  padding: 20px 10px 5px 10px;
+  margin-left: 45px;
+  font-size: 10pt;
+  background-color: #FBFBFB;
+
+ }

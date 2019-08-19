@@ -30,7 +30,7 @@
               </span>
 
               <div *ngIf="FilterSummaryKeys.Subjects">
-                <div class="filter-each" [hidden]="!panelExpanded" *ngFor="let item of FilterSummaryKeys.Subjects; let i = index">
+                <div class="filter-each" [hidden]="panelExpanded" *ngFor="let item of FilterSummaryKeys.Subjects; let i = index">
                   <hr>
                   <label>Academic Subjects :</label>
                   <span class="badge badge-light">{{item.SubjectName}}</span> |
@@ -50,12 +50,13 @@
             <i class="fa fa-angle-double-down"></i></button>
         </div>
       </div>
-      <div class="search-seemore">
+      <!-- `Click to see More` removed for now -->
+      <!-- <div class="search-seemore">
         <h3>{{panelExpanded ? 'Click to see less' : 'Click to see more'}}</h3>
         <a href="#" (click)="panelExpanded = !panelExpanded">
           <i [ngClass]="panelExpanded ? 'fa fa-angle-double-up' : 'fa fa-angle-double-down'"></i>
         </a>
-      </div>
+      </div> -->
     </section>
   </div>
 </div>
@@ -81,7 +82,7 @@
                 <span class="badge badge-light">{{filterCareerPathCourseData[0].CourseName}}</span>
                 <span *ngIf="filterCareerPathCourseData.length > 1"> +{{filterCareerPathCourseData.length - 1}} </span>
               </span>
-              <div class="filter-each" [hidden]="!panelExpanded">
+              <div class="filter-each" [hidden]="panelExpanded">
                 <hr>
                 <label>{{'CourseFields.AcademicSubjects' | translate}}: </label>
                 <span class="badge badge-light">{{filterAcadamicSubjectData[0].SubjectName}}</span>
@@ -100,12 +101,13 @@
             <i class="fa fa-angle-double-down"></i></button>
         </div>
       </div>
-      <div class="search-seemore">
+      <!-- `Click to see More` removed for now -->
+      <!-- <div class="search-seemore">
         <h3>{{panelExpanded ? 'Click to see less' : 'Click to see more'}}</h3>
         <a href="#" (click)="panelExpanded = !panelExpanded">
           <i [ngClass]="panelExpanded ? 'fa fa-angle-double-up' : 'fa fa-angle-double-down'"></i>
         </a>
-      </div>
+      </div> -->
     </section>
   </div>
 </div>
