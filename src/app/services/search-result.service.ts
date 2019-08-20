@@ -13,4 +13,9 @@ export class SearchResultService {
         var URL = 'https://edu-dev-sbd-commonfunctions.azurewebsites.net/api/SearchAlignments?code=wyCpr8XXH2VJEOTx9OLB1E2URsGMi7rOJ3xNTYipccXbGkVodBXd0A==';
         return this.http.post(URL, payload);
     }
+
+    getSearchResultCourseSearch(payload) {
+        var URL = '';
+        return this.http.post(URL, payload);
+    }
 }

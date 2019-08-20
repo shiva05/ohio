@@ -141,46 +141,23 @@ export class CourseSearchFiltersComponent implements OnInit {
   getData(data) {
     console.log(data);
   }
-  //onAcadamicSubjectSelect(selectedSubject) {
-  //  this.mathsCourseName = [];
-  //  this.ELACourseName = [];
-  //  this.scienceCourseName = [];
-  //  this.socialCourseName = [];
-
-  //  selectedSubject.forEach(sub => {
-  //    if (sub.SubjectId === 1) {
-  //      this.academicSubjectCourse[0].GradeSubjects.forEach(element => {
-  //        this.mathsCourseName.push(element.LevelValue);
-  //      });
-  //    } else if (sub.SubjectId === 2) {
-  //      this.academicSubjectCourse[1].GradeSubjects.forEach(element => {
-  //        this.ELACourseName.push(element.LevelValue);
-  //      });
-  //    } else if (sub.SubjectId === 3) {
-  //      this.academicSubjectCourse[2].GradeSubjects.forEach(element => {
-  //        this.scienceCourseName.push(element.LevelValue);
-  //      });
-  //    } else if (sub.SubjectId === 4) {
-  //      this.academicSubjectCourse[3].GradeSubjects.forEach(element => {
-  //        this.socialCourseName.push(element.LevelValue);
-  //      });
-  //    }
-  //  });
-  //}
-
+ 
   onItemSelect(event) {
     this.selectedAcademicItems = this.selectedAcadamicSubjects;
     this.selectListCreation();
   }
+
   OnItemDeSelect(event) {
     this.selectedAcademicItems = this.selectedAcadamicSubjects;
     this.selectListCreation();
   }
+
   onSelectAll(event) {
     this.selectedAcademicItems = [];
     this.selectedAcademicItems = event;
     this.selectListCreation();
   }
+  
   onDeSelectAll(event) {
     this.selectedAcademicItems = [];
     this.selectedAcadamicSubjects = [];

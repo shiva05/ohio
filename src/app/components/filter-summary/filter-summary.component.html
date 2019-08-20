@@ -10,27 +10,38 @@
             <span class="filter-each">
               <span>
                 <label>Career Field: </label>
-                <span class="badge badge-light" *ngIf="FilterSummaryKeys.CareerFieldIds.length == 1">{{FilterSummaryKeys.CareerFieldIds[0]}}</span>
-              <span class="badge badge-light" *ngIf="FilterSummaryKeys.CareerFieldIds.length >1">{{FilterSummaryKeys.CareerFieldIds[0]}} +{{FilterSummaryKeys.CareerFieldIds.length - 1}}</span>
-            </span>
-              <label>Strands: </label>
-              <span class="badge badge-light" *ngIf="FilterSummaryKeys.StrandIds.length == 1">{{FilterSummaryKeys.StrandIds[0]}}</span>
-              <span class="badge badge-light"*ngIf="FilterSummaryKeys.StrandIds.length > 1">{{FilterSummaryKeys.StrandIds[0]}} +{{FilterSummaryKeys.StrandIds.length - 1}}</span>
-              <label>Outcomes: </label>
-              <span class="badge badge-light" *ngIf="FilterSummaryKeys.OutcomeIds.length == 1">{{FilterSummaryKeys.OutcomeIds[0]}}
+                <span class="badge badge-light"
+                  *ngIf="FilterSummaryKeys.CareerFieldIds.length == 1">{{FilterSummaryKeys.CareerFieldIds[0]}}</span>
+                <span class="badge badge-light"
+                  *ngIf="FilterSummaryKeys.CareerFieldIds.length >1">{{FilterSummaryKeys.CareerFieldIds[0]}}
+                  +{{FilterSummaryKeys.CareerFieldIds.length - 1}}</span>
               </span>
-              <span class="badge badge-light" *ngIf="FilterSummaryKeys.OutcomeIds.length > 1">{{FilterSummaryKeys.OutcomeIds[0]}}
+              <label>Strands: </label>
+              <span class="badge badge-light"
+                *ngIf="FilterSummaryKeys.StrandIds.length == 1">{{FilterSummaryKeys.StrandIds[0]}}</span>
+              <span class="badge badge-light"
+                *ngIf="FilterSummaryKeys.StrandIds.length > 1">{{FilterSummaryKeys.StrandIds[0]}}
+                +{{FilterSummaryKeys.StrandIds.length - 1}}</span>
+              <label>Outcomes: </label>
+              <span class="badge badge-light"
+                *ngIf="FilterSummaryKeys.OutcomeIds.length == 1">{{FilterSummaryKeys.OutcomeIds[0]}}
+              </span>
+              <span class="badge badge-light"
+                *ngIf="FilterSummaryKeys.OutcomeIds.length > 1">{{FilterSummaryKeys.OutcomeIds[0]}}
                 +{{FilterSummaryKeys.OutcomeIds.length - 1}}
               </span>
               <label>Competency Numbers: </label>
-              <span class="badge badge-light" *ngIf="FilterSummaryKeys.CompetencyIds.length == 1">{{FilterSummaryKeys.CompetencyIds[0]}}
+              <span class="badge badge-light"
+                *ngIf="FilterSummaryKeys.CompetencyIds.length == 1">{{FilterSummaryKeys.CompetencyIds[0]}}
               </span>
-              <span class="badge badge-light" *ngIf="FilterSummaryKeys.CompetencyIds.length > 1">{{FilterSummaryKeys.CompetencyIds[0]}}
+              <span class="badge badge-light"
+                *ngIf="FilterSummaryKeys.CompetencyIds.length > 1">{{FilterSummaryKeys.CompetencyIds[0]}}
                 +{{FilterSummaryKeys.CompetencyIds.length - 1}}
               </span>
 
               <div *ngIf="FilterSummaryKeys.Subjects">
-                <div class="filter-each" [hidden]="panelExpanded" *ngFor="let item of FilterSummaryKeys.Subjects; let i = index">
+                <div class="filter-each" [hidden]="panelExpanded"
+                  *ngFor="let item of FilterSummaryKeys.Subjects; let i = index">
                   <hr>
                   <label>Academic Subjects :</label>
                   <span class="badge badge-light">{{item.SubjectName}}</span> |
@@ -50,13 +61,6 @@
             <i class="fa fa-angle-double-down"></i></button>
         </div>
       </div>
-      <!-- `Click to see More` removed for now -->
-      <!-- <div class="search-seemore">
-        <h3>{{panelExpanded ? 'Click to see less' : 'Click to see more'}}</h3>
-        <a href="#" (click)="panelExpanded = !panelExpanded">
-          <i [ngClass]="panelExpanded ? 'fa fa-angle-double-up' : 'fa fa-angle-double-down'"></i>
-        </a>
-      </div> -->
     </section>
   </div>
 </div>
@@ -82,16 +86,16 @@
                 <span class="badge badge-light">{{filterCareerPathCourseData[0].CourseName}}</span>
                 <span *ngIf="filterCareerPathCourseData.length > 1"> +{{filterCareerPathCourseData.length - 1}} </span>
               </span>
-              <div class="filter-each" [hidden]="panelExpanded">
+
+              <div class="filter-each" [hidden]="panelExpanded" *ngFor="let item of filterAcadamicSubjectData">
                 <hr>
                 <label>{{'CourseFields.AcademicSubjects' | translate}}: </label>
-                <span class="badge badge-light">{{filterAcadamicSubjectData[0].SubjectName}}</span>
-                <span *ngIf="filterAcadamicSubjectData.length > 1"> +{{filterAcadamicSubjectData.length - 1}} </span> |
+                <span class="badge badge-light">{{item.SubjectName}}</span> |
 
                 <label>{{'CourseFields.Courses' | translate}}: </label>
-                <span class="badge badge-light">{{filterAcadamicSubjectCourseData[0]}}</span>
-                <span *ngIf="filterAcadamicSubjectCourseData.length > 1">
-                  +{{filterAcadamicSubjectCourseData.length - 1}} </span>
+                <span class="badge badge-light">{{item.SelectedItems[0].LevelValue}}</span>
+                <span *ngIf="item.SelectedItems.length > 1">
+                  +{{item.SelectedItems.length - 1}} </span>
               </div>
             </span>
           </div>
@@ -101,13 +105,6 @@
             <i class="fa fa-angle-double-down"></i></button>
         </div>
       </div>
-      <!-- `Click to see More` removed for now -->
-      <!-- <div class="search-seemore">
-        <h3>{{panelExpanded ? 'Click to see less' : 'Click to see more'}}</h3>
-        <a href="#" (click)="panelExpanded = !panelExpanded">
-          <i [ngClass]="panelExpanded ? 'fa fa-angle-double-up' : 'fa fa-angle-double-down'"></i>
-        </a>
-      </div> -->
     </section>
   </div>
 </div>
