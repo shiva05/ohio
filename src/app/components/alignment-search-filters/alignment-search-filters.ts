@@ -199,6 +199,30 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     });
    // console.log(this.strandsDropdown);
   }
+  onCareerSelectAll() {
+    this.strandsDropdown = [];
+    this.strands.forEach(eachStrand => {
+          this.strandsDropdown.push(eachStrand);
+    });
+  }
+  onCareerDeSelectAll() {
+    this.strandsDropdown = [];
+  }
+  onStrandSelectAll() {
+    this.outcomesDropdown = [];
+    this.outcomes.forEach(eachOutcome => {
+          //  console.log(eachOutcome);
+          this.outcomesDropdown.push(eachOutcome);
+    });
+  }
+  onStrandDeSelectAll() {
+    this.outcomesDropdown = [];
+  }
+
+  //onOutcomeSelectAll() { }
+  //onOutcomeDeSelectAll() { }
+
+
   onItemSelect(event) {
     this.selectedAcademicItems = this.selectedAcadamicSubjects;
     this.selectListCreation();
@@ -282,6 +306,20 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.ref.detectChanges();
    // console.log(this.selectedAcademicItems);
   }
+
+
+  onSubjectLevelsSelectAll(data) {
+    let selectedAll = [];
+    data.SelectedItems = [];
+    data.SelectedItems = data.SubjectLevels;
+    this.onSubjectLevelsSelect(data);
+  }
+  onSubjectLevelsDeSelectAll(data) {
+    let selectedAll = [];
+    data.SelectedItems = [];
+    this.onSubjectLevelsSelect(data);
+  }
+
   onOutcomeSelect(outcome) {
     // TODO: Call API
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA , payload : this.selectedOutcome});

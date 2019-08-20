@@ -5,6 +5,7 @@
 <div class="col-md-12">
   <!-- <custom-accordion (onPageSelect)="onPageSelect($event)"  *ngIf="showCsResults"></custom-accordion> -->
 </div>
-<report (onPageSelect)="onPageSelect($event)" *ngIf="showCsReport"></report>
+<!--<report (onPageSelect)="onPageSelect($event)" *ngIf="showCsReport"></report>-->
+  <app-course-search-report (onPageSelect)="onPageSelect($event)" *ngIf="showCsReport"></app-course-search-report>
 
 </div>
