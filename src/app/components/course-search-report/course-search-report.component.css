@@ -28,3 +28,58 @@
   color: #700017;
   font-family: 'Lato', sans-serif;
 }
+
+
+.course-search-results,
+.course {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  float: left;
+}
+  .course-search-results {
+    padding: 30px;
+  }
+  .course {
+    border: 1px solid #ddd;
+    margin-bottom: 30px;
+  }
+.strand,
+.competency {
+  width: 50%;
+  float:left;
+  padding:15px;
+}
+  .strand h4 {
+      font-weight:bold;
+  }
+  .competency ul {
+      margin:0;
+      padding: 0;
+      list-style: none;
+  }
+
+    .competency ul li {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+.no-alignment {
+  border: 1px solid #ddd;
+  width: 40%;
+  float: right;
+  margin-right: 20px;
+  padding: 15px;
+}
+  .no-alignment ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+    .no-alignment ul li {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+  .no-alignment h4 {
+    font-weight: bold;
+  }
