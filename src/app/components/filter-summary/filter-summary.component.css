@@ -27,6 +27,11 @@ label {
     margin: 7px;
 }
 .badge {
-    padding: 5px;
-    margin: 7px;
+    padding: 6px;
+    margin: 4px;
+}
+.filter-divider {
+    font-weight: 800;
+    font-size: 20pt;
+    padding: 0 10px 0 10px;
 }
