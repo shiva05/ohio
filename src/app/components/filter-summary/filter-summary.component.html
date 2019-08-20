@@ -27,7 +27,7 @@
               <span class="filter-divider"> | </span>
               <label>Competency Numbers: </label>
               <span class="badge badge-light" *ngIf="FilterSummaryKeys.CompetencyIds.length == 1">
-                <span *ngIf="FilterSummaryKeys.CareerFieldIds[0].length < 20; else concatName">
+                <span *ngIf="FilterSummaryKeys.CompetencyIds[0].length < 20; else concatName">
                   {{FilterSummaryKeys.CompetencyIds[0]}}
                 </span>
                 <ng-template #concatName>
@@ -35,7 +35,7 @@
                 </ng-template>
               </span>
               <span class="badge badge-light" *ngIf="FilterSummaryKeys.CompetencyIds.length > 1">
-                <span *ngIf="FilterSummaryKeys.CareerFieldIds[0].length < 20; else concatName">
+                <span *ngIf="FilterSummaryKeys.CompetencyIds[0].length < 20; else concatName">
                 {{FilterSummaryKeys.CompetencyIds[0]}}
               </span>
               <ng-template #concatName>
