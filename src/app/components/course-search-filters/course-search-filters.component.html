@@ -40,9 +40,9 @@
             <div class="form-group col-md-6">
                 <label>{{ 'CourseFields.AcademicSubjects' | translate }}</label>
                 <ng-multiselect-dropdown [ngClass]="" [data]="academicSubjects" [(ngModel)]="selectedAcadamicSubjects"
-                    [settings]="academicSubjectsSettings" (onSelect)="onItemSelect($event)"
-                    (onSelectAll)="onSelectAll($event)" (onDeSelect)="OnItemDeSelect($event)"
-                    (onDeSelectAll)="onDeSelectAll($event)">
+                    [settings]="academicSubjectsSettings" (onSelect)="onSubjectSelect($event)"
+                    (onSelectAll)="onSubjectSelectAll($event)" (onDeSelect)="OnSubjectDeSelect($event)"
+                    (onDeSelectAll)="onSubjectDeSelectAll($event)">
                 </ng-multiselect-dropdown>
             </div>
         </div>

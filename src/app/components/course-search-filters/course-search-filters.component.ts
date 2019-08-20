@@ -37,12 +37,7 @@ export class CourseSearchFiltersComponent implements OnInit {
   coursesDropdown: any = [];
   courseSearchData: Observable<CourseSearchData>;
 
-  mathsCourseName: any = [];
-  ELACourseName: any = [];
-  scienceCourseName: any =[];
-  socialCourseName: any =[];
   selectedAcademicItems: any = [];
-
   selectedAcademicCourses: any = [];
 
   constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>) {
@@ -53,34 +48,6 @@ export class CourseSearchFiltersComponent implements OnInit {
   @Output() onPageSelect = new EventEmitter<any>();
 
   ngOnInit() {
-    this.store.select('courseSearch').subscribe(data => {
-      this.courseSearchData = data.courseSearchData;
-      this.careerPath = this.courseSearchData['CareerPath'];
-      this.courses = this.courseSearchData['CareerPathCourses'];
-      this.academicSubjects = this.courseSearchData['Subjects'];
-     
-     
-      this.academicSubjectCourse = [];
-      // if (this.metaData['Subjects'] && data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length == 0) {
-      this.academicSubjectCourse = this.courseSearchData['SubjectCourses'];
-      if (this.academicSubjectCourse != undefined) {
-        if (this.academicSubjectCourse.length > 0) {
-          this.academicSubjectCourse.forEach((subject) => {
-            subject.GradeSubjects.forEach((item) => {
-              item['SelectedItems'] = {}; // to maintain the individual selected list from the dropdowns.
-              item['DropdownList'] = item.SubjectLevels;
-            });
-          });
-        }
-      }
-
-        // this.metaData['Subjects'].forEach(element => {
-        //   this.academicSubjects.push({SubjectId :element.SubjectId,SubjectName :element.SubjectName});
-        //});
-     // }
-     // console.log(this.academicSubjectCourse);
-    });
-
     this.careerPathSettings = {
       singleSelection: false,
       idField: 'CareerPathId', textField: 'CareerPathName',
@@ -124,6 +91,48 @@ export class CourseSearchFiltersComponent implements OnInit {
       itemsShowLimit: 1,
       allowSearchFilter: true
     };
+
+    this.store.select('courseSearch').subscribe(data => {
+      this.courseSearchData = data.courseSearchData;
+      this.careerPath = this.courseSearchData['CareerPath'];
+      this.courses = this.courseSearchData['CareerPathCourses'];
+      this.academicSubjects = this.courseSearchData['Subjects'];
+
+
+      this.academicSubjectCourse = [];
+      // if (this.metaData['Subjects'] && data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length == 0) {
+      this.academicSubjectCourse = this.courseSearchData['SubjectCourses'];
+      if (this.academicSubjectCourse != undefined) {
+        if (this.academicSubjectCourse.length > 0) {
+          this.academicSubjectCourse.forEach((subject) => {
+            subject.GradeSubjects.forEach((item) => {
+              item['SelectedItems'] = {}; // to maintain the individual selected list from the dropdowns.
+              item['DropdownList'] = item.SubjectLevels;
+            });
+          });
+        }
+      }
+
+      if (data.courseSearchSelectedFilters) {
+        if (data.courseSearchSelectedFilters.selectedCareerPath.length > 0) {
+          this.selectedCareerPath = data.courseSearchSelectedFilters.selectedCareerPath;
+          this.onCareerPathSelect(this.selectedCareerPath);
+        }
+        if (data.courseSearchSelectedFilters.selectedCareerPathCourses.length > 0) {
+          this.selectedCourses = data.courseSearchSelectedFilters.selectedCareerPathCourses;
+        }
+        // if (data.courseSearchSelectedFilters.selectedAcademicSubject.length > 0) {
+        //   this.selectedAcadamicSubjects = data.courseSearchSelectedFilters.selectedAcademicSubject;
+        //   this.onSubjectSelect(this.selectedAcadamicSubjects);
+        // }
+        this.selectedAcadamicSubjects = data.courseSearchSelectedFilters.selectedAcademicSubject.length > 0 ? data.courseSearchSelectedFilters.selectedAcademicSubject : [];
+        if (data.courseSearchSelectedFilters.selectedAcademicSubject.length > 0) {
+          this.selectedAcademicItems = this.selectedAcadamicSubjects;
+          this.selectListCreation();
+        }
+      }
+    });
+
   }
 
   onCareerPathSelect(selectedPaths) {
@@ -141,24 +150,24 @@ export class CourseSearchFiltersComponent implements OnInit {
   getData(data) {
     console.log(data);
   }
- 
-  onItemSelect(event) {
+
+  onSubjectSelect(event) {
     this.selectedAcademicItems = this.selectedAcadamicSubjects;
     this.selectListCreation();
   }
 
-  OnItemDeSelect(event) {
+  OnSubjectDeSelect(event) {
     this.selectedAcademicItems = this.selectedAcadamicSubjects;
     this.selectListCreation();
   }
 
-  onSelectAll(event) {
+  onSubjectSelectAll(event) {
     this.selectedAcademicItems = [];
     this.selectedAcademicItems = event;
     this.selectListCreation();
   }
-  
-  onDeSelectAll(event) {
+
+  onSubjectDeSelectAll(event) {
     this.selectedAcademicItems = [];
     this.selectedAcadamicSubjects = [];
   }
@@ -174,21 +183,13 @@ export class CourseSearchFiltersComponent implements OnInit {
     console.log(this.selectedAcademicItems);
   }
 
-  selectAllAcademicSubject(data) {
-
-  }
-
-  deSelectAllAcademicSubject(data) {
-
-  }
-
   search() {
     this.searchObj = {
       selectedCareerPath: this.selectedCareerPath,
       selectedCareerPathCourses: this.selectedCourses,
       selectedAcademicSubject: this.selectedAcadamicSubjects,
-     // selectedAcademicSubjectCourses: [this.selectedMathsCourses, this.selectedELACourses, this.selectedScienceCourses, this.selectedSocialCourses]
-      selectedAcademicSubjectCourses : this.selectedAcademicItems
+      // selectedAcademicSubjectCourses: [this.selectedMathsCourses, this.selectedELACourses, this.selectedScienceCourses, this.selectedSocialCourses]
+      selectedAcademicSubjectCourses: this.selectedAcademicItems
     };
     this.store.dispatch({ type: CourseSearchActions.SAVE_AS_SELECTED_FILTERS_COURSESEARCH, payload: this.searchObj });
     localStorage.setItem('searchLable', 'SearchCourse');
