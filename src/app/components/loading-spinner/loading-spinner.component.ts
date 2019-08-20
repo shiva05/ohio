@@ -8,7 +8,7 @@ import { LoaderService } from '../../services/loader.service';
 })
 export class LoadingSpinnerComponent implements OnInit {
 
-  constructor(private loaderService: LoaderService) { }
+  constructor(public loaderService: LoaderService) { }
 
   ngOnInit() {
   }
