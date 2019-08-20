@@ -282,7 +282,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.ref.detectChanges();
    // console.log(this.selectedAcademicItems);
   }
-  onOutcomeSelect(outcome) {
+  onOutcomeSelect() {
     // TODO: Call API
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA , payload : this.selectedOutcome});
     console.log(this.competencyNumbers);

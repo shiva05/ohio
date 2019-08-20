@@ -23,7 +23,7 @@ import { LoaderService } from './services/loader.service';
 export class AppComponent implements OnInit {
   title = 'StandardsByDesignWeb';
 
-  constructor(private http: HttpClient, private loaderService: LoaderService) { }
+  constructor(private http: HttpClient, public loaderService: LoaderService) { }
 
   ngOnInit() {
 
