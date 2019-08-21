@@ -30,8 +30,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   constructor(private store: Store<AppState>, private httpService: HttpClient, private searchResultService: SearchResultService) { }
 
   ngOnInit() {
-    this.store.select('courseSearch').subscribe(data => {
-      console.log(data);
+    this.store.select('courseSearch').subscribe(data => {      
       if (data.courseSearchSelectedFilters) {
         this.courseSearchSelectedFilters = data.courseSearchSelectedFilters;
 
