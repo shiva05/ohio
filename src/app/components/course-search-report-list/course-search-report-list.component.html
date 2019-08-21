@@ -1,7 +1,7 @@
 <div class="col-md-12">
   <div class="row reports-head">
     <div class="reports-head-left col-md-3">
-      <h1>{{ 'ReportFields.Results' | translate }}</h1>
+      <h1>Results: Course Search</h1>
     </div>
 
     <div class="reports-head-right">
@@ -19,146 +19,79 @@
       </div>
     </div>
   </div>
-  <div class="reports-each col-md-12" *ngFor="let result of reportListhResultData.Competencies">
-    <h2>{{result.CompetencyName}}</h2>
-    <div class="row">
-
-      <div class="reports-each-top col-md-12">
-        <div class="reports-content">
-
-          <div class="reports-content-each">
-
-            <span class="reports-content-each-left">{{ 'ReportFields.CareerField' | translate }}</span>
-
-            <span class="reports-content-each-right reports-blue">{{result.CareerFiledName}}</span>
-
-          </div>
-          <div class="reports-content-each">
-
-            <span class="reports-content-each-left">{{ 'ReportFields.Strand' | translate }}</span>
-
-            <span class="reports-content-each-right">{{result.StrandName}}</span>
-
-          </div>
-          <div class="reports-content-each">
-            <span class="reports-content-each-left">
-              {{ 'ReportFields.Outcome' | translate }}
-            </span>
-            <span class="reports-content-each-right">
-              {{result.OutcomeName}}
-            </span>
-          </div>
-          <div class="reports-content-each">
-            <span class="reports-content-each-left">{{ 'ReportFields.Competency' | translate }}</span>
-
-            <span class="reports-content-each-right">{{result.CompetencyName}}</span>
-
-          </div>
-          <div class="reports-content-each">
-            <span class="reports-content-each-left">{{ 'ReportFields.AcademicSubject' | translate }}</span>
-
-            <span class="reports-content-each-right reports-green">{{result.SubjectName}}</span>
-
-          </div>
-
-          <div class="reports-content-each">
-            <span class="reports-content-each-left">{{ result.DomainOrClusterTitle }}</span>
-
-            <span class="reports-content-each-right">{{result.DomainOrClusterValue}}</span>
-
-          </div>
-          <div class="reports-content-each">
-            <span class="reports-content-each-left">{{ result.GradeOrSubjectTitle}}</span>
-
-            <span class="reports-content-each-right">{{result.GradeOrSubjectValue}}</span>
-
-          </div>
 
 
 
 
-        </div>
-      </div>
-      <div class="reports-each-bottom col-md-12">
-        <h3>{{ 'ReportFields.Standards' | translate }}:</h3>
-        <div class="reports-standards">
-          <div class="reports-standards-each" *ngFor="let  standard of result.Standards">
-            <span class="reports-standards-each-left">
-              <span [ngClass]="calculateStrandClasses(standard.StandardType)">
-                {{standard.StandardType}}
-              </span>
-            </span>
-            <span class="reports-standards-each-right">
-              {{standard.StandardDesc}}
-            </span>
-          </div>
-        </div>
-      </div>
+
+  <div class="col-md-6">
+    <h2>Academic Course</h2>
+    <hr>
+    <h3>Presenting</h3>
+  </div>
+
+  <div class="col-md-6">
+    <h2>CTE Courses</h2>
+    <hr>
+    <h3>Media Arts 3</h3>
+  </div>
+
+
+
+
+  <div class="col-md-6">
+    <p>Standard 1:</p>
+  </div>
+
+  <div class="col-md-6">
+    <div class="competency">
+      <ul>
+        <li> 1) Compentency List </li>
+        <li> 8) Compentency List </li>
+        <li> 4) Compentency List </li>
+      </ul>
     </div>
   </div>
-  <div class="reports-each col-md-12" *ngFor="let result of reportListhResultData.Standards">
-    <h2>{{result.StandardDesc}}</h2>
-    <div class="row">
 
-      <div class="reports-each-top col-md-12">
-        <div class="reports-content">
+  <div class="col-md-6">
+    <p>Standard 2:</p>
+  </div>
 
-          <div class="reports-content-each">
-
-            <span class="reports-content-each-left">{{ 'ReportFields.AcademicSubject' | translate }}</span>
-
-            <span class="reports-content-each-right reports-blue">{{result.SubjectName}}</span>
-
-          </div>
-          <div class="reports-content-each">
-
-            <span class="reports-content-each-left">{{ result.GradeOrSubjectTitle }}</span>
-
-            <span class="reports-content-each-right">{{result.GradeOrSubjectValue}}</span>
-
-          </div>
-          <div class="reports-content-each">
-            <span class="reports-content-each-left">
-              {{ result.DomainOrClusterTitle }}
-            </span>
-            <span class="reports-content-each-right">
-              {{result.DomainOrClusterValue}}
-            </span>
-          </div>
-          <div class="reports-content-each">
-            <span class="reports-content-each-left">{{ 'ReportFields.Standards' | translate }}</span>
-            <span class="reports-content-each-right">{{result.StandardDesc}}</span>
-          </div>
-          <div class="reports-content-each">
-            <span class="reports-content-each-left">{{ 'ReportFields.CareerField' | translate }}</span>
-            <span class="reports-content-each-right reports-blue">{{result.CareerFiledName}}</span>
-          </div>
-          <div class="reports-content-each">
-            <span class="reports-content-each-left">{{ 'ReportFields.Strand' | translate }}</span>
-            <span class="reports-content-each-right">{{result.StrandName}}</span>
-          </div>
-
-          <div class="reports-content-each">
-            <span class="reports-content-each-left"> {{ 'ReportFields.Outcome' | translate }}</span>
-            <span class="reports-content-each-right reports-green">{{result.OutcomeName}}</span>
-          </div>
-        </div>
-      </div>
-      <div class="reports-each-bottom col-md-12">
-        <h3>{{ 'ReportFields.Competency' | translate }}:</h3>
-        <div class="reports-standards">
-          <div class="reports-standards-each" *ngFor="let  standard of result.Competencies">
-            <span class="reports-standards-each-left">
-              <span [ngClass]="calculateStrandClasses(standard.Type)">
-                {{standard.Type}}
-              </span>
-            </span>
-            <span class="reports-standards-each-right">
-              {{standard.Competency}}
-            </span>
-          </div>
-        </div>
-      </div>
+  <div class="col-md-6">
+    <div class="competency">
+      <ul>
+        <li> 1) Compentency List </li>
+        <li> 8) Compentency List </li>
+        <li> 4) Compentency List </li>
+      </ul>
     </div>
   </div>
+
+  <div class="col-md-6">
+    <p>Standard 3:</p>
+  </div>
+
+  <div class="col-md-6">
+    <div class="competency">
+      <ul>
+        <li> 1) Compentency List </li>
+        <li> 8) Compentency List </li>
+        <li> 4) Compentency List </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="no-alignment col-md-6" style="float: right">
+    <h4>No Alignment</h4>
+    <ul>
+      <li> 1) Compentency List </li>
+      <li> 8) Compentency List </li>
+      <li> 4) Compentency List </li>
+    </ul>
+
+  </div>
+
+
+
 </div>
