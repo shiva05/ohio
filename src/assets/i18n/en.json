@@ -40,7 +40,8 @@
         "CareerFields": "Career Fields",
         "AcademicSubject": "Academic Subject",
         "Alignment": "Alignment",
-        "ToggleAlignments": "Toggle Alignments"
+        "ToggleAlignments": "Toggle Alignments",
+        "NoResultFound": "No Search Result Found"
     },
     "ReportFields": {
         "Results": "Results",

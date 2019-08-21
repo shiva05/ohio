@@ -15,15 +15,11 @@ import * as AdvancedSearchActions from './../../actions/advanced-search.actions'
 })
 export class CourseSearchComponent implements OnInit {
 
-
   showCsFilter = true;
   showCsResults = false;
   showCsReport = false;
 
-  constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>) {
-
-  }
-
+  constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>) { }
 
   ngOnInit() {
 
