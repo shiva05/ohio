@@ -45,18 +45,18 @@
   margin-bottom: 15px;
   background: #eee;
 }
-.strand {
-  width: 450px;
+.standard {
+  width: 50%;
   padding: 15px;
   float: left;
 }
 .competency {
-  width: calc(100% - 450px);
+  width: calc(100% - 50%);
   border-left: 1px solid #cbcbcb;
   padding: 0;
   float: left;
 }
-  .strand h4 {
+  .standard h4 {
       font-weight:bold;
   }
   .competency ul {
@@ -98,7 +98,6 @@
 .course-wrap {
   display: block;
   overflow: hidden;
-  width: 100%;
   padding: 15px;
   border: 1px solid #ddd;
   background: #f5f5f5;
@@ -110,8 +109,8 @@
     font-size: 24px;
   }
 .c2s .competency {
-  width: calc(100% - 450px);
+  width: calc(100% - 50%);
 }
-.c2s .strand {
-  width: 450px;
+.c2s .standard {
+  width: 50%;
 }
