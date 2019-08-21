@@ -14,11 +14,13 @@ import * as CourseSearchActions from './../../actions/course-search.actions';
 export class CourseSearchAccordionComponent implements OnInit {
   careerPathToSubject = true;
   courseSearchSelectedFilters: {};
-
+  careerPathToSubjectData: any = [];
+  subjectToCareerPathData: any = [];
   courseSearchReportPayload = {
     Keywords: '',
     CareerPathIds: [],
     CourseIds: [],
+    CompetencyIds: [],
     Subjects: [],
     CareerPathToSubject: true
   };
@@ -69,21 +71,79 @@ export class CourseSearchAccordionComponent implements OnInit {
           CareerPathToSubject: this.careerPathToSubject
         };
 
-        console.log(obj);
-
-        // this.searchResultService.getSearchResultCourseSearch(obj).subscribe(
-        //   data => {
-        //     this.searchResultData = data;
-        //     this.searchResultData.CareerField.forEach(element => {
-        //       this.searchResultDataArray.push(element);
-        //     });
-        //     this.formatSearchResultDataArray();
-        //   },
-        //   err => {
-        //     // Log errors if any
-        //     console.log(err);
-        //   });
+        this.getCourseSearchResult(obj);
       }
+    });
+  }
+
+  getCourseSearchResult(obj) {
+    this.searchResultService.getCourseSearchResult(obj).subscribe(
+      (data: any) => {
+        if (this.careerPathToSubject) {
+          this.careerPathToSubjectData = data.CareerPathToAcademicSubjects;
+        } else {
+          this.subjectToCareerPathData = data.AcademicSubjectToCareePaths;
+        }
+      },
+      err => {
+        console.log(err);
+      });
+  }
+
+  // Expand/Collapse event on Career Path
+  expandCollapseCareerPath(obj) {
+    obj.isCareerPathClosed = !obj.isCareerPathClosed;
+  }
+
+  // Expand/Collapse event on Course
+  expandCollapseCourse(obj) {
+    obj.isCourseClosed = !obj.isCourseClosed;
+  }
+
+  // Click event on Career Path
+  careerPathCheckBox(obj) {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < obj.Courses.length; i++) {
+      obj.Courses[i].isSelected = obj.isSelected;
+      if (obj.Courses[i].Competencies) {
+        // tslint:disable-next-line:prefer-for-of
+        for (let j = 0; j < obj.Courses[i].Competencies.length; j++) {
+          obj.Courses[i].Competencies[j].isSelected = obj.isSelected;
+        }
+      }
+    }
+  }
+
+  // Click event on Courses Checkbox
+  courseCheckBox(career, course) {
+    // tslint:disable-next-line:only-arrow-functions
+    career.isSelected = career.Courses.every(function (itemChild: any) {
+      return itemChild.isSelected === true;
+    });
+
+    if (course.Competencies) {
+      if (course.isSelected) {
+        course.Competencies.forEach(item => {
+          item.isSelected = true;
+        });
+      } else {
+        course.Competencies.forEach(item => {
+          item.isSelected = false;
+        });
+      }
+    }
+  }
+
+  // Click event on Competency Checkbox
+  competencyCheckBox(career, course) {
+    // tslint:disable-next-line:only-arrow-functions
+    course.isSelected = course.Competencies.every(function (itemChild: any) {
+      return itemChild.isSelected === true;
+    });
+
+    // tslint:disable-next-line:only-arrow-functions
+    career.isSelected = career.Courses.every(function (itemChild: any) {
+      return itemChild.isSelected === true;
     });
   }
 
@@ -94,33 +154,29 @@ export class CourseSearchAccordionComponent implements OnInit {
     this.courseSearchReportPayload.Subjects = [];
     this.courseSearchReportPayload.CareerPathToSubject = this.careerPathToSubject;
 
-    // this.searchResultDataArray.forEach(careerField => {
-    //   if (this.courseSearchReportPayload.Subjects.length <= 0) {
-    //     this.courseSearchReportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[careerField.AcademicSubject[0]] });
-    //   }
+    if (this.careerPathToSubject) {
+      this.careerPathToSubjectData.forEach(careerPath => {
 
-    //   if (careerField.isSelected) {
-    //     this.courseSearchReportPayload.CareerFiledIds.push(careerField.CareerFieldId);
-    //   }
+        if (careerPath.isSelected) {
+          this.courseSearchReportPayload.CareerPathIds.push(careerPath.CareerPathId);
+          this.courseSearchReportPayload.Subjects.push({ SubjectId: careerPath.SubjectName });
+        }
 
-    //   careerField.Strand.forEach(stand => {
-    //     if (stand.isSelected) {
-    //       this.courseSearchReportPayload.StrandIds.push(stand.StrandPk);
-    //     }
+        careerPath.Courses.forEach(course => {
+          if (course.isSelected) {
+            this.courseSearchReportPayload.CourseIds.push(course.CourseId);
+          }
 
-    //     stand.Outcome.forEach(outcome => {
-    //       if (outcome.isSelected) {
-    //         this.courseSearchReportPayload.OutcomeIds.push(outcome.OutcomePk);
-    //       }
+          course.Competencies.forEach(competency => {
+            if (competency.isSelected) {
+              this.courseSearchReportPayload.CompetencyIds.push(competency.Id);
+            }
+          });
+        });
+      });
+    } else {
 
-    //       outcome.Competency.forEach(competency => {
-    //         if (competency.isSelected) {
-    //           this.courseSearchReportPayload.CompetencyIds.push(competency.CompetencyPk);
-    //         }
-    //       });
-    //     });
-    //   });
-    // });
+    }
 
     console.log(this.courseSearchReportPayload);
     this.goToPage(obj);

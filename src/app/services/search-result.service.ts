@@ -14,8 +14,8 @@ export class SearchResultService {
         return this.http.post(URL, payload);
     }
 
-    getSearchResultCourseSearch(payload) {
-        var URL = '';
+    getCourseSearchResult(payload) {
+        var URL = 'https://edu-dev-sbd-commonfunctions.azurewebsites.net/api/GetCourseSearchResults?code=gQisfH5rAr8gU64EymE4N3eXE6h0YNKqGfKLDzdZaHmr6Im2kGvH7g==';
         return this.http.post(URL, payload);
     }
 }
