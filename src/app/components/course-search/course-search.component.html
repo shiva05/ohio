@@ -1,9 +1,10 @@
 <div class="main">
-  <app-course-search-filters (onPageSelect)="onPageSelect($event)" *ngIf="showCsFilter"></app-course-search-filters>
-  <filter-summary (onPageSelect)="onPageSelect($event)" *ngIf="showCsResults"></filter-summary>
-  <div class="col-md-12">
+
+<app-course-search-filters  (onPageSelect)="onPageSelect($event)"  *ngIf="showCsFilter" ></app-course-search-filters>
+<filter-summary (onPageSelect)="onPageSelect($event)"  *ngIf="showCsResults"></filter-summary>
+<div class="col-md-12">
     <app-course-search-accordion (onPageSelect)="onPageSelect($event)" *ngIf="showCsResults">
-    </app-course-search-accordion>
-  </div>
-  <report (onPageSelect)="onPageSelect($event)" *ngIf="showCsReport"></report>
+      </app-course-search-accordion>
+    </div>
+    <app-course-search-report (onPageSelect)="onPageSelect($event)"></app-course-search-report>
 </div>

@@ -152,9 +152,11 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       if (data.alignmentSearchSelectedFilters) {
         if (data.alignmentSearchSelectedFilters.selectedCareers.length > 0) {
           this.selectedCareer = data.alignmentSearchSelectedFilters.selectedCareers;
+          this.onCareerSelect();
         }
         if (data.alignmentSearchSelectedFilters.selectedStrands.length > 0) {
           this.selectedStrands = data.alignmentSearchSelectedFilters.selectedStrands;
+          this.onStrandSelect();
         }
         if (data.alignmentSearchSelectedFilters.selectedOutcomes.length > 0) {
           this.selectedOutcome = data.alignmentSearchSelectedFilters.selectedOutcomes;
@@ -164,8 +166,9 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         }
         this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0 ? data.alignmentSearchSelectedFilters.selectedAcadamicSubjects : [];
         if (data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0) {
-           this.selectedAcademicItems = this.selectedAcadamicSubjects;
-           this.selectListCreation();
+          this.selectedAcademicItems = this.selectedAcadamicSubjects;
+          this.academicSubjects = data.alignmentSearchSelectedFilters.finalSelectedObject;
+         //  this.selectListCreation();
          }
       }
     });
@@ -199,6 +202,30 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     });
    // console.log(this.strandsDropdown);
   }
+  onCareerSelectAll() {
+    this.strandsDropdown = [];
+    this.strands.forEach(eachStrand => {
+          this.strandsDropdown.push(eachStrand);
+    });
+  }
+  onCareerDeSelectAll() {
+    this.strandsDropdown = [];
+  }
+  onStrandSelectAll() {
+    this.outcomesDropdown = [];
+    this.outcomes.forEach(eachOutcome => {
+          //  console.log(eachOutcome);
+          this.outcomesDropdown.push(eachOutcome);
+    });
+  }
+  onStrandDeSelectAll() {
+    this.outcomesDropdown = [];
+  }
+
+  //onOutcomeSelectAll() { }
+  //onOutcomeDeSelectAll() { }
+
+
   onItemSelect(event) {
     this.selectedAcademicItems = this.selectedAcadamicSubjects;
     this.selectListCreation();
@@ -229,7 +256,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   }
 
   sendSub(item) {
-    console.log(item);
+  //  console.log(item);
   }
 
   onSubjectLevelsSelect(data) {
@@ -282,10 +309,23 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.ref.detectChanges();
    // console.log(this.selectedAcademicItems);
   }
+
+
+  onSubjectLevelsSelectAll(data) {
+    let selectedAll = [];
+    data.SelectedItems = [];
+    data.SelectedItems = data.SubjectLevels;
+    this.onSubjectLevelsSelect(data);
+  }
+  onSubjectLevelsDeSelectAll(data) {
+    let selectedAll = [];
+    data.SelectedItems = [];
+    this.onSubjectLevelsSelect(data);
+  }
   onOutcomeSelect() {
     // TODO: Call API
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA , payload : this.selectedOutcome});
-    console.log(this.competencyNumbers);
+  //  console.log(this.competencyNumbers);
   }
   search() {
     this.goToPage('SearchResults');
@@ -296,15 +336,17 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       selectedOutcomes: this.selectedOutcome,
       selectedCompetencies: this.selectedCompetencyNumbers,
       selectedAcadamicSubjects: this.selectedAcadamicSubjects,
-      finalSelectedObject : this.selectedAcademicItems
+      finalSelectedObject: this.academicSubjects,
+
     };
+    console.log(this.academicSubjects);
     localStorage.setItem('searchLable', 'SearchAlignment');
     this.goToPage('SearchResults');
     this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS , payload: this.searchObj});
   }
 
   onAcadamicSubjectSelect() {
-    console.log('hi');
+  //  console.log('hi');
   }
 
   goToPage(org) {

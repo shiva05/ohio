@@ -48,6 +48,8 @@ import { SearchResultsComponent } from './components/search-results/search-resul
 import { courseSearchReducer } from './reducers/course-search.reducer';
 import { CourseSearchEffects } from './effects/course-search.effect';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { CourseSearchReportComponent } from './components/course-search-report/course-search-report.component';
+import { CourseSearchReportListComponent } from './components/course-search-report-list/course-search-report-list.component';
 import { CourseSearchAccordionComponent } from './components/course-search-accordion/course-search-accordion.component';
 
 @NgModule({
@@ -71,6 +73,8 @@ import { CourseSearchAccordionComponent } from './components/course-search-accor
     CourseSearchFiltersComponent,
     SearchResultsComponent,
     LoadingSpinnerComponent,
+    CourseSearchReportComponent,
+    CourseSearchReportListComponent,
     CourseSearchAccordionComponent
   ],
   imports: [

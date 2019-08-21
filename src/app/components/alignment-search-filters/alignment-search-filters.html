@@ -28,7 +28,7 @@
 <div class="form-group col-md-6">
   <label>{{ 'SearchFields.CareerField' | translate }}</label>
   <ng-multiselect-dropdown [ngClass]="" [data]="careers" [(ngModel)]="selectedCareer"
-      [settings]="careerFieldDropdownSettings"  (onSelect)="onCareerSelect()" (onDeSelect)="onCareerSelect()">
+      [settings]="careerFieldDropdownSettings"  (onSelect)="onCareerSelect()" (onDeSelect)="onCareerSelect()" (onSelectAll)="onCareerSelectAll()" (onDeSelectAll)="onCareerDeSelectAll()">
   </ng-multiselect-dropdown>
 </div>
 <div class="form-group col-md-6">
@@ -49,13 +49,13 @@
       <div class="form-group col-md-6"  >
           <label>{{ 'SearchFields.Strands' | translate }}</label>
           <ng-multiselect-dropdown [ngClass]="" [data]="strandsDropdown" [(ngModel)]="selectedStrands"
-              [settings]="strandDropdownSettings" (onSelect)="onStrandSelect()" (onDeSelect)="onStrandSelect()">
+              [settings]="strandDropdownSettings" (onSelect)="onStrandSelect()" (onDeSelect)="onStrandSelect()" (onSelectAll)="onStrandSelectAll()" (onDeSelectAll)="onStrandDeSelectAll()">
           </ng-multiselect-dropdown>
       </div>
       <div class="form-group col-md-6" >
           <label>{{ 'SearchFields.Outcomes' | translate }}</label>
           <ng-multiselect-dropdown [ngClass]="" [data]="outcomesDropdown" [(ngModel)]="selectedOutcome"
-              [settings]="outcomeDropdownSettings" (onSelect)="onOutcomeSelect()">
+              [settings]="outcomeDropdownSettings" (onSelect)="onOutcomeSelect()" (onDeSelect)="onOutcomeSelect()">
           </ng-multiselect-dropdown>
       </div>
       <!-- End Dropdown Row -->
@@ -85,9 +85,12 @@
               <div class="row">
                 <div class="form-group col-md-4" *ngFor="let item of subject.Level; let sub = index;">
                   <label>{{item.LevelName}}</label>
-                  <ng-multiselect-dropdown [ngClass]=""  id="{{i}}{{sub}}" [data]="item.DropdownList" [(ngModel)]="item.SelectedItems"
+                  <ng-multiselect-dropdown [ngClass]=""  [data]="item.DropdownList" [(ngModel)]="item.SelectedItems"
                                            [settings]="subjectsDefaultSettings" (onSelect)="onSubjectLevelsSelect(item)"
-                                           (onDeSelect)="onSubjectLevelsSelect(item)">
+                                           (onDeSelect)="onSubjectLevelsSelect(item)"
+                                            (onSelectAll)="onSubjectLevelsSelectAll(item)"
+                                            (onDeSelectAll)="onSubjectLevelsDeSelectAll(item)"
+                                           >
                   </ng-multiselect-dropdown>
                 </div>
               </div>
