@@ -40,15 +40,21 @@
   .course-search-results {
     padding: 30px;
   }
-  .course {
-    border: 1px solid #ddd;
-    margin-bottom: 30px;
-  }
-.strand,
+.course {
+  border: 1px solid #cbcbcb;
+  margin-bottom: 15px;
+  background: #eee;
+}
+.strand {
+  width: 450px;
+  padding: 15px;
+  float: left;
+}
 .competency {
-  width: 50%;
-  float:left;
-  padding:15px;
+  width: calc(100% - 450px);
+  border-left: 1px solid #cbcbcb;
+  padding: 0;
+  float: left;
 }
   .strand h4 {
       font-weight:bold;
@@ -59,16 +65,22 @@
       list-style: none;
   }
 
-    .competency ul li {
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
+.competency ul li {
+  font-size: 16px;
+  border-bottom: 1px solid #cbcbcb;
+  padding: 9px;
+}
+  .competency ul li:last-child {
+      border-bottom: 0;
+  }
+
 .no-alignment {
   border: 1px solid #ddd;
   width: 40%;
   float: right;
-  margin-right: 20px;
+  margin: 15px 0px;
   padding: 15px;
+  background: #eee;
 }
   .no-alignment ul {
     margin: 0;
@@ -83,3 +95,23 @@
   .no-alignment h4 {
     font-weight: bold;
   }
+.course-wrap {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: #f5f5f5;
+  margin-bottom: 20px;
+}
+  .course-wrap h2 {
+    color: #700017;
+    margin: 0 0 15px 0;
+    font-size: 24px;
+  }
+.c2s .competency {
+  width: calc(100% - 450px);
+}
+.c2s .strand {
+  width: 450px;
+}
