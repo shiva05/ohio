@@ -50,6 +50,7 @@ import { CourseSearchEffects } from './effects/course-search.effect';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { CourseSearchReportComponent } from './components/course-search-report/course-search-report.component';
 import { CourseSearchReportListComponent } from './components/course-search-report-list/course-search-report-list.component';
+import { CourseSearchAccordionComponent } from './components/course-search-accordion/course-search-accordion.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { CourseSearchReportListComponent } from './components/course-search-repo
     SearchResultsComponent,
     LoadingSpinnerComponent,
     CourseSearchReportComponent,
-    CourseSearchReportListComponent
+    CourseSearchReportListComponent,
+    CourseSearchAccordionComponent
   ],
   imports: [
     BrowserModule,
