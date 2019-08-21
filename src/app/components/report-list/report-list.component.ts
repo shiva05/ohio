@@ -22,7 +22,7 @@ export class ReportListComponent implements OnInit {
   ngOnInit() {
     this.store.select('advancedSearch').subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
-        var objTemp = data.alignmentSearchSelectedFilters.selectedAsSearchResults;
+        let objTemp = data.alignmentSearchSelectedFilters.selectedAsSearchResults;
         this.reportService.getReportData(objTemp).subscribe(
           data => {
             this.reportListhResultData = data;
@@ -35,11 +35,11 @@ export class ReportListComponent implements OnInit {
   goToPage(org) {
     this.onPageSelect.emit(org);
   }
-  calculateStrandClasses(type){
-    var strandClasses = {
-          'A':'legend-application',
-          'R':'legend-reinforcement',
-          'E':'legend-enrichment'
+  calculateStrandClasses(type) {
+    let strandClasses = {
+          A: 'legend-application',
+          R: 'legend-reinforcement',
+          E: 'legend-enrichment'
     };
     return strandClasses[type];
 }
