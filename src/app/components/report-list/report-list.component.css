@@ -104,10 +104,10 @@
   .reports-standards-each-left{
       width: 30px;
       margin: 0 10px 0 0;
-      display: inline-block;
-      top: 50%;
-      -ms-transform: translateY(-50%);
-      transform: translateY(-50%);
+      float: left;
+      display: grid;
+      align-items: center;
+      justify-content: center;
   }
 
   .reports-standards-each-right{
