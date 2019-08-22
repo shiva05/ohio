@@ -16,6 +16,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   courseSearchSelectedFilters: {};
   careerPathToSubjectData: any = [];
   subjectToCareerPathData: any = [];
+  noCourseResultFound = false;
   courseSearchReportPayload = {
     Keywords: '',
     CareerPathIds: [],
@@ -30,6 +31,10 @@ export class CourseSearchAccordionComponent implements OnInit {
   constructor(private store: Store<AppState>, private httpService: HttpClient, private searchResultService: SearchResultService) { }
 
   ngOnInit() {
+    this.getCourseSearchResult();
+  }
+
+  getCourseSearchResult() {
     this.store.select('courseSearch').subscribe(data => {
       if (data.courseSearchSelectedFilters) {
         this.courseSearchSelectedFilters = data.courseSearchSelectedFilters;
@@ -70,23 +75,29 @@ export class CourseSearchAccordionComponent implements OnInit {
           CareerPathToSubject: this.careerPathToSubject
         };
 
-        this.getCourseSearchResult(obj);
+        this.searchResultService.getCourseSearchResult(obj).subscribe(
+          (data: any) => {
+            if (this.careerPathToSubject) {
+              this.careerPathToSubjectData = data.CareerPathToAcademicSubjects;
+              if (this.careerPathToSubjectData.length > 0) {
+                this.noCourseResultFound = false;
+              } else {
+                this.noCourseResultFound = true;
+              }
+            } else {
+              this.subjectToCareerPathData = data.AcademicSubjectToCareePaths;
+              if (this.subjectToCareerPathData.length > 0) {
+                this.noCourseResultFound = false;
+              } else {
+                this.noCourseResultFound = true;
+              }
+            }
+          },
+          err => {
+            console.log(err);
+          });
       }
     });
-  }
-
-  getCourseSearchResult(obj) {
-    this.searchResultService.getCourseSearchResult(obj).subscribe(
-      (data: any) => {
-        if (this.careerPathToSubject) {
-          this.careerPathToSubjectData = data.CareerPathToAcademicSubjects;
-        } else {
-          this.subjectToCareerPathData = data.AcademicSubjectToCareePaths;
-        }
-      },
-      err => {
-        console.log(err);
-      });
   }
 
   // Expand/Collapse event on Career Path
@@ -116,7 +127,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Courses Checkbox
   courseCheckBox(career, course) {
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Courses.every(function(itemChild: any) {
+    career.isSelected = career.Courses.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -136,12 +147,12 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Competency Checkbox
   competencyCheckBox(career, course) {
     // tslint:disable-next-line:only-arrow-functions
-    course.isSelected = course.Competencies.every(function(itemChild: any) {
+    course.isSelected = course.Competencies.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Courses.every(function(itemChild: any) {
+    career.isSelected = career.Courses.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
@@ -190,6 +201,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   onToggleClick(value) {
     this.careerPathToSubject = !this.careerPathToSubject;
     this.courseSearchReportPayload.CareerPathToSubject = this.careerPathToSubject;
+    this.getCourseSearchResult();
   }
 
 }
