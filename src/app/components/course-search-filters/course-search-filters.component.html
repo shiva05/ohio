@@ -68,8 +68,7 @@
                         <div class="form-group col-md-4">
                             <label>{{item.LevelName}}</label>
                             <ng-multiselect-dropdown [ngClass]="" [data]="item.GradeSubjects"
-                                [(ngModel)]="item.SelectedItems" [settings]="subjectsDefaultSettings"
-                                (onSelect)="onSubjectLevelsSelect(item)" (onDeSelect)="onSubjectLevelsSelect(item)">
+                                [(ngModel)]="item.SelectedItems" [settings]="subjectsDefaultSettings">
                             </ng-multiselect-dropdown>
                         </div>
                     </div>
