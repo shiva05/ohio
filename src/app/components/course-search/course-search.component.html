@@ -6,5 +6,5 @@
     <app-course-search-accordion (onPageSelect)="onPageSelect($event)" *ngIf="showCsResults">
       </app-course-search-accordion>
     </div>
-    <app-course-search-report (onPageSelect)="onPageSelect($event)"></app-course-search-report>
+    <app-course-search-report (onPageSelect)="onPageSelect($event)" *ngIf="showCsReport"></app-course-search-report>
 </div>

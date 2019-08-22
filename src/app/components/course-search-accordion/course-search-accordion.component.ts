@@ -30,7 +30,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   constructor(private store: Store<AppState>, private httpService: HttpClient, private searchResultService: SearchResultService) { }
 
   ngOnInit() {
-    this.store.select('courseSearch').subscribe(data => {      
+    this.store.select('courseSearch').subscribe(data => {
       if (data.courseSearchSelectedFilters) {
         this.courseSearchSelectedFilters = data.courseSearchSelectedFilters;
 
@@ -116,7 +116,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Courses Checkbox
   courseCheckBox(career, course) {
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Courses.every(function (itemChild: any) {
+    career.isSelected = career.Courses.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -136,12 +136,12 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Competency Checkbox
   competencyCheckBox(career, course) {
     // tslint:disable-next-line:only-arrow-functions
-    course.isSelected = course.Competencies.every(function (itemChild: any) {
+    course.isSelected = course.Competencies.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Courses.every(function (itemChild: any) {
+    career.isSelected = career.Courses.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
   }

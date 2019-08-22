@@ -12,9 +12,14 @@ export class MainComponent implements OnInit {
   someParam: any;
   someParamKid: any;
   loopNumber: any;
-  showAdvancedSearch = false; showSearchResults = false;
-  showReport = false; showHomePage = true;
-  showAlignmentSearch = false; showCourseSearch = false; showExport = false;
+  showAdvancedSearch = false;
+  showSearchResults = false;
+  showReport = false;
+  showHomePage = true;
+  showAlignmentSearch = false;
+  showCourseSearch = false;
+  showExport = false;
+  showCourseReport = false;
   iFrameSummonsSrc: SafeResourceUrl;
 
   constructor(private translate: TranslateService, private sanitizer: DomSanitizer) {
@@ -40,6 +45,7 @@ export class MainComponent implements OnInit {
     this.showAdvancedSearch = false;
     this.showSearchResults = false;
     this.showReport = false;
+    this.showCourseReport = false;
     this.showHomePage = false;
     this.showAlignmentSearch = false;
     this.showCourseSearch = false;
@@ -59,6 +65,8 @@ export class MainComponent implements OnInit {
       this.showCourseSearch = true;
     } else if (org === 'Export') {
       this.showExport = true;
+    } else if (org === 'CourseReport') {
+      this.showCourseReport = true;
     }
   }
 }

@@ -33,7 +33,7 @@ export class CourseSearchComponent implements OnInit {
       this.showCsFilter = true;
     } else if (org === 'SearchResults') {
       this.showCsResults = true;
-    } else if (org === 'Report') {
+    } else if (org === 'CourseSearchReport') {
       this.showCsReport = true;
     }
   }
