@@ -334,7 +334,7 @@ border-color: #fff !important;
     width: 25px;
 }
 .level-three-title{    
-    padding: 0 0 0 50px;
+    padding: 0 0 0 0px;
     display: inline-block;
     vertical-align: top;
     width: calc(100% - 25px);

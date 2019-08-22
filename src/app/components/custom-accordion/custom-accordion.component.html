@@ -41,6 +41,7 @@
           <!-- add class dynamically if partially selected  checkbox-indeterminate -->
           <div class="row careerfield-each-inner">
             <div class="col-md-6">
+              <div class="accordion-label">Career Field</div>
               <div class="accordion-checbox ">
                 <span class="ohio-checkbox checkbox checkbox-success">
                   <input type="checkbox" class="ohio-checkbox-el" id="careerFieldID_{{i}}"
@@ -70,6 +71,7 @@
               <li class="level-two-inner" *ngFor="let strand of careerField.Strand; index as j">
                 <div class="row strand-each-inner">
                   <div class="col-md-6">
+                    <div class="accordion-label">Strand</div>
                     <div class="accordion-checbox">
                       <span class="ohio-checkbox checkbox checkbox-success">
                         <input type="checkbox" class="ohio-checkbox-el" id="strandID_{{j}}"
@@ -101,6 +103,7 @@
                     <li class="level-two-inner" *ngFor="let outcome of strand.Outcome; index as k">
                       <div class="row outcome-each-inner">
                         <div class="col-md-6">
+                          <div class="accordion-label">Outcome</div>
                           <div class="accordion-checbox">
                             <span class="ohio-checkbox checkbox checkbox-success">
                               <input type="checkbox" class="ohio-checkbox-el" id="outcomeID_{{k}}"
@@ -132,6 +135,7 @@
                           <li class="list-group-item level-three" *ngFor="let item of outcome.Competency; index as l">
                             <div class="row competency-each-inner">
                               <div class="col-md-6">
+                                <div class="accordion-label">Competency</div>
                                 <div class="accordion-checbox">
                                   <span class="ohio-checkbox checkbox checkbox-success">
                                     <input type="checkbox" class="ohio-checkbox-el" id="competencyID_{{l}}"
