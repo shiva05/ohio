@@ -141,42 +141,42 @@
         <div class="col-md-12 nopad" *ngIf="!careerPathToSubject">
             <ul class="list-group search-accordion">
                 <li class="list-group-item search-accordion-each"
-                    [ngClass]="(careerPath.isCareerPathClosed) ? 'accordion-active' : ''"
-                    *ngFor="let careerPath of subjectToCareerPathData; index as i">
+                    [ngClass]="(subject.isCareerPathClosed) ? 'accordion-active' : ''"
+                    *ngFor="let subject of subjectToCareerPathData; index as i">
 
                     <!-- Subject -->
                     <div class="row careerfield-each-inner">
                         <div class="col-md-3 cg">
                             <div class="accordion-checbox ">
                                 <span class="ohio-checkbox checkbox checkbox-success">
-                                    <input type="checkbox" class="ohio-checkbox-el" id="careerPathID_{{i}}"
-                                        [(ngModel)]="careerPath.isSelected" name="list_name"
-                                        value="{{careerPath.CareerPathId}}"
-                                        (ngModelChange)="careerPathCheckBox(careerPath);" />
-                                    <label for="careerPathID_{{i}}"></label>
+                                    <input type="checkbox" class="ohio-checkbox-el" id="subjectID_{{i}}"
+                                        [(ngModel)]="subject.isSelected" name="list_name"
+                                        value="{{subject.SubjectId}}"
+                                        (ngModelChange)="careerPathCheckBox(subject);" />
+                                    <label for="subjectID_{{i}}"></label>
                                 </span>
                             </div>
-                            <span class="level-one-title"> {{careerPath.SubjectName}}</span>
+                            <span class="level-one-title"> {{subject.SubjectName}}</span>
                         </div>
 
                         <div class="col-md-2 search-right-arrow"><i class="fa fa-long-arrow-right"
                                 aria-hidden="true"></i>
                         </div>
-                        <div class="col-md-5">{{careerPath.CareerPathName}}</div>
+                        <div class="col-md-5">{{subject.CareerPathName}}</div>
                         <div class="col-md-1"> <span class="accordion-bubble bubble-green"
-                                *ngIf="careerPath.AlignmentCount">{{careerPath.AlignmentCount}} </span> </div>
+                                *ngIf="subject.AlignmentCount">{{subject.AlignmentCount}} </span> </div>
                         <div class="col-md-1 accordion-down-arrow">
-                            <span (click)="expandCollapseCareerPath(careerPath)">
-                                <i class="fas fa-chevron-up" *ngIf="careerPath.isCareerPathClosed;else isCollapsed"></i>
+                            <span (click)="expandCollapseCareerPath(subject)">
+                                <i class="fas fa-chevron-up" *ngIf="subject.isCareerPathClosed;else isCollapsed"></i>
                                 <ng-template #isCollapsed><i class="fas fa-chevron-down"></i></ng-template>
                             </span>
                         </div>
                     </div>
 
                     <!-- Career Path -->
-                    <div class="child-list" [hidden]="!careerPath.isCareerPathClosed">
+                    <div class="child-list" [hidden]="!subject.isCareerPathClosed">
                         <ul class="list-group level-two">
-                            <li class="level-two-inner" *ngFor="let course of careerPath.SubjecToStandards; index as j">
+                            <li class="level-two-inner" *ngFor="let course of subject.SubjecToStandards; index as j">
                                 <div class="row strand-each-inner">
                                     <div class="col-md-3">
                                         <div class="accordion-checbox">
@@ -184,7 +184,7 @@
                                                 <input type="checkbox" class="ohio-checkbox-el" id="courseID_{{j}}"
                                                     [(ngModel)]="course.isSelected" name="list_name_child"
                                                     value="{{course.CourseId}}"
-                                                    (ngModelChange)="courseCheckBox(careerPath, course)" />
+                                                    (ngModelChange)="courseCheckBox(subject, course)" />
                                                 <label for="courseID_{{j}}"></label>
                                             </span>
                                         </div>
@@ -193,7 +193,7 @@
                                         </span>
                                     </div>
                                     <div class="col-md-2"> &nbsp;</div>
-                                    <div class="col-md-5">{{careerPath.CareerPathName}} </div>
+                                    <div class="col-md-5">{{subject.CareerPathName}} </div>
                                     <div class="col-md-1"> <span class="accordion-bubble bubble-blue"
                                             *ngIf="course.AlignmentCount">{{course.AlignmentCount}} </span> </div>
                                     <div class="col-md-1 accordion-down-arrow">
@@ -211,27 +211,27 @@
                                 <div class="child-list" [hidden]="!course.isCourseClosed">
                                     <ul class="list-group level-two">
                                         <li class="level-two-inner"
-                                            *ngFor="let competency of course.Standards; index as k">
+                                            *ngFor="let standard of course.Standards; index as k">
                                             <div class="row outcome-each-inner">
                                                 <div class="col-md-3">
                                                     <div class="accordion-checbox">
                                                         <span class="ohio-checkbox checkbox checkbox-success">
                                                             <input type="checkbox" class="ohio-checkbox-el"
-                                                                id="competencyID_{{k}}"
-                                                                [(ngModel)]="competency.isSelected"
-                                                                name="list_name_child" value="{{competency.Id}}"
+                                                                id="standardID_{{k}}"
+                                                                [(ngModel)]="standard.isSelected"
+                                                                name="list_name_child" value="{{standard.Id}}"
                                                                 (ngModelChange)="competencyCheckBox(careerPath, course)" />
-                                                            <label for="competencyID_{{k}}"></label>
+                                                            <label for="standardID_{{k}}"></label>
                                                         </span>
                                                     </div>
                                                     <span class="level-two-title cg">
-                                                        {{competency.StandardDesc}}
+                                                        {{standard.StandardDesc}}
                                                     </span>
                                                 </div>
                                                 <div class="col-md-2"> &nbsp;</div>
-                                                <div class="col-md-5">{{careerPath.CareerPathName}} </div>
+                                                <div class="col-md-5">{{subject.CareerPathName}} </div>
                                                 <div class="col-md-1"> <span class="accordion-bubble bubble-blue"
-                                                        *ngIf="competency.AlignmentCount">{{competency.AlignmentCount}}
+                                                        *ngIf="standard.AlignmentCount">{{standard.AlignmentCount}}
                                                     </span>
                                                 </div>
                                             </div>
