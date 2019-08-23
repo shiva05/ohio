@@ -15,4 +15,8 @@ export class ReportService {
     var URL = 'https://edu-dev-sbd-commonfunctions.azurewebsites.net/api/GetCTEAlignmentSearchReport?code=Qjp8OlEY1C4fCfz6WD7F1C/nTLUkrDp2ieI7/tJJXeH9AZo4ioPauQ==';
     return this.http.post(URL,obj);
   }
+  getCourseSearchReportData(obj){
+    var URL = 'https://edu-dev-sbd-commonfunctions.azurewebsites.net/api/GetCourseSearchReport?code=zaotM7g/5ER2nfrpa9/l/TSIpAAyFw29vjPNiSAnI8lXjhuvPLw0Iw==';
+    return this.http.post(URL,obj);
+  }
 }

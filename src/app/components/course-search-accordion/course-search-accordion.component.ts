@@ -169,7 +169,7 @@ export class CourseSearchAccordionComponent implements OnInit {
 
         if (careerPath.isSelected) {
           this.courseSearchReportPayload.CareerPathIds.push(careerPath.CareerPathId);
-          this.courseSearchReportPayload.Subjects.push({ SubjectId: careerPath.SubjectName });
+          this.courseSearchReportPayload.Subjects.push({ SubjectId: careerPath.SubjectId });
         }
 
         careerPath.Courses.forEach(course => {

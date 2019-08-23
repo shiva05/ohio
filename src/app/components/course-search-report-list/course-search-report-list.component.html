@@ -1,50 +1,33 @@
-<div class="col-md-12">
-  <div class="row reports-head">
-    <div class="reports-head-left col-md-3">
-      <h1>Results: Course Search</h1>
+<div class="course-search-results">
+  <h1>Results</h1>
+  <div class="course-wrap" *ngFor="let result of reportListhResultData.Competencies">
+    <div class="col-md-6">
+      <h2>
+        <span>Academic Course</span>
+        <hr>
+        <span>{{result.AcademicCourseName}}</span>
+      </h2>
     </div>
 
-    <div class="reports-head-right">
-      <div class="reports-head-right-each">
-        <span class="legend-reinforcement">R</span>
-        {{ 'ReportFields.Reinforcement' | translate }}
-      </div>
-      <div class="reports-head-right-each">
-        <span class="legend-enrichment">E</span>
-        {{ 'ReportFields.Enrichment' | translate }}
-      </div>
-      <div class="reports-head-right-each">
-        <span class="legend-application">A</span>
-        {{ 'ReportFields.Application' | translate }}
-      </div>
+    <div class="col-md-6">
+      <h2>
+        <span>CTE Courses</span>
+        <hr>
+        <span>{{result.CteCourseName}}</span>
+      </h2>
     </div>
-  </div>
-
-
-
-
-
-  <div class="col-md-6">
-    <h2>Academic Course</h2>
-    <hr>
-    <h3>Presenting</h3>
-  </div>
-
-  <div class="col-md-6">
-    <h2>CTE Courses</h2>
-    <hr>
-    <h3>Media Arts 3</h3>
-  </div>
-
-
-
-
-  <div class="col-md-6">
-    <p>Standard 1:</p>
-  </div>
-
-  <div class="col-md-6">
-    <div class="competency">
+      <div class="course" *ngFor="let competency of result.Competencies">
+        <div class="standard">
+          <h4>{{competency.CompetencyDesc}} </h4>
+        </div>
+        <div class="competency">
+          <ul>
+            <li *ngFor="let std of competency.Standards"> {{std.StandardDesc}}</li>
+          </ul>
+        </div>
+      </div>
+    <div class="no-alignment">
+      <h4>No Alignment</h4>
       <ul>
         <li> 1) Compentency List </li>
         <li> 8) Compentency List </li>
@@ -52,13 +35,34 @@
       </ul>
     </div>
   </div>
+  <div class="course-wrap" *ngFor="let result of reportListhResultData.Standards">
+    <div class="col-md-6">
+      <h2>
+        <span>Academic Course</span>
+        <hr>
+        <span>{{result.AcademicCourseName}}</span>
+      </h2>
+    </div>
 
-  <div class="col-md-6">
-    <p>Standard 2:</p>
-  </div>
-
-  <div class="col-md-6">
-    <div class="competency">
+    <div class="col-md-6">
+      <h2>
+        <span>CTE Courses</span>
+        <hr>
+        <span>{{result.CteCourseName}}</span>
+      </h2>
+    </div>
+    <div class="course" *ngFor="let standard of result.Standards">
+      <div class="standard">
+        <h4>{{standard.StandardDesc}} </h4>
+      </div>
+      <div class="competency">
+        <ul>
+          <li *ngFor="let cpt of standard.Competencies"> {{cpt.Competency}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="no-alignment">
+      <h4>No Alignment</h4>
       <ul>
         <li> 1) Compentency List </li>
         <li> 8) Compentency List </li>
@@ -66,32 +70,4 @@
       </ul>
     </div>
   </div>
-
-  <div class="col-md-6">
-    <p>Standard 3:</p>
-  </div>
-
-  <div class="col-md-6">
-    <div class="competency">
-      <ul>
-        <li> 1) Compentency List </li>
-        <li> 8) Compentency List </li>
-        <li> 4) Compentency List </li>
-      </ul>
-    </div>
-  </div>
-
-
-  <div class="no-alignment col-md-6" style="float: right">
-    <h4>No Alignment</h4>
-    <ul>
-      <li> 1) Compentency List </li>
-      <li> 8) Compentency List </li>
-      <li> 4) Compentency List </li>
-    </ul>
-
-  </div>
-
-
-
 </div>
