@@ -35,3 +35,9 @@ label {
     font-size: 20pt;
     padding: 0 10px 0 10px;
 }
+.badge.badge-light {
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

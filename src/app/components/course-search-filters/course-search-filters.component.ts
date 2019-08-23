@@ -182,7 +182,20 @@ export class CourseSearchFiltersComponent implements OnInit {
     });
     console.log(this.selectedAcademicItems);
   }
-
+  clearSearch() {
+    this.searchObj = {
+      selectedCareerPath: [],
+      selectedCareerPathCourses: [],
+      selectedAcademicSubject: [],
+      selectedAcademicSubjectCourses: []
+    };
+    this.store.dispatch({ type: CourseSearchActions.SAVE_AS_SELECTED_FILTERS_COURSESEARCH, payload: this.searchObj });
+    this.selectedCareerPath = [];
+    this.selectedAcadamicSubjects = [];
+    this.selectedCourses = [];
+    this.coursesDropdown = [];
+    this.selectedAcademicItems = [];
+  }
   search() {
     this.searchObj = {
       selectedCareerPath: this.selectedCareerPath,
