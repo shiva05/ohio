@@ -20,3 +20,19 @@
   background-color: #6F0116;
   border-radius: 0px;
 }
+.link {
+  cursor:pointer;
+}
+.menuList li:hover {
+  background: #fff;
+  color: #700017;
+}
+  .menuList li:hover a{
+    color: #700017;
+  }
+.menuList .dropdown-menu li:hover {
+  background: #700017; 
+}
+  .menuList .dropdown-menu li:hover a {
+    color: #fff !important;
+  }

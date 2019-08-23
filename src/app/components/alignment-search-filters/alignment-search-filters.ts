@@ -134,7 +134,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       this.clusters = this.metaData['clusters'];
       this.standardNumbers = this.metaData['standardNumbers'];
       this.competencyNumbers = data.competencies;
-      if (this.metaData['Subjects'] && data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length == 0) {
+      if (this.metaData['Subjects'] && data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length == 0 && this.selectedAcadamicSubjects.length == 0) {
         this.academicSubjects = this.metaData['Subjects'];
         this.academicSubjects.forEach((subject) => {
           subject.Level.forEach((item) => {
@@ -164,7 +164,9 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         if (data.alignmentSearchSelectedFilters.selectedCompetencies.length > 0) {
           this.selectedCompetencyNumbers =  data.alignmentSearchSelectedFilters.selectedCompetencies;
         }
-        this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0 ? data.alignmentSearchSelectedFilters.selectedAcadamicSubjects : [];
+      //  this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0 ? data.alignmentSearchSelectedFilters.selectedAcadamicSubjects : [];
+        // this.selectedAcadamicSubjects is getting clear on selection of outcomes as store is getting updated on every selection of outcomes.
+        //this resolves the lose of academic subjects selected data.
         if (data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0) {
           this.selectedAcademicItems = this.selectedAcadamicSubjects;
           this.academicSubjects = data.alignmentSearchSelectedFilters.finalSelectedObject;
@@ -190,6 +192,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       });
     });
   }
+
   onStrandSelect() {
     this.outcomesDropdown = [];
     this.outcomes.forEach(eachOutcome => {
@@ -310,7 +313,26 @@ export class AlignmentSearchFiltersComponent implements OnInit {
    // console.log(this.selectedAcademicItems);
   }
 
-
+clearSearch(){
+  this.searchObj = {
+    selectedCareers: [],
+    selectedStrands: [],
+    selectedOutcomes: [],
+    selectedCompetencies: [],
+    selectedAcadamicSubjects: [],
+    finalSelectedObject: [],
+  };
+  this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
+  this.selectedCareer = [];
+  this.selectedAcadamicSubjects = [];
+  this.selectedStrands = [];
+  this.selectedOutcome = [];
+  this.selectedCompetencyNumbers = [];
+  this.selectedAcademicItems = [];
+  this.strandsDropdown = [];
+  this.outcomesDropdown = [];
+  this.competencyNumbers = [];
+}
   onSubjectLevelsSelectAll(data) {
     let selectedAll = [];
     data.SelectedItems = [];
@@ -339,7 +361,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       finalSelectedObject: this.academicSubjects,
 
     };
-    console.log(this.academicSubjects);
+   // console.log(this.academicSubjects);
     localStorage.setItem('searchLable', 'SearchAlignment');
     this.goToPage('SearchResults');
     this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS , payload: this.searchObj});
