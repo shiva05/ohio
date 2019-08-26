@@ -51,7 +51,9 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   metaData: Observable<MetaData>;
   selectedAcademicItems: any = [];
   subjectsDefaultSettings: any = {};
-  constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>) {
+  constructor(private httpService: HttpClient,
+              private ref: ChangeDetectorRef,
+              private store: Store<AppState>) {
     // this.metaData = store.select('metaData');
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_META_DATA });
   }
@@ -166,7 +168,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         }
       //  this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0 ? data.alignmentSearchSelectedFilters.selectedAcadamicSubjects : [];
         // this.selectedAcadamicSubjects is getting clear on selection of outcomes as store is getting updated on every selection of outcomes.
-        //this resolves the lose of academic subjects selected data.
+        // this resolves the lose of academic subjects selected data.
         if (data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0) {
           this.selectedAcademicItems = this.selectedAcadamicSubjects;
           this.academicSubjects = data.alignmentSearchSelectedFilters.finalSelectedObject;
@@ -225,8 +227,8 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.outcomesDropdown = [];
   }
 
-  //onOutcomeSelectAll() { }
-  //onOutcomeDeSelectAll() { }
+  // onOutcomeSelectAll() { }
+  // onOutcomeDeSelectAll() { }
 
 
   onItemSelect(event) {
@@ -313,7 +315,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
    // console.log(this.selectedAcademicItems);
   }
 
-clearSearch(){
+clearSearch() {
   this.searchObj = {
     selectedCareers: [],
     selectedStrands: [],

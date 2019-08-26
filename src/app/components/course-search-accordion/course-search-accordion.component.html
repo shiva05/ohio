@@ -38,14 +38,14 @@
                     *ngFor="let careerPath of careerPathToSubjectData; index as i">
 
                     <!-- Career Path -->
-                    <div class="row careerfield-each-inner">
+                    <div class="row careerfield-each-inner"  (click)="expandCollapseCareerPath(careerPath)">
                         <div class="col-md-5">
                             <div class="accordion-checbox ">
                                 <span class="ohio-checkbox checkbox checkbox-success">
                                     <input type="checkbox" class="ohio-checkbox-el" id="careerPathID_{{i}}"
                                         [(ngModel)]="careerPath.isSelected" name="list_name"
                                         value="{{careerPath.CareerPathId}}"
-                                        (ngModelChange)="careerPathCheckBox(careerPath);" />
+                                        (ngModelChange)="careerPathCheckBox(careerPath);$event.stopPropagation()" />
                                     <label for="careerPathID_{{i}}"></label>
                                 </span>
                             </div>
@@ -59,7 +59,7 @@
                         <div class="col-md-1"> <span class="accordion-bubble bubble-green"
                                 *ngIf="careerPath.AlignmentCount">{{careerPath.AlignmentCount}} </span> </div>
                         <div class="col-md-1 accordion-down-arrow">
-                            <span (click)="expandCollapseCareerPath(careerPath)">
+                            <span>
                                 <i class="fas fa-chevron-up" *ngIf="careerPath.isCareerPathClosed;else isCollapsed"></i>
                                 <ng-template #isCollapsed><i class="fas fa-chevron-down"></i></ng-template>
                             </span>
@@ -70,14 +70,14 @@
                     <div class="child-list" [hidden]="!careerPath.isCareerPathClosed">
                         <ul class="list-group level-two">
                             <li class="level-two-inner" *ngFor="let course of careerPath.Courses; index as j">
-                                <div class="row strand-each-inner">
+                                <div class="row strand-each-inner" (click)="expandCollapseCourse(course)" >
                                     <div class="col-md-6">
                                         <div class="accordion-checbox">
                                             <span class="ohio-checkbox checkbox checkbox-success">
                                                 <input type="checkbox" class="ohio-checkbox-el" id="courseID_{{j}}"
                                                     [(ngModel)]="course.isSelected" name="list_name_child"
                                                     value="{{course.CourseId}}"
-                                                    (ngModelChange)="courseCheckBox(careerPath, course)" />
+                                                    (ngModelChange)="courseCheckBox(careerPath, course);$event.stopPropagation()" />
                                                 <label for="courseID_{{j}}"></label>
                                             </span>
                                         </div>
@@ -91,7 +91,7 @@
                                             *ngIf="course.AlignmentCount">{{course.AlignmentCount}} </span> </div>
                                     <div class="col-md-1 accordion-down-arrow">
 
-                                        <span (click)="expandCollapseCourse(course)" *ngIf="course.Competencies">
+                                        <span *ngIf="course.Competencies">
                                             <i class="fas fa-chevron-up"
                                                 *ngIf="course.isCourseClosed;else isCourseClosed"></i>
                                             <ng-template #isCourseClosed><i class="fas fa-chevron-down"></i>
@@ -113,7 +113,7 @@
                                                                 id="competencyID_{{k}}"
                                                                 [(ngModel)]="competency.isSelected"
                                                                 name="list_name_child" value="{{competency.Id}}"
-                                                                (ngModelChange)="competencyCheckBox(careerPath, course)" />
+                                                                (ngModelChange)="competencyCheckBox(careerPath, course);$event.stopPropagation()" />
                                                             <label for="competencyID_{{k}}"></label>
                                                         </span>
                                                     </div>
@@ -145,14 +145,14 @@
                     *ngFor="let subject of subjectToCareerPathData; index as i">
 
                     <!-- Subject -->
-                    <div class="row careerfield-each-inner">
+                    <div class="row careerfield-each-inner" (click)="expandCollapseCareerPath(subject)">
                         <div class="col-md-3 cg">
                             <div class="accordion-checbox ">
                                 <span class="ohio-checkbox checkbox checkbox-success">
                                     <input type="checkbox" class="ohio-checkbox-el" id="subjectID_{{i}}"
                                         [(ngModel)]="subject.isSelected" name="list_name"
                                         value="{{subject.SubjectId}}"
-                                        (ngModelChange)="careerPathCheckBox(subject);" />
+                                        (ngModelChange)="careerPathCheckBox(subject);$event.stopPropagation()" />
                                     <label for="subjectID_{{i}}"></label>
                                 </span>
                             </div>
@@ -166,7 +166,7 @@
                         <div class="col-md-1"> <span class="accordion-bubble bubble-green"
                                 *ngIf="subject.AlignmentCount">{{subject.AlignmentCount}} </span> </div>
                         <div class="col-md-1 accordion-down-arrow">
-                            <span (click)="expandCollapseCareerPath(subject)">
+                            <span>
                                 <i class="fas fa-chevron-up" *ngIf="subject.isCareerPathClosed;else isCollapsed"></i>
                                 <ng-template #isCollapsed><i class="fas fa-chevron-down"></i></ng-template>
                             </span>
@@ -177,14 +177,14 @@
                     <div class="child-list" [hidden]="!subject.isCareerPathClosed">
                         <ul class="list-group level-two">
                             <li class="level-two-inner" *ngFor="let course of subject.SubjecToStandards; index as j">
-                                <div class="row strand-each-inner">
+                                <div class="row strand-each-inner" (click)="expandCollapseCourse(course)" >
                                     <div class="col-md-3">
                                         <div class="accordion-checbox">
                                             <span class="ohio-checkbox checkbox checkbox-success">
                                                 <input type="checkbox" class="ohio-checkbox-el" id="courseID_{{j}}"
                                                     [(ngModel)]="course.isSelected" name="list_name_child"
                                                     value="{{course.CourseId}}"
-                                                    (ngModelChange)="courseCheckBox(subject, course)" />
+                                                    (ngModelChange)="courseCheckBox(subject, course);$event.stopPropagation()" />
                                                 <label for="courseID_{{j}}"></label>
                                             </span>
                                         </div>
@@ -198,7 +198,7 @@
                                             *ngIf="course.AlignmentCount">{{course.AlignmentCount}} </span> </div>
                                     <div class="col-md-1 accordion-down-arrow">
 
-                                        <span (click)="expandCollapseCourse(course)" *ngIf="course.Standards">
+                                        <span *ngIf="course.Standards">
                                             <i class="fas fa-chevron-up"
                                                 *ngIf="course.isCourseClosed;else isCourseClosed"></i>
                                             <ng-template #isCourseClosed><i class="fas fa-chevron-down"></i>
@@ -220,7 +220,7 @@
                                                                 id="standardID_{{k}}"
                                                                 [(ngModel)]="standard.isSelected"
                                                                 name="list_name_child" value="{{standard.Id}}"
-                                                                (ngModelChange)="competencyCheckBox(careerPath, course)" />
+                                                                (ngModelChange)="competencyCheckBox(careerPath, course);$event.stopPropagation()" />
                                                             <label for="standardID_{{k}}"></label>
                                                         </span>
                                                     </div>

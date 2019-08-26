@@ -39,6 +39,14 @@
         "Enrichment": "Enriquecimiento",
         "Application": "Solicitud",
         "Generate": "Generar",
+        "SaveToProfile": "Guardar en perfil",
+        "Download": "Descargar",
+        "Cancel": "Cancelar"
+    },
+    "Import": {
+        "Import": "Importar",
+        "ChooseFile": "Escoge un archivo",
+        "Download": "Descargar",
         "Cancel": "Cancelar"
     }
 }
