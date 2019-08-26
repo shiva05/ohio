@@ -19,7 +19,9 @@ export class AlignmentSearchComponent implements OnInit {
   showAsResults = false;
   showAsReport = false;
 
-  constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>) {
+  constructor(private httpService: HttpClient,
+              private ref: ChangeDetectorRef,
+              private store: Store<AppState>) {
   }
   ngOnInit() {
   }
