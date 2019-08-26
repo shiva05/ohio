@@ -12,9 +12,17 @@
         "Cluster": "Cluster",
         "StandardNumber": "Standard Number",
         "Search": "Search",
-        "Cancel": "Cancel"
+        "Cancel": "Cancel",
+        "QuickSearch": "Quick Search"
     },
-
+    "Header": {
+        "Home": "Home",
+        "Search": "Search",
+        "AlignmentSearch": "Alignment Search",
+        "CourseSearch": "Course Search",
+        "Admin": "Admin",
+        "DataImport": "Data Import"
+    },
     "CourseFields": {
         "Keywords": "Course / Title",
         "CareerField": "Career Paths",
@@ -30,8 +38,12 @@
         "Search": "Search",
         "Cancel": "Cancel"
     },
-
     "FilterResults": {
+        "CareerField": "Career Paths",
+        "Outcomes": "Outcomes",
+        "Strands": "Strands",
+        "CompetencyNumbers": "Competency Numbers",
+        "AcademicSubjects": "Academic Subjects",
         "SearchCriteria": "Search Criteria",
         "UpdateSearch": "Update Search"
     },
@@ -41,7 +53,9 @@
         "AcademicSubject": "Academic Subject",
         "Alignment": "Alignment",
         "ToggleAlignments": "Toggle Alignments",
-        "NoResultFound": "No Search Result Found"
+        "NoResultFound": "No Search Result Found",
+        "Generate": "Generate",
+        "Cancel": "Cancel"
     },
     "ReportFields": {
         "Results": "Results",
@@ -57,6 +71,19 @@
         "Enrichment": "Enrichment",
         "Application": "Application",
         "Generate": "Generate",
+        "SaveToProfile": "Save to Profile",
+        "Download": "Download",
         "Cancel": "Cancel"
-    }
+    },
+    "Import": {
+        "Import": "Import",
+        "ChooseFile": "Choose a File",
+        "Download": "Download",
+        "Cancel": "Cancel"
+    },
+    "PageNotFound": {
+        "ServerError": "Server Error",
+        "SomethingWentWrong": "Looks like something went wrong.",
+        "ReturnToHomepage": "Return to Homepage"
+    },
 }

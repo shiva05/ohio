@@ -9,7 +9,7 @@
           <div class="filter">
             <span class="filter-each">
               <span>
-                <label>Career Field: </label>
+                <label>{{ 'FilterResults.CareerField' | translate }}: </label>
                 <span class="badge badge-light"
                   *ngIf="FilterSummaryKeys.CareerFieldIds.length == 1">{{FilterSummaryKeys.CareerFieldIds[0]}}</span>
                 <span class="badge badge-light"
@@ -17,14 +17,14 @@
                   +{{FilterSummaryKeys.CareerFieldIds.length - 1}}</span>
               </span>
               <span class="filter-divider"> | </span>
-              <label>Strands: </label>
+              <label>{{ 'FilterResults.Strands' | translate }}: </label>
               <span class="badge badge-light"
                 *ngIf="FilterSummaryKeys.StrandIds.length == 1">{{FilterSummaryKeys.StrandIds[0]}}</span>
               <span class="badge badge-light"
                 *ngIf="FilterSummaryKeys.StrandIds.length > 1">{{FilterSummaryKeys.StrandIds[0]}}
                 +{{FilterSummaryKeys.StrandIds.length - 1}}</span>
               <span class="filter-divider"> | </span>
-              <label>Outcomes: </label>
+              <label>{{ 'FilterResults.Outcomes' | translate }}: </label>
               <span class="badge badge-light"
                 *ngIf="FilterSummaryKeys.OutcomeIds.length == 1">{{FilterSummaryKeys.OutcomeIds[0]}}
               </span>
@@ -33,7 +33,7 @@
                 +{{FilterSummaryKeys.OutcomeIds.length - 1}}
               </span>
               <span class="filter-divider"> | </span>
-              <label>Competency Numbers: </label>
+              <label>{{ 'FilterResults.CompetencyNumbers' | translate }}: </label>
               <span class="badge badge-light" *ngIf="FilterSummaryKeys.CompetencyIds.length == 1">
                 <span *ngIf="FilterSummaryKeys.CompetencyIds[0].length < 20; else concatName">
                   {{FilterSummaryKeys.CompetencyIds[0]}}

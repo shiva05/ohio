@@ -7,7 +7,7 @@
 
         <!-- export Dropdown -->
         <div class="form-group col-md-12">
-            <label>Import</label>
+            <label>{{'Import.Import' | translate}}</label>
             <ng-multiselect-dropdown [ngClass]="" [settings]="dropdownSettings">
             </ng-multiselect-dropdown>
         </div>
@@ -16,7 +16,7 @@
         <div class="col-md-12">
             <label class="ohio-upload-single input-group" for="excel-upload">
                 <input  [(ngModel)]="uploadedFile" type="file" class="ohio-upload-single-file" id="excel-upload" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-                <span class="ohio-upload-single-label form-control">Choose a file</span>
+                <span class="ohio-upload-single-label form-control">{{'Import.ChooseFile' | translate}}</span>
                 <span class="input-group-btn">
                     <span class="ohio-upload-single-btn btn" type="button" for="excel-upload">
                         <i class="fa fa-paperclip" aria-hidden="true"></i>
@@ -28,9 +28,9 @@
         <!-- Button Row -->
         <div class="row">
             <div class="pull-right export-btn">
-                <button type="button" class="ohio-button large but-gap">Import</button>
+                <button type="button" class="ohio-button large but-gap">{{'Import.Import' | translate}}</button>
                 <button type="button"
-                    class="ohio-button large but-gap secondary">Cancel</button>
+                    class="ohio-button large but-gap secondary">{{'Import.Cancel' | translate}}</button>
             </div>
         </div>
     </div>

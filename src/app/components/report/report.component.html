@@ -5,11 +5,11 @@
   <div class="col-md-12">
     <div class="pull-right report-btn">
       <button type="button" class="ohio-button large but-gap">
-        Save to Profile
+        {{ 'ReportFields.SaveToProfile' | translate }}
       </button>
       <!-- <a href="../../../assets/pdf/Report.pdf" download="Report.pdf"> -->
       <button type="button" class="ohio-button large but-gap"(click)="downloadPDF()">
-        Download
+        {{ 'ReportFields.Download' | translate }}
       </button>
       <!-- </a> -->
       <button type="button" class="ohio-button large but-gap  secondary" (click)="goToPage('Search')">
