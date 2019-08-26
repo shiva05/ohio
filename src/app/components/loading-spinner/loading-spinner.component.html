@@ -1,13 +1,17 @@
-<!-- Loading Overlay -->
 <div id="has-overlay" *ngIf="loaderService.isLoading | async">
-    <div class="lds-roller">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+    <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+
+        <div class="modal-body">
+                        <div class="lds-roller">
+                            <span class="ohio-spinner"></span>
+                        </div>
+        </div>
+
     </div>
+    </div>
+
+
+
 </div>
