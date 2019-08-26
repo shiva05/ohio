@@ -39,13 +39,13 @@
 
           <!-- Career Field -->
           <!-- add class dynamically if partially selected  checkbox-indeterminate -->
-          <div class="row careerfield-each-inner">
+          <div class="row careerfield-each-inner"  (click)="expandCollapseCareerField(careerField)">
             <div class="col-md-6">
               <div class="accordion-checbox ">
                 <span class="ohio-checkbox checkbox checkbox-success">
                   <input type="checkbox" class="ohio-checkbox-el" id="careerFieldID_{{i}}"
                     [(ngModel)]="careerField.isSelected" name="list_name" value="{{careerField.id}}"
-                    (ngModelChange)="careerFieldCheckBox(careerField);" />
+                    (ngModelChange)="careerFieldCheckBox(careerField);$event.stopPropagation();" />
                   <label for="careerFieldID_{{i}}"></label>
                 </span>
               </div>
@@ -57,7 +57,7 @@
             <div class="col-md-1"> <span class="accordion-bubble bubble-green"
                 *ngIf="careerField.Alignment">{{careerField.Alignment[i]}} </span> </div>
             <div class="col-md-1 accordion-down-arrow">
-              <span (click)="expandCollapseCareerField(careerField)">
+              <span>
                 <i class="fas fa-chevron-up" *ngIf="careerField.isCareerFieldClosed;else isCollapsed"></i>
                 <ng-template #isCollapsed><i class="fas fa-chevron-down"></i></ng-template>
               </span>
@@ -68,13 +68,13 @@
           <div class="child-list" [hidden]="!careerField.isCareerFieldClosed">
             <ul class="list-group level-two">
               <li class="level-two-inner" *ngFor="let strand of careerField.Strand; index as j">
-                <div class="row strand-each-inner">
+                <div class="row strand-each-inner" (click)="expandCollapseStrand(strand)">
                   <div class="col-md-6">
                     <div class="accordion-checbox">
                       <span class="ohio-checkbox checkbox checkbox-success">
                         <input type="checkbox" class="ohio-checkbox-el" id="strandID_{{j}}"
                           [(ngModel)]="strand.isSelected" name="list_name_child" value="{{strand.id}}"
-                          (ngModelChange)="strandCheckBox(careerField, strand)" />
+                          (ngModelChange)="strandCheckBox(careerField, strand); $event.stopPropagation();" />
                         <label for="strandID_{{j}}"></label>
                       </span>
                     </div>
@@ -88,7 +88,7 @@
                       *ngIf="strand.Alignment">{{strand.Alignment[i]}} </span> </div>
                   <div class="col-md-1 accordion-down-arrow">
 
-                    <span (click)="expandCollapseStrand(strand)" *ngIf="strand.Outcome">
+                    <span *ngIf="strand.Outcome">
                       <i class="fas fa-chevron-up" *ngIf="strand.isStrandClosed;else isStrandClosed"></i>
                       <ng-template #isStrandClosed><i class="fas fa-chevron-down"></i></ng-template>
                     </span>
@@ -99,13 +99,13 @@
                 <div class="child-list" [hidden]="!strand.isStrandClosed">
                   <ul class="list-group level-two">
                     <li class="level-two-inner" *ngFor="let outcome of strand.Outcome; index as k">
-                      <div class="row outcome-each-inner">
+                      <div class="row outcome-each-inner"  (click)="expandCollapseOutcome(outcome)">
                         <div class="col-md-6">
                           <div class="accordion-checbox">
                             <span class="ohio-checkbox checkbox checkbox-success">
                               <input type="checkbox" class="ohio-checkbox-el" id="outcomeID_{{k}}"
                                 [(ngModel)]="outcome.isSelected" name="list_name_child" value="{{outcome.id}}"
-                                (ngModelChange)="outcomeCheckBox(careerField, strand, outcome)" />
+                                (ngModelChange)="outcomeCheckBox(careerField, strand, outcome); $event.stopPropagation();" />
                               <label for="outcomeID_{{k}}"></label>
                             </span>
                           </div>
@@ -119,7 +119,7 @@
                             *ngIf="outcome.Alignment">{{outcome.Alignment[i]}} </span> </div>
                         <div class="col-md-1 accordion-down-arrow">
 
-                          <span (click)="expandCollapseOutcome(outcome)" *ngIf="outcome.Competency">
+                          <span *ngIf="outcome.Competency">
                             <i class="fas fa-chevron-up" *ngIf="outcome.isOutcomeClosed;else isOutcomeClosed"></i>
                             <ng-template #isOutcomeClosed><i class="fas fa-chevron-down"></i></ng-template>
                           </span>
@@ -136,7 +136,7 @@
                                   <span class="ohio-checkbox checkbox checkbox-success">
                                     <input type="checkbox" class="ohio-checkbox-el" id="competencyID_{{l}}"
                                       [(ngModel)]="item.isSelected" name="list_name_child" value="{{item.id}}"
-                                      (ngModelChange)="competencyCheckBox(careerField, strand, outcome)" />
+                                      (ngModelChange)="competencyCheckBox(careerField, strand, outcome); $event.stopPropagation();" />
                                     <label for="competencyID_{{l}}"></label>
                                   </span>
                                 </div>
@@ -168,18 +168,18 @@
 
     <div class="col-md-12 nopad" *ngIf="cteToAcademic">
       <ul class="list-group search-accordion">
-        <li class="list-group-item search-accordion-each"
+        <li class="list-group-item search-accordion-each" 
           [ngClass]="(careerField.isCareerFieldClosed) ? 'accordion-active' : ''"
           *ngFor="let careerField of formattedData; index as i">
 
           <!-- Career Field -->
-          <div class="row careerfield-each-inner">
+          <div class="row careerfield-each-inner"  (click)="expandCollapseCareerField(careerField)">
             <div class="col-md-3 cg">
               <div class="accordion-checbox ">
                 <span class="ohio-checkbox checkbox checkbox-success">
                   <input type="checkbox" class="ohio-checkbox-el" id="careerFieldID_{{i}}"
                     [(ngModel)]="careerField.isSelected" name="list_name" value="{{careerField.id}}"
-                    (ngModelChange)="careerFieldCheckBox(careerField)" />
+                    (ngModelChange)="careerFieldCheckBox(careerField); $event.stopPropagation();" />
                   <label for="careerFieldID_{{i}}"></label>
                 </span>
               </div>
@@ -193,7 +193,7 @@
 
             <div class="col-md-1"> <span class="accordion-bubble bubble-green">10 </span> </div>
             <div class="col-md-1 accordion-down-arrow">
-              <span (click)="expandCollapseCareerField(careerField)">
+              <span>
                 <i class="fas fa-chevron-up" *ngIf="careerField.isCareerFieldClosed;else isCollapsed"></i>
                 <ng-template #isCollapsed><i class="fas fa-chevron-down"></i></ng-template>
               </span>
@@ -204,13 +204,13 @@
           <div class="child-list" [hidden]="!careerField.isCareerFieldClosed">
             <ul class="list-group level-two">
               <li class="level-two-inner" *ngFor="let strand of careerField.strands; index as j">
-                <div class="row strands-each-inner">
+                <div class="row strands-each-inner" (click)="expandCollapseStrand(strand)" >
                   <div class="col-md-3 cg">
                     <div class="accordion-checbox ">
                       <span class="ohio-checkbox checkbox checkbox-success">
                         <input type="checkbox" class="ohio-checkbox-el" id="strandID_{{j}}"
                           [(ngModel)]="strand.isSelected" name="list_name_child" value="{{strand.id}}"
-                          (ngModelChange)="strandCheckBox(careerField, strand)" />
+                          (ngModelChange)="strandCheckBox(careerField, strand);$event.stopPropagation();" />
                         <label for="strandID_{{j}}"></label>
                       </span>
                     </div>
@@ -225,7 +225,7 @@
 
                   <div class="col-md-1"> <span class="accordion-bubble bubble-blue">20 </span> </div>
                   <div class="col-md-1 accordion-down-arrow">
-                    <span (click)="expandCollapseStrand(strand)" *ngIf="strand.outcomes">
+                    <span *ngIf="strand.outcomes">
                       <i class="fas fa-chevron-up" *ngIf="strand.isStrandClosed;else isStrandClosed"></i>
                       <ng-template #isStrandClosed><i class="fas fa-chevron-down"></i></ng-template>
                     </span>
@@ -236,13 +236,13 @@
                 <div class="child-list" [hidden]="!strand.isStrandClosed">
                   <ul class="list-group level-two">
                     <li class="level-two-inner" *ngFor="let outcome of strand.outcomes; index as k">
-                      <div class="row outcome-each-inner">
+                      <div class="row outcome-each-inner"  (click)="expandCollapseOutcome(outcome)">
                         <div class="col-md-3 cg">
                           <div class="accordion-checbox">
                             <span class="ohio-checkbox checkbox checkbox-success">
                               <input type="checkbox" class="ohio-checkbox-el" id="outcomeID_{{k}}"
                                 [(ngModel)]="outcome.isSelected" name="list_name_child" value="{{outcome.id}}"
-                                (ngModelChange)="outcomeCheckBox(careerField, strand, outcome)" />
+                                (ngModelChange)="outcomeCheckBox(careerField, strand, outcome);$event.stopPropagation();" />
                               <label for="outcomeID_{{k}}"></label>
                             </span>
                           </div>
@@ -253,7 +253,7 @@
                         <div class="col-md-1"> <span class="accordion-bubble bubble-blue">20 </span> </div>
                         <div class="col-md-1 accordion-down-arrow">
 
-                          <span (click)="expandCollapseOutcome(outcome)" *ngIf="outcome.competency">
+                          <span *ngIf="outcome.competency">
                             <i class="fas fa-chevron-up" *ngIf="outcome.isOutcomeClosed;else isOutcomeClosed"></i>
                             <ng-template #isOutcomeClosed><i class="fas fa-chevron-down"></i></ng-template>
                           </span>
@@ -270,7 +270,7 @@
                                   <span class="ohio-checkbox checkbox checkbox-success">
                                     <input type="checkbox" class="ohio-checkbox-el" id="competencyID_{{l}}"
                                       [(ngModel)]="item.isSelected" name="list_name_child" value="{{item.id}}"
-                                      (ngModelChange)="competencyCheckBox(careerField, strand, outcome)" />
+                                      (ngModelChange)="competencyCheckBox(careerField, strand, outcome); $event.stopPropagation();" />
                                     <label for="competencyID_{{l}}"></label>
                                   </span>
                                 </div>

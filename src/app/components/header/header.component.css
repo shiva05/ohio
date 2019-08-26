@@ -23,16 +23,14 @@
 .link {
   cursor:pointer;
 }
-.menuList li:hover {
-  background: #fff;
-  color: #700017;
+.menuList >li:hover {
+  background: #540011;
+  color: #fff;
 }
   .menuList li:hover a{
-    color: #700017;
+    color: #fff;
   }
-.menuList .dropdown-menu li:hover {
-  background: #700017; 
-}
+
   .menuList .dropdown-menu li:hover a {
-    color: #fff !important;
+    color: #700017 !important;
   }
