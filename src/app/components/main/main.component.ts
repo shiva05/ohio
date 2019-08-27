@@ -34,11 +34,11 @@ export class MainComponent implements OnInit {
   }
 
   onItemSelect(item: any) {
-    console.log('on item slplselect', item);
+
   }
 
   onSelectAll(item: any) {
-    console.log('on select all', item);
+
   }
 
   onPageSelect(org) {

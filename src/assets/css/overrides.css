@@ -1,10 +1,10 @@
 
 
 
-@font-face {font-family: 'Serifa-Reg'; src: url('webfonts/32D152_0_0.eot');src: url('webfonts/32D152_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/32D152_0_0.woff2') format('woff2'),url('webfonts/32D152_0_0.woff') format('woff'),url('webfonts/32D152_0_0.ttf') format('truetype');}
+@font-face {font-family: 'Serifa-Med'; src: url('webfonts/32D152_0_0.eot');src: url('webfonts/32D152_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/32D152_0_0.woff2') format('woff2'),url('webfonts/32D152_0_0.woff') format('woff'),url('webfonts/32D152_0_0.ttf') format('truetype');}
 
 
-/* @font-face {font-family: 'Serifa-Med';src: url('webfonts/32D152_1_0.eot');src: url('webfonts/32D152_1_0.eot?#iefix') format('embedded-opentype'),url('webfonts/32D152_1_0.woff2') format('woff2'),url('webfonts/32D152_1_0.woff') format('woff'),url('webfonts/32D152_1_0.ttf') format('truetype');} */
+@font-face {font-family: 'Serifa-Med';src: url('webfonts/Serifa-Med/32D152_1_0.eot');src: url('webfonts/Serifa-Med/32D152_1_0.eot?#iefix') format('embedded-opentype'),url('webfonts/Serifa-Med/32D152_1_0.woff2') format('woff2'),url('webfonts/Serifa-Med/32D152_1_0.woff') format('woff'),url('webfonts/Serifa-Med/32D152_1_0.ttf') format('truetype');} 
 
 
 
@@ -17,7 +17,7 @@ body{
 }
 
 h1{
-    font-family: 'Serifa-Reg';
+    font-family: 'Serifa-Med';
 }
 
 .dn{
@@ -39,13 +39,21 @@ padding: 0px !important;
     background: #700017;
     border-radius: 0 !important;
     margin-bottom: 0 !important;
+    min-height: 56px !important;
 }
 
 .nav li a{
     color: #fff;
     font-size: 16px;
-    cursor: pointer;
+    cursor: pointer;    
+    padding: 16px 20px !important;
+    font-weight: 700 !important;
+    min-height: 56px;
 }
+  .nav li a i {
+    padding: 4px 20px;
+    float: right;
+  }
 
 .nav li a:hover,.nav li a:focus, .nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
     background-color: transparent !important;
@@ -62,8 +70,8 @@ padding: 0px !important;
     padding-bottom: 20px;
 }
 .main h1{
-    font-size: 30px;
-   font-family: 'Serifa-Reg';
+    font-size: 26px;
+   font-family: 'Serifa-Med';
    color: #700017;
    margin:0 0 15px 0
 
@@ -73,14 +81,14 @@ padding: 0px !important;
     margin: 10px 0;
 }
 .search-results-head{
-    margin:20px 0 10px 0;
+    margin:0px 0 10px 0;
 }
 
 .search-results-head-left h3{
     color: #700017;
-    font-size: 26px;
-    font-weight: 600;
-    font-family: Serifa-Reg;
+    font-size: 26px;    
+    font-family: Serifa-Med;
+    margin: 0px;
 }
 
 .search-results-head-left p{
@@ -106,16 +114,18 @@ padding: 0px !important;
     font-size: 16px;
    }
 
-.search-accordion-each{
-    overflow: hidden;
-    border-radius: 0 !important;
-    margin: 0 0 10px 0 !important;
-    border: 0px !important;   
-    font-size: 18px;
-    font-family: 'Lato', sans-serif ; 
-    font-weight: 600;    
-    display: block;
-    padding: 0px 0px !important;
+.search-accordion-each {
+  overflow: hidden;
+  border-radius: 0 !important;
+  margin: 0 0 5px 0 !important;
+  border: 0px !important;
+  font-size: 18px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
+  display: block;
+  padding: 0px 0px !important;
+  border: 1px solid #d8d8d8 !important;
+  border-radius: 3px;
 }
 
 .accordion-down-arrow{
@@ -139,7 +149,7 @@ padding: 10px 10px 2px 10px;
 
 .level-three .list-group-item{
     border: 0px !important;   
-    padding: 10px 0px;
+    padding:0px 0px;
 }
 .search-accordion-each .card-header{
     border: 0px;
@@ -157,11 +167,12 @@ padding: 10px 10px 2px 10px;
     padding: 15px;
     background: #D8D8D8;
     color: #700017;
-    font-family: Serifa-Reg;
-    font-weight: 600;
+    font-family: Serifa-Med;    
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
 }
 .search-accordion-head *{
-    font-family: Serifa-Reg;
+    font-family: Serifa-Med;
     font-size: 18px;
 }
 .cg{
@@ -229,16 +240,16 @@ width: 100%;
     vertical-align: top;
     display: inline-block;
 }
-.search-filter-right button{
-width: 100%;
-background: #337AB7;
-border: 1px solid #337AB7;
-color: #fff;
-padding: 15px 0;
-border-radius: 7px;
-margin: 0 0 0 0;
-font-size: 18px;
-}
+  .search-filter-right button {
+    width: 100%;
+    background: #337AB7;
+    border: 1px solid #337AB7;
+    color: #fff;
+    padding: 7px 0;
+    border-radius: 7px;
+    margin: 0 0 0 0;
+    font-size: 20px;
+  }
 
 .search-filter-right button i{
     margin: 0 0 0 20px;
@@ -302,7 +313,7 @@ border-color: #fff !important;
 }
 
 .reports-each *{
-    font-family: 'Serifa-Reg';
+    font-family: 'Serifa-Med';
   }
 
   .search-accordion .list-group{
@@ -311,44 +322,51 @@ border-color: #fff !important;
 
   .search-right-arrow{
     color: #707070;
-    font-size: 24px !important;
+    font-size: 16px !important;
     text-align: center;
 }
 
 .accordion-active{
-    border:  1px solid #A1A1A1 !important; 
+    border:  1px solid #ddd !important; 
     overflow: hidden;
 }
 
 .level-two-inner{
     border-radius: 0px !important;
-    border:1px solid #a1a1a1 !important; 
+    border:1px solid #ddd !important; 
     border-width: 0 0 1px 0 !important;
-    padding: 10px;
+    padding: 0px;
     display:block;
     position: relative;    
 }
 .accordion-checbox{
-    margin: 0 0 20px 0;
+    margin: 0;
     display: inline-block;
     width: 25px;
+}
+
+.level-four-title{    
+    padding: 0 0 0 0px;
+    display: inline-block;
+    vertical-align: top;
+    max-width: calc(100% - 100px);
 }
 .level-three-title{    
     padding: 0 0 0 0px;
     display: inline-block;
     vertical-align: top;
-    width: calc(100% - 25px);
+    max-width: calc(100% - 100px);
 }
 .level-two-title{        
     display: inline-block;
     vertical-align: top;
-    width: calc(100% - 25px);
+    max-width: calc(100% - 25px);
 }
 
 .level-one-title{        
     display: inline-block;
     vertical-align: top;
-    width: calc(100% - 25px);
+    max-width: calc(100% - 25px);
 }
 
 .checkbox-indeterminate input[type="checkbox"]:checked + label::after{
@@ -365,7 +383,7 @@ border-color: #fff !important;
 }
 
 .radio, .checkbox {
-    margin: 2px !important;
+    margin: 0px !important;
 }
 .dropdown-menu>li>a{
     color: #333 !important;
@@ -380,7 +398,7 @@ border-color: #fff !important;
 .search-seemore h3{
     text-align: center;
     font-size:20px;
-    font-family: 'Serifa-Reg';   
+    font-family: 'Serifa-Med';   
     margin: 0px;
 }
 .search-seemore a{
@@ -401,7 +419,7 @@ border-color: #fff !important;
 }
 
 .img-overlay h2{
-    font-family: 'Serifa-Reg';   
+    font-family: 'Serifa-Med';   
 }
 
 
@@ -413,6 +431,44 @@ border-color: #fff !important;
     }
     .dynamic-academics h3{
         font-size: 18px;
-        font-family: 'Serifa-Reg';   
+        font-family: 'Serifa-Med';   
         color: #700017;
     }
+.search-accordion {
+  clear:both;
+}
+
+.search-right-arrow {
+    margin-top: 6px;
+}
+.search-right-arrow i{
+    font-size: 22px;
+}
+.accordion-down-arrow{
+    margin-top: 6px;
+}
+.accordion-down-arrow i{
+    font-size: 24px;
+}
+
+.customsearch {
+  border: 1px solid #A1A1A1;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.customsearch input, .customsearch .input-group-addon{
+    border: 0px solid #a1a1a1 !important;
+}
+
+.dropdown-menu > li > a{
+    min-height: inherit !important;
+    padding: 5px 15px !important;
+    font-size: 16px;
+    font-weight: 600 !important;
+    line-height: inherit !important;
+    color: #700017 !important;
+    border-left:solid 6px #fff;
+}
+.dropdown-menu > li > a:hover{
+    border-left:solid 6px #eb1316;
+}

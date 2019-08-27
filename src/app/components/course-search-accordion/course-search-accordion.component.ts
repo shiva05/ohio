@@ -16,6 +16,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   courseSearchSelectedFilters: {};
   careerPathToSubjectData: any = [];
   subjectToCareerPathData: any = [];
+  noCourseResultFound = false;
   courseSearchReportPayload = {
     Keywords: '',
     CareerPathIds: [],
@@ -24,12 +25,34 @@ export class CourseSearchAccordionComponent implements OnInit {
     Subjects: [],
     CareerPathToSubject: true
   };
+  academicSubjectColorPallet: any = [
+    {
+      Subject: 'Math',
+      Color: '#000000'
+    },
+    {
+      Subject: 'ELA',
+      Color: '#5E8000'
+    },
+    {
+      Subject: 'Science',
+      Color: '#BF181A'
+    },
+    {
+      Subject: 'Social',
+      Color: '#0B5688'
+    }
+  ];
 
   @Output() onPageSelect = new EventEmitter<any>();
 
   constructor(private store: Store<AppState>, private httpService: HttpClient, private searchResultService: SearchResultService) { }
 
   ngOnInit() {
+    this.getCourseSearchResult();
+  }
+
+  getCourseSearchResult() {
     this.store.select('courseSearch').subscribe(data => {
       if (data.courseSearchSelectedFilters) {
         this.courseSearchSelectedFilters = data.courseSearchSelectedFilters;
@@ -70,23 +93,41 @@ export class CourseSearchAccordionComponent implements OnInit {
           CareerPathToSubject: this.careerPathToSubject
         };
 
-        this.getCourseSearchResult(obj);
+        this.searchResultService.getCourseSearchResult(obj).subscribe(
+          (data: any) => {
+            if (this.careerPathToSubject) {
+              this.careerPathToSubjectData = data.CareerPathToAcademicSubjects;
+              // this.careerPathToSubjectData.forEach((item) => {
+              //   if (element.AcademicSubject === item.Subject) {
+              //     element['Color'] = item.Color;
+              //   }
+              // });
+              if (this.careerPathToSubjectData.length > 0) {
+                this.noCourseResultFound = false;
+              } else {
+                this.noCourseResultFound = true;
+              }
+            } else {
+              this.subjectToCareerPathData = data.AcademicSubjectToCareePaths;
+              if (this.subjectToCareerPathData.length > 0) {
+                this.noCourseResultFound = false;
+              } else {
+                this.noCourseResultFound = true;
+              }
+            }
+          },
+          err => {
+          });
       }
     });
   }
 
-  getCourseSearchResult(obj) {
-    this.searchResultService.getCourseSearchResult(obj).subscribe(
-      (data: any) => {
-        if (this.careerPathToSubject) {
-          this.careerPathToSubjectData = data.CareerPathToAcademicSubjects;
-        } else {
-          this.subjectToCareerPathData = data.AcademicSubjectToCareePaths;
-        }
-      },
-      err => {
-        console.log(err);
-      });
+  findSubjectColor(subject) {
+    for (let i = 0; i < this.academicSubjectColorPallet.length; i++) {
+      if (this.academicSubjectColorPallet[i].Subject === subject) {
+        return this.academicSubjectColorPallet[i].Color;
+      }
+    }
   }
 
   // Expand/Collapse event on Career Path
@@ -158,7 +199,7 @@ export class CourseSearchAccordionComponent implements OnInit {
 
         if (careerPath.isSelected) {
           this.courseSearchReportPayload.CareerPathIds.push(careerPath.CareerPathId);
-          this.courseSearchReportPayload.Subjects.push({ SubjectId: careerPath.SubjectName });
+          this.courseSearchReportPayload.Subjects.push({ SubjectId: careerPath.SubjectId });
         }
 
         careerPath.Courses.forEach(course => {
@@ -176,8 +217,6 @@ export class CourseSearchAccordionComponent implements OnInit {
     } else {
 
     }
-
-    console.log(this.courseSearchReportPayload);
     this.goToPage(obj);
     this.courseSearchSelectedFilters['selectedCourseSearchResults'] = this.courseSearchReportPayload;
     this.store.dispatch({ type: CourseSearchActions.SAVE_AS_SELECTED_FILTERS_COURSESEARCH, payload: this.courseSearchSelectedFilters });
@@ -190,6 +229,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   onToggleClick(value) {
     this.careerPathToSubject = !this.careerPathToSubject;
     this.courseSearchReportPayload.CareerPathToSubject = this.careerPathToSubject;
+    this.getCourseSearchResult();
   }
 
 }

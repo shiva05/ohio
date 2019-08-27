@@ -21,7 +21,7 @@ label {
     float: right;
 }
 .search-filter-right {
-   margin-top: 30px;
+  margin: 0 0 20px;
 }
 .label-space {
     margin: 7px;
@@ -31,7 +31,13 @@ label {
     margin: 4px;
 }
 .filter-divider {
-    font-weight: 800;
-    font-size: 20pt;
+    font-weight: 600;
+    font-size: 20px;
     padding: 0 10px 0 10px;
+}
+.badge.badge-light {
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

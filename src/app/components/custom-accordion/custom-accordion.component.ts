@@ -45,6 +45,25 @@ export class CustomAccordionComponent implements OnInit {
     Science: 3,
     Social: 4
   };
+  academicSubjectColorPallet :any = [
+    {
+      Subject: 'Math',
+      Color: '#000000'
+    },
+    {
+      Subject: 'ELA',
+      Color: '#5E8000'
+    },
+    {
+      Subject: 'Science',
+      Color: '#BF181A'
+    },
+    {
+      Subject: 'Social',
+      Color: '#0B5688'
+    }
+    ];
+
 
   @Output() onPageSelect = new EventEmitter<any>();
 
@@ -105,7 +124,6 @@ export class CustomAccordionComponent implements OnInit {
           };
           subjects.push(subject);
         });
-
         let obj = {
           Keywords: '',
           CareerFiledIds: careerfeilds,
@@ -129,7 +147,6 @@ export class CustomAccordionComponent implements OnInit {
             }
           },
           err => {
-            console.log(err);
           });
         console.log(this.formattedData);
       }
@@ -137,34 +154,17 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   formatSearchResultDataArray() {
+    //add color pallets here AcademicSubject
     this.searchResultDataArray.forEach(element => {
-      if (element.Alignment[0]) {
-        this.totalSearchResults = this.totalSearchResults + element.Alignment[0];
+      if (element.Alignment ) {
+        this.totalSearchResults = this.totalSearchResults + element.Alignment;
       }
+      this.academicSubjectColorPallet.forEach((item) => {
+        if (element.AcademicSubject === item.Subject) {
+          element['Color'] = item.Color;
+        }
+      });
     });
-  }
-
-  updatePayload(obj, type) {
-    this.reportPayload.Subjects = [];
-    if (type == 'competency') {
-      if (obj.CompetencyPk !== 0) {
-        this.reportPayload.CompetencyIds.push(obj.CompetencyPk);
-        this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] });
-      }
-    }
-    if (type == 'careerField') {
-      this.reportPayload.CareerFiledIds.push(obj.CareerFieldId);
-      this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] });
-    }
-    if (type == 'strand') {
-      this.reportPayload.StrandIds.push(obj.StrandPk);
-      this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] });
-    }
-    if (type == 'outcome') {
-      this.reportPayload.OutcomeIds.push(obj.OutcomePk);
-      this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] });
-    }
-    console.log(obj + type);
   }
 
   // Click event on Career Field
@@ -276,11 +276,6 @@ export class CustomAccordionComponent implements OnInit {
   expandCollapseOutcome(obj) {
     obj.isOutcomeClosed = !obj.isOutcomeClosed;
   }
-
-  getCheckedValues(item) {
-    // console.log(item);
-  }
-
   getSelect(obj) {
     this.reportPayload.Keywords = '';
     this.reportPayload.CareerFiledIds = [];
@@ -288,22 +283,17 @@ export class CustomAccordionComponent implements OnInit {
     this.reportPayload.OutcomeIds = [];
     this.reportPayload.CompetencyIds = [];
     this.reportPayload.Subjects = [];
-
-
     this.searchResultDataArray.forEach(careerField => {
       if (this.reportPayload.Subjects.length <= 0) {
         this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[careerField.AcademicSubject[0]] });
       }
-
       if (careerField.isSelected) {
         this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
       }
-
       careerField.Strand.forEach(stand => {
         if (stand.isSelected) {
           this.reportPayload.StrandIds.push(stand.StrandPk);
         }
-
         stand.Outcome.forEach(outcome => {
           if (outcome.isSelected) {
             this.reportPayload.OutcomeIds.push(outcome.OutcomePk);
@@ -317,8 +307,6 @@ export class CustomAccordionComponent implements OnInit {
         });
       });
     });
-
-    console.log(this.reportPayload);
     this.goToPage(obj);
     this.alignmentSearchSelectedFilters['selectedAsSearchResults'] = this.reportPayload;
     this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.alignmentSearchSelectedFilters });
@@ -336,63 +324,5 @@ export class CustomAccordionComponent implements OnInit {
   onToggleClick(value) {
     this.cteToAcademic = !this.cteToAcademic;
     this.reportPayload.CteToAcademic = this.cteToAcademic;
-  }
-
-  getAccordionData() {
-    let data = [];
-    // var ParentChildchecklist = {};
-    // data.push(ParentChildchecklist);
-
-    // tslint:disable-next-line:prefer-for-of
-    for (let h = 0; h < this.accordionData.length; h++) {
-      data.push({
-        id: h,
-        value: `${this.accordionData[h].CareerField}`,
-        academicSubject: `Math`,
-        parent: null,
-        strands: []
-      });
-
-      // tslint:disable-next-line:prefer-for-of
-      for (let i = 0; i < this.accordionData[h].Strands.length - 1; i++) {
-        data[h].strands.push({
-          id: i,
-          value: `${this.accordionData[h].Strands[i].StrandTitle}`,
-          academicSubject: `Math`,
-          parent: data[h].name,
-          outcomes: []
-        });
-
-
-        // tslint:disable-next-line:prefer-for-of
-        for (let j = 0; j < this.accordionData[h].Strands[i].Outcomes.length; j++) {
-          data[h].strands[i].outcomes.push({
-            id: j,
-            value: `${this.accordionData[h].Strands[i].Outcomes[j].OutcomeTitle}`,
-            academicSubject: `Math`,
-            parent: data[h].strands[i].name,
-            competency: []
-          });
-
-
-          // tslint:disable-next-line:prefer-for-of
-          for (let k = 0; k < this.accordionData[h].Strands[i].Outcomes[j].Competencies.length; k++) {
-            data[h].strands[i].outcomes[j].competency.push({
-              value: `${this.accordionData[h].Strands[i].Outcomes[j].Competencies[k].CompetencyTitle}`,
-              academicSubject: `Math`,
-              parent: data[h].strands[i].outcomes[j].name,
-              greatGrandChildList: []
-            });
-          }
-
-        }
-
-
-      }
-
-    }
-    console.log(data);
-
-    return data;
   }
 }

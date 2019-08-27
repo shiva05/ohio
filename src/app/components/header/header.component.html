@@ -1,59 +1,34 @@
 <div class="custom-header">
-  <img alt="" src="../../assets/images/ohio-logo.png" />
+  <img src="../../assets/images/ohio-logo.png" alt="Ohi Logo" title="Ohio Department of Education"
+    (click)="goToPage('Home')" class="link" />
 </div>
 
-<!-- <nav class="navbar navbar-expand-lg navbar-dark navbar-color">
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="active" (click)="goToPage('Home')">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="active" (click)="goToPage('SearchAlignment')">Search Alignment</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="active" (click)="goToPage('SearchCourse')">Search Course</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="active" (click)="goToPage('Search')">Search</a>
-      </li>
-      <li class="nav-item">
-        <a (click)="goToPage('SearchResults')">Search</a>
-      </li>
-
-
-      <li class="nav-item">
-        <a (click)="goToPage('Report')">Admin</a>
-      </li>
-
-    </ul>
-  </div>
-</nav> -->
 
 <nav class="navbar">
 
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav">
-      <li class="active"><a (click)="goToPage('Home')">Home <span class="sr-only">(current)</span></a></li>
+    <ul class="nav navbar-nav menuList">
+      <li class="active"><a (click)="goToPage('Home')" title="Home">{{'Header.Home' | translate}}<span
+            class="sr-only">(current)</span></a></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-          aria-expanded="false">Search <span class="caret"></span></a>
+          aria-expanded="false" title="Search">{{'Header.Search' | translate}} <i class="fas fa-chevron-down"></i></a>
         <ul class="dropdown-menu">
           <li>
-            <a href="#" (click)="goToPage('SearchAlignment')">Alignment Search</a>
+            <a href="#" (click)="goToPage('SearchAlignment')"
+              title="Alignment Search">{{'Header.AlignmentSearch' | translate}}</a>
           </li>
           <li>
-            <a href="#" (click)="goToPage('SearchCourse')">Course Search</a>
+            <a href="#" (click)="goToPage('SearchCourse')"
+              title="Course Search">{{'Header.CourseSearch' | translate}}</a>
           </li>
         </ul>
       </li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-          aria-expanded="false">Admin <span class="caret"></span></a>
+          aria-expanded="false" title="Admin">{{'Header.Admin' | translate}} <i class="fas fa-chevron-down"></i></a>
         <ul class="dropdown-menu">
-          <li><a href="#" (click)="goToPage('Export')">Data Import</a></li>
+          <li><a href="#" (click)="goToPage('Export')" title="Data Import">{{'Header.DataImport' | translate}}</a></li>
         </ul>
       </li>
     </ul>

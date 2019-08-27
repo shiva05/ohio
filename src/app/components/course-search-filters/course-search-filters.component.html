@@ -6,7 +6,7 @@
                 <label class="ohio-field-status" for="field-example-8">
                     <span class="ohio-field-label">{{ 'CourseFields.Keywords' | translate }}</span>
 
-                    <div class="input-group">
+                    <div class="input-group customsearch">
                         <input type="search" class="ohio-field-input" id="keywordInput" placeholder="Course . . .">
                         <span class="input-group-addon">
                             <i class="fa fa-search" aria-hidden="true"></i>
@@ -18,7 +18,7 @@
             <div class="col-md-6">
                 <label class="ohio-field-status" for="field-example-8">
                     <span class="ohio-field-label">{{ 'CourseFields.Keywords' | translate }}</span>
-                    <div class="input-group">
+                    <div class="input-group customsearch">
                         <input type="search" class="ohio-field-input" id="keywordInput" placeholder="Course . . .">
                         <span class="input-group-addon">
                             <i class="fa fa-search" aria-hidden="true"></i>
@@ -68,8 +68,7 @@
                         <div class="form-group col-md-4">
                             <label>{{item.LevelName}}</label>
                             <ng-multiselect-dropdown [ngClass]="" [data]="item.GradeSubjects"
-                                [(ngModel)]="item.SelectedItems" [settings]="subjectsDefaultSettings"
-                                (onSelect)="onSubjectLevelsSelect(item)" (onDeSelect)="onSubjectLevelsSelect(item)">
+                                [(ngModel)]="item.SelectedItems" [settings]="subjectsDefaultSettings">
                             </ng-multiselect-dropdown>
                         </div>
                     </div>
@@ -82,7 +81,7 @@
             <div class="pull-right search-btn">
                 <button type="button" class="ohio-button large but-gap"
                     (click)="search()">{{ 'CourseFields.Search' | translate }}</button>
-                <button type="button"
+                <button type="button" (click)="clearSearch()"
                     class="ohio-button large but-gap  secondary">{{ 'CourseFields.Cancel' | translate }}</button>
             </div>
         </div>

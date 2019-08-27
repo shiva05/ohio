@@ -55,7 +55,6 @@ export class FilterSummaryComponent implements OnInit {
 
         let subjects = [];
         data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
-          console.log(element);
           let level1 = [];
           let level1Name = element.Level[0].LevelName;
           if (element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length > 0) {
@@ -103,7 +102,6 @@ export class FilterSummaryComponent implements OnInit {
           Subjects: subjects,
           CteToAcademic: true
         };
-        console.log(obj);
         this.FilterSummaryKeys = obj;
       }
     });
@@ -134,41 +132,9 @@ export class FilterSummaryComponent implements OnInit {
   }
 
   formatSearchDataToSummary(source) {
-    console.log(source);
   }
 
-  // formatSearchDataToSummary(source) {
-  //   this.FilterSummaryKeys.forEach(element => {
-  //     if (element.fieldType === '1') {
-  //       if (source[element.fieldKey]) {
-  //         var temp = element;
-  //         temp.fieldValue = this.getFormatedName(source[element.fieldKey]);
-  //         this.FilterSummaryData.push(temp);
-  //       }
-  //     }
-  //     if (element.fieldType === '2') {
-  //       if (source[element.fieldAcadamicKey]) {
-  //         source[element.fieldAcadamicKey].forEach(value => {
-  //           var temp = JSON.parse(JSON.stringify(element));
-  //           temp.fieldAcadamicValue = value.item_text;
-  //           if (value[element.fieldGradeKey]) {
-  //             temp.fieldGradeValue = this.getFormatedName(value[element.fieldGradeKey]);
-  //           }
-  //           if (value[element.fieldClusterKey]) {
-  //             temp.fieldClusterValue = this.getFormatedName(value[element.fieldClusterKey]);
-  //           }
-  //           if (value[element.fieldStandardNumberKey]) {
-  //             temp.fieldStandardNumberValue = this.getFormatedName(value[element.fieldStandardNumberKey]);
-  //           }
-  //           this.FilterSummaryData.push(temp);
-  //         });
-  //       }
-  //     }
-  //   });
-  // }
-
   formatSearchCourseData(source) {
-    console.log(source);
     this.filterCareerPathData = source.selectedCareerPath;
     this.filterCareerPathCourseData = source.selectedCareerPathCourses;
     this.filterAcadamicSubjectData = source.selectedAcademicSubject;

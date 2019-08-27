@@ -17,8 +17,6 @@ export class SearchResultsComponent implements OnInit {
 
   ngOnInit() {
     this.data = this.sharedData;
-    console.log(this.data);
-    console.log(localStorage.getItem('sharedData'));
   }
 
   onPageSelect(org) {

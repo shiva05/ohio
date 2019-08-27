@@ -17,36 +17,66 @@
 .level-one-title {
   line-height: 20px;
   padding-top: 6px;
+
+}
+.search-results-head{
+  margin-top:15px;
+  margin-bottom:15px;
+}
+
+.color-gap{
+  line-height: 20px;
+  padding-top: 6px;
+
 }
 .search-results-head-right {
   float: right;
 }
 .careerfield-each-inner {
-  padding: 20px 10px 5px 10px;
-  margin-left: 0px;
-  font-size: 16pt;
-  background-color: #E0E0E0;
+  padding: 5px 0px;
+  margin: 0px;
+  font-size: 16px;
+  background-color: #f5f5f5;
+}
+
+.careerfield-each-inner  .accordion-checbox {
+  margin-top:5px;
 }
 .strand-each-inner {
-  padding: 20px 10px 5px 10px;
-  margin-left: 15px;
-  font-size: 14pt;
-  background-color: #E9E9E9;
+  padding: 10px 15px;
+  margin: 0 px;
+  font-size: 14px;
+ background-color: #fff; /*#f5f5f5*/
 }
+.strand-each-inner .accordion-checbox{
+  margin:5px 0 0 20px;
+}
+.level-two-title{
+  padding-top: 6px;
+}
+
 .outcome-each-inner {
-  padding: 20px 10px 5px 10px;
-  margin-left: 30px;
-  font-size: 13pt;
-  background-color: #F0F0F0;
+  padding: 10px 15px;
+  margin: 0px;
+  font-size: 13px;
+  background-color: #fff;
+}
+.outcome-each-inner .accordion-checbox{
+  margin:5px 0 0 30px;
 }
 .competency-each-inner {
-  padding: 20px 10px 5px 10px;
-  margin-left: 45px;
-  font-size: 12pt;
-  background-color: #F9F9F9;
-
- }
+  padding: 10px 15px;
+  margin: 0 px;
+  font-size:12px;
+  background-color: #fff;
+}
 .accordion-label {
   padding-left: 30px;
   font-size: 7pt;
+}
+.competency-each-inner .accordion-checbox{
+  margin:8px 0 0 50px;
+}
+.competency-each-inner .level-three-title{
+  padding-top: 8px;
 }

@@ -7,7 +7,6 @@ import * as QuickSearchActions from './../../actions/quick-search.actions';
 import { Observable } from 'rxjs/Observable';
 import { QsMetaData } from './../../models/qs-meta-data.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-quick-search',
@@ -20,16 +19,19 @@ export class QuickSearchComponent implements OnInit {
 
   qsMetaData: Observable<QsMetaData>;
   dropdownSettings: any = {};
-  careerFieldDropdownSettings : any = {};
-  subjectDropdownSettings : any ={};
+  careerFieldDropdownSettings: any = {};
+  subjectDropdownSettings: any = {};
   selectedCareer: any = [];
   selectedAcadamicSubjects: any = [];
   academicSubjects = [];
     strands = [];
 
-  constructor(private translate: TranslateService,private sharedData: SharedService, private router: Router,private store: Store<AppState>,private httpService: HttpClient, private ref: ChangeDetectorRef,) {
-    console.log(this.sharedData);
-    translate.setDefaultLang('en');
+  constructor(private sharedData: SharedService,
+              private router: Router,
+              private store: Store<AppState>,
+              private httpService: HttpClient,
+              private ref: ChangeDetectorRef, ) {
+
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'item_id', textField: 'item_text',
@@ -59,14 +61,14 @@ export class QuickSearchComponent implements OnInit {
 
   ngOnInit() {
     this.store.select('quickSearch').subscribe(data => {
-      this.academicSubjects =[];
-      if(data.QsMetaData){
+      this.academicSubjects = [];
+      if (data.QsMetaData) {
         this.qsMetaData = data.QsMetaData;
-        debugger
+        debugger;
         this.careers = this.qsMetaData['CareerFields'];
-        //this.academicSubjects = this.qsMetaData['academicSubjects'];
+        // this.academicSubjects = this.qsMetaData['academicSubjects'];
         this.qsMetaData['Subjects'].forEach(element => {
-          this.academicSubjects.push({SubjectId :element.SubjectId,SubjectName :element.SubjectName})
+          this.academicSubjects.push({SubjectId : element.SubjectId, SubjectName : element.SubjectName});
        });
       }
     });
@@ -75,10 +77,6 @@ export class QuickSearchComponent implements OnInit {
   sendSearch() {
     this.sharedData.data = this.keyword;
     localStorage.setItem('sharedData', this.sharedData.data);
-
-    console.log(this.selectedCareer);
-    console.log(this.selectedAcadamicSubjects);
-
     (window as any).open('http://edu-dev-sbd.azurewebsites.net/Search', '_blank');
     // this.router.navigate(['/Search']);
   }
