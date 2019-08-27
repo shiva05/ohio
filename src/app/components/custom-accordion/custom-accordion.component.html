@@ -1,24 +1,29 @@
 <div *ngIf="!noResultFound">
+  <div class="row"> 
+      <div class="col-md-10 search-results-head-left">
+          <h3>{{ 'SearchResults.SearchResults' | translate }}</h3>
+          <p *ngIf="totalSearchResults"> Found {{totalSearchResults}} Alignments for your search criteria</p>
+        </div>
   <div class="col-md-2 search-results-head-right">
     <button (click)="onToggleClick(cteToAcademic)">
       {{ 'SearchResults.ToggleAlignments' | translate }} &nbsp; <i class="fa fa-exchange"></i>
     </button>
   </div>
-  <div class="col-md-12 search-results">
-    <div class="search-results-head row">
-      <div class="col-md-10 search-results-head-left">
-        <h3>{{ 'SearchResults.SearchResults' | translate }}</h3>
-        <p *ngIf="totalSearchResults"> Found {{totalSearchResults}} Alignments for your search criteria</p>
-      </div>
+</div>
+  <div class="search-results">
+    
 
       <div class="search-accordion" *ngIf="cteToAcademic">
-        <div class="search-accordion-head row">
+       
+        <div class="search-accordion-head">
+            <div class="row"> 
           <div class="col-md-6">{{ 'SearchResults.CareerFields' | translate }}</div>
           <div class="col-md-1">&nbsp;</div>
           <div class="col-md-3">{{ 'SearchResults.AcademicSubject' | translate }}</div>
           <div class="col-md-1">{{ 'SearchResults.Alignment' | translate }}</div>
           <div class="col-md-1">&nbsp;</div>
         </div>
+       
       </div>
 
       <div class="search-accordion" *ngIf="!cteToAcademic">
@@ -71,7 +76,9 @@
           <div class="child-list" [hidden]="!careerField.isCareerFieldClosed">
             <ul class="list-group level-two">
               <li class="level-two-inner" *ngFor="let strand of careerField.Strand; index as j">
-                <div class="row strand-each-inner" (click)="expandCollapseStrand(strand)">
+                <div class="strand-each-inner" (click)="expandCollapseStrand(strand)">
+                  <div class="row"> 
+
                   <div class="col-md-6">
                     <div class="accordion-checbox">
                       <span class="ohio-checkbox checkbox checkbox-success">
@@ -99,12 +106,13 @@
                     </span>
                   </div>
                 </div>
-
+              </div>
                 <!-- Outcomes -->
                 <div class="child-list" [hidden]="!strand.isStrandClosed">
                   <ul class="list-group level-two">
                     <li class="level-two-inner" *ngFor="let outcome of strand.Outcome; index as k">
-                      <div class="row outcome-each-inner" (click)="expandCollapseOutcome(outcome)">
+                      <div class="outcome-each-inner" (click)="expandCollapseOutcome(outcome)">
+                        <div class="row"> 
                         <div class="col-md-6">
                           <div class="accordion-checbox">
                             <span class="ohio-checkbox checkbox checkbox-success">
@@ -131,13 +139,14 @@
                             <ng-template #isOutcomeClosed><i class="fas fa-chevron-down"></i></ng-template>
                           </span>
                         </div>
-                      </div>
+                      </div>   </div>
 
                       <!-- Competency -->
                       <div class="child-list" [hidden]="!outcome.isOutcomeClosed" *ngIf="outcome.Competency">
                         <ul class="list-group level-three">
                           <li class="list-group-item level-three" *ngFor="let item of outcome.Competency; index as l">
-                            <div class="row competency-each-inner">
+                            <div class="competency-each-inner">
+                              <div class="row"> 
                               <div class="col-md-6">
                                 <div class="accordion-checbox">
                                   <span class="ohio-checkbox checkbox checkbox-success">
@@ -160,7 +169,7 @@
                               <div class="col-md-1">
                                 &nbsp;
                               </div>
-                            </div>
+                            </div> </div>
                           </li>
                         </ul>
                       </div>
@@ -245,7 +254,8 @@
                 <div class="child-list" [hidden]="!strand.isStrandClosed">
                   <ul class="list-group level-two">
                     <li class="level-two-inner" *ngFor="let outcome of strand.outcomes; index as k">
-                      <div class="row outcome-each-inner" (click)="expandCollapseOutcome(outcome)">
+                      <div class="outcome-each-inner" (click)="expandCollapseOutcome(outcome)">
+                        <div class="row"> 
                         <div class="col-md-3 cg">
                           <div class="accordion-checbox">
                             <span class="ohio-checkbox checkbox checkbox-success">
@@ -268,7 +278,7 @@
                           </span>
                         </div>
                       </div>
-
+                    </div>
                       <!-- Competency -->
                       <div class="child-list" [hidden]="!outcome.isOutcomeClosed" *ngIf="outcome.competency">
                         <ul class="list-group level-three">

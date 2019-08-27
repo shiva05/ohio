@@ -39,12 +39,20 @@ padding: 0px !important;
     background: #700017;
     border-radius: 0 !important;
     margin-bottom: 0 !important;
+    min-height: 56px !important;
 }
 
 .nav li a{
     color: #fff;
     font-size: 16px;
-    cursor: pointer;
+    cursor: pointer;    
+    padding: 16px 20px !important;
+    font-weight: 700 !important;
+    min-height: 56px;
+    font-family: Source Sans Pro;
+}
+.nav li a i{
+    padding: 0 10px;
 }
 
 .nav li a:hover,.nav li a:focus, .nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
@@ -141,7 +149,7 @@ padding: 10px 10px 2px 10px;
 
 .level-three .list-group-item{
     border: 0px !important;   
-    padding: 10px 0px;
+    padding:0px 0px;
 }
 .search-accordion-each .card-header{
     border: 0px;
@@ -161,6 +169,7 @@ padding: 10px 10px 2px 10px;
     color: #700017;
     font-family: Serifa-Reg;
     font-weight: 600;
+    margin: 0 0 10px 0;
 }
 .search-accordion-head *{
     font-family: Serifa-Reg;
@@ -326,7 +335,7 @@ border-color: #fff !important;
     border-radius: 0px !important;
     border:1px solid #ddd !important; 
     border-width: 0 0 1px 0 !important;
-    padding: 10px;
+    padding: 0px;
     display:block;
     position: relative;    
 }
@@ -335,11 +344,18 @@ border-color: #fff !important;
     display: inline-block;
     width: 25px;
 }
-.level-three-title{    
-    padding: 0 0 0 50px;
+
+.level-four-title{    
+    padding: 0 0 0 0px;
     display: inline-block;
     vertical-align: top;
-    max-width: calc(100% - 25px);
+    max-width: calc(100% - 100px);
+}
+.level-three-title{    
+    padding: 0 0 0 0px;
+    display: inline-block;
+    vertical-align: top;
+    max-width: calc(100% - 100px);
 }
 .level-two-title{        
     display: inline-block;
@@ -420,4 +436,25 @@ border-color: #fff !important;
     }
 .search-accordion {
   clear:both;
+}
+
+.search-right-arrow {
+    margin-top: 6px;
+}
+.search-right-arrow i{
+    font-size: 22px;
+}
+.accordion-down-arrow{
+    margin-top: 6px;
+}
+.accordion-down-arrow i{
+    font-size: 24px;
+}
+
+.customsearch{
+    border: 1px solid #A1A1A1;
+    border-radius: 4px;
+}
+.customsearch input, .customsearch .input-group-addon{
+    border: 0px solid #a1a1a1 !important;
 }
