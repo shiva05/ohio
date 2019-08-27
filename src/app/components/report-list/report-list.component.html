@@ -57,7 +57,7 @@
           <div class="reports-content-each">
             <span class="reports-content-each-left">{{ 'ReportFields.AcademicSubject' | translate }}</span>
 
-            <span class="reports-content-each-right" [style.background-color]="result.Color">{{result.SubjectName}}</span>
+            <span class="reports-content-each-right" style="color:white" [style.background-color]="findSubjectColor(result.SubjectName)">{{result.SubjectName}}</span>
 
           </div>
 

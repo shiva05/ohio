@@ -25,7 +25,7 @@ export class CourseSearchAccordionComponent implements OnInit {
     Subjects: [],
     CareerPathToSubject: true
   };
-  academicSubjectColorPallet :any = [
+  academicSubjectColorPallet: any = [
     {
       Subject: 'Math',
       Color: '#000000'
@@ -42,7 +42,8 @@ export class CourseSearchAccordionComponent implements OnInit {
       Subject: 'Social',
       Color: '#0B5688'
     }
-    ];
+  ];
+
   @Output() onPageSelect = new EventEmitter<any>();
 
   constructor(private store: Store<AppState>, private httpService: HttpClient, private searchResultService: SearchResultService) { }
@@ -121,6 +122,14 @@ export class CourseSearchAccordionComponent implements OnInit {
     });
   }
 
+  findSubjectColor(subject) {
+    for (let i = 0; i < this.academicSubjectColorPallet.length; i++) {
+      if (this.academicSubjectColorPallet[i].Subject === subject) {
+        return this.academicSubjectColorPallet[i].Color;
+      }
+    }
+  }
+
   // Expand/Collapse event on Career Path
   expandCollapseCareerPath(obj) {
     obj.isCareerPathClosed = !obj.isCareerPathClosed;
@@ -148,7 +157,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Courses Checkbox
   courseCheckBox(career, course) {
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Courses.every(function (itemChild: any) {
+    career.isSelected = career.Courses.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -168,12 +177,12 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Competency Checkbox
   competencyCheckBox(career, course) {
     // tslint:disable-next-line:only-arrow-functions
-    course.isSelected = course.Competencies.every(function (itemChild: any) {
+    course.isSelected = course.Competencies.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Courses.every(function (itemChild: any) {
+    career.isSelected = career.Courses.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
   }

@@ -30,7 +30,7 @@ export class ReportListComponent implements OnInit {
       Subject: 'Social',
       Color: '#0B5688'
     }
-  ]
+  ];
   results: any = [];
   reportListhResultData: any = [];
   @Output() onPageSelect = new EventEmitter<any>();
@@ -50,12 +50,22 @@ export class ReportListComponent implements OnInit {
                 }
               });
             });
+            console.log(this.reportListhResultData);
           },
           err => {
           });
       }
     });
   }
+
+  findSubjectColor(subject) {
+    for (let i = 0; i < this.academicSubjectColorPallet.length; i++) {
+      if (this.academicSubjectColorPallet[i].Subject === subject) {
+        return this.academicSubjectColorPallet[i].Color;
+      }
+    }
+  }
+
   goToPage(org) {
     this.onPageSelect.emit(org);
   }
