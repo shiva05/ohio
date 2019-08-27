@@ -1,11 +1,11 @@
 <div class="quick-search">
-    <h2>Quick Search</h2>
+    <h2>{{ 'SearchFields.QuickSearch' | translate }}</h2>
     <div class="quick-search-layer">
         <!-- Search Form Begin -->
         <form>
             <div class="row">
                 <div class="form-group col-md-12 col-xs-12">
-                    <label for="exampleFormControlInput1">Keywords</label>
+                    <label for="exampleFormControlInput1">{{ 'SearchFields.Keywords' | translate }}</label>
                     <input type="search" class="form-control" [(ngModel)]="keyword" name="enterKeyword"
                         id="exampleFormControlInput1" placeholder="Keywords . . .">
                 </div>

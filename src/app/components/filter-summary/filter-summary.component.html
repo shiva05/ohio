@@ -109,27 +109,28 @@
           <div class="filter">
             <span class="filter-each">
               <span>
-                <label>{{'CourseFields.CareerField' | translate}}: </label>
-                <span class="badge badge-light">{{filterCareerPathData[0].CareerPathName}}
+                <label *ngIf="filterCareerPathData &&  filterCareerPathData[0].CareerPathName">{{'CourseFields.CareerField' | translate}}: </label>
+                <span class="badge badge-light" *ngIf="filterCareerPathData &&  filterCareerPathData[0].CareerPathName">{{filterCareerPathData[0].CareerPathName}}
                   <span *ngIf="filterCareerPathData.length > 1"> +{{filterCareerPathData.length - 1}} </span>
                 </span>
-                <span class="filter-divider"> | </span>
+                <span class="filter-divider"  *ngIf="filterCareerPathCourseData[0] && filterCareerPathCourseData[0].CourseName"> | </span>
               </span>
               <span>
-                <label>{{'CourseFields.Courses' | translate}}: </label>
-                <span class="badge badge-light">{{filterCareerPathCourseData[0].CourseName}}
+                <label *ngIf="filterCareerPathCourseData[0] && filterCareerPathCourseData[0].CourseName">{{'CourseFields.Courses' | translate}}: </label>
+                <span class="badge badge-light" *ngIf="filterCareerPathCourseData[0] && filterCareerPathCourseData[0].CourseName">{{filterCareerPathCourseData[0].CourseName}}
                   <span *ngIf="filterCareerPathCourseData.length > 1"> +{{filterCareerPathCourseData.length - 1}}</span>
                 </span>
               </span>
 
               <div class="filter-each" [hidden]="panelExpanded" *ngFor="let item of filterAcadamicSubjectData">
                 <hr>
-                <label>{{'CourseFields.AcademicSubjects' | translate}}: </label>
-                <span class="badge badge-light">{{item.SubjectName}}</span> |
+                <label *ngIf="item.SubjectName">{{'CourseFields.AcademicSubjects' | translate}}: </label>
+                <span class="badge badge-light"  *ngIf="item.SubjectName">{{item.SubjectName}}</span>
+                <span  *ngIf="item.SelectedItems && item.SelectedItems.length"> | </span>
 
-                <label>{{'CourseFields.Courses' | translate}}: </label>
-                <span class="badge badge-light">{{item.SelectedItems[0].LevelValue}}
-                  <span *ngIf="item.SelectedItems.length > 1">+{{item.SelectedItems.length - 1}} </span>
+                <label *ngIf="item.SelectedItems && item.SelectedItems.length">{{'CourseFields.Courses' | translate}}: </label>
+                <span class="badge badge-light" *ngIf="item.SelectedItems" >{{item.SelectedItems[0].LevelValue}}
+                  <span *ngIf="item.SelectedItems && item.SelectedItems.length > 1">+{{item.SelectedItems.length - 1}} </span>
                 </span>
               </div>
             </span>
