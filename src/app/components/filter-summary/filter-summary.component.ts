@@ -103,7 +103,7 @@ export class FilterSummaryComponent implements OnInit {
           Subjects: subjects,
           CteToAcademic: true
         };
-        console.log(obj);
+        console.log('final' + obj);
         this.FilterSummaryKeys = obj;
       }
     });

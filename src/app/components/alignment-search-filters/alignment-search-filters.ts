@@ -168,6 +168,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         // this.selectedAcadamicSubjects is getting clear on selection of outcomes as store is getting updated on every selection of outcomes.
         //this resolves the lose of academic subjects selected data.
         if (data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0) {
+          this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects;
           this.selectedAcademicItems = this.selectedAcadamicSubjects;
           this.academicSubjects = data.alignmentSearchSelectedFilters.finalSelectedObject;
          //  this.selectListCreation();

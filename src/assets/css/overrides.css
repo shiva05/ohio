@@ -339,18 +339,18 @@ border-color: #fff !important;
     padding: 0 0 0 50px;
     display: inline-block;
     vertical-align: top;
-    width: calc(100% - 25px);
+    max-width: calc(100% - 25px);
 }
 .level-two-title{        
     display: inline-block;
     vertical-align: top;
-    width: calc(100% - 25px);
+    max-width: calc(100% - 25px);
 }
 
 .level-one-title{        
     display: inline-block;
     vertical-align: top;
-    width: calc(100% - 25px);
+    max-width: calc(100% - 25px);
 }
 
 .checkbox-indeterminate input[type="checkbox"]:checked + label::after{
