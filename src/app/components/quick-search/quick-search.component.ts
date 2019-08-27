@@ -31,7 +31,7 @@ export class QuickSearchComponent implements OnInit {
               private store: Store<AppState>,
               private httpService: HttpClient,
               private ref: ChangeDetectorRef, ) {
-    console.log(this.sharedData);
+
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'item_id', textField: 'item_text',
@@ -77,10 +77,6 @@ export class QuickSearchComponent implements OnInit {
   sendSearch() {
     this.sharedData.data = this.keyword;
     localStorage.setItem('sharedData', this.sharedData.data);
-
-    console.log(this.selectedCareer);
-    console.log(this.selectedAcadamicSubjects);
-
     (window as any).open('http://edu-dev-sbd.azurewebsites.net/Search', '_blank');
     // this.router.navigate(['/Search']);
   }

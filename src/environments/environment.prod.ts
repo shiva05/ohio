@@ -1,4 +1,4 @@
-const alignmentSearchAPI = 'http://edu-prod-sbd-alignmentsearch.azurewebsites.net/api/';
+const alignmentSearchAPI = 'https://edu-prod-sbd-alignmentsearch.azurewebsites.net/api/';
 const webServer = 'https://edu-dev-sbd.azurewebsites.net/';
 const userApi = 'https://edu-dev-sbd-commonfunctions.azurewebsites.net/api/';
 
