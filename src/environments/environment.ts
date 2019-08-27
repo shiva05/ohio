@@ -2,7 +2,7 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-const alignmentSearchAPI = 'http://edu-dev-sbd-alignmentsearch.azurewebsites.net/api/';
+const alignmentSearchAPI = 'https://edu-dev-sbd-alignmentsearch.azurewebsites.net/api/';
 const webServer = 'https://edu-dev-sbd.azurewebsites.net/';
 const userApi = 'https://edu-dev-sbd-commonfunctions.azurewebsites.net/api/';
 

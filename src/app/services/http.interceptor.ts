@@ -21,13 +21,11 @@ export class HttpLoadInterceptor implements HttpInterceptor {
         if (i >= 0) {
             this.requests.splice(i, 1);
         }
-        // console.log(i, this.requests.length);
         this.loaderService.isLoading.next(this.requests.length > 0);
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this.requests.push(req);
-        // console.log(this.loaderService.isLoading);
         this.loaderService.isLoading.next(true);
         return Observable.create(observer => {
             const subscription = next.handle(req)

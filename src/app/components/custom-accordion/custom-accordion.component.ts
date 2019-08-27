@@ -62,8 +62,8 @@ export class CustomAccordionComponent implements OnInit {
       Subject: 'Social',
       Color: '#0B5688'
     }
-    ]
-  
+    ];
+
 
   @Output() onPageSelect = new EventEmitter<any>();
 
@@ -124,8 +124,6 @@ export class CustomAccordionComponent implements OnInit {
           };
           subjects.push(subject);
         });
-
-        console.log();
         let obj = {
           Keywords: '',
           CareerFiledIds: careerfeilds,
@@ -149,7 +147,6 @@ export class CustomAccordionComponent implements OnInit {
             }
           },
           err => {
-            console.log(err);
           });
       }
     });
@@ -166,31 +163,7 @@ export class CustomAccordionComponent implements OnInit {
           element['Color'] = item.Color;
         }
       });
-    });    
-  //  console.log(this.searchResultDataArray);
-  }
-
-  updatePayload(obj, type) {
-    this.reportPayload.Subjects = [];
-    if (type == 'competency') {
-      if (obj.CompetencyPk !== 0) {
-        this.reportPayload.CompetencyIds.push(obj.CompetencyPk);
-        this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] });
-      }
-    }
-    if (type == 'careerField') {
-      this.reportPayload.CareerFiledIds.push(obj.CareerFieldId);
-      this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] });
-    }
-    if (type == 'strand') {
-      this.reportPayload.StrandIds.push(obj.StrandPk);
-      this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] });
-    }
-    if (type == 'outcome') {
-      this.reportPayload.OutcomeIds.push(obj.OutcomePk);
-      this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[obj.AcademicSubject[0]] });
-    }
-    console.log(obj + type);
+    });
   }
 
   // Click event on Career Field
@@ -304,7 +277,6 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   getCheckedValues(item) {
-    // console.log(item);
   }
 
   getSelect(obj) {
@@ -343,8 +315,6 @@ export class CustomAccordionComponent implements OnInit {
         });
       });
     });
-
-    console.log(this.reportPayload);
     this.goToPage(obj);
     this.alignmentSearchSelectedFilters['selectedAsSearchResults'] = this.reportPayload;
     this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.alignmentSearchSelectedFilters });
@@ -417,8 +387,6 @@ export class CustomAccordionComponent implements OnInit {
       }
 
     }
-    console.log(data);
-
     return data;
   }
 }

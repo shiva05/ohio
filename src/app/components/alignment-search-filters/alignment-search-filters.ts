@@ -189,7 +189,6 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.strands.forEach(eachStrand => {
       this.selectedCareer.forEach(eachCareer => {
         if (eachStrand.CareerFieldPk === eachCareer.CareerFieldId) {
-       //   console.log(eachStrand);
           this.strandsDropdown.push(eachStrand);
         }
       });
@@ -201,12 +200,10 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.outcomes.forEach(eachOutcome => {
       this.selectedStrands.forEach(eachStrand => {
         if (eachOutcome.StrandPk === eachStrand.StrandPk) {
-        //  console.log(eachOutcome);
           this.outcomesDropdown.push(eachOutcome);
         }
       });
     });
-   // console.log(this.strandsDropdown);
   }
   onCareerSelectAll() {
     this.strandsDropdown = [];
@@ -220,18 +217,12 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   onStrandSelectAll() {
     this.outcomesDropdown = [];
     this.outcomes.forEach(eachOutcome => {
-          //  console.log(eachOutcome);
           this.outcomesDropdown.push(eachOutcome);
     });
   }
   onStrandDeSelectAll() {
     this.outcomesDropdown = [];
   }
-
-  // onOutcomeSelectAll() { }
-  // onOutcomeDeSelectAll() { }
-
-
   onItemSelect(event) {
     this.selectedAcademicItems = this.selectedAcadamicSubjects;
     this.selectListCreation();
@@ -262,7 +253,6 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   }
 
   sendSub(item) {
-  //  console.log(item);
   }
 
   onSubjectLevelsSelect(data) {
@@ -313,7 +303,6 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     });
     this.selectedAcademicItems = tempData;
     this.ref.detectChanges();
-   // console.log(this.selectedAcademicItems);
   }
 
 clearSearch() {
@@ -350,7 +339,6 @@ clearSearch() {
   onOutcomeSelect() {
     // TODO: Call API
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA , payload : this.selectedOutcome});
-  //  console.log(this.competencyNumbers);
   }
   search() {
     this.goToPage('SearchResults');
@@ -364,14 +352,12 @@ clearSearch() {
       finalSelectedObject: this.academicSubjects,
 
     };
-   // console.log(this.academicSubjects);
     localStorage.setItem('searchLable', 'SearchAlignment');
     this.goToPage('SearchResults');
     this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS , payload: this.searchObj});
   }
 
   onAcadamicSubjectSelect() {
-  //  console.log('hi');
   }
 
   goToPage(org) {

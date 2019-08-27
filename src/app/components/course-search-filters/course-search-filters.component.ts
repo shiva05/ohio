@@ -148,7 +148,6 @@ export class CourseSearchFiltersComponent implements OnInit {
   }
 
   getData(data) {
-    console.log(data);
   }
 
   onSubjectSelect(event) {
@@ -180,7 +179,6 @@ export class CourseSearchFiltersComponent implements OnInit {
         }
       });
     });
-    console.log(this.selectedAcademicItems);
   }
   clearSearch() {
     this.searchObj = {
