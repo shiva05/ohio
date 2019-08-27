@@ -171,6 +171,7 @@ padding: 10px 10px 2px 10px;
     font-family: Serifa-Reg;
     font-weight: 600;
     margin: 0 0 10px 0;
+    text-transform: uppercase;
 }
 .search-accordion-head *{
     font-family: Serifa-Reg;
