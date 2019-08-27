@@ -97,6 +97,11 @@ export class CourseSearchAccordionComponent implements OnInit {
           (data: any) => {
             if (this.careerPathToSubject) {
               this.careerPathToSubjectData = data.CareerPathToAcademicSubjects;
+              // this.careerPathToSubjectData.forEach((item) => {
+              //   if (element.AcademicSubject === item.Subject) {
+              //     element['Color'] = item.Color;
+              //   }
+              // });
               if (this.careerPathToSubjectData.length > 0) {
                 this.noCourseResultFound = false;
               } else {
@@ -112,7 +117,6 @@ export class CourseSearchAccordionComponent implements OnInit {
             }
           },
           err => {
-            console.log(err);
           });
       }
     });
@@ -213,8 +217,6 @@ export class CourseSearchAccordionComponent implements OnInit {
     } else {
 
     }
-
-    console.log(this.courseSearchReportPayload);
     this.goToPage(obj);
     this.courseSearchSelectedFilters['selectedCourseSearchResults'] = this.courseSearchReportPayload;
     this.store.dispatch({ type: CourseSearchActions.SAVE_AS_SELECTED_FILTERS_COURSESEARCH, payload: this.courseSearchSelectedFilters });

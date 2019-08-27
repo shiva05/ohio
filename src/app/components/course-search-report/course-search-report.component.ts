@@ -19,7 +19,6 @@ export class CourseSearchReportComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log('app-course-search-report');
   }
 
   goToPage(org) {
