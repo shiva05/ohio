@@ -45,6 +45,25 @@ export class CustomAccordionComponent implements OnInit {
     Science: 3,
     Social: 4
   };
+  academicSubjectColorPallet :any = [
+    {
+      Subject: 'Math',
+      Color: '#000000'
+    },
+    {
+      Subject: 'ELA',
+      Color: '#5E8000'
+    },
+    {
+      Subject: 'Science',
+      Color: '#BF181A'
+    },
+    {
+      Subject: 'Social',
+      Color: '#0B5688'
+    }
+    ]
+  
 
   @Output() onPageSelect = new EventEmitter<any>();
 
@@ -137,11 +156,18 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   formatSearchResultDataArray() {
+    //add color pallets here AcademicSubject
     this.searchResultDataArray.forEach(element => {
       if (element.Alignment ) {
         this.totalSearchResults = this.totalSearchResults + element.Alignment;
       }
-    });
+      this.academicSubjectColorPallet.forEach((item) => {
+        if (element.AcademicSubject === item.Subject) {
+          element['Color'] = item.Color;
+        }
+      });
+    });    
+  //  console.log(this.searchResultDataArray);
   }
 
   updatePayload(obj, type) {

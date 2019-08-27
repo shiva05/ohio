@@ -55,7 +55,7 @@ export class FilterSummaryComponent implements OnInit {
 
         let subjects = [];
         data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
-          console.log(element);
+        //  console.log(element);
           let level1 = [];
           let level1Name = element.Level[0].LevelName;
           if (element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length > 0) {
@@ -103,7 +103,7 @@ export class FilterSummaryComponent implements OnInit {
           Subjects: subjects,
           CteToAcademic: true
         };
-        console.log(obj);
+      //  console.log('final' + obj);
         this.FilterSummaryKeys = obj;
       }
     });
@@ -134,7 +134,7 @@ export class FilterSummaryComponent implements OnInit {
   }
 
   formatSearchDataToSummary(source) {
-    console.log(source);
+  //  console.log(source);
   }
 
   // formatSearchDataToSummary(source) {
@@ -168,7 +168,7 @@ export class FilterSummaryComponent implements OnInit {
   // }
 
   formatSearchCourseData(source) {
-    console.log(source);
+  //  console.log(source);
     this.filterCareerPathData = source.selectedCareerPath;
     this.filterCareerPathCourseData = source.selectedCareerPathCourses;
     this.filterAcadamicSubjectData = source.selectedAcademicSubject;
