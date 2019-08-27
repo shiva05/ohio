@@ -60,7 +60,7 @@
             </div>
 
             <div class="col-md-1 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
-            <div class="col-md-3" [style.color]="careerField.Color">{{careerField.AcademicSubject}}</div>
+            <div class="col-md-3 color-gap" [style.color]="careerField.Color">{{careerField.AcademicSubject}}</div>
             <div class="col-md-1">
               <span class="accordion-bubble" [style.background-color]="careerField.Color"
                     *ngIf="careerField.Alignment">{{careerField.Alignment}}</span>
@@ -94,7 +94,7 @@
                     </span>
                   </div>
                   <div class="col-md-1"> &nbsp;</div>
-                  <div class="col-md-3" [style.color]="careerField.Color"> {{strand.AcademicSubject}}</div>
+                  <div class="col-md-3 color-gap" [style.color]="careerField.Color"> {{strand.AcademicSubject}}</div>
                   <div class="col-md-1">
                     <span class="accordion-bubble" [style.background-color]="careerField.Color"
                           *ngIf="strand.Alignment">{{strand.Alignment}}</span>
@@ -128,7 +128,7 @@
                           </span>
                         </div>
                         <div class="col-md-1"> &nbsp;</div>
-                        <div class="col-md-3" [style.color]="careerField.Color"> {{outcome.AcademicSubject}}</div>
+                        <div class="col-md-3 color-gap" [style.color]="careerField.Color"> {{outcome.AcademicSubject}}</div>
                         <div class="col-md-1">
                           <span class="accordion-bubble" [style.background-color]="careerField.Color"
                                 *ngIf="outcome.Alignment">{{outcome.Alignment}}</span>
@@ -162,7 +162,7 @@
                                 </span>
                               </div>
                               <div class="col-md-1"> &nbsp;</div>
-                              <div class="col-md-3" [style.color]="careerField.Color"> {{item.AcademicSubject}}</div>
+                              <div class="col-md-3 color-gap" [style.color]="careerField.Color"> {{item.AcademicSubject}}</div>
                               <div class="col-md-1">
                                 <span class="accordion-bubble" [style.background-color]="careerField.Color"
                                       *ngIf="item.Alignment">{{item.Alignment}}</span>
