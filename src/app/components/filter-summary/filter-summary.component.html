@@ -8,7 +8,7 @@
         <div class="search-filter-left">
           <div class="filter">
             <span class="filter-each">
-              <span>
+              <span *ngIf="FilterSummaryKeys.CareerFieldIds.length >1">
                 <label>Career Field: </label>
                 <span class="badge badge-light"
                       *ngIf="FilterSummaryKeys.CareerFieldIds.length == 1">{{FilterSummaryKeys.CareerFieldIds[0]}}</span>
