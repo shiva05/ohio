@@ -49,9 +49,9 @@
     },
     "SearchResults": {
         "SearchResults": "Search Results",
-        "CareerFields": "Career Fields",
-        "AcademicSubject": "Academic Subject",
-        "Alignment": "Alignment",
+        "CareerFields": "CAREER FIELDS",
+        "AcademicSubject": "ACADEMIC SUBJECT",
+        "Alignment": "ALIGNMENT",
         "ToggleAlignments": "Toggle Alignments",
         "NoResultFound": "No Search Result Found",
         "Generate": "Generate",

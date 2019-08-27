@@ -138,8 +138,8 @@ export class CustomAccordionComponent implements OnInit {
 
   formatSearchResultDataArray() {
     this.searchResultDataArray.forEach(element => {
-      if (element.Alignment[0]) {
-        this.totalSearchResults = this.totalSearchResults + element.Alignment[0];
+      if (element.Alignment ) {
+        this.totalSearchResults = this.totalSearchResults + element.Alignment;
       }
     });
   }

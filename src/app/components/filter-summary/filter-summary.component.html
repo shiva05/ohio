@@ -9,22 +9,22 @@
           <div class="filter">
             <span class="filter-each">
               <span>
-                <label>{{ 'FilterResults.CareerField' | translate }}: </label>
+                <label  *ngIf="FilterSummaryKeys.CareerFieldIds.length">{{ 'FilterResults.CareerField' | translate }}: </label>
                 <span class="badge badge-light"
                   *ngIf="FilterSummaryKeys.CareerFieldIds.length == 1">{{FilterSummaryKeys.CareerFieldIds[0]}}</span>
                 <span class="badge badge-light"
                   *ngIf="FilterSummaryKeys.CareerFieldIds.length >1">{{FilterSummaryKeys.CareerFieldIds[0]}}
                   +{{FilterSummaryKeys.CareerFieldIds.length - 1}}</span>
               </span>
-              <span class="filter-divider"> | </span>
-              <label>{{ 'FilterResults.Strands' | translate }}: </label>
+              <span  *ngIf="FilterSummaryKeys.StrandIds.length" class="filter-divider"> | </span>
+              <label  *ngIf="FilterSummaryKeys.StrandIds.length">{{ 'FilterResults.Strands' | translate }}: </label>
               <span class="badge badge-light"
                 *ngIf="FilterSummaryKeys.StrandIds.length == 1">{{FilterSummaryKeys.StrandIds[0]}}</span>
               <span class="badge badge-light"
                 *ngIf="FilterSummaryKeys.StrandIds.length > 1">{{FilterSummaryKeys.StrandIds[0]}}
                 +{{FilterSummaryKeys.StrandIds.length - 1}}</span>
-              <span class="filter-divider"> | </span>
-              <label>{{ 'FilterResults.Outcomes' | translate }}: </label>
+              <span  *ngIf="FilterSummaryKeys.OutcomeIds.length" class="filter-divider"> | </span>
+              <label  *ngIf="FilterSummaryKeys.OutcomeIds.length">{{ 'FilterResults.Outcomes' | translate }}: </label>
               <span class="badge badge-light"
                 *ngIf="FilterSummaryKeys.OutcomeIds.length == 1">{{FilterSummaryKeys.OutcomeIds[0]}}
               </span>
@@ -32,8 +32,8 @@
                 *ngIf="FilterSummaryKeys.OutcomeIds.length > 1">{{FilterSummaryKeys.OutcomeIds[0]}}
                 +{{FilterSummaryKeys.OutcomeIds.length - 1}}
               </span>
-              <span class="filter-divider"> | </span>
-              <label>{{ 'FilterResults.CompetencyNumbers' | translate }}: </label>
+              <span  *ngIf="FilterSummaryKeys.CompetencyIds.length" class="filter-divider"> | </span>
+              <label *ngIf="FilterSummaryKeys.CompetencyIds.length">{{ 'FilterResults.CompetencyNumbers' | translate }}: </label>
               <span class="badge badge-light" *ngIf="FilterSummaryKeys.CompetencyIds.length == 1">
                 <span *ngIf="FilterSummaryKeys.CompetencyIds[0].length < 20; else concatName">
                   {{FilterSummaryKeys.CompetencyIds[0]}}
@@ -58,14 +58,14 @@
                   <hr>
                   <label>Academic Subjects : </label>
                   <span class="badge badge-light">{{item.SubjectName}}</span>
-                  <span class="filter-divider"> | </span>
-                  <label>{{item.level1Name}} : </label>
+                  <span  *ngIf="FilterSummaryKeys.Level1Ids" class="filter-divider"> | </span>
+                  <label *ngIf="FilterSummaryKeys.Level1Ids" >{{item.level1Name}} : </label>
                   <span class="badge badge-light">{{item.Level1Ids}}</span>
-                  <span class="filter-divider"> | </span>
-                  <label>{{item.level2Name }} : </label>
+                  <span  *ngIf="FilterSummaryKeys.Level2Ids" class="filter-divider"> | </span>
+                  <label *ngIf="FilterSummaryKeys.Level2Ids" >{{item.level2Name }} : </label>
                   <span class="badge badge-light">{{item.Level2Ids}}</span>
-                  <span class="filter-divider"> | </span>
-                  <label>{{item.level3Name}} : </label>
+                  <span  *ngIf="FilterSummaryKeys.Level3Ids" class="filter-divider"> | </span>
+                  <label *ngIf="FilterSummaryKeys.Level3Ids">{{item.level3Name}} : </label>
                   <span class="badge badge-light">{{item.Level3Ids}}</span>
                 </div>
               </div>
@@ -92,27 +92,28 @@
           <div class="filter">
             <span class="filter-each">
               <span>
-                <label>{{'CourseFields.CareerField' | translate}}: </label>
-                <span class="badge badge-light">{{filterCareerPathData[0].CareerPathName}}
+                <label *ngIf="filterCareerPathData &&  filterCareerPathData[0].CareerPathName">{{'CourseFields.CareerField' | translate}}: </label>
+                <span class="badge badge-light" *ngIf="filterCareerPathData &&  filterCareerPathData[0].CareerPathName">{{filterCareerPathData[0].CareerPathName}}
                   <span *ngIf="filterCareerPathData.length > 1"> +{{filterCareerPathData.length - 1}} </span>
                 </span>
-                <span class="filter-divider"> | </span>
+                <span class="filter-divider"  *ngIf="filterCareerPathCourseData[0] && filterCareerPathCourseData[0].CourseName"> | </span>
               </span>
               <span>
-                <label>{{'CourseFields.Courses' | translate}}: </label>
-                <span class="badge badge-light">{{filterCareerPathCourseData[0].CourseName}}
+                <label *ngIf="filterCareerPathCourseData[0] && filterCareerPathCourseData[0].CourseName">{{'CourseFields.Courses' | translate}}: </label>
+                <span class="badge badge-light" *ngIf="filterCareerPathCourseData[0] && filterCareerPathCourseData[0].CourseName">{{filterCareerPathCourseData[0].CourseName}}
                   <span *ngIf="filterCareerPathCourseData.length > 1"> +{{filterCareerPathCourseData.length - 1}}</span>
                 </span>
               </span>
 
               <div class="filter-each" [hidden]="panelExpanded" *ngFor="let item of filterAcadamicSubjectData">
                 <hr>
-                <label>{{'CourseFields.AcademicSubjects' | translate}}: </label>
-                <span class="badge badge-light">{{item.SubjectName}}</span> |
+                <label *ngIf="item.SubjectName">{{'CourseFields.AcademicSubjects' | translate}}: </label>
+                <span class="badge badge-light"  *ngIf="item.SubjectName">{{item.SubjectName}}</span>
+                <span  *ngIf="item.SelectedItems && item.SelectedItems.length"> | </span>
 
-                <label>{{'CourseFields.Courses' | translate}}: </label>
-                <span class="badge badge-light">{{item.SelectedItems[0].LevelValue}}
-                  <span *ngIf="item.SelectedItems.length > 1">+{{item.SelectedItems.length - 1}} </span>
+                <label *ngIf="item.SelectedItems && item.SelectedItems.length">{{'CourseFields.Courses' | translate}}: </label>
+                <span class="badge badge-light" *ngIf="item.SelectedItems" >{{item.SelectedItems[0].LevelValue}}
+                  <span *ngIf="item.SelectedItems && item.SelectedItems.length > 1">+{{item.SelectedItems.length - 1}} </span>
                 </span>
               </div>
             </span>
