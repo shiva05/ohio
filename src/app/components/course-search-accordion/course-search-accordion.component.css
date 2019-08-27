@@ -1,32 +1,60 @@
 .level-one-title {
   line-height: 20px;
   padding-top: 6px;
+  font-size: 16px;
 }
 .search-results-head-right {
   float: right;
 }
 .careerfield-each-inner {
-  padding: 20px 10px 5px 10px;
+  padding: 10px 10px 10px 10px;
   margin-left: 0px;
-  font-size: 16pt;
-  background-color: #E0E0E0;
+  font-size: 16px;
+  background-color: #f5f5f5;
 }
+
+.careerfield-each-inner .accordion-checbox {
+  margin: 6px 0 0 0;
+}
+
 .strand-each-inner {
-  padding: 20px 10px 5px 10px;
-  margin-left: 15px;
-  font-size: 14pt;
-  background-color: #E9E9E9;
+  padding: 10px 10px 10px 10px;
+  margin-left: 0px;
+  font-size: 14px;
+  background-color: #fff;
 }
+.strand-each-inner .accordion-checbox {
+  margin: 6px 0 0 25px;
+}
+
 .outcome-each-inner {
-  padding: 20px 10px 5px 10px;
-  margin-left: 30px;
-  font-size: 13pt;
-  background-color: #F0F0F0;
+  padding: 10px 10px 10px 10px;
+  margin-left: 0px;
+  font-size: 13px;
+  background-color: #fff;
 }
+
+.outcome-each-inner .accordion-checbox {
+  margin: 6px 0 0 45px;
+}
+
 .competency-each-inner {
-  padding: 20px 10px 5px 10px;
-  margin-left: 45px;
-  font-size: 12pt;
-  background-color: #F9F9F9;
+  padding: 10px 10px 10px 10px;
+  margin-left: 0px;
+  font-size: 12px;
+  background-color: #fff;
 
  }
+
+ .level-two-title{
+  padding: 7px 0 0 0;
+}
+
+.outcome-each-inner .level-two-title{
+  max-width:calc(100% - 100px);
+  }
+  .color-gap{
+    line-height: 20px;
+    padding-top: 6px;
+  
+  }
