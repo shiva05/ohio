@@ -125,7 +125,6 @@ export class CustomAccordionComponent implements OnInit {
           subjects.push(subject);
         });
 
-        console.log();
         let obj = {
           Keywords: '',
           CareerFiledIds: careerfeilds,
