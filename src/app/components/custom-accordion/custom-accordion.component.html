@@ -48,6 +48,7 @@
           <!-- add class dynamically if partially selected  checkbox-indeterminate -->
           <div class="row careerfield-each-inner" (click)="expandCollapseCareerField(careerField)">
             <div class="col-md-6">
+              <div class="accordion-label-career">Career Field</div>
               <div class="accordion-checbox ">
                 <span class="ohio-checkbox checkbox checkbox-success">
                   <input type="checkbox" class="ohio-checkbox-el" id="careerFieldID_{{i}}"
@@ -81,6 +82,7 @@
                   <div class="row"> 
 
                   <div class="col-md-6">
+                    <div class="accordion-label-strand">Strand</div>
                     <div class="accordion-checbox">
                       <span class="ohio-checkbox checkbox checkbox-success">
                         <input type="checkbox" class="ohio-checkbox-el" id="strandID_{{j}}"
@@ -115,6 +117,7 @@
                       <div class="outcome-each-inner" (click)="expandCollapseOutcome(outcome)">
                         <div class="row"> 
                         <div class="col-md-6">
+                          <div class="accordion-label-outcome">Outcome</div>
                           <div class="accordion-checbox">
                             <span class="ohio-checkbox checkbox checkbox-success">
                               <input type="checkbox" class="ohio-checkbox-el" id="outcomeID_{{k}}"
@@ -149,6 +152,7 @@
                             <div class="competency-each-inner">
                               <div class="row"> 
                               <div class="col-md-6">
+                                <div class="accordion-label-competency">Competency</div>
                                 <div class="accordion-checbox">
                                   <span class="ohio-checkbox checkbox checkbox-success">
                                     <input type="checkbox" class="ohio-checkbox-el" id="competencyID_{{l}}"
@@ -194,6 +198,7 @@
           <!-- Career Field -->
           <div class="row careerfield-each-inner" (click)="expandCollapseCareerField(careerField)">
             <div class="col-md-3 cg">
+              <div class="accordion-label">Career Path</div>
               <div class="accordion-checbox ">
                 <span class="ohio-checkbox checkbox checkbox-success">
                   <input type="checkbox" class="ohio-checkbox-el" id="careerFieldID_{{i}}"
@@ -225,6 +230,7 @@
               <li class="level-two-inner" *ngFor="let strand of careerField.strands; index as j">
                 <div class="row strands-each-inner" (click)="expandCollapseStrand(strand)">
                   <div class="col-md-3 cg">
+                    <div class="accordion-label">Strand</div>
                     <div class="accordion-checbox ">
                       <span class="ohio-checkbox checkbox checkbox-success">
                         <input type="checkbox" class="ohio-checkbox-el" id="strandID_{{j}}"
@@ -258,6 +264,7 @@
                       <div class="outcome-each-inner" (click)="expandCollapseOutcome(outcome)">
                         <div class="row"> 
                         <div class="col-md-3 cg">
+                          <div class="accordion-label">Outcome</div>
                           <div class="accordion-checbox">
                             <span class="ohio-checkbox checkbox checkbox-success">
                               <input type="checkbox" class="ohio-checkbox-el" id="outcomeID_{{k}}"
@@ -286,6 +293,7 @@
                           <li class="list-group-item level-three" *ngFor="let item of outcome.competency; index as l">
                             <div class="row competency-each-inner">
                               <div class="col-md-3 cg">
+                                <div class="accordion-label">Competency</div>
                                 <div class="accordion-checbox">
                                   <span class="ohio-checkbox checkbox checkbox-success">
                                     <input type="checkbox" class="ohio-checkbox-el" id="competencyID_{{l}}"

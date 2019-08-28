@@ -147,7 +147,7 @@
       <div class="reports-each-bottom col-md-12">
         <h3>{{ 'ReportFields.Competency' | translate }}:</h3>
         <div class="reports-standards">
-          <div class="reports-standards-each" *ngFor="let  standard of result.Competencies">
+          <div class="reports-standards-each" *ngFor="let standard of result.Competencies">
             <span class="reports-standards-each-left">
               <span [ngClass]="calculateStrandClasses(standard.Type)">
                 {{standard.Type}}

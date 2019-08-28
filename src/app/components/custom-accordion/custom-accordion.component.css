@@ -36,7 +36,7 @@
   padding: 5px 0px;
   margin: 0px;
   font-size: 16px;
-  background-color: #f5f5f5;  
+  background-color: #f5f5f5;
 }
 
 .careerfield-each-inner  .accordion-checbox {
@@ -70,7 +70,26 @@
   font-size:12px;
   background-color: #fff;
 }
-
+.accordion-label-career {
+  padding-left: 30px;
+  font-size: 7pt;
+  color: #700017;
+}
+.accordion-label-strand {
+  padding-left: 47px;
+  font-size: 7pt;
+  color: #700017;
+}
+.accordion-label-outcome {
+  padding-left: 57px;
+  font-size: 7pt;
+  color: #700017;
+}
+.accordion-label-competency {
+  padding-left: 75px;
+  font-size: 7pt;
+  color: #700017;
+}
 .competency-each-inner .accordion-checbox{
   margin:8px 0 0 50px;
 }
