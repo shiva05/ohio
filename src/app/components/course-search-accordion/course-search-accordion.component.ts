@@ -17,6 +17,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   careerPathToSubjectData: any = [];
   subjectToCareerPathData: any = [];
   noCourseResultFound = false;
+  totalSearchResults = 0;
   courseSearchReportPayload = {
     Keywords: '',
     CareerPathIds: [],
@@ -95,6 +96,8 @@ export class CourseSearchAccordionComponent implements OnInit {
           CareerPathToSubject: this.careerPathToSubject
         };
 
+        console.log(obj);
+
         this.searchResultService.getCourseSearchResult(obj).subscribe(
           (data: any) => {
             if (this.careerPathToSubject) {
@@ -113,6 +116,10 @@ export class CourseSearchAccordionComponent implements OnInit {
                 this.noCourseResultFound = true;
               }
             }
+            this.careerPathToSubjectData.forEach(element => {
+              this.totalSearchResults += element.AlignmentCount;
+              console.log(element.AlignmentCount);
+            });
           },
           err => {
           });
@@ -155,7 +162,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Courses Checkbox
   courseCheckBox(career, course) {
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Courses.every(function (itemChild: any) {
+    career.isSelected = career.Courses.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -175,12 +182,12 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Competency Checkbox
   competencyCheckBox(career, course) {
     // tslint:disable-next-line:only-arrow-functions
-    course.isSelected = course.Competencies.every(function (itemChild: any) {
+    course.isSelected = course.Competencies.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Courses.every(function (itemChild: any) {
+    career.isSelected = career.Courses.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
@@ -202,7 +209,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Grade Checkbox
   gradeCheckBox(career, course) {
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.SubjecToStandards.every(function (itemChild: any) {
+    career.isSelected = career.SubjecToStandards.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -222,12 +229,12 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Standard Checkbox
   standardCheckBox(career, course) {
     // tslint:disable-next-line:only-arrow-functions
-    course.isSelected = course.Standards.every(function (itemChild: any) {
+    course.isSelected = course.Standards.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.SubjecToStandards.every(function (itemChild: any) {
+    career.isSelected = career.SubjecToStandards.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
