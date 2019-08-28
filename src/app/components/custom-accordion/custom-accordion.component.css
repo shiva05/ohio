@@ -70,8 +70,20 @@
   font-size:12px;
   background-color: #fff;
 }
-.accordion-label {
+.accordion-label-career {
   padding-left: 30px;
+  font-size: 7pt;
+}
+.accordion-label-strand {
+  padding-left: 50px;
+  font-size: 7pt;
+}
+.accordion-label-outcome {
+  padding-left: 60px;
+  font-size: 7pt;
+}
+.accordion-label-competency {
+  padding-left: 75px;
   font-size: 7pt;
 }
 .competency-each-inner .accordion-checbox{
