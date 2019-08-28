@@ -17,7 +17,7 @@ import * as AdvancedSearchActions from './../../actions/advanced-search.actions'
 
 export class CustomAccordionComponent implements OnInit {
   data: any;
-  formattedData: any = [];
+  subjectToCareerData: any = [];
   accordionData: any;
   cteToAcademic = true;
   noResultFound = false;
@@ -45,7 +45,7 @@ export class CustomAccordionComponent implements OnInit {
     Science: 3,
     Social: 4
   };
-  academicSubjectColorPallet :any = [
+  academicSubjectColorPallet: any = [
     {
       Subject: 'Math',
       Color: '#000000'
@@ -62,14 +62,20 @@ export class CustomAccordionComponent implements OnInit {
       Subject: 'Social',
       Color: '#0B5688'
     }
-    ];
+  ];
 
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor(private store: Store<AppState>, private httpService: HttpClient, private searchResultService: SearchResultService) { }
+  constructor(private store: Store<AppState>, private httpService: HttpClient, private searchResultService: SearchResultService) {
+    this.cteToAcademic = true;
+  }
 
   ngOnInit() {
+    this.getAlignmentSearchResult();
+  }
+
+  getAlignmentSearchResult() {
     this.store.select('advancedSearch').subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
         this.alignmentSearchSelectedFilters = data.alignmentSearchSelectedFilters;
@@ -124,6 +130,7 @@ export class CustomAccordionComponent implements OnInit {
           };
           subjects.push(subject);
         });
+
         let obj = {
           Keywords: '',
           CareerFiledIds: careerfeilds,
@@ -133,22 +140,33 @@ export class CustomAccordionComponent implements OnInit {
           Subjects: subjects,
           CteToAcademic: this.cteToAcademic
         };
+
         this.searchResultService.getSearchResultData(obj).subscribe(
           data => {
             this.searchResultData = data;
-            if (this.searchResultData.CareerField) {
-              this.searchResultData.CareerField.forEach(element => {
-                this.searchResultDataArray.push(element);
-                this.noResultFound = false;
-              });
-              this.formatSearchResultDataArray();
+            if (this.cteToAcademic) {
+              if (this.searchResultData.CareerField) {
+                this.searchResultData.CareerField.forEach(element => {
+                  this.searchResultDataArray.push(element);
+                  this.noResultFound = false;
+                });
+                this.formatSearchResultDataArray();
+              } else {
+                this.noResultFound = true;
+              }
             } else {
-              this.noResultFound = true;
+              if (this.searchResultData.Subject.length > 0) {
+                this.subjectToCareerData = this.searchResultData.Subject;
+                this.noResultFound = false;
+                this.formatAlignmentSearchData();
+              } else {
+                this.noResultFound = true;
+              }
             }
           },
           err => {
           });
-        console.log(this.formattedData);
+        console.log(data);
       }
     });
   }
@@ -156,11 +174,26 @@ export class CustomAccordionComponent implements OnInit {
   formatSearchResultDataArray() {
     //add color pallets here AcademicSubject
     this.searchResultDataArray.forEach(element => {
-      if (element.Alignment ) {
+      if (element.Alignment) {
         this.totalSearchResults = this.totalSearchResults + element.Alignment;
       }
       this.academicSubjectColorPallet.forEach((item) => {
         if (element.AcademicSubject === item.Subject) {
+          element['Color'] = item.Color;
+        }
+      });
+    });
+  }
+
+  formatAlignmentSearchData() {
+    //add color pallets here AcademicSubject
+    this.totalSearchResults = 0;
+    this.subjectToCareerData.forEach(element => {
+      if (element.Alignment) {
+        this.totalSearchResults = this.totalSearchResults + element.Alignment;
+      }
+      this.academicSubjectColorPallet.forEach((item) => {
+        if (element.SubjectName === item.Subject) {
           element['Color'] = item.Color;
         }
       });
@@ -191,7 +224,7 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Strand Checkbox
   strandCheckBox(parent, parentObj) {
     // tslint:disable-next-line:only-arrow-functions
-    parent.isSelected = parent.Strand.every(function(itemChild: any) {
+    parent.isSelected = parent.Strand.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -222,12 +255,12 @@ export class CustomAccordionComponent implements OnInit {
   outcomeCheckBox(career, strands, outcome) {
 
     // tslint:disable-next-line:only-arrow-functions
-    strands.isSelected = strands.Outcome.every(function(itemChild: any) {
+    strands.isSelected = strands.Outcome.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Strand.every(function(itemChild: any) {
+    career.isSelected = career.Strand.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -247,17 +280,111 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Outcome Checkbox
   competencyCheckBox(career, strand, outcome) {
     // tslint:disable-next-line:only-arrow-functions
-    outcome.isSelected = outcome.Competency.every(function(itemChild: any) {
+    outcome.isSelected = outcome.Competency.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    strand.isSelected = strand.Outcome.every(function(itemChild: any) {
+    strand.isSelected = strand.Outcome.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Strand.every(function(itemChild: any) {
+    career.isSelected = career.Strand.every(function (itemChild: any) {
+      return itemChild.isSelected === true;
+    });
+  }
+
+  // Click event on Subject
+  subjectCheckBox(parentObj) {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < parentObj.Level.length; i++) {
+      parentObj.Level[i].isSelected = parentObj.isSelected;
+      if (parentObj.Level[i].ChildLevel) {
+        // tslint:disable-next-line:prefer-for-of
+        for (let j = 0; j < parentObj.Level[i].ChildLevel.length; j++) {
+          parentObj.Level[i].ChildLevel[j].isSelected = parentObj.isSelected;
+
+          if (parentObj.Level[i].ChildLevel[j].ChildLevel) {
+            // tslint:disable-next-line:prefer-for-of
+            for (let k = 0; k < parentObj.Level[i].ChildLevel[j].ChildLevel.length; k++) {
+              parentObj.Level[i].ChildLevel[j].ChildLevel[k].isSelected = parentObj.isSelected;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Click event on Level Checkbox
+  levelCheckBox(parent, parentObj) {
+    // tslint:disable-next-line:only-arrow-functions
+    parent.isSelected = parent.Level.every(function (itemChild: any) {
+      return itemChild.isSelected === true;
+    });
+
+    if (parentObj.ChildLevel) {
+      if (parentObj.isSelected) {
+        parentObj.ChildLevel.forEach(item => {
+          item.isSelected = true;
+          if (item.ChildLevel) {
+            item.ChildLevel.forEach(data => {
+              data.isSelected = true;
+            });
+          }
+        });
+      } else {
+        parentObj.ChildLevel.forEach(item => {
+          item.isSelected = false;
+          if (item.ChildLevel) {
+            item.ChildLevel.forEach(data => {
+              data.isSelected = false;
+            });
+          }
+        });
+      }
+    }
+  }
+
+  // Click event on Child Level 1 Checkbox
+  childLevel1CheckBox(career, strands, outcome) {
+    // tslint:disable-next-line:only-arrow-functions
+    strands.isSelected = strands.ChildLevel.every(function (itemChild: any) {
+      return itemChild.isSelected === true;
+    });
+
+    // tslint:disable-next-line:only-arrow-functions
+    career.isSelected = career.Level.every(function (itemChild: any) {
+      return itemChild.isSelected === true;
+    });
+
+    if (outcome.ChildLevel) {
+      if (outcome.isSelected) {
+        outcome.ChildLevel.forEach(item => {
+          item.isSelected = true;
+        });
+      } else {
+        outcome.ChildLevel.forEach(item => {
+          item.isSelected = false;
+        });
+      }
+    }
+  }
+
+  // Click event on Child Level 2 Checkbox
+  childLevel2CheckBox(career, strand, outcome) {
+    // tslint:disable-next-line:only-arrow-functions
+    outcome.isSelected = outcome.ChildLevel.every(function (itemChild: any) {
+      return itemChild.isSelected === true;
+    });
+
+    // tslint:disable-next-line:only-arrow-functions
+    strand.isSelected = strand.ChildLevel.every(function (itemChild: any) {
+      return itemChild.isSelected === true;
+    });
+
+    // tslint:disable-next-line:only-arrow-functions
+    career.isSelected = career.Level.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
@@ -276,6 +403,22 @@ export class CustomAccordionComponent implements OnInit {
   expandCollapseOutcome(obj) {
     obj.isOutcomeClosed = !obj.isOutcomeClosed;
   }
+
+  // Expand/Collapse event on Subject
+  expandCollapseSubjectField(obj) {
+    obj.isSubjectFieldClosed = !obj.isSubjectFieldClosed;
+  }
+
+  // Expand/Collapse event on Strand
+  expandCollapseASStrand(obj) {
+    obj.isASStrandClosed = !obj.isASStrandClosed;
+  }
+
+  // Expand/Collapse event on Outcome
+  expandCollapseASOutcome(obj) {
+    obj.isOutcomeClosed = !obj.isOutcomeClosed;
+  }
+
   getSelect(obj) {
     this.reportPayload.Keywords = '';
     this.reportPayload.CareerFiledIds = [];
@@ -283,30 +426,61 @@ export class CustomAccordionComponent implements OnInit {
     this.reportPayload.OutcomeIds = [];
     this.reportPayload.CompetencyIds = [];
     this.reportPayload.Subjects = [];
-    this.searchResultDataArray.forEach(careerField => {
-      if (this.reportPayload.Subjects.length <= 0) {
-        this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[careerField.AcademicSubject[0]] });
-      }
-      if (careerField.isSelected) {
-        this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
-      }
-      careerField.Strand.forEach(stand => {
-        if (stand.isSelected) {
-          this.reportPayload.StrandIds.push(stand.StrandPk);
-        }
-        stand.Outcome.forEach(outcome => {
-          if (outcome.isSelected) {
-            this.reportPayload.OutcomeIds.push(outcome.OutcomePk);
-          }
 
-          outcome.Competency.forEach(competency => {
-            if (competency.isSelected) {
-              this.reportPayload.CompetencyIds.push(competency.CompetencyPk);
+    if (this.cteToAcademic) {
+      this.searchResultDataArray.forEach(careerField => {
+        if (this.reportPayload.Subjects.length <= 0) {
+          this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[careerField.AcademicSubject[0]] });
+        }
+        if (careerField.isSelected) {
+          this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
+        }
+        careerField.Strand.forEach(stand => {
+          if (stand.isSelected) {
+            this.reportPayload.StrandIds.push(stand.StrandPk);
+          }
+          stand.Outcome.forEach(outcome => {
+            if (outcome.isSelected) {
+              this.reportPayload.OutcomeIds.push(outcome.OutcomePk);
             }
+
+            outcome.Competency.forEach(competency => {
+              if (competency.isSelected) {
+                this.reportPayload.CompetencyIds.push(competency.CompetencyPk);
+              }
+            });
           });
         });
       });
-    });
+    } else {
+      this.subjectToCareerData.forEach(careerField => {
+        if (this.reportPayload.Subjects.length <= 0) {
+          this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[careerField.SubjectId] });
+        }
+        // Need to Generate Payload which need to pass to calling JSON for Report Generate
+
+        // if (careerField.isSelected) {
+        //   this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
+        // }
+        // careerField.Strand.forEach(stand => {
+        //   if (stand.isSelected) {
+        //     this.reportPayload.StrandIds.push(stand.StrandPk);
+        //   }
+        //   stand.Outcome.forEach(outcome => {
+        //     if (outcome.isSelected) {
+        //       this.reportPayload.OutcomeIds.push(outcome.OutcomePk);
+        //     }
+
+        //     outcome.Competency.forEach(competency => {
+        //       if (competency.isSelected) {
+        //         this.reportPayload.CompetencyIds.push(competency.CompetencyPk);
+        //       }
+        //     });
+        //   });
+        // });
+      });
+    }
+
     this.goToPage(obj);
     this.alignmentSearchSelectedFilters['selectedAsSearchResults'] = this.reportPayload;
     this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.alignmentSearchSelectedFilters });
@@ -324,5 +498,6 @@ export class CustomAccordionComponent implements OnInit {
   onToggleClick(value) {
     this.cteToAcademic = !this.cteToAcademic;
     this.reportPayload.CteToAcademic = this.cteToAcademic;
+    this.getAlignmentSearchResult();
   }
 }
