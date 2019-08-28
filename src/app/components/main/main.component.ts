@@ -42,6 +42,7 @@ export class MainComponent implements OnInit {
   }
 
   onPageSelect(org) {
+    console.log(org);
     this.showAdvancedSearch = false;
     this.showSearchResults = false;
     this.showReport = false;
