@@ -10,59 +10,45 @@
             <span class="filter-each">
               <span *ngIf="FilterSummaryKeys.CareerFieldIds.length >0">
                 <label>Career Field: </label>
-                <span class="badge badge-light"
-                      *ngIf="FilterSummaryKeys.CareerFieldIds.length == 1">{{FilterSummaryKeys.CareerFieldIds[0]}}</span>
-                <span class="badge badge-light"
-                      *ngIf="FilterSummaryKeys.CareerFieldIds.length >1">
-                  {{FilterSummaryKeys.CareerFieldIds[0]}}
-                  +{{FilterSummaryKeys.CareerFieldIds.length - 1}}
+                <span class="badge badge-light">
+                  <span class="selectedElement">{{FilterSummaryKeys.CareerFieldIds[0]}}</span>
+                  <span class="additionalElements" *ngIf="FilterSummaryKeys.CareerFieldIds.length > 1"> +{{FilterSummaryKeys.CareerFieldIds.length - 1}}</span>
                 </span>
               </span>
+
               <span *ngIf="FilterSummaryKeys.StrandIds.length > 0">
                 <span class="filter-divider"> | </span>
                 <label>Strands: </label>
-                <span class="badge badge-light"
-                      *ngIf="FilterSummaryKeys.StrandIds.length == 1">{{FilterSummaryKeys.StrandIds[0]}}</span>
-                <span class="badge badge-light"
-                      *ngIf="FilterSummaryKeys.StrandIds.length > 1">
-                  {{FilterSummaryKeys.StrandIds[0]}}
-                  +{{FilterSummaryKeys.StrandIds.length - 1}}
+                <span class="badge badge-light">
+                  <span class="selectedElement">{{FilterSummaryKeys.StrandIds[0]}}</span>
+                  <span class="additionalElements" *ngIf="FilterSummaryKeys.StrandIds.length > 1">+{{FilterSummaryKeys.StrandIds.length - 1}} </span>
+                  </span>
                 </span>
-              </span>
+
               <span *ngIf="FilterSummaryKeys.OutcomeIds.length > 0">
                 <span class="filter-divider"> | </span>
                 <label>Outcomes: </label>
-                <span class="badge badge-light"
-                      *ngIf="FilterSummaryKeys.OutcomeIds.length == 1">
-                  {{FilterSummaryKeys.OutcomeIds[0]}}
+                <span class="badge badge-light">
+                  <span class="selectedElement">{{FilterSummaryKeys.OutcomeIds[0]}}</span>
+                    <span class="additionalElements" *ngIf="FilterSummaryKeys.OutcomeIds.length > 0">+{{FilterSummaryKeys.OutcomeIds.length - 1}}</span>
+                  </span>
                 </span>
-                <span class="badge badge-light"
-                      *ngIf="FilterSummaryKeys.OutcomeIds.length > 1">
-                  {{FilterSummaryKeys.OutcomeIds[0]}}
-                  +{{FilterSummaryKeys.OutcomeIds.length - 1}}
-                </span>
-              </span>
+
               <span *ngIf="FilterSummaryKeys.CompetencyIds.length > 0">
                 <span class="filter-divider"> | </span>
                 <label>Competency Numbers: </label>
-                <span class="badge badge-light" *ngIf="FilterSummaryKeys.CompetencyIds.length == 1">
-                  <span *ngIf="FilterSummaryKeys.CompetencyIds[0].length < 20; else concatName">
-                    {{FilterSummaryKeys.CompetencyIds[0]}}
+                <span class="badge badge-light">
+                  <span class="selectedElement">
+                    <span *ngIf="FilterSummaryKeys.CompetencyIds[0].length < 20; else concatName">
+                      {{FilterSummaryKeys.CompetencyIds[0]}}
+                    </span>
+                    <ng-template #concatName>
+                      {{FilterSummaryKeys.CompetencyIds[0].substring(0,20) + ". . ."}}
+                    </ng-template>
+                    </span>
+                    <span class="additionalElements" *ngIf="FilterSummaryKeys.CompetencyIds.length > 0">  +{{FilterSummaryKeys.CompetencyIds.length - 1}}</span>
                   </span>
-                  <ng-template #concatName>
-                    {{FilterSummaryKeys.CompetencyIds[0].substring(0,20) + ". . ."}}
-                  </ng-template>
                 </span>
-                <span class="badge badge-light" *ngIf="FilterSummaryKeys.CompetencyIds.length > 1">
-                  <span *ngIf="FilterSummaryKeys.CompetencyIds[0].length < 20; else concatName">
-                    {{FilterSummaryKeys.CompetencyIds[0]}}
-                  </span>
-                  <ng-template #concatName>
-                    {{FilterSummaryKeys.CompetencyIds[0].substring(0,20) + ". . ."}}
-                  </ng-template>
-                  +{{FilterSummaryKeys.CompetencyIds.length - 1}}
-                </span>
-              </span>
               <div *ngIf="FilterSummaryKeys.Subjects">
                 <div class="filter-each" [hidden]="panelExpanded"
                      *ngFor="let item of FilterSummaryKeys.Subjects; let i = index">
@@ -72,17 +58,26 @@
                   <span *ngIf="item.Level1Ids != ''">
                     <span class="filter-divider"> | </span>
                     <label>{{item.level1Name}} : </label>
-                    <span class="badge badge-light">{{item.Level1Ids}}</span>
-                  </span>
+                    <span class="badge badge-light">
+                      <span class="selectedElement"> {{item.Level1Ids[0]}}</span>
+                      <span class="additionalElements" *ngIf="item.Level1Ids.length > 1"> +{{item.Level1Ids.length - 1}}</span>
+                    </span>
+                    </span>
                   <span *ngIf="item.Level2Ids != ''">
                     <span class="filter-divider"> | </span>
                     <label>{{item.level2Name }} : </label>
-                    <span class="badge badge-light">{{item.Level2Ids}}</span>
+                    <span class="badge badge-light">
+                      <span class="selectedElement"> {{item.Level2Ids[0]}}</span>
+                      <span class="additionalElements" *ngIf="item.Level2Ids.length > 1"> +{{item.Level2Ids.length - 1}}</span>
+                    </span>
                   </span>
                   <span *ngIf="item.Level3Ids != ''">
                     <span class="filter-divider"> | </span>
                     <label>{{item.level3Name}} : </label>
-                    <span class="badge badge-light">{{item.Level3Ids}}</span>
+                    <span class="badge badge-light">
+                      <span class="selectedElement"> {{item.Level3Ids[0]}}</span>
+                      <span class="additionalElements" *ngIf="item.Level3Ids.length > 1"> +{{item.Level3Ids.length - 1}}</span>
+                    </span>
                   </span>
 </div>
               </div>
@@ -110,27 +105,30 @@
             <span class="filter-each">
               <span>
                 <label *ngIf="filterCareerPathData &&  filterCareerPathData[0].CareerPathName">{{'CourseFields.CareerField' | translate}}: </label>
-                <span class="badge badge-light" *ngIf="filterCareerPathData &&  filterCareerPathData[0].CareerPathName">{{filterCareerPathData[0].CareerPathName}}
-                  <span *ngIf="filterCareerPathData.length > 1"> +{{filterCareerPathData.length - 1}} </span>
-                </span>
+                <span class="badge badge-light" *ngIf="filterCareerPathData &&  filterCareerPathData[0].CareerPathName">
+                  <span class="selectedElement"> {{filterCareerPathData[0].CareerPathName}}</span>
+                    <span  class="additionalElements" *ngIf="filterCareerPathData.length > 1"> +{{filterCareerPathData.length - 1}} </span>
+                  </span>
                 <span class="filter-divider"  *ngIf="filterCareerPathCourseData[0] && filterCareerPathCourseData[0].CourseName"> | </span>
               </span>
               <span>
                 <label *ngIf="filterCareerPathCourseData[0] && filterCareerPathCourseData[0].CourseName">{{'CourseFields.Courses' | translate}}: </label>
-                <span class="badge badge-light" *ngIf="filterCareerPathCourseData[0] && filterCareerPathCourseData[0].CourseName">{{filterCareerPathCourseData[0].CourseName}}
-                  <span *ngIf="filterCareerPathCourseData.length > 1"> +{{filterCareerPathCourseData.length - 1}}</span>
-                </span>
+                <span class="badge badge-light" *ngIf="filterCareerPathCourseData[0] && filterCareerPathCourseData[0].CourseName">
+                  <span class="selectedElement">{{filterCareerPathCourseData[0].CourseName}}</span>
+                    <span class="additionalElements" *ngIf="filterCareerPathCourseData.length > 1"> +{{filterCareerPathCourseData.length - 1}}</span>
+                  </span>
               </span>
 
               <div class="filter-each" [hidden]="panelExpanded" *ngFor="let item of filterAcadamicSubjectData">
                 <hr>
                 <label *ngIf="item.SubjectName">{{'CourseFields.AcademicSubjects' | translate}}: </label>
                 <span class="badge badge-light"  *ngIf="item.SubjectName">{{item.SubjectName}}</span>
-                <span  *ngIf="item.SelectedItems && item.SelectedItems.length"> | </span>
+                <span *ngIf="item.SelectedItems && item.SelectedItems.length" class="filter-divider"> | </span>
 
                 <label *ngIf="item.SelectedItems && item.SelectedItems.length">{{'CourseFields.Courses' | translate}}: </label>
-                <span class="badge badge-light" *ngIf="item.SelectedItems" >{{item.SelectedItems[0].LevelValue}}
-                  <span *ngIf="item.SelectedItems && item.SelectedItems.length > 1">+{{item.SelectedItems.length - 1}} </span>
+                <span class="badge badge-light" *ngIf="item.SelectedItems">
+                  <span class="selectedElement"> {{item.SelectedItems[0].LevelValue}}</span>                 
+                  <span class="additionalElements" *ngIf="item.SelectedItems && item.SelectedItems.length > 1">+{{item.SelectedItems.length - 1}} </span>
                 </span>
               </div>
             </span>

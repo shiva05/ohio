@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
@@ -51,7 +51,9 @@ export class CourseSearchAccordionComponent implements OnInit {
   ngOnInit() {
     this.getCourseSearchResult();
   }
-
+  goBackToCourseSearch() {
+    this.goToPage('SearchAlignment');
+  }
   getCourseSearchResult() {
     this.store.select('courseSearch').subscribe(data => {
       if (data.courseSearchSelectedFilters) {

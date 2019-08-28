@@ -36,8 +36,19 @@ label {
     padding: 0 10px 0 10px;
 }
 .badge.badge-light {
-  max-width: 300px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.selectedElement {
+  max-width: 310px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  float: left;
+}
+.additionalElements {
+  float:right;
+  margin-left: 15px;
 }

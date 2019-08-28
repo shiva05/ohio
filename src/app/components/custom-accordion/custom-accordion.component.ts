@@ -318,7 +318,7 @@ export class CustomAccordionComponent implements OnInit {
 
   goBackToSearch() {
     let lable = localStorage.getItem('searchLable');
-    this.onPageSelect.emit(lable);
+    this.onPageSelect.emit('SearchAlignment');
   }
 
   onToggleClick(value) {
