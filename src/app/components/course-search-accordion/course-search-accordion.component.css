@@ -1,6 +1,6 @@
 .level-one-title {
   line-height: 20px;
-  padding-top: 6px;
+  padding-top: 1px;
   font-size: 16px;
 }
 .search-results-head-right {
@@ -14,7 +14,7 @@
 }
 
 .careerfield-each-inner .accordion-checbox {
-  margin: 6px 0 0 0;
+  margin: 1px 0 0 0;
 }
 
 .strand-each-inner {
@@ -24,7 +24,7 @@
   background-color: #fff;
 }
 .strand-each-inner .accordion-checbox {
-  margin: 6px 0 0 25px;
+  margin: 1px 0 0 25px;
 }
 
 .outcome-each-inner {
@@ -35,7 +35,7 @@
 }
 
 .outcome-each-inner .accordion-checbox {
-  margin: 6px 0 0 45px;
+  margin: 1px 0 0 45px;
 }
 
 .competency-each-inner {
@@ -47,7 +47,7 @@
  }
 
  .level-two-title{
-  padding: 7px 0 0 0;
+  padding: 1px 0 0 0;
 }
 
 .outcome-each-inner .level-two-title{
@@ -58,3 +58,8 @@
     padding-top: 6px;
   
   }
+.accordion-label-career {
+  padding-left: 30px;
+  font-size: 7pt;
+  color: #700017;
+}
