@@ -231,27 +231,15 @@
       border-bottom: 0;
   }
 
-.no-alignment {
+/*.no-alignment {
   border: 1px solid #ddd;
   width: 40%;
   float: right;
   margin: 15px 0px;
   padding: 15px;
   background: #eee;
-}
-  .no-alignment ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-    .no-alignment ul li {
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
-  .no-alignment h4 {
-    font-weight: bold;
-  }
+}*/
+ 
 .course-wrap {
   display: block;
   overflow: hidden;
@@ -271,3 +259,85 @@
 .c2s .standard {
   width: 50%;
 }
+.course-wrap .item {
+  display: flex;
+  overflow: hidden;
+}
+
+  .course-wrap .item .title {
+    width: 300px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    float: left;
+    display: inline-flex;
+    background: #dbdbdb;
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    line-height: 18px;
+    word-spacing: 1px;
+  }
+  .course-wrap .item .description {
+    width: calc(100% - 305px);
+    float: left;
+    display: inline-flex;
+    background: #f2f2f2;
+    margin-bottom: 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+.description.bg-blue {
+    background: #71a4cc !important;
+  }
+.sortedTypeHeader {
+  font-size: 26px;
+  font-family: 'Serifa-Med';
+  color: #700017;
+  margin: 0 0 15px 0;
+}
+.course-wrap .item .description ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+  .course-wrap .item .description ul li {
+    display: block;
+    overflow: hidden;
+    margin-bottom: 15px;
+  }
+.no-alignment {
+  display: block;
+  overflow: hidden;
+  padding: 20px 0;
+}
+  .no-alignment ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+    .no-alignment ul li {
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+      .no-alignment ul li .prefix {
+        width: 30px;
+        text-align: center;
+        padding: 3px 0;
+        background: #f56400;
+        display: inline-block;
+        margin-right: 10px;
+        float: left;
+        border-radius: 5px;
+        color: #fff;
+      }
+      .no-alignment ul li .list {
+        width: calc(100% - 40px);
+        display: inline-block;
+      }
+
+      .no-alignment h4 {
+        font-weight: bold;
+        color: #700017;
+        margin: 10px 0 20px 40px;
+      }

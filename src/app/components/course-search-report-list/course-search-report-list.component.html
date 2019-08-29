@@ -1,27 +1,18 @@
 <div class="course-search-results">
   <h1>Results</h1>
   <div class="course-wrap" *ngFor="let result of reportListhResultData.Competencies">
-    <div class="col-md-6">
-      <h2>
-        <span>CTE Courses</span>
-        <hr>
-        <span>{{result.CteCourseName}}</span>
-      </h2>
-
+    <h3 class="sortedTypeHeader">{{result.CteCourseName}} <i class="fas fa-arrows-alt-h"> {{result.AcademicCourseName}}</i></h3>
+    <div class="item">
+      <div class="title"><span>CTE Courses</span></div>
+      <div class="description bg-blue"> <span>{{result.CteCourseName}}</span></div>
     </div>
-
-    <div class="col-md-6">
-      <h2>
-        <span>Academic Course</span>
-        <hr>
-        <span>{{result.AcademicCourseName}}</span>
-      </h2>
+    <div class="item">
+      <div class="title"> <span>Academic Course</span></div>
+      <div class="description">  <span>{{result.AcademicCourseName}}</span></div>
     </div>
-    <div class="course" *ngFor="let competency of result.Competencies">
-      <div class="standard">
-        <h4>{{competency.CompetencyDesc}} </h4>
-      </div>
-      <div class="competency">
+    <div class="item" *ngFor="let competency of result.Competencies">
+      <div class="title"> {{competency.CompetencyDesc}}</div>
+      <div class="description">
         <ul>
           <li *ngFor="let std of competency.Standards"> {{std.StandardDesc}}</li>
         </ul>
@@ -30,39 +21,35 @@
     <div class="no-alignment">
       <h4>No Alignment</h4>
       <ul>
-        <li *ngFor="let na of result.NoAlignment"> {{na}} </li>
+        <li *ngFor="let na of result.NoAlignment"> <span class="prefix">A</span> <span class="list">{{na}}</span></li>
       </ul>
     </div>
   </div>
+
+
   <div class="course-wrap" *ngFor="let result of reportListhResultData.Standards">
-    <div class="col-md-6">
-      <h2>
-        <span>Academic Course</span>
-        <hr>
-        <span>{{result.AcademicCourseName}}</span>
-      </h2>
+    <h3 class="sortedTypeHeader">{{result.AcademicCourseName}} <i class="fas fa-arrows-alt-h"> {{result.CteCourseName}}</i></h3>
+    <div class="item">
+      <div class="title"> <span>Academic Course</span></div>
+      <div class="description">  <span>{{result.AcademicCourseName}}</span></div>
     </div>
-    <div class="col-md-6">
-      <h2>
-        <span>CTE Courses</span>
-        <hr>
-        <span>{{result.CteCourseName}}</span>
-      </h2>
+    <div class="item">
+      <div class="title"> <span>CTE Course</span></div>
+      <div class="description">  <span>{{result.CteCourseName}}</span></div>
     </div>
-    <div class="course" *ngFor="let standard of result.Standards">
-      <div class="standard">
-        <h4>{{standard.StandardDesc}} </h4>
-      </div>
-      <div class="competency">
+    <div class="item" *ngFor="let standard of result.Standards">
+      <div class="title"> <span>{{standard.StandardDesc}} </span></div>
+      <div class="description">
         <ul>
           <li *ngFor="let cpt of standard.Competencies"> {{cpt.Competency}}</li>
         </ul>
       </div>
     </div>
+
     <div class="no-alignment">
       <h4>No Alignment</h4>
       <ul>
-          <li *ngFor="let na of result.NoAlignment"> {{na}} </li>
+        <li *ngFor="let na of result.NoAlignment"> <span class="prefix">A</span> <span class="list">{{na}}</span></li>
       </ul>
     </div>
   </div>

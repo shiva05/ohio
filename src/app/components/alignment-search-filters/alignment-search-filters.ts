@@ -302,7 +302,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         }
     });
     this.selectedAcademicItems = tempData;
-    this.ref.detectChanges();
+   // this.ref.detectChanges();
   }
 
 clearSearch() {
