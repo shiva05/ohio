@@ -8,6 +8,8 @@ import { Observable } from 'rxjs/Observable';
 import { MetaData } from './../../models/meta-data.model';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 import { _ } from 'underscore';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+
 @Component({
   selector: 'app-alignment-search-filters',
   templateUrl: './alignment-search-filters.html',
@@ -53,7 +55,8 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   subjectsDefaultSettings: any = {};
   constructor(private httpService: HttpClient,
               private ref: ChangeDetectorRef,
-              private store: Store<AppState>) {
+              private store: Store<AppState>,
+              private rout: Router) {
     // this.metaData = store.select('metaData');
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_META_DATA });
   }
@@ -324,6 +327,7 @@ clearSearch() {
   this.strandsDropdown = [];
   this.outcomesDropdown = [];
   this.competencyNumbers = [];
+  this.rout.navigate(['/AlignmentSearch']);
 }
   onSubjectLevelsSelectAll(data) {
     let selectedAll = [];
@@ -354,6 +358,7 @@ clearSearch() {
     };
     localStorage.setItem('searchLable', 'SearchAlignment');
     this.goToPage('SearchResults');
+   // this.rout.navigate(['/AlignmentSearchResults']);
     this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS , payload: this.searchObj});
   }
 

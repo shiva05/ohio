@@ -6,6 +6,7 @@ import { AppState } from './../../app.state';
 import { Observable } from 'rxjs/Observable';
 import { CourseSearchData } from './../../models/courseSearch.model';
 import * as CourseSearchActions from './../../actions/course-search.actions';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-course-search-filters',
@@ -40,7 +41,7 @@ export class CourseSearchFiltersComponent implements OnInit {
   selectedAcademicItems: any = [];
   selectedAcademicCourses: any = [];
 
-  constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>) {
+  constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>, private rout: Router) {
     // this.metaData = store.select('metaData');
     this.store.dispatch({ type: CourseSearchActions.LOAD_COURSESEARCH_DATA });
   }
@@ -204,7 +205,8 @@ export class CourseSearchFiltersComponent implements OnInit {
     };
     this.store.dispatch({ type: CourseSearchActions.SAVE_AS_SELECTED_FILTERS_COURSESEARCH, payload: this.searchObj });
     localStorage.setItem('searchLable', 'SearchCourse');
-    this.goToPage('SearchResults');
+     this.goToPage('SearchResults');
+   // this.rout.navigate(['/CourseSearchResults'])
   }
 
   goToPage(org) {

@@ -7,6 +7,7 @@ import { AppState } from './../../app.state';
 import { Observable } from 'rxjs/Observable';
 import { MetaData } from './../../models/meta-data.model';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-alignment-search',
@@ -21,6 +22,7 @@ export class AlignmentSearchComponent implements OnInit {
 
   constructor(private httpService: HttpClient,
               private ref: ChangeDetectorRef,
+              private rout: Router,
               private store: Store<AppState>) {
   }
   ngOnInit() {
@@ -33,6 +35,7 @@ export class AlignmentSearchComponent implements OnInit {
       this.showAsFilter = true;
     } else if (org === 'SearchResults') {
       this.showAsResults = true;
+     // this.rout.navigate(['/AlignmentSearchResults']);
     } else if (org === 'Report') {
       this.showAsReport = true;
     }
