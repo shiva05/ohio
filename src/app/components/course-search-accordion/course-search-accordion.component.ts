@@ -24,6 +24,8 @@ export class CourseSearchAccordionComponent implements OnInit {
     CourseIds: [],
     CompetencyIds: [],
     Subjects: [],
+    Level1Ids: [],
+    Level2Ids: [],
     CareerPathToSubject: true
   };
   academicSubjectColorPallet: any = [
@@ -162,7 +164,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Courses Checkbox
   courseCheckBox(career, course) {
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Courses.every(function(itemChild: any) {
+    career.isSelected = career.Courses.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -182,12 +184,12 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Competency Checkbox
   competencyCheckBox(career, course) {
     // tslint:disable-next-line:only-arrow-functions
-    course.isSelected = course.Competencies.every(function(itemChild: any) {
+    course.isSelected = course.Competencies.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Courses.every(function(itemChild: any) {
+    career.isSelected = career.Courses.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
@@ -209,7 +211,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Grade Checkbox
   gradeCheckBox(career, course) {
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.SubjecToStandards.every(function(itemChild: any) {
+    career.isSelected = career.SubjecToStandards.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -229,12 +231,12 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Standard Checkbox
   standardCheckBox(career, course) {
     // tslint:disable-next-line:only-arrow-functions
-    course.isSelected = course.Standards.every(function(itemChild: any) {
+    course.isSelected = course.Standards.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.SubjecToStandards.every(function(itemChild: any) {
+    career.isSelected = career.SubjecToStandards.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
@@ -272,12 +274,24 @@ export class CourseSearchAccordionComponent implements OnInit {
         if (subject.isSelected) {
           this.courseSearchReportPayload.CareerPathIds.push(subject.CareerPathId);
           this.courseSearchReportPayload.Subjects.push({ SubjectId: subject.SubjectId });
+
+          // this.courseSearchReportPayload.Subjects.push({
+          //   SubjectId: subject.SubjectId,
+          //   Level1Ids: ["8", "World Geography"]
+          // });
         }
 
         subject.SubjecToStandards.forEach(grade => {
           if (grade.isSelected) {
-            this.courseSearchReportPayload.CourseIds.push(grade.Level1Value);
+            // Level1Value should be Course Name but its coming as Subject/Course Title need to change from API
+            this.courseSearchReportPayload.Level1Ids.push(grade.Level1Value);
           }
+
+          grade.Standards.forEach(standard => {
+            if (standard.isSelected) {
+              this.courseSearchReportPayload.Level2Ids.push(standard.StandardDesc);
+            }
+          });
         });
       });
     }
