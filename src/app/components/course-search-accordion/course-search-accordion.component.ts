@@ -18,14 +18,14 @@ export class CourseSearchAccordionComponent implements OnInit {
   subjectToCareerPathData: any = [];
   noCourseResultFound = false;
   totalSearchResults = 0;
+  Level1Ids: any = [];
+  Level2Ids: any = [];
   courseSearchReportPayload = {
     Keywords: '',
     CareerPathIds: [],
     CourseIds: [],
     CompetencyIds: [],
     Subjects: [],
-    Level1Ids: [],
-    Level2Ids: [],
     CareerPathToSubject: true
   };
   academicSubjectColorPallet: any = [
@@ -271,28 +271,31 @@ export class CourseSearchAccordionComponent implements OnInit {
     } else {
       this.subjectToCareerPathData.forEach(subject => {
 
-        if (subject.isSelected) {
-          this.courseSearchReportPayload.CareerPathIds.push(subject.CareerPathId);
-          this.courseSearchReportPayload.Subjects.push({ SubjectId: subject.SubjectId });
-
-          // this.courseSearchReportPayload.Subjects.push({
-          //   SubjectId: subject.SubjectId,
-          //   Level1Ids: ["8", "World Geography"]
-          // });
-        }
-
+        this.Level1Ids = [];
         subject.SubjecToStandards.forEach(grade => {
           if (grade.isSelected) {
             // Level1Value should be Course Name but its coming as Subject/Course Title need to change from API
-            this.courseSearchReportPayload.Level1Ids.push(grade.Level1Value);
+            this.Level1Ids.push(grade.Level1Value);
           }
 
+          this.Level2Ids = [];
           grade.Standards.forEach(standard => {
             if (standard.isSelected) {
-              this.courseSearchReportPayload.Level2Ids.push(standard.StandardDesc);
+              this.Level2Ids.push(standard.StandardDesc);
             }
           });
         });
+
+        if (subject.isSelected) {
+          this.courseSearchReportPayload.CareerPathIds.push(subject.CareerPathId);
+          // this.courseSearchReportPayload.Subjects.push({ SubjectId: subject.SubjectId });
+
+          this.courseSearchReportPayload.Subjects.push({
+            SubjectId: subject.SubjectId,
+            Level1Ids: this.Level1Ids,
+            Level2Ids: this.Level2Ids
+          });
+        }
       });
     }
     this.goToPage(obj);
