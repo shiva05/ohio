@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { SearchResultService } from '../../services/search-result.service';
 import * as CourseSearchActions from './../../actions/course-search.actions';
-
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 @Component({
   selector: 'app-course-search-accordion',
   templateUrl: './course-search-accordion.component.html',
@@ -49,13 +49,14 @@ export class CourseSearchAccordionComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor(private store: Store<AppState>, private httpService: HttpClient, private searchResultService: SearchResultService) { }
+  constructor(private store: Store<AppState>, private httpService: HttpClient, private searchResultService: SearchResultService, private rout: Router) { }
 
   ngOnInit() {
     this.getCourseSearchResult();
   }
   goBackToCourseSearch() {
-    this.goToPage('SearchAlignment');
+    // this.goToPage('SearchAlignment');
+    this.rout.navigate(['/CourseSearch']);
   }
   getCourseSearchResult() {
     this.store.select('courseSearch').subscribe(data => {
@@ -298,7 +299,8 @@ export class CourseSearchAccordionComponent implements OnInit {
         }
       });
     }
-    this.goToPage(obj);
+    //this.goToPage(obj);
+    this.rout.navigate(['/CourseSearchReport']);
     this.courseSearchSelectedFilters['selectedCourseSearchResults'] = this.courseSearchReportPayload;
     this.store.dispatch({ type: CourseSearchActions.SAVE_AS_SELECTED_FILTERS_COURSESEARCH, payload: this.courseSearchSelectedFilters });
   }

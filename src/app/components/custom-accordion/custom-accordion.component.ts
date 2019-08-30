@@ -423,7 +423,7 @@ export class CustomAccordionComponent implements OnInit {
     obj.isOutcomeClosed = !obj.isOutcomeClosed;
   }
 
-  getSelect(obj) {
+  getSelect() {
     this.reportPayload.Keywords = '';
     this.reportPayload.CareerFiledIds = [];
     this.reportPayload.StrandIds = [];

@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './../../app.state';
-
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { SharedService } from '../../services/shared.service';
 @Component({
   selector: 'filter-summary',
   templateUrl: './filter-summary.component.html',
@@ -25,11 +26,13 @@ export class FilterSummaryComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private rout: Router, private shared: SharedService) {
     this.searchLable = localStorage.getItem('searchLable');
   }
 
   ngOnInit() {
+    this.shared.updateAlignmentSearch = false;
+    this.shared.updateCourseSearch = false;
     this.store.select('advancedSearch').subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
         let careerfields = [];
@@ -127,8 +130,13 @@ export class FilterSummaryComponent implements OnInit {
     }
   }
 
-  goBackToSearch() {
-    this.onPageSelect.emit('Search');
+  goBackToAlignmentSearch() {
+    this.shared.updateAlignmentSearch = true;
+    this.rout.navigate(['/AlignmentSearch']);  
+  }
+  goBackToCourseSearch() {
+    this.shared.updateCourseSearch = true;
+    this.rout.navigate(['/CourseSearch']);
   }
 
   formatSearchDataToSummary(source) {

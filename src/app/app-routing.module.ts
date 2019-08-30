@@ -11,7 +11,8 @@ import { AlignmentSearchComponent } from './components/alignment-search/alignmen
 import { CourseSearchComponent } from './components/course-search/course-search.component';
 import { ExportComponent } from './components/export/export.component';
 import { FilterSummaryComponent } from './components/filter-summary/filter-summary.component';
-import { ReportListComponent } from './components/report-list/report-list.component';
+import { ReportComponent } from './components/report/report.component';
+import { CourseSearchReportComponent } from './components/course-search-report/course-search-report.component';
 
 const routes: Routes = [
   //{ path: '', component: MainComponent },
@@ -29,33 +30,40 @@ const routes: Routes = [
        {
          path: 'Home',
          component: HomeComponent
-       },
-       {
-         path: 'AlignmentSearch',
-         component: AlignmentSearchComponent        
-       },
-       {
-         path: 'AlignmentSearchResults',
-         component: FilterSummaryComponent
-       },
-       {
-         path: 'AlignmentSearchReport',
-         component: ReportListComponent
-       },
-       {
-         path: 'CourseSearch',
-         component: CourseSearchComponent
-       },
-       {
-         path: 'CourseSearchResults',
-         component: FilterSummaryComponent
-       },
-       {
-         path: 'DataImport',
-         component: ExportComponent
        }
      ]
+   },
+     {
+     path: 'AlignmentSearch',
+     component: AlignmentSearchComponent
+   },
+     {
+       path: 'AlignmentSearchResults',
+       component: FilterSummaryComponent
+     },
+     {
+       path: 'AlignmentSearchReport',
+       component: ReportComponent
+     },
+  
+   {
+     path: 'CourseSearch',
+     component: CourseSearchComponent
+     },
+     {
+       path: 'CourseSearchResults',
+       component: FilterSummaryComponent
+     },
+     {
+       path: 'CourseSearchReport',
+       component: CourseSearchReportComponent
+     },
+  
+   {
+     path: 'DataImport',
+     component: ExportComponent
    }
+   
 ];
 
 @NgModule({

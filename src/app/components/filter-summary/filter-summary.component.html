@@ -1,5 +1,6 @@
 <!-- Alignment Search Filter Result -->
-<div class="col-md-12" *ngIf="searchAlignment">
+<div *ngIf="searchAlignment">
+<div class="col-md-12" >
   <h1>{{ 'FilterResults.SearchCriteria' | translate }}</h1>
   <div class="row">
     <!-- filter Form Begin -->
@@ -85,16 +86,21 @@
           </div>
         </div>
         <div class="search-filter-right">
-          <button (click)="goBackToSearch()">{{ 'FilterResults.UpdateSearch' | translate }}
+          <button (click)="goBackToAlignmentSearch()">{{ 'FilterResults.UpdateSearch' | translate }}
             <i class="fa fa-angle-double-down"></i></button>
         </div>
       </div>
     </section>
   </div>
 </div>
+<div class="col-md-12">
+  <custom-accordion></custom-accordion>
+</div>
+</div>
 
 <!-- Course Search Filter Result -->
-<div class="col-md-12 main" *ngIf="searchCourse">
+<div class="" *ngIf="searchCourse">
+<div class="col-md-12 main" >
   <h1>{{ 'FilterResults.SearchCriteria' | translate }}</h1>
   <div class="row">
     <!-- filter Form Begin -->
@@ -135,10 +141,16 @@
           </div>
         </div>
         <div class="search-filter-right">
-          <button (click)="goBackToSearch()">{{ 'FilterResults.UpdateSearch' | translate }}
+          <button (click)="goBackToCourseSearch()">{{ 'FilterResults.UpdateSearch' | translate }}
             <i class="fa fa-angle-double-down"></i></button>
         </div>
       </div>
     </section>
   </div>
 </div>
+<div class="col-md-12">
+  <app-course-search-accordion > </app-course-search-accordion>
+</div>
+  </div>
+
+

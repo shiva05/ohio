@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { DatePipe } from '@angular/common';
 
 import { AppState } from './../../app.state';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'report',
@@ -16,10 +17,13 @@ export class ReportComponent {
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe) {}
+  constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router) {}
 
   goToPage(org) {
     this.onPageSelect.emit(org);
+  }
+  clearAlignmentSearch() {
+    this.rout.navigate(['/AlignmentSearch']);
   }
 
   public downloadPDF(): void {
