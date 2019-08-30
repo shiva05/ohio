@@ -63,3 +63,23 @@
   font-size: 7pt;
   color: #700017;
 }
+.accordion-label-courses {
+  padding-left: 52px;
+  font-size: 7pt;
+  color: #700017;
+}
+.accordion-label-competencies {
+  padding-left: 72px;
+  font-size: 7pt;
+  color: #700017;
+}
+.accordion-label-subject {
+  padding-left: 30px;
+  font-size: 7pt;
+  color: #700017;
+}
+.accordion-label-standard {
+  padding-left: 52px;
+  font-size: 7pt;
+  color: #700017;
+}
