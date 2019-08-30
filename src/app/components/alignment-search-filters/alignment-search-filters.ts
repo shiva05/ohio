@@ -11,7 +11,7 @@ import { _ } from 'underscore';
 @Component({
   selector: 'app-alignment-search-filters',
   templateUrl: './alignment-search-filters.html',
-  styleUrls: []
+  styleUrls: ['./alignment-search-filters.css']
 })
 export class AlignmentSearchFiltersComponent implements OnInit {
 
@@ -51,6 +51,8 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   metaData: Observable<MetaData>;
   selectedAcademicItems: any = [];
   subjectsDefaultSettings: any = {};
+  isVisible: boolean = false;
+
   constructor(private httpService: HttpClient,
               private ref: ChangeDetectorRef,
               private store: Store<AppState>) {
@@ -340,21 +342,35 @@ clearSearch() {
     // TODO: Call API
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA , payload : this.selectedOutcome});
   }
+  showAlert(): void {
+    if (this.isVisible) {
+      return;
+    }
+    this.isVisible = true;
+    setTimeout(() => this.isVisible = false, 4000);
+  }
   search() {
-    this.goToPage('SearchResults');
-    // debugger;
-    this.searchObj = {
-      selectedCareers: this.selectedCareer,
-      selectedStrands: this.selectedStrands,
-      selectedOutcomes: this.selectedOutcome,
-      selectedCompetencies: this.selectedCompetencyNumbers,
-      selectedAcadamicSubjects: this.selectedAcadamicSubjects,
-      finalSelectedObject: this.academicSubjects,
+    if (this.selectedCareer < 1 || this.selectedAcademicItems < 1) {
+      console.log('search failed');
+      this.showAlert();
+    } else {
+      console.log('search succeeded');
+      this.goToPage('SearchResults');
+      // debugger;
+      this.searchObj = {
+        selectedCareers: this.selectedCareer,
+        selectedStrands: this.selectedStrands,
+        selectedOutcomes: this.selectedOutcome,
+        selectedCompetencies: this.selectedCompetencyNumbers,
+        selectedAcadamicSubjects: this.selectedAcadamicSubjects,
+        finalSelectedObject: this.academicSubjects,
 
-    };
-    localStorage.setItem('searchLable', 'SearchAlignment');
-    this.goToPage('SearchResults');
-    this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS , payload: this.searchObj});
+      };
+      localStorage.setItem('searchLable', 'SearchAlignment');
+      this.goToPage('SearchResults');
+      this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
+    }
+
   }
 
   onAcadamicSubjectSelect() {
