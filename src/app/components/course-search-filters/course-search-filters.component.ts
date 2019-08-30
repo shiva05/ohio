@@ -39,6 +39,7 @@ export class CourseSearchFiltersComponent implements OnInit {
 
   selectedAcademicItems: any = [];
   selectedAcademicCourses: any = [];
+  isVisible: boolean = false;
 
   constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>) {
     // this.metaData = store.select('metaData');
@@ -194,17 +195,28 @@ export class CourseSearchFiltersComponent implements OnInit {
     this.coursesDropdown = [];
     this.selectedAcademicItems = [];
   }
+  showAlert(): void {
+    if (this.isVisible) {
+      return;
+    }
+    this.isVisible = true;
+    setTimeout(() => this.isVisible = false, 4000);
+  }
   search() {
-    this.searchObj = {
-      selectedCareerPath: this.selectedCareerPath,
-      selectedCareerPathCourses: this.selectedCourses,
-      selectedAcademicSubject: this.selectedAcadamicSubjects,
-      // selectedAcademicSubjectCourses: [this.selectedMathsCourses, this.selectedELACourses, this.selectedScienceCourses, this.selectedSocialCourses]
-      selectedAcademicSubjectCourses: this.selectedAcademicItems
-    };
-    this.store.dispatch({ type: CourseSearchActions.SAVE_AS_SELECTED_FILTERS_COURSESEARCH, payload: this.searchObj });
-    localStorage.setItem('searchLable', 'SearchCourse');
-    this.goToPage('SearchResults');
+    if (this.selectedCareerPath.length < 1 && this.selectedAcademicItems.length < 1) {
+      this.showAlert();
+    } else {
+      this.searchObj = {
+        selectedCareerPath: this.selectedCareerPath,
+        selectedCareerPathCourses: this.selectedCourses,
+        selectedAcademicSubject: this.selectedAcadamicSubjects,
+        // selectedAcademicSubjectCourses: [this.selectedMathsCourses, this.selectedELACourses, this.selectedScienceCourses, this.selectedSocialCourses]
+        selectedAcademicSubjectCourses: this.selectedAcademicItems
+      };
+      this.store.dispatch({ type: CourseSearchActions.SAVE_AS_SELECTED_FILTERS_COURSESEARCH, payload: this.searchObj });
+      localStorage.setItem('searchLable', 'SearchCourse');
+      this.goToPage('SearchResults');
+    }
   }
 
   goToPage(org) {

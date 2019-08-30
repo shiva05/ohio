@@ -350,11 +350,9 @@ clearSearch() {
     setTimeout(() => this.isVisible = false, 4000);
   }
   search() {
-    if (this.selectedCareer < 1 || this.selectedAcademicItems < 1) {
-      console.log('search failed');
+    if (this.selectedCareer.length < 1 && this.selectedAcademicItems.length < 1) {
       this.showAlert();
     } else {
-      console.log('search succeeded');
       this.goToPage('SearchResults');
       // debugger;
       this.searchObj = {
