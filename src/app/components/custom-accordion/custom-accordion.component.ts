@@ -38,6 +38,9 @@ export class CustomAccordionComponent implements OnInit {
     OutcomeIds: [],
     CompetencyIds: [],
     Subjects: [],
+    Level1Ids: [],
+    Level2Ids: [],
+    Level3Ids: [],
     CteToAcademic: true
   };
   academicSubjectIds = {
@@ -427,6 +430,9 @@ export class CustomAccordionComponent implements OnInit {
     this.reportPayload.OutcomeIds = [];
     this.reportPayload.CompetencyIds = [];
     this.reportPayload.Subjects = [];
+    this.reportPayload.Level1Ids = [];
+    this.reportPayload.Level2Ids = [];
+    this.reportPayload.Level3Ids = [];
 
     if (this.cteToAcademic) {
       this.searchResultDataArray.forEach(careerField => {
@@ -455,30 +461,31 @@ export class CustomAccordionComponent implements OnInit {
       });
     } else {
       this.subjectToCareerData.forEach(careerField => {
+        // Career Field ID is missing in the JSON result so for now hardcoded
+        this.reportPayload.CareerFiledIds = [1];
+
         if (this.reportPayload.Subjects.length <= 0) {
-          this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[careerField.SubjectId] });
+          // this.reportPayload.Subjects.push(careerField.SubjectId);
+          this.reportPayload.Subjects.push({ SubjectId: careerField.SubjectId });
         }
-        // Need to Generate Payload which need to pass to calling JSON for Report Generate
 
-        // if (careerField.isSelected) {
-        //   this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
-        // }
-        // careerField.Strand.forEach(stand => {
-        //   if (stand.isSelected) {
-        //     this.reportPayload.StrandIds.push(stand.StrandPk);
-        //   }
-        //   stand.Outcome.forEach(outcome => {
-        //     if (outcome.isSelected) {
-        //       this.reportPayload.OutcomeIds.push(outcome.OutcomePk);
-        //     }
+        careerField.Level.forEach(level => {
+          if (level.isSelected) {
+            this.reportPayload.Level1Ids.push(level.LevelValue1);
+          }
 
-        //     outcome.Competency.forEach(competency => {
-        //       if (competency.isSelected) {
-        //         this.reportPayload.CompetencyIds.push(competency.CompetencyPk);
-        //       }
-        //     });
-        //   });
-        // });
+          level.ChildLevel.forEach(childLevel1 => {
+            if (childLevel1.isSelected) {
+              this.reportPayload.Level2Ids.push(childLevel1.LevelValue2);
+            }
+
+            childLevel1.ChildLevel.forEach(childLevel2 => {
+              if (childLevel2.isSelected) {
+                this.reportPayload.Level3Ids.push(childLevel2.LevelValue3);
+              }
+            });
+          });
+        });
       });
     }
 
