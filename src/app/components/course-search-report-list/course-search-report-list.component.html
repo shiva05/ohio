@@ -4,32 +4,37 @@
     <h3 class="sortedTypeHeader">{{result.CteCourseName}} <i class="fas fa-arrows-alt-h"> {{result.AcademicCourseName}}</i></h3>
     <div class="item">
       <div class="title"><span>CTE Courses</span></div>
-      <div class="description bg-blue"> <span>{{result.CteCourseName}}</span></div>
+      <div class="title"> <span>Academic Course</span></div>
     </div>
     <div class="item">
-      <div class="title"> <span>Academic Course</span></div>
-      <div class="description">  <span>{{result.AcademicCourseName}}</span></div>
+      <div class="title"> <span>{{result.CteCourseName}}</span></div>
+      <div class="title">  <span>{{result.AcademicCourseName}}</span></div>
     </div>
     <div class="item" *ngFor="let competency of result.Competencies">
-      <div class="title"> {{competency.CompetencyDesc}}</div>
+      
       <div class="description">
-        <ul>
-          <li *ngFor="let std of competency.Standards"> {{std.StandardDesc}}</li>
-        </ul>
+        <div class="compared-title">Competencies: </div>
+        <br>
+        {{competency.CompetencyDesc}}
+      </div>
+      <div class="description">
+          <div class="compared-title">Standards: </div>
+          <br>
+          <div *ngFor="let std of competency.Standards"><span class="prefix">A</span>{{std.StandardDesc}}</div>
       </div>
     </div>
 
     <div class="no-alignment col-md-6">
       <h4>Non-Aligned Competencies</h4>
       <ul>
-        <li *ngFor="let na of result.NoAlignment"> <span class="prefix">A</span> <span class="list">{{na}}</span></li>
+        <li *ngFor="let na of result.NoAlignment"> <span class="list">{{na}}</span></li>
       </ul>
     </div>
 
     <div class="no-alignment col-md-6">
       <h4>Non-Aligned Standards</h4>
       <ul>
-        <li *ngFor="let na of result.NoAlignment"> <span class="prefix">A</span> <span class="list">{{na}}</span></li>
+        <li *ngFor="let na of result.NoAlignment"> <span class="list">{{na}}</span></li>
       </ul>
     </div>
 
