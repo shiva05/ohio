@@ -8,6 +8,7 @@ import { SearchResultData } from './../../models/searchResult.model';
 import { Observable } from 'rxjs/Observable';
 import { SearchResultService } from '../../services/search-result.service';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'custom-accordion',
@@ -70,7 +71,7 @@ export class CustomAccordionComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor(private store: Store<AppState>, private httpService: HttpClient, private searchResultService: SearchResultService) {
+  constructor(private store: Store<AppState>, private httpService: HttpClient, private searchResultService: SearchResultService, private rout: Router,) {
     this.cteToAcademic = true;
   }
 
@@ -422,7 +423,7 @@ export class CustomAccordionComponent implements OnInit {
     obj.isOutcomeClosed = !obj.isOutcomeClosed;
   }
 
-  getSelect(obj) {
+  getSelect() {
     this.reportPayload.Keywords = '';
     this.reportPayload.CareerFiledIds = [];
     this.reportPayload.StrandIds = [];
@@ -488,7 +489,8 @@ export class CustomAccordionComponent implements OnInit {
       });
     }
 
-    this.goToPage(obj);
+    //this.goToPage(obj);
+    this.rout.navigate(['/AlignmentSearchReport']);
     this.alignmentSearchSelectedFilters['selectedAsSearchResults'] = this.reportPayload;
     this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.alignmentSearchSelectedFilters });
   }
@@ -498,8 +500,9 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   goBackToSearch() {
-    let lable = localStorage.getItem('searchLable');
-    this.onPageSelect.emit('SearchAlignment');
+    //let lable = localStorage.getItem('searchLable');
+    //this.onPageSelect.emit('SearchAlignment');
+    this.rout.navigate(['/AlignmentSearch']);
   }
 
   onToggleClick(value) {
