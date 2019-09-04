@@ -58,7 +58,7 @@
             </div>
 
             <div class="col-md-1 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
-            <div class="col-md-3 color-gap" [style.color]="careerField.Color">{{careerField.AcademicSubject}}</div>
+            <div class="col-md-3 color-gap" [style.color]="careerField.Color">{{careerField.AcademicSubjectName}}</div>
             <div class="col-md-1">
               <span class="accordion-bubble" [style.background-color]="careerField.Color"
                 *ngIf="careerField.Alignment">{{careerField.Alignment}}</span>
@@ -93,7 +93,7 @@
                       </span>
                     </div>
                     <div class="col-md-1"> &nbsp;</div>
-                    <div class="col-md-3 color-gap" [style.color]="careerField.Color"> {{strand.AcademicSubject}}</div>
+                    <div class="col-md-3 color-gap" [style.color]="careerField.Color"> {{strand.AcademicSubjectName}}</div>
                     <div class="col-md-1">
                       <span class="accordion-bubble" [style.background-color]="careerField.Color"
                         *ngIf="strand.Alignment">{{strand.Alignment}}</span>
@@ -128,7 +128,7 @@
                             </span>
                           </div>
                           <div class="col-md-1"> &nbsp;</div>
-                          <div class="col-md-3 color-gap" [style.color]="careerField.Color"> {{outcome.AcademicSubject}}
+                          <div class="col-md-3 color-gap" [style.color]="careerField.Color"> {{outcome.AcademicSubjectName}}
                           </div>
                           <div class="col-md-1">
                             <span class="accordion-bubble" [style.background-color]="careerField.Color"
@@ -166,7 +166,7 @@
                                 </div>
                                 <div class="col-md-1"> &nbsp;</div>
                                 <div class="col-md-3 color-gap" [style.color]="careerField.Color">
-                                  {{item.AcademicSubject}}</div>
+                                  {{item.AcademicSubjectName}}</div>
                                 <div class="col-md-1">
                                   <span class="accordion-bubble" [style.background-color]="careerField.Color"
                                     *ngIf="item.Alignment">{{item.Alignment}}</span>
@@ -212,7 +212,7 @@
             </div>
 
             <div class="col-md-1 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
-            <div class="col-md-6 color-gap" [style.color]="careerField.Color">{{careerField.CareerField}}</div>
+            <div class="col-md-6 color-gap" [style.color]="careerField.Color">{{careerField.CareerFieldName}}</div>
             <div class="col-md-1">
               <span class="accordion-bubble" [style.background-color]="careerField.Color"
                 *ngIf="careerField.Alignment">{{careerField.Alignment}}</span>
@@ -247,7 +247,7 @@
                       </span>
                     </div>
                     <div class="col-md-1"> &nbsp;</div>
-                    <div class="col-md-6 color-gap" [style.color]="careerField.Color"> {{strand.CareerField}}</div>
+                    <div class="col-md-6 color-gap" [style.color]="careerField.Color"> {{strand.CareerFieldName}}</div>
                     <div class="col-md-1">
                       <span class="accordion-bubble" [style.background-color]="careerField.Color"
                         *ngIf="strand.Alignment">{{strand.Alignment}}</span>
@@ -282,7 +282,7 @@
                             </span>
                           </div>
                           <div class="col-md-1"> &nbsp;</div>
-                          <div class="col-md-6 color-gap" [style.color]="careerField.Color"> {{outcome.CareerField}}
+                          <div class="col-md-6 color-gap" [style.color]="careerField.Color"> {{outcome.CareerFieldName}}
                           </div>
                           <div class="col-md-1">
                             <span class="accordion-bubble" [style.background-color]="careerField.Color"
@@ -320,7 +320,7 @@
                                 </div>
                                 <div class="col-md-1"> &nbsp;</div>
                                 <div class="col-md-6 color-gap" [style.color]="careerField.Color">
-                                  {{item.CareerField}}</div>
+                                  {{item.CareerFieldName}}</div>
                                 <div class="col-md-1">
                                   <span class="accordion-bubble" [style.background-color]="careerField.Color"
                                     *ngIf="item.Alignment">{{item.Alignment}}</span>

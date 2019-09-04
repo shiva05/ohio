@@ -182,7 +182,7 @@ export class CustomAccordionComponent implements OnInit {
         this.totalSearchResults = this.totalSearchResults + element.Alignment;
       }
       this.academicSubjectColorPallet.forEach((item) => {
-        if (element.AcademicSubject === item.Subject) {
+        if (element.AcademicSubjectName === item.Subject) {
           element['Color'] = item.Color;
         }
       });
@@ -437,7 +437,7 @@ export class CustomAccordionComponent implements OnInit {
     if (this.cteToAcademic) {
       this.searchResultDataArray.forEach(careerField => {
         if (this.reportPayload.Subjects.length <= 0) {
-          this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[careerField.AcademicSubject[0]] });
+          this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[careerField.AcademicSubjectName[0]] });
         }
         if (careerField.isSelected) {
           this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
