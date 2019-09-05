@@ -31,6 +31,9 @@ export class CustomAccordionComponent implements OnInit {
   finalSearchResults: any[];
   alignmentSearchSelectedFilters: {};
   totalSearchResults = 0;
+  Level1Ids: any = [];
+  Level2Ids: any = [];
+  Level3Ids: any = [];
   reportPayload = {
     Keywords: '',
     CareerFiledIds: [],
@@ -38,9 +41,6 @@ export class CustomAccordionComponent implements OnInit {
     OutcomeIds: [],
     CompetencyIds: [],
     Subjects: [],
-    Level1Ids: [],
-    Level2Ids: [],
-    Level3Ids: [],
     CteToAcademic: true
   };
   academicSubjectIds = {
@@ -430,9 +430,9 @@ export class CustomAccordionComponent implements OnInit {
     this.reportPayload.OutcomeIds = [];
     this.reportPayload.CompetencyIds = [];
     this.reportPayload.Subjects = [];
-    this.reportPayload.Level1Ids = [];
-    this.reportPayload.Level2Ids = [];
-    this.reportPayload.Level3Ids = [];
+    this.Level1Ids = [];
+    this.Level2Ids = [];
+    this.Level3Ids = [];
 
     if (this.cteToAcademic) {
       this.searchResultDataArray.forEach(careerField => {
@@ -463,27 +463,32 @@ export class CustomAccordionComponent implements OnInit {
         // Career Field ID is missing in the JSON result so for now hardcoded
         this.reportPayload.CareerFiledIds = [1];
 
-        if (this.reportPayload.Subjects.length <= 0) {
-          // this.reportPayload.Subjects.push(careerField.SubjectId);
-          this.reportPayload.Subjects.push({ SubjectId: careerField.SubjectId });
-        }
-
+        this.Level1Ids = [];
         careerField.Level.forEach(level => {
           if (level.isSelected) {
-            this.reportPayload.Level1Ids.push(level.LevelValue1);
+            this.Level1Ids.push(level.LevelValue1);
           }
 
+          this.Level2Ids = [];
           level.ChildLevel.forEach(childLevel1 => {
             if (childLevel1.isSelected) {
-              this.reportPayload.Level2Ids.push(childLevel1.LevelValue2);
+              this.Level2Ids.push(childLevel1.LevelValue2);
             }
 
+            this.Level3Ids = [];
             childLevel1.ChildLevel.forEach(childLevel2 => {
               if (childLevel2.isSelected) {
-                this.reportPayload.Level3Ids.push(childLevel2.LevelValue3);
+                this.Level3Ids.push(childLevel2.LevelValue3);
               }
             });
           });
+        });
+
+        this.reportPayload.Subjects.push({
+          SubjectId: careerField.SubjectId,
+          Level1Ids: this.Level1Ids,
+          Level2Ids: this.Level2Ids,
+          Level3Ids: this.Level3Ids
         });
       });
     }
