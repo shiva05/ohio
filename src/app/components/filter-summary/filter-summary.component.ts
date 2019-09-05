@@ -3,6 +3,9 @@ import { Store } from '@ngrx/store';
 import { AppState } from './../../app.state';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 @Component({
   selector: 'filter-summary',
   templateUrl: './filter-summary.component.html',
@@ -18,6 +21,8 @@ export class FilterSummaryComponent implements OnInit {
   searchLable: any;
   searchAlignment: any;
   searchCourse: any;
+  searchObj: any;
+
 
   filterCareerPathData: any = [];
   filterCareerPathCourseData: any = [];
@@ -26,15 +31,38 @@ export class FilterSummaryComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor(private store: Store<AppState>, private rout: Router, private shared: SharedService) {
+  constructor(private store: Store<AppState>, private rout: Router, private shared: SharedService, private http: HttpClient) {
     this.searchLable = localStorage.getItem('searchLable');
+    this.store.dispatch({ type: AdvancedSearchActions.LOAD_META_DATA });
   }
 
   ngOnInit() {
     this.shared.updateAlignmentSearch = false;
     this.shared.updateCourseSearch = false;
     this.store.select('advancedSearch').subscribe(data => {
-      if (data.alignmentSearchSelectedFilters) {
+    var quickSearchData = localStorage.getItem('QuickSearchData');
+    if (quickSearchData) {          
+      quickSearchData = JSON.parse(quickSearchData);
+      data.alignmentSearchSelectedFilters.selectedAcadamicSubjects = [];
+      data.alignmentSearchSelectedFilters.selectedCareers = [];
+        data.metaData['Subjects'].forEach((element) => {
+            quickSearchData['AcademicSubjects'].forEach((selctedAcademicSubject) => {
+              if (selctedAcademicSubject.SubjectId === element.SubjectId) {
+               // console.log(element);
+                data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.push(element);
+              }
+          });
+          });
+        data.metaData['CareerFields'].forEach((career) => {
+            quickSearchData['CareerFields'].forEach((selctedCareer) => {
+              if (career.CareerFieldId === selctedCareer.CareerFieldId) {
+                data.alignmentSearchSelectedFilters.selectedCareers.push(career);
+              }
+          });
+        });
+        //console.log(data.alignmentSearchSelectedFilters);
+      }
+    if (data.alignmentSearchSelectedFilters) {
         let careerfields = [];
         data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
           careerfields.push(element.CareerFieldName);
@@ -158,5 +186,9 @@ export class FilterSummaryComponent implements OnInit {
       }
       return result;
     }
+  }
+
+  ngOnDestroy() {
+    localStorage.removeItem('QuickSearchData');
   }
 }
