@@ -349,6 +349,15 @@ clearSearch() {
     // TODO: Call API
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA , payload : this.selectedOutcome});
   }
+  onOutcomeSelectAll() {
+    this.competencyNumbers = [];
+    this.selectedOutcome = this.outcomesDropdown;
+    this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA, payload: this.selectedOutcome });
+  }
+  onOutcomeDeSelectAll() {
+    this.competencyNumbers = [];
+    this.selectedCompetencyNumbers = [];
+  }
   search() {
     this.goToPage('SearchResults');
     // debugger;
