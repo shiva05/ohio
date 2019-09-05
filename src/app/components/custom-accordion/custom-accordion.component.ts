@@ -71,7 +71,7 @@ export class CustomAccordionComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor(private store: Store<AppState>, private httpService: HttpClient, private searchResultService: SearchResultService, private rout: Router,) {
+  constructor(private store: Store<AppState>, private httpService: HttpClient, private searchResultService: SearchResultService, private rout: Router) {
     this.cteToAcademic = true;
   }
 
@@ -436,9 +436,8 @@ export class CustomAccordionComponent implements OnInit {
 
     if (this.cteToAcademic) {
       this.searchResultDataArray.forEach(careerField => {
-        if (this.reportPayload.Subjects.length <= 0) {
-          this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[careerField.AcademicSubjectName[0]] });
-        }
+        this.reportPayload.Subjects.push({ SubjectId: careerField.AcademicSubjectId });
+
         if (careerField.isSelected) {
           this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
         }
