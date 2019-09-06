@@ -38,6 +38,7 @@ export class FilterSummaryComponent implements OnInit {
 
   ngOnInit() {
     this.searchCourse = false;
+    this.searchAlignment = true;
     this.shared.updateAlignmentSearch = false;
     this.shared.updateCourseSearch = false;
     this.store.select('advancedSearch').subscribe(data => {
@@ -135,6 +136,7 @@ export class FilterSummaryComponent implements OnInit {
           CteToAcademic: true
         };
         this.FilterSummaryKeys = obj;
+        
       }
     });
 
@@ -142,20 +144,23 @@ export class FilterSummaryComponent implements OnInit {
       this.store.select('advancedSearch').subscribe(data => {
         if (data.alignmentSearchSelectedFilters) {
           this.formatSearchDataToSummary(data.alignmentSearchSelectedFilters);
+          this.searchAlignment = true;
+          this.searchCourse = false;
+          
         }
       });
 
-      this.searchAlignment = true;
-      this.searchCourse = false;
+
     } else {
 
       this.store.select('courseSearch').subscribe(data => {
-        if (data.courseSearchSelectedFilters) {
+        if (data.courseSearchSelectedFilters.selectedAcademicSubject.length != 0 || data.courseSearchSelectedFilters.selectedAcademicSubjectCourses.length != 0 || data.courseSearchSelectedFilters.selectedCareerPath.length != 0 || data.courseSearchSelectedFilters.selectedCareerPathCourses.length != 0) {
           this.formatSearchCourseData(data.courseSearchSelectedFilters);
+          this.searchAlignment = false;
+          this.searchCourse = true;
         }
       });
-      this.searchAlignment = false;
-      this.searchCourse = true;
+     
     }
   }
 
