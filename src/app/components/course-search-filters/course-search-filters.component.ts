@@ -42,7 +42,7 @@ export class CourseSearchFiltersComponent implements OnInit {
   selectedAcademicItems: any = [];
   selectedAcademicCourses: any = [];
 
-  constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>, private rout: Router, private shared: SharedService,) {
+  constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>, private rout: Router, private shared: SharedService, ) {
     // this.metaData = store.select('metaData');
     this.store.dispatch({ type: CourseSearchActions.LOAD_COURSESEARCH_DATA });
   }
@@ -150,6 +150,17 @@ export class CourseSearchFiltersComponent implements OnInit {
         }
       });
     });
+  }
+
+  onCareerPathSelectAll() {
+    this.coursesDropdown = [];
+    this.courses.forEach(course => {
+      this.coursesDropdown.push(course);
+    });
+  }
+
+  onCareerPathDeSelectAll() {
+    this.coursesDropdown = [];
   }
 
   getData(data) {

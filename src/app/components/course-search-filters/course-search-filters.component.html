@@ -34,7 +34,7 @@
                 <label>{{ 'CourseFields.CareerField' | translate }}</label>
                 <ng-multiselect-dropdown [ngClass]="" [data]="careerPath" [(ngModel)]="selectedCareerPath"
                     [settings]="careerPathSettings" (onSelect)="onCareerPathSelect(selectedCareerPath)"
-                    (onDeSelect)="onCareerPathSelect(selectedCareerPath)">
+                    (onDeSelect)="onCareerPathSelect(selectedCareerPath)" (onSelectAll)="onCareerPathSelectAll()" (onDeSelectAll)="onCareerPathDeSelectAll()">
                 </ng-multiselect-dropdown>
             </div>
             <div class="form-group col-md-6">
