@@ -194,13 +194,16 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   }
   onCareerSelect() {
     this.strandsDropdown = [];
+    this.selectedStrands = [];
     this.strands.forEach(eachStrand => {
       this.selectedCareer.forEach(eachCareer => {
         if (eachStrand.CareerFieldPk === eachCareer.CareerFieldId) {
           this.strandsDropdown.push(eachStrand);
+          //have to use _.intersection method to remove the element sof the unselected parent data.
         }
       });
     });
+   
   }
 
   onStrandSelect() {
@@ -282,7 +285,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
                   // if (selectedItem.SubjectLevelsPk === )
               });
               // to set the values of only selected list options
-              mainCourse.DropdownList.forEach((dropwdownList) => { dropDownSetId.push(dropwdownList.SubjectLevelsPk); }); // start mappiing the next dropdown
+              mainCourse.DropdownList.forEach((dropwdownList) => { dropDownSetId.push(dropwdownList.SubjectLevelsPk); }); // start mapping the next dropdown
               if (mainCourse.SelectedItems.length > 0) {
                   mainCourse.SelectedItems.forEach((selectedList) => { selectedSetId.push(selectedList.SubjectLevelsPk); });
                   updatedSelectedSetId = _.intersection(dropDownSetId, selectedSetId);
