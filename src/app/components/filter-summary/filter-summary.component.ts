@@ -37,6 +37,7 @@ export class FilterSummaryComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.searchCourse = false;
     this.shared.updateAlignmentSearch = false;
     this.shared.updateCourseSearch = false;
     this.store.select('advancedSearch').subscribe(data => {
