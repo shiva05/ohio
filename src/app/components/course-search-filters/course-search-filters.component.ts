@@ -50,49 +50,11 @@ export class CourseSearchFiltersComponent implements OnInit {
   @Output() onPageSelect = new EventEmitter<any>();
 
   ngOnInit() {
-    this.careerPathSettings = {
-      singleSelection: false,
-      idField: 'CareerPathId', textField: 'CareerPathName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-
-    this.careerPathCourseSettings = {
-      singleSelection: false,
-      idField: 'CourseId', textField: 'CourseName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-
-    this.academicSubjectsSettings = {
-      singleSelection: false,
-      idField: 'SubjectId', textField: 'SubjectName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-
-    this.subjectsDefaultSettings = {
-      singleSelection: false,
-      idField: 'GradeSubjectId', textField: 'LevelValue',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-    this.academicSubjectCourseSettings = {
-      singleSelection: false,
-      idField: 'LevelId', textField: 'LevelValue',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
+    this.careerPathSettings = this.shared.careerPathSettings;
+    this.careerPathCourseSettings = this.shared.careerPathSettings;
+    this.academicSubjectsSettings = this.shared.academicSubjectsSettings;
+    this.subjectsDefaultSettings = this.shared.subjectsDefaultSettings;
+    this.academicSubjectCourseSettings = this.shared.academicSubjectCourseSettings;
 
     this.store.select('courseSearch').subscribe(data => {
       this.courseSearchData = data.courseSearchData;
@@ -134,7 +96,7 @@ export class CourseSearchFiltersComponent implements OnInit {
         }
       }
     });
-    //if we are navigating from other pages except updatesearch of alignmentSearchResults, we are clearing the search data.
+    // if we are navigating from other pages except updatesearch of alignmentSearchResults, we are clearing the search data.
     if (!this.shared.updateCourseSearch) {
       this.clearSearch();
     }
