@@ -33,7 +33,10 @@
     "rxjs-compat": "^6.5.2",
     "tslib": "^1.9.0",
     "underscore": "^1.9.1",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "cuid": "^2.1.2",
+    "jwt-decode": "^2.2.0",
+    "@angular/http": "^6.1.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.801.0",

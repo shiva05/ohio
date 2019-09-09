@@ -47,10 +47,16 @@ import { CourseSearchFiltersComponent } from './components/course-search-filters
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { courseSearchReducer } from './reducers/course-search.reducer';
 import { CourseSearchEffects } from './effects/course-search.effect';
+import { AuthEffectsService } from './effects/auth-effects';
+import { ClaimsEffectsService } from './effects/claims-effects';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { CourseSearchReportComponent } from './components/course-search-report/course-search-report.component';
 import { CourseSearchReportListComponent } from './components/course-search-report-list/course-search-report-list.component';
 import { CourseSearchAccordionComponent } from './components/course-search-accordion/course-search-accordion.component';
+import { AuthService } from './services/auth.service';
+import { ClaimsService } from './services/claims.service';
+import { AuthOrchestration } from './services/auth-orchestration.service';
+import { AppHttpService } from './services/app-http.service';
 
 @NgModule({
   declarations: [
@@ -97,11 +103,15 @@ import { CourseSearchAccordionComponent } from './components/course-search-accor
     // StoreModule.forRoot(reducers, { metaReducers }),
     StoreModule.forRoot({ advancedSearch: advancedSearchReducer, report: reportReducer, quickSearch: quickSearchReducer, searchResult: searchResultReducer, courseSearch: courseSearchReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 100, name: 'tng1' }),
-    EffectsModule.forRoot([AdvancedSearchEffects, ReportEffects, QuickSearchEffects, SearchResultEffects, CourseSearchEffects])
+    EffectsModule.forRoot([AdvancedSearchEffects, ReportEffects, QuickSearchEffects, SearchResultEffects, CourseSearchEffects,AuthEffectsService,ClaimsEffectsService])
 
   ],
   providers: [
     DatePipe,
+    AuthService,
+    ClaimsService,
+    AuthOrchestration,
+    AppHttpService,
     LoaderService,
     {
       provide: HTTP_INTERCEPTORS,
