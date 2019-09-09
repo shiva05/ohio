@@ -6,6 +6,7 @@ import { SharedService } from '../../services/shared.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
+import { take } from 'rxjs/operators';
 @Component({
   selector: 'filter-summary',
   templateUrl: './filter-summary.component.html',
@@ -41,7 +42,7 @@ export class FilterSummaryComponent implements OnInit {
     this.searchAlignment = true;
     this.shared.updateAlignmentSearch = false;
     this.shared.updateCourseSearch = false;
-    this.store.select('advancedSearch').subscribe(data => {
+    this.store.select('advancedSearch').pipe(take(1)).subscribe(data => {
     var quickSearchData = localStorage.getItem('QuickSearchData');
     if (quickSearchData) {          
       quickSearchData = JSON.parse(quickSearchData);
