@@ -24,7 +24,12 @@ export class QuickSearchComponent implements OnInit {
   selectedCareer: any = [];
   selectedAcadamicSubjects: any = [];
   academicSubjects = [];
-    strands = [];
+  strands = [];
+  quickSearchSharedData = {
+    'KeyWords': '',
+    'CareerFields': [],
+    'AcademicSubjects' : []
+  };
 
   constructor(private sharedData: SharedService,
               private router: Router,
@@ -64,7 +69,7 @@ export class QuickSearchComponent implements OnInit {
       this.academicSubjects = [];
       if (data.QsMetaData) {
         this.qsMetaData = data.QsMetaData;
-        debugger;
+      //  debugger;
         this.careers = this.qsMetaData['CareerFields'];
         // this.academicSubjects = this.qsMetaData['academicSubjects'];
         this.qsMetaData['Subjects'].forEach(element => {
@@ -75,9 +80,14 @@ export class QuickSearchComponent implements OnInit {
   }
 
   sendSearch() {
-    this.sharedData.data = this.keyword;
-    localStorage.setItem('sharedData', this.sharedData.data);
-    (window as any).open('http://edu-dev-sbd.azurewebsites.net/Search', '_blank');
-    // this.router.navigate(['/Search']);
+    this.quickSearchSharedData.KeyWords = this.keyword;
+    this.quickSearchSharedData.CareerFields = this.selectedCareer;
+    this.quickSearchSharedData.AcademicSubjects = this.selectedAcadamicSubjects;
+    localStorage.setItem('QuickSearchData', JSON.stringify(this.quickSearchSharedData));
+    (window as any).open('http://edu-dev-sbd.azurewebsites.net/AlignmentSearchResults', '_blank');
+
+    // (window as any).open('http://edu-dev-sbd.azurewebsites.net/Search', '_blank');
+  //  (window as any).open('http://edu-dev-sbd.azurewebsites.net/AlignmentSearchResults', '_blank');
+    
   }
 }

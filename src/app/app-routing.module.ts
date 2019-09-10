@@ -62,6 +62,10 @@ const routes: Routes = [
    {
      path: 'DataImport',
      component: ExportComponent
+     },
+   {
+     path: 'quickSearch',
+     component: QuickSearchComponent
    }
    
 ];
