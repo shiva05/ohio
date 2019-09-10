@@ -25,7 +25,6 @@ export class QuickSearchComponent implements OnInit {
   selectedAcadamicSubjects: any = [];
   academicSubjects = [];
   strands = [];
-  finalData: any;
   quickSearchSharedData = {
     'KeyWords': '',
     'CareerFields': [],
@@ -84,9 +83,11 @@ export class QuickSearchComponent implements OnInit {
     this.quickSearchSharedData.KeyWords = this.keyword;
     this.quickSearchSharedData.CareerFields = this.selectedCareer;
     this.quickSearchSharedData.AcademicSubjects = this.selectedAcadamicSubjects;
-    this.finalData = JSON.stringify(this.quickSearchSharedData);
-    localStorage.setItem('QuickSearchData', this.finalData);
-   // (window as any).open('http://edu-dev-sbd.azurewebsites.net/Search', '_blank');
-    this.router.navigate(['/AlignmentSearchResults']);
+    localStorage.setItem('QuickSearchData', JSON.stringify(this.quickSearchSharedData));
+    (window as any).open('http://edu-dev-sbd.azurewebsites.net/AlignmentSearchResults', '_blank');
+
+    // (window as any).open('http://edu-dev-sbd.azurewebsites.net/Search', '_blank');
+  //  (window as any).open('http://edu-dev-sbd.azurewebsites.net/AlignmentSearchResults', '_blank');
+    
   }
 }

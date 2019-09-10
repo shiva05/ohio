@@ -6,7 +6,7 @@ import { SharedService } from '../../services/shared.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
-import { take } from 'rxjs/operators';
+
 @Component({
   selector: 'filter-summary',
   templateUrl: './filter-summary.component.html',
@@ -20,8 +20,8 @@ export class FilterSummaryComponent implements OnInit {
   FilterSummaryData: any = [];
   panelExpanded: boolean = false;
   searchLable: any;
-  searchAlignment: any;
-  searchCourse: any;
+  alignmentSearchResults: any;
+  courseSearchResults: any;
   searchObj: any;
 
 
@@ -34,15 +34,15 @@ export class FilterSummaryComponent implements OnInit {
 
   constructor(private store: Store<AppState>, private rout: Router, private shared: SharedService, private http: HttpClient) {
     this.searchLable = localStorage.getItem('searchLable');
-    this.store.dispatch({ type: AdvancedSearchActions.LOAD_META_DATA });
+  //  this.store.dispatch({ type: AdvancedSearchActions.LOAD_META_DATA });
   }
 
   ngOnInit() {
-    this.searchCourse = false;
-    this.searchAlignment = true;
+    this.courseSearchResults = false;
+    this.alignmentSearchResults = true;
     this.shared.updateAlignmentSearch = false;
     this.shared.updateCourseSearch = false;
-    this.store.select('advancedSearch').pipe(take(1)).subscribe(data => {
+    this.store.select('advancedSearch').subscribe(data => {
     var quickSearchData = localStorage.getItem('QuickSearchData');
     if (quickSearchData) {          
       quickSearchData = JSON.parse(quickSearchData);
@@ -141,12 +141,12 @@ export class FilterSummaryComponent implements OnInit {
       }
     });
 
-    if (this.searchLable === 'SearchAlignment') {
+    if (this.searchLable === 'alignmentSearchResults') {
       this.store.select('advancedSearch').subscribe(data => {
         if (data.alignmentSearchSelectedFilters) {
           this.formatSearchDataToSummary(data.alignmentSearchSelectedFilters);
-          this.searchAlignment = true;
-          this.searchCourse = false;
+          this.alignmentSearchResults = true;
+          this.courseSearchResults = false;
           
         }
       });
@@ -157,8 +157,8 @@ export class FilterSummaryComponent implements OnInit {
       this.store.select('courseSearch').subscribe(data => {
         if (data.courseSearchSelectedFilters.selectedAcademicSubject.length != 0 || data.courseSearchSelectedFilters.selectedAcademicSubjectCourses.length != 0 || data.courseSearchSelectedFilters.selectedCareerPath.length != 0 || data.courseSearchSelectedFilters.selectedCareerPathCourses.length != 0) {
           this.formatSearchCourseData(data.courseSearchSelectedFilters);
-          this.searchAlignment = false;
-          this.searchCourse = true;
+          this.alignmentSearchResults = false;
+          this.courseSearchResults = true;
         }
       });
      
