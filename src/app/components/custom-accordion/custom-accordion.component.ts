@@ -43,6 +43,7 @@ export class CustomAccordionComponent implements OnInit {
     Subjects: [],
     CteToAcademic: true
   };
+  dataReceived = false;
   academicSubjectIds = {
     Math: 1,
     ELA: 2,
@@ -80,8 +81,11 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   getAlignmentSearchResult() {
+
     this.store.select('advancedSearch').subscribe(data => {
+      if (this.dataReceived === false){
       if (data.alignmentSearchSelectedFilters) {
+        this.dataReceived = true;
         this.alignmentSearchSelectedFilters = data.alignmentSearchSelectedFilters;
         let careerfeilds = [];
         data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
@@ -167,11 +171,14 @@ export class CustomAccordionComponent implements OnInit {
                 this.noResultFound = true;
               }
             }
+            return;
           },
           err => {
           });
-        console.log(data);
+        // console.log(data);
+        return;
       }
+    }
     });
   }
 
