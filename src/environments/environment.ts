@@ -5,7 +5,7 @@ import { api } from './api';
 
 const alignmentSearchAPI = 'https://edu-dev-sbd-alignmentsearch.azurewebsites.net/api/';
 const webServer = 'https://edu-dev-sbd.azurewebsites.net/';
-const apiServer = 'https://edu-dev-sbd-gateway.azurewebsites.net/api/';
+const apiServer = 'https://edu-dev-sbd-gateway.azurewebsites.net/api/v1/';
 
 const environment = {
   ...api(apiServer),
