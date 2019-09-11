@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { SearchResultService } from '../../services/search-result.service';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'custom-accordion',
@@ -69,6 +70,15 @@ export class CustomAccordionComponent implements OnInit {
     }
   ];
 
+  quickSearchFilterData :any = {
+    CareerFiledIds: [],
+    CompetencyIds: [],
+    CteToAcademic: true,
+    Keywords: "",
+    OutcomeIds: [],
+    StrandIds: [],
+    Subjects: [],
+  }
 
   @Output() onPageSelect = new EventEmitter<any>();
 
@@ -77,7 +87,57 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAlignmentSearchResult();
+    
+        var quickSearchData = JSON.parse(localStorage.getItem('QuickSearchData'));
+        if (quickSearchData) {
+          if (quickSearchData['AcademicSubjects'].length > 0) {
+            quickSearchData['AcademicSubjects'].forEach((subject) => {
+              var selectedSubject = {
+                SubjectId: 0,
+                Level1Ids: [],
+                Level2Ids: [],
+                Level3Ids: []
+              }
+              selectedSubject.SubjectId = subject.SubjectId;
+              this.quickSearchFilterData.Subjects.push(selectedSubject);
+            });
+          }
+          if (quickSearchData['CareerFields'].length > 0) {
+            quickSearchData['CareerFields'].forEach((career) => {
+              this.quickSearchFilterData.CareerFiledIds.push(career.CareerFieldId);
+            });
+          }
+          // console.log(this.quickSearchFilterData);
+          this.searchResultService.getSearchResultData(this.quickSearchFilterData).pipe(take(1)).subscribe(
+            data => {
+              this.searchResultData = data;
+              if (this.cteToAcademic) {
+                if (this.searchResultData.CareerField) {
+                  this.searchResultData.CareerField.forEach(element => {
+                    this.searchResultDataArray.push(element);
+                    this.noResultFound = false;
+                  });
+                  this.formatSearchResultDataArray();
+                } else {
+                  this.noResultFound = true;
+                }
+              } else {
+                if (this.searchResultData.Subject.length > 0) {
+                  this.subjectToCareerData = this.searchResultData.Subject;
+                  this.noResultFound = false;
+                  this.formatAlignmentSearchData();
+                } else {
+                  this.noResultFound = true;
+                }
+              }
+              return;
+            },
+            err => {
+            });
+        } else {
+          this.getAlignmentSearchResult();
+        }
+        
   }
 
   getAlignmentSearchResult() {
@@ -520,5 +580,8 @@ export class CustomAccordionComponent implements OnInit {
     this.cteToAcademic = !this.cteToAcademic;
     this.reportPayload.CteToAcademic = this.cteToAcademic;
     this.getAlignmentSearchResult();
+  }
+   ngOnDestroy() {
+    localStorage.removeItem('QuickSearchData');
   }
 }

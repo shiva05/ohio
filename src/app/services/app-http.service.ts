@@ -18,11 +18,11 @@ export class AppHttpService {
 
       this.store.select(appState => appState.authState).subscribe(authJwt => {
         // console.log('authJwt', authJwt);
-        debugger
+       // debugger
         this.authJwt = authJwt.authJwt;
       });
       this.store.select(appState => appState.claimsState).subscribe(claimsJwt => {
-        debugger
+     //   debugger
         // console.log('claimsJwt', claimsJwt);
         if (claimsJwt !== null) {
 
