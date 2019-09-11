@@ -1,18 +1,41 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+
+
+
+
 import { api } from './api';
 
 const alignmentSearchAPI = 'https://edu-dev-sbd-alignmentsearch.azurewebsites.net/api/';
 const webServer = 'https://edu-dev-sbd.azurewebsites.net/';
 const apiServer = 'https://edu-dev-sbd-gateway.azurewebsites.net/api/v1/';
 
+
+const childWebSPAs = [
+  {
+      Name: 'Standard by Design',
+      WebServer: 'localhost',
+      SpaServer: 'localhost:4200',
+      SystemKey: 20
+  }];
+
+const hostname = window.location.hostname;
+const currentSpa = childWebSPAs.find(x => x.WebServer === hostname);
+
 const environment = {
   ...api(apiServer),
   production: false,
   name: '(DEV)',
-
+  localhost: true,
+  AUTH_API: apiServer + 'Auth/authtoken',
+  PUBLIC_AUTH_API: apiServer + 'Auth/publictoken',
+  systemKey : currentSpa.SystemKey,
+  MENU_API: apiServer + '/api/v1/Menu/menus',
+  CLAIMS_API :apiServer+'Auth/authclaims',
+  safeUrl: '/assets/fake/fake-safe.html',
 };
+
 
 export { environment };
 
