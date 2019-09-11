@@ -65,6 +65,7 @@ export class QuickSearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.removeItem('QuickSearchData');
     this.store.select('quickSearch').subscribe(data => {
       this.academicSubjects = [];
       if (data.QsMetaData) {

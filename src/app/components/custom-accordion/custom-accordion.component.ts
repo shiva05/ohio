@@ -581,7 +581,5 @@ export class CustomAccordionComponent implements OnInit {
     this.reportPayload.CteToAcademic = this.cteToAcademic;
     this.getAlignmentSearchResult();
   }
-   ngOnDestroy() {
-    localStorage.removeItem('QuickSearchData');
-  }
+
 }
