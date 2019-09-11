@@ -17,9 +17,13 @@ export const parseClaimsJwt = function (jwtPayloadResponse: any) {
 
     const jwtPayload = {
         uuid: jwtObj.uuid,
-        app_id: jwtObj.app_id,
-        org_id: jwtObj.org_id,
-        aud_id: jwtObj.aud_id
+        // changed the properties because we are not receiving the below properties
+        // app_id: jwtObj.app_id,
+        // org_id: jwtObj.org_id,
+        // aud_id: jwtObj.aud_id
+        app_id: jwtObj.application_key,
+        org_id: jwtObj.org_key,
+        aud_id: jwtObj.audience_key
     };
     return jwtPayload;
 };
