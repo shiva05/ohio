@@ -5,5 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class SharedService {
   data: any = [];
+  updateAlignmentSearch = false;
+  updateCourseSearch = false;
   constructor() { }
 }

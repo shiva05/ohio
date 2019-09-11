@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { DatePipe } from '@angular/common'
 
 import { AppState } from './../../app.state';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-course-search-report',
@@ -15,7 +16,7 @@ export class CourseSearchReportComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe) { }
+  constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router) { }
 
 
   ngOnInit() {
@@ -65,4 +66,7 @@ export class CourseSearchReportComponent implements OnInit {
 
   }
 
+  clearCourseSearch() {
+    this.rout.navigate(['/CourseSearch']);
+  }
 }

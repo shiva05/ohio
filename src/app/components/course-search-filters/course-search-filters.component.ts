@@ -6,6 +6,8 @@ import { AppState } from './../../app.state';
 import { Observable } from 'rxjs/Observable';
 import { CourseSearchData } from './../../models/courseSearch.model';
 import * as CourseSearchActions from './../../actions/course-search.actions';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-course-search-filters',
@@ -41,7 +43,7 @@ export class CourseSearchFiltersComponent implements OnInit {
   selectedAcademicCourses: any = [];
   isVisible: boolean = false;
 
-  constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>) {
+  constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>, private rout: Router, private shared: SharedService, ) {
     // this.metaData = store.select('metaData');
     this.store.dispatch({ type: CourseSearchActions.LOAD_COURSESEARCH_DATA });
   }
@@ -133,7 +135,10 @@ export class CourseSearchFiltersComponent implements OnInit {
         }
       }
     });
-
+    // if we are navigating from other pages except updatesearch of alignmentSearchResults, we are clearing the search data.
+    if (!this.shared.updateCourseSearch) {
+      this.clearSearch();
+    }
   }
 
   onCareerPathSelect(selectedPaths) {
@@ -146,6 +151,17 @@ export class CourseSearchFiltersComponent implements OnInit {
         }
       });
     });
+  }
+
+  onCareerPathSelectAll() {
+    this.coursesDropdown = [];
+    this.courses.forEach(course => {
+      this.coursesDropdown.push(course);
+    });
+  }
+
+  onCareerPathDeSelectAll() {
+    this.coursesDropdown = [];
   }
 
   getData(data) {
@@ -207,15 +223,16 @@ export class CourseSearchFiltersComponent implements OnInit {
       this.showAlert();
     } else {
       this.searchObj = {
-        selectedCareerPath: this.selectedCareerPath,
-        selectedCareerPathCourses: this.selectedCourses,
-        selectedAcademicSubject: this.selectedAcadamicSubjects,
-        // selectedAcademicSubjectCourses: [this.selectedMathsCourses, this.selectedELACourses, this.selectedScienceCourses, this.selectedSocialCourses]
-        selectedAcademicSubjectCourses: this.selectedAcademicItems
-      };
+      selectedCareerPath: this.selectedCareerPath,
+      selectedCareerPathCourses: this.selectedCourses,
+      selectedAcademicSubject: this.selectedAcadamicSubjects,
+      // selectedAcademicSubjectCourses: [this.selectedMathsCourses, this.selectedELACourses, this.selectedScienceCourses, this.selectedSocialCourses]
+      selectedAcademicSubjectCourses: this.selectedAcademicItems
+    };
       this.store.dispatch({ type: CourseSearchActions.SAVE_AS_SELECTED_FILTERS_COURSESEARCH, payload: this.searchObj });
       localStorage.setItem('searchLable', 'SearchCourse');
-      this.goToPage('SearchResults');
+    // this.goToPage('SearchResults');
+      this.rout.navigate(['/CourseSearchResults']);
     }
   }
 

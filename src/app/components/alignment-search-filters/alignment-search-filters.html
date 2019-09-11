@@ -60,7 +60,7 @@
       <div class="form-group col-md-6" >
           <label>{{ 'SearchFields.Outcomes' | translate }}</label>
           <ng-multiselect-dropdown [ngClass]="" [data]="outcomesDropdown" [(ngModel)]="selectedOutcome"
-              [settings]="outcomeDropdownSettings" (onSelect)="onOutcomeSelect()" (onDeSelect)="onOutcomeSelect()">
+              [settings]="outcomeDropdownSettings" (onSelect)="onOutcomeSelect()" (onDeSelect)="onOutcomeSelect()" (onSelectAll)="onOutcomeSelectAll()" (onDeSelectAll)="onOutcomeDeSelectAll()">
           </ng-multiselect-dropdown>
       </div>
       <!-- End Dropdown Row -->

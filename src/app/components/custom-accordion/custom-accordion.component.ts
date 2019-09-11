@@ -8,6 +8,7 @@ import { SearchResultData } from './../../models/searchResult.model';
 import { Observable } from 'rxjs/Observable';
 import { SearchResultService } from '../../services/search-result.service';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'custom-accordion',
@@ -31,6 +32,9 @@ export class CustomAccordionComponent implements OnInit {
   alignmentSearchSelectedFilters: {};
   totalSearchResults = 0;
   isVisible: boolean = false;
+  Level1Ids: any = [];
+  Level2Ids: any = [];
+  Level3Ids: any = [];
   reportPayload = {
     Keywords: '',
     CareerFiledIds: [],
@@ -38,11 +42,9 @@ export class CustomAccordionComponent implements OnInit {
     OutcomeIds: [],
     CompetencyIds: [],
     Subjects: [],
-    Level1Ids: [],
-    Level2Ids: [],
-    Level3Ids: [],
     CteToAcademic: true
   };
+  dataReceived = false;
   academicSubjectIds = {
     Math: 1,
     ELA: 2,
@@ -71,7 +73,7 @@ export class CustomAccordionComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor(private store: Store<AppState>, private httpService: HttpClient, private searchResultService: SearchResultService) {
+  constructor(private store: Store<AppState>, private httpService: HttpClient, private searchResultService: SearchResultService, private rout: Router) {
     this.cteToAcademic = true;
   }
 
@@ -80,8 +82,11 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   getAlignmentSearchResult() {
+
     this.store.select('advancedSearch').subscribe(data => {
+      if (this.dataReceived === false) {
       if (data.alignmentSearchSelectedFilters) {
+        this.dataReceived = true;
         this.alignmentSearchSelectedFilters = data.alignmentSearchSelectedFilters;
         let careerfeilds = [];
         data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
@@ -167,11 +172,14 @@ export class CustomAccordionComponent implements OnInit {
                 this.noResultFound = true;
               }
             }
+            return;
           },
           err => {
           });
-        console.log(data);
+        // console.log(data);
+        return;
       }
+    }
     });
   }
 
@@ -182,7 +190,7 @@ export class CustomAccordionComponent implements OnInit {
         this.totalSearchResults = this.totalSearchResults + element.Alignment;
       }
       this.academicSubjectColorPallet.forEach((item) => {
-        if (element.AcademicSubject === item.Subject) {
+        if (element.AcademicSubjectName === item.Subject) {
           element['Color'] = item.Color;
         }
       });
@@ -423,22 +431,21 @@ export class CustomAccordionComponent implements OnInit {
     obj.isOutcomeClosed = !obj.isOutcomeClosed;
   }
 
-  getSelect(obj) {
+  getSelect() {
     this.reportPayload.Keywords = '';
     this.reportPayload.CareerFiledIds = [];
     this.reportPayload.StrandIds = [];
     this.reportPayload.OutcomeIds = [];
     this.reportPayload.CompetencyIds = [];
     this.reportPayload.Subjects = [];
-    this.reportPayload.Level1Ids = [];
-    this.reportPayload.Level2Ids = [];
-    this.reportPayload.Level3Ids = [];
+    this.Level1Ids = [];
+    this.Level2Ids = [];
+    this.Level3Ids = [];
 
     if (this.cteToAcademic) {
       this.searchResultDataArray.forEach(careerField => {
-        if (this.reportPayload.Subjects.length <= 0) {
-          this.reportPayload.Subjects.push({ SubjectId: this.academicSubjectIds[careerField.AcademicSubject[0]] });
-        }
+        this.reportPayload.Subjects.push({ SubjectId: careerField.AcademicSubjectId });
+
         if (careerField.isSelected) {
           this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
         }
@@ -464,33 +471,39 @@ export class CustomAccordionComponent implements OnInit {
         // Career Field ID is missing in the JSON result so for now hardcoded
         this.reportPayload.CareerFiledIds = [1];
 
-        if (this.reportPayload.Subjects.length <= 0) {
-          // this.reportPayload.Subjects.push(careerField.SubjectId);
-          this.reportPayload.Subjects.push({ SubjectId: careerField.SubjectId });
-        }
-
+        this.Level1Ids = [];
         careerField.Level.forEach(level => {
           if (level.isSelected) {
-            this.reportPayload.Level1Ids.push(level.LevelValue1);
+            this.Level1Ids.push(level.LevelValue1);
           }
 
+          this.Level2Ids = [];
           level.ChildLevel.forEach(childLevel1 => {
             if (childLevel1.isSelected) {
-              this.reportPayload.Level2Ids.push(childLevel1.LevelValue2);
+              this.Level2Ids.push(childLevel1.LevelValue2);
             }
 
+            this.Level3Ids = [];
             childLevel1.ChildLevel.forEach(childLevel2 => {
               if (childLevel2.isSelected) {
-                this.reportPayload.Level3Ids.push(childLevel2.LevelValue3);
+                this.Level3Ids.push(childLevel2.LevelValue3);
               }
             });
           });
+        });
+
+        this.reportPayload.Subjects.push({
+          SubjectId: careerField.SubjectId,
+          Level1Ids: this.Level1Ids,
+          Level2Ids: this.Level2Ids,
+          Level3Ids: this.Level3Ids
         });
       });
     }
 
     if (this.reportPayload.CompetencyIds.length > 0) {
-      this.goToPage(obj);
+      // this.goToPage(obj);
+      this.rout.navigate(['/AlignmentSearchReport']);
       this.alignmentSearchSelectedFilters['selectedAsSearchResults'] = this.reportPayload;
       this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.alignmentSearchSelectedFilters });
     } else {
@@ -510,8 +523,9 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   goBackToSearch() {
-    let lable = localStorage.getItem('searchLable');
-    this.onPageSelect.emit('SearchAlignment');
+    // let lable = localStorage.getItem('searchLable');
+    // this.onPageSelect.emit('SearchAlignment');
+    this.rout.navigate(['/AlignmentSearch']);
   }
 
   onToggleClick(value) {

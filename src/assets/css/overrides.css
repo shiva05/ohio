@@ -4,7 +4,7 @@
 @font-face {font-family: 'Serifa-Med'; src: url('webfonts/32D152_0_0.eot');src: url('webfonts/32D152_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/32D152_0_0.woff2') format('woff2'),url('webfonts/32D152_0_0.woff') format('woff'),url('webfonts/32D152_0_0.ttf') format('truetype');}
 
 
-@font-face {font-family: 'Serifa-Med';src: url('webfonts/Serifa-Med/32D152_1_0.eot');src: url('webfonts/Serifa-Med/32D152_1_0.eot?#iefix') format('embedded-opentype'),url('webfonts/Serifa-Med/32D152_1_0.woff2') format('woff2'),url('webfonts/Serifa-Med/32D152_1_0.woff') format('woff'),url('webfonts/Serifa-Med/32D152_1_0.ttf') format('truetype');} 
+@font-face {font-family: 'Serifa-Med';src: url('~/webfonts/Serifa-Med/32D152_1_0.eot');src: url('~/webfonts/Serifa-Med/32D152_1_0.eot?#iefix') format('embedded-opentype'),url('~/webfonts/Serifa-Med/32D152_1_0.woff2') format('woff2'),url('~/webfonts/Serifa-Med/32D152_1_0.woff') format('woff'),url('~/webfonts/Serifa-Med/32D152_1_0.ttf') format('truetype');}
 
 
 
@@ -45,7 +45,7 @@ padding: 0px !important;
 .nav li a{
     color: #fff;
     font-size: 16px;
-    cursor: pointer;    
+    cursor: pointer;
     padding: 16px 20px !important;
     font-weight: 700 !important;
     min-height: 56px;
@@ -86,7 +86,7 @@ padding: 0px !important;
 
 .search-results-head-left h3{
     color: #700017;
-    font-size: 26px;    
+    font-size: 26px;
     font-family: Serifa-Med;
     margin: 0px;
 }
@@ -148,7 +148,7 @@ padding: 10px 10px 2px 10px;
 
 
 .level-three .list-group-item{
-    border: 0px !important;   
+    border: 0px !important;
     padding:0px 0px;
 }
 .search-accordion-each .card-header{
@@ -167,7 +167,7 @@ padding: 10px 10px 2px 10px;
     padding: 15px;
     background: #D8D8D8;
     color: #700017;
-    font-family: Serifa-Med;    
+    font-family: Serifa-Med;
     margin: 0 0 10px 0;
     text-transform: uppercase;
 }
@@ -180,7 +180,7 @@ padding: 10px 10px 2px 10px;
 }
 
 .accordion-bubble{
-    color: #fff; 
+    color: #fff;
     font-weight: 600;
     border-radius: 5px;
     display: block;
@@ -190,15 +190,15 @@ padding: 10px 10px 2px 10px;
 
 
 .bubble-green{
-    background: #5E8000 !important;   
+    background: #5E8000 !important;
 }
 
 .bubble-blue{
-    background: #0B5688 !important;   
+    background: #0B5688 !important;
 }
 
 .bubble-blue-color{
-    color: #0B5688 !important;   
+    color: #0B5688 !important;
 }
 
 
@@ -283,7 +283,7 @@ border-color: #fff !important;
 
 .home{
     font-family: 'Lato', sans-serif;
-    font-size: 16px ;   
+    font-size: 16px ;
 }
 
 
@@ -327,17 +327,17 @@ border-color: #fff !important;
 }
 
 .accordion-active{
-    border:  1px solid #ddd !important; 
+    border:  1px solid #ddd !important;
     overflow: hidden;
 }
 
 .level-two-inner{
     border-radius: 0px !important;
-    border:1px solid #ddd !important; 
+    border:1px solid #ddd !important;
     border-width: 0 0 1px 0 !important;
     padding: 0px;
     display:block;
-    position: relative;    
+    position: relative;
 }
 .accordion-checbox{
     margin: 0;
@@ -345,25 +345,25 @@ border-color: #fff !important;
     width: 25px;
 }
 
-.level-four-title{    
+.level-four-title{
     padding: 0 0 0 0px;
     display: inline-block;
     vertical-align: top;
     max-width: calc(100% - 100px);
 }
-.level-three-title{    
+.level-three-title{
     padding: 0 0 0 0px;
     display: inline-block;
     vertical-align: top;
     max-width: calc(100% - 100px);
 }
-.level-two-title{        
+.level-two-title{
     display: inline-block;
     vertical-align: top;
     max-width: calc(100% - 25px);
 }
 
-.level-one-title{        
+.level-one-title{
     display: inline-block;
     vertical-align: top;
     max-width: calc(100% - 25px);
@@ -392,13 +392,13 @@ border-color: #fff !important;
 .search-seemore{
     display: block;
     width: 100%;
-    margin: 0 0 10px 0;  
-    position: relative;  
+    margin: 0 0 10px 0;
+    position: relative;
 }
 .search-seemore h3{
     text-align: center;
     font-size:20px;
-    font-family: 'Serifa-Med';   
+    font-family: 'Serifa-Med';
     margin: 0px;
 }
 .search-seemore a{
@@ -408,7 +408,7 @@ border-color: #fff !important;
     background: #700017;
     left:calc(50% - 30px);
     width: 50px;
-    text-align: center; 
+    text-align: center;
     border-radius: 0 0 50px 50px;
     bottom: -60px;
     display: block;
@@ -419,19 +419,19 @@ border-color: #fff !important;
 }
 
 .img-overlay h2{
-    font-family: 'Serifa-Med';   
+    font-family: 'Serifa-Med';
 }
 
 
 .multiselect-dropdown .dropdown-btn .selected-item{
-        white-space: nowrap;        
+        white-space: nowrap;
         overflow: hidden;
         max-width: calc(100% - 60px);
         text-overflow: ellipsis;
     }
     .dynamic-academics h3{
         font-size: 18px;
-        font-family: 'Serifa-Med';   
+        font-family: 'Serifa-Med';
         color: #700017;
     }
 .search-accordion {
