@@ -8,6 +8,6 @@ export interface AppState {
   readonly metaData: MetaData;
   readonly qsMetaData: QsMetaData;
   readonly   authState : AuthState;
-  readonly   claim : ClaimsState;
+  readonly   claimsState : ClaimsState;
 
 }

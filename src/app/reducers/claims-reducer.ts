@@ -29,8 +29,8 @@ export function ClaimsReducer(state = initialState, action: ClaimsActions.Action
 
             return {
                 ...state, loading: false,
-                claimsJwt: action.payload.claimsJwt,
-                claimsJwtPayload: parseClaimsJwt(action.payload.claimsJwt),
+                claimsJwt: action.payload.ClaimsJwt,
+                claimsJwtPayload: parseClaimsJwt(action.payload.ClaimsJwt),
                 error: null
             };
         case ClaimsActions.GET_CLAIMS_JWT_ERROR:

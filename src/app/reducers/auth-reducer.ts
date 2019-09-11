@@ -49,11 +49,11 @@ export function AuthReducer(state = initialState, action: AuthActions.Actions): 
                 ...state,
                 loading: false,
                 error: null,
-                authJwt: action.payload.accessToken,
-                authJwtPayload: parseAuthJwt(action.payload.accessToken),
-                orgs: action.payload.orgs,
-                expiration: parseAuthJwt(action.payload.accessToken).exp,
-                isPublic: action.payload.public
+                authJwt: action.payload.AccessToken,
+                authJwtPayload: parseAuthJwt(action.payload.AccessToken),
+                orgs: action.payload.Orgs,
+                expiration: parseAuthJwt(action.payload.AccessToken).exp,
+                isPublic: action.payload.Public
             };
         case AuthActions.SET_SELECTED_ORG:
             return { ...state, selectedOrg: action.payload };

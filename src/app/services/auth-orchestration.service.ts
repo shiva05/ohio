@@ -37,23 +37,23 @@ export class AuthOrchestration {
     // subscribe only to changes in orgID, call apps and audiences service
     this.store.select(appState => appState.authState.orgs).subscribe(orgs => {
       if (orgs) {
-        //this.autoSelectOrg(orgs);
+        this.autoSelectOrg(orgs);
       }
     });
 
     this.store
       .select(appState => appState.authState.selectedOrg)
       .subscribe(selectedOrg => {
-        if (selectedOrg && selectedOrg.audiences) {
-          //this.autoSelectAudience(selectedOrg.audiences);
+        if (selectedOrg && selectedOrg.Audiences) {
+          this.autoSelectAudience(selectedOrg.Audiences);
         }
       });
 
     this.store
       .select(appState => appState.authState.selectedAudience)
       .subscribe(selectedAudience => {
-        if (selectedAudience && selectedAudience.applications) {
-          this.autoSelectApplication(selectedAudience.applications);
+        if (selectedAudience && selectedAudience.Applications) {
+          this.autoSelectApplication(selectedAudience.Applications);
         }
       });
   }
@@ -61,9 +61,9 @@ export class AuthOrchestration {
   handleClaims(org, aud, app) {
     if (org && aud && app) {
       const claimsObj = {
-        org_id: org.org_id,
-        aud_id: aud.aud_id,
-        app_id: app.app_id
+        org_id: org.Org_id,
+        aud_id: aud.Aud_id,
+        app_id: app.App_id
       };
       this.store.dispatch(new ClaimsActions.GetClaimsJwt(claimsObj));
     }

@@ -57,6 +57,9 @@ import { AuthService } from './services/auth.service';
 import { ClaimsService } from './services/claims.service';
 import { AuthOrchestration } from './services/auth-orchestration.service';
 import { AppHttpService } from './services/app-http.service';
+import { AuthReducer } from './reducers/auth-reducer';
+import { ClaimsReducer } from './reducers/claims-reducer';
+// import { AuthEffectsService } from './effects/auth-effects';
 
 @NgModule({
   declarations: [
@@ -101,7 +104,7 @@ import { AppHttpService } from './services/app-http.service';
       }
     }),
     // StoreModule.forRoot(reducers, { metaReducers }),
-    StoreModule.forRoot({ advancedSearch: advancedSearchReducer, report: reportReducer, quickSearch: quickSearchReducer, searchResult: searchResultReducer, courseSearch: courseSearchReducer }),
+    StoreModule.forRoot({ advancedSearch: advancedSearchReducer, report: reportReducer, quickSearch: quickSearchReducer, searchResult: searchResultReducer, courseSearch: courseSearchReducer, authState: AuthReducer, claimsReducer: ClaimsReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 100, name: 'tng1' }),
     EffectsModule.forRoot([AdvancedSearchEffects, ReportEffects, QuickSearchEffects, SearchResultEffects, CourseSearchEffects,AuthEffectsService,ClaimsEffectsService])
 

@@ -4,6 +4,7 @@ import { ResponseContentType } from '@angular/http';
 import * as cuid from 'cuid';
 import { Store } from '@ngrx/store';
 import { State } from '../reducers';
+import { AppState } from './../app.state';
 
 @Injectable({
   providedIn: 'root'
@@ -13,18 +14,21 @@ export class AppHttpService {
     authJwt = '';
     claimsJwt = '';
 
-    constructor(private http: HttpClient, private store: Store<State>) {
+    constructor(private http: HttpClient, private store: Store<AppState>) {
 
-      // this.store.select(appState => appState..authJwt).subscribe(authJwt => {
-      //   // console.log('authJwt', authJwt);
-      //   this.authJwt = authJwt;
-      // });
-      // this.store.select(appState => appState.claimsState.claimsJwt).subscribe(claimsJwt => {
-      //   // console.log('claimsJwt', claimsJwt);
-      //   if (claimsJwt !== null) {
-      //       this.claimsJwt = claimsJwt;
-      //   }
-      // });
+      this.store.select(appState => appState.authState).subscribe(authJwt => {
+        // console.log('authJwt', authJwt);
+        debugger
+        this.authJwt = authJwt.authJwt;
+      });
+      this.store.select(appState => appState.claimsState).subscribe(claimsJwt => {
+        debugger
+        // console.log('claimsJwt', claimsJwt);
+        if (claimsJwt !== null) {
+
+            this.claimsJwt = claimsJwt.claimsJwt;
+        }
+      });
     }
 
     get(url: string, reqObject: any = null) {

@@ -30,6 +30,10 @@ import { LoaderService } from './services/loader.service';
 export class AppComponent implements OnInit {
   title = 'StandardsByDesignWeb';
   isLocal = false;
+  appError = false;
+  errorMessage = '';
+  isPublic = false;
+  loading = true;
 
   constructor(private http: HttpClient,
               private store: Store<AppState>,
@@ -86,6 +90,30 @@ export class AppComponent implements OnInit {
         }
       }
     }
+
+    this.store.select('authState').subscribe((authState) => {
+      this.appError = (authState.error !== null);
+      this.errorMessage = (authState.error !== null) ? authState.error.error : '';
+      if (authState != null) {
+        this.isPublic = authState.isPublic;
+        const userType = authState.isPublic ? 'Public' : 'Internal';
+        localStorage.setItem(environment.name + '_at', userType);
+      }
+      // call this when they are all set
+      if (authState.authJwt != null) {
+        this.authOrchestration.handleClaims(authState.selectedOrg, authState.selectedAudience, authState.selectedApplication);
+      }
+
+      // console.log('authState:', authState);
+      if (authState && authState.error) {
+        this.appError = true;
+        this.errorMessage = authState.error.error;
+        this.loading = false;
+      }
+    });
+
+
+
 
 
   }

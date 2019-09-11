@@ -203,7 +203,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         }
       });
     });
-   
+
   }
 
   onStrandSelect() {
