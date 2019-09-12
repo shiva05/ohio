@@ -67,5 +67,5 @@ export type Actions = MetaDataFetch |
   SaveAsSelectedFilters |
   CompetencyDataFetch |
   CompetencyDataFetchFailure |
-  ResetSearchFilters |
+  ResetAlignmentSearchFilters |
   CompetencyDataFetchSucess;
