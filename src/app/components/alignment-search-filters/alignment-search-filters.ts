@@ -14,7 +14,7 @@ import { SharedService } from '../../services/shared.service';
 @Component({
   selector: 'app-alignment-search-filters',
   templateUrl: './alignment-search-filters.html',
-  styleUrls: []
+  styleUrls: ['./alignment-search-filters.css']
 })
 export class AlignmentSearchFiltersComponent implements OnInit {
 
@@ -54,6 +54,8 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   metaData: Observable<MetaData>;
   selectedAcademicItems: any = [];
   subjectsDefaultSettings: any = {};
+  isVisible: boolean = false;
+
   constructor(private httpService: HttpClient,
               private ref: ChangeDetectorRef,
               private store: Store<AppState>,
@@ -183,7 +185,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       }
     });
 
-    //if we are navigating from other pages except updatesearch of alignmentSearchResults, we are clearing the search data.
+    // if we are navigating from other pages except updatesearch of alignmentSearchResults, we are clearing the search data.
     if (!this.shared.updateAlignmentSearch) {
       this.clearSearch();
     }
@@ -199,7 +201,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       this.selectedCareer.forEach(eachCareer => {
         if (eachStrand.CareerFieldPk === eachCareer.CareerFieldId) {
           this.strandsDropdown.push(eachStrand);
-          //have to use _.intersection method to remove the element sof the unselected parent data.
+          // have to use _.intersection method to remove the element sof the unselected parent data.
         }
       });
     });
@@ -352,6 +354,13 @@ clearSearch() {
     // TODO: Call API
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA , payload : this.selectedOutcome});
   }
+  showAlert(): void {
+    if (this.isVisible) {
+      return;
+    }
+    this.isVisible = true;
+    setTimeout(() => this.isVisible = false, 4000);
+  }
   onOutcomeSelectAll() {
     this.competencyNumbers = [];
     this.selectedOutcome = this.outcomesDropdown;
@@ -362,21 +371,25 @@ clearSearch() {
     this.selectedCompetencyNumbers = [];
   }
   search() {
-    this.goToPage('SearchResults');
-    // debugger;
-    this.searchObj = {
-      selectedCareers: this.selectedCareer,
-      selectedStrands: this.selectedStrands,
-      selectedOutcomes: this.selectedOutcome,
-      selectedCompetencies: this.selectedCompetencyNumbers,
-      selectedAcadamicSubjects: this.selectedAcadamicSubjects,
-      finalSelectedObject: this.academicSubjects,
+    if (this.selectedCareer.length < 1 && this.selectedAcademicItems.length < 1) {
+      this.showAlert();
+    } else {
+      this.goToPage('SearchResults');
+      // debugger;
+      this.searchObj = {
+        selectedCareers: this.selectedCareer,
+        selectedStrands: this.selectedStrands,
+        selectedOutcomes: this.selectedOutcome,
+        selectedCompetencies: this.selectedCompetencyNumbers,
+        selectedAcadamicSubjects: this.selectedAcadamicSubjects,
+        finalSelectedObject: this.academicSubjects,
 
-    };
-    localStorage.setItem('searchLable', 'SearchAlignment');
-    //this.goToPage('SearchResults');
-    this.rout.navigate(['/AlignmentSearchResults']);
-    this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS , payload: this.searchObj});
+      };
+      localStorage.setItem('searchLable', 'SearchAlignment');
+      // this.goToPage('SearchResults');
+      this.rout.navigate(['/AlignmentSearchResults']);
+      this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
+    }
   }
 
   onAcadamicSubjectSelect() {
