@@ -32,7 +32,7 @@ export class ReportComponent {
         let objTemp =  data.alignmentSearchSelectedFilters.selectedAsSearchResults;
         this.downloadPDFService.getPDF(objTemp)
         .subscribe(x => {
-          debugger
+
           // It is necessary to create a new blob object with mime-type explicitly set
           // otherwise only Chrome works like it should
           const newBlob = new Blob([x], { type: 'application/pdf' });

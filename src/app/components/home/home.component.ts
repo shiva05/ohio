@@ -7,6 +7,7 @@ import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  isPublic : boolean
   constructor() { }
 
   @Output() onPageSelect = new EventEmitter<any>();
@@ -16,6 +17,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isPublic = true;
   }
 
 }

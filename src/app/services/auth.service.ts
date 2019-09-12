@@ -9,7 +9,7 @@ export class AuthService {
   constructor(private http: AppHttpService) { }
 
   fetchJwt(token: string) {
-    debugger
+
     const url = environment.AUTH_API + '?token=' + encodeURIComponent(token);
     return this.http.get(url);
   }

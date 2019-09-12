@@ -113,8 +113,8 @@ export class AppComponent implements OnInit {
     });
 
     this.store.select('claimsReducer').subscribe((claimsState) => {
-      debugger
-      this.ready = (claimsState.claimsJwtPayload.application_key !== null);       // show the reset of app
+
+      this.ready = (claimsState.claimsJwtPayload.app_id !== null);       // show the reset of app
       // if (this.ready) {
       //   // this.loading = false;
       //   // claimsState.menus.items.forEach(item => {

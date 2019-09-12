@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ResponseContentType } from '@angular/http';
 import * as cuid from 'cuid';
 import { Store } from '@ngrx/store';
-import { State } from '../reducers';
+import { Reducers } from '../reducers';
 import { AppState } from './../app.state';
 
 @Injectable({
@@ -18,11 +18,11 @@ export class AppHttpService {
 
       this.store.select(appState => appState.authState).subscribe(authJwt => {
         // console.log('authJwt', authJwt);
-        debugger
+
         this.authJwt = authJwt.authJwt;
       });
       this.store.select(appState => appState.claimsState).subscribe(claimsJwt => {
-        debugger
+
         // console.log('claimsJwt', claimsJwt);
         if (claimsJwt !== null) {
 
