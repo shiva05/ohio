@@ -58,6 +58,9 @@ export class AppHttpService {
     delete(url: string) {
         return this.http.delete(url, this.getHeaders());
     }
+    getPDFFile(url: string, data: any) {
+    return this.http.post(url, data, this.getFileHeaders());
+     }
 
     getHeaders() {
         const rid = cuid();

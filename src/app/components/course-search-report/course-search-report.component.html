@@ -1,27 +1,3 @@
-<!--<div class="reports">
-
-  <app-course-search-report-list></app-course-search-report-list>
-
-  <div class="col-md-12">
-    <div class="pull-right report-btn">
-      <button type="button" class="ohio-button large but-gap">
-        Save to Profile
-      </button>-->
-      <!-- <a href="../../../assets/pdf/Report.pdf" download="Report.pdf"> -->
-      <!--<button type="button" class="ohio-button large but-gap" (click)="downloadPDF()">
-        Download
-      </button>-->
-      <!-- </a> -->
-      <!--<button type="button" class="ohio-button large but-gap  secondary" (click)="goToPage('Search')">
-        {{ 'ReportFields.Cancel' | translate }}
-      </button>
-
-    </div>
-  </div>
-
-
-
-</div>-->
 <div class="reports">
 
   <app-course-search-report-list></app-course-search-report-list>
@@ -32,7 +8,7 @@
           {{ 'ReportFields.SaveToProfile' | translate }}
         </button>
         <!-- <a href="../../../assets/pdf/Report.pdf" download="Report.pdf"> -->
-        <button type="button" class="ohio-button large but-gap" >
+        <button type="button" class="ohio-button large but-gap" (click)="downloadPDF()" >
           {{ 'ReportFields.Download' | translate }}
         </button>
         <!-- </a> -->
