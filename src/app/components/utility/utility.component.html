@@ -1,0 +1,80 @@
+<div class="utilityContainer shelf-container">
+
+  <app-utilitynav (doUtilNav)="utilNav($event)"></app-utilitynav>
+
+  <div class="utility" id="utils-docs" *ngIf="showDocs && !hideUtilityDivs">
+      <button (click)="utilNav('Documents')" _ngcontent-c15="" aria-label="Close"  class="close close-slider pull-right" type="button">
+          <span _ngcontent-c15="" aria-hidden="true"><i class="fas fa-times"></i></span>
+        </button>
+    <utils-docs
+    (doLoadImportDocs)="loadImportDocs($event)"
+    (doLoadDocs)="loadDocs($event)"
+    (doImportDocs)="importDocs($event)"
+    (doDeleteDocs)="removeDocs($event)"
+    [docs]="docsResults"
+    [importDocs]="importDocsResults"
+    [utilsContext]="context"
+    [docStatusMessage]="docStatusMessage"
+    [hideDocMessages]="hideDocMessages"
+    [alertMsg]="docStatusMessage"
+    [alertType]="alertType"
+    [importDocPermissions]="importDocPermissions"
+    [addDocPermissions]="addDocPermissions"
+    [docHistoryPermissions]="docHistoryPermissions"
+    [docReviewPermissions]="docReviewPermissions">
+  </utils-docs>
+  </div>
+
+  <div class="utility" id="utils-flags" *ngIf="showFlags && !IsOverview() && !hideUtilityDivs">
+      <button (click)="utilNav('Flags')" _ngcontent-c15="" aria-label="Close"  class="close close-slider-flags pull-right" type="button">
+          <span _ngcontent-c15="" aria-hidden="true"><i class="fas fa-times"></i></span>
+        </button>
+    <utils-flags (doLoadFlags)="loadFlags($event)" (doAddFlags)="addFlags($event)" (doRemoveFlags)="removeFlags($event)"
+      [flags]="flagResults"></utils-flags>
+
+  </div>
+
+  <div class="utility" id="utils-flags-overview" *ngIf="showFlags && IsOverview() && !hideUtilityDivs">
+      <button (click)="utilNav('Flags')" _ngcontent-c15="" aria-label="Close"  class="close close-slider-flags pull-right" type="button">
+          <span _ngcontent-c15="" aria-hidden="true"><i class="fas fa-times"></i></span>
+        </button>
+    <app-flags-overview [flags]="flagOverviewResults">
+
+    </app-flags-overview>
+
+  </div>
+
+  <div class="utility" id="utils-contacts" *ngIf="showContacts && !hideUtilityDivs">
+    <utils-contacts></utils-contacts>
+  </div>
+  <div class="utility" id="utils-history" *ngIf="showHistory && !hideUtilityDivs">
+    <utils-history></utils-history>
+  </div>
+
+  <div id="utils-comments" class="utility" *ngIf="showComments && !IsOverview() && !hideUtilityDivs" style="width: 93%;">
+      <button (click)="utilNav('Comments')" _ngcontent-c15="" aria-label="Close"  class="close close-slider pull-right" type="button">
+          <span _ngcontent-c15="" aria-hidden="true"><i class="fas fa-times"></i></span>
+        </button>
+    <app-comments-container (editComment)="updateComment($event)" (addComment)="addComment($event)" (addSubject)="addSubject($event)"
+      [subjects]="subjects"></app-comments-container>
+
+
+  </div>
+
+  <div id="utils-comments-overview" class="utility" *ngIf="showComments && IsOverview() && !hideUtilityDivs" style="width: 93%;">
+      <button (click)="utilNav('Comments')" _ngcontent-c15="" aria-label="Close"  class="close close-slider pull-right" type="button">
+          <span _ngcontent-c15="" aria-hidden="true"><i class="fas fa-times"></i></span>
+        </button>
+    <app-comments-overview
+        (editComment)="updateComment($event)"
+        (addComment)="addComment($event)"
+        (addSubject)="addSubject($event)"
+        [subjects]="subjects"
+        [filteredSubjects]="subjects"
+        [sources]="sources">
+    </app-comments-overview>
+
+
+  </div>
+
+</div>

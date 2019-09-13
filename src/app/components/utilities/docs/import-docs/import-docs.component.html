@@ -1,0 +1,59 @@
+
+<div class="margin-seperator-top">
+    <div>
+        <div class="sub-title-content no-underline"><i class="fa fa-download"></i>&nbsp;Import Document(s) From Other Programs</div>
+        <!-- <h4 class="section-header-text status-title">
+            <b>
+                <i class="fa fa-download"></i>&nbsp;Import Document(s) From Other Programs
+            </b>
+        </h4> -->
+    </div>
+    <div class="no-docs" *ngIf="!importDocs?.length">
+            <!-- <span>** No import documents found for current case and tab **</span> -->
+            <div class="alert alert-warning alert-dismissible delete-doc-message" role="alert" style="font-size: 23px; line-height: 25px;">
+                    <i class="fas fa-info-circle"></i>&nbsp;
+                    No import documents found for current case and tab. 
+              </div>
+        </div>
+        <div class="clearfix" *ngIf="!importDocs?.length">
+                <div class="button-right button-top-spacer">
+                    <button class="ohio-button x-small info" title="Close Import Docs" type="button" (click)="hide()">Close Import Docs</button>
+            
+                </div>
+            </div>
+    
+    <div *ngIf="importDocs?.length">
+        <div>
+            <div class="margin-seperator-top">
+                <article class="ohio-table docs">
+                    <table class="table district-teachers">
+                        <thead>
+                            <tr>
+                                <th>Doc Name</th>
+                                <th>Doc type</th>
+                                <th>Date</th>
+                                <th>Select</th>
+                            </tr>
+                          </thead>
+                            <tbody>
+                            <tr *ngFor="let doc of importDocs;">
+                                <td><a (click)="previewDoc(doc)">{{doc.docFileNameDecoded}}</a></td>
+                                <td>{{doc.docTypeNameDecoded}}</td>
+                                <td>{{doc.docUploadDate}}</td>
+                                <td><div class="ohio-checkbox"><input type="checkbox" class="ohio-checkbox-el" [(ngModel)]="doc.docSelected"(change)="enableImport($event,importDocs)" ></div></td>
+                              </tr>
+                        </tbody>
+                    </table>
+                </article>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="button-right button-top-spacer">
+                <button class="ohio-button x-small info" title="Close Import Docs" type="button" (click)="hide()">Close Import Docs</button>
+                <button [disabled]="canImport()" (click)="importingDocs()" class="ohio-button x-small" style="margin-left: 5px;" title="Import Document(s)" type="button">Import Document(s)</button>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>

@@ -62,6 +62,17 @@ import { ClaimsReducer } from './reducers/claims-reducer';
 import {MenubarComponent} from './components/menubar/menubar.component';
 import { InteropService } from 'src/app/services/interop.service';
 import { Reducers } from './reducers/index';
+
+import { UtilityComponent} from './components/utility/utility.component';
+import {UtilitynavComponent } from './components/utilitynav/utilitynav.component';
+import {DocsComponent } from './components/utilities/docs/docs.component';
+import {FlagsComponent } from './components/utilities/flags/flags.component';
+import {FlagsOverviewComponent } from './components/utilities/flags-overview/flags-overview.component';
+import {CommentsOverviewComponent } from './components/utilities/comments-overview/comments-overview.component';
+import {ContactsComponent } from './components/utilities/contacts/contacts.component';
+import {HistoryComponent } from './components/utilities/history/history.component';
+import {CommentComponent } from './components/utilities/comments/comment/comment.component';
+import {CommentsContainerComponent } from './components/utilities/comments/comments-container/comments-container.component';
 // import { AuthEffectsService } from './effects/auth-effects';
 
 @NgModule({
@@ -88,7 +99,17 @@ import { Reducers } from './reducers/index';
     CourseSearchReportComponent,
     CourseSearchReportListComponent,
     CourseSearchAccordionComponent,
-    MenubarComponent
+    MenubarComponent,
+    UtilityComponent,
+    UtilitynavComponent,
+    DocsComponent,
+    FlagsComponent,
+    FlagsOverviewComponent,
+    CommentsOverviewComponent,
+    ContactsComponent,
+    HistoryComponent,
+    CommentComponent,
+    CommentsContainerComponent
   ],
   imports: [
     BrowserModule,

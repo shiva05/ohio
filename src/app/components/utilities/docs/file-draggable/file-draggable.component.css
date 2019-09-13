@@ -1,0 +1,24 @@
+.doc-validation {
+  max-width: 90%;
+  color:#ed6102;
+  font-size: small;
+  font-weight: bold;
+}
+
+.my-drop-zone {
+  width: 100%;
+  border: dashed 2px #a1a1a1;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: #949494;
+  padding: 35px;
+}
+
+.nv-file-over {
+  border: dashed 2px #ed6102;
+}
+.progress
+{
+  margin-bottom: 5px;
+}

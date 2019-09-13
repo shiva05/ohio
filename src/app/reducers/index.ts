@@ -25,6 +25,7 @@ import { searchResultReducer ,SearchResultData } from './search-result.reducer';
 import { reportReducer,ReportData } from './report.reducer';
 import { advancedSearchReducer, AdvancedSearchData } from './advanced-search.reducer';
 import { courseSearchReducer,CourseSearch } from './course-search.reducer';
+import { UtilsState, UtilsReducer } from './utils-reducer';
 
 
 export const Reducers = {
@@ -34,7 +35,8 @@ export const Reducers = {
   report: reportReducer,
   quickSearch: quickSearchReducer,
   searchResult: searchResultReducer,
-  courseSearch: courseSearchReducer
+  courseSearch: courseSearchReducer,
+  utilsState: UtilsReducer
 };
 
 
@@ -44,6 +46,7 @@ export interface AppState {
   advancedSearch:AdvancedSearchData,
   report :ReportData,
   SearchResultData :SearchResultData,
-  quickSearch:QsMetaData
+  quickSearch:QsMetaData,
+  utilsState: UtilsState,
   CourseSearch:CourseSearch
 }

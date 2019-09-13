@@ -1,0 +1,34 @@
+<app-card [title]="content.title" (keyup.enter)="save($event)" (keyup.escape)="cancel()">
+    <form [formGroup]="subjectForm" class="card-body-content">
+        <div class="row">
+            <div class="col-xs-12">
+                <label class="ohio-field">
+                    <input [appFocus]="true" class="ohio-field-input" type="text" placeholder="Title" formControlName="title" [maxlength]="subjectMaxLength">
+                </label>
+                <div *ngIf="title.invalid && title.dirty">
+                    <div class="small" *ngIf="title.errors.required" style="color:red">
+                        {{content.errors.title.required}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <label class="ohio-field">
+                    <textarea class="ohio-field-input" type="text" formControlName="comment" [maxlength]="commentMaxLength"></textarea>
+                    <span class="help-block"><small>Note: Press Enter to submit a comment. Press Shift+Enter for a new line.</small></span>
+                </label>
+                <div *ngIf="comment.invalid && (comment.dirty || comment.touched)">
+                    <div class="small" *ngIf="comment.errors.required" style="color:red">
+                        {{content.errors.comment.required}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <app-character-count [current-count]="comment.value.length" [max-character-count]="commentMaxLength"></app-character-count>
+                <span class="pull-right">
+                    <button [clickAndEnter]="cancel.bind(this)" class="ohio-button x-small info" title="Cancel adding a subject" type="button">{{content.cancelBtn}}</button> 
+                    <button (click)="save($event)" class="ohio-button x-small">{{content.addNewSubjectBtn}}</button>
+                </span>
+            </div>
+        </div>
+    </form>
+</app-card>

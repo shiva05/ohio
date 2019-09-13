@@ -1,0 +1,27 @@
+<div *ngIf="!showEditComment">
+    <div>
+        <div>
+            <div>
+                <app-formated-text-viewer [text]="comment.commentText" [expandDetail]="expandDetail">
+                </app-formated-text-viewer>
+            </div>
+        </div>
+        <app-commenter [commenter]="comment.person" [changedLabel]="lastChangedLabel" [changedDate]="lastChanged">
+        </app-commenter>
+        <div *ngIf="editable">
+            <div class="clearfix">
+                <button class="ohio-button x-small pull-right" title="Open UI for a comment update" type="button"
+                    (click)="toggleEditUI()">{{content.editBtn}}</button>
+            </div>
+        </div>
+        <hr *ngIf="showSeparator" class="replies">
+    </div>
+</div>
+<div *ngIf="showEditComment">
+    <div>
+        <app-message-editor [errors]="content.errors" (cancel)="toggleEditUI()" (ok)="edit($event)"
+            [message]="comment.commentText" [maxLength]="maxLength" [okBtnText]="content.updateBtnText"
+            [cancelBtnText]="content.cancelBtnText"></app-message-editor>
+        <hr *ngIf="showSeparator" class="edit-hr">
+    </div>
+</div>

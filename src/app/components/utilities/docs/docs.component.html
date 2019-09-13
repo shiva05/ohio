@@ -1,0 +1,67 @@
+<div class="" id="docs">
+  <div class="margin-seperator-top">
+    <div class="col-md-12">
+        <div>
+            <h3 class="section-header-text status-title">
+                <b>Documents On File</b>
+            </h3>
+            <hr class="form shelf docs-hr">
+        </div>
+    </div>
+  </div>
+  <div class="document-scroll">
+  <div class="col-md-12" *ngIf="addDocPermissions?.create || importDocPermissions?.create">
+    <div style="margin-bottom:8px;">
+      <button *ngIf="addDocPermissions.create" class="ohio-button x-small doc-buttons-margin" title="Add Documents" (click)="show('add')">
+      <i class="fa fa-plus"></i>&nbsp;Add Documents
+    </button>
+    &nbsp;
+    <button *ngIf="importDocPermissions.create" (click)="show('import')" class="ohio-button x-small doc-buttons-margin" title="Import Documents From Other Programs"><i
+        class="fa fa-download"></i>&nbsp;Import Documents
+    </button>
+    </div>
+    <div *ngIf="alertMsg !==''">
+        <div>
+          <app-alert-message type="{{alertType}}" message="{{alertMsg}}"></app-alert-message>
+        </div>
+      </div>
+  </div>
+  
+ 
+  <div class="col-md-12">
+    <div *ngIf="showAdd" class="clearfix">
+      <app-add-docs (doLoadDocs)="loadDocs($event)" (hideAddDocs)="hideAddDocs($event)"></app-add-docs>
+    </div>
+
+    <div *ngIf="showImport">
+      <app-import-docs (hideImportDocs)="hideImportDocs($event)" [importDocsList]="importDocs" (doImportDocs)="importingDocs($event)"></app-import-docs>
+    </div>
+    
+    <div *ngIf="showPreview">
+      <app-preview-docs 
+      [docRelationInstanceId]="docRelationInstanceId" 
+      [docName]="docName" 
+      [docUrl]="docUrl" 
+      [docResponseType]="docResponseType" 
+      [docPreviewFlag]="docPreviewFlag" 
+      [docReviewPermissions]="docReviewPermissions"
+      (closePreviewDoc)="closePreviewDoc($event)">
+    </app-preview-docs>
+    </div>
+</div>
+  <div class="col-md-12">
+    <app-list-docs 
+      [docsList]="docs" 
+      (doDeleteDocs)="deleteDocs($event)" 
+      (doPreviewDoc)="previewDoc($event)" 
+      (doLoadDocs)="loadDocs($event)"
+      [hideDocMessages]="hideDocMessages"
+      [docHistoryPermissions]="docHistoryPermissions"
+      [docReviewPermissions]="docReviewPermissions">
+    </app-list-docs>
+  </div>
+</div>
+  <hr>
+  <!-- <button (click)="testLoadDocs()">Test Reload Docs</button>
+  <br>remove this, it just shows how to reload this page. -->
+</div>

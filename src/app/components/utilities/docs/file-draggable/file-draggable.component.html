@@ -1,0 +1,29 @@
+<div>
+  <div ng2FileDrop
+        [ngClass]="{'nv-file-over': fileDraggableStateChild.hasBaseDropZoneOver}"
+        (fileOver)="fileOverBase($event)"
+        [uploader]="fileDraggableStateChild.fileUploader"
+        class="well my-drop-zone" (click)="fileInput.click()">
+      Drag file(s) here to upload or click here to browse for files.
+  </div>
+
+  <span style="visibility: hidden; position: absolute; overflow: hidden; width: 0px; height:0px;border:none;margin:0; padding:0">
+      <input type="file" #fileInput ng2FileSelect [uploader]="fileDraggableStateChild.fileUploader" />
+ </span>
+  <!-- If error exists, display error message here -->
+  <div class="doc-validation" *ngIf="this.errorMessage?.message">
+    <span [innerHTML]="errorMessage.message"></span>
+  </div>
+
+  
+  <div>
+    <div>
+      Queue progress
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': fileDraggableStateChild.fileUploader.progress + '%' }"></div>
+      </div>
+    </div>
+  </div>
+  
+
+</div>

@@ -1,0 +1,64 @@
+
+  <div class="margin-seperator-top">
+    <div>
+      <div class="sub-title-content no-underline">
+          <i class="fa fa-plus"></i>&nbsp;Add Document(s)
+      </div>
+      <div>
+        <label class="ohio-select">
+          <span class="ohio-select-label">Document Type</span>
+          <ng-select class="custom" [items]="docTypeResults" bindLabel="label" bindValue="value" [closeOnSelect]="true" [searchable]="true"
+            [(ngModel)]="model.docTypeId" (change)="documentTypeChange($event)" placeholder="Select Document Type">
+          </ng-select>
+        </label>
+      </div>
+
+      <div style="margin-top:10px;" *ngIf="documentState.showFileDrop">
+        <app-file-draggable
+          [fileDraggableStateChild]="fileDraggableState"
+          (doLoadDocs)="loadDocs($event)"
+          [docUploadValidation]="docUploadValidation"
+          [uploadAllowedMimeTypes]="uploadAllowedMimeTypes">
+        </app-file-draggable>
+      </div>
+
+      <div class="col-md-12" *ngIf="documentState.showFileDrop">
+        <ul class="">
+          <li>
+            Under Document Type drop down list select the document type you would like to have the document(s) you
+            would have the files
+            listed under.
+          </li>
+          <li>
+            <!-- You may select up to 5 documents at a time to upload. -->
+            You may select up to {{ this.docUploadValidation.uploadDocumentMaxCount }} documents at a time to upload.
+          </li>
+          <li>
+            Drag file from file window to the Drag and Drop window to add the file to the Documents list.
+          </li>
+          <li>
+            <!-- File Location (Max Size 25M) -->
+            Maximum file size is {{ this.docUploadValidation.maxFileSizeMb }} MB.
+          </li>
+          <li>
+            Only the following file extensions are accepted
+            <br>
+            <!-- <b>.doc, .docx, .gif, .jpg, .jpeg, .mht, .pdf, .txt, .xls , .xlsx, .xlsm, .xlsb, .png. and .zip</b> -->
+            <b>{{ this.docUploadValidation.uploadAllowedFileTypes.join(', ') }}</b>
+          </li>
+        </ul>
+      </div>
+      <div class="button-right button-top-spacer">
+          <button class="ohio-button x-small info" title="Cancel Add Documents" type="button" (click)="hide()">Close Add Documents</button>
+      </div>
+      <!-- <div class="col-md-12 clearfix">
+        <div class="button-right button-top-spacer">
+          <button class="ohio-button small info" title="Close Add Document(s)" type="button">Close</button>
+          <button class="ohio-button small" style="margin-right: 0;" title="Add Document(s)" type="button" (click)="addDoc()">Add
+            New Document(s)</button>
+        </div>
+      </div> -->
+
+    </div>
+  </div>
+

@@ -1,0 +1,20 @@
+<form [formGroup]="subjectForm" class="card-body-content search-container" (keyup.escape)="cancel()">
+  <div>
+    <label class="ohio-field">
+      <textarea [appFocus]="true" class="ohio-field-input" type="text" formControlName="messageControl" maxlength="{{maxLength}}"></textarea>
+      <span class="help-block"><small>Note: Press Enter to submit a comment. Press Shift+Enter for a new line.</small></span>
+    </label>
+    <div *ngIf="messageControl.invalid && messageControl.dirty">
+      <div class="small" *ngIf="messageControl.errors.required" style="color:#700017">
+        {{content.errors.required}}
+      </div>
+    </div>
+  </div>
+  <div>
+    <app-character-count [current-count]="messageControl.value.length" [max-character-count]="maxLength"></app-character-count>
+    <span class="button-right">
+      <button [clickAndEnter]="cancel.bind(this)" class="ohio-button x-small info" title="Discarding a message" type="button">{{cancelBtnText}}</button>
+      <button (click)="ok()" class="ohio-button x-small" title="Saving a message">{{okBtnText}}</button>
+    </span>
+  </div>
+</form>

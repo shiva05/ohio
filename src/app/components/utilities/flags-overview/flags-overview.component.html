@@ -1,0 +1,57 @@
+<div style="padding-left: 10px;padding-right: 10px; width: 95%;">
+    <div class="margin-seperator-top">
+      <h3 class="section-header-text status-title">
+        <b>Flags Overview</b>
+      </h3>
+      <hr style="margin: 7px 0;" class="form shelf">
+    </div>
+
+    <div *ngFor="let source of flagSources" style="position: relative;">
+        
+      <div>
+        
+            <div class="content_med">
+              {{source.immediateOwnerName}}
+            </div>
+            
+            <div>
+              <button [class]="!hideFlagSource(source.immediateOwnerSourceKey) ? 'close close-overview-flags rotate-icon-back': 'close close-overview-flags rotate-icon'"  (click)="toggleFlags(source.immediateOwnerSourceKey)"><i class="fas fa-caret-down"></i></button>
+            </div>
+            <div *ngIf="!hideFlagSource(source.immediateOwnerSourceKey)">
+              <div class="sub-title-content">
+                Applied Flags
+              </div>
+              <div class="horizontal-layout read-only-list">
+                  <span *ngFor="let flag of flags.readOnly | filterList:source.immediateOwnerSourceKey" class="roFlag">{{flag.flagDescription}}</span>
+                
+              </div>
+              <div>
+                  <hr class="form shelf">
+              </div>
+            </div>
+
+      </div>
+      <!-- <div class="content_med">
+        Intake
+      </div>
+      <div>
+        <button [class]="toggleIconClass"  (click)="toggleFlags ()"><i class="fas fa-caret-down"></i></button>
+      </div> -->
+      <!-- This is the div that should open/close -->
+
+      <!-- <div>
+        <div class="sub-title-content">
+          Applied Flags
+        </div>
+        <div class="horizontal-layout read-only-list">
+            <span *ngFor="let flag of flags.readOnly" class="roFlag">{{flag.flagDescription}}</span>
+          
+        </div>
+        <div>
+            <hr class="form shelf">
+        </div>
+      </div> -->
+        <!-- End This is the div that should open/close -->
+    </div>
+
+  </div>
