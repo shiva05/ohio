@@ -57,6 +57,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   }
   goBackToCourseSearch() {
     // this.goToPage('SearchAlignment');
+    this.store.dispatch({ type: CourseSearchActions.RESET_COURSE_SELECTED_FILTERS });
     this.rout.navigate(['/CourseSearch']);
   }
   getCourseSearchResult() {

@@ -204,7 +204,8 @@ export class CourseSearchFiltersComponent implements OnInit {
       selectedAcademicSubject: [],
       selectedAcademicSubjectCourses: []
     };
-    this.store.dispatch({ type: CourseSearchActions.SAVE_AS_SELECTED_FILTERS_COURSESEARCH, payload: this.searchObj });
+  //  this.store.dispatch({ type: CourseSearchActions.SAVE_AS_SELECTED_FILTERS_COURSESEARCH, payload: this.searchObj });
+    this.store.dispatch({ type: CourseSearchActions.RESET_COURSE_SELECTED_FILTERS });
     this.selectedCareerPath = [];
     this.selectedAcadamicSubjects = [];
     this.selectedCourses = [];

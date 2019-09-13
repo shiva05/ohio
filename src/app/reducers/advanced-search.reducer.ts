@@ -39,7 +39,8 @@ const initialState: AdvancedSearchData = {metaData :{
   Subjects :[]
 },
 competencies:[],
-alignmentSearchSelectedFilters :{
+
+alignmentSearchSelectedFilters: {
   selectedCareers : [],
   selectedStrands: [],
   selectedOutcomes: [],
@@ -74,6 +75,18 @@ export function advancedSearchReducer(state = initialState ,Action :AdvancedSear
         ...state,
         metaData: Action.payload
       };
+      case AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS:
+        return {
+          ...state,
+          alignmentSearchSelectedFilters: { 
+            selectedCareers: [],
+            selectedStrands: [],
+            selectedOutcomes: [],
+            selectedCompetencies: [],
+            selectedAcadamicSubjects: [],
+            selectedAsSearchResults: {}
+          }
+        };
     default:
       return state;
   }

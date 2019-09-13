@@ -525,6 +525,7 @@ export class CustomAccordionComponent implements OnInit {
   goBackToSearch() {
     // let lable = localStorage.getItem('searchLable');
     // this.onPageSelect.emit('SearchAlignment');
+    this.store.dispatch({ type: AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS });
     this.rout.navigate(['/AlignmentSearch']);
   }
 

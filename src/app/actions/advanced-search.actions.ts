@@ -8,7 +8,7 @@ export const LOAD_META_DATA  = '[MetaData] Fetch';
 export const LOAD_META_DATA_SUCCESS  = '[MetaData] Success';
 export const LOAD_META_DATA_FAILURE  = '[MetaData] Failure';
 export const SAVE_AS_SELECTED_FILTERS = '[AlignmentSearchSelectedFilters] Save';
-
+export const RESET_ALIGNMENTSEARCH_FILTERS = '[AlignmentSearchSelectedFilters] Reset';
 export const LOAD_COMPETENCY_DATA  = '[COMPETENCIES] Fetch';
 export const LOAD_COMPETENCY_DATA_SUCCESS  = '[COMPETENCIES] Success';
 export const LOAD_COMPETENCY_DATA_FAILURE  = '[COMPETENCIES] Failure';
@@ -35,6 +35,10 @@ export class SaveAsSelectedFilters implements Action {
   readonly type = SAVE_AS_SELECTED_FILTERS;
   constructor(public payload: AlignmentSearchSelectedFilters) {}
 }
+export class ResetAlignmentSearchFilters implements Action {
+  readonly type = RESET_ALIGNMENTSEARCH_FILTERS;
+}
+
 
 export class CompetencyDataFetchSucess implements Action {
   readonly type = LOAD_COMPETENCY_DATA_SUCCESS;
@@ -59,4 +63,5 @@ export type Actions = MetaDataFetch |
   SaveAsSelectedFilters |
   CompetencyDataFetch |
   CompetencyDataFetchFailure |
-  CompetencyDataFetchSucess;
+  CompetencyDataFetchSucess |
+  ResetAlignmentSearchFilters;
