@@ -369,7 +369,7 @@ border-color: #fff !important;
     max-width: calc(100% - 25px);
 }
 
-.checkbox-indeterminate input[type="checkbox"]:checked + label::after{
+.checkbox-indeterminate input[type="checkbox"] + label::after{
     content:"";
     display: block;
     content: "";

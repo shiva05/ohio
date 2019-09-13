@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { SearchResultService } from '../../services/search-result.service';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { _ } from 'underscore';
 
 @Component({
   selector: 'custom-accordion',
@@ -156,7 +157,24 @@ export class CustomAccordionComponent implements OnInit {
             if (this.cteToAcademic) {
               if (this.searchResultData.CareerField) {
                 this.searchResultData.CareerField.forEach(element => {
+                  //this code can be removed if we can get a property to check the selected values count in all the levels
+                  element['IsChildPartiallySelected'] = false;
+                  if (element['Strand'].length > 0) {
+                    element['Strand'].forEach((strand) => {
+                      strand['IsChildPartiallySelected'] = false;
+                      if (strand['Outcome'].length > 0) {
+                        strand['Outcome'].forEach((outcome) => {
+                          outcome['IsChildPartiallySelected'] = false;
+                        });
+                      }
+                    });
+                  } 
+
+                  //this code above can be removed if we can get a property to check the selected values count in all the levels
+
+
                   this.searchResultDataArray.push(element);
+                //  console.log(this.searchResultDataArray);
                   this.noResultFound = false;
                 });
                 this.formatSearchResultDataArray();
@@ -214,6 +232,7 @@ export class CustomAccordionComponent implements OnInit {
 
   // Click event on Career Field
   careerFieldCheckBox(parentObj) {
+    parentObj['IsChildPartiallySelected'] = true;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < parentObj.Strand.length; i++) {
       parentObj.Strand[i].isSelected = parentObj.isSelected;
@@ -289,17 +308,52 @@ export class CustomAccordionComponent implements OnInit {
     }
   }
 
-  // Click event on Outcome Checkbox
+  // Click event on Competency Checkbox
   competencyCheckBox(career, strand, outcome) {
     // tslint:disable-next-line:only-arrow-functions
     outcome.isSelected = outcome.Competency.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
+    outcome.Competency.forEach((competency) => { // to check the selected competencies to enable partialselection of outcomes.
+      if (outcome.isSelected === true) {
+        outcome.IsChildPartiallySelected = false;
+      } 
+      if (outcome.isSelected === false) {
+        var MatchNotFound = _.isMatch(competency, { isSelected: false });
+        if (MatchNotFound) {
+          outcome.IsChildPartiallySelected = false;
+        } else {
+          outcome.IsChildPartiallySelected = true;
+        }
+      }
+    });
+
+
+    //to apply the strands selection
+    //var outcomesSelectedMatchFound = _.isMatch(strand.outcome, { isSelected: false });
+    //if (outcomesSelectedMatchFound) {
+    //  strand.IsChildPartiallySelected = false;
+    //}
+    //else if (outcome.IsChildPartiallySelected || outcome.isSelected) {
+    //  strand.IsChildPartiallySelected = true;
+    //} else {
+    //  var MatchFound = _.isMatch(outcome, { isSelected: false });
+    //  if (MatchFound) {
+    //    strand.IsChildPartiallySelected = false;
+    //  } else {
+    //    strand.IsChildPartiallySelected = true;
+    //  }
+    //}
+
+    
 
     // tslint:disable-next-line:only-arrow-functions
     strand.isSelected = strand.Outcome.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
+    if(outcome.IsChildPartiallySelected) {
+      strand.IsChildPartiallySelected = true;
+    }
 
     // tslint:disable-next-line:only-arrow-functions
     career.isSelected = career.Strand.every(function(itemChild: any) {
