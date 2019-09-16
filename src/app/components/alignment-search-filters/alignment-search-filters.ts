@@ -136,7 +136,9 @@ export class AlignmentSearchFiltersComponent implements OnInit {
 
     this.store.select('advancedSearch').subscribe(data => {
       this.metaData = data.metaData;
-      this.careers = this.metaData['CareerFields'];
+      if (this.careers.length === 0) {
+        this.careers = this.metaData['CareerFields'];
+      }
       this.strands = this.metaData['Strands'];
       this.outcomes = this.metaData['Outcomes'];
       this.grades = this.metaData['Grades'];
@@ -327,7 +329,8 @@ clearSearch() {
     selectedAcadamicSubjects: [],
     finalSelectedObject: [],
   };
-  this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
+  //this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
+  this.store.dispatch({ type: AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS, payload: this.searchObj });
   this.selectedCareer = [];
   this.selectedAcadamicSubjects = [];
   this.selectedStrands = [];
@@ -337,7 +340,7 @@ clearSearch() {
   this.strandsDropdown = [];
   this.outcomesDropdown = [];
   this.competencyNumbers = [];
-  this.rout.navigate(['/AlignmentSearch']);
+ // this.rout.navigate(['/AlignmentSearch']);
 }
   onSubjectLevelsSelectAll(data) {
     let selectedAll = [];

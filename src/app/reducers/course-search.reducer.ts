@@ -59,7 +59,13 @@ export function courseSearchReducer(state = initialState, Action: CourseSearchAc
             return {
                 ...state,
                 courseSearchSelectedFilters: Action.payload
-            };
+        };
+        case CourseSearchActions.RESET_COURSE_SELECTED_FILTERS:
+          return {
+            ...state,
+            courseSearchSelectedFilters: Action.payload
+          };
+            
         default:
             return state;
     }
