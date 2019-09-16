@@ -59,6 +59,9 @@ import { AuthOrchestration } from './services/auth-orchestration.service';
 import { AppHttpService } from './services/app-http.service';
 import { AuthReducer } from './reducers/auth-reducer';
 import { ClaimsReducer } from './reducers/claims-reducer';
+import {MenubarComponent} from './components/menubar/menubar.component';
+import { InteropService } from 'src/app/services/interop.service';
+import { Reducers } from './reducers/index';
 // import { AuthEffectsService } from './effects/auth-effects';
 
 @NgModule({
@@ -84,7 +87,8 @@ import { ClaimsReducer } from './reducers/claims-reducer';
     LoadingSpinnerComponent,
     CourseSearchReportComponent,
     CourseSearchReportListComponent,
-    CourseSearchAccordionComponent
+    CourseSearchAccordionComponent,
+    MenubarComponent
   ],
   imports: [
     BrowserModule,
@@ -104,7 +108,7 @@ import { ClaimsReducer } from './reducers/claims-reducer';
       }
     }),
     // StoreModule.forRoot(reducers, { metaReducers }),
-    StoreModule.forRoot({ advancedSearch: advancedSearchReducer, report: reportReducer, quickSearch: quickSearchReducer, searchResult: searchResultReducer, courseSearch: courseSearchReducer, authState: AuthReducer, claimsReducer: ClaimsReducer }),
+    StoreModule.forRoot(Reducers),
     StoreDevtoolsModule.instrument({ maxAge: 100, name: 'tng1' }),
     EffectsModule.forRoot([AdvancedSearchEffects, ReportEffects, QuickSearchEffects, SearchResultEffects, CourseSearchEffects,AuthEffectsService,ClaimsEffectsService])
 
@@ -112,6 +116,7 @@ import { ClaimsReducer } from './reducers/claims-reducer';
   providers: [
     DatePipe,
     AuthService,
+    InteropService,
     ClaimsService,
     AuthOrchestration,
     AppHttpService,

@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
 import { AppState } from './../../app.state';

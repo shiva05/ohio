@@ -27,10 +27,10 @@ export class CourseSearchReportComponent implements OnInit {
   }
 
   public downloadPDF(): void {
-    this.store.select('advancedSearch').subscribe(data => {
-      if (data.alignmentSearchSelectedFilters) {
-        var objTemp = data.alignmentSearchSelectedFilters.selectedAsSearchResults;
-        this.downloadPDFService.getPDF(objTemp)
+    this.store.select('courseSearch').subscribe(data => {
+      if (data.courseSearchSelectedFilters) {
+        const objTemp = data.courseSearchSelectedFilters.selectedCourseSearchResults;
+        this.downloadPDFService.getCoursePDF(objTemp)
           .subscribe(x => {
             // It is necessary to create a new blob object with mime-type explicitly set
             // otherwise only Chrome works like it should
@@ -51,7 +51,7 @@ export class CourseSearchReportComponent implements OnInit {
             link.href = data;
 
             let dataNow = this.datepipe.transform(new Date(), 'yyyy-MM-dd');;
-            link.download = 'Alignment Report ' + dataNow + '.pdf'; // There isn't that much of a reason to even think about what I'm doing and instead just do it because there isn't a
+            link.download = 'Course search Report ' + dataNow + '.pdf'; // There isn't that much of a reason to even think about what I'm doing and instead just do it because there isn't a
             // this is necessary as link.click() does not work on the latest firefox
             link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
 
