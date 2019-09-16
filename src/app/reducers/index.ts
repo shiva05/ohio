@@ -48,5 +48,6 @@ export interface AppState {
   SearchResultData :SearchResultData,
   quickSearch:QsMetaData,
   utilsState: UtilsState,
-  CourseSearch:CourseSearch
+  CourseSearch:CourseSearch,
+
 }

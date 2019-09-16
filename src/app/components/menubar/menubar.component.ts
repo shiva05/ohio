@@ -112,6 +112,7 @@ export class MenubarComponent implements OnInit {
 
   navigate(url: string, menuName: string, hasChildren: boolean = true) {
 
+    debugger
     if (!hasChildren) {
        // url = `/case${url}`;
         // console.log('navigate:', url, menuName );
@@ -124,6 +125,7 @@ export class MenubarComponent implements OnInit {
 
     const message = { originator: 'MENU_CLICK', htmlPushUrl: url };
     console.log('PUBLISHING MSG TO CHILD SPA', message, new Date().toLocaleString());
+    debugger
     // publish message to child SPA
     this.interopService.publish(message);
   }

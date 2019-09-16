@@ -12,6 +12,12 @@ import { AuthService } from './services/auth.service';
 import { AuthOrchestration } from './services/auth-orchestration.service';
 import * as AuthActions from './actions/auth-actions';
 import * as ClaimsActions from './actions/claims-actions';
+import { Utilities } from './models/util-nav-item';
+import { UtilsContext } from './models/utils-context';
+import * as UtilsActions from './actions/utils-actions';
+import { NavResize } from './actions/nav-actions';
+import { InteropService } from './services/interop.service';
+import { InteropDataPacket } from './models/interop-datapacket';
 import {
   HttpClient,
   HttpErrorResponse,
@@ -35,13 +41,22 @@ export class AppComponent implements OnInit {
   isPublic = false;
   loading = true;
   ready = false;
+  mainWidth = window.innerWidth - 80;
+  mainLeft = 56;
+  utilsWidth = 0;
+  mainHeight = 1400;
+  currentUtil: Utilities = Utilities.none;
   constructor(private http: HttpClient,
               private store: Store<AppState>,
               public loaderService: LoaderService,
               private translate: TranslateService,
               private authService: AuthService,
+              private interopService: InteropService,
               private authOrchestration: AuthOrchestration) {
     translate.setDefaultLang('en');
+    window.onresize = () => {
+      this.utilNav(this.currentUtil);
+    };
    }
 
   ngOnInit() {
@@ -135,7 +150,61 @@ export class AppComponent implements OnInit {
       // }
     });
 
+    const utilsContext = this.store.select(state => state.utilsState.utilityContext);
+    utilsContext.subscribe((ctx) => {
+      // if (ctx !== null && ctx.detailKey > 0 && ctx.assetTemplateKey !== 154000) {
+      // if (ctx !== null && ctx.isDetailAsset && ctx.moduleKey) {
+      //   console.log('MENU SPA SUBSCRIBING TO CONTEXT CHANGE FROM CASE SPA - CHECKING DETAIL BOOLEAN', ctx.isDetailAsset);
+      //   console.log('MENU SPA SUBSCRIBING TO CONTEXT CHANGE FROM CASE SPA - CHECKING MODULE KEY', ctx.moduleKey);
+      // }
 
+      // if (ctx !== null && ctx.detailKey > 0 && ctx.isDetailAsset) {
+      //   this.currentAssetTemplateKey = ctx.assetTemplateKey;
+      // }
+      // else {
+      //   this.currentAssetTemplateKey = 0;
+      // }
+    });
+
+    this.store.select('utilsState').subscribe((utilityState) => {
+      if (utilityState && utilityState.activeUtility) {
+        this.utilNav(utilityState.activeUtility);
+      }
+    });
+
+    this.store.select('utilsState', 'utilityContext').subscribe((current: UtilsContext) => {
+      if (current) {
+        this.store.dispatch(new UtilsActions.UtilsContextChanged(current));
+      }
+    });
+
+
+    this.interopService.dataStream().subscribe((data: InteropDataPacket) => {
+            debugger
+            // console.log('utilsContext:', data);
+            if (data && data.utilsContext && data.utilsContext.detailKey > 0) {
+              this.store.dispatch(new UtilsActions.UtilsSetContext(data.utilsContext));
+            } else {
+              this.store.dispatch(new UtilsActions.UtilsReset({}));
+            }
+            if (data && data.url && data.url !== document.location.pathname) {
+              history.pushState(null, null, data.url);
+            }
+            if (data && data.appSize && data.appSize.scrollHeight > 0) {
+              this.mainHeight = data.appSize.scrollHeight + 250;
+            }
+
+            if (data && data.utilsContext.moduleKey > 0) {
+              console.log(' handshake from child SPA completed: ',  new Date().toLocaleString());
+              this.loading = false;
+            }
+
+            if (data && data.error) {
+              this.appError = true;
+              this.errorMessage = data.error.error;
+              this.loading = false;
+            }
+          });
 
   }
 
@@ -149,6 +218,29 @@ export class AppComponent implements OnInit {
     this.store.dispatch(new AuthActions.ResetAuth({}));
     this.store.dispatch(new ClaimsActions.ResetClaims({}));
     window.location.href = `${window.location.protocol}//${window.location.host}`;
+  }
+  setIframeWidth(utilWidth: number) {
+    this.utilsWidth = utilWidth;
+    this.mainWidth = window.innerWidth - 75 - utilWidth;
+    this.mainLeft = utilWidth;
+    const newIframeWidth = window.innerWidth - utilWidth - 20;
+    this.store.dispatch(new NavResize(newIframeWidth));
+  }
+
+  utilNav(util: Utilities) {
+    this.currentUtil = util;
+    const baseWidth = window.innerWidth - 75;
+    // define target widths for each utility
+    const targetWidth = {};
+
+    targetWidth[Utilities.Documents] = baseWidth * .5;
+    targetWidth[Utilities.Flags] = baseWidth * .3;
+    targetWidth[Utilities.contacts] = baseWidth * .4;
+    targetWidth[Utilities.history] = baseWidth * .2;
+    targetWidth[Utilities.Comments] = baseWidth * .4;
+
+    const width = (util !== Utilities.none) ? targetWidth[util] : 55;
+    this.setIframeWidth(width);
   }
 }
 
