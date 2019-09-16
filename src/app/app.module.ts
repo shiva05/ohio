@@ -54,6 +54,9 @@ import { CourseSearchReportComponent } from './components/course-search-report/c
 import { CourseSearchReportListComponent } from './components/course-search-report-list/course-search-report-list.component';
 import { CourseSearchAccordionComponent } from './components/course-search-accordion/course-search-accordion.component';
 import { AuthService } from './services/auth.service';
+import { FlagService } from './services/flag.service';
+import { DocsService } from './services/docs.service';
+
 import { ClaimsService } from './services/claims.service';
 import { AuthOrchestration } from './services/auth-orchestration.service';
 import { AppHttpService } from './services/app-http.service';
@@ -73,6 +76,12 @@ import {ContactsComponent } from './components/utilities/contacts/contacts.compo
 import {HistoryComponent } from './components/utilities/history/history.component';
 import {CommentComponent } from './components/utilities/comments/comment/comment.component';
 import {CommentsContainerComponent } from './components/utilities/comments/comments-container/comments-container.component';
+import {AlertMessageComponent } from './components/alert-message/alert-message.component';
+import {AddDocsComponent } from './components/utilities/docs/add-docs/add-docs.component';
+import { ImportDocsComponent } from './components/utilities/docs/import-docs/import-docs.component';
+import { ListDocsComponent } from './components/utilities/docs/list-docs/list-docs.component';
+import { PreviewDocsComponent } from './components/utilities/docs/preview-docs/preview-docs.component';
+import { FileDraggableComponent } from './components/utilities/docs/file-draggable/file-draggable.component';
 // import { AuthEffectsService } from './effects/auth-effects';
 
 @NgModule({
@@ -109,7 +118,14 @@ import {CommentsContainerComponent } from './components/utilities/comments/comme
     ContactsComponent,
     HistoryComponent,
     CommentComponent,
-    CommentsContainerComponent
+    CommentsContainerComponent,
+    AlertMessageComponent,
+    AddDocsComponent,
+    ImportDocsComponent,
+    PreviewDocsComponent,
+    ListDocsComponent,
+    FileDraggableComponent
+
   ],
   imports: [
     BrowserModule,
@@ -142,6 +158,8 @@ import {CommentsContainerComponent } from './components/utilities/comments/comme
     AuthOrchestration,
     AppHttpService,
     LoaderService,
+    FlagService,
+    DocsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpLoadInterceptor,

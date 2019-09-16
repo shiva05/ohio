@@ -69,7 +69,7 @@
                         </div>
                         <div style=margin:5px;>
                           <div>Document History</div>
-                          <app-history-docs [docHistory]="docHistory"></app-history-docs>
+                          <!-- <app-history-docs [docHistory]="docHistory"></app-history-docs> -->
                           <div class="button-right" style="margin:5px;">
                             <button class="ohio-button x-small info" (click)="openHistory(i,doc.documentRelationInstanceKey)" title="Close Document Preview" type="button">Close Details</button>
                           </div>
@@ -78,15 +78,15 @@
                     </td>
                   </tr>
             </ng-template>
-          
-        
+
+
       </table>
     </article>
   </div>
   <div class="no-docs" *ngIf="!docs?.length">
     <div class="alert alert-warning alert-dismissible delete-doc-message" role="alert" style="font-size: 23px; line-height: 25px;">
         <i class="fas fa-info-circle"></i>&nbsp;
-        No documents found for current case and tab. 
+        No documents found for current case and tab.
   </div>
   </div>
 

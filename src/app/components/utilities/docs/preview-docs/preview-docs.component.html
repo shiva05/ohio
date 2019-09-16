@@ -24,7 +24,7 @@
               {{status.documentStatusName}}
             </option>
           </select>
-          
+
         </span>
       </label>
   </div>
@@ -40,9 +40,9 @@
   <div class="iframe-doc-border" *ngIf="docUrl">
     <!-- <iframe class="iframe-doc" [src]="" [srcdoc]="" id="ifrmDocumentView" name="ifrmDocumentView" #myIframe> -->
 
-      <object [data]="objUrl | safe" type="{{ docResponseType }}" id="objData" name="objData" #objData>
+      <!-- <object [data]="objUrl | safe" type="{{ docResponseType }}" id="objData" name="objData" #objData>
         <embed style="border-radius:4px; background-color:#fff; height: 600px; width: 100%;" [src]="embedUrl | safe"  type="{{ docResponseType }}" id="embedSrc" name="embedSrc" #embedSrc />
-      </object>
+      </object> -->
 
     <!-- </iframe> -->
   </div>

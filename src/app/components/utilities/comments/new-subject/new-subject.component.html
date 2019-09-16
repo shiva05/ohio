@@ -1,4 +1,4 @@
-<app-card [title]="content.title" (keyup.enter)="save($event)" (keyup.escape)="cancel()">
+<!-- <app-card [title]="content.title" (keyup.enter)="save($event)" (keyup.escape)="cancel()">
     <form [formGroup]="subjectForm" class="card-body-content">
         <div class="row">
             <div class="col-xs-12">
@@ -25,10 +25,10 @@
             <div class="col-xs-12">
                 <app-character-count [current-count]="comment.value.length" [max-character-count]="commentMaxLength"></app-character-count>
                 <span class="pull-right">
-                    <button [clickAndEnter]="cancel.bind(this)" class="ohio-button x-small info" title="Cancel adding a subject" type="button">{{content.cancelBtn}}</button> 
+                    <button [clickAndEnter]="cancel.bind(this)" class="ohio-button x-small info" title="Cancel adding a subject" type="button">{{content.cancelBtn}}</button>
                     <button (click)="save($event)" class="ohio-button x-small">{{content.addNewSubjectBtn}}</button>
                 </span>
             </div>
         </div>
     </form>
-</app-card>
+</app-card> -->

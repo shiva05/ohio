@@ -67,11 +67,11 @@ export class AppHttpService {
         let headerOptions: any = {
             'x-requestid': rid
         };
-        if (this.authJwt !== '') {
+        if (this.authJwt !== '' && this.authJwt) {
             const authObj = { authorization: 'Bearer ' + this.authJwt };
             headerOptions = { ...headerOptions, ...authObj };
         }
-        if (this.claimsJwt !== '') {
+        if (this.claimsJwt !== '' && this.claimsJwt) {
             const claimsObj = { Claims: this.claimsJwt };
             headerOptions = { ...headerOptions, ...claimsObj };
         }

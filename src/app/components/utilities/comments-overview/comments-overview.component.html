@@ -1,4 +1,4 @@
-<div class="padding-adjust">
+<!-- <div class="padding-adjust">
   <div class="margin-seperator-top">
     <h3 class="section-header-text status-title">
         <b>Comments Overview</b>
@@ -25,10 +25,10 @@
           <span class="ohio-select-label"> Tab </span>
           <span class="ohio-select-select fa">
             <select class="ohio-select-select-el" name="commentSearch" [(ngModel)]="commentSearchModel.immediateOwnerSourceKey">
-              <!-- <option value="">Select tab...</option> -->
+               <option value="">Select tab...</option>
               <option *ngFor="let source of sources" value="{{source.immediateOwnerSourceKey}}">{{source.immediateOwnerName}}</option>
             </select>
-            
+
           </span>
         </label>
       </li>
@@ -42,11 +42,11 @@
         <li>
             <label  class="ohio-field">
               <span class="ohio-field-label">Date "From"</span>
-              <input bsDatepicker 
+              <input bsDatepicker
               id="searchCommentFromDate"
-              #dp="bsDatepicker" 
-              class="ohio-field-input" 
-              type="text" 
+              #dp="bsDatepicker"
+              class="ohio-field-input"
+              type="text"
               #searchCommentFromDate="ngModel"
               [(ngModel)]="commentSearchModel.fromTs">
             </label>
@@ -82,10 +82,10 @@
       <app-subject *ngFor="let subject of filteredSubjects" [subject]="subject" (reply)="addComment($event,subject)"
           (editComment)="editComment($event,subject)"></app-subject>
   </div>
-</div>
+</div> -->
 <!-- <div class="padding-adjust">
     <div class="alert alert-warning alert-dismissible delete-doc-message" role="alert" style="font-size: 23px; line-height: 25px;">
             <i class="fas fa-info-circle"></i>&nbsp;
-           There are no results for the current search terms. 
+           There are no results for the current search terms.
       </div>
 </div> -->
