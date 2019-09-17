@@ -1,13 +1,14 @@
 import * as ClaimsActions from '../actions/claims-actions';
 import { ClaimsJwtPayload } from '../models/claims-jwt-payload';
 import { parseClaimsJwt } from '../helpers/jwt-helper';
-
+import { Menus } from '../models/menus';
 import { environment } from '../../environments/environment';
 
 export interface ClaimsState {
     loading: boolean;
     error: any;
     claimsJwt: string;
+    menus: Menus;
     claimsJwtPayload: ClaimsJwtPayload;
 }
 
@@ -15,6 +16,7 @@ const initialState: ClaimsState = {
     loading: false,
     error: null,
     claimsJwt: null,
+    menus: null,
     claimsJwtPayload: null
 };
 
@@ -29,6 +31,7 @@ export function ClaimsReducer(state = initialState, action: ClaimsActions.Action
 
             return {
                 ...state, loading: false,
+                menus: action.payload.TopNav,
                 claimsJwt: action.payload.ClaimsJwt,
                 claimsJwtPayload: parseClaimsJwt(action.payload.ClaimsJwt),
                 error: null

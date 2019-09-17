@@ -1,0 +1,137 @@
+<nav id="ohio-main-nav" class="" role="tablist" aria-multiselectable="false" style="margin-bottom:15px;">
+    <div class="ohio-main-nav-panel panel dropdown" style="position:absolute;">
+        <a class="ohio-main-nav-link" (click)="openUtils()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    <div class="ohio-main-nav-container">
+        <div class="ohio-main-nav-panel panel dropdown" *ngFor="let navItem of links; let i = index;" (mouseenter)="showSub(i,true)"
+            (mouseleave)="showSub(i,false)" [ngClass]="{'active': navItem.selected, 'open': navItem.subHidden}">
+            <a href="javascript:void(0)" class="ohio-main-nav-link" routerLinkActive="active" (click)="navigate(navItem.originalUrl, navItem.label, navItem.children.length > 0 ? true: false)">{{navItem.label}}
+                <i *ngIf="navItem.children.length>0" class="ohio-accordion-caret fa fa-chevron-down" aria-hidden="true"></i>
+            </a>
+            <ul *ngIf="navItem.children.length>0" class="nav nav-stacked dropdown-menu" [ngClass]="!navItem.subHidden ? 'collapse' : ''"
+                style="margin-top:-1px">
+                <li class="nav-item" *ngFor="let sublink of navItem.children;">
+                    <a href="javascript:void(0)" class="nav-link" (click)="navigate(sublink.originalUrl, sublink.label)">{{sublink.label}}</a>
+                </li>
+            </ul>
+        </div>
+        <!-- <app-social></app-social> -->
+    </div>
+</nav>
+
+<ng-template #appnav>
+    <div>
+        <div class="ohio-card ode-section">
+            <h3 class="section-header-text" style="display: inline;">
+                <b>Application</b>
+            </h3>
+            <button aria-label="Close" class="close pull-right" type="button" (click)="modalRef.hide()">
+                <span aria-hidden="true">×</span>
+            </button>
+            <hr class="form" style="margin: 7px 0;">
+            <div>
+                <div>
+                    <ul class="standard_content org-select">
+                        <li>
+                            <div class="alert alert-info " style="margin-top: 5px;">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                <strong class="center-block">You are associated to multiple roles of the organization.
+                                    Please
+                                    select a role and click View Dashboard button below. </strong>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="title_green_med">View As</div>
+                            <div>
+                                <div class="content_lg">
+                                    John Smith
+                                </div>
+                                <div style="margin-top:10px;">
+                                    <button type="button" class="ohio-button x-small ">View Dashboard</button>
+
+                                </div>
+                                <div style="margin-top:10px;">
+                                    <label class="ohio-select">
+                                        <span class="ohio-select-select fa">
+                                            <select class="ohio-select-select-el" name="selectedOrg" (change)="selectOrg($event.target.value)">
+                                                <option _ngcontent-c2="" value="none" ng-reflect-value="none">Select
+                                                    Organization</option>
+                                                <option>"Deer Hart" Child Care Center</option>
+                                                <option>A B C Day Care Center</option>
+                                                <option>ABC</option>
+                                                <option>Akron City</option>
+                                                <option>Bexley City School District</option>
+                                                <option>Columbus Africentric Secondary Junior High School</option>
+                                                <option>Columbus City School District</option>
+                                                <option>Edgewood City School District</option>
+                                                <option>Ohio Department of Education</option>
+                                                <option>Scholarship DEV Test Org</option>
+                                                <option>Scholarship DEV Test Org2</option>
+                                                <option>Shawn Autism Test</option>
+                                                <option>Test Org3</option>
+                                                <option>Test for Shawn's Kids</option>
+                                                <option>TestBugFixForComments</option>
+                                                <option>test org4</option>
+                                                <option>test123456</option>
+                                                <option>test34</option>
+                                                <option>test4321</option>
+                                            </select>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="title_green_med" style="margin-top:10px;">Applications</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="application-list-flyout">
+                    <ul class="standard_content org-select">
+                        <li>
+                            <a href="">Deer Hart" Child Care Center</a>
+                        </li>
+                        <li>
+                            <a href="">A B C Day Care Center</a>
+                        </li>
+                        <li>
+                            <a href="">ABC</a>
+                        </li>
+                        <li>
+                            <a href="">Akron City</a>
+                        </li>
+                        <li>
+                            <a href="">Bexley City School District</a>
+                        </li>
+                        <li>
+                            <a href="">Columbus Africentric Secondary Junior High School</a>
+                        </li>
+                        <li>
+                            <a href="">Deer Hart" Child Care Center</a>
+                        </li>
+                        <li>
+                            <a href="">A B C Day Care Center</a>
+                        </li>
+                        <li>
+                            <a href="">ABC</a>
+                        </li>
+                        <li>
+                            <a href="">Akron City</a>
+                        </li>
+                        <li>
+                            <a href="">Bexley City School District</a>
+                        </li>
+                        <li>
+                            <a href="">Columbus Africentric Secondary Junior High School</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</ng-template>

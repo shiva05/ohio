@@ -9,7 +9,8 @@ export class ClaimsService {
   constructor(private http: AppHttpService) { }
 
   fetchClaimsJwt(claimsObject) {
-    const url = environment.CLAIMS_API + '?OrgKey=' + claimsObject.org_id
+
+    const url = environment.MENU_API + '?OrgKey=' + claimsObject.org_id
       + '&AudienceKey=' + claimsObject.aud_id
       + '&ApplicationKey=' + claimsObject.app_id;
 

@@ -10,9 +10,15 @@ export class DownloadPDFService {
 
   constructor(private httpService: AppHttpService) { }
 
-  public getPDF(obj): Observable<object> {
+  public getPDF(obj): Observable<any> {
     const uri = environment.GetDownloadedReport;
     // this.http refers to HttpClient. Note here that you cannot use the generic get<Blob> as it does not compile: instead you "choose" the appropriate API in this way.
-    return this.httpService.post(uri, obj);
+    return this.httpService.getPDFFile(uri, obj);
+  }
+
+  public getCoursePDF(obj): Observable<any> {
+    const uri = environment.GetCourseSearchDownloadedReport;
+    // this.http refers to HttpClient. Note here that you cannot use the generic get<Blob> as it does not compile: instead you "choose" the appropriate API in this way.
+    return this.httpService.getPDFFile(uri, obj);
   }
 }

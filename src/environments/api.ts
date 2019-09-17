@@ -12,5 +12,6 @@ export const api = function (serverUrl) {
       GetCourseMetaData: `${serverUrl}CourseSearch/courseMetadata`,
       GetCourseSearchResult: `${serverUrl}CourseSearch/courseSearchResults`,
       GetCourseSearchReportData: `${serverUrl}CourseSearch/courseSearchReport`,
+      GetCourseSearchDownloadedReport: `${serverUrl}CourseSearch/downloadPdfReport`,
     };
 };
