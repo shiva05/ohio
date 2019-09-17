@@ -401,14 +401,18 @@ export class CustomAccordionComponent implements OnInit {
       if (strandStatus.length > 1) {
         StrandData.isSelected = false;
         StrandData.IsChildPartiallySelected = true;
+        CareerFieldData.IsChildPartiallySelected = true;
       }
       else if (strandStatus.length === 1) {
         if (strandStatus[0] == true) {
           StrandData.isSelected = true;
-          StrandData.IsChildPartiallySelected = false;
+          //StrandData.IsChildPartiallySelected = false;
         } else if (strandStatus[0] == false) {
           StrandData.isSelected = false;
+          CareerFieldData.IsChildPartiallySelected = false;
+          CareerFieldData.isSelected = false;
         }
+        StrandData.IsChildPartiallySelected = false;
       }
     }
   }
