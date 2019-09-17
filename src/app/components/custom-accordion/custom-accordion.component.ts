@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { SearchResultService } from '../../services/search-result.service';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { _ } from 'underscore';
 
 @Component({
   selector: 'custom-accordion',
@@ -156,7 +157,34 @@ export class CustomAccordionComponent implements OnInit {
               if (this.cteToAcademic) {
                 if (this.searchResultData.CareerField) {
                   this.searchResultData.CareerField.forEach(element => {
+                    //this code can be removed if we can get a property to check the selected values count in all the levels
+                    element['IsChildPartiallySelected'] = false;
+                    element['isSelected'] = false;
+                    if (element['Strand'].length > 0) {
+                      element['Strand'].forEach((strand) => {
+                        strand['IsChildPartiallySelected'] = false;
+                        strand['isSelected'] = false;
+                        if (strand['Outcome'].length > 0) {
+                          strand['Outcome'].forEach((outcome) => {
+                            outcome['IsChildPartiallySelected'] = false;
+                            outcome['isSelected'] = false;
+
+                            if (outcome['Competency'].length > 0) {
+                              outcome['Competency'].forEach((competency) => {
+                                competency['isSelected'] = false;
+                              });
+                            }
+
+                          });
+                        }
+                      });
+                    }
+
+                    //this code above can be removed if we can get a property to check the selected values count in all the levels
+
+
                     this.searchResultDataArray.push(element);
+                    //  console.log(this.searchResultDataArray);
                     this.noResultFound = false;
                   });
                   this.formatSearchResultDataArray();
@@ -181,6 +209,8 @@ export class CustomAccordionComponent implements OnInit {
         }
       }
     });
+
+    console.log(this.searchResultDataArray);
   }
 
   formatSearchResultDataArray() {
@@ -214,6 +244,7 @@ export class CustomAccordionComponent implements OnInit {
 
   // Click event on Career Field
   careerFieldCheckBox(parentObj) {
+   // parentObj['IsChildPartiallySelected'] = true;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < parentObj.Strand.length; i++) {
       parentObj.Strand[i].isSelected = parentObj.isSelected;
@@ -234,9 +265,9 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   // Click event on Strand Checkbox
-  strandCheckBox(parent, parentObj) {
+  strandCheckBox(CareerFieldData, parentObj) {
     // tslint:disable-next-line:only-arrow-functions
-    parent.isSelected = parent.Strand.every(function (itemChild: any) {
+    CareerFieldData.isSelected = CareerFieldData.Strand.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -261,18 +292,19 @@ export class CustomAccordionComponent implements OnInit {
         });
       }
     }
+    this.trackCareersStatus(CareerFieldData);
   }
 
   // Click event on Outcome Checkbox
-  outcomeCheckBox(career, strands, outcome) {
+  outcomeCheckBox(CareerFieldData, StrandData, outcome) {
 
     // tslint:disable-next-line:only-arrow-functions
-    strands.isSelected = strands.Outcome.every(function (itemChild: any) {
+    StrandData.isSelected = StrandData.Outcome.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Strand.every(function (itemChild: any) {
+    CareerFieldData.isSelected = CareerFieldData.Strand.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -287,24 +319,119 @@ export class CustomAccordionComponent implements OnInit {
         });
       }
     }
+    this.trackStrandsStatus(CareerFieldData, StrandData);
+    this.trackCareersStatus(CareerFieldData);
   }
 
-  // Click event on Outcome Checkbox
-  competencyCheckBox(career, strand, outcome) {
-    // tslint:disable-next-line:only-arrow-functions
-    outcome.isSelected = outcome.Competency.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
-    });
+  // Click event on Competency Checkbox
+  competencyCheckBox(careerField, strand, outcome) {
+    //// tslint:disable-next-line:only-arrow-functions
+    //outcome.isSelected = outcome.Competency.every(function (itemChild: any) {
+    //  return itemChild.isSelected === true;
+    //});
+    //// tslint:disable-next-line:only-arrow-functions
+    //strand.isSelected = strand.Outcome.every(function (itemChild: any) {
+    //  return itemChild.isSelected === true;
+    //});
+    //if (outcome.IsChildPartiallySelected) {
+    //  strand.IsChildPartiallySelected = true;
+    //}
 
-    // tslint:disable-next-line:only-arrow-functions
-    strand.isSelected = strand.Outcome.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
-    });
+    //// tslint:disable-next-line:only-arrow-functions
+    //career.isSelected = career.Strand.every(function (itemChild: any) {
+    //  return itemChild.isSelected === true;
+    //});
+    this.trackOutcomesStatus(careerField, strand, outcome)
+  }
 
-    // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Strand.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
-    });
+  trackOutcomesStatus(CareerFieldData, StrandData, OutcomeData) {
+    var competencyStatus = [];
+    for (var comp = 0; comp < OutcomeData.Competency.length; comp++) {//to update Compatency and outcomes status
+      OutcomeData.Competency.forEach((element) => {
+        competencyStatus.push(element.isSelected);
+      });
+      competencyStatus = _.uniq(competencyStatus);
+      if (competencyStatus.length > 1) {
+        OutcomeData.IsChildPartiallySelected = true;
+        OutcomeData.isSelected = false;
+        CareerFieldData.IsChildPartiallySelected = true;
+        StrandData.IsChildPartiallySelected = true;
+        //   return;
+      } else if (competencyStatus.length === 1) {
+        if (competencyStatus[0] == true) {
+          OutcomeData.IsChildPartiallySelected = false;
+          OutcomeData.isSelected = true;
+          CareerFieldData.IsChildPartiallySelected = true;
+          StrandData.IsChildPartiallySelected = true;
+          //  return;
+        } else if (competencyStatus[0] == false) {
+          OutcomeData.IsChildPartiallySelected = false;
+          OutcomeData.isSelected = false;
+          var outComesStatus = [];
+          StrandData.Outcome.forEach((outComes) => {
+            outComesStatus.push(outComes.IsChildPartiallySelected);
+          });
+          outComesStatus = _.uniq(outComesStatus);
+          if (outComesStatus.length > 1){
+            StrandData.IsChildPartiallySelected = true;
+          } else if (outComesStatus.length === 1){
+            if (outComesStatus[0] ==  true){
+              StrandData.IsChildPartiallySelected = false;
+              StrandData.isSelected = true;
+            } else if (outComesStatus[0] == false) {
+              StrandData.IsChildPartiallySelected = false;
+              StrandData.isSelected = false;
+            }
+          }
+          CareerFieldData.IsChildPartiallySelected = false;
+          //return;
+        }
+    }
+    }
+    this.trackStrandsStatus(CareerFieldData, StrandData);
+    this.trackCareersStatus(CareerFieldData);
+    } 
+  trackStrandsStatus(CareerFieldData, StrandData) {
+    var strandStatus = []; //to update strands status
+    for (var strand = 0; strand < StrandData.Outcome.length; strand++) {
+      StrandData.Outcome.forEach((element) => {
+        strandStatus.push(element.isSelected);
+      });
+      strandStatus = _.uniq(strandStatus);
+      if (strandStatus.length > 1) {
+        StrandData.isSelected = false;
+        StrandData.IsChildPartiallySelected = true;
+      }
+      else if (strandStatus.length === 1) {
+        if (strandStatus[0] == true) {
+          StrandData.isSelected = true;
+          StrandData.IsChildPartiallySelected = false;
+        } else if (strandStatus[0] == false) {
+          StrandData.isSelected = false;
+        }
+      }
+    }
+  }
+  trackCareersStatus(CareerFieldData) {
+    var carrerStatus = [];//to update strands status
+    for (var career = 0; career < CareerFieldData.Strand.length; career++) {
+      CareerFieldData.Strand.forEach((element) => {
+        carrerStatus.push(element.isSelected);
+      });
+      carrerStatus = _.uniq(carrerStatus);
+      if (carrerStatus.length > 1) {
+        CareerFieldData.isSelected = false;
+        CareerFieldData.IsChildPartiallySelected = true;
+      }
+      else if (carrerStatus.length === 1) {
+        if (carrerStatus[0] == true) {
+          CareerFieldData.isSelected = true;
+          CareerFieldData.IsChildPartiallySelected = false;
+        } else if (carrerStatus[0] == false) {
+          CareerFieldData.isSelected = false;
+        }
+      }
+    }
   }
 
   // Click event on Subject
