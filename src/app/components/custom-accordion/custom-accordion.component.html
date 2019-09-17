@@ -50,7 +50,7 @@
             <div class="col-md-6">
               <div class="accordion-label-career">Career Field</div>
               <div class="accordion-checbox ">
-                <span class="ohio-checkbox checkbox checkbox-success" [ngClass]="careerField.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
+                <span class="ohio-checkbox checkbox checkbox-success">
                   <input type="checkbox" class="ohio-checkbox-el" id="careerFieldID_{{i}}"
                     [(ngModel)]="careerField.isSelected" name="list_name" value="{{careerField.id}}"
                     (ngModelChange)="careerFieldCheckBox(careerField);" (click)="$event.stopPropagation()" />
@@ -84,7 +84,7 @@
                     <div class="col-md-6">
                       <div class="accordion-label-strand">Strand</div>
                       <div class="accordion-checbox">
-                        <span class="ohio-checkbox checkbox checkbox-success" [ngClass]="strand.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
+                        <span class="ohio-checkbox checkbox checkbox-success">
                           <input type="checkbox" class="ohio-checkbox-el" id="strandID_{{j}}"
                             [(ngModel)]="strand.isSelected" name="list_name_child" value="{{strand.id}}"
                             (ngModelChange)="strandCheckBox(careerField, strand)" (click)="$event.stopPropagation()"/>
@@ -119,7 +119,7 @@
                           <div class="col-md-6">
                             <div class="accordion-label-outcome">Outcome</div>
                             <div class="accordion-checbox">
-                              <span class="ohio-checkbox checkbox checkbox-success" [ngClass]="outcome.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
+                              <span class="ohio-checkbox checkbox checkbox-success">
                                 <input type="checkbox" class="ohio-checkbox-el" id="outcomeID_{{k}}"
                                   [(ngModel)]="outcome.isSelected" name="list_name_child" value="{{outcome.id}}"
                                   (ngModelChange)="outcomeCheckBox(careerField, strand, outcome)" (click)="$event.stopPropagation()"/>
@@ -204,7 +204,7 @@
             <div class="col-md-3">
               <div class="accordion-label-career">Subject</div>
               <div class="accordion-checbox ">
-                <span class="ohio-checkbox checkbox checkbox-success" [ngClass]="careerField.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
+                <span class="ohio-checkbox checkbox checkbox-success">
                   <input type="checkbox" class="ohio-checkbox-el" id="careerFieldID_{{i}}"
                     [(ngModel)]="careerField.isSelected" name="list_name" value="{{careerField.id}}"
                     (ngModelChange)="subjectCheckBox(careerField)" (click)="$event.stopPropagation()"/>
@@ -238,7 +238,7 @@
                     <div class="col-md-3">
                       <div class="accordion-label-strand">{{strand.LevelName}}</div>
                       <div class="accordion-checbox">
-                        <span class="ohio-checkbox checkbox checkbox-success" [ngClass]="strand.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
+                        <span class="ohio-checkbox checkbox checkbox-success">
                           <input type="checkbox" class="ohio-checkbox-el" id="strandID_{{j}}"
                             [(ngModel)]="strand.isSelected" name="list_name_child" value="{{strand.LevelId}}"
                             (ngModelChange)="levelCheckBox(careerField, strand)" (click)="$event.stopPropagation()"/>
@@ -273,7 +273,7 @@
                           <div class="col-md-3">
                             <div class="accordion-label-outcome">{{outcome.LevelName}}</div>
                             <div class="accordion-checbox">
-                              <span class="ohio-checkbox checkbox checkbox-success" [ngClass]="outcome.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
+                              <span class="ohio-checkbox checkbox checkbox-success">
                                 <input type="checkbox" class="ohio-checkbox-el" id="outcomeID_{{k}}"
                                   [(ngModel)]="outcome.isSelected" name="list_name_child" value="{{outcome.LevelId}}"
                                   (ngModelChange)="childLevel1CheckBox(careerField, strand, outcome)" (click)="$event.stopPropagation()"/>
