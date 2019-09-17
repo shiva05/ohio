@@ -14,7 +14,7 @@ import { SharedService } from '../../services/shared.service';
 @Component({
   selector: 'app-alignment-search-filters',
   templateUrl: './alignment-search-filters.html',
-  styleUrls: []
+  styleUrls: ['./alignment-search-filters.css']
 })
 export class AlignmentSearchFiltersComponent implements OnInit {
 
@@ -54,6 +54,8 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   metaData: Observable<MetaData>;
   selectedAcademicItems: any = [];
   subjectsDefaultSettings: any = {};
+  isVisible: boolean = false;
+
   constructor(private httpService: HttpClient,
               private ref: ChangeDetectorRef,
               private store: Store<AppState>,
@@ -78,7 +80,9 @@ export class AlignmentSearchFiltersComponent implements OnInit {
 
     this.store.select('advancedSearch').subscribe(data => {
       this.metaData = data.metaData;
-      this.careers = this.metaData['CareerFields'];
+      if (this.careers.length === 0) {
+        this.careers = this.metaData['CareerFields'];
+      }
       this.strands = this.metaData['Strands'];
       this.outcomes = this.metaData['Outcomes'];
       this.grades = this.metaData['Grades'];
@@ -138,13 +142,16 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   }
   onCareerSelect() {
     this.strandsDropdown = [];
+    this.selectedStrands = [];
     this.strands.forEach(eachStrand => {
       this.selectedCareer.forEach(eachCareer => {
         if (eachStrand.CareerFieldPk === eachCareer.CareerFieldId) {
           this.strandsDropdown.push(eachStrand);
+          // have to use _.intersection method to remove the element sof the unselected parent data.
         }
       });
     });
+
   }
 
   onStrandSelect() {
@@ -226,7 +233,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
                   // if (selectedItem.SubjectLevelsPk === )
               });
               // to set the values of only selected list options
-              mainCourse.DropdownList.forEach((dropwdownList) => { dropDownSetId.push(dropwdownList.SubjectLevelsPk); }); // start mappiing the next dropdown
+              mainCourse.DropdownList.forEach((dropwdownList) => { dropDownSetId.push(dropwdownList.SubjectLevelsPk); }); // start mapping the next dropdown
               if (mainCourse.SelectedItems.length > 0) {
                   mainCourse.SelectedItems.forEach((selectedList) => { selectedSetId.push(selectedList.SubjectLevelsPk); });
                   updatedSelectedSetId = _.intersection(dropDownSetId, selectedSetId);
@@ -266,7 +273,8 @@ clearSearch() {
     selectedAcadamicSubjects: [],
     finalSelectedObject: [],
   };
-  this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
+  // this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
+  this.store.dispatch({ type: AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS, payload: this.searchObj });
   this.selectedCareer = [];
   this.selectedAcadamicSubjects = [];
   this.selectedStrands = [];
@@ -276,7 +284,7 @@ clearSearch() {
   this.strandsDropdown = [];
   this.outcomesDropdown = [];
   this.competencyNumbers = [];
-  this.rout.navigate(['/AlignmentSearch']);
+ // this.rout.navigate(['/AlignmentSearch']);
 }
   onSubjectLevelsSelectAll(data) {
     let selectedAll = [];
@@ -293,22 +301,42 @@ clearSearch() {
     // TODO: Call API
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA , payload : this.selectedOutcome});
   }
+  showAlert(): void {
+    if (this.isVisible) {
+      return;
+    }
+    this.isVisible = true;
+    setTimeout(() => this.isVisible = false, 4000);
+  }
+  onOutcomeSelectAll() {
+    this.competencyNumbers = [];
+    this.selectedOutcome = this.outcomesDropdown;
+    this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA, payload: this.selectedOutcome });
+  }
+  onOutcomeDeSelectAll() {
+    this.competencyNumbers = [];
+    this.selectedCompetencyNumbers = [];
+  }
   search() {
-    this.goToPage('SearchResults');
-    // debugger;
-    this.searchObj = {
-      selectedCareers: this.selectedCareer,
-      selectedStrands: this.selectedStrands,
-      selectedOutcomes: this.selectedOutcome,
-      selectedCompetencies: this.selectedCompetencyNumbers,
-      selectedAcadamicSubjects: this.selectedAcadamicSubjects,
-      finalSelectedObject: this.academicSubjects,
+    if (this.selectedCareer.length < 1 && this.selectedAcademicItems.length < 1) {
+      this.showAlert();
+    } else {
+      this.goToPage('SearchResults');
+      // debugger;
+      this.searchObj = {
+        selectedCareers: this.selectedCareer,
+        selectedStrands: this.selectedStrands,
+        selectedOutcomes: this.selectedOutcome,
+        selectedCompetencies: this.selectedCompetencyNumbers,
+        selectedAcadamicSubjects: this.selectedAcadamicSubjects,
+        finalSelectedObject: this.academicSubjects,
 
-    };
-    localStorage.setItem('searchLable', 'SearchAlignment');
-    // this.goToPage('SearchResults');
-    this.rout.navigate(['/AlignmentSearchResults']);
-    this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS , payload: this.searchObj});
+      };
+      localStorage.setItem('searchLable', 'SearchAlignment');
+      // this.goToPage('SearchResults');
+      this.rout.navigate(['/AlignmentSearchResults']);
+      this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
+    }
   }
 
   onAcadamicSubjectSelect() {

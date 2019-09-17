@@ -31,6 +31,7 @@ export class CustomAccordionComponent implements OnInit {
   finalSearchResults: any[];
   alignmentSearchSelectedFilters: {};
   totalSearchResults = 0;
+  isVisible: boolean = false;
   Level1Ids: any = [];
   Level2Ids: any = [];
   Level3Ids: any = [];
@@ -43,6 +44,7 @@ export class CustomAccordionComponent implements OnInit {
     Subjects: [],
     CteToAcademic: true
   };
+  dataReceived = false;
   academicSubjectIds = {
     Math: 1,
     ELA: 2,
@@ -80,8 +82,11 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   getAlignmentSearchResult() {
+
     this.store.select('advancedSearch').subscribe(data => {
+      if (this.dataReceived === false) {
       if (data.alignmentSearchSelectedFilters) {
+        this.dataReceived = true;
         this.alignmentSearchSelectedFilters = data.alignmentSearchSelectedFilters;
         let careerfeilds = [];
         data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
@@ -167,16 +172,19 @@ export class CustomAccordionComponent implements OnInit {
                 this.noResultFound = true;
               }
             }
+            return;
           },
           err => {
           });
-        console.log(data);
+        // console.log(data);
+        return;
       }
+    }
     });
   }
 
   formatSearchResultDataArray() {
-    //add color pallets here AcademicSubject
+    // add color pallets here AcademicSubject
     this.searchResultDataArray.forEach(element => {
       if (element.Alignment) {
         this.totalSearchResults = this.totalSearchResults + element.Alignment;
@@ -190,7 +198,7 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   formatAlignmentSearchData() {
-    //add color pallets here AcademicSubject
+    // add color pallets here AcademicSubject
     this.totalSearchResults = 0;
     this.subjectToCareerData.forEach(element => {
       if (element.Alignment) {
@@ -228,7 +236,7 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Strand Checkbox
   strandCheckBox(parent, parentObj) {
     // tslint:disable-next-line:only-arrow-functions
-    parent.isSelected = parent.Strand.every(function (itemChild: any) {
+    parent.isSelected = parent.Strand.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -259,12 +267,12 @@ export class CustomAccordionComponent implements OnInit {
   outcomeCheckBox(career, strands, outcome) {
 
     // tslint:disable-next-line:only-arrow-functions
-    strands.isSelected = strands.Outcome.every(function (itemChild: any) {
+    strands.isSelected = strands.Outcome.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Strand.every(function (itemChild: any) {
+    career.isSelected = career.Strand.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -284,17 +292,17 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Outcome Checkbox
   competencyCheckBox(career, strand, outcome) {
     // tslint:disable-next-line:only-arrow-functions
-    outcome.isSelected = outcome.Competency.every(function (itemChild: any) {
+    outcome.isSelected = outcome.Competency.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    strand.isSelected = strand.Outcome.every(function (itemChild: any) {
+    strand.isSelected = strand.Outcome.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Strand.every(function (itemChild: any) {
+    career.isSelected = career.Strand.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
@@ -323,7 +331,7 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Level Checkbox
   levelCheckBox(parent, parentObj) {
     // tslint:disable-next-line:only-arrow-functions
-    parent.isSelected = parent.Level.every(function (itemChild: any) {
+    parent.isSelected = parent.Level.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -353,12 +361,12 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Child Level 1 Checkbox
   childLevel1CheckBox(career, strands, outcome) {
     // tslint:disable-next-line:only-arrow-functions
-    strands.isSelected = strands.ChildLevel.every(function (itemChild: any) {
+    strands.isSelected = strands.ChildLevel.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Level.every(function (itemChild: any) {
+    career.isSelected = career.Level.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -378,17 +386,17 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Child Level 2 Checkbox
   childLevel2CheckBox(career, strand, outcome) {
     // tslint:disable-next-line:only-arrow-functions
-    outcome.isSelected = outcome.ChildLevel.every(function (itemChild: any) {
+    outcome.isSelected = outcome.ChildLevel.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    strand.isSelected = strand.ChildLevel.every(function (itemChild: any) {
+    strand.isSelected = strand.ChildLevel.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Level.every(function (itemChild: any) {
+    career.isSelected = career.Level.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
@@ -493,10 +501,21 @@ export class CustomAccordionComponent implements OnInit {
       });
     }
 
-    //this.goToPage(obj);
-    this.rout.navigate(['/AlignmentSearchReport']);
-    this.alignmentSearchSelectedFilters['selectedAsSearchResults'] = this.reportPayload;
-    this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.alignmentSearchSelectedFilters });
+    if (this.reportPayload.CompetencyIds.length > 0) {
+      // this.goToPage(obj);
+      this.rout.navigate(['/AlignmentSearchReport']);
+      this.alignmentSearchSelectedFilters['selectedAsSearchResults'] = this.reportPayload;
+      this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.alignmentSearchSelectedFilters });
+    } else {
+      this.showAlert();
+    }
+  }
+  showAlert(): void {
+    if (this.isVisible) {
+      return;
+    }
+    this.isVisible = true;
+    setTimeout(() => this.isVisible = false, 4000);
   }
 
   goToPage(org) {
@@ -504,8 +523,8 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   goBackToSearch() {
-    //let lable = localStorage.getItem('searchLable');
-    //this.onPageSelect.emit('SearchAlignment');
+    // let lable = localStorage.getItem('searchLable');
+    // this.onPageSelect.emit('SearchAlignment');
     this.rout.navigate(['/AlignmentSearch']);
   }
 

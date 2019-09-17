@@ -1,3 +1,7 @@
+<div class="alert alert-danger" [class.visible]="isVisible">
+  At least 1 Career Field and 1 Academic Subject required.
+</div>
+
 <div class="col-md-12">
   <h1>Alignment Search </h1>
   <div class="searchmain">
@@ -56,7 +60,7 @@
       <div class="form-group col-md-6" >
           <label>{{ 'SearchFields.Outcomes' | translate }}</label>
           <ng-multiselect-dropdown [ngClass]="" [data]="outcomesDropdown" [(ngModel)]="selectedOutcome"
-              [settings]="outcomeDropdownSettings" (onSelect)="onOutcomeSelect()" (onDeSelect)="onOutcomeSelect()">
+              [settings]="outcomeDropdownSettings" (onSelect)="onOutcomeSelect()" (onDeSelect)="onOutcomeSelect()" (onSelectAll)="onOutcomeSelectAll()" (onDeSelectAll)="onOutcomeDeSelectAll()">
           </ng-multiselect-dropdown>
       </div>
       <!-- End Dropdown Row -->

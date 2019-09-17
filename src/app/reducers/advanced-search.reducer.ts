@@ -74,6 +74,12 @@ export function advancedSearchReducer(state = initialState ,Action :AdvancedSear
         ...state,
         metaData: Action.payload
       };
+
+    case AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS:
+      return {
+        ...state,
+        alignmentSearchSelectedFilters: Action.payload
+      };
     default:
       return state;
   }

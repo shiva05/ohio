@@ -5,12 +5,13 @@ export const api = function (serverUrl) {
     return {
       GetAlignmentMetaData: `${serverUrl}AlignmnetSearch/alignmentsMetadata`,
       GetCompetencyData: `${serverUrl}AlignmnetSearch/cteCompetencyMetadata`,
-      GetSearchResultData: `${serverUrl}AlignmnetSearch/SearchAlignments`,
+      GetSearchResultData: `${serverUrl}AlignmnetSearch/searchResults`,
       GetReportData: `${serverUrl}AlignmnetSearch/searchReport`,
       GetDownloadedReport: `${serverUrl}AlignmnetSearch/downloadPdfReport`,
 
       GetCourseMetaData: `${serverUrl}CourseSearch/courseMetadata`,
       GetCourseSearchResult: `${serverUrl}CourseSearch/courseSearchResults`,
       GetCourseSearchReportData: `${serverUrl}CourseSearch/courseSearchReport`,
+      GetCourseSearchDownloadedReport: `${serverUrl}CourseSearch/downloadPdfReport`,
     };
 };
