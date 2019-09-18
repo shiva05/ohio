@@ -42,104 +42,124 @@ export class FilterSummaryComponent implements OnInit {
     this.alignmentSearchResults = true;
     this.shared.updateAlignmentSearch = false;
     this.shared.updateCourseSearch = false;
-    this.store.select('advancedSearch').subscribe(data => {
-    var quickSearchData = localStorage.getItem('QuickSearchData');
-    if (quickSearchData) {          
-      quickSearchData = JSON.parse(quickSearchData);
-      data.alignmentSearchSelectedFilters.selectedAcadamicSubjects = [];
-      data.alignmentSearchSelectedFilters.selectedCareers = [];
-        data.metaData['Subjects'].forEach((element) => {
-            quickSearchData['AcademicSubjects'].forEach((selctedAcademicSubject) => {
-              if (selctedAcademicSubject.SubjectId === element.SubjectId) {
-               // console.log(element);
-                data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.push(element);
-              }
-          });
-          });
-        data.metaData['CareerFields'].forEach((career) => {
-            quickSearchData['CareerFields'].forEach((selctedCareer) => {
-              if (career.CareerFieldId === selctedCareer.CareerFieldId) {
-                data.alignmentSearchSelectedFilters.selectedCareers.push(career);
-              }
-          });
+
+    var quickSearchData = JSON.parse(localStorage.getItem('QuickSearchData'));
+    if (quickSearchData) {
+      this.FilterSummaryKeys = {
+        Keywords: '',
+        CareerFieldIds: [],
+        StrandIds: [],
+        OutcomeIds: [],
+        CompetencyIds: [],
+        Subjects: [],
+        CteToAcademic: true
+      };
+
+      if (quickSearchData['AcademicSubjects'].length > 0) {
+        quickSearchData['AcademicSubjects'].forEach((subject) => {
+          var selectedSubject = {
+            SubjectId: 0,
+            SubjectName : '',
+            Level1Ids: [],
+            Level2Ids: [],
+            Level3Ids: []
+          }
+          selectedSubject.SubjectId = subject.SubjectId;
+          this.FilterSummaryKeys.Subjects.push(selectedSubject);
+          selectedSubject.SubjectName = subject.SubjectName;
         });
-        //console.log(data.alignmentSearchSelectedFilters);
       }
-    if (data.alignmentSearchSelectedFilters) {
-        let careerfields = [];
-        data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
-          careerfields.push(element.CareerFieldName);
+      if (quickSearchData['CareerFields'].length > 0) {
+        quickSearchData['CareerFields'].forEach((career) => {
+          this.FilterSummaryKeys.CareerFieldIds.push(career.CareerFieldName);
         });
+      }
+      this.searchObj = {
+        selectedCareers: quickSearchData['CareerFields'],
+        selectedAcadamicSubjects: quickSearchData['AcademicSubjects']
+      };
+      this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
 
-        let strands = [];
-        data.alignmentSearchSelectedFilters.selectedStrands.forEach(element => {
-          strands.push(element.StrandName);
-        });
+    }
 
-        let outcomes = [];
-        data.alignmentSearchSelectedFilters.selectedOutcomes.forEach(element => {
-          outcomes.push(element.OutcomeName);
-        });
-
-        let CompetencyIds = [];
-        data.alignmentSearchSelectedFilters.selectedCompetencies.forEach(element => {
-          CompetencyIds.push(element.CompetencyName);
-        });
-
-
-        let subjects = [];
-        data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
-          let level1 = [];
-          let level1Name = element.Level[0].LevelName;
-          if (element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length > 0) {
-            element.Level[0].SelectedItems.forEach(element => {
-              level1.push(element.LevelValue1);
+      this.store.select('advancedSearch').subscribe(data => {
+        if (data.alignmentSearchSelectedFilters) {
+          let careerfields = [];
+          let strands = [];
+          let outcomes = [];
+          let CompetencyIds = [];
+          let subjects = [];
+          if (data.alignmentSearchSelectedFilters.selectedCareers) {
+            data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
+              careerfields.push(element.CareerFieldName);
             });
           }
-
-          let level2 = [];
-          let level2Name = element.Level[1].LevelName;
-          if (element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length > 0) {
-            element.Level[1].SelectedItems.forEach(element => {
-              level2.push(element.LevelValue1);
+          if (data.alignmentSearchSelectedFilters.selectedStrand) {
+            data.alignmentSearchSelectedFilters.selectedStrands.forEach(element => {
+              strands.push(element.StrandName);
             });
           }
-          let level3 = [];
-          let level3Name = element.Level[2].LevelName;
-          if (element.Level[2] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length > 0) {
-            element.Level[2].SelectedItems.forEach(element => {
-              level3.push(element.LevelValue1);
+          if (data.alignmentSearchSelectedFilters.selectedOutcomes) {
+            data.alignmentSearchSelectedFilters.selectedOutcomes.forEach(element => {
+              outcomes.push(element.OutcomeName);
             });
           }
+          if (data.alignmentSearchSelectedFilters.selectedCompetencies) {
+            data.alignmentSearchSelectedFilters.selectedCompetencies.forEach(element => {
+              CompetencyIds.push(element.CompetencyName);
+            });
+          }
+          if(data.alignmentSearchSelectedFilters.selectedAcadamicSubjects){
+            data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
+              let level1 = [];
+              let level1Name = element.Level[0].LevelName;
+              if (element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length > 0) {
+                element.Level[0].SelectedItems.forEach(element => {
+                  level1.push(element.LevelValue1);
+                });
+              }
 
-
-          let subject = {
-            SubjectId: element.SubjectId,
-            SubjectName: element.SubjectName,
-            Level1Ids: level1,
-            level1Name,
-            Level2Ids: level2,
-            level2Name,
-            Level3Ids: level3,
-            level3Name
+              let level2 = [];
+              let level2Name = element.Level[1].LevelName;
+              if (element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length > 0) {
+                element.Level[1].SelectedItems.forEach(element => {
+                  level2.push(element.LevelValue1);
+                });
+              }
+              let level3 = [];
+              let level3Name = element.Level[2].LevelName;
+              if (element.Level[2] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length > 0) {
+                element.Level[2].SelectedItems.forEach(element => {
+                  level3.push(element.LevelValue1);
+                });
+              }
+              let subject = {
+                SubjectId: element.SubjectId,
+                SubjectName: element.SubjectName,
+                Level1Ids: level1,
+                level1Name,
+                Level2Ids: level2,
+                level2Name,
+                Level3Ids: level3,
+                level3Name
+              };
+              subjects.push(subject);
+            });
+          }
+          let obj = {
+            Keywords: '',
+            CareerFieldIds: careerfields,
+            StrandIds: strands,
+            OutcomeIds: outcomes,
+            CompetencyIds,
+            Subjects: subjects,
+            CteToAcademic: true
           };
-          subjects.push(subject);
-        });
+          this.FilterSummaryKeys = obj;
 
+        }
+      });
 
-        let obj = {
-          Keywords: '',
-          CareerFieldIds: careerfields,
-          StrandIds: strands,
-          OutcomeIds: outcomes,
-          CompetencyIds,
-          Subjects: subjects,
-          CteToAcademic: true
-        };
-        this.FilterSummaryKeys = obj;
-        
-      }
-    });
 
     if (this.searchLable === 'alignmentSearchResults') {
       this.store.select('advancedSearch').subscribe(data => {
@@ -147,7 +167,7 @@ export class FilterSummaryComponent implements OnInit {
           this.formatSearchDataToSummary(data.alignmentSearchSelectedFilters);
           this.alignmentSearchResults = true;
           this.courseSearchResults = false;
-          
+
         }
       });
 
@@ -161,13 +181,13 @@ export class FilterSummaryComponent implements OnInit {
           this.courseSearchResults = true;
         }
       });
-     
+
     }
   }
 
   goBackToAlignmentSearch() {
     this.shared.updateAlignmentSearch = true;
-    this.rout.navigate(['/AlignmentSearch']);  
+    this.rout.navigate(['/AlignmentSearch']);
   }
   goBackToCourseSearch() {
     this.shared.updateCourseSearch = true;
@@ -195,7 +215,7 @@ export class FilterSummaryComponent implements OnInit {
     }
   }
 
-  ngOnDestroy() {
-    localStorage.removeItem('QuickSearchData');
-  }
+  //ngOnDestroy() {
+  //  localStorage.removeItem('QuickSearchData');
+  //}
 }

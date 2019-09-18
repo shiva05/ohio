@@ -2,7 +2,8 @@
 
 <!-- Loading Overlay -->
 <loading-spinner *ngIf="loaderService.isLoading | async"></loading-spinner>
-<div>
+{{ready}}
+<div *ngIf="ready">
   <header></header>
    <router-outlet></router-outlet>
 </div>
