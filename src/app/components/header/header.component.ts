@@ -14,7 +14,7 @@ import { AppState } from './../../app.state';
 export class HeaderComponent implements OnInit {
 
 
-
+  isPublic = false;
   @Output() onPageSelect = new EventEmitter<any>();
   ngOnInit() {
 

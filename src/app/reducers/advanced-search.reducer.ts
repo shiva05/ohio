@@ -72,7 +72,7 @@ export function advancedSearchReducer(state = initialState ,Action :AdvancedSear
     case AdvancedSearchActions.LOAD_COMPETENCY_DATA_FAILURE:
       return {
         ...state,
-        metaData: Action.payload
+        competencies: []
       };
 
     case AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS:

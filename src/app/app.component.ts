@@ -112,9 +112,9 @@ export class AppComponent implements OnInit {
       }
     });
 
-    this.store.select('claimsReducer').subscribe((claimsState) => {
-      if(claimsState &&  claimsState.claimsJwtPayload){
-        this.ready = (claimsState.claimsJwtPayload.app_id !== null);
+    this.store.select('claimsState').subscribe((claimsState) => {
+      if(claimsState &&  claimsState.claimsJwtPayload && claimsState.claimsJwt){
+        this.ready = true;
       }
           // show the reset of app
       // if (this.ready) {

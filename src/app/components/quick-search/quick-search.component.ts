@@ -85,11 +85,11 @@ export class QuickSearchComponent implements OnInit {
     this.quickSearchSharedData.CareerFields = this.selectedCareer;
     this.quickSearchSharedData.AcademicSubjects = this.selectedAcadamicSubjects;
     localStorage.setItem('QuickSearchData', JSON.stringify(this.quickSearchSharedData));
-   // (window as any).open('http://edu-dev-sbd.azurewebsites.net/#/AlignmentSearchResults', '_blank');
+    (window as any).open('http://edu-dev-sbd.azurewebsites.net/#/AlignmentSearchResults', '_parent');
 
     // (window as any).open('http://edu-dev-sbd.azurewebsites.net/Search', '_blank');
     //  (window as any).open('http://edu-dev-sbd.azurewebsites.net/AlignmentSearchResults', '_blank');
-    this.router.navigate(['/AlignmentSearchResults']);
-    
+    //this.router.navigate(['/AlignmentSearchResults']);
+
   }
 }

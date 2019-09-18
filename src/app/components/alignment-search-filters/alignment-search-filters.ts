@@ -165,24 +165,24 @@ export class AlignmentSearchFiltersComponent implements OnInit {
           // });
         }
         if (data.alignmentSearchSelectedFilters) {
-          if (data.alignmentSearchSelectedFilters.selectedCareers.length > 0) {
+          if (data.alignmentSearchSelectedFilters.selectedCareers && data.alignmentSearchSelectedFilters.selectedCareers.length > 0) {
             this.selectedCareer = data.alignmentSearchSelectedFilters.selectedCareers;
             this.onCareerSelect();
           }
-          if (data.alignmentSearchSelectedFilters.selectedStrands.length > 0) {
+          if (data.alignmentSearchSelectedFilters.selectedStrands && data.alignmentSearchSelectedFilters.selectedStrands.length > 0) {
             this.selectedStrands = data.alignmentSearchSelectedFilters.selectedStrands;
             this.onStrandSelect();
           }
-          if (data.alignmentSearchSelectedFilters.selectedOutcomes.length > 0) {
+          if (data.alignmentSearchSelectedFilters.selectedOutcomes && data.alignmentSearchSelectedFilters.selectedOutcomes.length > 0) {
             this.selectedOutcome = data.alignmentSearchSelectedFilters.selectedOutcomes;
           }
-          if (data.alignmentSearchSelectedFilters.selectedCompetencies.length > 0) {
+          if (data.alignmentSearchSelectedFilters.selectedCompetencies && data.alignmentSearchSelectedFilters.selectedCompetencies.length > 0) {
             this.selectedCompetencyNumbers = data.alignmentSearchSelectedFilters.selectedCompetencies;
           }
           //  this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0 ? data.alignmentSearchSelectedFilters.selectedAcadamicSubjects : [];
           // this.selectedAcadamicSubjects is getting clear on selection of outcomes as store is getting updated on every selection of outcomes.
           // this resolves the lose of academic subjects selected data.
-          if (data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0) {
+          if (data.alignmentSearchSelectedFilters.selectedAcadamicSubjects && data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0) {
             this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects;
             this.selectedAcademicItems = this.selectedAcadamicSubjects;
             this.academicSubjects = data.alignmentSearchSelectedFilters.finalSelectedObject;
@@ -390,10 +390,10 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     if (this.selectedCareer.length < 1 && this.selectedAcademicItems.length < 1) {
       this.showAlert();
     } else {
-      localStorage.removeItem('QuickSearchData');
-      this.quickSearchSharedData.CareerFields = this.selectedCareer;
-      this.quickSearchSharedData.AcademicSubjects = this.selectedAcadamicSubjects;
-      localStorage.setItem('QuickSearchData', JSON.stringify(this.quickSearchSharedData));
+      // localStorage.removeItem('QuickSearchData');
+      // this.quickSearchSharedData.CareerFields = this.selectedCareer;
+      // this.quickSearchSharedData.AcademicSubjects = this.selectedAcadamicSubjects;
+      // localStorage.setItem('QuickSearchData', JSON.stringify(this.quickSearchSharedData));
 
       this.goToPage('SearchResults');
       // debugger;

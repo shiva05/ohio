@@ -88,63 +88,62 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   ngOnInit() {
-    
-        var quickSearchData = JSON.parse(localStorage.getItem('QuickSearchData'));
-        if (quickSearchData) {
-          if (quickSearchData['AcademicSubjects'].length > 0) {
-            quickSearchData['AcademicSubjects'].forEach((subject) => {
-              var selectedSubject = {
-                SubjectId: 0,
-                Level1Ids: [],
-                Level2Ids: [],
-                Level3Ids: []
-              }
-              selectedSubject.SubjectId = subject.SubjectId;
-              this.quickSearchFilterData.Subjects.push(selectedSubject);
-            });
-          }
-          if (quickSearchData['CareerFields'].length > 0) {
-            quickSearchData['CareerFields'].forEach((career) => {
-              this.quickSearchFilterData.CareerFiledIds.push(career.CareerFieldId);
-            });
-          }
-          // console.log(this.quickSearchFilterData);
-          this.searchResultService.getSearchResultData(this.quickSearchFilterData).pipe(take(1)).subscribe(
-            data => {
-              this.searchResultData = data;
-              if (this.cteToAcademic) {
-                if (this.searchResultData.CareerField) {
-                  this.searchResultData.CareerField.forEach(element => {
-                    this.searchResultDataArray.push(element);
-                    this.noResultFound = false;
-                  });
-                  this.formatSearchResultDataArray();
-                } else {
-                  this.noResultFound = true;
-                }
-              } else {
-                if (this.searchResultData.Subject.length > 0) {
-                  this.subjectToCareerData = this.searchResultData.Subject;
-                  this.noResultFound = false;
-                  this.formatAlignmentSearchData();
-                } else {
-                  this.noResultFound = true;
-                }
-              }
-              return;
-            },
-            err => {
-            });
-        } else {
-          this.getAlignmentSearchResult();
-        }
-        
+
+        // var quickSearchData = JSON.parse(localStorage.getItem('QuickSearchData'));
+        // if (quickSearchData) {
+        //   if (quickSearchData['AcademicSubjects'].length > 0) {
+        //     quickSearchData['AcademicSubjects'].forEach((subject) => {
+        //       var selectedSubject = {
+        //         SubjectId: 0,
+        //         Level1Ids: [],
+        //         Level2Ids: [],
+        //         Level3Ids: []
+        //       }
+        //       selectedSubject.SubjectId = subject.SubjectId;
+        //       this.quickSearchFilterData.Subjects.push(selectedSubject);
+        //     });
+        //   }
+        //   if (quickSearchData['CareerFields'].length > 0) {
+        //     quickSearchData['CareerFields'].forEach((career) => {
+        //       this.quickSearchFilterData.CareerFiledIds.push(career.CareerFieldId);
+        //     });
+        //   }
+        //   // console.log(this.quickSearchFilterData);
+        //   this.searchResultService.getSearchResultData(this.quickSearchFilterData).pipe(take(1)).subscribe(
+        //     data => {
+        //       this.searchResultData = data;
+        //       if (this.cteToAcademic) {
+        //         if (this.searchResultData.CareerField) {
+        //           this.searchResultData.CareerField.forEach(element => {
+        //             this.searchResultDataArray.push(element);
+        //             this.noResultFound = false;
+        //           });
+        //           this.formatSearchResultDataArray();
+        //         } else {
+        //           this.noResultFound = true;
+        //         }
+        //       } else {
+        //         if (this.searchResultData.Subject.length > 0) {
+        //           this.subjectToCareerData = this.searchResultData.Subject;
+        //           this.noResultFound = false;
+        //           this.formatAlignmentSearchData();
+        //         } else {
+        //           this.noResultFound = true;
+        //         }
+        //       }
+        //       return;
+        //     },
+        //     err => {
+        //     });
+        // } else {
+
+        // }
+        this.getAlignmentSearchResult();
   }
 
   getAlignmentSearchResult() {
 
     this.store.select('advancedSearch').subscribe(data => {
-      if (this.dataReceived === false) {
       if (data.alignmentSearchSelectedFilters) {
         this.dataReceived = true;
         this.alignmentSearchSelectedFilters = data.alignmentSearchSelectedFilters;
@@ -154,43 +153,51 @@ export class CustomAccordionComponent implements OnInit {
         });
 
         let strands = [];
-        data.alignmentSearchSelectedFilters.selectedStrands.forEach(element => {
-          strands.push(element.StrandPk);
-        });
-
+        if(data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedStrands){
+          data.alignmentSearchSelectedFilters.selectedStrands.forEach(element => {
+            strands.push(element.StrandPk);
+          });
+        }
         let outcomes = [];
-        data.alignmentSearchSelectedFilters.selectedOutcomes.forEach(element => {
-          outcomes.push(element.OutcomePk);
-        });
+        if(data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedOutcomes){
+          data.alignmentSearchSelectedFilters.selectedOutcomes.forEach(element => {
+            outcomes.push(element.OutcomePk);
+          });
+        }
 
         let CompetencyIds = [];
-        data.alignmentSearchSelectedFilters.selectedCompetencies.forEach(element => {
-          CompetencyIds.push(element.CompetencyPk);
-        });
-
+        if(data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedCompetencies){
+          data.alignmentSearchSelectedFilters.selectedCompetencies.forEach(element => {
+            CompetencyIds.push(element.CompetencyPk);
+          });
+        }
         let subjects = [];
         data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
           let level1 = [];
-          if (element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length > 0) {
-            element.Level[0].SelectedItems.forEach(element => {
-              level1.push(element.LevelValue1);
-            });
-          }
-
           let level2 = [];
-          if (element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length > 0) {
-            element.Level[1].SelectedItems.forEach(element => {
-              level2.push(element.LevelValue1);
-            });
-          }
-
           let level3 = [];
-          if (element.Level[3] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length > 0) {
-            element.Level[3].SelectedItems.forEach(element => {
-              level3.push(element.LevelValue1);
-            });
-          }
+          if(element.Level){
+            if (element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length > 0) {
+              element.Level[0].SelectedItems.forEach(element => {
+                level1.push(element.LevelValue1);
+              });
+            }
 
+
+            if (element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length > 0) {
+              element.Level[1].SelectedItems.forEach(element => {
+                level2.push(element.LevelValue1);
+              });
+            }
+
+
+            if (element.Level[3] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length > 0) {
+              element.Level[3].SelectedItems.forEach(element => {
+                level3.push(element.LevelValue1);
+              });
+            }
+
+          }
           let subject = {
             SubjectId: element.SubjectId,
             Level1Ids: level1,
@@ -239,7 +246,6 @@ export class CustomAccordionComponent implements OnInit {
         // console.log(data);
         return;
       }
-    }
     });
   }
 
