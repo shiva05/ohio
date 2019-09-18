@@ -42,7 +42,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   selectedClusters: any = [];
   selectedStandardNumbers: any = [];
   dropdownSettings: any = {};
-  compitencyDropdownSettings: any = {};
+  competencyDropdownSettings: any = {};
   academicDropdownSettings: any = {};
   careerFieldDropdownSettings: any = {};
   strandDropdownSettings: any = {};
@@ -68,70 +68,14 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   @Output() onPageSelect = new EventEmitter<any>();
 
   ngOnInit() {
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'CareerFieldId', textField: 'CareerFieldName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-    this.careerFieldDropdownSettings = {
-      singleSelection: false,
-      idField: 'CareerFieldId', textField: 'CareerFieldName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-    this.strandDropdownSettings = {
-      singleSelection: false,
-      idField: 'StrandPk', textField: 'StrandName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-    this.outcomeDropdownSettings = {
-      singleSelection: false,
-      idField: 'OutcomePk', textField: 'OutcomeName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-    this.careerFieldDropdownSettings = {
-      singleSelection: false,
-      idField: 'CareerFieldId', textField: 'CareerFieldName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-    this.academicSubjectDropdownSettings = {
-      singleSelection: false,
-      idField: 'SubjectId', textField: 'SubjectName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-    this.compitencyDropdownSettings = {
-      singleSelection: false,
-      idField: 'CompetencyPk', textField: 'CompetencyName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-    this.subjectsDefaultSettings = {
-      singleSelection: false,
-      idField: 'SubjectLevelsPk', textField: 'LevelValue1',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
+    this.dropdownSettings = this.shared.dropdownSettings;
+    this.careerFieldDropdownSettings = this.shared.careerFieldDropdownSettings;
+    this.strandDropdownSettings = this.shared.strandDropdownSettings;
+    this.outcomeDropdownSettings = this.shared.outcomeDropdownSettings;
+    this.careerFieldDropdownSettings = this.shared.careerFieldDropdownSettings;
+    this.academicSubjectDropdownSettings = this.shared.academicSubjectDropdownSettings;
+    this.competencyDropdownSettings = this.shared.competencyDropdownSettings;
+    this.subjectsDefaultSettings = this.shared.subjectsDefaultSettings;
 
 
     this.store.select('advancedSearch').subscribe(data => {
@@ -329,7 +273,7 @@ clearSearch() {
     selectedAcadamicSubjects: [],
     finalSelectedObject: [],
   };
-  //this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
+  // this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
   this.store.dispatch({ type: AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS, payload: this.searchObj });
   this.selectedCareer = [];
   this.selectedAcadamicSubjects = [];
