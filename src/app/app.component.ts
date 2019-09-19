@@ -12,6 +12,7 @@ import { AuthService } from './services/auth.service';
 import { AuthOrchestration } from './services/auth-orchestration.service';
 import * as AuthActions from './actions/auth-actions';
 import * as ClaimsActions from './actions/claims-actions';
+import { Router } from '@angular/router';
 import {
   HttpClient,
   HttpErrorResponse,
@@ -36,6 +37,7 @@ export class AppComponent implements OnInit {
   loading = true;
   ready = false;
   constructor(private http: HttpClient,
+              public router: Router,
               private store: Store<AppState>,
               public loaderService: LoaderService,
               private translate: TranslateService,

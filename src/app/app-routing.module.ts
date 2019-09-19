@@ -45,7 +45,7 @@ const routes: Routes = [
        path: 'AlignmentSearchReport',
        component: ReportComponent
      },
-  
+
    {
      path: 'CourseSearch',
      component: CourseSearchComponent
@@ -58,16 +58,16 @@ const routes: Routes = [
        path: 'CourseSearchReport',
        component: CourseSearchReportComponent
      },
-  
+
    {
      path: 'DataImport',
      component: ExportComponent
      },
    {
-     path: 'quickSearch',
+     path: 'quickSearchapp',
      component: QuickSearchComponent
    }
-   
+
 ];
 
 @NgModule({
