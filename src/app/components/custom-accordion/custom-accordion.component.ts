@@ -210,7 +210,7 @@ export class CustomAccordionComponent implements OnInit {
       }
     });
 
-    console.log(this.searchResultDataArray);
+   // console.log(this.searchResultDataArray);
   }
 
   formatSearchResultDataArray() {
@@ -244,15 +244,16 @@ export class CustomAccordionComponent implements OnInit {
 
   // Click event on Career Field
   careerFieldCheckBox(parentObj) {
-   // parentObj['IsChildPartiallySelected'] = true;
+    parentObj.IsChildPartiallySelected = false;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < parentObj.Strand.length; i++) {
       parentObj.Strand[i].isSelected = parentObj.isSelected;
+      parentObj.Strand[i].IsChildPartiallySelected = false;
       if (parentObj.Strand[i].Outcome) {
         // tslint:disable-next-line:prefer-for-of
         for (let j = 0; j < parentObj.Strand[i].Outcome.length; j++) {
           parentObj.Strand[i].Outcome[j].isSelected = parentObj.isSelected;
-
+          parentObj.Strand[i].Outcome[j].IsChildPartiallySelected = false;
           if (parentObj.Strand[i].Outcome[j].Competency) {
             // tslint:disable-next-line:prefer-for-of
             for (let k = 0; k < parentObj.Strand[i].Outcome[j].Competency.length; k++) {
@@ -265,16 +266,18 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   // Click event on Strand Checkbox
-  strandCheckBox(CareerFieldData, parentObj) {
+  strandCheckBox(CareerFieldData, StrandData) {
+    StrandData.IsChildPartiallySelected = false;
     // tslint:disable-next-line:only-arrow-functions
     CareerFieldData.isSelected = CareerFieldData.Strand.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
-    if (parentObj.Outcome) {
-      if (parentObj.isSelected) {
-        parentObj.Outcome.forEach(item => {
+    if (StrandData.Outcome) {
+      if (StrandData.isSelected) {
+        StrandData.Outcome.forEach(item => {
           item.isSelected = true;
+          item.IsChildPartiallySelected = false;
           if (item.Competency) {
             item.Competency.forEach(data => {
               data.isSelected = true;
@@ -282,7 +285,7 @@ export class CustomAccordionComponent implements OnInit {
           }
         });
       } else {
-        parentObj.Outcome.forEach(item => {
+        StrandData.Outcome.forEach(item => {
           item.isSelected = false;
           if (item.Competency) {
             item.Competency.forEach(data => {
@@ -292,11 +295,13 @@ export class CustomAccordionComponent implements OnInit {
         });
       }
     }
+
+   // this.trackStrandsStatus(CareerFieldData, StrandData);
     this.trackCareersStatus(CareerFieldData);
   }
 
   // Click event on Outcome Checkbox
-  outcomeCheckBox(CareerFieldData, StrandData, outcome) {
+  outcomeCheckBox(CareerFieldData, StrandData, OutcomeData) {
 
     // tslint:disable-next-line:only-arrow-functions
     StrandData.isSelected = StrandData.Outcome.every(function (itemChild: any) {
@@ -308,17 +313,18 @@ export class CustomAccordionComponent implements OnInit {
       return itemChild.isSelected === true;
     });
 
-    if (outcome.Competency) {
-      if (outcome.isSelected) {
-        outcome.Competency.forEach(item => {
+    if (OutcomeData.Competency) {
+      if (OutcomeData.isSelected) {
+        OutcomeData.Competency.forEach(item => {
           item.isSelected = true;
         });
       } else {
-        outcome.Competency.forEach(item => {
+        OutcomeData.Competency.forEach(item => {
           item.isSelected = false;
         });
       }
     }
+    this.trackOutcomesStatus(CareerFieldData, StrandData, OutcomeData);
     this.trackStrandsStatus(CareerFieldData, StrandData);
     this.trackCareersStatus(CareerFieldData);
   }
@@ -393,6 +399,7 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   trackStrandsStatus(CareerFieldData, StrandData) {
+    StrandData.IsChildPartiallySelected = false;
     var strandStatus = []; //to update strands status
     for (var strand = 0; strand < StrandData.Outcome.length; strand++) {
       StrandData.Outcome.forEach((element) => {
