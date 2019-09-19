@@ -409,9 +409,26 @@ export class CustomAccordionComponent implements OnInit {
           StrandData.isSelected = false;
           StrandData.IsChildPartiallySelected = true;
         } else if (strandStatus[0] == false) {
-          StrandData.isSelected = false;
-          CareerFieldData.IsChildPartiallySelected = false;
-          CareerFieldData.isSelected = false;
+          var outComesSelectedStatus = [];
+          StrandData.Outcome.forEach((element) => {
+            outComesSelectedStatus.push(element.isSelected);
+          });
+          outComesSelectedStatus = _.uniq(outComesSelectedStatus);
+          if (outComesSelectedStatus.length > 1) {
+            StrandData.isSelected = false;
+            StrandData.IsChildPartiallySelected = true;
+            CareerFieldData.IsChildPartiallySelected = true;
+            CareerFieldData.isSelected = false;
+          } else if (outComesSelectedStatus.length == 1)
+            if (outComesSelectedStatus[0] == true) {
+              StrandData.isSelected = true;
+              StrandData.IsChildPartiallySelected = false;
+              CareerFieldData.IsChildPartiallySelected = true;
+              CareerFieldData.isSelected = false;
+            }
+          //StrandData.isSelected = false;
+          //CareerFieldData.IsChildPartiallySelected = false;
+          //CareerFieldData.isSelected = false;
         }
       //  StrandData.IsChildPartiallySelected = false;
       }
