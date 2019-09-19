@@ -229,7 +229,7 @@ export class CourseSearchFiltersComponent implements OnInit {
       // selectedAcademicSubjectCourses: [this.selectedMathsCourses, this.selectedELACourses, this.selectedScienceCourses, this.selectedSocialCourses]
       selectedAcademicSubjectCourses: this.selectedAcademicItems
     };
-      this.store.dispatch({ type: CourseSearchActions.SAVE_AS_SELECTED_FILTERS_COURSESEARCH, payload: this.searchObj });
+      this.store.dispatch({ type: CourseSearchActions.SAVE_CS_SELECTED_FILTERS, payload: this.searchObj });
       localStorage.setItem('searchLable', 'SearchCourse');
     // this.goToPage('SearchResults');
       this.rout.navigate(['/CourseSearchResults']);

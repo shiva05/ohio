@@ -166,7 +166,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Courses Checkbox
   courseCheckBox(career, course) {
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Courses.every(function(itemChild: any) {
+    career.isSelected = career.Courses.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -186,12 +186,12 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Competency Checkbox
   competencyCheckBox(career, course) {
     // tslint:disable-next-line:only-arrow-functions
-    course.isSelected = course.Competencies.every(function(itemChild: any) {
+    course.isSelected = course.Competencies.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Courses.every(function(itemChild: any) {
+    career.isSelected = career.Courses.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
@@ -213,7 +213,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Grade Checkbox
   gradeCheckBox(career, course) {
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.SubjecToStandards.every(function(itemChild: any) {
+    career.isSelected = career.SubjecToStandards.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -233,12 +233,12 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Standard Checkbox
   standardCheckBox(career, course) {
     // tslint:disable-next-line:only-arrow-functions
-    course.isSelected = course.Standards.every(function(itemChild: any) {
+    course.isSelected = course.Standards.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.SubjecToStandards.every(function(itemChild: any) {
+    career.isSelected = career.SubjecToStandards.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
@@ -300,16 +300,16 @@ export class CourseSearchAccordionComponent implements OnInit {
         }
       });
     }
+
     console.log(this.courseSearchReportPayload);
     if (this.courseSearchReportPayload.CompetencyIds.length > 0) {
       // this.goToPage(obj);
       this.rout.navigate(['/CourseSearchReport']);
       this.courseSearchSelectedFilters['selectedCourseSearchResults'] = this.courseSearchReportPayload;
-      this.store.dispatch({ type: CourseSearchActions.SAVE_AS_SELECTED_FILTERS_COURSESEARCH, payload: this.courseSearchSelectedFilters });
+      this.store.dispatch({ type: CourseSearchActions.SAVE_CS_SELECTED_FILTERS, payload: this.courseSearchSelectedFilters });
     } else {
       this.showAlert();
     }
-
   }
 
   showAlert(): void {
