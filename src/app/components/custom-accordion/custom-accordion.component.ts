@@ -447,10 +447,26 @@ export class CustomAccordionComponent implements OnInit {
       }
       else if (carrerStatus.length === 1) {
         if (carrerStatus[0] == true) {
-          CareerFieldData.isSelected = true;
-          CareerFieldData.IsChildPartiallySelected = false;
-        } else if (carrerStatus[0] == false) {
           CareerFieldData.isSelected = false;
+          CareerFieldData.IsChildPartiallySelected = true;
+        } else if (carrerStatus[0] == false) {
+          var strandsSelectedStatus = []
+          CareerFieldData.Strand.forEach((element) => {
+            strandsSelectedStatus.push(element.isSelected);
+          });
+          strandsSelectedStatus = _.uniq(strandsSelectedStatus);
+          if (strandsSelectedStatus.length > 1) {
+            CareerFieldData.isSelected = false;
+            CareerFieldData.IsChildPartiallySelected = true;
+          } else if (strandsSelectedStatus.length == 1) {
+            if (strandsSelectedStatus[0] == true) {
+              CareerFieldData.isSelected = true;
+              CareerFieldData.IsChildPartiallySelected = false;
+            } else if (strandsSelectedStatus[0] == false) {
+              CareerFieldData.isSelected = false;
+              CareerFieldData.IsChildPartiallySelected = false;
+            }
+          }
         }
       }
     }
