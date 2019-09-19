@@ -377,10 +377,10 @@ export class CustomAccordionComponent implements OnInit {
           } else if (outComesStatus.length === 1){
             if (outComesStatus[0] ==  true){
               StrandData.IsChildPartiallySelected = false;
-              StrandData.isSelected = true;
+            //  StrandData.isSelected = true;
             } else if (outComesStatus[0] == false) {
               StrandData.IsChildPartiallySelected = false;
-              StrandData.isSelected = false;
+           //   StrandData.isSelected = false;
             }
           }
           CareerFieldData.IsChildPartiallySelected = false;
@@ -390,12 +390,13 @@ export class CustomAccordionComponent implements OnInit {
     }
     this.trackStrandsStatus(CareerFieldData, StrandData);
     this.trackCareersStatus(CareerFieldData);
-    } 
+  }
+
   trackStrandsStatus(CareerFieldData, StrandData) {
     var strandStatus = []; //to update strands status
     for (var strand = 0; strand < StrandData.Outcome.length; strand++) {
       StrandData.Outcome.forEach((element) => {
-        strandStatus.push(element.isSelected);
+        strandStatus.push(element.IsChildPartiallySelected);
       });
       strandStatus = _.uniq(strandStatus);
       if (strandStatus.length > 1) {
@@ -405,14 +406,14 @@ export class CustomAccordionComponent implements OnInit {
       }
       else if (strandStatus.length === 1) {
         if (strandStatus[0] == true) {
-          StrandData.isSelected = true;
-          //StrandData.IsChildPartiallySelected = false;
+          StrandData.isSelected = false;
+          StrandData.IsChildPartiallySelected = true;
         } else if (strandStatus[0] == false) {
           StrandData.isSelected = false;
           CareerFieldData.IsChildPartiallySelected = false;
           CareerFieldData.isSelected = false;
         }
-        StrandData.IsChildPartiallySelected = false;
+      //  StrandData.IsChildPartiallySelected = false;
       }
     }
   }
@@ -420,7 +421,7 @@ export class CustomAccordionComponent implements OnInit {
     var carrerStatus = [];//to update strands status
     for (var career = 0; career < CareerFieldData.Strand.length; career++) {
       CareerFieldData.Strand.forEach((element) => {
-        carrerStatus.push(element.isSelected);
+        carrerStatus.push(element.IsChildPartiallySelected);
       });
       carrerStatus = _.uniq(carrerStatus);
       if (carrerStatus.length > 1) {
