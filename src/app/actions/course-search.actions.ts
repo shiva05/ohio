@@ -23,7 +23,7 @@ export class CourseSearchDataFailure implements Action {
 }
 
 export class SaveAsSelectedFilters implements Action {
-    readonly type = SAVE_CS_SELECTED_FILTERS;
+  readonly type = SAVE_CS_SELECTED_FILTERS;
     constructor(public payload: CourseSearchSelectedFilters) { }
 }
 export class ResetCourseSelectedFilters implements Action {
