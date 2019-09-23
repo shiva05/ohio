@@ -29,7 +29,6 @@ export class SearchResultEffects {
         ];
 
         const outcomes = [
-            // tslint:disable-next-line:max-line-length
             { id: 1, academicSubject: 'Math', value: 'Select materials and lay out rough\u2010in wiring runs according to specifications, drawings and code requirements.' },
             { id: 2, academicSubject: 'Math', value: 'Lay out and install conduit or cable runs, raceways and cable systems.', competency: JSON.parse(JSON.stringify(competency)) }
         ];

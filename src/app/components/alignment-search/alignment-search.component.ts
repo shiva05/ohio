@@ -35,7 +35,6 @@ export class AlignmentSearchComponent implements OnInit {
       this.showAsFilter = true;
     } else if (org === 'SearchResults') {
       this.showAsResults = true;
-     // this.rout.navigate(['/SearchResults']);
     } else if (org === 'Report') {
       this.showAsReport = true;
     }

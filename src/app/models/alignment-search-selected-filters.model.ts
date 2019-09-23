@@ -9,15 +9,15 @@ import { CompetencyNumber } from './competency-number.model';
 
 
 export interface AlignmentSearchSelectedFilters {
-  selectedCareers : Career[],
-  selectedStrands: Strand[],
-  selectedOutcomes: Outcome[],
-  selectedCompetencies :CompetencyNumber[],
-  selectedAcadamicSubjects :selectedAcademicSubject[]
+  selectedCareers: Career[];
+  selectedStrands: Strand[];
+  selectedOutcomes: Outcome[];
+  selectedCompetencies: CompetencyNumber[];
+  selectedAcadamicSubjects: selectedAcademicSubject[];
 }
-export interface selectedAcademicSubject{
-    selectedGrades : Grade[],
-    selectedClusters : Cluster[]
-    selectedStandardNumbers : StandardNumber[]
+export interface selectedAcademicSubject {
+    selectedGrades: Grade[];
+    selectedClusters: Cluster[];
+    selectedStandardNumbers: StandardNumber[];
 }
 

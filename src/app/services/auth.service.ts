@@ -31,10 +31,6 @@ export class AuthService {
     if (hasValidToken) {
       const authToken = JSON.parse(jwt);
       if (authToken !== null) {
-        // const expiryDate = new Date(authToken.jwt.expires);
-        // const currentDt = environment.localhost
-        //       ? new Date(new Date(Date.now()).getTime() + 21600000)
-        //       : new Date(Date.now());
         const currentDt = new Date(Date.now());
         const expiryDate = environment.localhost
                 ? new Date(new Date(authToken.expires).getTime() - 14400000)  // 4 hours: 5: Hours during Day Light Savings

@@ -1,4 +1,4 @@
-export interface Test{
-  name: string,
-  url :string
+export interface Test {
+  name: string;
+  url: string;
 }

@@ -1,6 +1,6 @@
-export interface CompetencyNumber{
-  CompetencyPk: number,
-  CompetencyName :string,
-  OutcomePk :number,
-  CompetencyId :number
+export interface CompetencyNumber {
+  CompetencyPk: number;
+  CompetencyName: string;
+  OutcomePk: number;
+  CompetencyId: number;
 }

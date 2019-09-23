@@ -12,58 +12,58 @@ export interface MetaData {
 
 }
 export interface AdvancedSearchData {
-  metaData : MetaData,
-  competencies : CompetencyNumber[],
-  alignmentSearchSelectedFilters :AlignmentSearchSelectedFilters
+  metaData: MetaData;
+  competencies: CompetencyNumber[];
+  alignmentSearchSelectedFilters: AlignmentSearchSelectedFilters;
 
 }
 export interface AlignmentSearchSelectedFilters {
-  selectedCareers : Career[],
-  selectedStrands: Strand[],
-  selectedOutcomes: Outcome[],
-  selectedCompetencies :CompetencyNumber[],
-  selectedAcadamicSubjects :selectedAcademicSubject[],
-  selectedAsSearchResults :any
+  selectedCareers: Career[];
+  selectedStrands: Strand[];
+  selectedOutcomes: Outcome[];
+  selectedCompetencies: CompetencyNumber[];
+  selectedAcadamicSubjects: selectedAcademicSubject[];
+  selectedAsSearchResults: any;
 }
-export interface selectedAcademicSubject{
-    selectedGrades : Grade[],
-    selectedClusters : Cluster[]
-    selectedStandardNumbers : StandardNumber[]
+export interface selectedAcademicSubject {
+    selectedGrades: Grade[];
+    selectedClusters: Cluster[];
+    selectedStandardNumbers: StandardNumber[];
 }
 
-const initialState: AdvancedSearchData = {metaData :{
+const initialState: AdvancedSearchData = {metaData : {
   academicSubjects: [],
   Strands: [],
   CareerFields: [],
   Outcomes: [],
-  Subjects :[]
+  Subjects : []
 },
-competencies:[],
+competencies: [],
 
 alignmentSearchSelectedFilters: {
   selectedCareers : [],
   selectedStrands: [],
   selectedOutcomes: [],
-  selectedCompetencies :[],
+  selectedCompetencies : [],
   selectedAcadamicSubjects: [],
-  selectedAsSearchResults :{}
+  selectedAsSearchResults : {}
 }
 };
-export function advancedSearchReducer(state = initialState ,Action :AdvancedSearchActions.Actions){
-  switch(Action.type){
+export function advancedSearchReducer(state = initialState , Action: AdvancedSearchActions.Actions) {
+  switch (Action.type) {
     case AdvancedSearchActions.LOAD_META_DATA_SUCCESS:
       return {
         ...state,
-        metaData :Action.payload
+        metaData : Action.payload
       };
     case AdvancedSearchActions.LOAD_META_DATA_FAILURE:
     return {
       ...state,
-      metaData :Action.payload
+      metaData : Action.payload
     };
     case AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS:
     return { ...state,
-      alignmentSearchSelectedFilters :Action.payload
+      alignmentSearchSelectedFilters : Action.payload
     };
     case AdvancedSearchActions.LOAD_COMPETENCY_DATA_SUCCESS:
       return {
@@ -78,7 +78,7 @@ export function advancedSearchReducer(state = initialState ,Action :AdvancedSear
       case AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS:
         return {
           ...state,
-          alignmentSearchSelectedFilters: { 
+          alignmentSearchSelectedFilters: {
             selectedCareers: [],
             selectedStrands: [],
             selectedOutcomes: [],

@@ -1,15 +1,10 @@
 
 export interface alignmentSearchResultsPayload {
-  //Keywords: string,
-  CareerFiledIds: number[],
-  // StrandIds: number[],
-  // OutcomeIds: number[],
-  // CompetencyIds: number[],
-  // Subjects: SubjectIds[]
+  CareerFiledIds: number[];
 }
 export interface SubjectIds {
-  SubjectId: 1,
-  Level1Ids: number[],
-  Level2Ids: number[],
-  Level3Ids: number[]
+  SubjectId: 1;
+  Level1Ids: number[];
+  Level2Ids: number[];
+  Level3Ids: number[];
 }

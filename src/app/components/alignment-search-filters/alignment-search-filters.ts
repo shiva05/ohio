@@ -235,12 +235,12 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     let updatedSelectedSetId: any = [];
     let tempData = this.selectedAcademicItems;
     tempData.map((subject) => {
-        if (data.SubjectId === subject.SubjectId) { // comparing the selected items  level id with below statement which is the data of main object
+        if (data.SubjectId === subject.SubjectId) { // comparing the selected items level id with below statement which is the data of main object
           subject.Level.map((mainCourse, index) => {
             if (data.LevelId + 1 === mainCourse.LevelId) {
               mainCourse.DropdownList = [];
               data.SelectedItems.map((selectedItem) => {   // assigning parent level dropdown data
-                  mainCourse.SubjectLevels.map((targetedDropdown) => { // setting the vakle of dropdown here
+                  mainCourse.SubjectLevels.map((targetedDropdown) => { // setting the value of dropdown here
                     if (selectedItem.SubjectLevelsPk === targetedDropdown.ParentLevelPk) {
                       mainCourse.DropdownList.push(targetedDropdown);
                     }
@@ -266,7 +266,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
                   }
                 } else {
                   mainCourse.SelectedItems = [];
-                } // end mappiing the next dropdown
+                } // end mapping the next dropdown
               this.onSubjectLevelsSelect(mainCourse);
             }
 
@@ -276,7 +276,6 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         }
     });
     this.selectedAcademicItems = tempData;
-   // this.ref.detectChanges();
   }
 
   clearSearch() {
@@ -303,19 +302,16 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   // this.rout.navigate(['/AlignmentSearch']);
 }
   onSubjectLevelsSelectAll(data) {
-    let selectedAll = [];
     data.SelectedItems = [];
     data.SelectedItems = data.SubjectLevels;
     this.onSubjectLevelsSelect(data);
   }
   onSubjectLevelsDeSelectAll(data) {
-    let selectedAll = [];
     data.SelectedItems = [];
     this.onSubjectLevelsSelect(data);
   }
   onOutcomeSelect() {
-    // TODO: Call API
-    this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA , payload : this.selectedOutcome});
+    this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA, payload : this.selectedOutcome});
   }
   showAlert(): void {
     if (this.isVisible) {
@@ -337,24 +333,15 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     if (this.selectedCareer.length < 1 && this.selectedAcademicItems.length < 1) {
       this.showAlert();
     } else {
-      // localStorage.removeItem('QuickSearchData');
-      // this.quickSearchSharedData.CareerFields = this.selectedCareer;
-      // this.quickSearchSharedData.AcademicSubjects = this.selectedAcadamicSubjects;
-      // localStorage.setItem('QuickSearchData', JSON.stringify(this.quickSearchSharedData));
-
-      // this.goToPage('SearchResults');
-      // debugger;
       this.searchObj = {
         selectedCareers: this.selectedCareer,
         selectedStrands: this.selectedStrands,
         selectedOutcomes: this.selectedOutcome,
         selectedCompetencies: this.selectedCompetencyNumbers,
         selectedAcadamicSubjects: this.selectedAcadamicSubjects,
-        finalSelectedObject: this.academicSubjects,
-
+        finalSelectedObject: this.academicSubjects
       };
       localStorage.setItem('searchLable', 'SearchAlignment');
-      // this.goToPage('SearchResults');
       this.rout.navigate(['/AlignmentSearchResults']);
       this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
     }

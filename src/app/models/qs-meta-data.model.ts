@@ -9,7 +9,7 @@ import { CompetencyNumber } from './competency-number.model';
 
 
 export interface QsMetaData {
-  academicSubjects: AcademicSubject[],
-  careers: Career[]
+  academicSubjects: AcademicSubject[];
+  careers: Career[];
 }
 

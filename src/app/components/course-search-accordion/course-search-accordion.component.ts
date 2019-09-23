@@ -7,7 +7,6 @@ import * as CourseSearchActions from './../../actions/course-search.actions';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { _ } from 'underscore';
 
-
 @Component({
   selector: 'app-course-search-accordion',
   templateUrl: './course-search-accordion.component.html',
@@ -104,8 +103,6 @@ export class CourseSearchAccordionComponent implements OnInit {
           CareerPathToSubject: this.careerPathToSubject
         };
 
-       // console.log(obj);
-
         this.searchResultService.getCourseSearchResult(obj).subscribe(
           (data: any) => {
             if (this.careerPathToSubject) {
@@ -141,13 +138,11 @@ export class CourseSearchAccordionComponent implements OnInit {
               this.totalSearchResults += element.AlignmentCount;
             });
 
-            //err => {
-            //}
             console.log(this.careerPathToSubjectData);
           });
       }
     });
-   
+
   }
 
   findSubjectColor(subject) {
@@ -171,11 +166,9 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Career Path
   careerPathCheckBox(obj) {
     obj.IsChildPartiallySelected = false;
-    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < obj.Courses.length; i++) {
       obj.Courses[i].isSelected = obj.isSelected;
       if (obj.Courses[i].Competencies) {
-        // tslint:disable-next-line:prefer-for-of
         for (let j = 0; j < obj.Courses[i].Competencies.length; j++) {
           obj.Courses[i].Competencies[j].isSelected = obj.isSelected;
         }
@@ -186,8 +179,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Courses Checkbox
   courseCheckBox(career, course) {
     course.IsChildPartiallySelected = false;
-    // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Courses.every(function (itemChild: any) {
+    career.isSelected = career.Courses.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -202,28 +194,26 @@ export class CourseSearchAccordionComponent implements OnInit {
         });
       }
     }
-    
+
     this.trackCareersStatus(career);
 
   }
 
   // Click event on Competency Checkbox
   competencyCheckBox(career, course) {
-    // tslint:disable-next-line:only-arrow-functions
-    course.isSelected = course.Competencies.every(function (itemChild: any) {
+    course.isSelected = course.Competencies.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
-    // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Courses.every(function (itemChild: any) {
+    career.isSelected = career.Courses.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
     this.trackCareerCompetencyStatus(career, course);
   }
 
   trackCareerCompetencyStatus(career, course) {
-    var competencyStatus = [];
-    for (var comp = 0; comp < course.Competencies.length; comp++) {//to update Compatency and outcomes status
+    let competencyStatus = [];
+    for (let comp = 0; comp < course.Competencies.length; comp++) {// to update Compatency and outcomes status
       course.Competencies.forEach((element) => {
         competencyStatus.push(element.isSelected);
       });
@@ -240,31 +230,14 @@ export class CourseSearchAccordionComponent implements OnInit {
         } else if (competencyStatus[0] == false) {
           course.IsChildPartiallySelected = false;
           course.isSelected = false;
-          //var coursesStatus = [];
-          //course.forEach((courseList) => {
-          //  coursesStatus.push(courseList.isSelected);
-          //});
-          //coursesStatus = _.uniq(coursesStatus);
-          //if (coursesStatus.length > 1) {
-          //  career.IsChildPartiallySelected = false;
-          //  career.isSelected = false;
-          //} else if (coursesStatus.length === 1) {
-          //  if (coursesStatus[0] == true) {
-          //    career.IsChildPartiallySelected = false;
-          //    career.isSelected = true;
-          //  } else if (coursesStatus[0] == false) {
-          //    career.IsChildPartiallySelected = false;
-          //    career.isSelected = false;
-          //  }
-          //}
         }
       }
     }
     this.trackCareersStatus(career);
   }
   trackCareersStatus(career) {
-    var coursesPatialSelectedList = [];
-    for (var sub = 0; sub < career.Courses.length; sub++) {
+    let coursesPatialSelectedList = [];
+    for (let sub = 0; sub < career.Courses.length; sub++) {
       career.Courses.forEach((course) => {
         coursesPatialSelectedList.push(course.IsChildPartiallySelected);
       });
@@ -277,7 +250,7 @@ export class CourseSearchAccordionComponent implements OnInit {
           career.IsChildPartiallySelected = true;
           career.isSelected = false;
         } else if (coursesPatialSelectedList[0] == false) {
-          var coursesSelectedList = [];
+          let coursesSelectedList = [];
           career.Courses.forEach((career) => {
             coursesSelectedList.push(career.isSelected);
           });
@@ -303,11 +276,9 @@ export class CourseSearchAccordionComponent implements OnInit {
 
   // Click event on Subject
   subjectCheckBox(obj) {
-    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < obj.SubjecToStandards.length; i++) {
       obj.SubjecToStandards[i].isSelected = obj.isSelected;
       if (obj.SubjecToStandards[i].Standards) {
-        // tslint:disable-next-line:prefer-for-of
         for (let j = 0; j < obj.SubjecToStandards[i].Standards.length; j++) {
           obj.SubjecToStandards[i].Standards[j].isSelected = obj.isSelected;
         }
@@ -317,8 +288,7 @@ export class CourseSearchAccordionComponent implements OnInit {
 
   // Click event on Grade Checkbox
   gradeCheckBox(career, course) {
-    // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.SubjecToStandards.every(function (itemChild: any) {
+    career.isSelected = career.SubjecToStandards.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -337,13 +307,11 @@ export class CourseSearchAccordionComponent implements OnInit {
 
   // Click event on Standard Checkbox
   standardCheckBox(career, course) {
-    // tslint:disable-next-line:only-arrow-functions
-    course.isSelected = course.Standards.every(function (itemChild: any) {
+    course.isSelected = course.Standards.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
-    // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.SubjecToStandards.every(function (itemChild: any) {
+    career.isSelected = career.SubjecToStandards.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
@@ -395,8 +363,6 @@ export class CourseSearchAccordionComponent implements OnInit {
 
         if (subject.isSelected) {
           this.courseSearchReportPayload.CareerPathIds.push(subject.CareerPathId);
-          // this.courseSearchReportPayload.Subjects.push({ SubjectId: subject.SubjectId });
-
           this.courseSearchReportPayload.Subjects.push({
             SubjectId: subject.SubjectId,
             Level1Ids: this.Level1Ids,
@@ -406,9 +372,7 @@ export class CourseSearchAccordionComponent implements OnInit {
       });
     }
 
-   // console.log(this.courseSearchReportPayload);
     if (this.courseSearchReportPayload.CompetencyIds.length > 0) {
-      // this.goToPage(obj);
       this.rout.navigate(['/CourseSearchReport']);
       this.courseSearchSelectedFilters['selectedCourseSearchResults'] = this.courseSearchReportPayload;
       this.store.dispatch({ type: CourseSearchActions.SAVE_CS_SELECTED_FILTERS, payload: this.courseSearchSelectedFilters });
@@ -425,15 +389,13 @@ export class CourseSearchAccordionComponent implements OnInit {
     setTimeout(() => this.isVisible = false, 4000);
   }
 
-
   goToPage(org) {
     this.onPageSelect.emit(org);
   }
 
-  onToggleClick(value) {
+  onToggleClick() {
     this.careerPathToSubject = !this.careerPathToSubject;
     this.courseSearchReportPayload.CareerPathToSubject = this.careerPathToSubject;
     this.getCourseSearchResult();
   }
-
 }
