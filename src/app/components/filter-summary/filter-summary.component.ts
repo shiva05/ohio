@@ -48,48 +48,49 @@ export class FilterSummaryComponent implements OnInit {
     this.alignmentSearchResults = true;
     this.shared.updateAlignmentSearch = false;
     this.shared.updateCourseSearch = false;
-    this.cookieValue = this.cookieService.get('Test');
-    console.log(this.cookieValue);
-    var quickSearchData = JSON.parse(this.cookieValue);
-    if (quickSearchData) {
-      alert('quicksearch data received'+ quickSearchData)
-      this.FilterSummaryKeys = {
-        Keywords: '',
-        CareerFieldIds: [],
-        StrandIds: [],
-        OutcomeIds: [],
-        CompetencyIds: [],
-        Subjects: [],
-        CteToAcademic: true
-      };
+    //console.log(this.cookieValue);
+    if(this.cookieService.get('Test')){
+      this.cookieValue = this.cookieService.get('Test');
+      var quickSearchData = JSON.parse(this.cookieValue);
+      if (quickSearchData) {
+        alert('quicksearch data received'+ quickSearchData)
+        this.FilterSummaryKeys = {
+          Keywords: '',
+          CareerFieldIds: [],
+          StrandIds: [],
+          OutcomeIds: [],
+          CompetencyIds: [],
+          Subjects: [],
+          CteToAcademic: true
+        };
 
-      if (quickSearchData['AcademicSubjects'].length > 0) {
-        quickSearchData['AcademicSubjects'].forEach((subject) => {
-          var selectedSubject = {
-            SubjectId: 0,
-            SubjectName : '',
-            Level1Ids: [],
-            Level2Ids: [],
-            Level3Ids: []
-          }
-          selectedSubject.SubjectId = subject.SubjectId;
-          this.FilterSummaryKeys.Subjects.push(selectedSubject);
-          selectedSubject.SubjectName = subject.SubjectName;
-        });
+        if (quickSearchData['AcademicSubjects'].length > 0) {
+          quickSearchData['AcademicSubjects'].forEach((subject) => {
+            var selectedSubject = {
+              SubjectId: 0,
+              SubjectName : '',
+              Level1Ids: [],
+              Level2Ids: [],
+              Level3Ids: []
+            }
+            selectedSubject.SubjectId = subject.SubjectId;
+            this.FilterSummaryKeys.Subjects.push(selectedSubject);
+            selectedSubject.SubjectName = subject.SubjectName;
+          });
+        }
+        if (quickSearchData['CareerFields'].length > 0) {
+          quickSearchData['CareerFields'].forEach((career) => {
+            this.FilterSummaryKeys.CareerFieldIds.push(career.CareerFieldName);
+          });
+        }
+        this.searchObj = {
+          selectedCareers: quickSearchData['CareerFields'],
+          selectedAcadamicSubjects: quickSearchData['AcademicSubjects']
+        };
+        this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
+        this.cookieService.delete('Test');
       }
-      if (quickSearchData['CareerFields'].length > 0) {
-        quickSearchData['CareerFields'].forEach((career) => {
-          this.FilterSummaryKeys.CareerFieldIds.push(career.CareerFieldName);
-        });
-      }
-      this.searchObj = {
-        selectedCareers: quickSearchData['CareerFields'],
-        selectedAcadamicSubjects: quickSearchData['AcademicSubjects']
-      };
-      this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
-      this.cookieService.delete('test');
     }
-
       this.store.select('advancedSearch').subscribe(data => {
         if (data.alignmentSearchSelectedFilters) {
           let careerfields = [];
@@ -120,7 +121,7 @@ export class FilterSummaryComponent implements OnInit {
           if(data.alignmentSearchSelectedFilters.selectedAcadamicSubjects){
             data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
               let level1 = [];
-              let level1Name = element.Level[0].LevelName;
+              let level1Name = element.Level[0] ? element.Level[0].LevelName : '';
               if (element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length > 0) {
                 element.Level[0].SelectedItems.forEach(element => {
                   level1.push(element.LevelValue1);
@@ -128,14 +129,14 @@ export class FilterSummaryComponent implements OnInit {
               }
 
               let level2 = [];
-              let level2Name = element.Level[1].LevelName;
+              let level2Name = element.Level[1] ? element.Level[1].LevelName : '';
               if (element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length > 0) {
                 element.Level[1].SelectedItems.forEach(element => {
                   level2.push(element.LevelValue1);
                 });
               }
               let level3 = [];
-              let level3Name = element.Level[2].LevelName;
+              let level3Name = element.Level[2] ? element.Level[2].LevelName : '';
               if (element.Level[2] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length > 0) {
                 element.Level[2].SelectedItems.forEach(element => {
                   level3.push(element.LevelValue1);
