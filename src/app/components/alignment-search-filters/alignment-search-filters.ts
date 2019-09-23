@@ -54,9 +54,9 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   metaData: Observable<MetaData>;
   selectedAcademicItems: any = [];
   quickSearchSharedData = {
-    'KeyWords': '',
-    'CareerFields': [],
-    'AcademicSubjects': []
+    KeyWords: '',
+    CareerFields: [],
+    AcademicSubjects: []
   };
   subjectsDefaultSettings: any = {};
   isVisible: boolean = false;
@@ -82,13 +82,13 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.competencyDropdownSettings = this.shared.competencyDropdownSettings;
     this.subjectsDefaultSettings = this.shared.subjectsDefaultSettings;
 
-    var quickSearchData = JSON.parse(localStorage.getItem('QuickSearchData'));
+    let quickSearchData = JSON.parse(localStorage.getItem('QuickSearchData'));
 
     this.store.select('advancedSearch').subscribe(data => {
       this.metaData = data.metaData;
       if (this.careers.length === 0) {
           this.careers = this.metaData['CareerFields'];
-        }     
+        }
       this.strands = this.metaData['Strands'];
       this.outcomes = this.metaData['Outcomes'];
       this.grades = this.metaData['Grades'];
@@ -136,9 +136,9 @@ export class AlignmentSearchFiltersComponent implements OnInit {
          }
 	  }
 
-	  if (quickSearchData) {
+	     if (quickSearchData) {
 		  if (quickSearchData['AcademicSubjects'].length > 0) {
-			  this.selectedAcadamicSubjects = quickSearchData['AcademicSubjects']
+			  this.selectedAcadamicSubjects = quickSearchData['AcademicSubjects'];
 		  }
 		  if (quickSearchData['CareerFields'].length > 0) {
 			  this.selectedCareer = quickSearchData['CareerFields'];
@@ -281,7 +281,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
 
   clearSearch() {
     localStorage.removeItem('QuickSearchData');
-  this.searchObj = {
+    this.searchObj = {
     selectedCareers: [],
     selectedStrands: [],
     selectedOutcomes: [],
@@ -289,18 +289,18 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     selectedAcadamicSubjects: [],
     finalSelectedObject: [],
   };
-  //this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
-  this.store.dispatch({ type: AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS});
-  this.selectedCareer = [];
-  this.selectedAcadamicSubjects = [];
-  this.selectedStrands = [];
-  this.selectedOutcome = [];
-  this.selectedCompetencyNumbers = [];
-  this.selectedAcademicItems = [];
-  this.strandsDropdown = [];
-  this.outcomesDropdown = [];
-  this.competencyNumbers = [];
-  //this.rout.navigate(['/AlignmentSearch']);
+  // this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
+    this.store.dispatch({ type: AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS});
+    this.selectedCareer = [];
+    this.selectedAcadamicSubjects = [];
+    this.selectedStrands = [];
+    this.selectedOutcome = [];
+    this.selectedCompetencyNumbers = [];
+    this.selectedAcademicItems = [];
+    this.strandsDropdown = [];
+    this.outcomesDropdown = [];
+    this.competencyNumbers = [];
+  // this.rout.navigate(['/AlignmentSearch']);
 }
   onSubjectLevelsSelectAll(data) {
     let selectedAll = [];
@@ -342,7 +342,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       // this.quickSearchSharedData.AcademicSubjects = this.selectedAcadamicSubjects;
       // localStorage.setItem('QuickSearchData', JSON.stringify(this.quickSearchSharedData));
 
-      this.goToPage('SearchResults');
+      // this.goToPage('SearchResults');
       // debugger;
       this.searchObj = {
         selectedCareers: this.selectedCareer,
