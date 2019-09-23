@@ -62,6 +62,7 @@ import { ClaimsReducer } from './reducers/claims-reducer';
 import {MenubarComponent} from './components/menubar/menubar.component';
 import { InteropService } from 'src/app/services/interop.service';
 import { Reducers } from './reducers/index';
+import { CookieService } from 'ngx-cookie-service';
 // import { AuthEffectsService } from './effects/auth-effects';
 
 @NgModule({
@@ -120,6 +121,7 @@ import { Reducers } from './reducers/index';
     ClaimsService,
     AuthOrchestration,
     AppHttpService,
+    CookieService,
     LoaderService,
     {
       provide: HTTP_INTERCEPTORS,

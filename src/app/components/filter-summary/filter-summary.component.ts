@@ -6,6 +6,7 @@ import { SharedService } from '../../services/shared.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'filter-summary',
@@ -29,10 +30,15 @@ export class FilterSummaryComponent implements OnInit {
   filterCareerPathCourseData: any = [];
   filterAcadamicSubjectData: any = [];
   filterAcadamicSubjectCourseData: any = [];
+  cookieValue :any;
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor(private store: Store<AppState>, private rout: Router, private shared: SharedService, private http: HttpClient) {
+  constructor(private store: Store<AppState>,
+    private rout: Router,
+    private shared: SharedService,
+    private http: HttpClient,
+    private cookieService: CookieService) {
     this.searchLable = localStorage.getItem('searchLable');
   //  this.store.dispatch({ type: AdvancedSearchActions.LOAD_META_DATA });
   }
@@ -42,9 +48,11 @@ export class FilterSummaryComponent implements OnInit {
     this.alignmentSearchResults = true;
     this.shared.updateAlignmentSearch = false;
     this.shared.updateCourseSearch = false;
-
-    var quickSearchData = JSON.parse(localStorage.getItem('QuickSearchData'));
+    this.cookieValue = this.cookieService.get('Test');
+    console.log(this.cookieValue);
+    var quickSearchData = JSON.parse(this.cookieValue);
     if (quickSearchData) {
+      alert('quicksearch data received'+ quickSearchData)
       this.FilterSummaryKeys = {
         Keywords: '',
         CareerFieldIds: [],
@@ -79,7 +87,7 @@ export class FilterSummaryComponent implements OnInit {
         selectedAcadamicSubjects: quickSearchData['AcademicSubjects']
       };
       this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
-
+      this.cookieService.delete('test');
     }
 
       this.store.select('advancedSearch').subscribe(data => {

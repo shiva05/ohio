@@ -36,7 +36,8 @@
     "zone.js": "~0.9.1",
     "cuid": "^2.1.2",
     "jwt-decode": "^2.2.0",
-    "@angular/http": "^6.1.0"
+    "@angular/http": "^6.1.0",
+    "ngx-cookie-service": "^2.2.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.801.0",
