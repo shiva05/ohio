@@ -7,7 +7,6 @@ import { ClaimsState } from './reducers/claims-reducer';
 export interface AppState {
   readonly metaData: MetaData;
   readonly qsMetaData: QsMetaData;
-  readonly   authState : AuthState;
-  readonly   claimsState : ClaimsState;
-
+  readonly authState: AuthState;
+  readonly claimsState: ClaimsState;
 }

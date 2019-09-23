@@ -72,15 +72,15 @@ export class CustomAccordionComponent implements OnInit {
     }
   ];
 
-  quickSearchFilterData :any = {
+  quickSearchFilterData: any = {
     CareerFiledIds: [],
     CompetencyIds: [],
     CteToAcademic: true,
-    Keywords: "",
+    Keywords: '',
     OutcomeIds: [],
     StrandIds: [],
     Subjects: [],
-  }
+  };
 
   @Output() onPageSelect = new EventEmitter<any>();
 
@@ -89,61 +89,10 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   ngOnInit() {
-
-        // var quickSearchData = JSON.parse(localStorage.getItem('QuickSearchData'));
-        // if (quickSearchData) {
-        //   if (quickSearchData['AcademicSubjects'].length > 0) {
-        //     quickSearchData['AcademicSubjects'].forEach((subject) => {
-        //       var selectedSubject = {
-        //         SubjectId: 0,
-        //         Level1Ids: [],
-        //         Level2Ids: [],
-        //         Level3Ids: []
-        //       }
-        //       selectedSubject.SubjectId = subject.SubjectId;
-        //       this.quickSearchFilterData.Subjects.push(selectedSubject);
-        //     });
-        //   }
-        //   if (quickSearchData['CareerFields'].length > 0) {
-        //     quickSearchData['CareerFields'].forEach((career) => {
-        //       this.quickSearchFilterData.CareerFiledIds.push(career.CareerFieldId);
-        //     });
-        //   }
-        //   // console.log(this.quickSearchFilterData);
-        //   this.searchResultService.getSearchResultData(this.quickSearchFilterData).pipe(take(1)).subscribe(
-        //     data => {
-        //       this.searchResultData = data;
-        //       if (this.cteToAcademic) {
-        //         if (this.searchResultData.CareerField) {
-        //           this.searchResultData.CareerField.forEach(element => {
-        //             this.searchResultDataArray.push(element);
-        //             this.noResultFound = false;
-        //           });
-        //           this.formatSearchResultDataArray();
-        //         } else {
-        //           this.noResultFound = true;
-        //         }
-        //       } else {
-        //         if (this.searchResultData.Subject.length > 0) {
-        //           this.subjectToCareerData = this.searchResultData.Subject;
-        //           this.noResultFound = false;
-        //           this.formatAlignmentSearchData();
-        //         } else {
-        //           this.noResultFound = true;
-        //         }
-        //       }
-        //       return;
-        //     },
-        //     err => {
-        //     });
-        // } else {
-
-        // }
-        this.getAlignmentSearchResult();
+    this.getAlignmentSearchResult();
   }
 
   getAlignmentSearchResult() {
-
     this.store.select('advancedSearch').subscribe(data => {
       if (this.dataReceived === false) {
         if (data.alignmentSearchSelectedFilters) {
@@ -154,60 +103,60 @@ export class CustomAccordionComponent implements OnInit {
             careerfeilds.push(element.CareerFieldId);
           });
 
-        let strands = [];
-        if(data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedStrands){
-          data.alignmentSearchSelectedFilters.selectedStrands.forEach(element => {
-            strands.push(element.StrandPk);
-          });
-        }
-        let outcomes = [];
-        if(data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedOutcomes){
-          data.alignmentSearchSelectedFilters.selectedOutcomes.forEach(element => {
-            outcomes.push(element.OutcomePk);
-          });
-        }
-
-        let CompetencyIds = [];
-        if(data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedCompetencies){
-          data.alignmentSearchSelectedFilters.selectedCompetencies.forEach(element => {
-            CompetencyIds.push(element.CompetencyPk);
-          });
-        }
-        let subjects = [];
-        data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
-          let level1 = [];
-          let level2 = [];
-          let level3 = [];
-          if(element.Level){
-            if (element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length > 0) {
-              element.Level[0].SelectedItems.forEach(element => {
-                level1.push(element.LevelValue1);
-              });
-            }
-
-
-            if (element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length > 0) {
-              element.Level[1].SelectedItems.forEach(element => {
-                level2.push(element.LevelValue1);
-              });
-            }
-
-
-            if (element.Level[3] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length > 0) {
-              element.Level[3].SelectedItems.forEach(element => {
-                level3.push(element.LevelValue1);
-              });
-            }
-
+          let strands = [];
+          if (data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedStrands) {
+            data.alignmentSearchSelectedFilters.selectedStrands.forEach(element => {
+              strands.push(element.StrandPk);
+            });
           }
-          let subject = {
-            SubjectId: element.SubjectId,
-            Level1Ids: level1,
-            Level2Ids: level2,
-            Level3Ids: level3
-          };
-          subjects.push(subject);
-        });
+          let outcomes = [];
+          if (data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedOutcomes) {
+            data.alignmentSearchSelectedFilters.selectedOutcomes.forEach(element => {
+              outcomes.push(element.OutcomePk);
+            });
+          }
+
+          let CompetencyIds = [];
+          if (data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedCompetencies) {
+            data.alignmentSearchSelectedFilters.selectedCompetencies.forEach(element => {
+              CompetencyIds.push(element.CompetencyPk);
+            });
+          }
+          let subjects = [];
+          data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
+            let level1 = [];
+            let level2 = [];
+            let level3 = [];
+            if (element.Level) {
+              if (element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length > 0) {
+                element.Level[0].SelectedItems.forEach(element => {
+                  level1.push(element.LevelValue1);
+                });
+              }
+
+
+              if (element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length > 0) {
+                element.Level[1].SelectedItems.forEach(element => {
+                  level2.push(element.LevelValue1);
+                });
+              }
+
+
+              if (element.Level[3] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length > 0) {
+                element.Level[3].SelectedItems.forEach(element => {
+                  level3.push(element.LevelValue1);
+                });
+              }
+
+            }
+            let subject = {
+              SubjectId: element.SubjectId,
+              Level1Ids: level1,
+              Level2Ids: level2,
+              Level3Ids: level3
+            };
+            subjects.push(subject);
+          });
 
           let obj = {
             Keywords: '',
@@ -225,7 +174,7 @@ export class CustomAccordionComponent implements OnInit {
               if (this.cteToAcademic) {
                 if (this.searchResultData.CareerField) {
                   this.searchResultData.CareerField.forEach(element => {
-                    //this code can be removed if we can get a property to check the selected values count in all the levels
+                    // this code can be removed if we can get a property to check the selected values count in all the levels
                     element['IsChildPartiallySelected'] = false;
                     element['isSelected'] = false;
                     if (element['Strand'].length > 0) {
@@ -248,7 +197,7 @@ export class CustomAccordionComponent implements OnInit {
                       });
                     }
 
-                    //this code above can be removed if we can get a property to check the selected values count in all the levels
+                    // this code above can be removed if we can get a property to check the selected values count in all the levels
 
 
                     this.searchResultDataArray.push(element);
@@ -278,7 +227,7 @@ export class CustomAccordionComponent implements OnInit {
       }
     });
 
-   // console.log(this.searchResultDataArray);
+    // console.log(this.searchResultDataArray);
   }
 
   formatSearchResultDataArray() {
@@ -313,17 +262,14 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Career Field
   careerFieldCheckBox(parentObj) {
     parentObj.IsChildPartiallySelected = false;
-    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < parentObj.Strand.length; i++) {
       parentObj.Strand[i].isSelected = parentObj.isSelected;
       parentObj.Strand[i].IsChildPartiallySelected = false;
       if (parentObj.Strand[i].Outcome) {
-        // tslint:disable-next-line:prefer-for-of
         for (let j = 0; j < parentObj.Strand[i].Outcome.length; j++) {
           parentObj.Strand[i].Outcome[j].isSelected = parentObj.isSelected;
           parentObj.Strand[i].Outcome[j].IsChildPartiallySelected = false;
           if (parentObj.Strand[i].Outcome[j].Competency) {
-            // tslint:disable-next-line:prefer-for-of
             for (let k = 0; k < parentObj.Strand[i].Outcome[j].Competency.length; k++) {
               parentObj.Strand[i].Outcome[j].Competency[k].isSelected = parentObj.isSelected;
             }
@@ -336,8 +282,7 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Strand Checkbox
   strandCheckBox(CareerFieldData, StrandData) {
     StrandData.IsChildPartiallySelected = false;
-    // tslint:disable-next-line:only-arrow-functions
-    CareerFieldData.isSelected = CareerFieldData.Strand.every(function (itemChild: any) {
+    CareerFieldData.isSelected = CareerFieldData.Strand.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -364,20 +309,19 @@ export class CustomAccordionComponent implements OnInit {
       }
     }
 
-   // this.trackStrandsStatus(CareerFieldData, StrandData);
+    // this.trackStrandsStatus(CareerFieldData, StrandData);
     this.trackCareersStatus(CareerFieldData);
   }
 
   // Click event on Outcome Checkbox
   outcomeCheckBox(CareerFieldData, StrandData, OutcomeData) {
-
     // tslint:disable-next-line:only-arrow-functions
-    StrandData.isSelected = StrandData.Outcome.every(function (itemChild: any) {
+    StrandData.isSelected = StrandData.Outcome.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    CareerFieldData.isSelected = CareerFieldData.Strand.every(function (itemChild: any) {
+    CareerFieldData.isSelected = CareerFieldData.Strand.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -399,28 +343,12 @@ export class CustomAccordionComponent implements OnInit {
 
   // Click event on Competency Checkbox
   competencyCheckBox(careerField, strand, outcome) {
-    //// tslint:disable-next-line:only-arrow-functions
-    //outcome.isSelected = outcome.Competency.every(function (itemChild: any) {
-    //  return itemChild.isSelected === true;
-    //});
-    //// tslint:disable-next-line:only-arrow-functions
-    //strand.isSelected = strand.Outcome.every(function (itemChild: any) {
-    //  return itemChild.isSelected === true;
-    //});
-    //if (outcome.IsChildPartiallySelected) {
-    //  strand.IsChildPartiallySelected = true;
-    //}
-
-    //// tslint:disable-next-line:only-arrow-functions
-    //career.isSelected = career.Strand.every(function (itemChild: any) {
-    //  return itemChild.isSelected === true;
-    //});
-    this.trackOutcomesStatus(careerField, strand, outcome)
+    this.trackOutcomesStatus(careerField, strand, outcome);
   }
 
   trackOutcomesStatus(CareerFieldData, StrandData, OutcomeData) {
-    var competencyStatus = [];
-    for (var comp = 0; comp < OutcomeData.Competency.length; comp++) {//to update Compatency and outcomes status
+    let competencyStatus = [];
+    for (let comp = 0; comp < OutcomeData.Competency.length; comp++) {// to update Compatency and outcomes status
       OutcomeData.Competency.forEach((element) => {
         competencyStatus.push(element.isSelected);
       });
@@ -441,26 +369,26 @@ export class CustomAccordionComponent implements OnInit {
         } else if (competencyStatus[0] == false) {
           OutcomeData.IsChildPartiallySelected = false;
           OutcomeData.isSelected = false;
-          var outComesStatus = [];
+          let outComesStatus = [];
           StrandData.Outcome.forEach((outComes) => {
             outComesStatus.push(outComes.IsChildPartiallySelected);
           });
           outComesStatus = _.uniq(outComesStatus);
-          if (outComesStatus.length > 1){
+          if (outComesStatus.length > 1) {
             StrandData.IsChildPartiallySelected = true;
-          } else if (outComesStatus.length === 1){
-            if (outComesStatus[0] ==  true){
+          } else if (outComesStatus.length === 1) {
+            if (outComesStatus[0] == true) {
               StrandData.IsChildPartiallySelected = false;
-            //  StrandData.isSelected = true;
+              //  StrandData.isSelected = true;
             } else if (outComesStatus[0] == false) {
               StrandData.IsChildPartiallySelected = false;
-           //   StrandData.isSelected = false;
+              //   StrandData.isSelected = false;
             }
           }
           CareerFieldData.IsChildPartiallySelected = false;
-          //return;
+          // return;
         }
-    }
+      }
     }
     this.trackStrandsStatus(CareerFieldData, StrandData);
     this.trackCareersStatus(CareerFieldData);
@@ -468,8 +396,8 @@ export class CustomAccordionComponent implements OnInit {
 
   trackStrandsStatus(CareerFieldData, StrandData) {
     StrandData.IsChildPartiallySelected = false;
-    var strandStatus = []; //to update strands status
-    for (var strand = 0; strand < StrandData.Outcome.length; strand++) {
+    let strandStatus = []; // to update strands status
+    for (let strand = 0; strand < StrandData.Outcome.length; strand++) {
       StrandData.Outcome.forEach((element) => {
         strandStatus.push(element.IsChildPartiallySelected);
       });
@@ -478,13 +406,12 @@ export class CustomAccordionComponent implements OnInit {
         StrandData.isSelected = false;
         StrandData.IsChildPartiallySelected = true;
         CareerFieldData.IsChildPartiallySelected = true;
-      }
-      else if (strandStatus.length === 1) {
+      } else if (strandStatus.length === 1) {
         if (strandStatus[0] == true) {
           StrandData.isSelected = false;
           StrandData.IsChildPartiallySelected = true;
         } else if (strandStatus[0] == false) {
-          var outComesSelectedStatus = [];
+          let outComesSelectedStatus = [];
           StrandData.Outcome.forEach((element) => {
             outComesSelectedStatus.push(element.isSelected);
           });
@@ -494,24 +421,25 @@ export class CustomAccordionComponent implements OnInit {
             StrandData.IsChildPartiallySelected = true;
             CareerFieldData.IsChildPartiallySelected = true;
             CareerFieldData.isSelected = false;
-          } else if (outComesSelectedStatus.length == 1)
+          } else if (outComesSelectedStatus.length == 1) {
             if (outComesSelectedStatus[0] == true) {
               StrandData.isSelected = true;
               StrandData.IsChildPartiallySelected = false;
               CareerFieldData.IsChildPartiallySelected = true;
               CareerFieldData.isSelected = false;
             }
-          //StrandData.isSelected = false;
-          //CareerFieldData.IsChildPartiallySelected = false;
-          //CareerFieldData.isSelected = false;
+          }
+          // StrandData.isSelected = false;
+          // CareerFieldData.IsChildPartiallySelected = false;
+          // CareerFieldData.isSelected = false;
         }
-      //  StrandData.IsChildPartiallySelected = false;
+        //  StrandData.IsChildPartiallySelected = false;
       }
     }
   }
   trackCareersStatus(CareerFieldData) {
-    var carrerStatus = [];//to update strands status
-    for (var career = 0; career < CareerFieldData.Strand.length; career++) {
+    let carrerStatus = []; // to update strands status
+    for (let career = 0; career < CareerFieldData.Strand.length; career++) {
       CareerFieldData.Strand.forEach((element) => {
         carrerStatus.push(element.IsChildPartiallySelected);
       });
@@ -519,13 +447,12 @@ export class CustomAccordionComponent implements OnInit {
       if (carrerStatus.length > 1) {
         CareerFieldData.isSelected = false;
         CareerFieldData.IsChildPartiallySelected = true;
-      }
-      else if (carrerStatus.length === 1) {
+      } else if (carrerStatus.length === 1) {
         if (carrerStatus[0] == true) {
           CareerFieldData.isSelected = false;
           CareerFieldData.IsChildPartiallySelected = true;
         } else if (carrerStatus[0] == false) {
-          var strandsSelectedStatus = []
+          let strandsSelectedStatus = [];
           CareerFieldData.Strand.forEach((element) => {
             strandsSelectedStatus.push(element.isSelected);
           });
@@ -571,7 +498,7 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Level Checkbox
   levelCheckBox(parent, parentObj) {
     // tslint:disable-next-line:only-arrow-functions
-    parent.isSelected = parent.Level.every(function (itemChild: any) {
+    parent.isSelected = parent.Level.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -601,12 +528,12 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Child Level 1 Checkbox
   childLevel1CheckBox(career, strands, outcome) {
     // tslint:disable-next-line:only-arrow-functions
-    strands.isSelected = strands.ChildLevel.every(function (itemChild: any) {
+    strands.isSelected = strands.ChildLevel.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Level.every(function (itemChild: any) {
+    career.isSelected = career.Level.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -626,17 +553,17 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Child Level 2 Checkbox
   childLevel2CheckBox(career, strand, outcome) {
     // tslint:disable-next-line:only-arrow-functions
-    outcome.isSelected = outcome.ChildLevel.every(function (itemChild: any) {
+    outcome.isSelected = outcome.ChildLevel.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    strand.isSelected = strand.ChildLevel.every(function (itemChild: any) {
+    strand.isSelected = strand.ChildLevel.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Level.every(function (itemChild: any) {
+    career.isSelected = career.Level.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
   }

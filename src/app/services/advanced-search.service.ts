@@ -16,10 +16,10 @@ export class AdvancedSearchService {
     return this.http.get(environment.GetAlignmentMetaData);
   }
   getCompetencyData(result) {
-    var outcomeIds =[];
+    let outcomeIds = [];
     result.forEach(element => {
       outcomeIds.push(element.OutcomePk);
     });
-    return this.http.post(environment.GetCompetencyData,outcomeIds);
+    return this.http.post(environment.GetCompetencyData, outcomeIds);
   }
 }

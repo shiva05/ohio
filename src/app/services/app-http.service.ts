@@ -92,19 +92,6 @@ export class AppHttpService {
           const claimsObj = { Claims: this.claimsJwt };
           headerOptions = { ...headerOptions, ...claimsObj };
       }
-
-      // headerOptions = { ...headerOptions, 'Accept': 'application/pdf' };
-      // headerOptions = { ...headerOptions, 'Accept': 'text/plain' };
-      // headerOptions = { ...headerOptions, 'Accept': 'image/png' };
-
-      // observe: 'response' as 'body', // return header info + data
-      // responseType: 'arraybuffer' as 'json'  // return type for binary data
-
-      // let type0 = ResponseContentType.Text; // 0
-      // let type1 = ResponseContentType.Json; // 1
-      // let type2 = ResponseContentType.ArrayBuffer; // 2
-      // let type3 = ResponseContentType.Blob; // 3
-
       const options = {
         headers: new HttpHeaders(headerOptions),
         observe: 'body' as 'body', // return data only

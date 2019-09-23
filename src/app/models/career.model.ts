@@ -1,4 +1,4 @@
-export interface Career{
-  CareerFieldId: string,
-  CareerFieldName :string
+export interface Career {
+  CareerFieldId: string;
+  CareerFieldName: string;
 }

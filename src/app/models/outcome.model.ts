@@ -1,6 +1,6 @@
-export interface Outcome{
-  OutcomeId: number,
-  OutcomeName: string,
-  OutcomePk: number,
-  StrandPk: number
+export interface Outcome {
+  OutcomeId: number;
+  OutcomeName: string;
+  OutcomePk: number;
+  StrandPk: number;
 }

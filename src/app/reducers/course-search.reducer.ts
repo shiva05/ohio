@@ -69,7 +69,7 @@ export function courseSearchReducer(state = initialState, Action: CourseSearchAc
               selectedAcademicSubject: [],
               selectedAcademicSubjectCourses: []
             }
-  }
+  };
         default:
             return state;
     }

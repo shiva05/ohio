@@ -15,13 +15,13 @@ import { ReportComponent } from './components/report/report.component';
 import { CourseSearchReportComponent } from './components/course-search-report/course-search-report.component';
 
 const routes: Routes = [
-  //{ path: '', component: MainComponent },
-  //{ path: 'main', component: HomeComponent },
-  //{ path: 'Search', component: SearchResultsComponent },
-  //{ path: 'quickSearch', component: QuickSearchComponent },
-  //{ path: 'login', component: LoginComponent },
-  //{ path: 'myApp', component: MyAppComponent },
-  //{ path: '**', component: PageNotFoundComponent },
+  // { path: '', component: MainComponent },
+  // { path: 'main', component: HomeComponent },
+  // { path: 'Search', component: SearchResultsComponent },
+  // { path: 'quickSearch', component: QuickSearchComponent },
+  // { path: 'login', component: LoginComponent },
+  // { path: 'myApp', component: MyAppComponent },
+  // { path: '**', component: PageNotFoundComponent },
 
    { path: '', redirectTo: 'Home', pathMatch: 'full' },
    {

@@ -44,7 +44,6 @@ export class CourseSearchFiltersComponent implements OnInit {
   isVisible: boolean = false;
 
   constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>, private rout: Router, private shared: SharedService, ) {
-    // this.metaData = store.select('metaData');
     this.store.dispatch({ type: CourseSearchActions.LOAD_COURSESEARCH_DATA });
   }
 
@@ -65,7 +64,6 @@ export class CourseSearchFiltersComponent implements OnInit {
 
 
       this.academicSubjectCourse = [];
-      // if (this.metaData['Subjects'] && data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length == 0) {
       this.academicSubjectCourse = this.courseSearchData['SubjectCourses'];
       if (this.academicSubjectCourse != undefined) {
         if (this.academicSubjectCourse.length > 0) {
@@ -86,10 +84,6 @@ export class CourseSearchFiltersComponent implements OnInit {
         if (data.courseSearchSelectedFilters.selectedCareerPathCourses.length > 0) {
           this.selectedCourses = data.courseSearchSelectedFilters.selectedCareerPathCourses;
         }
-        // if (data.courseSearchSelectedFilters.selectedAcademicSubject.length > 0) {
-        //   this.selectedAcadamicSubjects = data.courseSearchSelectedFilters.selectedAcademicSubject;
-        //   this.onSubjectSelect(this.selectedAcadamicSubjects);
-        // }
         this.selectedAcadamicSubjects = data.courseSearchSelectedFilters.selectedAcademicSubject.length > 0 ? data.courseSearchSelectedFilters.selectedAcademicSubject : [];
         if (data.courseSearchSelectedFilters.selectedAcademicSubject.length > 0) {
           this.selectedAcademicItems = this.selectedAcadamicSubjects;
@@ -166,7 +160,6 @@ export class CourseSearchFiltersComponent implements OnInit {
       selectedAcademicSubject: [],
       selectedAcademicSubjectCourses: []
     };
-  //  this.store.dispatch({ type: CourseSearchActions.SAVE_AS_SELECTED_FILTERS_COURSESEARCH, payload: this.searchObj });
     this.store.dispatch({ type: CourseSearchActions.RESET_COURSE_SELECTED_FILTERS });
     this.selectedCareerPath = [];
     this.selectedAcadamicSubjects = [];
@@ -189,12 +182,10 @@ export class CourseSearchFiltersComponent implements OnInit {
       selectedCareerPath: this.selectedCareerPath,
       selectedCareerPathCourses: this.selectedCourses,
       selectedAcademicSubject: this.selectedAcadamicSubjects,
-      // selectedAcademicSubjectCourses: [this.selectedMathsCourses, this.selectedELACourses, this.selectedScienceCourses, this.selectedSocialCourses]
       selectedAcademicSubjectCourses: this.selectedAcademicItems
     };
       this.store.dispatch({ type: CourseSearchActions.SAVE_CS_SELECTED_FILTERS, payload: this.searchObj });
       localStorage.setItem('searchLable', 'SearchCourse');
-    // this.goToPage('SearchResults');
       this.rout.navigate(['/CourseSearchResults']);
     }
   }
