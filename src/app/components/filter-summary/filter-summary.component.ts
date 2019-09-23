@@ -30,15 +30,15 @@ export class FilterSummaryComponent implements OnInit {
   filterCareerPathCourseData: any = [];
   filterAcadamicSubjectData: any = [];
   filterAcadamicSubjectCourseData: any = [];
-  cookieValue :any;
+  cookieValue: any;
 
   @Output() onPageSelect = new EventEmitter<any>();
 
   constructor(private store: Store<AppState>,
-    private rout: Router,
-    private shared: SharedService,
-    private http: HttpClient,
-    private cookieService: CookieService) {
+              private rout: Router,
+              private shared: SharedService,
+              private http: HttpClient,
+              private cookieService: CookieService) {
     this.searchLable = localStorage.getItem('searchLable');
   //  this.store.dispatch({ type: AdvancedSearchActions.LOAD_META_DATA });
   }
@@ -48,10 +48,10 @@ export class FilterSummaryComponent implements OnInit {
     this.alignmentSearchResults = true;
     this.shared.updateAlignmentSearch = false;
     this.shared.updateCourseSearch = false;
-    //console.log(this.cookieValue);
-    if(this.cookieService.get('Test')){
+    // console.log(this.cookieValue);
+    if (this.cookieService.get('Test')) {
       this.cookieValue = this.cookieService.get('Test');
-      var quickSearchData = JSON.parse(this.cookieValue);
+      let quickSearchData = JSON.parse(this.cookieValue);
       if (quickSearchData) {
         this.FilterSummaryKeys = {
           Keywords: '',
@@ -65,13 +65,13 @@ export class FilterSummaryComponent implements OnInit {
 
         if (quickSearchData['AcademicSubjects'].length > 0) {
           quickSearchData['AcademicSubjects'].forEach((subject) => {
-            var selectedSubject = {
+            let selectedSubject = {
               SubjectId: 0,
               SubjectName: '',
               Level1Ids: [],
               Level2Ids: [],
               Level3Ids: []
-            }
+            };
             selectedSubject.SubjectId = subject.SubjectId;
             this.FilterSummaryKeys.Subjects.push(selectedSubject);
             selectedSubject.SubjectName = subject.SubjectName;
@@ -90,7 +90,7 @@ export class FilterSummaryComponent implements OnInit {
         this.cookieService.delete('Test');
       }
     }
-        this.store.select('advancedSearch').subscribe(data => {
+    this.store.select('advancedSearch').subscribe(data => {
             if (data.alignmentSearchSelectedFilters) {
                 let careerfields = [];
                 let strands = [];
@@ -169,7 +169,7 @@ export class FilterSummaryComponent implements OnInit {
         });
 
 
-        if (this.searchLable === 'alignmentSearchResults') {
+    if (this.searchLable === 'alignmentSearchResults') {
             this.store.select('advancedSearch').subscribe(data => {
                 if (data.alignmentSearchSelectedFilters) {
                     this.formatSearchDataToSummary(data.alignmentSearchSelectedFilters);
@@ -222,8 +222,4 @@ export class FilterSummaryComponent implements OnInit {
             return result;
         }
     }
-
-    //ngOnDestroy() {
-    //  localStorage.removeItem('QuickSearchData');
-    //}
 }
