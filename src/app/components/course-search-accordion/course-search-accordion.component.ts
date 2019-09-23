@@ -5,6 +5,9 @@ import { AppState } from 'src/app/app.state';
 import { SearchResultService } from '../../services/search-result.service';
 import * as CourseSearchActions from './../../actions/course-search.actions';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { _ } from 'underscore';
+
+
 @Component({
   selector: 'app-course-search-accordion',
   templateUrl: './course-search-accordion.component.html',
@@ -57,6 +60,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   }
   goBackToCourseSearch() {
     // this.goToPage('SearchAlignment');
+    this.store.dispatch({ type: CourseSearchActions.RESET_COURSE_SELECTED_FILTERS });
     this.rout.navigate(['/CourseSearch']);
   }
   getCourseSearchResult() {
@@ -100,7 +104,7 @@ export class CourseSearchAccordionComponent implements OnInit {
           CareerPathToSubject: this.careerPathToSubject
         };
 
-        console.log(obj);
+       // console.log(obj);
 
         this.searchResultService.getCourseSearchResult(obj).subscribe(
           (data: any) => {
@@ -121,14 +125,29 @@ export class CourseSearchAccordionComponent implements OnInit {
               }
             }
             this.careerPathToSubjectData.forEach(element => {
+              element['IsChildPartiallySelected'] = false;
+              element['isSelected'] = false;
+              if (element['Courses'].length > 0) {
+                element['Courses'].forEach((courses) => {
+                  courses['IsChildPartiallySelected'] = false;
+                  courses['isSelected'] = false;
+                  if (courses['Competencies'].length > 0) {
+                    courses['Competencies'].forEach((competencies) => {
+                      competencies['isSelected'] = false;
+                    });
+                  }
+                });
+              }
               this.totalSearchResults += element.AlignmentCount;
-              console.log(element.AlignmentCount);
             });
-          },
-          err => {
+
+            //err => {
+            //}
+            console.log(this.careerPathToSubjectData);
           });
       }
     });
+   
   }
 
   findSubjectColor(subject) {
@@ -151,6 +170,7 @@ export class CourseSearchAccordionComponent implements OnInit {
 
   // Click event on Career Path
   careerPathCheckBox(obj) {
+    obj.IsChildPartiallySelected = false;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < obj.Courses.length; i++) {
       obj.Courses[i].isSelected = obj.isSelected;
@@ -165,6 +185,7 @@ export class CourseSearchAccordionComponent implements OnInit {
 
   // Click event on Courses Checkbox
   courseCheckBox(career, course) {
+    course.IsChildPartiallySelected = false;
     // tslint:disable-next-line:only-arrow-functions
     career.isSelected = career.Courses.every(function (itemChild: any) {
       return itemChild.isSelected === true;
@@ -181,6 +202,9 @@ export class CourseSearchAccordionComponent implements OnInit {
         });
       }
     }
+    
+    this.trackCareersStatus(career);
+
   }
 
   // Click event on Competency Checkbox
@@ -194,6 +218,87 @@ export class CourseSearchAccordionComponent implements OnInit {
     career.isSelected = career.Courses.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
+    this.trackCareerCompetencyStatus(career, course);
+  }
+
+  trackCareerCompetencyStatus(career, course) {
+    var competencyStatus = [];
+    for (var comp = 0; comp < course.Competencies.length; comp++) {//to update Compatency and outcomes status
+      course.Competencies.forEach((element) => {
+        competencyStatus.push(element.isSelected);
+      });
+      competencyStatus = _.uniq(competencyStatus);
+      if (competencyStatus.length > 1) {
+        course.IsChildPartiallySelected = true;
+        course.isSelected = false;
+        career.IsChildPartiallySelected = true;
+      } else if (competencyStatus.length === 1) {
+        if (competencyStatus[0] == true) {
+          course.IsChildPartiallySelected = false;
+          course.isSelected = true;
+          career.IsChildPartiallySelected = true;
+        } else if (competencyStatus[0] == false) {
+          course.IsChildPartiallySelected = false;
+          course.isSelected = false;
+          //var coursesStatus = [];
+          //course.forEach((courseList) => {
+          //  coursesStatus.push(courseList.isSelected);
+          //});
+          //coursesStatus = _.uniq(coursesStatus);
+          //if (coursesStatus.length > 1) {
+          //  career.IsChildPartiallySelected = false;
+          //  career.isSelected = false;
+          //} else if (coursesStatus.length === 1) {
+          //  if (coursesStatus[0] == true) {
+          //    career.IsChildPartiallySelected = false;
+          //    career.isSelected = true;
+          //  } else if (coursesStatus[0] == false) {
+          //    career.IsChildPartiallySelected = false;
+          //    career.isSelected = false;
+          //  }
+          //}
+        }
+      }
+    }
+    this.trackCareersStatus(career);
+  }
+  trackCareersStatus(career) {
+    var coursesPatialSelectedList = [];
+    for (var sub = 0; sub < career.Courses.length; sub++) {
+      career.Courses.forEach((course) => {
+        coursesPatialSelectedList.push(course.IsChildPartiallySelected);
+      });
+      coursesPatialSelectedList = _.uniq(coursesPatialSelectedList);
+      if (coursesPatialSelectedList.length > 1) {
+        career.IsChildPartiallySelected = true;
+        career.isSelected = false;
+      } else if (coursesPatialSelectedList.length === 1) {
+        if (coursesPatialSelectedList[0] == true) {
+          career.IsChildPartiallySelected = true;
+          career.isSelected = false;
+        } else if (coursesPatialSelectedList[0] == false) {
+          var coursesSelectedList = [];
+          career.Courses.forEach((career) => {
+            coursesSelectedList.push(career.isSelected);
+          });
+          coursesSelectedList = _.uniq(coursesSelectedList);
+          if (coursesSelectedList.length > 1) {
+            career.IsChildPartiallySelected = true;
+            career.isSelected = false;
+          } else if (coursesSelectedList.length === 1) {
+            if (coursesSelectedList[0] == true) {
+              career.IsChildPartiallySelected = false;
+              career.isSelected = true;
+            } else if (coursesSelectedList[0] == false) {
+              career.IsChildPartiallySelected = false;
+              career.isSelected = false;
+            }
+          }
+        }
+      }
+
+    }
+
   }
 
   // Click event on Subject
@@ -301,7 +406,7 @@ export class CourseSearchAccordionComponent implements OnInit {
       });
     }
 
-    console.log(this.courseSearchReportPayload);
+   // console.log(this.courseSearchReportPayload);
     if (this.courseSearchReportPayload.CompetencyIds.length > 0) {
       // this.goToPage(obj);
       this.rout.navigate(['/CourseSearchReport']);

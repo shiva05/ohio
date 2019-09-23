@@ -57,11 +57,11 @@
                             <div class="col-md-5">
                                 <div class="accordion-label-career">Career Path</div>
                                 <div class="accordion-checbox ">
-                                    <span class="ohio-checkbox checkbox checkbox-success">
+                                    <span class="ohio-checkbox checkbox checkbox-success"  [ngClass]="careerPath.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
                                         <input type="checkbox" class="ohio-checkbox-el" id="careerPathID_{{i}}"
                                             [(ngModel)]="careerPath.isSelected" name="list_name"
                                             value="{{careerPath.CareerPathId}}"
-                                            (ngModelChange)="careerPathCheckBox(careerPath);$event.stopPropagation()" />
+                                            (ngModelChange)="careerPathCheckBox(careerPath)" (click)="$event.stopPropagation()" />
                                         <label for="careerPathID_{{i}}"></label>
                                     </span>
                                 </div>
@@ -94,11 +94,11 @@
                                         <div class="col-md-6">
                                             <div class="accordion-label-courses">Courses</div>
                                             <div class="accordion-checbox">
-                                                <span class="ohio-checkbox checkbox checkbox-success">
+                                                <span class="ohio-checkbox checkbox checkbox-success"  [ngClass]="course.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
                                                     <input type="checkbox" class="ohio-checkbox-el" id="courseID_{{j}}"
                                                         [(ngModel)]="course.isSelected" name="list_name_child"
                                                         value="{{course.CourseId}}"
-                                                        (ngModelChange)="courseCheckBox(careerPath, course);$event.stopPropagation()" />
+                                                        (ngModelChange)="courseCheckBox(careerPath, course)"  (click)="$event.stopPropagation()" />
                                                     <label for="courseID_{{j}}"></label>
                                                 </span>
                                             </div>
@@ -134,12 +134,12 @@
                                                     <div class="col-md-6">
                                                         <div class="accordion-label-competencies">Competencies</div>
                                                         <div class="accordion-checbox">
-                                                            <span class="ohio-checkbox checkbox checkbox-success">
+                                                            <span class="ohio-checkbox checkbox checkbox-success"  [ngClass]="competency.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
                                                                 <input type="checkbox" class="ohio-checkbox-el"
                                                                     id="competencyID_{{k}}"
                                                                     [(ngModel)]="competency.isSelected"
                                                                     name="list_name_child" value="{{competency.Id}}"
-                                                                    (ngModelChange)="competencyCheckBox(careerPath, course);$event.stopPropagation()" />
+                                                                    (ngModelChange)="competencyCheckBox(careerPath, course)" (click)="$event.stopPropagation()" />
                                                                 <label for="competencyID_{{k}}"></label>
                                                             </span>
                                                         </div>
@@ -181,11 +181,11 @@
                             <div class="col-md-3">
                                 <div class="accordion-label-subject">Subject</div>
                                 <div class="accordion-checbox ">
-                                    <span class="ohio-checkbox checkbox checkbox-success">
+                                    <span class="ohio-checkbox checkbox checkbox-success"  [ngClass]="subject.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
                                         <input type="checkbox" class="ohio-checkbox-el" id="subjectID_{{i}}"
                                             [(ngModel)]="subject.isSelected" name="list_name"
                                             value="{{subject.SubjectId}}"
-                                            (ngModelChange)="subjectCheckBox(subject);$event.stopPropagation()" />
+                                            (ngModelChange)="subjectCheckBox(subject)" (click)="$event.stopPropagation()" />
                                         <label for="subjectID_{{i}}"></label>
                                     </span>
                                 </div>
@@ -218,11 +218,11 @@
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="accordion-checbox">
-                                                <span class="ohio-checkbox checkbox checkbox-success">
+                                                <span class="ohio-checkbox checkbox checkbox-success"  [ngClass]="course.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
                                                     <input type="checkbox" class="ohio-checkbox-el" id="courseID_{{j}}"
                                                         [(ngModel)]="course.isSelected" name="list_name_child"
                                                         value="{{course.CourseId}}"
-                                                        (ngModelChange)="gradeCheckBox(subject, course);$event.stopPropagation()" />
+                                                        (ngModelChange)="gradeCheckBox(subject, course)" (click)="$event.stopPropagation()" />
                                                     <label for="courseID_{{j}}"></label>
                                                 </span>
                                             </div>
@@ -256,12 +256,12 @@
                                                     <div class="col-md-3">
                                                         <div class="accordion-label-standard">Standard</div>
                                                         <div class="accordion-checbox">
-                                                            <span class="ohio-checkbox checkbox checkbox-success">
+                                                            <span class="ohio-checkbox checkbox checkbox-success"  [ngClass]="standard.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
                                                                 <input type="checkbox" class="ohio-checkbox-el"
                                                                     id="standardID_{{k}}"
                                                                     [(ngModel)]="standard.isSelected"
                                                                     name="list_name_child" value="{{standard.Id}}"
-                                                                    (ngModelChange)="standardCheckBox(subject, course);$event.stopPropagation()" />
+                                                                    (ngModelChange)="standardCheckBox(subject, course)" (click)="$event.stopPropagation()" />
                                                                 <label for="standardID_{{k}}"></label>
                                                             </span>
                                                         </div>

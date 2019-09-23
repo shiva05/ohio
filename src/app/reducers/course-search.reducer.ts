@@ -44,27 +44,32 @@ const initialState: CourseSearch = {
 };
 
 export function courseSearchReducer(state = initialState, Action: CourseSearchActions.Actions) {
-    switch (Action.type) {
-        case CourseSearchActions.LOAD_COURSESEARCH_DATA_SUCCESS:
-            return {
-                ...state,
-                courseSearchData: Action.payload
-            };
-        case CourseSearchActions.LOAD_COURSESEARCH_DATA_FAILURE:
-            return {
-                ...state,
-                courseSearchData: Action.payload
-            };
-        case CourseSearchActions.SAVE_CS_SELECTED_FILTERS:
-            return {
-                ...state,
-                courseSearchSelectedFilters: Action.payload
-            };
-        case CourseSearchActions.RESET_COURSE_SELECTED_FILTERS:
-            return {
-                ...state,
-                courseSearchSelectedFilters: Action.payload
-            };
+  switch (Action.type) {
+    case CourseSearchActions.LOAD_COURSESEARCH_DATA_SUCCESS:
+      return {
+        ...state,
+        courseSearchData: Action.payload
+      };
+    case CourseSearchActions.LOAD_COURSESEARCH_DATA_FAILURE:
+      return {
+        ...state,
+        courseSearchData: Action.payload
+      };
+    case CourseSearchActions.SAVE_CS_SELECTED_FILTERS:
+      return {
+        ...state,
+        courseSearchSelectedFilters: Action.payload
+      };
+    case CourseSearchActions.RESET_COURSE_SELECTED_FILTERS:
+                return {
+            ...state,
+            courseSearchSelectedFilters: {
+              selectedCareerPath: [],
+              selectedCareerPathCourses: [],
+              selectedAcademicSubject: [],
+              selectedAcademicSubjectCourses: []
+            }
+  }
         default:
             return state;
     }
