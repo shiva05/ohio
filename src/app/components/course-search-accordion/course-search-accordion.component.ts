@@ -170,6 +170,7 @@ export class CourseSearchAccordionComponent implements OnInit {
 
   // Click event on Career Path
   careerPathCheckBox(obj) {
+    obj.IsChildPartiallySelected = false;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < obj.Courses.length; i++) {
       obj.Courses[i].isSelected = obj.isSelected;
@@ -184,6 +185,7 @@ export class CourseSearchAccordionComponent implements OnInit {
 
   // Click event on Courses Checkbox
   courseCheckBox(career, course) {
+    course.IsChildPartiallySelected = false;
     // tslint:disable-next-line:only-arrow-functions
     career.isSelected = career.Courses.every(function (itemChild: any) {
       return itemChild.isSelected === true;
@@ -201,7 +203,7 @@ export class CourseSearchAccordionComponent implements OnInit {
       }
     }
     
-
+    this.trackCareersStatus(career);
 
   }
 
@@ -258,23 +260,40 @@ export class CourseSearchAccordionComponent implements OnInit {
         }
       }
     }
+    this.trackCareersStatus(career);
   }
   trackCareersStatus(career) {
-    var coursesSelectedList = [];
-    for (var sub = 0; sub < career.course.length; sub++) {
-      career.course.forEach((course) => {
-        coursesSelectedList.push(course.IsChildPartiallySelected);
+    var coursesPatialSelectedList = [];
+    for (var sub = 0; sub < career.Courses.length; sub++) {
+      career.Courses.forEach((course) => {
+        coursesPatialSelectedList.push(course.IsChildPartiallySelected);
       });
-      coursesSelectedList = _.uniq(coursesSelectedList);
-      if (coursesSelectedList.length > 1) {
+      coursesPatialSelectedList = _.uniq(coursesPatialSelectedList);
+      if (coursesPatialSelectedList.length > 1) {
         career.IsChildPartiallySelected = true;
         career.isSelected = false;
-      } else if (coursesSelectedList.length === 1) {
-        if (coursesSelectedList[0] == true) {
-          career.IsChildPartiallySelected = false;
-          career.isSelected = true;
-        } else if (coursesSelectedList[0] == false) {
-
+      } else if (coursesPatialSelectedList.length === 1) {
+        if (coursesPatialSelectedList[0] == true) {
+          career.IsChildPartiallySelected = true;
+          career.isSelected = false;
+        } else if (coursesPatialSelectedList[0] == false) {
+          var coursesSelectedList = [];
+          career.Courses.forEach((career) => {
+            coursesSelectedList.push(career.isSelected);
+          });
+          coursesSelectedList = _.uniq(coursesSelectedList);
+          if (coursesSelectedList.length > 1) {
+            career.IsChildPartiallySelected = true;
+            career.isSelected = false;
+          } else if (coursesSelectedList.length === 1) {
+            if (coursesSelectedList[0] == true) {
+              career.IsChildPartiallySelected = false;
+              career.isSelected = true;
+            } else if (coursesSelectedList[0] == false) {
+              career.IsChildPartiallySelected = false;
+              career.isSelected = false;
+            }
+          }
         }
       }
 
