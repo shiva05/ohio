@@ -41,6 +41,14 @@ export class SharedService {
     itemsShowLimit: 1,
     allowSearchFilter: true
   };
+  academicSubjectsDefaultSettings = {
+    singleSelection: false,
+    idField: 'SubjectLevelsPk', textField: 'LevelValue1',
+    selectAllText: 'Select All',
+    unSelectAllText: 'Unselect All',
+    itemsShowLimit: 1,
+    allowSearchFilter: true
+  };
   academicSubjectCourseSettings = {
     singleSelection: false,
     idField: 'LevelId', textField: 'LevelValue',
