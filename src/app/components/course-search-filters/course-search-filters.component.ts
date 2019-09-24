@@ -51,7 +51,7 @@ export class CourseSearchFiltersComponent implements OnInit {
 
   ngOnInit() {
     this.careerPathSettings = this.shared.careerPathSettings;
-    this.careerPathCourseSettings = this.shared.careerPathSettings;
+    this.careerPathCourseSettings = this.shared.careerPathCourseSettings;
     this.academicSubjectsSettings = this.shared.academicSubjectsSettings;
     this.subjectsDefaultSettings = this.shared.subjectsDefaultSettings;
     this.academicSubjectCourseSettings = this.shared.academicSubjectCourseSettings;

@@ -33,7 +33,9 @@ export class CustomAccordionComponent implements OnInit {
   finalSearchResults: any[];
   alignmentSearchSelectedFilters: {};
   totalSearchResults = 0;
-  isVisible: boolean = false;
+  isSelectedValidation: boolean = false;
+  isASVisible: boolean = false;
+  isCSVisible: boolean = false;
   Level1Ids: any = [];
   Level2Ids: any = [];
   Level3Ids: any = [];
@@ -46,7 +48,6 @@ export class CustomAccordionComponent implements OnInit {
     Subjects: [],
     CteToAcademic: true
   };
-  dataReceived = false;
   academicSubjectIds = {
     Math: 1,
     ELA: 2,
@@ -94,140 +95,135 @@ export class CustomAccordionComponent implements OnInit {
 
   getAlignmentSearchResult() {
     this.store.select('advancedSearch').subscribe(data => {
-      if (this.dataReceived === false) {
-        if (data.alignmentSearchSelectedFilters) {
-          this.dataReceived = true;
-          this.alignmentSearchSelectedFilters = data.alignmentSearchSelectedFilters;
-          let careerfeilds = [];
-          data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
-            careerfeilds.push(element.CareerFieldId);
+      if (data.alignmentSearchSelectedFilters) {
+
+        this.alignmentSearchSelectedFilters = data.alignmentSearchSelectedFilters;
+        let careerfeilds = [];
+        data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
+          careerfeilds.push(element.CareerFieldId);
+        });
+
+        let strands = [];
+        if (data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedStrands) {
+          data.alignmentSearchSelectedFilters.selectedStrands.forEach(element => {
+            strands.push(element.StrandPk);
           });
-
-          let strands = [];
-          if (data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedStrands) {
-            data.alignmentSearchSelectedFilters.selectedStrands.forEach(element => {
-              strands.push(element.StrandPk);
-            });
-          }
-          let outcomes = [];
-          if (data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedOutcomes) {
-            data.alignmentSearchSelectedFilters.selectedOutcomes.forEach(element => {
-              outcomes.push(element.OutcomePk);
-            });
-          }
-
-          let CompetencyIds = [];
-          if (data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedCompetencies) {
-            data.alignmentSearchSelectedFilters.selectedCompetencies.forEach(element => {
-              CompetencyIds.push(element.CompetencyPk);
-            });
-          }
-          let subjects = [];
-          data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
-            let level1 = [];
-            let level2 = [];
-            let level3 = [];
-            if (element.Level) {
-              if (element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length > 0) {
-                element.Level[0].SelectedItems.forEach(element => {
-                  level1.push(element.LevelValue1);
-                });
-              }
-
-
-              if (element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length > 0) {
-                element.Level[1].SelectedItems.forEach(element => {
-                  level2.push(element.LevelValue1);
-                });
-              }
-
-
-              if (element.Level[3] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length > 0) {
-                element.Level[3].SelectedItems.forEach(element => {
-                  level3.push(element.LevelValue1);
-                });
-              }
-
-            }
-            let subject = {
-              SubjectId: element.SubjectId,
-              Level1Ids: level1,
-              Level2Ids: level2,
-              Level3Ids: level3
-            };
-            subjects.push(subject);
-          });
-
-          let obj = {
-            Keywords: '',
-            CareerFiledIds: careerfeilds,
-            StrandIds: strands,
-            OutcomeIds: outcomes,
-            CompetencyIds,
-            Subjects: subjects,
-            CteToAcademic: this.cteToAcademic
-          };
-
-          this.searchResultService.getSearchResultData(obj).subscribe(
-            data => {
-              this.searchResultData = data;
-              if (this.cteToAcademic) {
-                if (this.searchResultData.CareerField) {
-                  this.searchResultData.CareerField.forEach(element => {
-                    // this code can be removed if we can get a property to check the selected values count in all the levels
-                    element['IsChildPartiallySelected'] = false;
-                    element['isSelected'] = false;
-                    if (element['Strand'].length > 0) {
-                      element['Strand'].forEach((strand) => {
-                        strand['IsChildPartiallySelected'] = false;
-                        strand['isSelected'] = false;
-                        if (strand['Outcome'].length > 0) {
-                          strand['Outcome'].forEach((outcome) => {
-                            outcome['IsChildPartiallySelected'] = false;
-                            outcome['isSelected'] = false;
-
-                            if (outcome['Competency'].length > 0) {
-                              outcome['Competency'].forEach((competency) => {
-                                competency['isSelected'] = false;
-                              });
-                            }
-
-                          });
-                        }
-                      });
-                    }
-
-                    // this code above can be removed if we can get a property to check the selected values count in all the levels
-
-
-                    this.searchResultDataArray.push(element);
-                    //  console.log(this.searchResultDataArray);
-                    this.noResultFound = false;
-                  });
-                  this.formatSearchResultDataArray();
-                } else {
-                  this.noResultFound = true;
-                }
-              } else {
-                if (this.searchResultData.Subject.length > 0) {
-                  this.subjectToCareerData = this.searchResultData.Subject;
-                  this.noResultFound = false;
-                  this.formatAlignmentSearchData();
-                } else {
-                  this.noResultFound = true;
-                }
-              }
-              return;
-            },
-            err => {
-            });
-          // console.log(data);
-          return;
         }
+        let outcomes = [];
+        if (data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedOutcomes) {
+          data.alignmentSearchSelectedFilters.selectedOutcomes.forEach(element => {
+            outcomes.push(element.OutcomePk);
+          });
+        }
+
+        let CompetencyIds = [];
+        if (data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedCompetencies) {
+          data.alignmentSearchSelectedFilters.selectedCompetencies.forEach(element => {
+            CompetencyIds.push(element.CompetencyPk);
+          });
+        }
+        let subjects = [];
+        data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
+          let level1 = [];
+          let level2 = [];
+          let level3 = [];
+          if (element.Level) {
+            if (element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length > 0) {
+              element.Level[0].SelectedItems.forEach(element => {
+                level1.push(element.LevelValue1);
+              });
+            }
+
+
+            if (element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length > 0) {
+              element.Level[1].SelectedItems.forEach(element => {
+                level2.push(element.LevelValue1);
+              });
+            }
+
+
+            if (element.Level[3] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length > 0) {
+              element.Level[3].SelectedItems.forEach(element => {
+                level3.push(element.LevelValue1);
+              });
+            }
+
+          }
+          let subject = {
+            SubjectId: element.SubjectId,
+            Level1Ids: level1,
+            Level2Ids: level2,
+            Level3Ids: level3
+          };
+          subjects.push(subject);
+        });
+
+        let obj = {
+          Keywords: '',
+          CareerFiledIds: careerfeilds,
+          StrandIds: strands,
+          OutcomeIds: outcomes,
+          CompetencyIds,
+          Subjects: subjects,
+          CteToAcademic: this.cteToAcademic
+        };
+
+        this.searchResultService.getSearchResultData(obj).subscribe(
+          data => {
+            this.searchResultData = data;
+            if (this.cteToAcademic) {
+              if (this.searchResultData.CareerField) {
+                this.searchResultData.CareerField.forEach(element => {
+                  // this code can be removed if we can get a property to check the selected values count in all the levels
+                  element['IsChildPartiallySelected'] = false;
+                  element['isSelected'] = false;
+                  if (element['Strand'].length > 0) {
+                    element['Strand'].forEach((strand) => {
+                      strand['IsChildPartiallySelected'] = false;
+                      strand['isSelected'] = false;
+                      if (strand['Outcome'].length > 0) {
+                        strand['Outcome'].forEach((outcome) => {
+                          outcome['IsChildPartiallySelected'] = false;
+                          outcome['isSelected'] = false;
+
+                          if (outcome['Competency'].length > 0) {
+                            outcome['Competency'].forEach((competency) => {
+                              competency['isSelected'] = false;
+                            });
+                          }
+
+                        });
+                      }
+                    });
+                  }
+
+                  // this code above can be removed if we can get a property to check the selected values count in all the levels
+
+
+                  this.searchResultDataArray.push(element);
+                  //  console.log(this.searchResultDataArray);
+                  this.noResultFound = false;
+                });
+                this.formatSearchResultDataArray();
+              } else {
+                this.noResultFound = true;
+              }
+            } else {
+              if (this.searchResultData.Subject.length > 0) {
+                this.subjectToCareerData = this.searchResultData.Subject;
+                this.noResultFound = false;
+                this.formatAlignmentSearchData();
+              } else {
+                this.noResultFound = true;
+              }
+            }
+            return;
+          },
+          err => {
+          });
+        return;
       }
     });
-
-    // console.log(this.searchResultDataArray);
   }
 
   formatSearchResultDataArray() {
@@ -282,7 +278,7 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Strand Checkbox
   strandCheckBox(CareerFieldData, StrandData) {
     StrandData.IsChildPartiallySelected = false;
-    CareerFieldData.isSelected = CareerFieldData.Strand.every(function(itemChild: any) {
+    CareerFieldData.isSelected = CareerFieldData.Strand.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -316,12 +312,12 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Outcome Checkbox
   outcomeCheckBox(CareerFieldData, StrandData, OutcomeData) {
     // tslint:disable-next-line:only-arrow-functions
-    StrandData.isSelected = StrandData.Outcome.every(function(itemChild: any) {
+    StrandData.isSelected = StrandData.Outcome.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    CareerFieldData.isSelected = CareerFieldData.Strand.every(function(itemChild: any) {
+    CareerFieldData.isSelected = CareerFieldData.Strand.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -498,7 +494,7 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Level Checkbox
   levelCheckBox(parent, parentObj) {
     // tslint:disable-next-line:only-arrow-functions
-    parent.isSelected = parent.Level.every(function(itemChild: any) {
+    parent.isSelected = parent.Level.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -528,12 +524,12 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Child Level 1 Checkbox
   childLevel1CheckBox(career, strands, outcome) {
     // tslint:disable-next-line:only-arrow-functions
-    strands.isSelected = strands.ChildLevel.every(function(itemChild: any) {
+    strands.isSelected = strands.ChildLevel.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Level.every(function(itemChild: any) {
+    career.isSelected = career.Level.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -553,17 +549,17 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Child Level 2 Checkbox
   childLevel2CheckBox(career, strand, outcome) {
     // tslint:disable-next-line:only-arrow-functions
-    outcome.isSelected = outcome.ChildLevel.every(function(itemChild: any) {
+    outcome.isSelected = outcome.ChildLevel.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    strand.isSelected = strand.ChildLevel.every(function(itemChild: any) {
+    strand.isSelected = strand.ChildLevel.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Level.every(function(itemChild: any) {
+    career.isSelected = career.Level.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
@@ -609,25 +605,103 @@ export class CustomAccordionComponent implements OnInit {
     this.Level2Ids = [];
     this.Level3Ids = [];
 
+    this.isSelectedValidate();
+
+    if (!this.isSelectedValidation) {
+
+      if (this.cteToAcademic) {
+        this.searchResultDataArray.forEach(careerField => {
+          this.reportPayload.Subjects.push({ SubjectId: careerField.AcademicSubjectId });
+
+          if (careerField.isSelected) {
+            this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
+          }
+          careerField.Strand.forEach(stand => {
+            if (stand.isSelected) {
+              this.reportPayload.StrandIds.push(stand.StrandPk);
+            }
+            stand.Outcome.forEach(outcome => {
+              if (outcome.isSelected) {
+                this.reportPayload.OutcomeIds.push(outcome.OutcomePk);
+              }
+
+              outcome.Competency.forEach(competency => {
+                if (competency.isSelected) {
+                  this.reportPayload.CompetencyIds.push(competency.CompetencyPk);
+                }
+              });
+            });
+          });
+        });
+      } else {
+        this.subjectToCareerData.forEach(careerField => {
+          // Career Field ID is missing in the JSON result so for now hardcoded
+          this.reportPayload.CareerFiledIds = [1];
+
+          this.Level1Ids = [];
+          careerField.Level.forEach(level => {
+            if (level.isSelected) {
+              this.Level1Ids.push(level.LevelValue1);
+            }
+
+            this.Level2Ids = [];
+            level.ChildLevel.forEach(childLevel1 => {
+              if (childLevel1.isSelected) {
+                this.Level2Ids.push(childLevel1.LevelValue2);
+              }
+
+              this.Level3Ids = [];
+              childLevel1.ChildLevel.forEach(childLevel2 => {
+                if (childLevel2.isSelected) {
+                  this.Level3Ids.push(childLevel2.LevelValue3);
+                }
+              });
+            });
+          });
+
+          this.reportPayload.Subjects.push({
+            SubjectId: careerField.SubjectId,
+            Level1Ids: this.Level1Ids,
+            Level2Ids: this.Level2Ids,
+            Level3Ids: this.Level3Ids
+          });
+        });
+      }
+
+      this.rout.navigate(['/AlignmentSearchReport']);
+      this.alignmentSearchSelectedFilters['selectedAsSearchResults'] = this.reportPayload;
+      this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.alignmentSearchSelectedFilters });
+    } else {
+      if (this.cteToAcademic) {
+        this.isASVisible = false;
+        this.isCSVisible = true;
+        setTimeout(() => this.isCSVisible = false, 4000);
+      } else {
+        this.isCSVisible = false;
+        this.isASVisible = true;
+        setTimeout(() => this.isASVisible = false, 4000);
+      }
+    }
+  }
+
+  isSelectedValidate() {
+    this.isSelectedValidation = true;
     if (this.cteToAcademic) {
       this.searchResultDataArray.forEach(careerField => {
-        this.reportPayload.Subjects.push({ SubjectId: careerField.AcademicSubjectId });
-
         if (careerField.isSelected) {
-          this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
+          this.isSelectedValidation = false;
         }
         careerField.Strand.forEach(stand => {
           if (stand.isSelected) {
-            this.reportPayload.StrandIds.push(stand.StrandPk);
+            this.isSelectedValidation = false;
           }
           stand.Outcome.forEach(outcome => {
             if (outcome.isSelected) {
-              this.reportPayload.OutcomeIds.push(outcome.OutcomePk);
+              this.isSelectedValidation = false;
             }
-
             outcome.Competency.forEach(competency => {
               if (competency.isSelected) {
-                this.reportPayload.CompetencyIds.push(competency.CompetencyPk);
+                this.isSelectedValidation = false;
               }
             });
           });
@@ -635,54 +709,23 @@ export class CustomAccordionComponent implements OnInit {
       });
     } else {
       this.subjectToCareerData.forEach(careerField => {
-        // Career Field ID is missing in the JSON result so for now hardcoded
-        this.reportPayload.CareerFiledIds = [1];
-
-        this.Level1Ids = [];
         careerField.Level.forEach(level => {
           if (level.isSelected) {
-            this.Level1Ids.push(level.LevelValue1);
+            this.isSelectedValidation = false;
           }
-
-          this.Level2Ids = [];
           level.ChildLevel.forEach(childLevel1 => {
             if (childLevel1.isSelected) {
-              this.Level2Ids.push(childLevel1.LevelValue2);
+              this.isSelectedValidation = false;
             }
-
-            this.Level3Ids = [];
             childLevel1.ChildLevel.forEach(childLevel2 => {
               if (childLevel2.isSelected) {
-                this.Level3Ids.push(childLevel2.LevelValue3);
+                this.isSelectedValidation = false;
               }
             });
           });
         });
-
-        this.reportPayload.Subjects.push({
-          SubjectId: careerField.SubjectId,
-          Level1Ids: this.Level1Ids,
-          Level2Ids: this.Level2Ids,
-          Level3Ids: this.Level3Ids
-        });
       });
     }
-
-    if (this.reportPayload.CompetencyIds.length > 0) {
-      // this.goToPage(obj);
-      this.rout.navigate(['/AlignmentSearchReport']);
-      this.alignmentSearchSelectedFilters['selectedAsSearchResults'] = this.reportPayload;
-      this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.alignmentSearchSelectedFilters });
-    } else {
-      this.showAlert();
-    }
-  }
-  showAlert(): void {
-    if (this.isVisible) {
-      return;
-    }
-    this.isVisible = true;
-    setTimeout(() => this.isVisible = false, 4000);
   }
 
   goToPage(org) {
