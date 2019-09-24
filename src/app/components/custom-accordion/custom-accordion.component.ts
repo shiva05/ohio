@@ -636,7 +636,9 @@ export class CustomAccordionComponent implements OnInit {
       } else {
         this.subjectToCareerData.forEach(careerField => {
           // Career Field ID is missing in the JSON result so for now hardcoded
-          this.reportPayload.CareerFiledIds = [1];
+          if (careerField.isSelected) {
+            this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
+          }
 
           this.Level1Ids = [];
           careerField.Level.forEach(level => {
