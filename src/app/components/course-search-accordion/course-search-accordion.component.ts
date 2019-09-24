@@ -22,7 +22,9 @@ export class CourseSearchAccordionComponent implements OnInit {
   totalSearchResults = 0;
   Level1Ids: any = [];
   Level2Ids: any = [];
-  isVisible: boolean = false;
+  isCSVisible: boolean = false;
+  isASVisible: boolean = false;
+  isSelectedValidation: boolean = false;
   courseSearchReportPayload = {
     Keywords: '',
     CareerPathIds: [],
@@ -179,7 +181,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   // Click event on Courses Checkbox
   courseCheckBox(career, course) {
     course.IsChildPartiallySelected = false;
-    career.isSelected = career.Courses.every(function(itemChild: any) {
+    career.isSelected = career.Courses.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -201,11 +203,11 @@ export class CourseSearchAccordionComponent implements OnInit {
 
   // Click event on Competency Checkbox
   competencyCheckBox(career, course) {
-    course.isSelected = course.Competencies.every(function(itemChild: any) {
+    course.isSelected = course.Competencies.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
-    career.isSelected = career.Courses.every(function(itemChild: any) {
+    career.isSelected = career.Courses.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
     this.trackCareerCompetencyStatus(career, course);
@@ -288,7 +290,7 @@ export class CourseSearchAccordionComponent implements OnInit {
 
   // Click event on Grade Checkbox
   gradeCheckBox(career, course) {
-    career.isSelected = career.SubjecToStandards.every(function(itemChild: any) {
+    career.isSelected = career.SubjecToStandards.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -307,11 +309,11 @@ export class CourseSearchAccordionComponent implements OnInit {
 
   // Click event on Standard Checkbox
   standardCheckBox(career, course) {
-    course.isSelected = course.Standards.every(function(itemChild: any) {
+    course.isSelected = course.Standards.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
-    career.isSelected = career.SubjecToStandards.every(function(itemChild: any) {
+    career.isSelected = career.SubjecToStandards.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
@@ -323,70 +325,108 @@ export class CourseSearchAccordionComponent implements OnInit {
     this.courseSearchReportPayload.Subjects = [];
     this.courseSearchReportPayload.CareerPathToSubject = this.careerPathToSubject;
 
-    if (this.careerPathToSubject) {
-      this.careerPathToSubjectData.forEach(careerPath => {
+    this.isSelectedValidate();
 
-        if (careerPath.isSelected) {
-          this.courseSearchReportPayload.CareerPathIds.push(careerPath.CareerPathId);
-          this.courseSearchReportPayload.Subjects.push({ SubjectId: careerPath.SubjectId });
-        }
-
-        careerPath.Courses.forEach(course => {
-          if (course.isSelected) {
-            this.courseSearchReportPayload.CourseIds.push(course.CourseId);
+    if (!this.isSelectedValidation) {
+      if (this.careerPathToSubject) {
+        this.careerPathToSubjectData.forEach(careerPath => {
+          if (careerPath.isSelected) {
+            this.courseSearchReportPayload.CareerPathIds.push(careerPath.CareerPathId);
+            this.courseSearchReportPayload.Subjects.push({ SubjectId: careerPath.SubjectId });
           }
 
+          careerPath.Courses.forEach(course => {
+            if (course.isSelected) {
+              this.courseSearchReportPayload.CourseIds.push(course.CourseId);
+            }
+
+            course.Competencies.forEach(competency => {
+              if (competency.isSelected) {
+                this.courseSearchReportPayload.CompetencyIds.push(competency.Id);
+              }
+            });
+          });
+        });
+      } else {
+        this.subjectToCareerPathData.forEach(subject => {
+
+          this.Level1Ids = [];
+          subject.SubjecToStandards.forEach(grade => {
+            if (grade.isSelected) {
+              // Level1Value should be Course Name but its coming as Subject/Course Title need to change from API
+              this.Level1Ids.push(grade.Level1Value);
+            }
+
+            this.Level2Ids = [];
+            grade.Standards.forEach(standard => {
+              if (standard.isSelected) {
+                this.Level2Ids.push(standard.StandardDesc);
+              }
+            });
+          });
+
+          if (subject.isSelected) {
+            this.courseSearchReportPayload.CareerPathIds.push(subject.CareerPathId);
+
+            this.courseSearchReportPayload.Subjects.push({
+              SubjectId: subject.SubjectId,
+              Level1Ids: this.Level1Ids,
+              Level2Ids: this.Level2Ids
+            });
+          }
+        });
+      }
+      this.rout.navigate(['/CourseSearchReport']);
+      this.courseSearchSelectedFilters['selectedCourseSearchResults'] = this.courseSearchReportPayload;
+      this.store.dispatch({ type: CourseSearchActions.SAVE_CS_SELECTED_FILTERS, payload: this.courseSearchSelectedFilters });
+    } else {
+      if (this.careerPathToSubject) {
+        this.isASVisible = false;
+        this.isCSVisible = true;
+        setTimeout(() => this.isCSVisible = false, 4000);
+      } else {
+        this.isCSVisible = false;
+        this.isASVisible = true;
+        setTimeout(() => this.isASVisible = false, 4000);
+      }
+    }
+  }
+
+  isSelectedValidate() {
+    this.isSelectedValidation = true;
+    if (this.careerPathToSubject) {
+      this.careerPathToSubjectData.forEach(careerPath => {
+        if (careerPath.isSelected) {
+          this.isSelectedValidation = false;
+        }
+        careerPath.Courses.forEach(course => {
+          if (course.isSelected) {
+            this.isSelectedValidation = false;
+          }
           course.Competencies.forEach(competency => {
             if (competency.isSelected) {
-              this.courseSearchReportPayload.CompetencyIds.push(competency.Id);
+              this.isSelectedValidation = false;
             }
           });
         });
       });
     } else {
       this.subjectToCareerPathData.forEach(subject => {
-
-        this.Level1Ids = [];
         subject.SubjecToStandards.forEach(grade => {
           if (grade.isSelected) {
-            // Level1Value should be Course Name but its coming as Subject/Course Title need to change from API
-            this.Level1Ids.push(grade.Level1Value);
+            this.isSelectedValidation = false;
           }
-
-          this.Level2Ids = [];
           grade.Standards.forEach(standard => {
             if (standard.isSelected) {
-              this.Level2Ids.push(standard.StandardDesc);
+              this.isSelectedValidation = false;
             }
           });
         });
-
         if (subject.isSelected) {
-          this.courseSearchReportPayload.CareerPathIds.push(subject.CareerPathId);
-          this.courseSearchReportPayload.Subjects.push({
-            SubjectId: subject.SubjectId,
-            Level1Ids: this.Level1Ids,
-            Level2Ids: this.Level2Ids
-          });
+          this.isSelectedValidation = false;
         }
       });
     }
-
-    if (this.courseSearchReportPayload.CompetencyIds.length > 0) {
-      this.rout.navigate(['/CourseSearchReport']);
-      this.courseSearchSelectedFilters['selectedCourseSearchResults'] = this.courseSearchReportPayload;
-      this.store.dispatch({ type: CourseSearchActions.SAVE_CS_SELECTED_FILTERS, payload: this.courseSearchSelectedFilters });
-    } else {
-      this.showAlert();
-    }
-  }
-
-  showAlert(): void {
-    if (this.isVisible) {
-      return;
-    }
-    this.isVisible = true;
-    setTimeout(() => this.isVisible = false, 4000);
   }
 
   goToPage(org) {
