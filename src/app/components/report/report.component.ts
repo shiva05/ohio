@@ -66,4 +66,18 @@ export class ReportComponent {
     });
 
   }
+  public saveToProfile(): void {
+    this.store.select('advancedSearch').subscribe(data => {
+      if (data.alignmentSearchSelectedFilters) {
+        let objTemp =  data.alignmentSearchSelectedFilters.selectedAsSearchResults;
+        this.downloadPDFService.asSaveToProfile(objTemp)
+        .subscribe(x => {
+
+
+        });
+      }
+    });
+
+  }
+
 }

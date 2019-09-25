@@ -68,4 +68,15 @@ export class CourseSearchReportComponent implements OnInit {
   clearCourseSearch() {
     this.rout.navigate(['/CourseSearch']);
   }
+  public saveToProfile(): void {
+    this.store.select('courseSearch').subscribe(data => {
+      if (data.courseSearchSelectedFilters) {
+        const objTemp = data.courseSearchSelectedFilters.selectedCourseSearchResults;
+        this.downloadPDFService.asSaveToProfile(objTemp)
+        .subscribe(x => {
+        });
+      }
+    });
+
+  }
 }

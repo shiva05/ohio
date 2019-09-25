@@ -8,7 +8,22 @@ import { AuthOrchestration } from './services/auth-orchestration.service';
 import * as AuthActions from './actions/auth-actions';
 import * as ClaimsActions from './actions/claims-actions';
 import { Router } from '@angular/router';
+<<<<<<< HEAD
 import { HttpClient } from '@angular/common/http';
+=======
+import { Utilities } from './models/util-nav-item';
+import { NavResize } from './actions/nav-actions';
+import * as UtilsActions from './actions/utils-actions';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpResponse,
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptor
+} from '@angular/common/http';
+>>>>>>> a08371549283c59937cbf7161177d36dfdda9fbe
 import { LoaderService } from './services/loader.service';
 
 @Component({
@@ -25,10 +40,30 @@ export class AppComponent implements OnInit {
   isPublic = false;
   loading = true;
   ready = false;
+<<<<<<< HEAD
 
   constructor(private http: HttpClient, public router: Router, private store: Store<AppState>, public loaderService: LoaderService, private translate: TranslateService, private authService: AuthService, private authOrchestration: AuthOrchestration) {
     translate.setDefaultLang('en');
   }
+=======
+  utilsWidth = 0;
+  mainWidth = window.innerWidth - 80;
+  mainLeft = 56;
+  mainHeight = 1400;
+  currentUtil: Utilities = Utilities.none;
+  constructor(private http: HttpClient,
+              public router: Router,
+              private store: Store<AppState>,
+              public loaderService: LoaderService,
+              private translate: TranslateService,
+              private authService: AuthService,
+              private authOrchestration: AuthOrchestration) {
+    translate.setDefaultLang('en');
+    window.onresize = () => {
+      //this.utilNav(this.currentUtil);
+    };
+   }
+>>>>>>> a08371549283c59937cbf7161177d36dfdda9fbe
 
   ngOnInit() {
 
@@ -104,7 +139,21 @@ export class AppComponent implements OnInit {
       }
     });
   }
+  // utilNav(util: Utilities) {
+  //   this.currentUtil = util;
+  //   const baseWidth = window.innerWidth - 75;
+  //   // define target widths for each utility
+  //   const targetWidth = {};
 
+  //   targetWidth[Utilities.Documents] = baseWidth * .5;
+  //   targetWidth[Utilities.Flags] = baseWidth * .3;
+  //   targetWidth[Utilities.contacts] = baseWidth * .4;
+  //   targetWidth[Utilities.history] = baseWidth * .2;
+  //   targetWidth[Utilities.Comments] = baseWidth * .4;
+
+  //   const width = (util !== Utilities.none) ? targetWidth[util] : 55;
+  //   this.setIframeWidth(width);
+  // }
   showSafeLogin() {
     this.store.dispatch(new AuthActions.ResetAuth({}));
     this.store.dispatch(new ClaimsActions.ResetClaims({}));
@@ -116,5 +165,12 @@ export class AppComponent implements OnInit {
     this.store.dispatch(new ClaimsActions.ResetClaims({}));
     window.location.href = `${window.location.protocol}//${window.location.host}`;
   }
+  // setIframeWidth(utilWidth: number) {
+  //   this.utilsWidth = utilWidth;
+  //   this.mainWidth = window.innerWidth - 75 - utilWidth;
+  //   this.mainLeft = utilWidth;
+  //   const newIframeWidth = window.innerWidth - utilWidth - 20;
+  //   this.store.dispatch(new NavResize(newIframeWidth));
+  // }
 }
 
