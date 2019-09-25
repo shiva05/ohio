@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-//import { Organization } from '../models/organization';
 import { AppState } from './../app.state';
 import { Store } from '@ngrx/store';
 import * as AuthActions from '../actions/auth-actions';
@@ -8,12 +7,10 @@ import * as _ from 'lodash';
 import { Organization } from '../models/organization';
 import { Audience } from '../models/audience';
 import { Application } from '../models/application';
-
-//import { Audience } from '../models/audience';
-//import { Application } from '../models/application';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
+
 export class AuthOrchestration {
   constructor(private store: Store<AppState>) { }
 
@@ -69,27 +66,7 @@ export class AuthOrchestration {
     }
   }
 
-  handleAutoNavigate() {
-    // // navigate to default tab
-    // this.store.select((appState) => {
-    //   //return {tabs: appState.claimsState.tabs, orgId: appState.authState.selectedOrg.org_id}
-    //   return {orgId: appState.authState.selectedOrg.org_id}
-    // }).subscribe(returnObject => {
-    //   if (returnObject.orgId == 0) {
-    //     this.navigateToPublic();
-    //     return;
-    //   }
-    //   //if (returnObject.tabs && returnObject.tabs.defaultTabKey != null) this.autoNavigate(returnObject.tabs);
-    // });
-    // this.store.select('authState').subscribe((authState) => {
-    //   console.log('authstate in handleautonavigate',authState)
-    // });
-    // this.store
-    // .select(appState => appState.tabState.tabs)
-    // .subscribe(tabs => {
-    //   if (tabs) this.autoNavigate(tabs);
-    // });
-  }
+  handleAutoNavigate() { }
 
   autoSelectOrg(orgs: Organization[]) {
     if (orgs.length === 1) {
@@ -112,5 +89,4 @@ export class AuthOrchestration {
       );
     }
   }
-
 }

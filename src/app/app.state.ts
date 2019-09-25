@@ -1,6 +1,5 @@
-
-import { MetaData  } from './models/meta-data.model';
-import { QsMetaData  } from './models/qs-meta-data.model';
+import { MetaData } from './models/meta-data.model';
+import { QsMetaData } from './models/qs-meta-data.model';
 import { AuthState } from './reducers/auth-reducer';
 import { ClaimsState } from './reducers/claims-reducer';
 

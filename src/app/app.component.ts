@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
-import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
 import { environment } from '../environments/environment';
@@ -13,21 +8,15 @@ import { AuthOrchestration } from './services/auth-orchestration.service';
 import * as AuthActions from './actions/auth-actions';
 import * as ClaimsActions from './actions/claims-actions';
 import { Router } from '@angular/router';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpResponse,
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { LoaderService } from './services/loader.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit {
   title = 'StandardsByDesignWeb';
   isLocal = false;
@@ -36,15 +25,10 @@ export class AppComponent implements OnInit {
   isPublic = false;
   loading = true;
   ready = false;
-  constructor(private http: HttpClient,
-              public router: Router,
-              private store: Store<AppState>,
-              public loaderService: LoaderService,
-              private translate: TranslateService,
-              private authService: AuthService,
-              private authOrchestration: AuthOrchestration) {
+
+  constructor(private http: HttpClient, public router: Router, private store: Store<AppState>, public loaderService: LoaderService, private translate: TranslateService, private authService: AuthService, private authOrchestration: AuthOrchestration) {
     translate.setDefaultLang('en');
-   }
+  }
 
   ngOnInit() {
 
@@ -115,30 +99,10 @@ export class AppComponent implements OnInit {
     });
 
     this.store.select('claimsState').subscribe((claimsState) => {
-      if (claimsState &&  claimsState.claimsJwtPayload && claimsState.claimsJwt) {
+      if (claimsState && claimsState.claimsJwtPayload && claimsState.claimsJwt) {
         this.ready = true;
       }
     });
-            // show the reset of app
-     // if (this.ready) {
-     //   // this.loading = false;
-     //   // claimsState.menus.items.forEach(item => {
-     //   //   // if (item.menuKey === claimsState.menus.defaultMenuKey) {
-     //   //   //   // this.mySource = item.url;
-     //   //   //   // this.mapPathToApp(item.url);
-     //   //   // }
-     //   // });
-     //   // use this when testing locally so you don't need to click everything.
-     //   // this.testUtilsOnLoad();
-     // }
-
-     // // console.log('claimsState:' , claimsState);
-     // if (claimsState && claimsState.error) {
-     //   this.appError = true;
-     //   this.errorMessage = claimsState.error.error;
-     //   this.loading = false;
-     // }
-
   }
 
   showSafeLogin() {
