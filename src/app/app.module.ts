@@ -14,8 +14,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { LoaderService } from '../app/services/loader.service';
 import { HttpLoadInterceptor } from './services/http.interceptor';
-import { DatePipe } from '@angular/common'
-// import { reducers, metaReducers } from './reducers';
+import { DatePipe } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
 
@@ -26,7 +25,7 @@ import { AdvancedSearchEffects } from './effects/advanced-search.effect';
 import { SearchResultEffects } from './effects/search-result.effect';
 import { reportReducer } from './reducers/report.reducer';
 import { ReportEffects } from './effects/report.effects';
-// import ngx-translate and the http loader
+
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AlignmentSearchComponent } from './components/alignment-search/alignment-search.component';
@@ -83,6 +82,7 @@ import { ListDocsComponent } from './components/utilities/docs/list-docs/list-do
 import { PreviewDocsComponent } from './components/utilities/docs/preview-docs/preview-docs.component';
 import { FileDraggableComponent } from './components/utilities/docs/file-draggable/file-draggable.component';
 
+import { CookieService } from 'ngx-cookie-service';
 // import { AuthEffectsService } from './effects/auth-effects';
 
 @NgModule({
@@ -136,7 +136,6 @@ import { FileDraggableComponent } from './components/utilities/docs/file-draggab
     FormsModule,
     ReactiveFormsModule,
     AngularFontAwesomeModule,
-    // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -145,10 +144,9 @@ import { FileDraggableComponent } from './components/utilities/docs/file-draggab
         deps: [HttpClient]
       }
     }),
-    // StoreModule.forRoot(reducers, { metaReducers }),
     StoreModule.forRoot(Reducers),
     StoreDevtoolsModule.instrument({ maxAge: 100, name: 'tng1' }),
-    EffectsModule.forRoot([AdvancedSearchEffects, ReportEffects, QuickSearchEffects, SearchResultEffects, CourseSearchEffects,AuthEffectsService,ClaimsEffectsService])
+    EffectsModule.forRoot([AdvancedSearchEffects, ReportEffects, QuickSearchEffects, SearchResultEffects, CourseSearchEffects, AuthEffectsService, ClaimsEffectsService])
 
   ],
   providers: [
@@ -158,6 +156,7 @@ import { FileDraggableComponent } from './components/utilities/docs/file-draggab
     ClaimsService,
     AuthOrchestration,
     AppHttpService,
+    CookieService,
     LoaderService,
     FlagService,
     DocsService,

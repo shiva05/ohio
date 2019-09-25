@@ -5,7 +5,8 @@ import { CourseSearchSelectedFilters } from '../models/courseSearch-selected-fil
 export const LOAD_COURSESEARCH_DATA = '[CourseSearchData] Fetch';
 export const LOAD_COURSESEARCH_DATA_SUCCESS = '[CourseSearchData] Success';
 export const LOAD_COURSESEARCH_DATA_FAILURE = '[CourseSearchData] Failure';
-export const SAVE_AS_SELECTED_FILTERS_COURSESEARCH = '[CourseSearchSelectedFilters] Save';
+export const SAVE_CS_SELECTED_FILTERS = '[CourseSearchSelectedFilters] Save';
+export const RESET_COURSE_SELECTED_FILTERS = '[CourseSearchSelectedFilters] Reset';
 
 export class CourseSearchDataFetch implements Action {
     readonly type = LOAD_COURSESEARCH_DATA;
@@ -22,8 +23,11 @@ export class CourseSearchDataFailure implements Action {
 }
 
 export class SaveAsSelectedFilters implements Action {
-    readonly type = SAVE_AS_SELECTED_FILTERS_COURSESEARCH;
+  readonly type = SAVE_CS_SELECTED_FILTERS;
     constructor(public payload: CourseSearchSelectedFilters) { }
 }
+export class ResetCourseSelectedFilters implements Action {
+  readonly type = RESET_COURSE_SELECTED_FILTERS;
+}
 
-export type Actions = CourseSearchDataFetch | CourseSearchDataSucess | CourseSearchDataFailure | SaveAsSelectedFilters;
+export type Actions = CourseSearchDataFetch | CourseSearchDataSucess | CourseSearchDataFailure | SaveAsSelectedFilters | ResetCourseSelectedFilters;

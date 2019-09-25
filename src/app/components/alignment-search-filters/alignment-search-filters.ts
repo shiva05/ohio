@@ -42,7 +42,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   selectedClusters: any = [];
   selectedStandardNumbers: any = [];
   dropdownSettings: any = {};
-  compitencyDropdownSettings: any = {};
+  competencyDropdownSettings: any = {};
   academicDropdownSettings: any = {};
   careerFieldDropdownSettings: any = {};
   strandDropdownSettings: any = {};
@@ -53,6 +53,11 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   competencyNumbers: any;
   metaData: Observable<MetaData>;
   selectedAcademicItems: any = [];
+  quickSearchSharedData = {
+    KeyWords: '',
+    CareerFields: [],
+    AcademicSubjects: []
+  };
   subjectsDefaultSettings: any = {};
   isVisible: boolean = false;
 
@@ -68,75 +73,22 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   @Output() onPageSelect = new EventEmitter<any>();
 
   ngOnInit() {
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'CareerFieldId', textField: 'CareerFieldName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-    this.careerFieldDropdownSettings = {
-      singleSelection: false,
-      idField: 'CareerFieldId', textField: 'CareerFieldName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-    this.strandDropdownSettings = {
-      singleSelection: false,
-      idField: 'StrandPk', textField: 'StrandName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-    this.outcomeDropdownSettings = {
-      singleSelection: false,
-      idField: 'OutcomePk', textField: 'OutcomeName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-    this.careerFieldDropdownSettings = {
-      singleSelection: false,
-      idField: 'CareerFieldId', textField: 'CareerFieldName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-    this.academicSubjectDropdownSettings = {
-      singleSelection: false,
-      idField: 'SubjectId', textField: 'SubjectName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-    this.compitencyDropdownSettings = {
-      singleSelection: false,
-      idField: 'CompetencyPk', textField: 'CompetencyName',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-    this.subjectsDefaultSettings = {
-      singleSelection: false,
-      idField: 'SubjectLevelsPk', textField: 'LevelValue1',
-      selectAllText: 'Select All',
-      unSelectAllText: 'Unselect All',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
+    this.dropdownSettings = this.shared.dropdownSettings;
+    this.careerFieldDropdownSettings = this.shared.careerFieldDropdownSettings;
+    this.strandDropdownSettings = this.shared.strandDropdownSettings;
+    this.outcomeDropdownSettings = this.shared.outcomeDropdownSettings;
+    this.careerFieldDropdownSettings = this.shared.careerFieldDropdownSettings;
+    this.academicSubjectDropdownSettings = this.shared.academicSubjectDropdownSettings;
+    this.competencyDropdownSettings = this.shared.competencyDropdownSettings;
+    this.subjectsDefaultSettings = this.shared.academicSubjectsDefaultSettings;
 
+    let quickSearchData = JSON.parse(localStorage.getItem('QuickSearchData'));
 
     this.store.select('advancedSearch').subscribe(data => {
       this.metaData = data.metaData;
-      this.careers = this.metaData['CareerFields'];
+      if (this.careers.length === 0) {
+          this.careers = this.metaData['CareerFields'];
+        }
       this.strands = this.metaData['Strands'];
       this.outcomes = this.metaData['Outcomes'];
       this.grades = this.metaData['Grades'];
@@ -159,30 +111,61 @@ export class AlignmentSearchFiltersComponent implements OnInit {
        // });
       }
       if (data.alignmentSearchSelectedFilters) {
-        if (data.alignmentSearchSelectedFilters.selectedCareers.length > 0) {
-          this.selectedCareer = data.alignmentSearchSelectedFilters.selectedCareers;
-          this.onCareerSelect();
+        if (data.alignmentSearchSelectedFilters.selectedCareers) {
+          if (data.alignmentSearchSelectedFilters.selectedCareers.length > 0) {
+            this.selectedCareer = data.alignmentSearchSelectedFilters.selectedCareers;
+            this.onCareerSelect();
+          }
         }
-        if (data.alignmentSearchSelectedFilters.selectedStrands.length > 0) {
-          this.selectedStrands = data.alignmentSearchSelectedFilters.selectedStrands;
-          this.onStrandSelect();
+        if (data.alignmentSearchSelectedFilters.selectedStrands) {
+          if (data.alignmentSearchSelectedFilters.selectedStrands.length > 0) {
+            this.selectedStrands = data.alignmentSearchSelectedFilters.selectedStrands;
+            this.onStrandSelect();
+          }
         }
-        if (data.alignmentSearchSelectedFilters.selectedOutcomes.length > 0) {
-          this.selectedOutcome = data.alignmentSearchSelectedFilters.selectedOutcomes;
+        if (data.alignmentSearchSelectedFilters.selectedOutcomes) {
+          if (data.alignmentSearchSelectedFilters.selectedOutcomes.length > 0) {
+            this.selectedOutcome = data.alignmentSearchSelectedFilters.selectedOutcomes;
+          }
         }
-        if (data.alignmentSearchSelectedFilters.selectedCompetencies.length > 0) {
-          this.selectedCompetencyNumbers =  data.alignmentSearchSelectedFilters.selectedCompetencies;
+        if (data.alignmentSearchSelectedFilters.selectedCompetencies) {
+          if (data.alignmentSearchSelectedFilters.selectedCompetencies.length > 0) {
+            this.selectedCompetencyNumbers = data.alignmentSearchSelectedFilters.selectedCompetencies;
+          }
         }
       //  this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0 ? data.alignmentSearchSelectedFilters.selectedAcadamicSubjects : [];
         // this.selectedAcadamicSubjects is getting clear on selection of outcomes as store is getting updated on every selection of outcomes.
         // this resolves the lose of academic subjects selected data.
-        if (data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0) {
-          this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects;
-          this.selectedAcademicItems = this.selectedAcadamicSubjects;
-          this.academicSubjects = data.alignmentSearchSelectedFilters.finalSelectedObject;
-         //  this.selectListCreation();
-         }
-      }
+        if (data.alignmentSearchSelectedFilters.selectedAcadamicSubjects) {
+          if (data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0) {
+            this.selectedAcadamicSubjects = data.alignmentSearchSelectedFilters.selectedAcadamicSubjects;
+            this.selectedAcademicItems = this.selectedAcadamicSubjects;
+            this.academicSubjects = data.alignmentSearchSelectedFilters.finalSelectedObject;
+            //  this.selectListCreation();
+          }
+        }
+	  }
+
+	     if (quickSearchData) {
+           if (quickSearchData['AcademicSubjects'].length > 0) {
+             this.academicSubjects = this.metaData['Subjects'];
+             this.academicSubjects.forEach((subject) => {
+               subject.Level.forEach((item) => {
+                 item['SelectedItems'] = {}; // to maintain the individual selected list from the dropdowns.
+                 item['DropdownList'] = []; // to set the data for the dropdowns of each item of a subject.
+                 if (item.LevelNumber === 1) { // to bind the data for the 1st column dropdown list.
+                   item['DropdownList'] = item.SubjectLevels;
+                 }
+               });
+             });
+            this.selectedAcadamicSubjects = quickSearchData['AcademicSubjects'];
+            this.selectedAcademicItems = quickSearchData['AcademicSubjects'];
+            this.selectListCreation();
+		  }
+		  if (quickSearchData['CareerFields'].length > 0) {
+			  this.selectedCareer = quickSearchData['CareerFields'];
+		  }
+	  }
     });
 
     // if we are navigating from other pages except updatesearch of alignmentSearchResults, we are clearing the search data.
@@ -274,12 +257,12 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     let updatedSelectedSetId: any = [];
     let tempData = this.selectedAcademicItems;
     tempData.map((subject) => {
-        if (data.SubjectId === subject.SubjectId) { // comparing the selected items  level id with below statement which is the data of main object
+        if (data.SubjectId === subject.SubjectId) { // comparing the selected items level id with below statement which is the data of main object
           subject.Level.map((mainCourse, index) => {
             if (data.LevelId + 1 === mainCourse.LevelId) {
               mainCourse.DropdownList = [];
               data.SelectedItems.map((selectedItem) => {   // assigning parent level dropdown data
-                  mainCourse.SubjectLevels.map((targetedDropdown) => { // setting the vakle of dropdown here
+                  mainCourse.SubjectLevels.map((targetedDropdown) => { // setting the value of dropdown here
                     if (selectedItem.SubjectLevelsPk === targetedDropdown.ParentLevelPk) {
                       mainCourse.DropdownList.push(targetedDropdown);
                     }
@@ -305,7 +288,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
                   }
                 } else {
                   mainCourse.SelectedItems = [];
-                } // end mappiing the next dropdown
+                } // end mapping the next dropdown
               this.onSubjectLevelsSelect(mainCourse);
             }
 
@@ -315,11 +298,11 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         }
     });
     this.selectedAcademicItems = tempData;
-   // this.ref.detectChanges();
   }
 
-clearSearch() {
-  this.searchObj = {
+  clearSearch() {
+    localStorage.removeItem('QuickSearchData');
+    this.searchObj = {
     selectedCareers: [],
     selectedStrands: [],
     selectedOutcomes: [],
@@ -327,32 +310,30 @@ clearSearch() {
     selectedAcadamicSubjects: [],
     finalSelectedObject: [],
   };
-  this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
-  this.selectedCareer = [];
-  this.selectedAcadamicSubjects = [];
-  this.selectedStrands = [];
-  this.selectedOutcome = [];
-  this.selectedCompetencyNumbers = [];
-  this.selectedAcademicItems = [];
-  this.strandsDropdown = [];
-  this.outcomesDropdown = [];
-  this.competencyNumbers = [];
-  this.rout.navigate(['/AlignmentSearch']);
+  // this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
+    this.store.dispatch({ type: AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS});
+    this.selectedCareer = [];
+    this.selectedAcadamicSubjects = [];
+    this.selectedStrands = [];
+    this.selectedOutcome = [];
+    this.selectedCompetencyNumbers = [];
+    this.selectedAcademicItems = [];
+    this.strandsDropdown = [];
+    this.outcomesDropdown = [];
+    this.competencyNumbers = [];
+  // this.rout.navigate(['/AlignmentSearch']);
 }
   onSubjectLevelsSelectAll(data) {
-    let selectedAll = [];
     data.SelectedItems = [];
     data.SelectedItems = data.SubjectLevels;
     this.onSubjectLevelsSelect(data);
   }
   onSubjectLevelsDeSelectAll(data) {
-    let selectedAll = [];
     data.SelectedItems = [];
     this.onSubjectLevelsSelect(data);
   }
   onOutcomeSelect() {
-    // TODO: Call API
-    this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA , payload : this.selectedOutcome});
+    this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA, payload : this.selectedOutcome});
   }
   showAlert(): void {
     if (this.isVisible) {
@@ -374,19 +355,15 @@ clearSearch() {
     if (this.selectedCareer.length < 1 && this.selectedAcademicItems.length < 1) {
       this.showAlert();
     } else {
-      this.goToPage('SearchResults');
-      // debugger;
       this.searchObj = {
         selectedCareers: this.selectedCareer,
         selectedStrands: this.selectedStrands,
         selectedOutcomes: this.selectedOutcome,
         selectedCompetencies: this.selectedCompetencyNumbers,
         selectedAcadamicSubjects: this.selectedAcadamicSubjects,
-        finalSelectedObject: this.academicSubjects,
-
+        finalSelectedObject: this.academicSubjects
       };
       localStorage.setItem('searchLable', 'SearchAlignment');
-      // this.goToPage('SearchResults');
       this.rout.navigate(['/AlignmentSearchResults']);
       this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
     }

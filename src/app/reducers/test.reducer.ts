@@ -4,15 +4,15 @@ import * as TestActions from '../actions/test.actions';
 
 
 
-const initialState : Test = {
+const initialState: Test = {
     name : 'Initial state',
-    url :'google.com'
-}
+    url : 'google.com'
+};
 
-export function testReducer(state :Test[] = [initialState] ,Action :TestActions.Actions){
-  switch(Action.type){
+export function testReducer(state: Test[] = [initialState], Action: TestActions.Actions) {
+  switch (Action.type) {
     case TestActions.ADD_TEST:
-      return [...state,Action.payload];
+      return [...state, Action.payload];
     case TestActions.LOAD_TEST:
       return state;
     default:

@@ -1,5 +1,8 @@
-<div class="alert alert-danger" [class.visible]="isVisible">
+<div class="alert alert-danger" [class.visible]="isCSVisible">
     At least 1 selected Competency is required.
+</div>
+<div class="alert alert-danger" [class.visible]="isASVisible">
+    At least 1 course is required.
 </div>
 <div *ngIf="!noCourseResultFound">
     <div class="search-results-head row">
@@ -14,13 +17,9 @@
         </div>
     </div>
     <div class="search-results">
-
-
-
         <div class="search-accordion" *ngIf="careerPathToSubject">
             <div class="search-accordion-head">
                 <div class="row">
-
                     <div class="col-md-5">{{ 'CourseFields.CareerField' | translate }}</div>
                     <div class="col-md-2">&nbsp;</div>
                     <div class="col-md-3">{{ 'CourseFields.AcademicSubjects' | translate }}</div>
@@ -28,8 +27,6 @@
                     <div class="col-md-1">&nbsp;</div>
                 </div>
             </div>
-
-
         </div>
 
         <div class="search-accordion" *ngIf="!careerPathToSubject">
@@ -44,7 +41,6 @@
             </div>
         </div>
 
-
         <div class="col-md-12 nopad" *ngIf="careerPathToSubject">
             <ul class="list-group search-accordion">
                 <li class="list-group-item search-accordion-each"
@@ -57,11 +53,13 @@
                             <div class="col-md-5">
                                 <div class="accordion-label-career">Career Path</div>
                                 <div class="accordion-checbox ">
-                                    <span class="ohio-checkbox checkbox checkbox-success">
+                                    <span class="ohio-checkbox checkbox checkbox-success"
+                                        [ngClass]="careerPath.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
                                         <input type="checkbox" class="ohio-checkbox-el" id="careerPathID_{{i}}"
                                             [(ngModel)]="careerPath.isSelected" name="list_name"
                                             value="{{careerPath.CareerPathId}}"
-                                            (ngModelChange)="careerPathCheckBox(careerPath);$event.stopPropagation()" />
+                                            (ngModelChange)="careerPathCheckBox(careerPath)"
+                                            (click)="$event.stopPropagation()" />
                                         <label for="careerPathID_{{i}}"></label>
                                     </span>
                                 </div>
@@ -71,7 +69,8 @@
                             <div class="col-md-2 search-right-arrow"><i class="fa fa-long-arrow-right"
                                     aria-hidden="true"></i>
                             </div>
-                            <div class="col-md-3 color-gap" [style.color]="findSubjectColor(careerPath.SubjectName)">{{careerPath.SubjectName}}</div>
+                            <div class="col-md-3 color-gap" [style.color]="findSubjectColor(careerPath.SubjectName)">
+                                {{careerPath.SubjectName}}</div>
                             <div class="col-md-1"> <span class="accordion-bubble" style="color:white"
                                     [style.background-color]="findSubjectColor(careerPath.SubjectName)"
                                     *ngIf="careerPath.AlignmentCount">{{careerPath.AlignmentCount}} </span> </div>
@@ -94,11 +93,13 @@
                                         <div class="col-md-6">
                                             <div class="accordion-label-courses">Courses</div>
                                             <div class="accordion-checbox">
-                                                <span class="ohio-checkbox checkbox checkbox-success">
+                                                <span class="ohio-checkbox checkbox checkbox-success"
+                                                    [ngClass]="course.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
                                                     <input type="checkbox" class="ohio-checkbox-el" id="courseID_{{j}}"
                                                         [(ngModel)]="course.isSelected" name="list_name_child"
                                                         value="{{course.CourseId}}"
-                                                        (ngModelChange)="courseCheckBox(careerPath, course);$event.stopPropagation()" />
+                                                        (ngModelChange)="courseCheckBox(careerPath, course)"
+                                                        (click)="$event.stopPropagation()" />
                                                     <label for="courseID_{{j}}"></label>
                                                 </span>
                                             </div>
@@ -107,8 +108,7 @@
                                             </span>
                                         </div>
                                         <div class="col-md-1"> &nbsp;</div>
-                                        <div class="col-md-3"
-                                            [style.color]="findSubjectColor(careerPath.SubjectName)">
+                                        <div class="col-md-3" [style.color]="findSubjectColor(careerPath.SubjectName)">
                                             {{course.SubjectName}}</div>
                                         <div class="col-md-1"> <span class="accordion-bubble" style="color:white"
                                                 [style.background-color]="findSubjectColor(careerPath.SubjectName)"
@@ -134,12 +134,14 @@
                                                     <div class="col-md-6">
                                                         <div class="accordion-label-competencies">Competencies</div>
                                                         <div class="accordion-checbox">
-                                                            <span class="ohio-checkbox checkbox checkbox-success">
+                                                            <span class="ohio-checkbox checkbox checkbox-success"
+                                                                [ngClass]="competency.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
                                                                 <input type="checkbox" class="ohio-checkbox-el"
                                                                     id="competencyID_{{k}}"
                                                                     [(ngModel)]="competency.isSelected"
                                                                     name="list_name_child" value="{{competency.Id}}"
-                                                                    (ngModelChange)="competencyCheckBox(careerPath, course);$event.stopPropagation()" />
+                                                                    (ngModelChange)="competencyCheckBox(careerPath, course)"
+                                                                    (click)="$event.stopPropagation()" />
                                                                 <label for="competencyID_{{k}}"></label>
                                                             </span>
                                                         </div>
@@ -181,11 +183,12 @@
                             <div class="col-md-3">
                                 <div class="accordion-label-subject">Subject</div>
                                 <div class="accordion-checbox ">
-                                    <span class="ohio-checkbox checkbox checkbox-success">
+                                    <span class="ohio-checkbox checkbox checkbox-success"
+                                        [ngClass]="subject.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
                                         <input type="checkbox" class="ohio-checkbox-el" id="subjectID_{{i}}"
                                             [(ngModel)]="subject.isSelected" name="list_name"
-                                            value="{{subject.SubjectId}}"
-                                            (ngModelChange)="subjectCheckBox(subject);$event.stopPropagation()" />
+                                            value="{{subject.SubjectId}}" (ngModelChange)="subjectCheckBox(subject)"
+                                            (click)="$event.stopPropagation()" />
                                         <label for="subjectID_{{i}}"></label>
                                     </span>
                                 </div>
@@ -217,12 +220,15 @@
                                 <div class="strand-each-inner" (click)="expandCollapseCourse(course)">
                                     <div class="row">
                                         <div class="col-md-3">
+                                            <div class="accordion-label-subject">Course</div>
                                             <div class="accordion-checbox">
-                                                <span class="ohio-checkbox checkbox checkbox-success">
+                                                <span class="ohio-checkbox checkbox checkbox-success"
+                                                    [ngClass]="course.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
                                                     <input type="checkbox" class="ohio-checkbox-el" id="courseID_{{j}}"
                                                         [(ngModel)]="course.isSelected" name="list_name_child"
                                                         value="{{course.CourseId}}"
-                                                        (ngModelChange)="gradeCheckBox(subject, course);$event.stopPropagation()" />
+                                                        (ngModelChange)="gradeCheckBox(subject, course)"
+                                                        (click)="$event.stopPropagation()" />
                                                     <label for="courseID_{{j}}"></label>
                                                 </span>
                                             </div>
@@ -256,12 +262,14 @@
                                                     <div class="col-md-3">
                                                         <div class="accordion-label-standard">Standard</div>
                                                         <div class="accordion-checbox">
-                                                            <span class="ohio-checkbox checkbox checkbox-success">
+                                                            <span class="ohio-checkbox checkbox checkbox-success"
+                                                                [ngClass]="standard.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
                                                                 <input type="checkbox" class="ohio-checkbox-el"
                                                                     id="standardID_{{k}}"
                                                                     [(ngModel)]="standard.isSelected"
                                                                     name="list_name_child" value="{{standard.Id}}"
-                                                                    (ngModelChange)="standardCheckBox(subject, course);$event.stopPropagation()" />
+                                                                    (ngModelChange)="standardCheckBox(subject, course)"
+                                                                    (click)="$event.stopPropagation()" />
                                                                 <label for="standardID_{{k}}"></label>
                                                             </span>
                                                         </div>

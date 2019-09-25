@@ -3,27 +3,27 @@ import * as ReportActions from '../actions/report.actions';
 
 
 export interface ReportRecord {
-  title: string,
-  strand: string,
-  careerField: string,
-  outcome: string,
-  competency: string,
-  domain: string,
-  grade: string,
-  academicSubject: string,
-  standards: Standard[]
+  title: string;
+  strand: string;
+  careerField: string;
+  outcome: string;
+  competency: string;
+  domain: string;
+  grade: string;
+  academicSubject: string;
+  standards: Standard[];
 }
 export interface Standard {
-  standardType: string,
-  standardDesc: string,
+  standardType: string;
+  standardDesc: string;
 }
 
 export interface ReportData {
-  reportRecords: ReportRecord[]
+  reportRecords: ReportRecord[];
 }
 
-const initialState : ReportData = {
-  reportRecords :[
+const initialState: ReportData = {
+  reportRecords : [
     {
       title: '',
       strand: '',
@@ -37,7 +37,7 @@ const initialState : ReportData = {
     }
   ]
 
-}
+};
 
 
 export function reportReducer(state= initialState, Action: ReportActions.Actions) {

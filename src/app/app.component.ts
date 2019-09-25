@@ -18,6 +18,7 @@ import * as UtilsActions from './actions/utils-actions';
 import { NavResize } from './actions/nav-actions';
 import { InteropService } from './services/interop.service';
 import { InteropDataPacket } from './models/interop-datapacket';
+import { Router } from '@angular/router';
 import {
   HttpClient,
   HttpErrorResponse,
@@ -47,6 +48,7 @@ export class AppComponent implements OnInit {
   mainHeight = 1400;
   currentUtil: Utilities = Utilities.none;
   constructor(private http: HttpClient,
+              public router: Router,
               private store: Store<AppState>,
               public loaderService: LoaderService,
               private translate: TranslateService,
@@ -62,7 +64,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
 
     this.isLocal = environment.localhost;
-    //this.titleService.setTitle(environment.title);
+    // this.titleService.setTitle(environment.title);
     const params = new URLSearchParams(window.location.search);
     const fromSafe = (params.get('auth') === 'dev' || params.get('auth') === 'qa' || params.get('auth') === 'prod');
 
@@ -93,10 +95,10 @@ export class AppComponent implements OnInit {
           const isPublicUser = localStorage.getItem(environment.name + '_at') === 'Public';
           if (isPublicUser) {
             // Navigate to the login page for Public
-            //this.showPublicLogin();
+            // this.showPublicLogin();
           } else {
             // Navigate to Safe Login Page
-            //this.showSafeLogin();
+            // this.showSafeLogin();
           }
           return;
         } else {
@@ -127,27 +129,10 @@ export class AppComponent implements OnInit {
       }
     });
 
-    this.store.select('claimsReducer').subscribe((claimsState) => {
-
-      this.ready = (claimsState.claimsJwtPayload.app_id !== null);       // show the reset of app
-      // if (this.ready) {
-      //   // this.loading = false;
-      //   // claimsState.menus.items.forEach(item => {
-      //   //   // if (item.menuKey === claimsState.menus.defaultMenuKey) {
-      //   //   //   // this.mySource = item.url;
-      //   //   //   // this.mapPathToApp(item.url);
-      //   //   // }
-      //   // });
-      //   // use this when testing locally so you don't need to click everything.
-      //   // this.testUtilsOnLoad();
-      // }
-
-      // // console.log('claimsState:' , claimsState);
-      // if (claimsState && claimsState.error) {
-      //   this.appError = true;
-      //   this.errorMessage = claimsState.error.error;
-      //   this.loading = false;
-      // }
+    this.store.select('claimsState').subscribe((claimsState) => {
+      if (claimsState &&  claimsState.claimsJwtPayload && claimsState.claimsJwt) {
+        this.ready = true;
+      }
     });
 
     const utilsContext = this.store.select(state => state.utilsState.utilityContext);

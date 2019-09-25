@@ -9,13 +9,13 @@ import { CompetencyNumber } from './competency-number.model';
 
 
 export interface MetaData {
-  academicSubjects: AcademicSubject[],
-  strands: Strand[],
-  careers: Career[],
-  outcomes: Outcome[],
-  grades: Grade[],
-  standardNumbers: StandardNumber[],
-  clusters :Cluster[],
-  competencyNumbers : CompetencyNumber[]
+  academicSubjects: AcademicSubject[];
+  strands: Strand[];
+  careers: Career[];
+  outcomes: Outcome[];
+  grades: Grade[];
+  standardNumbers: StandardNumber[];
+  clusters: Cluster[];
+  competencyNumbers: CompetencyNumber[];
 }
 

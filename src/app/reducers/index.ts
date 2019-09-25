@@ -1,28 +1,8 @@
-// import {
-//   ActionReducer,
-//   ActionReducerMap,
-//   createFeatureSelector,
-//   createSelector,
-//   MetaReducer
-// } from '@ngrx/store';
-// import { environment } from '../../environments/environment';
-
-// export interface State {
-
-// }
-
-// export const reducers: ActionReducerMap<State> = {
-
-// };
-
-
-// export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
-
 import { AuthReducer, AuthState } from './auth-reducer';
 import { ClaimsReducer, ClaimsState } from './claims-reducer';
-import { quickSearchReducer ,QsMetaData } from './quick-search.reducer';
-import { searchResultReducer ,SearchResultData } from './search-result.reducer';
-import { reportReducer,ReportData } from './report.reducer';
+import { quickSearchReducer , QsMetaData } from './quick-search.reducer';
+import { searchResultReducer , SearchResultData } from './search-result.reducer';
+import { reportReducer, ReportData } from './report.reducer';
 import { advancedSearchReducer, AdvancedSearchData } from './advanced-search.reducer';
 import { courseSearchReducer,CourseSearch } from './course-search.reducer';
 import { UtilsState, UtilsReducer } from './utils-reducer';

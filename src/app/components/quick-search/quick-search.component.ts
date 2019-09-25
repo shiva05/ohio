@@ -7,6 +7,7 @@ import * as QuickSearchActions from './../../actions/quick-search.actions';
 import { Observable } from 'rxjs/Observable';
 import { QsMetaData } from './../../models/qs-meta-data.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-quick-search',
@@ -26,16 +27,16 @@ export class QuickSearchComponent implements OnInit {
   academicSubjects = [];
   strands = [];
   quickSearchSharedData = {
-    'KeyWords': '',
-    'CareerFields': [],
-    'AcademicSubjects' : []
+    KeyWords: '',
+    CareerFields: [],
+    AcademicSubjects : []
   };
 
   constructor(private sharedData: SharedService,
               private router: Router,
               private store: Store<AppState>,
               private httpService: HttpClient,
-              private ref: ChangeDetectorRef, ) {
+              private ref: ChangeDetectorRef, private cookieService: CookieService ) {
 
     this.dropdownSettings = {
       singleSelection: false,
@@ -65,13 +66,12 @@ export class QuickSearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    //localStorage.removeItem('QuickSearchData');
     this.store.select('quickSearch').subscribe(data => {
       this.academicSubjects = [];
       if (data.QsMetaData) {
         this.qsMetaData = data.QsMetaData;
-      //  debugger;
         this.careers = this.qsMetaData['CareerFields'];
-        // this.academicSubjects = this.qsMetaData['academicSubjects'];
         this.qsMetaData['Subjects'].forEach(element => {
           this.academicSubjects.push({SubjectId : element.SubjectId, SubjectName : element.SubjectName});
        });
@@ -80,14 +80,17 @@ export class QuickSearchComponent implements OnInit {
   }
 
   sendSearch() {
+
     this.quickSearchSharedData.KeyWords = this.keyword;
     this.quickSearchSharedData.CareerFields = this.selectedCareer;
     this.quickSearchSharedData.AcademicSubjects = this.selectedAcadamicSubjects;
     localStorage.setItem('QuickSearchData', JSON.stringify(this.quickSearchSharedData));
-    (window as any).open('http://edu-dev-sbd.azurewebsites.net/AlignmentSearchResults', '_blank');
+    this.cookieService.set( 'Test', JSON.stringify(this.quickSearchSharedData) );
+    (window as any).open('http://edu-dev-sbd.azurewebsites.net/#/AlignmentSearchResults', '_blank');
 
     // (window as any).open('http://edu-dev-sbd.azurewebsites.net/Search', '_blank');
-  //  (window as any).open('http://edu-dev-sbd.azurewebsites.net/AlignmentSearchResults', '_blank');
-    
+    //  (window as any).open('http://edu-dev-sbd.azurewebsites.net/AlignmentSearchResults', '_blank');
+    // this.router.navigate(['/AlignmentSearchResults']);
+
   }
 }
