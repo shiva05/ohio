@@ -1,12 +1,11 @@
 
-import { Component, EventEmitter, Output, OnInit, ChangeDetectorRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './../../app.state';
 import { Observable } from 'rxjs/Observable';
 import { CourseSearchData } from './../../models/courseSearch.model';
 import * as CourseSearchActions from './../../actions/course-search.actions';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
 
 @Component({
@@ -43,7 +42,7 @@ export class CourseSearchFiltersComponent implements OnInit {
   selectedAcademicCourses: any = [];
   isVisible: boolean = false;
 
-  constructor(private httpService: HttpClient, private ref: ChangeDetectorRef, private store: Store<AppState>, private rout: Router, private shared: SharedService, ) {
+  constructor(private store: Store<AppState>, private rout: Router, private shared: SharedService) {
     this.store.dispatch({ type: CourseSearchActions.LOAD_COURSESEARCH_DATA });
   }
 
@@ -61,7 +60,6 @@ export class CourseSearchFiltersComponent implements OnInit {
       this.careerPath = this.courseSearchData['CareerPath'];
       this.courses = this.courseSearchData['CareerPathCourses'];
       this.academicSubjects = this.courseSearchData['Subjects'];
-
 
       this.academicSubjectCourse = [];
       this.academicSubjectCourse = this.courseSearchData['SubjectCourses'];
@@ -153,6 +151,7 @@ export class CourseSearchFiltersComponent implements OnInit {
       });
     });
   }
+
   clearSearch() {
     this.searchObj = {
       selectedCareerPath: [],
@@ -167,6 +166,7 @@ export class CourseSearchFiltersComponent implements OnInit {
     this.coursesDropdown = [];
     this.selectedAcademicItems = [];
   }
+
   showAlert(): void {
     if (this.isVisible) {
       return;
@@ -174,16 +174,17 @@ export class CourseSearchFiltersComponent implements OnInit {
     this.isVisible = true;
     setTimeout(() => this.isVisible = false, 4000);
   }
+
   search() {
     if (this.selectedCareerPath.length < 1 && this.selectedAcademicItems.length < 1) {
       this.showAlert();
     } else {
       this.searchObj = {
-      selectedCareerPath: this.selectedCareerPath,
-      selectedCareerPathCourses: this.selectedCourses,
-      selectedAcademicSubject: this.selectedAcadamicSubjects,
-      selectedAcademicSubjectCourses: this.selectedAcademicItems
-    };
+        selectedCareerPath: this.selectedCareerPath,
+        selectedCareerPathCourses: this.selectedCourses,
+        selectedAcademicSubject: this.selectedAcadamicSubjects,
+        selectedAcademicSubjectCourses: this.selectedAcademicItems
+      };
       this.store.dispatch({ type: CourseSearchActions.SAVE_CS_SELECTED_FILTERS, payload: this.searchObj });
       localStorage.setItem('searchLable', 'SearchCourse');
       this.rout.navigate(['/CourseSearchResults']);

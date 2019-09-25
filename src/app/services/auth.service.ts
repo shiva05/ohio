@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { AppHttpService } from './app-http.service';
 import { environment } from '../../environments/environment';
 
@@ -20,21 +19,21 @@ export class AuthService {
   }
 
   isAuthorized(): boolean {
-    return  localStorage.getItem(environment.name + '_at') !== null &&
-    localStorage.getItem(environment.name + '_as') !== null;
+    return localStorage.getItem(environment.name + '_at') !== null &&
+      localStorage.getItem(environment.name + '_as') !== null;
   }
 
   isAuthTokenExpired(): boolean {
-    const jwt  = localStorage.getItem(environment.name + '_as');
-    const hasValidToken =  localStorage.getItem(environment.name + '_at') !== null && jwt !== null;
+    const jwt = localStorage.getItem(environment.name + '_as');
+    const hasValidToken = localStorage.getItem(environment.name + '_at') !== null && jwt !== null;
     let expired = false;
     if (hasValidToken) {
       const authToken = JSON.parse(jwt);
       if (authToken !== null) {
         const currentDt = new Date(Date.now());
         const expiryDate = environment.localhost
-                ? new Date(new Date(authToken.expires).getTime() - 14400000)  // 4 hours: 5: Hours during Day Light Savings
-                : new Date(authToken.expires);
+          ? new Date(new Date(authToken.expires).getTime() - 14400000)  // 4 hours: 5: Hours during Day Light Savings
+          : new Date(authToken.expires);
 
         if (expiryDate < currentDt) {
           expired = true;

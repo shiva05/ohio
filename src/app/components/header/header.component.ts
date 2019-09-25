@@ -1,9 +1,4 @@
-import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import { Store } from '@ngrx/store';
-import { AppState } from './../../app.state';
-
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 
 @Component({
   selector: 'header',
@@ -12,23 +7,15 @@ import { AppState } from './../../app.state';
 })
 
 export class HeaderComponent implements OnInit {
-
-
   isPublic = false;
-  @Output() onPageSelect = new EventEmitter<any>();
-  ngOnInit() {
 
-  }
+  @Output() onPageSelect = new EventEmitter<any>();
+
+  constructor() { }
+
+  ngOnInit() { }
+
   goToPage(org) {
     this.onPageSelect.emit(org);
   }
-  constructor(private store: Store<AppState>) {
-
-  }
-  addTutorial(name, url) {
-
-
-
-  }
-
 }

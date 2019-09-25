@@ -7,7 +7,7 @@
   float: right;
 }
 .careerfield-each-inner {
- padding: 5px 10px;
+  padding: 5px 10px;
   margin-left: 0px;
   font-size: 16px;
   background-color: #f5f5f5;
@@ -43,21 +43,19 @@
   margin-left: 0px;
   font-size: 12px;
   background-color: #fff;
+}
 
- }
-
- .level-two-title{
+.level-two-title {
   padding: 1px 0 0 0;
 }
 
-.outcome-each-inner .level-two-title{
-  max-width:calc(100% - 100px);
-  }
-  .color-gap{
-    line-height: 20px;
-    padding-top: 6px;
-  
-  }
+.outcome-each-inner .level-two-title {
+  max-width: calc(100% - 100px);
+}
+.color-gap {
+  line-height: 20px;
+  padding-top: 6px;
+}
 .accordion-label-career {
   padding-left: 30px;
   font-size: 7pt;
@@ -83,14 +81,14 @@
   font-size: 7pt;
   color: #700017;
 }
-.alert  {
+.alert {
   position: fixed;
   top: 120px;
   right: 40%;
   border-radius: 0.25rem;
   padding: 2rem;
   box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.5);
-  transition:  all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   opacity: 0;
   z-index: 50;
 }

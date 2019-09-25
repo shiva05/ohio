@@ -1,5 +1,5 @@
 <loading-spinner *ngIf="loaderService.isLoading | async"></loading-spinner>
 <div>
   <header *ngIf="!router.url.includes('app')"></header>
-   <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>

@@ -1,5 +1,4 @@
 import * as AdvancedSearchActions from '../actions/advanced-search.actions';
-import { AcademicSubject } from './../models/academic-subject.model';
 import { Strand } from './../models/strand.model';
 import { Career } from './../models/career.model';
 import { Outcome } from './../models/outcome.model';
@@ -8,15 +7,15 @@ import { StandardNumber } from './../models/standard-number.model';
 import { CompetencyNumber } from './../models/competency-number.model';
 import { Cluster } from './../models/cluster.model';
 
-export interface MetaData {
+export interface MetaData { }
 
-}
 export interface AdvancedSearchData {
   metaData: MetaData;
   competencies: CompetencyNumber[];
   alignmentSearchSelectedFilters: AlignmentSearchSelectedFilters;
 
 }
+
 export interface AlignmentSearchSelectedFilters {
   selectedCareers: Career[];
   selectedStrands: Strand[];
@@ -25,46 +24,50 @@ export interface AlignmentSearchSelectedFilters {
   selectedAcadamicSubjects: selectedAcademicSubject[];
   selectedAsSearchResults: any;
 }
+
 export interface selectedAcademicSubject {
-    selectedGrades: Grade[];
-    selectedClusters: Cluster[];
-    selectedStandardNumbers: StandardNumber[];
+  selectedGrades: Grade[];
+  selectedClusters: Cluster[];
+  selectedStandardNumbers: StandardNumber[];
 }
 
-const initialState: AdvancedSearchData = {metaData : {
-  academicSubjects: [],
-  Strands: [],
-  CareerFields: [],
-  Outcomes: [],
-  Subjects : []
-},
-competencies: [],
+const initialState: AdvancedSearchData = {
+  metaData: {
+    academicSubjects: [],
+    Strands: [],
+    CareerFields: [],
+    Outcomes: [],
+    Subjects: []
+  },
+  competencies: [],
 
-alignmentSearchSelectedFilters: {
-  selectedCareers : [],
-  selectedStrands: [],
-  selectedOutcomes: [],
-  selectedCompetencies : [],
-  selectedAcadamicSubjects: [],
-  selectedAsSearchResults : {}
-}
+  alignmentSearchSelectedFilters: {
+    selectedCareers: [],
+    selectedStrands: [],
+    selectedOutcomes: [],
+    selectedCompetencies: [],
+    selectedAcadamicSubjects: [],
+    selectedAsSearchResults: {}
+  }
 };
-export function advancedSearchReducer(state = initialState , Action: AdvancedSearchActions.Actions) {
+
+export function advancedSearchReducer(state = initialState, Action: AdvancedSearchActions.Actions) {
   switch (Action.type) {
     case AdvancedSearchActions.LOAD_META_DATA_SUCCESS:
       return {
         ...state,
-        metaData : Action.payload
+        metaData: Action.payload
       };
     case AdvancedSearchActions.LOAD_META_DATA_FAILURE:
-    return {
-      ...state,
-      metaData : Action.payload
-    };
+      return {
+        ...state,
+        metaData: Action.payload
+      };
     case AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS:
-    return { ...state,
-      alignmentSearchSelectedFilters : Action.payload
-    };
+      return {
+        ...state,
+        alignmentSearchSelectedFilters: Action.payload
+      };
     case AdvancedSearchActions.LOAD_COMPETENCY_DATA_SUCCESS:
       return {
         ...state,
@@ -75,18 +78,18 @@ export function advancedSearchReducer(state = initialState , Action: AdvancedSea
         ...state,
         competencies: []
       };
-      case AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS:
-        return {
-          ...state,
-          alignmentSearchSelectedFilters: {
-            selectedCareers: [],
-            selectedStrands: [],
-            selectedOutcomes: [],
-            selectedCompetencies: [],
-            selectedAcadamicSubjects: [],
-            selectedAsSearchResults: {}
-          }
-        };
+    case AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS:
+      return {
+        ...state,
+        alignmentSearchSelectedFilters: {
+          selectedCareers: [],
+          selectedStrands: [],
+          selectedOutcomes: [],
+          selectedCompetencies: [],
+          selectedAcadamicSubjects: [],
+          selectedAsSearchResults: {}
+        }
+      };
     default:
       return state;
   }

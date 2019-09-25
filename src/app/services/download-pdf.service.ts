@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AppHttpService } from './app-http.service';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class DownloadPDFService {
 
   constructor(private httpService: AppHttpService) { }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵConsole, Input  } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NavItem } from '../../models/claims-response';
 import { Store } from '@ngrx/store';
 import { AppState } from './../../app.state';
@@ -8,9 +8,7 @@ import { InteropService } from '../../services/interop.service';
 
 import { Utilities } from '../../models/util-nav-item';
 import * as UtilsActions from '../../actions/utils-actions';
-// import { ConsoleReporter } from 'jasmine';
 import * as _ from 'lodash';
-import { getQueryPredicate } from '@angular/compiler/src/render3/view/util';
 
 class UINavItem implements NavItem {
   url;
@@ -34,6 +32,7 @@ class UINavItem implements NavItem {
   templateUrl: './menubar.component.html',
   styleUrls: ['./menubar.component.css']
 })
+
 export class MenubarComponent implements OnInit {
 
   @Input() isPublic = false;
@@ -45,14 +44,11 @@ export class MenubarComponent implements OnInit {
   authJwt = '';
   claimsJwt = '';
   isLoaded = false;
-  defaultMenuKey =  0;
+  defaultMenuKey = 0;
 
-  constructor(private store: Store<AppState>, private router: Router,
-              private interopService: InteropService) { }
+  constructor(private store: Store<AppState>, private router: Router, private interopService: InteropService) { }
 
   ngOnInit() {
-
-    // navigate to default tab
     this.store.select((appState) => {
       return {
         authJwt: appState.authState.authJwt,
@@ -63,11 +59,9 @@ export class MenubarComponent implements OnInit {
 
       if (returnObject.menus && returnObject.menus.Items) {
         this.defaultMenuKey = this.isPublic
-                ? returnObject.menus.DefaultMenuKey || 14610400
-                : returnObject.menus.DefaultMenuKey || 14610200;
-        // console.log(this.links);
+          ? returnObject.menus.DefaultMenuKey || 14610400
+          : returnObject.menus.DefaultMenuKey || 14610200;
         this.links = returnObject.menus.Items.map((item) => {
-          // todo = figure this out for claims and auth
           const url = item.Url
             + '?menuKey=' + item.MenuKey
             + '&authJwt=' + returnObject.authJwt + '&claimsJwt=' + returnObject.claimsJwt;
@@ -76,15 +70,6 @@ export class MenubarComponent implements OnInit {
             this.createChildLink(item, returnObject.authJwt, returnObject.claimsJwt));
         });
       }
-
-      // if (!this.isLoaded && this.interopService.iframe) {
-      //   const menuKeySearch = `?menuKey=${this.defaultMenuKey }`;
-      //   const selectedLinks = this.filterData(this.links, (link) =>  link.url.indexOf(menuKeySearch) > -1);
-      //   if (selectedLinks && selectedLinks.length > 0 && selectedLinks[0].children.length > 0) {
-      //     this.navigate(selectedLinks[0].children[0].originalUrl, selectedLinks[0].children[0].label);
-      //     this.isLoaded = true;
-      //   }
-      // }
     });
   }
 
@@ -112,10 +97,7 @@ export class MenubarComponent implements OnInit {
 
   navigate(url: string, menuName: string, hasChildren: boolean = true) {
 
-    if (!hasChildren) {
-       // url = `/case${url}`;
-        // console.log('navigate:', url, menuName );
-    }
+    if (!hasChildren) { }
 
     this.store.dispatch(new UtilsActions.UtilsReset(Utilities.none));
     this.store.dispatch(new NavActions.NavSetMenuName(menuName));
@@ -123,8 +105,6 @@ export class MenubarComponent implements OnInit {
     this.router.navigateByUrl(url);
 
     const message = { originator: 'MENU_CLICK', htmlPushUrl: url };
-    console.log('PUBLISHING MSG TO CHILD SPA', message, new Date().toLocaleString());
-    // publish message to child SPA
     this.interopService.publish(message);
   }
 
@@ -136,7 +116,7 @@ export class MenubarComponent implements OnInit {
       } else if (entry.children != null) {
         const children = this.filterData(entry.children, predicate);
         if (children.length > 0) {
-          clone = Object.assign({}, entry, {children: children});
+          clone = Object.assign({}, entry, { children: children });
         }
       }
       if (clone) {

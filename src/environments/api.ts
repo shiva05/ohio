@@ -1,7 +1,7 @@
 // update app APIs here, these should match http://server/swagger/
 export const BASE_HREF = '/case';
 
-export const api = function (serverUrl) {
+export const api = function(serverUrl) {
     return {
       GetAlignmentMetaData: `${serverUrl}AlignmentSearch/alignmentsMetadata`,
       GetCompetencyData: `${serverUrl}AlignmentSearch/cteCompetencyMetadata`,

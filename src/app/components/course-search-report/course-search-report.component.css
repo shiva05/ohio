@@ -1,9 +1,8 @@
-
 .reports-head h1 {
   color: #700017;
   font-size: 30px;
   margin: 0;
-  font-family: 'Serifa-Reg';
+  font-family: "Serifa-Reg";
 }
 
 .reports-head {
@@ -26,34 +25,34 @@
   float: left;
   margin: 0 0 0 20px;
   color: #700017;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
-.reports-head h1{
+.reports-head h1 {
   color: #700017;
   font-size: 30px;
   margin: 0;
-  font-family: 'Serifa-Reg';
+  font-family: "Serifa-Reg";
 }
-.reports-head{
+.reports-head {
   display: block;
   margin: 15px 0;
 }
-.reports-head-left{
+.reports-head-left {
   display: inline-block;
   width: calc(100% - 440px);
   max-width: calc(100% - 440px);
 }
 
-.reports-head-right{
-display: inline-block;
-width: 440px;
+.reports-head-right {
+  display: inline-block;
+  width: 440px;
 }
-.reports-head-right-each{
-float: left;
-margin: 0 0 0 20px;
-color: #700017;
-font-family: 'Lato', sans-serif ;
+.reports-head-right-each {
+  float: left;
+  margin: 0 0 0 20px;
+  color: #700017;
+  font-family: "Lato", sans-serif;
 }
 
 .course-search-results,
@@ -63,9 +62,9 @@ font-family: 'Lato', sans-serif ;
   width: 100%;
   float: left;
 }
-  .course-search-results {
-    padding: 30px;
-  }
+.course-search-results {
+  padding: 30px;
+}
 .course {
   border: 1px solid #cbcbcb;
   margin-bottom: 15px;
@@ -82,23 +81,23 @@ font-family: 'Lato', sans-serif ;
   padding: 0;
   float: left;
 }
-  .standard h4 {
-      font-weight:bold;
-  }
-  .competency ul {
-      margin:0;
-      padding: 0;
-      list-style: none;
-  }
+.standard h4 {
+  font-weight: bold;
+}
+.competency ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 
 .competency ul li {
   font-size: 16px;
   border-bottom: 1px solid #cbcbcb;
   padding: 9px;
 }
-  .competency ul li:last-child {
-      border-bottom: 0;
-  }
+.competency ul li:last-child {
+  border-bottom: 0;
+}
 
 .no-alignment {
   border: 1px solid #ddd;
@@ -108,19 +107,19 @@ font-family: 'Lato', sans-serif ;
   padding: 15px;
   background: #eee;
 }
-  .no-alignment ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
+.no-alignment ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 
-    .no-alignment ul li {
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
-  .no-alignment h4 {
-    font-weight: bold;
-  }
+.no-alignment ul li {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.no-alignment h4 {
+  font-weight: bold;
+}
 .course-wrap {
   display: block;
   overflow: hidden;
@@ -129,11 +128,11 @@ font-family: 'Lato', sans-serif ;
   background: #f5f5f5;
   margin-bottom: 20px;
 }
-  .course-wrap h2 {
-    color: #700017;
-    margin: 0 0 15px 0;
-    font-size: 24px;
-  }
+.course-wrap h2 {
+  color: #700017;
+  margin: 0 0 15px 0;
+  font-size: 24px;
+}
 .c2s .competency {
   width: calc(100% - 50%);
 }

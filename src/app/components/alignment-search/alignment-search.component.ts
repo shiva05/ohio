@@ -1,32 +1,21 @@
-import { Component, EventEmitter, Output, Input, OnInit, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import * as util from 'util';
-import { Store } from '@ngrx/store';
-import { AppState } from './../../app.state';
-import { Observable } from 'rxjs/Observable';
-import { MetaData } from './../../models/meta-data.model';
-import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-alignment-search',
   templateUrl: './alignment-search.component.html',
   styleUrls: ['./alignment-search.component.css']
 })
-export class AlignmentSearchComponent implements OnInit {
 
+export class AlignmentSearchComponent implements OnInit {
   showAsFilter = true;
   showAsResults = false;
   showAsReport = false;
 
-  constructor(private httpService: HttpClient,
-              private ref: ChangeDetectorRef,
-              private rout: Router,
-              private store: Store<AppState>) {
-  }
+  constructor() { }
+
   ngOnInit() {
   }
+
   onPageSelect(org) {
     this.showAsFilter = false;
     this.showAsResults = false;

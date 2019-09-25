@@ -5,6 +5,7 @@ import { Component, EventEmitter, Output, OnInit } from '@angular/core';
   templateUrl: './export.component.html',
   styleUrls: ['./export.component.css']
 })
+
 export class ExportComponent implements OnInit {
   dropdownSettings: any = {};
   uploadedFile: any;
@@ -29,6 +30,6 @@ export class ExportComponent implements OnInit {
   }
 
   import() {
-    // TODO: write function
+
   }
 }
