@@ -8,9 +8,6 @@ import { AuthOrchestration } from './services/auth-orchestration.service';
 import * as AuthActions from './actions/auth-actions';
 import * as ClaimsActions from './actions/claims-actions';
 import { Router } from '@angular/router';
-<<<<<<< HEAD
-import { HttpClient } from '@angular/common/http';
-=======
 import { Utilities } from './models/util-nav-item';
 import { NavResize } from './actions/nav-actions';
 import * as UtilsActions from './actions/utils-actions';
@@ -23,7 +20,6 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
->>>>>>> a08371549283c59937cbf7161177d36dfdda9fbe
 import { LoaderService } from './services/loader.service';
 
 @Component({
@@ -40,12 +36,6 @@ export class AppComponent implements OnInit {
   isPublic = false;
   loading = true;
   ready = false;
-<<<<<<< HEAD
-
-  constructor(private http: HttpClient, public router: Router, private store: Store<AppState>, public loaderService: LoaderService, private translate: TranslateService, private authService: AuthService, private authOrchestration: AuthOrchestration) {
-    translate.setDefaultLang('en');
-  }
-=======
   utilsWidth = 0;
   mainWidth = window.innerWidth - 80;
   mainLeft = 56;
@@ -60,10 +50,9 @@ export class AppComponent implements OnInit {
               private authOrchestration: AuthOrchestration) {
     translate.setDefaultLang('en');
     window.onresize = () => {
-      //this.utilNav(this.currentUtil);
+      // this.utilNav(this.currentUtil);
     };
    }
->>>>>>> a08371549283c59937cbf7161177d36dfdda9fbe
 
   ngOnInit() {
 
