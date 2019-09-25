@@ -13,6 +13,9 @@ import { AuthOrchestration } from './services/auth-orchestration.service';
 import * as AuthActions from './actions/auth-actions';
 import * as ClaimsActions from './actions/claims-actions';
 import { Router } from '@angular/router';
+import { Utilities } from './models/util-nav-item';
+import { NavResize } from './actions/nav-actions';
+import * as UtilsActions from './actions/utils-actions';
 import {
   HttpClient,
   HttpErrorResponse,
@@ -36,6 +39,11 @@ export class AppComponent implements OnInit {
   isPublic = false;
   loading = true;
   ready = false;
+  utilsWidth = 0;
+  mainWidth = window.innerWidth - 80;
+  mainLeft = 56;
+  mainHeight = 1400;
+  currentUtil: Utilities = Utilities.none;
   constructor(private http: HttpClient,
               public router: Router,
               private store: Store<AppState>,
@@ -44,6 +52,9 @@ export class AppComponent implements OnInit {
               private authService: AuthService,
               private authOrchestration: AuthOrchestration) {
     translate.setDefaultLang('en');
+    window.onresize = () => {
+      //this.utilNav(this.currentUtil);
+    };
    }
 
   ngOnInit() {
@@ -118,8 +129,7 @@ export class AppComponent implements OnInit {
       if (claimsState &&  claimsState.claimsJwtPayload && claimsState.claimsJwt) {
         this.ready = true;
       }
-    });
-            // show the reset of app
+     // show the reset of app
      // if (this.ready) {
      //   // this.loading = false;
      //   // claimsState.menus.items.forEach(item => {
@@ -138,9 +148,41 @@ export class AppComponent implements OnInit {
      //   this.errorMessage = claimsState.error.error;
      //   this.loading = false;
      // }
+    });
 
+    // if (this.ready) {
+    //   let tempObj ={
+    //     assetTemplateKey: 22203,
+    //     detailKey: 0,
+    //     moduleKey: 32,
+    //     isDetailAsset: true
+    //   };
+    //   this.store.dispatch(new UtilsActions.UtilsSetContext(tempObj));
+    // } else {
+    //   this.store.dispatch(new UtilsActions.UtilsReset({}));
+    // }
+
+    // this.store.select('utilsState').subscribe((utilityState) => {
+    //   if (utilityState && utilityState.activeUtility) {
+    //     this.utilNav(utilityState.activeUtility);
+    //   }
+    // });
   }
+  // utilNav(util: Utilities) {
+  //   this.currentUtil = util;
+  //   const baseWidth = window.innerWidth - 75;
+  //   // define target widths for each utility
+  //   const targetWidth = {};
 
+  //   targetWidth[Utilities.Documents] = baseWidth * .5;
+  //   targetWidth[Utilities.Flags] = baseWidth * .3;
+  //   targetWidth[Utilities.contacts] = baseWidth * .4;
+  //   targetWidth[Utilities.history] = baseWidth * .2;
+  //   targetWidth[Utilities.Comments] = baseWidth * .4;
+
+  //   const width = (util !== Utilities.none) ? targetWidth[util] : 55;
+  //   this.setIframeWidth(width);
+  // }
   showSafeLogin() {
     this.store.dispatch(new AuthActions.ResetAuth({}));
     this.store.dispatch(new ClaimsActions.ResetClaims({}));
@@ -152,5 +194,12 @@ export class AppComponent implements OnInit {
     this.store.dispatch(new ClaimsActions.ResetClaims({}));
     window.location.href = `${window.location.protocol}//${window.location.host}`;
   }
+  // setIframeWidth(utilWidth: number) {
+  //   this.utilsWidth = utilWidth;
+  //   this.mainWidth = window.innerWidth - 75 - utilWidth;
+  //   this.mainLeft = utilWidth;
+  //   const newIframeWidth = window.innerWidth - utilWidth - 20;
+  //   this.store.dispatch(new NavResize(newIframeWidth));
+  // }
 }
 
