@@ -132,6 +132,16 @@ export class AppComponent implements OnInit {
     this.store.select('claimsState').subscribe((claimsState) => {
       if (claimsState &&  claimsState.claimsJwtPayload && claimsState.claimsJwt) {
         this.ready = true;
+        if (this.ready) {
+          let obj = {
+            assetTemplateKey: 0,
+            //e.g a case key
+            detailKey: 0,
+            moduleKey: 0,
+            isDetailAsset: false
+          };
+          this.store.dispatch(new UtilsActions.UtilsSetContext(obj));
+        }
       }
     });
 
@@ -153,6 +163,7 @@ export class AppComponent implements OnInit {
 
     this.store.select('utilsState').subscribe((utilityState) => {
       if (utilityState && utilityState.activeUtility) {
+        debugger
         this.utilNav(utilityState.activeUtility);
       }
     });
@@ -163,33 +174,6 @@ export class AppComponent implements OnInit {
       }
     });
 
-
-    this.interopService.dataStream().subscribe((data: InteropDataPacket) => {
-            debugger
-            // console.log('utilsContext:', data);
-            if (data && data.utilsContext && data.utilsContext.detailKey > 0) {
-              this.store.dispatch(new UtilsActions.UtilsSetContext(data.utilsContext));
-            } else {
-              this.store.dispatch(new UtilsActions.UtilsReset({}));
-            }
-            if (data && data.url && data.url !== document.location.pathname) {
-              history.pushState(null, null, data.url);
-            }
-            if (data && data.appSize && data.appSize.scrollHeight > 0) {
-              this.mainHeight = data.appSize.scrollHeight + 250;
-            }
-
-            if (data && data.utilsContext.moduleKey > 0) {
-              console.log(' handshake from child SPA completed: ',  new Date().toLocaleString());
-              this.loading = false;
-            }
-
-            if (data && data.error) {
-              this.appError = true;
-              this.errorMessage = data.error.error;
-              this.loading = false;
-            }
-          });
 
   }
 

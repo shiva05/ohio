@@ -72,21 +72,9 @@ export class UtilityComponent implements OnInit {
 
       this.context = ctx;
 
-      if (ctx !== null && ctx.assetTemplateKey > 0 && ctx.detailKey > 0
-        && ctx.isDetailAsset != null && ctx.isDetailAsset
-        && ctx.moduleKey != null && ctx.moduleKey > 0
-        && (this.currentAssetTemplateKey !== ctx.assetTemplateKey || this.currentDetailKey !== ctx.detailKey)) {
+      if (true) {
         this.currentAssetTemplateKey = ctx.assetTemplateKey;
         this.currentDetailKey = ctx.detailKey;
-
-        if (this.showFlags) {
-          this.flagResults = this.initFlagResults;
-          this.loadFlags();
-        }
-        else {
-          this.loadFlagsCount();
-        }
-
 
         if (this.showDocs) {
           this.importDocsResults = [];
@@ -98,21 +86,13 @@ export class UtilityComponent implements OnInit {
           this.importDocsResults = [];
           this.loadDocsCount();
         }
-
-        if (this.showComments) {
-          this.loadSubjects();
-        }
-        else {
-          this.loadSubjectsCount();
-        }
-
-
       }
       // need to load docs and other items here.
     });
 
     // subscribe to updates of utility state changes to show or hide utilities
     this.store.select('utilsState').subscribe((utilityState) => {
+      debugger
       if (utilityState && utilityState.activeUtility === Utilities.none) {
         this.hideUtilityDivs = true;
         this.showDocs = false;
@@ -131,25 +111,13 @@ export class UtilityComponent implements OnInit {
 
   utilNav(util: Utilities) {
     this.showDocs = (util === Utilities.Documents && !this.showDocs);
-    this.showFlags = (util === Utilities.Flags && !this.showFlags);
-    this.showContacts = (util === Utilities.contacts && !this.showContacts);
-    this.showHistory = (util === Utilities.history && !this.showHistory);
-    this.showComments = (util === Utilities.Comments && !this.showComments);
+
     const showUtils = (this.showDocs || this.showFlags || this.showContacts || this.showHistory || this.showComments);
 
     if (this.showDocs) {
       this.importDocsResults = [];
       this.docsResults = [];
       this.loadDocs(true);
-    }
-
-    if (this.showFlags) {
-      this.flagResults = this.initFlagResults;
-      this.loadFlags();
-    }
-
-    if (this.showComments) {
-      this.loadSubjects();
     }
 
     if (!showUtils) {
@@ -170,79 +138,17 @@ export class UtilityComponent implements OnInit {
     return false;
   }
 
-  loadFlags() {
-    if (this.context.moduleKey != null && this.context.assetTemplateKey != 154000 && this.context.assetTemplateKey != 154030
-      && this.context.assetTemplateKey != 154100 && this.context.assetTemplateKey != 154240) {
-      console.log('LOADING FLAGS');
-      this.flagService.fetchFlags(this.context).subscribe((flags: Flags) => {
-        this.flagResults = flags;
-        if (this.IsOverview()) {
-          this.flagOverviewResults = flags;
-        }
-
-        this.store.dispatch(new UtilsActions.UtilsSetFlagCount(flags.count));
-      },
-        (error: HttpErrorResponse) =>
-          console.log(`Error Status: ${JSON.stringify(error.status)};
-        Error Status Text: ${JSON.stringify(error.statusText)};
-        Error Msg: ${JSON.stringify(error.message)};`));
-    }
-
-  }
-
-
-
-  loadFlagsCount() {
-    if (this.context.moduleKey != null && this.context.assetTemplateKey != 154000 && this.context.assetTemplateKey != 154030
-      && this.context.assetTemplateKey != 154100 && this.context.assetTemplateKey != 154240) {
-      if (this.IsOverview()) {
-        this.loadFlags();
-      }
-      else {
-        this.flagService.fetchFlagsCount(this.context).subscribe((flagsCount: number) => {
-          if(flagsCount != null)
-          {
-            this.store.dispatch(new UtilsActions.UtilsSetFlagCount(flagsCount));
-          }
-
-
-        },
-          (error: HttpErrorResponse) =>
-            console.log(`Error Status: ${JSON.stringify(error.status)};
-          Error Status Text: ${JSON.stringify(error.statusText)};
-          Error Msg: ${JSON.stringify(error.message)};`));
-      }
-
-    }
-
-  }
-
-  addFlags(flagKey: number) {
-    this.flagService.addFlag(this.context, flagKey).subscribe((response) => {
-      // check for error
-      this.loadFlags(); // load after updated
-    });
-  }
-
-  removeFlags(flagKey: number) {
-    this.flagService.removeFlags(this.context, flagKey).subscribe((response) => {
-      // check for error
-      this.loadFlags(); // load after updated
-    });
-  }
-
   loadDocsCount() {
-    if (this.context.moduleKey != null && this.context.assetTemplateKey != 154000 && this.context.assetTemplateKey != 154030 && this.context.assetTemplateKey != 154100) {
+    if (true) {
       this.docsService.fetchDocCount(this.context).subscribe((docCount: number) => {
         if (docCount != null) {
+          docCount = 10;
           this.store.dispatch(new UtilsActions.UtilsSetDocCount(docCount));
         }
 
       },
         (error: HttpErrorResponse) =>
-          console.log(`Error Status: ${JSON.stringify(error.status)};
-        Error Status Text: ${JSON.stringify(error.statusText)};
-        Error Msg: ${JSON.stringify(error.message)};`));
+        this.store.dispatch(new UtilsActions.UtilsSetDocCount(10)));
     }
 
   }
@@ -275,29 +181,91 @@ export class UtilityComponent implements OnInit {
     //Get permissions first
     this.loadDocComponentPermissions();
 
+
+     let doc= {
+      docKey: 1234,
+      documentRelationInstanceKey: 7896,
+      description: 'TestDoc1',
+      docTypeKey: '1',
+      docTypeName: '1',
+      docFileName: '1',
+      docPermission: 'read',
+      docUploadDate: 'Temp',
+      status: 'Test',
+      docUrl: 'google.com',
+      docReviewed: true,
+      docResponseType: 'PDF',
+      docPreviewFlag: true,
+      permission: Permission
+     };
+
+     let doc1= {
+      docKey: 1234,
+      documentRelationInstanceKey: 7896,
+      description: 'TestDoc2',
+      docTypeKey: '1',
+      docTypeName: '1',
+      docFileName: '1',
+      docPermission: 'read',
+      docUploadDate: 'Temp',
+      status: 'Test',
+      docUrl: 'google.com',
+      docReviewed: true,
+      docResponseType: 'PDF',
+      docPreviewFlag: true,
+      permission: Permission
+     };
+
+     let doc2= {
+      docKey: 1234,
+      documentRelationInstanceKey: 7896,
+      description: 'TestDoc3',
+      docTypeKey: '1',
+      docTypeName: '1',
+      docFileName: '1',
+      docPermission: 'read',
+      docUploadDate: 'Temp',
+      status: 'Test',
+      docUrl: 'google.com',
+      docReviewed: true,
+      docResponseType: 'PDF',
+      docPreviewFlag: true,
+      permission: Permission
+     };
+
+     let temp = [];
+     temp.push(doc);
+     temp.push(doc1);
+     temp.push(doc2);
+
+
+     this.docsResults = temp;
+
     //Get documents next
-    this.docsService.fetchDocs(this.context).subscribe((docs: Docs[]) => {
-
-      if (docs !== null && docs.length > 0) {
-        this.docsResults = docs.map(doc => {
-          return {
-            ...doc,
-            docUrl: docBaseViewUrl + doc.docUrl
-          };
-        });
-      } else {
-        docs = [];
-        this.docsResults = [];
-      }
-
-      this.store.dispatch(new UtilsActions.UtilsSetDocCount(docs.length));
+    // this.docsService.fetchDocs(this.context).subscribe((docs: Docs[]) => {
 
 
-    },
-      (error: HttpErrorResponse) =>
-        console.log(`Error Status: ${JSON.stringify(error.status)};
-      Error Status Text: ${JSON.stringify(error.statusText)};
-      Error Msg: ${JSON.stringify(error.message)};`));
+
+    //   if (docs !== null && docs.length > 0) {
+    //     this.docsResults = docs.map(doc => {
+    //       return {
+    //         ...doc,
+    //         docUrl: docBaseViewUrl + doc.docUrl
+    //       };
+    //     });
+    //   } else {
+    //     docs = [];
+    //     this.docsResults = [];
+    //   }
+
+    //   this.store.dispatch(new UtilsActions.UtilsSetDocCount(docs.length));
+
+
+    // },
+    //   (error: HttpErrorResponse) =>
+    //   console.log(`Error Status: ${JSON.stringify(error.status)};
+    //   Error Status Text: ${JSON.stringify(error.statusText)};
+    //   Error Msg: ${JSON.stringify(error.message)};`));
   }
 
   loadDocComponentPermissions() {

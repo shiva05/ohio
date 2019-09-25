@@ -44,9 +44,9 @@
             <th>Doc Name</th>
             <th>Doc Type</th>
             <th>Date</th>
-            <th *ngIf="docHistoryPermissions?.read">Info</th>
-            <th *ngIf="docReviewPermissions?.read">Status</th>
-            <th *ngIf="canDelete()">Delete</th>
+            <th >Info</th>
+            <th >Status</th>
+            <th >Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -55,9 +55,9 @@
                     <td><a title="{{doc.description}}" (click)="previewDoc(doc)">{{doc.docFileNameDecoded}}</a></td>
                     <td>{{doc.docTypeNameDecoded}}</td>
                     <td>{{doc.docUploadDate}}</td>
-                    <td *ngIf="docHistoryPermissions?.read"><button class="ohio-button x-small" (click)="openHistory(i,doc.documentRelationInstanceKey)" title="Description, Document history"><i class="fas fa-info"></i></button></td>
-                    <td *ngIf="docReviewPermissions?.read">{{doc.status}}</td>
-                    <td *ngIf="canDelete()"><div *ngIf="doc.permission?.delete" class="ohio-checkbox"><input type="checkbox" class="ohio-checkbox-el" [(ngModel)]="doc.todelete"></div></td>
+                    <td><button class="ohio-button x-small" (click)="openHistory(i,doc.documentRelationInstanceKey)" title="Description, Document history"><i class="fas fa-info"></i></button></td>
+                    <td >{{doc.status}}</td>
+                    <td><div *ngIf="doc.permission?.delete" class="ohio-checkbox"><input type="checkbox" class="ohio-checkbox-el" [(ngModel)]="doc.todelete"></div></td>
                   </tr>
                   <tr *ngIf="showHistory(i)">
                     <td colspan="6" class="docs-details-container">
@@ -78,8 +78,6 @@
                     </td>
                   </tr>
             </ng-template>
-
-
       </table>
     </article>
   </div>

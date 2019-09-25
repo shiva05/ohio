@@ -4,10 +4,10 @@ div,span,i {
 
 .utilityActive {
     padding-top:10px;
-    background-color:#540011;
+    background-color:#540011 !important;
     /* margin-top:-15px; */
-    width:53px;
-    height:1000px;
+    width:53px !important;
+    height:53px;
     text-align: center;
 }
 .utilityActive div

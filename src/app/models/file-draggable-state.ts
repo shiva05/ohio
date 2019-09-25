@@ -1,4 +1,4 @@
-import { FileUploader } from 'ng2-file-upload';
+ import { FileUploader } from 'ng2-file-upload';
 
 export interface FileDraggable {
   fileUploader: FileUploader;
