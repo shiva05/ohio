@@ -70,7 +70,7 @@ export class ReportComponent {
     this.store.select('advancedSearch').subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
         let objTemp =  data.alignmentSearchSelectedFilters.selectedAsSearchResults;
-        this.downloadPDFService.saveToProfile(objTemp)
+        this.downloadPDFService.asSaveToProfile(objTemp)
         .subscribe(x => {
 
 
