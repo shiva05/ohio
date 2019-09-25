@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './../../app.state';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -16,81 +15,74 @@ import { CookieService } from 'ngx-cookie-service';
 
 export class FilterSummaryComponent implements OnInit {
 
-  @Input() FilterSummary;
-  FilterSummaryKeys: any;
-  FilterSummaryData: any = [];
-  panelExpanded: boolean = false;
-  searchLable: any;
-  alignmentSearchResults: any;
-  courseSearchResults: any;
-  searchObj: any;
+    @Input() FilterSummary;
+    FilterSummaryKeys: any;
+    FilterSummaryData: any = [];
+    panelExpanded: boolean = false;
+    searchLable: any;
+    alignmentSearchResults: any;
+    courseSearchResults: any;
+    searchObj: any;
 
+    filterCareerPathData: any = [];
+    filterCareerPathCourseData: any = [];
+    filterAcadamicSubjectData: any = [];
+    filterAcadamicSubjectCourseData: any = [];
+    cookieValue: any;
 
-  filterCareerPathData: any = [];
-  filterCareerPathCourseData: any = [];
-  filterAcadamicSubjectData: any = [];
-  filterAcadamicSubjectCourseData: any = [];
-  cookieValue: any;
+    @Output() onPageSelect = new EventEmitter<any>();
 
-  @Output() onPageSelect = new EventEmitter<any>();
-
-  constructor(private store: Store<AppState>,
-              private rout: Router,
-              private shared: SharedService,
-              private http: HttpClient,
-              private cookieService: CookieService) {
-    this.searchLable = localStorage.getItem('searchLable');
-  //  this.store.dispatch({ type: AdvancedSearchActions.LOAD_META_DATA });
-  }
-
-  ngOnInit() {
-    this.courseSearchResults = false;
-    this.alignmentSearchResults = true;
-    this.shared.updateAlignmentSearch = false;
-    this.shared.updateCourseSearch = false;
-    // console.log(this.cookieValue);
-    if (this.cookieService.get('Test')) {
-      this.cookieValue = this.cookieService.get('Test');
-      let quickSearchData = JSON.parse(this.cookieValue);
-      if (quickSearchData) {
-        this.FilterSummaryKeys = {
-          Keywords: '',
-          CareerFieldIds: [],
-          StrandIds: [],
-          OutcomeIds: [],
-          CompetencyIds: [],
-          Subjects: [],
-          CteToAcademic: true
-        };
-
-        if (quickSearchData['AcademicSubjects'].length > 0) {
-          quickSearchData['AcademicSubjects'].forEach((subject) => {
-            let selectedSubject = {
-              SubjectId: 0,
-              SubjectName: '',
-              Level1Ids: [],
-              Level2Ids: [],
-              Level3Ids: []
-            };
-            selectedSubject.SubjectId = subject.SubjectId;
-            this.FilterSummaryKeys.Subjects.push(selectedSubject);
-            selectedSubject.SubjectName = subject.SubjectName;
-          });
-        }
-        if (quickSearchData['CareerFields'].length > 0) {
-          quickSearchData['CareerFields'].forEach((career) => {
-            this.FilterSummaryKeys.CareerFieldIds.push(career.CareerFieldName);
-          });
-        }
-        this.searchObj = {
-          selectedCareers: quickSearchData['CareerFields'],
-          selectedAcadamicSubjects: quickSearchData['AcademicSubjects']
-        };
-        this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
-        this.cookieService.delete('Test');
-      }
+    constructor(private store: Store<AppState>, private rout: Router, private shared: SharedService, private cookieService: CookieService) {
+        this.searchLable = localStorage.getItem('searchLable');
     }
-    this.store.select('advancedSearch').subscribe(data => {
+
+    ngOnInit() {
+        this.courseSearchResults = false;
+        this.alignmentSearchResults = true;
+        this.shared.updateAlignmentSearch = false;
+        this.shared.updateCourseSearch = false;
+        if (this.cookieService.get('Test')) {
+            this.cookieValue = this.cookieService.get('Test');
+            let quickSearchData = JSON.parse(this.cookieValue);
+            if (quickSearchData) {
+                this.FilterSummaryKeys = {
+                    Keywords: '',
+                    CareerFieldIds: [],
+                    StrandIds: [],
+                    OutcomeIds: [],
+                    CompetencyIds: [],
+                    Subjects: [],
+                    CteToAcademic: true
+                };
+
+                if (quickSearchData['AcademicSubjects'].length > 0) {
+                    quickSearchData['AcademicSubjects'].forEach((subject) => {
+                        let selectedSubject = {
+                            SubjectId: 0,
+                            SubjectName: '',
+                            Level1Ids: [],
+                            Level2Ids: [],
+                            Level3Ids: []
+                        };
+                        selectedSubject.SubjectId = subject.SubjectId;
+                        this.FilterSummaryKeys.Subjects.push(selectedSubject);
+                        selectedSubject.SubjectName = subject.SubjectName;
+                    });
+                }
+                if (quickSearchData['CareerFields'].length > 0) {
+                    quickSearchData['CareerFields'].forEach((career) => {
+                        this.FilterSummaryKeys.CareerFieldIds.push(career.CareerFieldName);
+                    });
+                }
+                this.searchObj = {
+                    selectedCareers: quickSearchData['CareerFields'],
+                    selectedAcadamicSubjects: quickSearchData['AcademicSubjects']
+                };
+                this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
+                this.cookieService.delete('Test');
+            }
+        }
+        this.store.select('advancedSearch').subscribe(data => {
             if (data.alignmentSearchSelectedFilters) {
                 let careerfields = [];
                 let strands = [];
@@ -168,20 +160,15 @@ export class FilterSummaryComponent implements OnInit {
             }
         });
 
-
-    if (this.searchLable === 'alignmentSearchResults') {
+        if (this.searchLable === 'alignmentSearchResults') {
             this.store.select('advancedSearch').subscribe(data => {
                 if (data.alignmentSearchSelectedFilters) {
                     this.formatSearchDataToSummary(data.alignmentSearchSelectedFilters);
                     this.alignmentSearchResults = true;
                     this.courseSearchResults = false;
-
                 }
             });
-
-
         } else {
-
             this.store.select('courseSearch').subscribe(data => {
                 if (data.courseSearchSelectedFilters.selectedAcademicSubject.length != 0 || data.courseSearchSelectedFilters.selectedAcademicSubjectCourses.length != 0 || data.courseSearchSelectedFilters.selectedCareerPath.length != 0 || data.courseSearchSelectedFilters.selectedCareerPathCourses.length != 0) {
                     this.formatSearchCourseData(data.courseSearchSelectedFilters);
@@ -189,7 +176,6 @@ export class FilterSummaryComponent implements OnInit {
                     this.courseSearchResults = true;
                 }
             });
-
         }
     }
 
@@ -197,6 +183,7 @@ export class FilterSummaryComponent implements OnInit {
         this.shared.updateAlignmentSearch = true;
         this.rout.navigate(['/AlignmentSearch']);
     }
+
     goBackToCourseSearch() {
         this.shared.updateCourseSearch = true;
         this.rout.navigate(['/CourseSearch']);

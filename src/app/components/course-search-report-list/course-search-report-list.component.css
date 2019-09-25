@@ -1,7 +1,7 @@
 .reports {
   padding-top: 20px;
   padding-bottom: 20px;
-  font-family: 'Serifa-Reg';
+  font-family: "Serifa-Reg";
 }
 
 .reports-head h1 {
@@ -28,29 +28,29 @@
   float: left;
   margin: 0 0 0 20px;
   color: #700017;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 .reports-each {
-  background: #F2F2F2;
+  background: #f2f2f2;
   margin: 0 0 20px 0;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
-  .reports-each h2 {
-    color: #700017;
-    font-size: 26px;
-    margin-bottom: 20px;
-  }
+.reports-each h2 {
+  color: #700017;
+  font-size: 26px;
+  margin-bottom: 20px;
+}
 
 .reports-each-top {
   margin: 0 0 20px 0;
 }
 
-  .reports-each-top table {
-    width: 100%;
-  }
+.reports-each-top table {
+  width: 100%;
+}
 
 .reports-content {
   margin: 0 0 5px 0;
@@ -66,21 +66,21 @@
   width: 250px;
   display: inline-block;
   vertical-align: top;
-  background: #D8D8D8;
-  border: #D8D8D8 solid 1px;
+  background: #d8d8d8;
+  border: #d8d8d8 solid 1px;
   padding: 5px;
   font-size: 16px;
   font-weight: 600;
 }
 
 .reports-blue {
-  background: #73A5CC;
-  border: #73A5CC solid 1px;
+  background: #73a5cc;
+  border: #73a5cc solid 1px;
 }
 
 .reports-green {
-  background: #5E8000;
-  border: #5E8000 solid 1px;
+  background: #5e8000;
+  border: #5e8000 solid 1px;
   color: #fff;
 }
 
@@ -89,12 +89,11 @@
   width: calc(100% - 260px);
   display: inline-block;
   vertical-align: top;
-  border: #D8D8D8 solid 1px;
+  border: #d8d8d8 solid 1px;
   padding: 5px;
   font-size: 14px;
   font-weight: 600;
 }
-
 
 .reports-each-bottom h3 {
   color: #700017;
@@ -121,46 +120,44 @@
   display: inline-block;
 }
 
-
 .legend-application {
-  background: #ED6102;
+  background: #ed6102;
   border-radius: 4px;
   padding: 0;
   color: #fff;
   width: 30px;
   display: inline-block;
   text-align: center;
-  font-family: 'Serifa-Reg';
+  font-family: "Serifa-Reg";
 }
 
 .legend-reinforcement {
-  background: #347AA9;
+  background: #347aa9;
   border-radius: 4px;
   padding: 0;
   color: #fff;
   width: 30px;
   display: inline-block;
   text-align: center;
-  font-family: 'Serifa-Reg';
+  font-family: "Serifa-Reg";
 }
 
 .legend-enrichment {
-  background: #B5DC10;
+  background: #b5dc10;
   border-radius: 4px;
   padding: 0;
   color: #fff;
   width: 30px;
   display: inline-block;
   text-align: center;
-  font-family: 'Serifa-Reg';
+  font-family: "Serifa-Reg";
 }
-
 
 .reports-head h1 {
   color: #700017;
   font-size: 30px;
   margin: 0;
-  font-family: 'Serifa-Reg';
+  font-family: "Serifa-Reg";
 }
 
 .reports-head {
@@ -183,9 +180,8 @@
   float: left;
   margin: 0 0 0 20px;
   color: #700017;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
-
 
 .course-search-results,
 .course {
@@ -194,9 +190,9 @@
   width: 100%;
   float: left;
 }
-  .course-search-results {
-    padding: 30px;
-  }
+.course-search-results {
+  padding: 30px;
+}
 .course {
   border: 1px solid #cbcbcb;
   margin-bottom: 15px;
@@ -213,23 +209,23 @@
   padding: 0;
   float: left;
 }
-  .standard h4 {
-      font-weight:bold;
-  }
-  .competency ul {
-      margin:0;
-      padding: 0;
-      list-style: none;
-  }
+.standard h4 {
+  font-weight: bold;
+}
+.competency ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 
 .competency ul li {
   font-size: 16px;
   border-bottom: 1px solid #cbcbcb;
   padding: 9px;
 }
-  .competency ul li:last-child {
-      border-bottom: 0;
-  }
+.competency ul li:last-child {
+  border-bottom: 0;
+}
 
 /*.no-alignment {
   border: 1px solid #ddd;
@@ -239,7 +235,7 @@
   padding: 15px;
   background: #eee;
 }*/
- 
+
 .course-wrap {
   display: block;
   overflow: hidden;
@@ -248,11 +244,11 @@
   background: #f5f5f5;
   margin-bottom: 20px;
 }
-  .course-wrap h2 {
-    color: #700017;
-    margin: 0 0 15px 0;
-    font-size: 24px;
-  }
+.course-wrap h2 {
+  color: #700017;
+  margin: 0 0 15px 0;
+  font-size: 24px;
+}
 .c2s .competency {
   width: calc(100% - 50%);
 }
@@ -264,72 +260,72 @@
   overflow: hidden;
 }
 
-  .course-wrap .item .title {
-    width: 50%;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    float: left;
-    background: #dbdbdb;
-    padding: 10px;
-    border: 1px solid #ddd;
-    font-size: 14px;
-    line-height: 18px;
-    word-spacing: 1px;
-  }
-  .course-wrap .item .description {
-    width: calc(50% - 5px);
-    float: left;
-    background: #f2f2f2;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    padding: 10px;
-    border: 1px solid #ddd;
-  }
+.course-wrap .item .title {
+  width: 50%;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  float: left;
+  background: #dbdbdb;
+  padding: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  line-height: 18px;
+  word-spacing: 1px;
+}
+.course-wrap .item .description {
+  width: calc(50% - 5px);
+  float: left;
+  background: #f2f2f2;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
 .description.bg-blue {
-    background: #71a4cc !important;
-  }
+  background: #71a4cc !important;
+}
 .sortedTypeHeader {
   font-size: 26px;
-  font-family: 'Serifa-Med';
+  font-family: "Serifa-Med";
   color: #700017;
   margin: 0 0 15px 0;
 }
-.course-wrap .item .description ul{
-  list-style:none;
-  padding:0;
-  margin:0;
+.course-wrap .item .description ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-  .course-wrap .item .description ul li {
-    display: block;
-    overflow: hidden;
-    margin-bottom: 15px;
-  }
+.course-wrap .item .description ul li {
+  display: block;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
 .no-alignment {
   display: block;
   overflow: hidden;
   padding: 20px 0;
 }
-  .no-alignment ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
+.no-alignment ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 
-    .no-alignment ul li {
-      font-size: 14px;
-      margin-bottom: 15px;
-    }
+.no-alignment ul li {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
 
-      .no-alignment ul li .list {
-        width: calc(100% - 40px);
-        display: inline-block;
-      }
+.no-alignment ul li .list {
+  width: calc(100% - 40px);
+  display: inline-block;
+}
 
-      .no-alignment h4 {
-        font-weight: bold;
-        color: #700017;
-        margin: 10px 0 20px 40px;
-      }
+.no-alignment h4 {
+  font-weight: bold;
+  color: #700017;
+  margin: 10px 0 20px 40px;
+}
 .compared-title {
   font-size: 11pt;
 }

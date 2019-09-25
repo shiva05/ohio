@@ -15,7 +15,8 @@
         <!-- export input -->
         <div class="col-md-12">
             <label class="ohio-upload-single input-group" for="excel-upload">
-                <input  [(ngModel)]="uploadedFile" type="file" class="ohio-upload-single-file" id="excel-upload" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                <input [(ngModel)]="uploadedFile" type="file" class="ohio-upload-single-file" id="excel-upload"
+                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
                 <span class="ohio-upload-single-label form-control">{{'Import.ChooseFile' | translate}}</span>
                 <span class="input-group-btn">
                     <span class="ohio-upload-single-btn btn" type="button" for="excel-upload">
@@ -38,6 +39,4 @@
     <div class="col-md-6">
         <!-- Right Side Content  -->
     </div>
-
-
 </div>

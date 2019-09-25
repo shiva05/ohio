@@ -1,10 +1,9 @@
-import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { SearchResultService } from '../../services/search-result.service';
 import * as CourseSearchActions from './../../actions/course-search.actions';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
 import { _ } from 'underscore';
 
 @Component({
@@ -54,16 +53,18 @@ export class CourseSearchAccordionComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor(private store: Store<AppState>, private httpService: HttpClient, private searchResultService: SearchResultService, private rout: Router) { }
+  constructor(private store: Store<AppState>, private searchResultService: SearchResultService, private rout: Router) { }
 
   ngOnInit() {
     this.getCourseSearchResult();
   }
+
   goBackToCourseSearch() {
     // this.goToPage('SearchAlignment');
     this.store.dispatch({ type: CourseSearchActions.RESET_COURSE_SELECTED_FILTERS });
     this.rout.navigate(['/CourseSearch']);
   }
+
   getCourseSearchResult() {
     this.store.select('courseSearch').subscribe(data => {
       if (data.courseSearchSelectedFilters) {
@@ -139,8 +140,6 @@ export class CourseSearchAccordionComponent implements OnInit {
               }
               this.totalSearchResults += element.AlignmentCount;
             });
-
-            console.log(this.careerPathToSubjectData);
           });
       }
     });
@@ -196,9 +195,7 @@ export class CourseSearchAccordionComponent implements OnInit {
         });
       }
     }
-
     this.trackCareersStatus(career);
-
   }
 
   // Click event on Competency Checkbox
@@ -271,9 +268,7 @@ export class CourseSearchAccordionComponent implements OnInit {
           }
         }
       }
-
     }
-
   }
 
   // Click event on Subject

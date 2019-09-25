@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Input, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedService } from '../../services/shared.service';
 
