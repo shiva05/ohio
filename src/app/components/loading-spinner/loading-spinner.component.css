@@ -1,15 +1,15 @@
 /* Loading overlay */
 #has-overlay {
-    z-index:999;
-    content: "";
-    display: block;
-    position: fixed;
-    padding: 100px 0;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 999;
+  content: "";
+  display: block;
+  position: fixed;
+  padding: 100px 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
 }
 
 /* Custom spinner from -- loading.io/css */

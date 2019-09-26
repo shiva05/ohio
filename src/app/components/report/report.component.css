@@ -1,27 +1,26 @@
+.reports-head h1 {
+  color: #700017;
+  font-size: 30px;
+  margin: 0;
+  font-family: "Serifa-Reg";
+}
+.reports-head {
+  display: block;
+  margin: 15px 0;
+}
+.reports-head-left {
+  display: inline-block;
+  width: calc(100% - 440px);
+  max-width: calc(100% - 440px);
+}
 
-  .reports-head h1{
-    color: #700017;
-    font-size: 30px;
-    margin: 0;
-    font-family: 'Serifa-Reg';
+.reports-head-right {
+  display: inline-block;
+  width: 440px;
 }
-.reports-head{
-    display: block;
-    margin: 15px 0;
-}
-.reports-head-left{
-    display: inline-block;
-    width: calc(100% - 440px);
-    max-width: calc(100% - 440px);
-}
-
-.reports-head-right{
- display: inline-block;
- width: 440px;
-}
-.reports-head-right-each{
+.reports-head-right-each {
   float: left;
   margin: 0 0 0 20px;
   color: #700017;
-  font-family: 'Lato', sans-serif ;
+  font-family: "Lato", sans-serif;
 }

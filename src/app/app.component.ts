@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
-import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
 import { environment } from '../environments/environment';
@@ -19,6 +14,9 @@ import { NavResize } from './actions/nav-actions';
 import { InteropService } from './services/interop.service';
 import { InteropDataPacket } from './models/interop-datapacket';
 import { Router } from '@angular/router';
+import { Utilities } from './models/util-nav-item';
+import { NavResize } from './actions/nav-actions';
+import * as UtilsActions from './actions/utils-actions';
 import {
   HttpClient,
   HttpErrorResponse,
@@ -29,11 +27,13 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { LoaderService } from './services/loader.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit {
   title = 'StandardsByDesignWeb';
   isLocal = false;
@@ -42,9 +42,9 @@ export class AppComponent implements OnInit {
   isPublic = false;
   loading = true;
   ready = false;
+  utilsWidth = 0;
   mainWidth = window.innerWidth - 80;
   mainLeft = 56;
-  utilsWidth = 0;
   mainHeight = 1400;
   currentUtil: Utilities = Utilities.none;
   constructor(private http: HttpClient,
@@ -130,7 +130,7 @@ export class AppComponent implements OnInit {
     });
 
     this.store.select('claimsState').subscribe((claimsState) => {
-      if (claimsState &&  claimsState.claimsJwtPayload && claimsState.claimsJwt) {
+      if (claimsState && claimsState.claimsJwtPayload && claimsState.claimsJwt) {
         this.ready = true;
         if (this.ready) {
           let obj = {
@@ -173,10 +173,22 @@ export class AppComponent implements OnInit {
         this.store.dispatch(new UtilsActions.UtilsContextChanged(current));
       }
     });
-
-
   }
+  // utilNav(util: Utilities) {
+  //   this.currentUtil = util;
+  //   const baseWidth = window.innerWidth - 75;
+  //   // define target widths for each utility
+  //   const targetWidth = {};
 
+  //   targetWidth[Utilities.Documents] = baseWidth * .5;
+  //   targetWidth[Utilities.Flags] = baseWidth * .3;
+  //   targetWidth[Utilities.contacts] = baseWidth * .4;
+  //   targetWidth[Utilities.history] = baseWidth * .2;
+  //   targetWidth[Utilities.Comments] = baseWidth * .4;
+
+  //   const width = (util !== Utilities.none) ? targetWidth[util] : 55;
+  //   this.setIframeWidth(width);
+  // }
   showSafeLogin() {
     this.store.dispatch(new AuthActions.ResetAuth({}));
     this.store.dispatch(new ClaimsActions.ResetClaims({}));

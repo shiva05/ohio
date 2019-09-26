@@ -1,13 +1,8 @@
 .import-btn {
-    margin: 10px;
+  margin: 10px;
 }
-/* .ohio-upload-single-label {
-  opacity: 1;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-} */
+
 .ohio-upload-single-btn:hover {
-    color: #700017;
-    background-color: white;
+  color: #700017;
+  background-color: white;
 }

@@ -1,23 +1,22 @@
-import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { DownloadPDFService } from '../../services/download-pdf.service';
-import { ReportService } from '../../services/report.service';
 import { Store } from '@ngrx/store';
 import { DatePipe } from '@angular/common'
 
 import { AppState } from './../../app.state';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-search-report',
   templateUrl: './course-search-report.component.html',
   styleUrls: ['./course-search-report.component.css']
 })
+
 export class CourseSearchReportComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
 
   constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router) { }
-
 
   ngOnInit() {
   }
@@ -68,5 +67,16 @@ export class CourseSearchReportComponent implements OnInit {
 
   clearCourseSearch() {
     this.rout.navigate(['/CourseSearch']);
+  }
+  public saveToProfile(): void {
+    this.store.select('courseSearch').subscribe(data => {
+      if (data.courseSearchSelectedFilters) {
+        const objTemp = data.courseSearchSelectedFilters.selectedCourseSearchResults;
+        this.downloadPDFService.asSaveToProfile(objTemp)
+        .subscribe(x => {
+        });
+      }
+    });
+
   }
 }

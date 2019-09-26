@@ -47,7 +47,7 @@ export function AuthReducer(state = initialState, action: AuthActions.Actions): 
                 localStorage.setItem(environment.name + '_as', JSON.stringify(action.payload));
             }
 
-            return  {
+            return {
                 ...state,
                 loading: false,
                 error: null,

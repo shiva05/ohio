@@ -9,23 +9,24 @@ export const SAVE_CS_SELECTED_FILTERS = '[CourseSearchSelectedFilters] Save';
 export const RESET_COURSE_SELECTED_FILTERS = '[CourseSearchSelectedFilters] Reset';
 
 export class CourseSearchDataFetch implements Action {
-    readonly type = LOAD_COURSESEARCH_DATA;
+  readonly type = LOAD_COURSESEARCH_DATA;
 }
 
 export class CourseSearchDataSucess implements Action {
-    readonly type = LOAD_COURSESEARCH_DATA_SUCCESS;
-    constructor(public payload: CourseSearchData) { }
+  readonly type = LOAD_COURSESEARCH_DATA_SUCCESS;
+  constructor(public payload: CourseSearchData) { }
 }
 
 export class CourseSearchDataFailure implements Action {
-    readonly type = LOAD_COURSESEARCH_DATA_FAILURE;
-    constructor(public payload: CourseSearchData) { }
+  readonly type = LOAD_COURSESEARCH_DATA_FAILURE;
+  constructor(public payload: CourseSearchData) { }
 }
 
 export class SaveAsSelectedFilters implements Action {
   readonly type = SAVE_CS_SELECTED_FILTERS;
-    constructor(public payload: CourseSearchSelectedFilters) { }
+  constructor(public payload: CourseSearchSelectedFilters) { }
 }
+
 export class ResetCourseSelectedFilters implements Action {
   readonly type = RESET_COURSE_SELECTED_FILTERS;
 }

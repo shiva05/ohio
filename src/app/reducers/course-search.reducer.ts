@@ -5,42 +5,41 @@ import { CareerPathCourses } from '../models/careerPathCourses.model';
 import { AcademicSubjectCourses } from '../models/academic-subject-course.model';
 
 export interface CourseSearchData {
-    careerPaths: CareerPath[];
-    careerPathCourses: CareerPathCourses[];
-    academicSubjects: AcademicSubject[];
-    academicSubjectCourses: AcademicSubjectCourses[];
+  careerPaths: CareerPath[];
+  careerPathCourses: CareerPathCourses[];
+  academicSubjects: AcademicSubject[];
+  academicSubjectCourses: AcademicSubjectCourses[];
 }
 
 export interface CourseSearchSelectedFilters {
-    selectedCareerPath: CareerPath[];
-    selectedCareerPathCourses: CareerPathCourses[];
-    selectedAcademicSubject: AcademicSubject[];
-    selectedAcademicSubjectCourses: AcademicSubjectCourses[];
+  selectedCareerPath: CareerPath[];
+  selectedCareerPathCourses: CareerPathCourses[];
+  selectedAcademicSubject: AcademicSubject[];
+  selectedAcademicSubjectCourses: AcademicSubjectCourses[];
 }
 
 export interface CourseSearch {
-    courseSearchData: CourseSearchData;
-    courseSearchSelectedFilters: CourseSearchSelectedFilters;
+  courseSearchData: CourseSearchData;
+  courseSearchSelectedFilters: CourseSearchSelectedFilters;
 }
 
-// tslint:disable-next-line:no-empty-interface
 export interface SelectedAcademicSubject {
-    courseSearchSelectedFilters: CourseSearchSelectedFilters;
+  courseSearchSelectedFilters: CourseSearchSelectedFilters;
 }
 
 const initialState: CourseSearch = {
-    courseSearchData: {
-        careerPaths: [],
-        careerPathCourses: [],
-        academicSubjects: [],
-        academicSubjectCourses: []
-    },
-    courseSearchSelectedFilters: {
-        selectedCareerPath: [],
-        selectedCareerPathCourses: [],
-        selectedAcademicSubject: [],
-        selectedAcademicSubjectCourses: []
-    }
+  courseSearchData: {
+    careerPaths: [],
+    careerPathCourses: [],
+    academicSubjects: [],
+    academicSubjectCourses: []
+  },
+  courseSearchSelectedFilters: {
+    selectedCareerPath: [],
+    selectedCareerPathCourses: [],
+    selectedAcademicSubject: [],
+    selectedAcademicSubjectCourses: []
+  }
 };
 
 export function courseSearchReducer(state = initialState, Action: CourseSearchActions.Actions) {
@@ -61,16 +60,16 @@ export function courseSearchReducer(state = initialState, Action: CourseSearchAc
         courseSearchSelectedFilters: Action.payload
       };
     case CourseSearchActions.RESET_COURSE_SELECTED_FILTERS:
-                return {
-            ...state,
-            courseSearchSelectedFilters: {
-              selectedCareerPath: [],
-              selectedCareerPathCourses: [],
-              selectedAcademicSubject: [],
-              selectedAcademicSubjectCourses: []
-            }
-  };
-        default:
-            return state;
-    }
+      return {
+        ...state,
+        courseSearchSelectedFilters: {
+          selectedCareerPath: [],
+          selectedCareerPathCourses: [],
+          selectedAcademicSubject: [],
+          selectedAcademicSubjectCourses: []
+        }
+      };
+    default:
+      return state;
+  }
 }

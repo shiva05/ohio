@@ -1,16 +1,10 @@
 import { Injectable } from '@angular/core';
-import {
-    HttpErrorResponse,
-    HttpResponse,
-    HttpRequest,
-    HttpHandler,
-    HttpEvent,
-    HttpInterceptor
-} from '@angular/common/http';
+import { HttpResponse, HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { LoaderService } from './loader.service';
 
 @Injectable()
+
 export class HttpLoadInterceptor implements HttpInterceptor {
     private requests: HttpRequest<any>[] = [];
 
