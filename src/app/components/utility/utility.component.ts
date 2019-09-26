@@ -72,7 +72,10 @@ export class UtilityComponent implements OnInit {
 
       this.context = ctx;
 
-      if (true) {
+      if (ctx !== null && ctx.assetTemplateKey > 0 && ctx.detailKey > 0
+        && ctx.isDetailAsset != null && ctx.isDetailAsset
+        && ctx.moduleKey != null && ctx.moduleKey > 0
+        && (this.currentAssetTemplateKey !== ctx.assetTemplateKey || this.currentDetailKey !== ctx.detailKey)) {
         this.currentAssetTemplateKey = ctx.assetTemplateKey;
         this.currentDetailKey = ctx.detailKey;
 
@@ -139,10 +142,10 @@ export class UtilityComponent implements OnInit {
   }
 
   loadDocsCount() {
-    if (true) {
+    if (this.context.moduleKey != null && this.context.assetTemplateKey != 154000 && this.context.assetTemplateKey != 154030 && this.context.assetTemplateKey != 154100) {
+      debugger
       this.docsService.fetchDocCount(this.context).subscribe((docCount: number) => {
         if (docCount != null) {
-          docCount = 10;
           this.store.dispatch(new UtilsActions.UtilsSetDocCount(docCount));
         }
 
@@ -182,90 +185,32 @@ export class UtilityComponent implements OnInit {
     this.loadDocComponentPermissions();
 
 
-     let doc= {
-      docKey: 1234,
-      documentRelationInstanceKey: 7896,
-      description: 'TestDoc1',
-      docTypeKey: '1',
-      docTypeName: '1',
-      docFileName: '1',
-      docPermission: 'read',
-      docUploadDate: 'Temp',
-      status: 'Test',
-      docUrl: 'google.com',
-      docReviewed: true,
-      docResponseType: 'PDF',
-      docPreviewFlag: true,
-      permission: Permission
-     };
-
-     let doc1= {
-      docKey: 1234,
-      documentRelationInstanceKey: 7896,
-      description: 'TestDoc2',
-      docTypeKey: '1',
-      docTypeName: '1',
-      docFileName: '1',
-      docPermission: 'read',
-      docUploadDate: 'Temp',
-      status: 'Test',
-      docUrl: 'google.com',
-      docReviewed: true,
-      docResponseType: 'PDF',
-      docPreviewFlag: true,
-      permission: Permission
-     };
-
-     let doc2= {
-      docKey: 1234,
-      documentRelationInstanceKey: 7896,
-      description: 'TestDoc3',
-      docTypeKey: '1',
-      docTypeName: '1',
-      docFileName: '1',
-      docPermission: 'read',
-      docUploadDate: 'Temp',
-      status: 'Test',
-      docUrl: 'google.com',
-      docReviewed: true,
-      docResponseType: 'PDF',
-      docPreviewFlag: true,
-      permission: Permission
-     };
-
-     let temp = [];
-     temp.push(doc);
-     temp.push(doc1);
-     temp.push(doc2);
-
-
-     this.docsResults = temp;
 
     //Get documents next
-    // this.docsService.fetchDocs(this.context).subscribe((docs: Docs[]) => {
+    this.docsService.fetchDocs(this.context).subscribe((docs: Docs[]) => {
 
 
 
-    //   if (docs !== null && docs.length > 0) {
-    //     this.docsResults = docs.map(doc => {
-    //       return {
-    //         ...doc,
-    //         docUrl: docBaseViewUrl + doc.docUrl
-    //       };
-    //     });
-    //   } else {
-    //     docs = [];
-    //     this.docsResults = [];
-    //   }
+      if (docs !== null && docs.length > 0) {
+        this.docsResults = docs.map(doc => {
+          return {
+            ...doc,
+            docUrl: docBaseViewUrl + doc.docUrl
+          };
+        });
+      } else {
+        docs = [];
+        this.docsResults = [];
+      }
 
-    //   this.store.dispatch(new UtilsActions.UtilsSetDocCount(docs.length));
+      this.store.dispatch(new UtilsActions.UtilsSetDocCount(docs.length));
 
 
-    // },
-    //   (error: HttpErrorResponse) =>
-    //   console.log(`Error Status: ${JSON.stringify(error.status)};
-    //   Error Status Text: ${JSON.stringify(error.statusText)};
-    //   Error Msg: ${JSON.stringify(error.message)};`));
+    },
+      (error: HttpErrorResponse) =>
+      console.log(`Error Status: ${JSON.stringify(error.status)};
+      Error Status Text: ${JSON.stringify(error.statusText)};
+      Error Msg: ${JSON.stringify(error.message)};`));
   }
 
   loadDocComponentPermissions() {

@@ -134,11 +134,11 @@ export class AppComponent implements OnInit {
         this.ready = true;
         if (this.ready) {
           let obj = {
-            assetTemplateKey: 0,
+            assetTemplateKey:242710,
             //e.g a case key
-            detailKey: 0,
-            moduleKey: 0,
-            isDetailAsset: false
+            detailKey: 1,
+            moduleKey: 32,
+            isDetailAsset: true
           };
           this.store.dispatch(new UtilsActions.UtilsSetContext(obj));
         }
