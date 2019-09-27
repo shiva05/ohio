@@ -1,3 +1,13 @@
 .ohio-main-nav-link {
   background-color: #700017;
 }
+.ohio-main-nav-panel {
+  background-color: #700017;
+}
+#ohio-main-nav, .ohio-main-nav-panel {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.ohio-main-nav-container {
+  margin: 0 0 0 30px;
+}

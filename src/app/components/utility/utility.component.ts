@@ -36,7 +36,7 @@ export class UtilityComponent implements OnInit {
   importDocsResults: ImportDocs[] = null;
   subjects: CommentSubject[] = [];
   sources: CommentSources[] = [];
-  //commentOverview: CommentResponseViewModel = {sources: [], subjects: []};
+  // commentOverview: CommentResponseViewModel = {sources: [], subjects: []};
   docStatusMessage = '';
   alertType: AlertTypes;
   importDocPermissions: Permission = null;
@@ -46,14 +46,21 @@ export class UtilityComponent implements OnInit {
   initFlagResults: Flags = { count: 0, editable: [], readOnly: [], sources: [] };
   hideUtilityDivs: boolean = false;
 
-  //Fork Join Doc Permission Variables
+  // Fork Join Doc Permission Variables
   addDocumentPermissions: any = null;
   importDocumentPermissions: any = null;
   viewHistoryDocumentPermissions: any = null;
   viewStatusDocumentPermissions: any = null;
 
   hideDocMessages = false;
+  canSee: boolean = true;
 
+  show(e: any) {
+    this.canSee = true;
+  }
+  hide(e: any) {
+    this.canSee = false;
+  }
   constructor(
     private store: Store<AppState>,
     private flagService: FlagService,
@@ -84,8 +91,7 @@ export class UtilityComponent implements OnInit {
           this.docsResults = [];
           this.loadImportDocs();
           this.loadDocs(hideDeleteDocStatus);
-        }
-        else {
+        } else {
           this.importDocsResults = [];
           this.loadDocsCount();
         }
@@ -95,7 +101,6 @@ export class UtilityComponent implements OnInit {
 
     // subscribe to updates of utility state changes to show or hide utilities
     this.store.select('utilsState').subscribe((utilityState) => {
-      debugger
       if (utilityState && utilityState.activeUtility === Utilities.none) {
         this.hideUtilityDivs = true;
         this.showDocs = false;
@@ -104,13 +109,13 @@ export class UtilityComponent implements OnInit {
         this.showHistory = false;
         this.showContacts = false;
         console.log('HideUtility: Utility Options Subscribe to UtilityState: ' + utilityState.activeUtility);
-      }
-      else {
+      } else {
         this.hideUtilityDivs = false;
         console.log('Utility Options Subscribe to UtilityState: ' + utilityState.activeUtility);
       }
     });
   }
+
 
   utilNav(util: Utilities) {
     this.showDocs = (util === Utilities.Documents && !this.showDocs);
@@ -143,7 +148,6 @@ export class UtilityComponent implements OnInit {
 
   loadDocsCount() {
     if (this.context.moduleKey != null && this.context.assetTemplateKey != 154000 && this.context.assetTemplateKey != 154030 && this.context.assetTemplateKey != 154100) {
-      debugger
       this.docsService.fetchDocCount(this.context).subscribe((docCount: number) => {
         if (docCount != null) {
           this.store.dispatch(new UtilsActions.UtilsSetDocCount(docCount));
@@ -181,12 +185,12 @@ export class UtilityComponent implements OnInit {
   loadDocs(hideDeleteDocStatus: boolean) {
     const docBaseViewUrl = environment.DOCS_GET_DOC_FILE_API;
 
-    //Get permissions first
+    // Get permissions first
     this.loadDocComponentPermissions();
 
 
 
-    //Get documents next
+    // Get documents next
     this.docsService.fetchDocs(this.context).subscribe((docs: Docs[]) => {
 
 
@@ -214,12 +218,12 @@ export class UtilityComponent implements OnInit {
   }
 
   loadDocComponentPermissions() {
-    const addDoc = "AddDocuments";
-    const importDoc = "ImportDocuments";
-    const docHistory = "DocumentHistory";
-    const docReview = "DocumentReview";
+    const addDoc = 'AddDocuments';
+    const importDoc = 'ImportDocuments';
+    const docHistory = 'DocumentHistory';
+    const docReview = 'DocumentReview';
 
-    //Doc permissions forkjoin
+    // Doc permissions forkjoin
     forkJoin(
       this.docsService.fetchUiComponentPermissions(this.context, addDoc),
       this.docsService.fetchUiComponentPermissions(this.context, importDoc),
@@ -333,8 +337,7 @@ export class UtilityComponent implements OnInit {
     this.commentsSerice.addSubject(subject, this.context).subscribe((subjects: CommentSubject[]) => {
       if (this.IsOverview()) {
         this.loadSubjects();
-      }
-      else{
+      } else {
         this.subjects = subjects;
         this.store.dispatch(new UtilsActions.UtilsSetCommentsCount(subjects.length));
       }
@@ -345,11 +348,10 @@ export class UtilityComponent implements OnInit {
     this.commentsSerice.addComment(subject, this.context).subscribe((subjects: CommentSubject[]) => {
       if (this.IsOverview()) {
         this.loadSubjects();
-      }
-      else{
+      } else {
         let updatedSubject = subjects.find(subj => subj.subjectKey === subject.subjectKey);
-      this.subjects.find(subj => subj.subjectKey === subject.subjectKey).comments = updatedSubject.comments;
-      this.store.dispatch(new UtilsActions.UtilsSetCommentsCount(subjects.length));
+        this.subjects.find(subj => subj.subjectKey === subject.subjectKey).comments = updatedSubject.comments;
+        this.store.dispatch(new UtilsActions.UtilsSetCommentsCount(subjects.length));
       }
 
     });
