@@ -4,7 +4,7 @@
 }
 .nav-item a {
   color: white;
-  padding: 0 10px 0 10px;
+  padding: 0 10px 0 0;
   margin: 10px;
   font-size: 16px;
   cursor: pointer;
@@ -30,7 +30,9 @@
 .menuList li:hover a {
   color: #fff;
 }
-
 .menuList .dropdown-menu li:hover a {
   color: #700017 !important;
+}
+.app-menubar {
+  padding: 0;
 }

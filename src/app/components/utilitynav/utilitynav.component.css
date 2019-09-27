@@ -9,15 +9,23 @@ div,span,i {
     background-color:#540011 !important;
     /* margin-top:-15px; */
     width:53px !important;
-    height:100%;
     text-align: center;
+    z-index: 5;
+    height: calc(100% - 130px); /* calculate height of everything that's not the header */
+    width: 160px;
+    position: absolute;
     z-index: 1;
+    top: 130px; /*  This should change so that there's no gap/overlap with the top navbar  */
+    left: 0;
+    background-color: #111;
+    overflow: hidden;
+    padding-top: 20px;
 }
 .utilityActive div
 {
     z-index: 1;
     color: white;
-   margin-bottom:7px;
+    margin-bottom:7px;
 }
 .utilitynav div
 {

@@ -9,10 +9,10 @@
 .utility {
     width: 715px;
     position: fixed;
-    top: 184px;
+    top: 154px;
     left: 73px;
-    height: 100vh;
-    z-index: 5;
+    height: calc(100% - 100px);
+    z-index: 1;
     background: #700017;
     color: #555;
     animation: .4s ease-in 0s 1 slideInFromLeft;
