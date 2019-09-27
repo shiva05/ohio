@@ -73,14 +73,11 @@ table.district-teachers th {
 
 .section-header-text {
   margin-bottom: 10px;
+  color: #555;
 }
 
 .section-bottom-spacer {
   margin-bottom: 45px;
-}
-
-.section-header-text {
-  color: white;
 }
 
 .ohio-table .table td {

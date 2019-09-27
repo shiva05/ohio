@@ -11,25 +11,24 @@
     position: fixed;
     top: 154px;
     left: 73px;
-    height: calc(100% - 100px);
+    height: 500px;
     z-index: 1;
-    background: #700017;
+    background: #f2f2f2;
     color: #555;
-    animation: .4s ease-in 0s 1 slideInFromLeft;
+    animation: .4s ease-in-out 0s 1 slideInFromLeft;
+    border-radius: 10px;
+    border: 2px solid #700017;
 }
-.close-slider
-{
-    color:white; 
-    font-size:20px; 
+.close-slider {
+    color:#222; 
+    font-size:20px;
     margin-right:2%;
     position: relative;
     top: 16px;
     z-index: 2;
 }
-.close-slider-flags
-{
-    color:white; 
-    font-size:20px; 
+.close-slider-flags {
+    font-size:20px;
     margin-right:7%;
     position: relative;
     top: 16px;
