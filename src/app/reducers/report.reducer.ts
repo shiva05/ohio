@@ -1,7 +1,5 @@
 import * as ReportActions from '../actions/report.actions';
 
-
-
 export interface ReportRecord {
   title: string;
   strand: string;
@@ -23,7 +21,7 @@ export interface ReportData {
 }
 
 const initialState: ReportData = {
-  reportRecords : [
+  reportRecords: [
     {
       title: '',
       strand: '',
@@ -36,18 +34,16 @@ const initialState: ReportData = {
       standards: []
     }
   ]
-
 };
 
-
-export function reportReducer(state= initialState, Action: ReportActions.Actions) {
+export function reportReducer(state = initialState, Action: ReportActions.Actions) {
   switch (Action.type) {
     case ReportActions.LOAD_REPORT_DATA_SUCCESS:
       return {};
     case ReportActions.LOAD_REPORT_DATA_FAILURE:
 
       return {
-        reportRecords : Action.payload
+        reportRecords: Action.payload
       };
     default:
       return state;

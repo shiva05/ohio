@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { AppHttpService } from './app-http.service';
 import { environment } from '../../environments/environment';
 
@@ -16,5 +15,4 @@ export class ClaimsService {
 
     return this.http.get(url);
   }
-
 }

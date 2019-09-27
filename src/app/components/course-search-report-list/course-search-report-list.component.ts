@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { AppState } from './../../app.state';
-import * as ReportsActions from './../../actions/report.actions';
 import { ReportService } from '../../services/report.service';
 
 @Component({
@@ -10,17 +9,19 @@ import { ReportService } from '../../services/report.service';
   templateUrl: './course-search-report-list.component.html',
   styleUrls: ['./course-search-report-list.component.css']
 })
-export class CourseSearchReportListComponent implements OnInit {
 
+export class CourseSearchReportListComponent implements OnInit {
   results: any = [];
   reportListhResultData: any = [];
+
   @Output() onPageSelect = new EventEmitter<any>();
-  constructor(private store: Store<AppState>, private reportService: ReportService) {
-  }
+
+  constructor(private store: Store<AppState>, private reportService: ReportService) { }
+
   ngOnInit() {
     this.store.select('courseSearch').subscribe(data => {
       if (data.courseSearchSelectedFilters.selectedCourseSearchResults) {
-        var objTemp = data.courseSearchSelectedFilters.selectedCourseSearchResults;
+        let objTemp = data.courseSearchSelectedFilters.selectedCourseSearchResults;
         this.reportService.getCourseSearchReportData(objTemp).subscribe(
           data => {
             this.reportListhResultData = data;
@@ -30,9 +31,11 @@ export class CourseSearchReportListComponent implements OnInit {
       }
     });
   }
+
   goToPage(org) {
     this.onPageSelect.emit(org);
   }
+
   calculateStrandClasses(type) {
     var strandClasses = {
       'A': 'legend-application',

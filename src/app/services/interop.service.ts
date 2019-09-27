@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { InteropDataPacket } from '../models/interop-datapacket';
-import { Store } from '@ngrx/store';
-import { AppState } from './../app.state';
 
 @Injectable()
 export class InteropService {
@@ -24,8 +22,6 @@ export class InteropService {
     publish(message: any) {
         console.log('IN MENU SPA InteropService, PUBLISHING MSG TO CHILD SPA', message, new Date().toLocaleString());
         if (this.iframe && this.iframe.contentWindow) {
-            // console.log('IN MENU SPA InteropService, this.iframe', this.iframe);
-            // console.log('IN MENU SPA InteropService, POSTING MSG', JSON.stringify(message));
             this.iframe.contentWindow.postMessage(JSON.stringify(message), '*');
         }
     }

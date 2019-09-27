@@ -1,12 +1,9 @@
-import { Component, EventEmitter, Output, Input, OnInit, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './../../app.state';
-import { SharedService } from '../../services/shared.service';
 import * as QuickSearchActions from './../../actions/quick-search.actions';
 import { Observable } from 'rxjs/Observable';
 import { QsMetaData } from './../../models/qs-meta-data.model';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
@@ -14,6 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
   templateUrl: './quick-search.component.html',
   styleUrls: ['./quick-search.component.css']
 })
+
 export class QuickSearchComponent implements OnInit {
   keyword: any = '';
   careers: any = [];
@@ -29,14 +27,10 @@ export class QuickSearchComponent implements OnInit {
   quickSearchSharedData = {
     KeyWords: '',
     CareerFields: [],
-    AcademicSubjects : []
+    AcademicSubjects: []
   };
 
-  constructor(private sharedData: SharedService,
-              private router: Router,
-              private store: Store<AppState>,
-              private httpService: HttpClient,
-              private ref: ChangeDetectorRef, private cookieService: CookieService ) {
+  constructor(private store: Store<AppState>, private cookieService: CookieService) {
 
     this.dropdownSettings = {
       singleSelection: false,
@@ -66,31 +60,24 @@ export class QuickSearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    //localStorage.removeItem('QuickSearchData');
     this.store.select('quickSearch').subscribe(data => {
       this.academicSubjects = [];
       if (data.QsMetaData) {
         this.qsMetaData = data.QsMetaData;
         this.careers = this.qsMetaData['CareerFields'];
         this.qsMetaData['Subjects'].forEach(element => {
-          this.academicSubjects.push({SubjectId : element.SubjectId, SubjectName : element.SubjectName});
-       });
+          this.academicSubjects.push({ SubjectId: element.SubjectId, SubjectName: element.SubjectName });
+        });
       }
     });
   }
 
   sendSearch() {
-
     this.quickSearchSharedData.KeyWords = this.keyword;
     this.quickSearchSharedData.CareerFields = this.selectedCareer;
     this.quickSearchSharedData.AcademicSubjects = this.selectedAcadamicSubjects;
     localStorage.setItem('QuickSearchData', JSON.stringify(this.quickSearchSharedData));
-    this.cookieService.set( 'Test', JSON.stringify(this.quickSearchSharedData) );
+    this.cookieService.set('Test', JSON.stringify(this.quickSearchSharedData));
     (window as any).open('http://edu-dev-sbd.azurewebsites.net/#/AlignmentSearchResults', '_blank');
-
-    // (window as any).open('http://edu-dev-sbd.azurewebsites.net/Search', '_blank');
-    //  (window as any).open('http://edu-dev-sbd.azurewebsites.net/AlignmentSearchResults', '_blank');
-    // this.router.navigate(['/AlignmentSearchResults']);
-
   }
 }

@@ -1,16 +1,10 @@
-import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import * as util from 'util';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import * as SearchResultsActions from './../../actions/search-result.action';
-import { SearchResultData } from './../../models/searchResult.model';
-import { Observable } from 'rxjs/Observable';
 import { SearchResultService } from '../../services/search-result.service';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
 import { _ } from 'underscore';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'custom-accordion',
@@ -85,7 +79,7 @@ export class CustomAccordionComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor(private store: Store<AppState>, private httpService: HttpClient, private searchResultService: SearchResultService, private rout: Router) {
+  constructor(private store: Store<AppState>, private searchResultService: SearchResultService, private rout: Router) {
     this.cteToAcademic = true;
   }
 
@@ -174,7 +168,6 @@ export class CustomAccordionComponent implements OnInit {
             if (this.cteToAcademic) {
               if (this.searchResultData.CareerField) {
                 this.searchResultData.CareerField.forEach(element => {
-                  // this code can be removed if we can get a property to check the selected values count in all the levels
                   element['IsChildPartiallySelected'] = false;
                   element['isSelected'] = false;
                   if (element['Strand'].length > 0) {
@@ -196,12 +189,7 @@ export class CustomAccordionComponent implements OnInit {
                       }
                     });
                   }
-
-                  // this code above can be removed if we can get a property to check the selected values count in all the levels
-
-
                   this.searchResultDataArray.push(element);
-                  //  console.log(this.searchResultDataArray);
                   this.noResultFound = false;
                 });
                 this.formatSearchResultDataArray();
@@ -304,8 +292,6 @@ export class CustomAccordionComponent implements OnInit {
         });
       }
     }
-
-    // this.trackStrandsStatus(CareerFieldData, StrandData);
     this.trackCareersStatus(CareerFieldData);
   }
 
@@ -356,13 +342,12 @@ export class CustomAccordionComponent implements OnInit {
         StrandData.IsChildPartiallySelected = true;
         //   return;
       } else if (competencyStatus.length === 1) {
-        if (competencyStatus[0] == true) {
+        if (competencyStatus[0] === true) {
           OutcomeData.IsChildPartiallySelected = false;
           OutcomeData.isSelected = true;
           CareerFieldData.IsChildPartiallySelected = true;
           StrandData.IsChildPartiallySelected = true;
-          //  return;
-        } else if (competencyStatus[0] == false) {
+        } else if (competencyStatus[0] === false) {
           OutcomeData.IsChildPartiallySelected = false;
           OutcomeData.isSelected = false;
           let outComesStatus = [];
@@ -373,16 +358,13 @@ export class CustomAccordionComponent implements OnInit {
           if (outComesStatus.length > 1) {
             StrandData.IsChildPartiallySelected = true;
           } else if (outComesStatus.length === 1) {
-            if (outComesStatus[0] == true) {
+            if (outComesStatus[0] === true) {
               StrandData.IsChildPartiallySelected = false;
-              //  StrandData.isSelected = true;
-            } else if (outComesStatus[0] == false) {
+            } else if (outComesStatus[0] === false) {
               StrandData.IsChildPartiallySelected = false;
-              //   StrandData.isSelected = false;
             }
           }
           CareerFieldData.IsChildPartiallySelected = false;
-          // return;
         }
       }
     }
@@ -403,10 +385,10 @@ export class CustomAccordionComponent implements OnInit {
         StrandData.IsChildPartiallySelected = true;
         CareerFieldData.IsChildPartiallySelected = true;
       } else if (strandStatus.length === 1) {
-        if (strandStatus[0] == true) {
+        if (strandStatus[0] === true) {
           StrandData.isSelected = false;
           StrandData.IsChildPartiallySelected = true;
-        } else if (strandStatus[0] == false) {
+        } else if (strandStatus[0] === false) {
           let outComesSelectedStatus = [];
           StrandData.Outcome.forEach((element) => {
             outComesSelectedStatus.push(element.isSelected);
@@ -417,24 +399,20 @@ export class CustomAccordionComponent implements OnInit {
             StrandData.IsChildPartiallySelected = true;
             CareerFieldData.IsChildPartiallySelected = true;
             CareerFieldData.isSelected = false;
-          } else if (outComesSelectedStatus.length == 1) {
-            if (outComesSelectedStatus[0] == true) {
+          } else if (outComesSelectedStatus.length === 1) {
+            if (outComesSelectedStatus[0] === true) {
               StrandData.isSelected = true;
               StrandData.IsChildPartiallySelected = false;
               CareerFieldData.IsChildPartiallySelected = true;
               CareerFieldData.isSelected = false;
             }
           }
-          // StrandData.isSelected = false;
-          // CareerFieldData.IsChildPartiallySelected = false;
-          // CareerFieldData.isSelected = false;
         }
-        //  StrandData.IsChildPartiallySelected = false;
       }
     }
   }
   trackCareersStatus(CareerFieldData) {
-    let carrerStatus = []; // to update strands status
+    let carrerStatus = [];
     for (let career = 0; career < CareerFieldData.Strand.length; career++) {
       CareerFieldData.Strand.forEach((element) => {
         carrerStatus.push(element.IsChildPartiallySelected);
@@ -444,10 +422,10 @@ export class CustomAccordionComponent implements OnInit {
         CareerFieldData.isSelected = false;
         CareerFieldData.IsChildPartiallySelected = true;
       } else if (carrerStatus.length === 1) {
-        if (carrerStatus[0] == true) {
+        if (carrerStatus[0] === true) {
           CareerFieldData.isSelected = false;
           CareerFieldData.IsChildPartiallySelected = true;
-        } else if (carrerStatus[0] == false) {
+        } else if (carrerStatus[0] === false) {
           let strandsSelectedStatus = [];
           CareerFieldData.Strand.forEach((element) => {
             strandsSelectedStatus.push(element.isSelected);
@@ -456,11 +434,11 @@ export class CustomAccordionComponent implements OnInit {
           if (strandsSelectedStatus.length > 1) {
             CareerFieldData.isSelected = false;
             CareerFieldData.IsChildPartiallySelected = true;
-          } else if (strandsSelectedStatus.length == 1) {
-            if (strandsSelectedStatus[0] == true) {
+          } else if (strandsSelectedStatus.length === 1) {
+            if (strandsSelectedStatus[0] === true) {
               CareerFieldData.isSelected = true;
               CareerFieldData.IsChildPartiallySelected = false;
-            } else if (strandsSelectedStatus[0] == false) {
+            } else if (strandsSelectedStatus[0] === false) {
               CareerFieldData.isSelected = false;
               CareerFieldData.IsChildPartiallySelected = false;
             }
@@ -635,7 +613,6 @@ export class CustomAccordionComponent implements OnInit {
         });
       } else {
         this.subjectToCareerData.forEach(careerField => {
-          // Career Field ID is missing in the JSON result so for now hardcoded
           if (careerField.isSelected) {
             this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
           }
@@ -735,8 +712,6 @@ export class CustomAccordionComponent implements OnInit {
   }
 
   goBackToSearch() {
-    // let lable = localStorage.getItem('searchLable');
-    // this.onPageSelect.emit('SearchAlignment');
     this.store.dispatch({ type: AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS });
     this.rout.navigate(['/AlignmentSearch']);
   }
@@ -746,5 +721,4 @@ export class CustomAccordionComponent implements OnInit {
     this.reportPayload.CteToAcademic = this.cteToAcademic;
     this.getAlignmentSearchResult();
   }
-
 }

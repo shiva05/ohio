@@ -1,10 +1,9 @@
 <div class="reports">
-
   <app-course-search-report-list></app-course-search-report-list>
 
   <div class="col-md-12">
     <div class="pull-right report-btn">
-      <button type="button" class="ohio-button large but-gap">
+      <button type="button" class="ohio-button large but-gap" (click)="saveToProfile()" >
         {{ 'ReportFields.SaveToProfile' | translate }}
       </button>
       <button type="button" class="ohio-button large but-gap" (click)="downloadPDF()">
@@ -13,10 +12,6 @@
       <button type="button" (click)="clearCourseSearch()" class="ohio-button large but-gap  secondary">
         {{ 'ReportFields.Cancel' | translate }}
       </button>
-
     </div>
   </div>
-
-
-
 </div>

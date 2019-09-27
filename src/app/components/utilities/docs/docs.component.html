@@ -26,34 +26,26 @@
         </div>
       </div>
   </div>
-  
- 
-  <div class="col-md-12">
-    <div *ngIf="showAdd" class="clearfix">
-      <app-add-docs (doLoadDocs)="loadDocs($event)" (hideAddDocs)="hideAddDocs($event)"></app-add-docs>
-    </div>
 
-    <div *ngIf="showImport">
-      <app-import-docs (hideImportDocs)="hideImportDocs($event)" [importDocsList]="importDocs" (doImportDocs)="importingDocs($event)"></app-import-docs>
-    </div>
-    
-    <div *ngIf="showPreview">
-      <app-preview-docs 
-      [docRelationInstanceId]="docRelationInstanceId" 
-      [docName]="docName" 
-      [docUrl]="docUrl" 
-      [docResponseType]="docResponseType" 
-      [docPreviewFlag]="docPreviewFlag" 
+
+  <div class="col-md-12">
+    <div>
+      <app-preview-docs
+      [docRelationInstanceId]="docRelationInstanceId"
+      [docName]="docName"
+      [docUrl]="docUrl"
+      [docResponseType]="docResponseType"
+      [docPreviewFlag]="docPreviewFlag"
       [docReviewPermissions]="docReviewPermissions"
       (closePreviewDoc)="closePreviewDoc($event)">
     </app-preview-docs>
     </div>
 </div>
   <div class="col-md-12">
-    <app-list-docs 
-      [docsList]="docs" 
-      (doDeleteDocs)="deleteDocs($event)" 
-      (doPreviewDoc)="previewDoc($event)" 
+    <app-list-docs
+      [docsList]="docs"
+      (doDeleteDocs)="deleteDocs($event)"
+      (doPreviewDoc)="previewDoc($event)"
       (doLoadDocs)="loadDocs($event)"
       [hideDocMessages]="hideDocMessages"
       [docHistoryPermissions]="docHistoryPermissions"

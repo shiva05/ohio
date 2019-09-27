@@ -5,112 +5,100 @@
 <div class="col-md-12">
   <h1>Alignment Search </h1>
   <div class="searchmain">
-<div class="row">
-<!-- Search Form Begin -->
-<div class="col-md-6">
-      <label  for="keywordInput" class="ohio-field-status" for="field-example-8">
-        <span class="ohio-field-label">{{ 'SearchFields.Keywords' | translate }}</span>
+    <div class="row">
+      <!-- Search Form Begin -->
+      <div class="col-md-6">
+        <label for="keywordInput" class="ohio-field-status" for="field-example-8">
+          <span class="ohio-field-label">{{ 'SearchFields.Keywords' | translate }}</span>
 
-        <div class="input-group customsearch">
-              <input type="search" class="ohio-field-input" id="keywordInput"
+          <div class="input-group customsearch">
+            <input type="search" class="ohio-field-input" id="keywordInput"
               placeholder="{{ 'SearchFields.Keywords' | translate }} . . ." [(ngModel)]="selectedKeyword">
 
-          <span class="input-group-addon">
-              <i id="filtersubmit"  class="fa fa-search" aria-hidden="true"></i>
-  </span>
+            <span class="input-group-addon">
+              <i id="filtersubmit" class="fa fa-search" aria-hidden="true"></i>
+            </span>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Dropdown row -->
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label>{{ 'SearchFields.CareerField' | translate }}</label>
+        <ng-multiselect-dropdown [ngClass]="" [data]="careers" [(ngModel)]="selectedCareer"
+          [settings]="careerFieldDropdownSettings" (onSelect)="onCareerSelect()" (onDeSelect)="onCareerSelect()"
+          (onSelectAll)="onCareerSelectAll()" (onDeSelectAll)="onCareerDeSelectAll()">
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="form-group col-md-6">
+        <label>{{ 'SearchFields.AcademicSubjects' | translate }}</label>
+        <ng-multiselect-dropdown [ngClass]="" [data]="academicSubjects" [(ngModel)]="selectedAcadamicSubjects"
+          [settings]="academicSubjectDropdownSettings" (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)" (onDeSelect)="OnItemDeSelect($event)"
+          (onDeSelectAll)="onDeSelectAll($event)">
+        </ng-multiselect-dropdown>
+      </div>
+
+      <div class="col-md-6">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label>{{ 'SearchFields.Strands' | translate }}</label>
+            <ng-multiselect-dropdown [ngClass]="" [data]="strandsDropdown" [(ngModel)]="selectedStrands"
+              [settings]="strandDropdownSettings" (onSelect)="onStrandSelect()" (onDeSelect)="onStrandSelect()"
+              (onSelectAll)="onStrandSelectAll()" (onDeSelectAll)="onStrandDeSelectAll()">
+            </ng-multiselect-dropdown>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label>{{ 'SearchFields.Outcomes' | translate }}</label>
+            <ng-multiselect-dropdown [ngClass]="" [data]="outcomesDropdown" [(ngModel)]="selectedOutcome"
+              [settings]="outcomeDropdownSettings" (onSelect)="onOutcomeSelect()" (onDeSelect)="onOutcomeSelect()"
+              (onSelectAll)="onOutcomeSelectAll()" (onDeSelectAll)="onOutcomeDeSelectAll()">
+            </ng-multiselect-dropdown>
+          </div>
+          <!-- End Dropdown Row -->
         </div>
 
-      </label>
-    </div>
-
-
-
-</div>
-
-<!-- Dropdown row -->
-<div class="row">
-<div class="form-group col-md-6">
-  <label>{{ 'SearchFields.CareerField' | translate }}</label>
-  <ng-multiselect-dropdown [ngClass]="" [data]="careers" [(ngModel)]="selectedCareer"
-      [settings]="careerFieldDropdownSettings"  (onSelect)="onCareerSelect()" (onDeSelect)="onCareerSelect()" (onSelectAll)="onCareerSelectAll()" (onDeSelectAll)="onCareerDeSelectAll()">
-  </ng-multiselect-dropdown>
-</div>
-<div class="form-group col-md-6">
-  <label>{{ 'SearchFields.AcademicSubjects' | translate }}</label>
-  <ng-multiselect-dropdown [ngClass]="" [data]="academicSubjects"
-      [(ngModel)]="selectedAcadamicSubjects" [settings]="academicSubjectDropdownSettings"
-                           (onSelect)="onItemSelect($event)"
-                           (onSelectAll)="onSelectAll($event)"
-                           (onDeSelect)="OnItemDeSelect($event)"
-                         (onDeSelectAll)="onDeSelectAll($event)"
-     >
-  </ng-multiselect-dropdown>
-</div>
-
-
-<div class="col-md-6">
-  <div class="row">
-      <div class="form-group col-md-6"  >
-          <label>{{ 'SearchFields.Strands' | translate }}</label>
-          <ng-multiselect-dropdown [ngClass]="" [data]="strandsDropdown" [(ngModel)]="selectedStrands"
-              [settings]="strandDropdownSettings" (onSelect)="onStrandSelect()" (onDeSelect)="onStrandSelect()" (onSelectAll)="onStrandSelectAll()" (onDeSelectAll)="onStrandDeSelectAll()">
-          </ng-multiselect-dropdown>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="competencyInput">{{ 'SearchFields.CompetencyNumber' | translate }}</label>
+            <ng-multiselect-dropdown [ngClass]="" [data]="competencyNumbers" [(ngModel)]="selectedCompetencyNumbers"
+              [settings]="competencyDropdownSettings">
+            </ng-multiselect-dropdown>
+          </div>
+        </div>
       </div>
 
-      <div class="form-group col-md-6" >
-          <label>{{ 'SearchFields.Outcomes' | translate }}</label>
-          <ng-multiselect-dropdown [ngClass]="" [data]="outcomesDropdown" [(ngModel)]="selectedOutcome"
-              [settings]="outcomeDropdownSettings" (onSelect)="onOutcomeSelect()" (onDeSelect)="onOutcomeSelect()" (onSelectAll)="onOutcomeSelectAll()" (onDeSelectAll)="onOutcomeDeSelectAll()">
-          </ng-multiselect-dropdown>
-      </div>
-      <!-- End Dropdown Row -->
-  </div>
+      <!-- Dynamic dropdowns of Academic subjects -->
+      <div class="col-md-6">
+        <div class="dynamic-academics" *ngFor="let subject of selectedAcademicItems;let i = index;">
+          <div>
+            <h3>{{subject.SubjectName}}</h3>
 
-
-
-  <div class="row">
-  <div class="form-group col-md-12">
-      <label for="competencyInput">{{ 'SearchFields.CompetencyNumber' | translate }}</label>
-      <ng-multiselect-dropdown [ngClass]="" [data]="competencyNumbers"
-          [(ngModel)]="selectedCompetencyNumbers" [settings]="competencyDropdownSettings"
-          >
-      </ng-multiselect-dropdown>
-  </div> </div>
-</div>
-
-
-
-<!-- Dynamic dropdowns of Academic subjects -->
-<div class="col-md-6">
-  <div class="dynamic-academics" *ngFor="let subject of selectedAcademicItems;let i = index;">
-
-    <div>
-      <h3>{{subject.SubjectName}}</h3>
-
-              <div class="row">
-                <div class="form-group col-md-4" *ngFor="let item of subject.Level; let sub = index;">
-                  <label>{{item.LevelName}}</label>
-                  <ng-multiselect-dropdown [ngClass]=""  [data]="item.DropdownList" [(ngModel)]="item.SelectedItems"
-                                           [settings]="subjectsDefaultSettings" (onSelect)="onSubjectLevelsSelect(item)"
-                                           (onDeSelect)="onSubjectLevelsSelect(item)"
-                                            (onSelectAll)="onSubjectLevelsSelectAll(item)"
-                                            (onDeSelectAll)="onSubjectLevelsDeSelectAll(item)"
-                                           >
-                  </ng-multiselect-dropdown>
-                </div>
+            <div class="row">
+              <div class="form-group col-md-4" *ngFor="let item of subject.Level; let sub = index;">
+                <label>{{item.LevelName}}</label>
+                <ng-multiselect-dropdown [ngClass]="" [data]="item.DropdownList" [(ngModel)]="item.SelectedItems"
+                  [settings]="subjectsDefaultSettings" (onSelect)="onSubjectLevelsSelect(item)"
+                  (onDeSelect)="onSubjectLevelsSelect(item)" (onSelectAll)="onSubjectLevelsSelectAll(item)"
+                  (onDeSelectAll)="onSubjectLevelsDeSelectAll(item)">
+                </ng-multiselect-dropdown>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Button Row -->
+    <div class="row">
+      <div class="pull-right search-btn">
+        <button type="button" class="ohio-button large but-gap"
+          (click)="search()">{{ 'SearchFields.Search' | translate }}</button>
+        <button type="button" (click)="clearSearch()"
+          class="ohio-button large but-gap  secondary">{{ 'SearchFields.Cancel' | translate }}</button>
+      </div>
     </div>
   </div>
-</div>
-</div>
-
-
-<!-- Button Row -->
-<div class="row">
-  <div class="pull-right search-btn">
-  <button type="button" class="ohio-button large but-gap"
-      (click)="search()">{{ 'SearchFields.Search' | translate }}</button>
-  <button type="button" (click)="clearSearch()"
-      class="ohio-button large but-gap  secondary">{{ 'SearchFields.Cancel' | translate }}</button>
-</div>
-</div> </div>

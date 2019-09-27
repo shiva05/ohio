@@ -1,4 +1,3 @@
-
 .nav-item {
   color: white;
   overflow: hidden;
@@ -18,20 +17,20 @@
   color: white;
 }
 .navbar-color {
-  background-color: #6F0116;
+  background-color: #6f0116;
   border-radius: 0px;
 }
 .link {
-  cursor:pointer;
+  cursor: pointer;
 }
-.menuList >li:hover {
+.menuList > li:hover {
   background: #540011;
   color: #fff;
 }
-  .menuList li:hover a{
-    color: #fff;
-  }
+.menuList li:hover a {
+  color: #fff;
+}
 
-  .menuList .dropdown-menu li:hover a {
-    color: #700017 !important;
-  }
+.menuList .dropdown-menu li:hover a {
+  color: #700017 !important;
+}
