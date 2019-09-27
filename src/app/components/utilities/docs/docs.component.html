@@ -10,26 +10,8 @@
     </div>
   </div>
   <div class="document-scroll">
-  <div class="col-md-12" *ngIf="addDocPermissions?.create || importDocPermissions?.create">
-    <div style="margin-bottom:8px;">
-      <button *ngIf="addDocPermissions.create" class="ohio-button x-small doc-buttons-margin" title="Add Documents" (click)="show('add')">
-      <i class="fa fa-plus"></i>&nbsp;Add Documents
-    </button>
-    &nbsp;
-    <button *ngIf="importDocPermissions.create" (click)="show('import')" class="ohio-button x-small doc-buttons-margin" title="Import Documents From Other Programs"><i
-        class="fa fa-download"></i>&nbsp;Import Documents
-    </button>
-    </div>
-    <div *ngIf="alertMsg !==''">
-        <div>
-          <app-alert-message type="{{alertType}}" message="{{alertMsg}}"></app-alert-message>
-        </div>
-      </div>
-  </div>
-
-
   <div class="col-md-12">
-    <div>
+    <div *ngIf="showPreview">
       <app-preview-docs
       [docRelationInstanceId]="docRelationInstanceId"
       [docName]="docName"

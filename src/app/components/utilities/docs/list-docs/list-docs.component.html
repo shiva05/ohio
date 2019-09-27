@@ -45,7 +45,7 @@
             <th>Doc Type</th>
             <th>Date</th>
             <th >Info</th>
-            <th >Status</th>
+            <!-- <th >Status</th> -->
             <th >Delete</th>
           </tr>
         </thead>
@@ -56,7 +56,7 @@
                     <td>{{doc.docTypeNameDecoded}}</td>
                     <td>{{doc.docUploadDate}}</td>
                     <td><button class="ohio-button x-small" (click)="openHistory(i,doc.documentRelationInstanceKey)" title="Description, Document history"><i class="fas fa-info"></i></button></td>
-                    <td >{{doc.status}}</td>
+                    <!-- <td >{{doc.status}}</td> -->
                     <td><div *ngIf="doc.permission?.delete" class="ohio-checkbox"><input type="checkbox" class="ohio-checkbox-el" [(ngModel)]="doc.todelete"></div></td>
                   </tr>
                   <tr *ngIf="showHistory(i)">
@@ -68,9 +68,9 @@
                           <hr class="form">
                         </div>
                         <div style=margin:5px;>
-                          <div>Document History</div>
-                          <!-- <app-history-docs [docHistory]="docHistory"></app-history-docs> -->
-                          <div class="button-right" style="margin:5px;">
+                          <!-- <div>Document History</div>
+                          <app-history-docs [docHistory]="docHistory"></app-history-docs>   -->
+                            <div class="button-right" style="margin:5px;">
                             <button class="ohio-button x-small info" (click)="openHistory(i,doc.documentRelationInstanceKey)" title="Close Document Preview" type="button">Close Details</button>
                           </div>
                         </div>

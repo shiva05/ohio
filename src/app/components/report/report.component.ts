@@ -52,7 +52,7 @@ export class ReportComponent {
             link.href = data;
 
             let dataNow = this.datepipe.transform(new Date(), 'yyyy-MM-dd');
-            link.download = 'Alignment Report ' + dataNow + '.pdf'; 
+            link.download = 'Alignment Report ' + dataNow + '.pdf';
             // this is necessary as link.click() does not work on the latest firefox
             link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
 
