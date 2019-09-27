@@ -7,10 +7,10 @@ import { AuthService } from './services/auth.service';
 import { AuthOrchestration } from './services/auth-orchestration.service';
 import * as AuthActions from './actions/auth-actions';
 import * as ClaimsActions from './actions/claims-actions';
-import { Utilities } from './models/util-nav-item';
+
 import { UtilsContext } from './models/utils-context';
-import * as UtilsActions from './actions/utils-actions';
-import { NavResize } from './actions/nav-actions';
+
+
 import { InteropService } from './services/interop.service';
 import { InteropDataPacket } from './models/interop-datapacket';
 import { Router } from '@angular/router';

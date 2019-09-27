@@ -40,7 +40,7 @@ const environment = {
   DOCS_SAVE_API: apiServer + 'Document/documents/saved',
   DOCS_IMPORT_GET_API: apiServer + 'Document/documents/import',
   DOCS_IMPORT_API: apiServer + 'Document/documents/importing',
-  DOCS_MULTI_DELETE_API: apiServer + 'Document/documents/deleted',
+  DOCS_MULTI_DELETE_API: apiServer + 'Document/documents/deleteselected',
   DOCS_DELETE_API: apiServer + 'Document/documents',
   DOCS_COUNT_GET_API: apiServer + 'Document/documents/count',
   UTILS_API: apiServer + 'Menu/utilityNav',

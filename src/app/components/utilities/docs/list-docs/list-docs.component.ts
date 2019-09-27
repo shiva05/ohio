@@ -105,7 +105,6 @@ export class ListDocsComponent implements OnInit, OnChanges {
       return { documentKey: doc.docKey, docTypeKey: doc.docTypeKey };
     });
     // console.log('list-docs.deleteDocs() docsKeysToDelete = ', docsKeysToDelete);
-
     this.doDeleteDocs.emit(docsKeysToDelete);
 
     // // TODO: Add BFF delete to handle multiple keys in parameter list
