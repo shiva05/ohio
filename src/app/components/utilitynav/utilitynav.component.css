@@ -1,21 +1,27 @@
 div,span,i {
     color:white;
 }
-
+.utilityContainer {
+    z-index: 1;
+}
 .utilityActive {
     padding-top:10px;
     background-color:#540011 !important;
     /* margin-top:-15px; */
     width:53px !important;
-    height:53px;
+    height:100%;
     text-align: center;
+    z-index: 1;
 }
 .utilityActive div
 {
+    z-index: 1;
+    color: white;
    margin-bottom:7px;
 }
 .utilitynav div
 {
+    z-index: 1;
     padding:10px;
 }
 

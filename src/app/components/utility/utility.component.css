@@ -1,12 +1,25 @@
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 .utility {
-    position: absolute;
-    top: 0;
-    left: 56px;
-    width: 94%;
+    width: 715px;
+    position: fixed;
+    top: 184px;
+    left: 73px;
+    height: 100vh;
+    z-index: 5;
+    background: #700017;
+    color: #555;
+    animation: .4s ease-in 0s 1 slideInFromLeft;
 }
 .close-slider
 {
-    color:#700017; 
+    color:white; 
     font-size:20px; 
     margin-right:2%;
     position: relative;
@@ -15,18 +28,10 @@
 }
 .close-slider-flags
 {
-    color:#700017; 
+    color:white; 
     font-size:20px; 
     margin-right:7%;
     position: relative;
     top: 16px;
     z-index: 2;
 }
-
-
-
- 
-
-  
-
-

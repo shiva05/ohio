@@ -42,11 +42,9 @@ export function AuthReducer(state = initialState, action: AuthActions.Actions): 
         case AuthActions.GET_JWT_TOKEN_ERROR:
             return { ...state, loading: false, error: action.payload };
         case AuthActions.GET_JWT_TOKEN_SUCCESS:
-              debugger
             if (action.payload !== null) {
                 localStorage.setItem(environment.name + '_as', JSON.stringify(action.payload));
             }
-
             return  {
                 ...state,
                 loading: false,

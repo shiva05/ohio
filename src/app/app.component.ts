@@ -163,7 +163,6 @@ export class AppComponent implements OnInit {
 
     this.store.select('utilsState').subscribe((utilityState) => {
       if (utilityState && utilityState.activeUtility) {
-        debugger
         this.utilNav(utilityState.activeUtility);
       }
     });

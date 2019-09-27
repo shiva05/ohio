@@ -1,28 +1,20 @@
 <div class="utilityContainer shelf-container">
 
+
   <app-utilitynav (doUtilNav)="utilNav($event)"></app-utilitynav>
 
   <div class="utility" id="utils-docs" *ngIf="showDocs && !hideUtilityDivs">
-      <button (click)="utilNav('Documents')" _ngcontent-c15="" aria-label="Close"  class="close close-slider pull-right" type="button">
-          <span _ngcontent-c15="" aria-hidden="true"><i class="fas fa-times"></i></span>
-        </button>
-    <utils-docs
-    (doLoadImportDocs)="loadImportDocs($event)"
-    (doLoadDocs)="loadDocs($event)"
-    (doImportDocs)="importDocs($event)"
-    (doDeleteDocs)="removeDocs($event)"
-    [docs]="docsResults"
-    [importDocs]="importDocsResults"
-    [utilsContext]="context"
-    [docStatusMessage]="docStatusMessage"
-    [hideDocMessages]="hideDocMessages"
-    [alertMsg]="docStatusMessage"
-    [alertType]="alertType"
-    [importDocPermissions]="importDocPermissions"
-    [addDocPermissions]="addDocPermissions"
-    [docHistoryPermissions]="docHistoryPermissions"
-    [docReviewPermissions]="docReviewPermissions">
-  </utils-docs>
+    <button (click)="utilNav('Documents')" _ngcontent-c15="" aria-label="Close" class="close close-slider pull-right"
+      type="button">
+      <span _ngcontent-c15="" aria-hidden="true"><i class="fas fa-times"></i></span>
+    </button>
+    <utils-docs (doLoadImportDocs)="loadImportDocs($event)" (doLoadDocs)="loadDocs($event)"
+      (doImportDocs)="importDocs($event)" (doDeleteDocs)="removeDocs($event)" [docs]="docsResults"
+      [importDocs]="importDocsResults" [utilsContext]="context" [docStatusMessage]="docStatusMessage"
+      [hideDocMessages]="hideDocMessages" [alertMsg]="docStatusMessage" [alertType]="alertType"
+      [importDocPermissions]="importDocPermissions" [addDocPermissions]="addDocPermissions"
+      [docHistoryPermissions]="docHistoryPermissions" [docReviewPermissions]="docReviewPermissions">
+    </utils-docs>
   </div>
 
   <!-- <div class="utility" id="utils-flags" *ngIf="showFlags && !IsOverview() && !hideUtilityDivs">
@@ -77,4 +69,6 @@
 
   </div> -->
 
+
 </div>
+

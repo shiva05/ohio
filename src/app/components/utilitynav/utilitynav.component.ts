@@ -20,13 +20,13 @@ export class UtilitynavComponent implements OnInit {
   commentsCount = 0;
   workHistoryCount = 0;
   currentWidth = 0;
-  //hideUtil = false;
-  //context: UtilsContext;
+  // hideUtil = false;
+  // context: UtilsContext;
 
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
-    
+
     const flagCountObserver = this.store.select(state => state.utilsState.flagCount);
     flagCountObserver.subscribe((count) => {
       // console.log('UtilitynavComponent ngOnInit() flagCount', count);
@@ -48,20 +48,17 @@ export class UtilitynavComponent implements OnInit {
     const tabObserver = this.store.select(state => state.utilsState.tabs);
     // console.log('UtilitynavComponent ngOnInit() state.utilsState.tabs', tabObserver);
     tabObserver.subscribe((tabs) => {
-      
-      if(tabs == null)
-      {
+
+      if (tabs == null) {
+        this.utilities = tabs;
+      } else if (tabs.length > 0) {
         this.utilities = tabs;
       }
-      else if(tabs.length > 0)
-      {
-        this.utilities = tabs;
-      }
-      
+
     });
 
-    
-    
+
+
   }
 
   utilNav(util: string) {
@@ -85,8 +82,8 @@ export class UtilitynavComponent implements OnInit {
     if (this.utilities !== null && this.utilities.indexOf) {
       return (this.utilities && this.utilities.indexOf(util) >= 0);
     }
-  
+
     return false;
   }
- 
+
 }

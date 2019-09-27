@@ -79,6 +79,10 @@ table.district-teachers th {
   margin-bottom: 45px;
 }
 
+.section-header-text {
+  color: white;
+}
+
 .ohio-table .table td {
   background-color: #fff;
 }
@@ -94,6 +98,7 @@ hr.form {
 
 .utilities .ohio-table > .table > tbody > tr > td,
 .utilities .ohio-table > .table > tbody > tr > th {
+    background-color: #222 !important;
   padding: 4px;
 }
 

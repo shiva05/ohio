@@ -35,7 +35,6 @@ export function UtilsReducer(state = initialState, action: UtilsActions.Actions)
                 activeUtility: action.payload
             };
         case UtilsActions.UTILS_SET_CONTEXT:
-        debugger
             if (state.utilityContext && action.payload &&
                 (state.utilityContext.assetTemplateKey === action.payload.assetTemplateKey &&
                     state.utilityContext.detailKey === action.payload.detailKey &&
@@ -61,7 +60,7 @@ export function UtilsReducer(state = initialState, action: UtilsActions.Actions)
             return {
                 ...state,
                 commentsCount: action.payload
-            }
+            };
         default:
             return state;
     }
