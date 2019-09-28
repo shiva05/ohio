@@ -65,6 +65,9 @@ article.ohio-table.second-table {
 .ohio-table.second-table .table {
   padding: 5px;
 }
+.doc-delete-placement {
+  float: right;
+}
 
 .ohio-table .table td.second-table-container {
   padding: 0px !important;
