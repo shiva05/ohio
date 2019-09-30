@@ -1,0 +1,6 @@
+<div class="ohio-alert alert " [ngClass]="['ohio-alert','alert', currentStyle]" *ngIf="toShow">
+  <button type="button" class="close" aria-label="Close" (click)="toggle()">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </button>
+  {{message}}
+</div>

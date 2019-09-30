@@ -1,0 +1,91 @@
+<!-- <div class="padding-adjust">
+  <div class="margin-seperator-top">
+    <h3 class="section-header-text status-title">
+        <b>Comments Overview</b>
+    </h3>
+    <hr style="margin: 7px 0;" class="form">
+</div>
+
+<div *ngIf="!showNew">
+  <button [appFocus]="true" type="button" class="ohio-button x-small" style="margin-bottom: 10px" (keyup.enter)="addSubject()"
+      (click)="addSubjectClick($event)">
+
+      <i class="fa fa-plus"></i>
+      {{content.addNewSubjectBtn}}
+  </button>
+  &nbsp;
+  <button [disabled]="disableSearch()" (click)="displaySearchComments($event)"  class="ohio-button x-small" style="margin-bottom: 10px" type="button"><i class="fas fa-search"></i> Search</button>
+</div>
+<div *ngIf="displaySearchPanel">
+  <div class="sub-title-content no-underline">Search</div>
+  <div class="clearfix">
+    <ul class="form-list">
+      <li class="tab">
+        <label class="ohio-select">
+          <span class="ohio-select-label"> Tab </span>
+          <span class="ohio-select-select fa">
+            <select class="ohio-select-select-el" name="commentSearch" [(ngModel)]="commentSearchModel.immediateOwnerSourceKey">
+               <option value="">Select tab...</option>
+              <option *ngFor="let source of sources" value="{{source.immediateOwnerSourceKey}}">{{source.immediateOwnerName}}</option>
+            </select>
+
+          </span>
+        </label>
+      </li>
+      <li class="lrg">
+          <label  class="ohio-field">
+            <span class="ohio-field-label">Person</span>
+            <input  class="ohio-field-input" type="text" [(ngModel)]="commentSearchModel.name">
+          </label>
+        </li>
+        <br>
+        <li>
+            <label  class="ohio-field">
+              <span class="ohio-field-label">Date "From"</span>
+              <input bsDatepicker
+              id="searchCommentFromDate"
+              #dp="bsDatepicker"
+              class="ohio-field-input"
+              type="text"
+              #searchCommentFromDate="ngModel"
+              [(ngModel)]="commentSearchModel.fromTs">
+            </label>
+          </li>
+          <li>
+              <label  class="ohio-field">
+                <span class="ohio-field-label">Date "To"</span>
+                <input id="searchCommentToDate" #searchCommentToDate="ngModel" bsDatepicker #dp="bsDatepicker" class="ohio-field-input" type="text" [(ngModel)]="commentSearchModel.toTs">
+              </label>
+            </li>
+            <li class="lrg">
+                <label  class="ohio-field">
+                  <span class="ohio-field-label">Comment Title</span>
+                  <input  class="ohio-field-input" type="text" [(ngModel)]="commentSearchModel.title">
+                </label>
+              </li>
+    </ul>
+    <hr style="margin: 7px 0;" class="form">
+    <div class="button-right">
+      <button class="ohio-button x-small info" type="button" (click)="clearCommentSearch()">Clear Search</button> &nbsp;
+      <button (click)="closeSearch($event)"  class="ohio-button x-small info" type="submit">Close Search</button> &nbsp;
+      <button  class="ohio-button x-small default" type="submit" (click)="searchComments()">Search</button>
+    </div>
+  </div>
+</div>
+</div>
+<br>
+<div class="comments-scroll">
+  <div class="search-container">
+      <app-new-subject (save)="saveSubject($event)" (cancel)="cancel()" *ngIf="showNew"></app-new-subject>
+  </div>
+  <div>
+      <app-subject *ngFor="let subject of filteredSubjects" [subject]="subject" (reply)="addComment($event,subject)"
+          (editComment)="editComment($event,subject)"></app-subject>
+  </div>
+</div> -->
+<!-- <div class="padding-adjust">
+    <div class="alert alert-warning alert-dismissible delete-doc-message" role="alert" style="font-size: 23px; line-height: 25px;">
+            <i class="fas fa-info-circle"></i>&nbsp;
+           There are no results for the current search terms.
+      </div>
+</div> -->

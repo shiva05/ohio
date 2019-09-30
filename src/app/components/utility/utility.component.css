@@ -1,0 +1,36 @@
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.utility {
+    width: 715px;
+    position: fixed;
+    top: 154px;
+    left: 73px;
+    height: 500px;
+    z-index: 1;
+    background: #f8f8f8;
+    color: #555;
+    animation: .4s ease-in-out 0s 1 slideInFromLeft;
+    border-radius: 10px;
+    border: 2px solid #700017;
+}
+.close-slider {
+    color:#222; 
+    font-size:20px;
+    margin-right:2%;
+    position: relative;
+    top: 16px;
+    z-index: 2;
+}
+.close-slider-flags {
+    font-size:20px;
+    margin-right:7%;
+    position: relative;
+    top: 16px;
+    z-index: 2;
+}

@@ -45,12 +45,33 @@ import { CourseSearchReportComponent } from './components/course-search-report/c
 import { CourseSearchReportListComponent } from './components/course-search-report-list/course-search-report-list.component';
 import { CourseSearchAccordionComponent } from './components/course-search-accordion/course-search-accordion.component';
 import { AuthService } from './services/auth.service';
+import { FlagService } from './services/flag.service';
+import { DocsService } from './services/docs.service';
+
 import { ClaimsService } from './services/claims.service';
 import { AuthOrchestration } from './services/auth-orchestration.service';
 import { AppHttpService } from './services/app-http.service';
 import { MenubarComponent } from './components/menubar/menubar.component';
 import { InteropService } from 'src/app/services/interop.service';
 import { Reducers } from './reducers/index';
+
+import { UtilityComponent} from './components/utility/utility.component';
+import {UtilitynavComponent } from './components/utilitynav/utilitynav.component';
+import {DocsComponent } from './components/utilities/docs/docs.component';
+import {FlagsComponent } from './components/utilities/flags/flags.component';
+import {FlagsOverviewComponent } from './components/utilities/flags-overview/flags-overview.component';
+import {CommentsOverviewComponent } from './components/utilities/comments-overview/comments-overview.component';
+import {ContactsComponent } from './components/utilities/contacts/contacts.component';
+import {HistoryComponent } from './components/utilities/history/history.component';
+import {CommentComponent } from './components/utilities/comments/comment/comment.component';
+import {CommentsContainerComponent } from './components/utilities/comments/comments-container/comments-container.component';
+import {AlertMessageComponent } from './components/alert-message/alert-message.component';
+import {AddDocsComponent } from './components/utilities/docs/add-docs/add-docs.component';
+import { ImportDocsComponent } from './components/utilities/docs/import-docs/import-docs.component';
+import { ListDocsComponent } from './components/utilities/docs/list-docs/list-docs.component';
+import { PreviewDocsComponent } from './components/utilities/docs/preview-docs/preview-docs.component';
+import { FileDraggableComponent } from './components/utilities/docs/file-draggable/file-draggable.component';
+
 import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
@@ -77,7 +98,24 @@ import { CookieService } from 'ngx-cookie-service';
     CourseSearchReportComponent,
     CourseSearchReportListComponent,
     CourseSearchAccordionComponent,
-    MenubarComponent
+    MenubarComponent,
+    UtilityComponent,
+    UtilitynavComponent,
+    DocsComponent,
+    FlagsComponent,
+    FlagsOverviewComponent,
+    CommentsOverviewComponent,
+    ContactsComponent,
+    HistoryComponent,
+    CommentComponent,
+    CommentsContainerComponent,
+    AlertMessageComponent,
+    AddDocsComponent,
+    ImportDocsComponent,
+    PreviewDocsComponent,
+    ListDocsComponent,
+    FileDraggableComponent
+
   ],
   imports: [
     BrowserModule,
@@ -109,6 +147,8 @@ import { CookieService } from 'ngx-cookie-service';
     AppHttpService,
     CookieService,
     LoaderService,
+    FlagService,
+    DocsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpLoadInterceptor,

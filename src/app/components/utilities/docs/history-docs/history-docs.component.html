@@ -1,0 +1,23 @@
+<article class="ohio-table second-table">
+<div class="ohio-table second-table">
+  <table class="table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Action</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+      <ng-template *ngIf="docHistory?.length > 0" ngFor let-dh [ngForOf]="docHistory" let-i="index">
+          <tr>
+              <td>{{dh.personUpdated}}</td>
+              <td>{{dh.status}}</td>
+              <td>{{dh.updateTs | date}}</td>
+          </tr>
+      </ng-template>
+    
+  </tbody>
+</table>
+</div>
+</article>

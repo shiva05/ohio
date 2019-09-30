@@ -1,0 +1,28 @@
+ul.form-list li.date
+{
+    width:140px;
+    margin-top: 3px;
+}
+ul.form-list li.tab 
+{
+    width: 296px;
+}
+.ohio-select-select
+{
+    height: 36px;
+}
+.ohio-select-select-el
+{
+    padding: 6px 14px;
+}
+.padding-adjust
+{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.comments-scroll 
+{
+    height: 759px;
+    overflow: auto;
+    margin: 0 10px;
+}

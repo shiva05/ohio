@@ -1,0 +1,305 @@
+/* Start of old CSS */
+
+/* a, .ohio-link, .ohio-alert .alert-link, a:focus, .ohio-link:focus, .ohio-alert .alert-link:focus, a:hover, .ohio-link:hover, .ohio-alert .alert-link:hover {
+  color: #3D7AA9;
+  font-weight: 700;
+      font-size: 1.6rem;
+}
+   ul.horizontal-layout {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 10px;
+  font-size: 16px;
+}
+   ul.horizontal-layout li {
+  display: inline-block;
+  margin-right: 20px;
+}
+   .ohio-card.ode-section
+{
+  padding:15px;
+  background-color:#fff;
+  margin-bottom:15px;
+}
+   .margin-seperator-top {
+  margin-top: 15px;
+}
+   .button-right
+{
+  float:right;
+}
+.ohio-button.delete
+{
+  background-color: #eb1316;
+}
+.ohio-button.delete:hover
+{
+  background-color: #ac0c0e;
+}
+table.district-teachers th {
+  font-weight: normal;
+  color: #525051;
+  background-color: #f5f5f5;
+  color: #5e8000;
+}
+.ohio-table table.district-teachers.comments tr:active td,
+.ohio-table table.district-teachers.comments tr:hover td
+{
+  background: #F5F5F5;
+  cursor: pointer;
+}
+.ohio-table .table tr:last-child td {
+  background-color: #fff;
+} */
+
+/* End of old CSS */
+
+.boxes {
+  border: 1px solid #000;
+  margin: 0px auto;
+  float: left;
+}
+
+.scroll {
+  background-color: #ccc;
+  width: 20px;
+  height: 100%;
+  float: right;
+}
+
+.shelf-container {
+  background-color: #d8d8d8;
+}
+
+.section-header-text {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.section-bottom-spacer {
+  margin-bottom: 45px;
+}
+
+.ohio-table .table td {
+  background-color: #fff;
+}
+
+hr.form {
+  border-top: 1px solid #a1a1a1;
+}
+
+.close {
+  opacity: 1;
+  font-size: 25px;
+}
+
+.utilities .ohio-table > .table > tbody > tr > td,
+.utilities .ohio-table > .table > tbody > tr > th {
+    background-color: #222 !important;
+  padding: 4px;
+}
+
+article.ohio-table.second-table table {
+  margin-bottom: 0;
+}
+
+article.ohio-table.second-table {
+  margin: 0;
+}
+
+  article.ohio-table.second-table table.district-teachers th {
+      background-color: #525051;
+      color: #f2f2f2;
+      border-top: 1px solid #525051;
+      border-left: 1px solid #525051;
+  }
+
+  article.ohio-table.second-table .table td,
+  article.ohio-table.second-table .table th {
+      font-size: 13px;
+      padding: 3px;
+  }
+
+.ohio-table.second-table .table {
+  padding: 5px;
+}
+
+.ohio-table .table td.second-table-container {
+  padding: 0px !important;
+}
+
+.second-table-button-margin {
+  margin: 0 5px 5px 0;
+}
+
+.message {
+  text-align: center;
+  padding: 10px;
+  background-color: #fff;
+  font-size: 15px;
+  border-radius: 4px;
+  color: #525051;
+  font-weight: normal;
+  margin-top: -12px;
+  margin-bottom: 9px;
+}
+
+.ohio-field-input.mini-comments {
+  padding: 3px 7px;
+  font-size: 14px;
+}
+
+.section-header-text.mini-comments {
+  margin-bottom: 5px;
+  margin-top: 0px;
+  font-size: 16px;
+}
+
+.utilities .ohio-card.ode-section {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.horizontal-layout.person-details {
+  margin-bottom: 4px;
+}
+
+.person-details-container {
+  border: 1px solid #5e8000;
+  border-radius: 4px;
+  padding: 0px;
+  background-color: #f2f2f2;
+  margin-top: 5px;
+}
+
+.person-details-traingle {
+  position: absolute;
+  color: #5e8000;
+  font-size: 26px;
+  top: 6px;
+  left: 100px;
+}
+
+a.close-button {
+  color: #5e8000;
+  font-size: 20px;
+  float: right;
+  position: relative;
+  background: none;
+  right: 5px;
+  top: -3px;
+}
+
+  a.close-button:hover {
+      opacity: 0.6;
+      color: #5e8000;
+      font-size: 20px;
+  }
+
+.preview .ohio-radio-button {
+  display: inline-block;
+}
+
+ul.horizontal-layout.read-only-list {
+  list-style-type: none;
+  padding: 10px;
+  background-color: #fff;
+  font-size: 15px;
+  border-radius: 4px;
+  color: #525051;
+  font-weight: bold;
+  margin-left: 0;
+}
+
+  ul.horizontal-layout.read-only-list li {
+  display: inline-block;
+  border: 1px solid #d8d8d8;
+  padding: 3px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  background-color: #f2f2f2;
+  }
+
+.flag-read-only {
+  margin-top: 4px;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+.ohio-button.mini-nav-button {
+  padding: 6px;
+  font-size: 25px;
+  margin: 1px;
+}
+
+.circle-mini-count {
+  background-color: #fff;
+  border-color: #fff;
+  min-width: 25px;
+  min-height: 25px;
+  line-height: 25px;
+  font-weight: bold;
+  color: #000;
+  border-radius: 100%;
+  font-size: 13px;
+  box-shadow: none;
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.mini-count {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.utilitynav {
+  padding-top: 10px;
+  background-color: #540011;
+  width: 53px;
+}
+
+  .utilitynav a {
+      color: #fff;
+      display: block;
+  }
+
+      .utilitynav a:focus,
+      .utilitynav a:active,
+      .utilitynav a:hover {
+          color: #fff;
+          opacity: 0.7;
+      }
+
+  .utilitynav div {
+  }
+
+.mini-nav-group {
+  color: #fff;
+  margin-left: 35%;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Start of custom CSS */
+
+.docs-box {
+  min-height: 633px; width: 700px;
+}
+
+.docs-hr {
+  margin: 7px 0;
+}
+
+/* End of custom CSS */
+.document-scroll
+{
+  height: 909px;
+  overflow: auto;
+  position: absolute;
+  top: 63px;
+  margin-right: 13px;
+}

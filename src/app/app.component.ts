@@ -7,6 +7,12 @@ import { AuthService } from './services/auth.service';
 import { AuthOrchestration } from './services/auth-orchestration.service';
 import * as AuthActions from './actions/auth-actions';
 import * as ClaimsActions from './actions/claims-actions';
+
+import { UtilsContext } from './models/utils-context';
+
+
+import { InteropService } from './services/interop.service';
+import { InteropDataPacket } from './models/interop-datapacket';
 import { Router } from '@angular/router';
 import { Utilities } from './models/util-nav-item';
 import { NavResize } from './actions/nav-actions';
@@ -47,10 +53,11 @@ export class AppComponent implements OnInit {
               public loaderService: LoaderService,
               private translate: TranslateService,
               private authService: AuthService,
+              private interopService: InteropService,
               private authOrchestration: AuthOrchestration) {
     translate.setDefaultLang('en');
     window.onresize = () => {
-      // this.utilNav(this.currentUtil);
+      this.utilNav(this.currentUtil);
     };
    }
 
@@ -125,6 +132,44 @@ export class AppComponent implements OnInit {
     this.store.select('claimsState').subscribe((claimsState) => {
       if (claimsState && claimsState.claimsJwtPayload && claimsState.claimsJwt) {
         this.ready = true;
+        if (this.ready) {
+          let obj = {
+            assetTemplateKey:242710,
+            //e.g a case key
+            detailKey: 1,
+            moduleKey: 32,
+            isDetailAsset: true
+          };
+          this.store.dispatch(new UtilsActions.UtilsSetContext(obj));
+        }
+      }
+    });
+
+    const utilsContext = this.store.select(state => state.utilsState.utilityContext);
+    utilsContext.subscribe((ctx) => {
+      // if (ctx !== null && ctx.detailKey > 0 && ctx.assetTemplateKey !== 154000) {
+      // if (ctx !== null && ctx.isDetailAsset && ctx.moduleKey) {
+      //   console.log('MENU SPA SUBSCRIBING TO CONTEXT CHANGE FROM CASE SPA - CHECKING DETAIL BOOLEAN', ctx.isDetailAsset);
+      //   console.log('MENU SPA SUBSCRIBING TO CONTEXT CHANGE FROM CASE SPA - CHECKING MODULE KEY', ctx.moduleKey);
+      // }
+
+      // if (ctx !== null && ctx.detailKey > 0 && ctx.isDetailAsset) {
+      //   this.currentAssetTemplateKey = ctx.assetTemplateKey;
+      // }
+      // else {
+      //   this.currentAssetTemplateKey = 0;
+      // }
+    });
+
+    this.store.select('utilsState').subscribe((utilityState) => {
+      if (utilityState && utilityState.activeUtility) {
+        this.utilNav(utilityState.activeUtility);
+      }
+    });
+
+    this.store.select('utilsState', 'utilityContext').subscribe((current: UtilsContext) => {
+      if (current) {
+        this.store.dispatch(new UtilsActions.UtilsContextChanged(current));
       }
     });
   }
@@ -154,12 +199,28 @@ export class AppComponent implements OnInit {
     this.store.dispatch(new ClaimsActions.ResetClaims({}));
     window.location.href = `${window.location.protocol}//${window.location.host}`;
   }
-  // setIframeWidth(utilWidth: number) {
-  //   this.utilsWidth = utilWidth;
-  //   this.mainWidth = window.innerWidth - 75 - utilWidth;
-  //   this.mainLeft = utilWidth;
-  //   const newIframeWidth = window.innerWidth - utilWidth - 20;
-  //   this.store.dispatch(new NavResize(newIframeWidth));
-  // }
+  setIframeWidth(utilWidth: number) {
+    this.utilsWidth = utilWidth;
+    this.mainWidth = window.innerWidth - 75 - utilWidth;
+    this.mainLeft = utilWidth;
+    const newIframeWidth = window.innerWidth - utilWidth - 20;
+    this.store.dispatch(new NavResize(newIframeWidth));
+  }
+
+  utilNav(util: Utilities) {
+    this.currentUtil = util;
+    const baseWidth = window.innerWidth - 75;
+    // define target widths for each utility
+    const targetWidth = {};
+
+    targetWidth[Utilities.Documents] = baseWidth * .5;
+    targetWidth[Utilities.Flags] = baseWidth * .3;
+    targetWidth[Utilities.contacts] = baseWidth * .4;
+    targetWidth[Utilities.history] = baseWidth * .2;
+    targetWidth[Utilities.Comments] = baseWidth * .4;
+
+    const width = (util !== Utilities.none) ? targetWidth[util] : 55;
+    this.setIframeWidth(width);
+  }
 }
 

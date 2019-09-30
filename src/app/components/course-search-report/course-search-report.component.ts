@@ -72,7 +72,7 @@ export class CourseSearchReportComponent implements OnInit {
     this.store.select('courseSearch').subscribe(data => {
       if (data.courseSearchSelectedFilters) {
         const objTemp = data.courseSearchSelectedFilters.selectedCourseSearchResults;
-        this.downloadPDFService.asSaveToProfile(objTemp)
+        this.downloadPDFService.csSaveToProfile(objTemp)
         .subscribe(x => {
         });
       }
