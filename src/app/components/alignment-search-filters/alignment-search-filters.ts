@@ -158,13 +158,16 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     }
   }
 
-  isEmptyObject(obj) {
-    return (obj && (Object.keys(obj).length === 0));
-  }
+  //isEmptyObject(obj) {
+  //  return (obj && (Object.keys(obj).length === 0));
+  //}
 
   onCareerSelect() {
     this.strandsDropdown = [];
-    this.selectedStrands = [];
+    var strandsId = [];
+    var selectedStrandId = [];
+    var finalUpdatedSelectListIds = [];
+   // this.selectedStrands = [];
     this.strands.forEach(eachStrand => {
       this.selectedCareer.forEach(eachCareer => {
         if (eachStrand.CareerFieldPk === eachCareer.CareerFieldId) {
@@ -172,9 +175,40 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         }
       });
     });
+    this.strandsDropdown.forEach(item => {
+      strandsId.push(item.StrandPk);
+    });
+    this.selectedStrands.forEach(element => {
+      selectedStrandId.push(element.StrandPk);
+    });
+    finalUpdatedSelectListIds = _.intersection(selectedStrandId, strandsId);
+    this.selectedStrands = [];
+    if (finalUpdatedSelectListIds.length === 0) {
+      this.selectedStrands = [];
+      this.selectedOutcome = [];
+      this.outcomesDropdown = [];
+    } else {
+      this.strands.forEach(strand => {
+        finalUpdatedSelectListIds.forEach(element => {
+          if (strand.StrandPk === element) {
+            this.selectedStrands.push(strand);
+          }
+        });
+        if (this.selectedOutcome.length > 0){
+          this.onStrandSelect();
+        }
+
+      });
+    }
   }
 
+
+
+
   onStrandSelect() {
+    var outcomesId = [];
+    var selectedOutcomesId = [];
+    var finalUpdatedSelectListIds = [];
     this.outcomesDropdown = [];
     this.outcomes.forEach(eachOutcome => {
       this.selectedStrands.forEach(eachStrand => {
@@ -183,6 +217,27 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         }
       });
     });
+
+    this.outcomesDropdown.forEach(item => {
+      outcomesId.push(item.OutcomePk);
+    });
+    this.selectedOutcome.forEach(element => {
+      selectedOutcomesId.push(element.OutcomePk);
+    });
+    finalUpdatedSelectListIds = _.intersection(selectedOutcomesId, outcomesId);
+    this.selectedOutcome = [];
+    if (finalUpdatedSelectListIds.length === 0) {
+      this.selectedOutcome = [];
+    } else {
+      this.outcomes.forEach(strand => {
+        finalUpdatedSelectListIds.forEach(element => {
+          if (strand.OutcomePk === element) {
+            this.selectedOutcome.push(strand);
+          }
+        })
+      });
+    }
+
   }
 
   onCareerSelectAll() {

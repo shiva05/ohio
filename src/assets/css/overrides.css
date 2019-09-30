@@ -50,8 +50,8 @@ padding: 0px !important;
     min-height: 56px;
 }
   .nav li a i {
-    padding: 4px 20px;
-    float: right;
+    padding: 4px 0;
+    margin-left: 20px;
   }
 
 .nav li a:hover,.nav li a:focus, .nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
