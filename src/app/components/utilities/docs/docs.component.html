@@ -1,0 +1,41 @@
+<div class="" id="docs">
+  <div class="margin-seperator-top">
+    <div class="col-md-12">
+        <div>
+            <h3 class="section-header-text status-title">
+                <b>Documents On File</b>
+            </h3>
+            <!-- <hr class="form shelf docs-hr"> -->
+        </div>
+    </div>
+  </div>
+  <div class="document-scroll">
+  <div class="col-md-12">
+    <div *ngIf="showPreview">
+      <app-preview-docs
+      [docRelationInstanceId]="docRelationInstanceId"
+      [docName]="docName"
+      [docUrl]="docUrl"
+      [docResponseType]="docResponseType"
+      [docPreviewFlag]="docPreviewFlag"
+      [docReviewPermissions]="docReviewPermissions"
+      (closePreviewDoc)="closePreviewDoc($event)">
+    </app-preview-docs>
+    </div>
+</div>
+  <div class="col-md-12">
+    <app-list-docs
+      [docsList]="docs"
+      (doDeleteDocs)="deleteDocs($event)"
+      (doPreviewDoc)="previewDoc($event)"
+      (doLoadDocs)="loadDocs($event)"
+      [hideDocMessages]="hideDocMessages"
+      [docHistoryPermissions]="docHistoryPermissions"
+      [docReviewPermissions]="docReviewPermissions">
+    </app-list-docs>
+  </div>
+</div>
+  <!-- <hr> -->
+  <!-- <button (click)="testLoadDocs()">Test Reload Docs</button>
+  <br>remove this, it just shows how to reload this page. -->
+</div>

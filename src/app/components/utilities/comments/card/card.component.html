@@ -1,0 +1,10 @@
+<div class="ohio-card ode-section comment">
+    <div #appCardHeader>
+        <ng-content select=".card-header-content"></ng-content>
+    </div>
+    <h3 *ngIf="appCardHeader.childNodes.length==0" class="section-header-text mini-comments">
+        <b>{{title}}</b>
+    </h3>
+    <hr class="card">
+    <ng-content select=".card-body-content"></ng-content>
+</div>

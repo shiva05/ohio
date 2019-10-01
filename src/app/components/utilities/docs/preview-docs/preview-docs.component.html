@@ -1,0 +1,67 @@
+<div class="col-md-12 margin-seperator-top">
+
+  <h4 class="section-header-text status-title">
+    <b>
+      <i class="fa fa-file"></i>
+      &nbsp;Document Preview
+    </b>
+  </h4>
+</div>
+
+<div class="col-md-12 margin-seperator-top">
+  <div style="margin-bottom: 15px;">
+    <span class="title_green_med">Document Name:&nbsp;</span>
+    <span>
+      <b>{{ this.docName }}</b>
+    </span>
+  </div>
+  <div *ngIf="docReviewPermissions?.read" class="col-md-3 col-md-3 no-padding-left">
+      <label class="ohio-select">
+        <span class="ohio-select-select fa">
+          <select class="ohio-select-select-el" (change)="updateDocumentStatus($event.target.value)" [disabled]="canChangeStatus()" >
+            <option>{{docStatusUpdate.currentStatus}}</option>
+            <option *ngFor="let status of docStatusUpdate.documentStatuses" value="{{status.documentStatusKey}}">
+              {{status.documentStatusName}}
+            </option>
+          </select>
+
+        </span>
+      </label>
+  </div>
+  <div class="col-md-9" *ngIf="docUrl">
+    <button class="ohio-button x-small button-right" title="Download Document" type="button" style="margin-bottom:7px;" (click)="onDownloadDoc()">
+      <i class="fa fa-download fa-lg" aria-hidden="true"></i>&nbsp;Download Document
+    </button>
+  </div>
+</div>
+
+<div class="col-md-12" *ngIf="docPreviewFlag">
+
+  <div class="iframe-doc-border" *ngIf="docUrl">
+    <!-- <iframe class="iframe-doc" [src]="" [srcdoc]="" id="ifrmDocumentView" name="ifrmDocumentView" #myIframe> -->
+
+      <!-- <object [data]="objUrl | safe" type="{{ docResponseType }}" id="objData" name="objData" #objData>
+        <embed style="border-radius:4px; background-color:#fff; height: 600px; width: 100%;" [src]="embedUrl | safe"  type="{{ docResponseType }}" id="embedSrc" name="embedSrc" #embedSrc />
+      </object> -->
+
+    <!-- </iframe> -->
+  </div>
+  <div class="iframe-doc-border" *ngIf="!docUrl">
+    <span>** No document to view **</span>
+  </div>
+
+</div>
+
+<div class="col-md-12" *ngIf="!docPreviewFlag">
+  <!-- <span>A preview of the document is not available. Please click on the Download button to view file on your computer.</span> -->
+  <div class="alert alert-warning alert-dismissible delete-doc-message" role="alert" style="font-size: 23px; line-height: 25px;">
+      <i class="fas fa-info-circle"></i>&nbsp;
+    A preview of the document is not available. Please click on the Download button to view file on your computer.
+</div>
+</div>
+
+<div class="col-md-12 clearfix">
+  <div class="button-right button-top-spacer">
+    <button class="ohio-button small info" title="Close Document Preview" type="button" (click)="onClosePreviewDoc($event)">Close Document Preview</button>
+  </div>
+</div>

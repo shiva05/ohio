@@ -5,6 +5,7 @@ import { AuthJwtPayload } from '../models/auth-jwt-payload';
 import { Organization } from '../models/organization';
 import { parseAuthJwt } from '../helpers/jwt-helper';
 import { environment } from '../../environments/environment';
+import { debug } from 'util';
 
 export interface AuthState {
     loading: boolean;
@@ -44,7 +45,6 @@ export function AuthReducer(state = initialState, action: AuthActions.Actions): 
             if (action.payload !== null) {
                 localStorage.setItem(environment.name + '_as', JSON.stringify(action.payload));
             }
-
             return {
                 ...state,
                 loading: false,
