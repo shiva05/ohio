@@ -80,4 +80,8 @@ export class QuickSearchComponent implements OnInit {
     this.cookieService.set('Test', JSON.stringify(this.quickSearchSharedData));
     (window as any).open('http://edu-dev-sbd.azurewebsites.net/#/AlignmentSearchResults', '_blank');
   }
+  clearQuickSearch() {
+    this.selectedCareer = [];
+    this.selectedAcadamicSubjects = [];
+  }
 }
