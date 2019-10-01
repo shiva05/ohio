@@ -1,7 +1,8 @@
-
-  <div *ngIf="canDelete()" class="margin-seperator-top">
-      <div class="sub-title-content no-underline doc-list"> Document List</div>
-    <button style="margin-bottom:5px;" class="ohio-button x-small doc-delete-placement doc-buttons-margin" (click)="confirmDeleteDocs()" *ngIf="docs?.length">
+<div class="doc-wrapper">
+  <div *ngIf="canDelete()" class="margin-seperator-top table-title">
+    <div class="sub-title-content no-underline doc-list"> Document List</div>
+    <button style="margin-bottom:5px;" class="ohio-button x-small doc-delete-placement doc-buttons-margin"
+      (click)="confirmDeleteDocs()" *ngIf="docs?.length">
       <i class="fa fa-trash"></i>
       &nbsp;
       Delete Document(s)
@@ -14,26 +15,27 @@
   </div> -->
   <div *ngIf="displayDeleteConfirm">
     <div class="ohio-alert alert alert-warning alert-dismissible delete-doc-message" role="alert">
-        Are you sure you would like to delete {{ docDeleteCount }} document(s) from the list?
-        <button (click)="hideDeleteDocMessages()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <i class="fa fa-times" aria-hidden="true"></i>
-          </button>
+      Are you sure you would like to delete {{ docDeleteCount }} document(s) from the list?
+      <button (click)="hideDeleteDocMessages()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
     </div>
     <div>
-      <button style="margin-bottom:5px;" class="ohio-button delete x-small doc-delete-placement" title="Delete documents that are checked from the documents list" (click)="deleteDocs()">
-          <i class="fa fa-trash"></i>
-          &nbsp;
-          Delete Document(s)
+      <button style="margin-bottom:5px;" class="ohio-button delete x-small doc-delete-placement"
+        title="Delete documents that are checked from the documents list" (click)="deleteDocs()">
+        <i class="fa fa-trash"></i>
+        &nbsp;
+        Delete Document(s)
       </button>
       &nbsp;
     </div>
   </div>
   <div *ngIf="displayDeleteZero">
     <div class="ohio-alert alert alert-warning alert-dismissible delete-doc-message" role="alert">
-        You have not marked any documents for deletion. Please select document(s) to delete.
-        <button (click)="hideDeleteDocMessages()" type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <i class="fa fa-times" aria-hidden="true"></i>
-          </button>
+      You have not marked any documents for deletion. Please select document(s) to delete.
+      <button (click)="hideDeleteDocMessages()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
     </div>
   </div>
   <div *ngIf="docs?.length">
@@ -44,47 +46,54 @@
             <th>Doc Name</th>
             <th>Doc Type</th>
             <th>Date</th>
-            <th >Info</th>
+            <th>Info</th>
             <!-- <th >Status</th> -->
-            <th >Delete</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
-            <ng-template ngFor let-doc [ngForOf]="docs" let-i="index">
-                <tr>
-                    <td><a title="{{doc.description}}" (click)="previewDoc(doc)">{{doc.docFileNameDecoded}}</a></td>
-                    <td>{{doc.docTypeNameDecoded}}</td>
-                    <td>{{doc.docUploadDate}}</td>
-                    <td><button class="ohio-button x-small" (click)="openHistory(i,doc.documentRelationInstanceKey)" title="Description, Document history"><i class="fas fa-info"></i></button></td>
-                    <!-- <td >{{doc.status}}</td> -->
-                    <td><div *ngIf="doc.permission?.delete" class="ohio-checkbox"><input type="checkbox" class="ohio-checkbox-el" [(ngModel)]="doc.todelete"></div></td>
-                  </tr>
-                  <tr *ngIf="showHistory(i)">
-                    <td colspan="6" class="docs-details-container">
-                      <div class="clearfix docs-detail-card">
-                        <div style=margin:5px;>
-                          <div>Document Description</div>
-                          <p class="content_med">{{doc.description}}</p>
-                          <hr class="form">
-                        </div>
-                        <div style=margin:5px;>
-                          <!-- <div>Document History</div>
+          <ng-template ngFor let-doc [ngForOf]="docs" let-i="index">
+            <tr>
+              <td><a title="{{doc.description}}" (click)="previewDoc(doc)">{{doc.docFileNameDecoded}}</a></td>
+              <td>{{doc.docTypeNameDecoded}}</td>
+              <td>{{doc.docUploadDate}}</td>
+              <td><button class="ohio-button x-small" (click)="openHistory(i,doc.documentRelationInstanceKey)"
+                  title="Description, Document history"><i class="fas fa-info"></i></button></td>
+              <!-- <td >{{doc.status}}</td> -->
+              <td>
+                <div *ngIf="doc.permission?.delete" class="ohio-checkbox"><input type="checkbox"
+                    class="ohio-checkbox-el" [(ngModel)]="doc.todelete"></div>
+              </td>
+            </tr>
+            <tr *ngIf="showHistory(i)">
+              <td colspan="6" class="docs-details-container">
+                <div class="clearfix docs-detail-card">
+                  <div style=margin:5px;>
+                    <div>Document Description</div>
+                    <p class="content_med">{{doc.description}}</p>
+                    <hr class="form">
+                  </div>
+                  <div style=margin:5px;>
+                    <!-- <div>Document History</div>
                           <app-history-docs [docHistory]="docHistory"></app-history-docs>   -->
-                            <div class="button-right" style="margin:5px;">
-                            <button class="ohio-button x-small info" (click)="openHistory(i,doc.documentRelationInstanceKey)" title="Close Document Preview" type="button">Close Details</button>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-            </ng-template>
+                    <div class="button-right" style="margin:5px;">
+                      <button class="ohio-button x-small info" (click)="openHistory(i,doc.documentRelationInstanceKey)"
+                        title="Close Document Preview" type="button">Close Details</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
       </table>
     </article>
   </div>
   <div class="no-docs" *ngIf="!docs?.length">
-    <div class="alert alert-warning alert-dismissible delete-doc-message" role="alert" style="font-size: 23px; line-height: 25px;">
-        <i class="fas fa-info-circle"></i>&nbsp;
-        No documents found for current case and tab.
-  </div>
+    <div class="alert alert-warning alert-dismissible delete-doc-message" role="alert"
+      style="font-size: 23px; line-height: 25px;">
+      <i class="fas fa-info-circle"></i>&nbsp;
+      No documents found for current case and tab.
+    </div>
   </div>
 
+</div>

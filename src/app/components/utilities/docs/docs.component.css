@@ -297,7 +297,6 @@ ul.horizontal-layout.read-only-list {
 /* End of custom CSS */
 .document-scroll
 {
-  height: 909px;
   overflow: auto;
   position: absolute;
   top: 63px;

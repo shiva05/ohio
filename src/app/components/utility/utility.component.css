@@ -6,9 +6,12 @@
     transform: translateX(0);
   }
 }
+.utilityContainer {
+    overflow: hidden;
+}
 .utility {
     width: 715px;
-    position: fixed;
+    position: absolute;
     top: 154px;
     left: 73px;
     height: 500px;
@@ -18,6 +21,11 @@
     animation: .4s ease-in-out 0s 1 slideInFromLeft;
     border-radius: 10px;
     border: 2px solid #700017;
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 .close-slider {
     color:#222; 

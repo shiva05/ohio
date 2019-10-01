@@ -1,12 +1,20 @@
-<div class="col-md-12 margin-seperator-top">
-
+<div class="row">
+<div class="col-md-8 margin-seperator-top">
   <h4 class="section-header-text status-title">
     <b>
       <i class="fa fa-file"></i>
-      &nbsp;Document Preview
+      &nbsp;Document Ready
     </b>
   </h4>
 </div>
+<div class="col-md-4 document-download" *ngIf="docUrl">
+  <button class="ohio-button x-small button-right" title="Download Document" type="button" style="margin-bottom:7px;"
+    (click)="onDownloadDoc()">
+    <i class="fa fa-download fa-lg" aria-hidden="true"></i>&nbsp;Download Document
+  </button>
+</div>
+</div>
+
 
 <div class="col-md-12 margin-seperator-top">
   <div style="margin-bottom: 15px;">
@@ -28,11 +36,7 @@
         </span>
       </label>
   </div>
-  <div class="col-md-9" *ngIf="docUrl">
-    <button class="ohio-button x-small button-right" title="Download Document" type="button" style="margin-bottom:7px;" (click)="onDownloadDoc()">
-      <i class="fa fa-download fa-lg" aria-hidden="true"></i>&nbsp;Download Document
-    </button>
-  </div>
+
 </div>
 
 <div class="col-md-12" *ngIf="docPreviewFlag">
