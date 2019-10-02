@@ -1,15 +1,21 @@
 <div class="reports">
-  <app-report-list></app-report-list>
+  <!-- [reportErr]="reportErr" -->
+  <app-report-list (reportFail)="reportFail = true"></app-report-list>
   <div class="col-md-12">
-    <div class="pull-right report-btn">
+    <div class="pull-right report-btn" *ngIf="!reportFail">
       <button type="button" class="ohio-button large but-gap"(click)="saveToProfile()" >
         {{ 'ReportFields.SaveToProfile' | translate }}
       </button>
       <button type="button" class="ohio-button large but-gap" (click)="downloadPDF()">
         {{ 'ReportFields.Download' | translate }}
       </button>
-      <button type="button" class="ohio-button large but-gap  secondary" (click)="clearAlignmentSearch()">
+      <button type="button" class="ohio-button large but-gap secondary" (click)="clearAlignmentSearch()">
         {{ 'ReportFields.Cancel' | translate }}
+      </button>
+    </div>
+    <div class="pull-right report-btn report-failed" *ngIf="reportFail">
+      <button type="button" class="ohio-button large but-gap secondary" (click)="clearAlignmentSearch()">
+        Go Back
       </button>
     </div>
   </div>

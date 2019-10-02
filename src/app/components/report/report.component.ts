@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { DownloadPDFService } from '../../services/download-pdf.service';
 import { Store } from '@ngrx/store';
 import { DatePipe } from '@angular/common';
@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 export class ReportComponent {
 
   @Output() onPageSelect = new EventEmitter<any>();
+  reportFail: boolean = false;
 
   constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router) { }
 
