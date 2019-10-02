@@ -340,3 +340,10 @@
   border-radius: 5px;
   color: #fff;
 }
+.report-fail {
+  margin: 80px 0 10px 50px;
+  font-size: 20px;
+  font-weight: 600;
+  display: block;
+  width: 100%;
+}

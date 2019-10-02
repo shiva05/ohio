@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { DownloadPDFService } from '../../services/download-pdf.service';
 import { Store } from '@ngrx/store';
-import { DatePipe } from '@angular/common'
+import { DatePipe } from '@angular/common';
 
 import { AppState } from './../../app.state';
 import { Router } from '@angular/router';
@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 export class CourseSearchReportComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
+  reportFail: boolean = false;
 
   constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router) { }
 
@@ -49,7 +50,7 @@ export class CourseSearchReportComponent implements OnInit {
             const link = document.createElement('a');
             link.href = data;
 
-            let dataNow = this.datepipe.transform(new Date(), 'yyyy-MM-dd');;
+            let dataNow = this.datepipe.transform(new Date(), 'yyyy-MM-dd'); ;
             link.download = 'Course search Report ' + dataNow + '.pdf'; // There isn't that much of a reason to even think about what I'm doing and instead just do it because there isn't a
             // this is necessary as link.click() does not work on the latest firefox
             link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
