@@ -28,10 +28,10 @@
             </div>
             <!-- Button Row -->
             <div class="row search-btn">
-                <div class="col-md-6 col-xs-6"> <button type="button" class="btn btn-outline-secondary">Cancel</button>
+                <div class="col-md-6 col-xs-6"> <button type="button" (click)="clearQuickSearch()" class="btn btn-outline-secondary">Cancel</button>
                 </div>
                 <div class="col-md-6 col-xs-6">
-                    <button type="button" class="btn btn-info" (click)="sendSearch()">Search</button>
+                    <button type="button" class="btn btn-info" (click)="sendSearch()" [disabled]="selectedCareer.length == 0 || selectedAcadamicSubjects.length == 0">Search2</button>
                 </div>
             </div>
         </form>
