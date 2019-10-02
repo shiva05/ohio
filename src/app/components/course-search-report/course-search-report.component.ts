@@ -66,7 +66,7 @@ export class CourseSearchReportComponent implements OnInit {
   }
 
   clearCourseSearch() {
-    this.rout.navigate(['/CourseSearch']);
+    this.rout.navigate(['/coursesearch']);
   }
   public saveToProfile(): void {
     this.store.select('courseSearch').subscribe(data => {

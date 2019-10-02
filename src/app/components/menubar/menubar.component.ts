@@ -101,7 +101,11 @@ export class MenubarComponent implements OnInit {
 
     this.store.dispatch(new UtilsActions.UtilsReset(Utilities.none));
     this.store.dispatch(new NavActions.NavSetMenuName(menuName));
-
+    debugger
+    if(url){
+      url = url.replace (/\//g, "");
+      url = url.replace (/#/g, "");
+    }
     this.router.navigateByUrl(url);
 
     const message = { originator: 'MENU_CLICK', htmlPushUrl: url };

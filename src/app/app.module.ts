@@ -72,6 +72,14 @@ import { ListDocsComponent } from './components/utilities/docs/list-docs/list-do
 import { PreviewDocsComponent } from './components/utilities/docs/preview-docs/preview-docs.component';
 import { FileDraggableComponent } from './components/utilities/docs/file-draggable/file-draggable.component';
 
+
+import { CardComponent } from './components/utilities/comments/card/card.component';
+import { CommenterComponent } from './components/utilities/comments/commenter/commenter.component';
+import { MessageEditorComponent } from './components/utilities/comments/message-editor/message-editor.component';
+import { NewSubjectComponent } from './components/utilities/comments/new-subject/new-subject.component';
+import { SubjectComponent } from './components/utilities/comments/subject/subject.component';
+import { NewCommentComponent } from './components/utilities/comments/new-comment/new-comment.component';
+import { HistoryDocsComponent } from './components/utilities/docs/history-docs/history-docs.component';
 import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
@@ -114,8 +122,14 @@ import { CookieService } from 'ngx-cookie-service';
     ImportDocsComponent,
     PreviewDocsComponent,
     ListDocsComponent,
-    FileDraggableComponent
-
+    FileDraggableComponent,
+    CardComponent,
+    CommenterComponent,
+    MessageEditorComponent,
+    NewSubjectComponent,
+    SubjectComponent,
+    HistoryDocsComponent,
+    NewCommentComponent
   ],
   imports: [
     BrowserModule,

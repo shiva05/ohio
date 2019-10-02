@@ -11,15 +11,15 @@ import { ReportComponent } from './components/report/report.component';
 import { CourseSearchReportComponent } from './components/course-search-report/course-search-report.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'Home', pathMatch: 'full' },
+  //{ path: '', redirectTo: 'Home', pathMatch: 'full' },
   {
     path: '', component: MainComponent, children: [
       { path: 'Home', component: HomeComponent }]
   },
-  { path: 'AlignmentSearch', component: AlignmentSearchComponent },
+  { path: 'alignmentsearch', component: AlignmentSearchComponent },
   { path: 'AlignmentSearchResults', component: FilterSummaryComponent },
   { path: 'AlignmentSearchReport', component: ReportComponent },
-  { path: 'CourseSearch', component: CourseSearchComponent },
+  { path: 'coursesearch', component: CourseSearchComponent },
   { path: 'CourseSearchResults', component: FilterSummaryComponent },
   { path: 'CourseSearchReport', component: CourseSearchReportComponent },
   { path: 'DataImport', component: ExportComponent },

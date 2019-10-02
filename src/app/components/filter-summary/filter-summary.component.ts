@@ -181,12 +181,12 @@ export class FilterSummaryComponent implements OnInit {
 
     goBackToAlignmentSearch() {
         this.shared.updateAlignmentSearch = true;
-        this.rout.navigate(['/AlignmentSearch']);
+        this.rout.navigate(['/alignmentsearch']);
     }
 
     goBackToCourseSearch() {
         this.shared.updateCourseSearch = true;
-        this.rout.navigate(['/CourseSearch']);
+        this.rout.navigate(['/coursesearch']);
     }
 
     formatSearchDataToSummary(source) {

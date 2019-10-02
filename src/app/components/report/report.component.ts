@@ -23,7 +23,7 @@ export class ReportComponent {
   }
 
   clearAlignmentSearch() {
-    this.rout.navigate(['/AlignmentSearch']);
+    this.rout.navigate(['/alignmentsearch']);
   }
 
   public downloadPDF(): void {
