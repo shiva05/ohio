@@ -157,9 +157,9 @@ export class AlignmentSearchFiltersComponent implements OnInit {
 
   onCareerSelect() {
     this.strandsDropdown = [];
-    var strandsId = [];
-    var selectedStrandId = [];
-    var finalUpdatedSelectListIds = [];
+    let strandsId:any = [];
+    let selectedStrandId:any = [];
+    var finalUpdatedSelectListIds:any = [];
     this.strands.forEach(eachStrand => {
       this.selectedCareer.forEach(eachCareer => {
         if (eachStrand.CareerFieldPk === eachCareer.CareerFieldId) {
@@ -195,9 +195,9 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   }
 
   onStrandSelect() {
-    var outcomesId = [];
-    var selectedOutcomesId = [];
-    var finalUpdatedSelectListIds = [];
+    let outcomesId:any = [];
+    let selectedOutcomesId:any = [];
+    let finalUpdatedSelectListIds:any = [];
     this.outcomesDropdown = [];
     this.outcomes.forEach(eachOutcome => {
       this.selectedStrands.forEach(eachStrand => {
