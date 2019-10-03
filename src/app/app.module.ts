@@ -81,6 +81,8 @@ import { SubjectComponent } from './components/utilities/comments/subject/subjec
 import { NewCommentComponent } from './components/utilities/comments/new-comment/new-comment.component';
 import { HistoryDocsComponent } from './components/utilities/docs/history-docs/history-docs.component';
 import { CookieService } from 'ngx-cookie-service';
+import { ReportModalComponent } from './report-modal/report-modal.component';
+import { CourseSearchReportModalComponent } from './course-search-report-modal/course-search-report-modal.component';
 
 @NgModule({
   declarations: [
@@ -129,7 +131,9 @@ import { CookieService } from 'ngx-cookie-service';
     NewSubjectComponent,
     SubjectComponent,
     HistoryDocsComponent,
-    NewCommentComponent
+    NewCommentComponent,
+    ReportModalComponent,
+    CourseSearchReportModalComponent
   ],
   imports: [
     BrowserModule,

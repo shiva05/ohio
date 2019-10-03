@@ -16,6 +16,8 @@ export class ReportComponent {
 
   @Output() onPageSelect = new EventEmitter<any>();
   reportFail: boolean = false;
+  nameDialogue: boolean = false;
+  PDFName: string = '';
 
   constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router) { }
 
@@ -27,7 +29,12 @@ export class ReportComponent {
     this.rout.navigate(['/alignmentsearch']);
   }
 
+  openNameDialogue() {
+    this.nameDialogue = true;
+  }
+
   public downloadPDF(): void {
+    console.log(this.PDFName); // TODO: THIS IS THE VARIABLE: ths.PDFName
     this.store.select('advancedSearch').subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
         let objTemp = data.alignmentSearchSelectedFilters.selectedAsSearchResults;
