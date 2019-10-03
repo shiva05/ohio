@@ -15,9 +15,6 @@ import { SharedService } from '../../services/shared.service';
 })
 
 export class AlignmentSearchFiltersComponent implements OnInit {
-  disabled = false;
-  ShowFilter = true;
-  limitSelection = false;
   careers: any = [];
   academicSubjects: any = [];
   strands: any = [];
@@ -28,7 +25,6 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   strandsDropdown: any = [];
   outcomesDropdown: any = [];
   selectedKeyword: any;
-  selectedItems: any = [];
   selectedCareer: any = [];
   selectedAcadamicSubjects: any = [];
   selectedStrands: any = [];
@@ -158,16 +154,12 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     }
   }
 
-  //isEmptyObject(obj) {
-  //  return (obj && (Object.keys(obj).length === 0));
-  //}
 
   onCareerSelect() {
     this.strandsDropdown = [];
-    var strandsId = [];
-    var selectedStrandId = [];
-    var finalUpdatedSelectListIds = [];
-   // this.selectedStrands = [];
+    let strandsId:any = [];
+    let selectedStrandId:any = [];
+    var finalUpdatedSelectListIds:any = [];
     this.strands.forEach(eachStrand => {
       this.selectedCareer.forEach(eachCareer => {
         if (eachStrand.CareerFieldPk === eachCareer.CareerFieldId) {
@@ -202,13 +194,10 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     }
   }
 
-
-
-
   onStrandSelect() {
-    var outcomesId = [];
-    var selectedOutcomesId = [];
-    var finalUpdatedSelectListIds = [];
+    let outcomesId:any = [];
+    let selectedOutcomesId:any = [];
+    let finalUpdatedSelectListIds:any = [];
     this.outcomesDropdown = [];
     this.outcomes.forEach(eachOutcome => {
       this.selectedStrands.forEach(eachStrand => {
@@ -291,9 +280,6 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         }
       });
     });
-  }
-
-  sendSub(item) {
   }
 
   onSubjectLevelsSelect(data) {
@@ -412,12 +398,5 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       this.rout.navigate(['/AlignmentSearchResults']);
       this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.searchObj });
     }
-  }
-
-  onAcadamicSubjectSelect() {
-  }
-
-  goToPage(org) {
-    this.onPageSelect.emit(org);
   }
 }

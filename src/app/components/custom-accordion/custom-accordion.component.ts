@@ -161,7 +161,7 @@ export class CustomAccordionComponent implements OnInit {
           Subjects: subjects,
           CteToAcademic: this.cteToAcademic
         };
-
+        this.searchResultDataArray = [];
         this.searchResultService.getSearchResultData(obj).subscribe(
           data => {
             this.searchResultData = data;
