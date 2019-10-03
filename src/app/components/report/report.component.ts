@@ -34,7 +34,6 @@ export class ReportComponent {
   }
 
   public downloadPDF(): void {
-    console.log(this.PDFName); // TODO: THIS IS THE VARIABLE: ths.PDFName
     this.store.select('advancedSearch').subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
         let objTemp = data.alignmentSearchSelectedFilters.selectedAsSearchResults;
@@ -75,6 +74,7 @@ export class ReportComponent {
 
   }
   public saveToProfile(): void {
+    console.log(this.PDFName); // TODO: THIS IS THE VARIABLE: ths.PDFName
     this.store.select('advancedSearch').subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
         let objTemp =  data.alignmentSearchSelectedFilters.selectedAsSearchResults;
