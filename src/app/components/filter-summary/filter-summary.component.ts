@@ -162,7 +162,6 @@ export class FilterSummaryComponent implements OnInit {
         if (this.searchLable === 'alignmentSearchResults') {
             this.store.select('advancedSearch').subscribe(data => {
                 if (data.alignmentSearchSelectedFilters) {
-                    this.formatSearchDataToSummary(data.alignmentSearchSelectedFilters);
                     this.alignmentSearchResults = true;
                     this.courseSearchResults = false;
                 }
