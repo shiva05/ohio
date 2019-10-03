@@ -3,6 +3,7 @@ import { AppHttpService } from './app-http.service';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../environments/environment';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,13 +24,16 @@ export class DownloadPDFService {
     return this.httpService.getPDFFile(uri, obj);
   }
   public asSaveToProfile(obj): Observable<any> {
-    const uri = environment.AsSaveToProfile + '?moduleKey=32&detailKey=0&assetTemplateKey=171182&docType=1182';
+    const uri = environment.AsSaveToProfile + '?moduleKey=32&detailKey=0&assetTemplateKey=242710&docType=1182';
     // this.http refers to HttpClient. Note here that you cannot use the generic get<Blob> as it does not compile: instead you "choose" the appropriate API in this way.
     return this.httpService.post(uri, obj);
   }
   public csSaveToProfile(obj): Observable<any> {
-    const uri = environment.CsSaveToProfile + '?moduleKey=32&detailKey=0&assetTemplateKey=171182&docType=1182';
+    const uri = environment.CsSaveToProfile + '?moduleKey=32&detailKey=0&assetTemplateKey=242710&docType=1182';
     // this.http refers to HttpClient. Note here that you cannot use the generic get<Blob> as it does not compile: instead you "choose" the appropriate API in this way.
     return this.httpService.post(uri, obj);
+  }
+  public getPermissions(){
+    return this.httpService.get(environment.Auth_Assets + '?moduleKey=32&assetTemplateKey=242710&assetTypeName=doc' );
   }
 }
