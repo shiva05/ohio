@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { AppState } from './../../app.state';
@@ -32,6 +32,8 @@ export class ReportListComponent implements OnInit {
   results: any = [];
   reportListhResultData: any = [];
 
+  localReportErr: boolean = false;
+  @Output() reportFail = new EventEmitter<any>();
   @Output() onPageSelect = new EventEmitter<any>();
 
   constructor(private store: Store<AppState>, private reportService: ReportService) { }
@@ -52,6 +54,9 @@ export class ReportListComponent implements OnInit {
             });
           },
           err => {
+            console.log('Report FAILED');
+            this.localReportErr = true;
+            this.reportFail.emit();
           });
       }
     });

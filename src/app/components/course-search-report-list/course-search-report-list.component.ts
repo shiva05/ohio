@@ -13,13 +13,14 @@ import { ReportService } from '../../services/report.service';
 export class CourseSearchReportListComponent implements OnInit {
   results: any = [];
   reportListhResultData: any = [];
-
+  localReportErr: boolean = false;
+  @Output() reportFail = new EventEmitter<any>();
   @Output() onPageSelect = new EventEmitter<any>();
 
   constructor(private store: Store<AppState>, private reportService: ReportService) { }
 
   ngOnInit() {
-    this.store.select('courseSearch').subscribe(data => {
+    this.store.select('courseSearch').subscribe(data => { 
       if (data.courseSearchSelectedFilters.selectedCourseSearchResults) {
         let objTemp = data.courseSearchSelectedFilters.selectedCourseSearchResults;
         this.reportService.getCourseSearchReportData(objTemp).subscribe(
@@ -27,7 +28,14 @@ export class CourseSearchReportListComponent implements OnInit {
             this.reportListhResultData = data;
           },
           err => {
+            console.log('Report FAILED');
+            this.localReportErr = true;
+            this.reportFail.emit();
           });
+      } else {
+        console.log('Report FAILED');
+        this.localReportErr = true;
+        this.reportFail.emit();
       }
     });
   }
@@ -37,10 +45,10 @@ export class CourseSearchReportListComponent implements OnInit {
   }
 
   calculateStrandClasses(type) {
-    var strandClasses = {
-      'A': 'legend-application',
-      'R': 'legend-reinforcement',
-      'E': 'legend-enrichment'
+    let strandClasses = {
+      A: 'legend-application',
+      R: 'legend-reinforcement',
+      E: 'legend-enrichment'
     };
     return strandClasses[type];
   }

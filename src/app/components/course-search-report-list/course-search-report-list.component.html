@@ -1,4 +1,4 @@
-<div class="course-search-results">
+<div class="course-search-results" *ngIf="!localReportErr">
   <h1>Results</h1>
   <div class="course-wrap" *ngFor="let result of reportListhResultData.CareerpathToAcademicsubject">
     <h3 class="sortedTypeHeader">{{result.CteCourseName}} <i class="fas fa-arrows-alt-h">
@@ -76,4 +76,8 @@
       </ul>
     </div>
   </div>
+</div>
+
+<div class="col-md-12 report-fail" *ngIf="localReportErr">
+  Unfortunately, your report could not be generated. Please try again later.
 </div>
