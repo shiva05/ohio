@@ -20,25 +20,5 @@
   <!-- </div> -->
 </div>
 
-<div *ngIf="nameDialogue" class="modal fade show in danger center-modal" id="reportModal" role="dialog">
-  <div class="modal-dialog" role="document" style="display: flex;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="reportModal" aria-label="Close">
-          <i class="fa fa-times" aria-hidden="true"></i>
-        </button>
-      </div>
-      <div class="modal-body">
-        <h2 class="modal-title" id="myModalLabel">Save as...</h2>
-        <p>Choose a file name for your PDF document.</p>
-        <label class="ohio-field" for="PDFNameInput">
-          <span class="ohio-field-label">File Name:</span>
-          <input [(ngModel)]="PDFName" type="text" id="PDFNameInput" class="ohio-field-input" name="" value="">
-        </label>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="ohio-button" (click)="saveToProfile()">Save to Profile</button>
-      </div>
-    </div>
-  </div>
-</div>
+<app-report-modal *ngIf="nameDialogue" (nameForParent)="saveToProfile($event)"></app-report-modal>
+

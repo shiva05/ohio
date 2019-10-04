@@ -71,10 +71,9 @@ export class ReportComponent {
           });
       }
     });
-
   }
   public saveToProfile(): void {
-    console.log(this.PDFName); // TODO: THIS IS THE VARIABLE: ths.PDFName
+    console.log(this.PDFName); // TODO: THIS IS THE VARIABLE: this.PDFName
     this.store.select('advancedSearch').subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
         let objTemp =  data.alignmentSearchSelectedFilters.selectedAsSearchResults;
