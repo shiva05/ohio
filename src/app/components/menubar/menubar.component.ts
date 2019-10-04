@@ -99,7 +99,7 @@ export class MenubarComponent implements OnInit {
 
     if (!hasChildren) { }
 
-    this.store.dispatch(new UtilsActions.UtilsReset(Utilities.none));
+
     this.store.dispatch(new NavActions.NavSetMenuName(menuName));
     debugger
     if(url){

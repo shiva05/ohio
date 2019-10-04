@@ -16,8 +16,17 @@ export class ReportComponent {
 
   @Output() onPageSelect = new EventEmitter<any>();
   reportFail: boolean = false;
+  isPublic: boolean = false;
 
   constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router) { }
+
+  ngOnInit() {
+    this.store.select('authState').subscribe((authState) => {
+      if (authState != null) {
+        this.isPublic = authState.isPublic;
+      }
+    });
+  }
 
   goToPage(org) {
     this.onPageSelect.emit(org);
@@ -78,7 +87,5 @@ export class ReportComponent {
         });
       }
     });
-
   }
-
 }
