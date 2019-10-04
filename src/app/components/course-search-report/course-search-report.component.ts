@@ -18,10 +18,15 @@ export class CourseSearchReportComponent implements OnInit {
   reportFail: boolean = false;
   nameDialogue: boolean = false;
   PDFName: string = '';
-
+  isPublic: boolean = false;
   constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router) { }
 
   ngOnInit() {
+    this.store.select('authState').subscribe((authState) => {
+      if (authState != null) {
+        this.isPublic = authState.isPublic;
+      }
+    });
   }
 
   goToPage(org) {

@@ -119,31 +119,20 @@ export class ListDocsComponent implements OnInit, OnChanges {
     } else {
       this.showHist[index] = true;
     }
-    this.fetchDocHistory(documentRelationInstanceKey);
   }
 
-  showHistory(index: number) {
-    // Get document history
-    // this.fetchDocHistory(documentRelationInstanceKey);
+    showHistory(index: number) {
+      // Get document history
+      // this.fetchDocHistory(documentRelationInstanceKey);
 
-    // Set the document description
+      // Set the document description
 
-    // Show history panel
-    return this.showHist[index];
-    // this.displayHist = !this.displayHist;
-  }
+      // Show history panel
+      return this.showHist[index];
+      // this.displayHist = !this.displayHist;
+    }
 
-  fetchDocHistory(documentRelationInstanceKey) {
-    // Get document statuses
-    this.docService.fetchDocHistory(documentRelationInstanceKey).subscribe((history: DocumentHistory[]) => {
-      this.docHistory = history;
 
-    },
-    (error: HttpErrorResponse) =>
-      console.log(`Error Status: ${JSON.stringify(error.status)};
-    Error Status Text: ${JSON.stringify(error.statusText)};
-    Error Msg: ${JSON.stringify(error.message)};`));
-  }
 
   canDelete() {
     const docsAllowedToDelete = this.docsList.filter(x => x.permission.delete === true);

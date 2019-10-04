@@ -186,7 +186,7 @@ export class UtilityComponent implements OnInit {
     const docBaseViewUrl = environment.DOCS_GET_DOC_FILE_API;
 
     // Get permissions first
-    this.loadDocComponentPermissions();
+    //this.loadDocComponentPermissions();
 
 
 

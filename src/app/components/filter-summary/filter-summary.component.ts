@@ -17,7 +17,6 @@ export class FilterSummaryComponent implements OnInit {
 
     @Input() FilterSummary;
     FilterSummaryKeys: any;
-    FilterSummaryData: any = [];
     panelExpanded: boolean = false;
     searchLable: any;
     alignmentSearchResults: any;
@@ -84,11 +83,11 @@ export class FilterSummaryComponent implements OnInit {
         }
         this.store.select('advancedSearch').subscribe(data => {
             if (data.alignmentSearchSelectedFilters) {
-                let careerfields = [];
-                let strands = [];
-                let outcomes = [];
-                let CompetencyIds = [];
-                let subjects = [];
+                let careerfields:any = [];
+                let strands:any = [];
+                let outcomes:any = [];
+                let CompetencyIds:any = [];
+                let subjects:any = [];
                 if (data.alignmentSearchSelectedFilters.selectedCareers) {
                     data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
                         careerfields.push(element.CareerFieldName);
@@ -111,7 +110,7 @@ export class FilterSummaryComponent implements OnInit {
                 }
                 if (data.alignmentSearchSelectedFilters.selectedAcadamicSubjects) {
                     data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
-                        let level1 = [];
+                        let level1:any = [];
                         let level1Name = element.Level[0].LevelName;
                         if (element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length > 0) {
                             element.Level[0].SelectedItems.forEach(element => {
@@ -119,14 +118,14 @@ export class FilterSummaryComponent implements OnInit {
                             });
                         }
 
-                        let level2 = [];
+                        let level2:any = [];
                         let level2Name = element.Level[1].LevelName;
                         if (element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length > 0) {
                             element.Level[1].SelectedItems.forEach(element => {
                                 level2.push(element.LevelValue1);
                             });
                         }
-                        let level3 = [];
+                        let level3:any = [];
                         let level3Name = element.Level[2].LevelName;
                         if (element.Level[2] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length > 0) {
                             element.Level[2].SelectedItems.forEach(element => {
@@ -163,7 +162,6 @@ export class FilterSummaryComponent implements OnInit {
         if (this.searchLable === 'alignmentSearchResults') {
             this.store.select('advancedSearch').subscribe(data => {
                 if (data.alignmentSearchSelectedFilters) {
-                    this.formatSearchDataToSummary(data.alignmentSearchSelectedFilters);
                     this.alignmentSearchResults = true;
                     this.courseSearchResults = false;
                 }
@@ -189,24 +187,10 @@ export class FilterSummaryComponent implements OnInit {
         this.rout.navigate(['/coursesearch']);
     }
 
-    formatSearchDataToSummary(source) {
-    }
-
     formatSearchCourseData(source) {
         this.filterCareerPathData = source.selectedCareerPath;
         this.filterCareerPathCourseData = source.selectedCareerPathCourses;
         this.filterAcadamicSubjectData = source.selectedAcademicSubject;
         this.filterAcadamicSubjectCourseData = source.selectedAcademicSubjectCourses;
-    }
-
-    getFormatedName(arg) {
-        let result;
-        if (arg && arg.length > 0) {
-            result = arg[0].item_text;
-            if (arg.length > 1) {
-                result = result + '  ' + (arg.length - 1);
-            }
-            return result;
-        }
     }
 }
