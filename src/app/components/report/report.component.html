@@ -1,7 +1,7 @@
 <div class="reports">
   <app-report-list (reportFail)="reportFail = true"></app-report-list>
   <div class="col-md-12">
-    <div class="pull-right report-btn" *ngIf="!reportFail">
+    <!-- <div class="pull-right report-btn" *ngIf="!reportFail"> -->
       <button type="button" class="ohio-button large but-gap"(click)="nameDialogue=true;" >
         {{ 'ReportFields.SaveToProfile' | translate }}
       </button>
@@ -17,10 +17,10 @@
         Go Back
       </button>
     </div>
-  </div>
+  <!-- </div> -->
 </div>
 
-<div *ngIf="nameDialogue" class="modal fade show in danger" id="reportModal" role="dialog">
+<div *ngIf="nameDialogue" class="modal fade show in danger center-modal" id="reportModal" role="dialog">
   <div class="modal-dialog" role="document" style="display: flex;">
     <div class="modal-content">
       <div class="modal-header">
@@ -37,7 +37,7 @@
         </label>
       </div>
       <div class="modal-footer">
-        <button type="button" class="ohio-button" (click)="saveToProfile()">Download</button>
+        <button type="button" class="ohio-button" (click)="saveToProfile()">Save to Profile</button>
       </div>
     </div>
   </div>

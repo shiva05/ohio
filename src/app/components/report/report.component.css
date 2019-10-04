@@ -27,3 +27,7 @@
 .report-failed {
   margin-right: 80px;
 }
+.modal-body {
+  width: 600px;
+  height: 300px;
+}
