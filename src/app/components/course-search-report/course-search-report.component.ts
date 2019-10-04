@@ -80,12 +80,12 @@ export class CourseSearchReportComponent implements OnInit {
   clearCourseSearch() {
     this.rout.navigate(['/coursesearch']);
   }
-  public saveToProfile(): void {
+  public saveToProfile(fileName: any): void {
     console.log(this.PDFName); // TODO: THIS IS THE VARIABLE: ths.PDFName
     this.store.select('courseSearch').subscribe(data => {
       if (data.courseSearchSelectedFilters) {
         const objTemp = data.courseSearchSelectedFilters.selectedCourseSearchResults;
-        this.downloadPDFService.csSaveToProfile(objTemp)
+        this.downloadPDFService.csSaveToProfile(objTemp ,fileName)
         .subscribe(x => {
         });
       }

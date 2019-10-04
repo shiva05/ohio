@@ -23,13 +23,13 @@ export class DownloadPDFService {
     // this.http refers to HttpClient. Note here that you cannot use the generic get<Blob> as it does not compile: instead you "choose" the appropriate API in this way.
     return this.httpService.getPDFFile(uri, obj);
   }
-  public asSaveToProfile(obj): Observable<any> {
-    const uri = environment.AsSaveToProfile + '?moduleKey=32&detailKey=0&assetTemplateKey=242710&docType=1182';
+  public asSaveToProfile(obj,fileName): Observable<any> {
+    const uri = environment.AsSaveToProfile + '?moduleKey=32&detailKey=0&assetTemplateKey=242710&docType=1182&documentName=' + fileName;
     // this.http refers to HttpClient. Note here that you cannot use the generic get<Blob> as it does not compile: instead you "choose" the appropriate API in this way.
     return this.httpService.post(uri, obj);
   }
-  public csSaveToProfile(obj): Observable<any> {
-    const uri = environment.CsSaveToProfile + '?moduleKey=32&detailKey=0&assetTemplateKey=242710&docType=1182';
+  public csSaveToProfile(obj,fileName): Observable<any> {
+    const uri = environment.CsSaveToProfile + '?moduleKey=32&detailKey=0&assetTemplateKey=242710&docType=1182&documentName=' + fileName;
     // this.http refers to HttpClient. Note here that you cannot use the generic get<Blob> as it does not compile: instead you "choose" the appropriate API in this way.
     return this.httpService.post(uri, obj);
   }

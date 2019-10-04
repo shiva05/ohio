@@ -63,6 +63,7 @@ import {AlertMessageComponent } from './components/alert-message/alert-message.c
 import { ListDocsComponent } from './components/utilities/docs/list-docs/list-docs.component';
 import { PreviewDocsComponent } from './components/utilities/docs/preview-docs/preview-docs.component';
 import { CookieService } from 'ngx-cookie-service';
+import { FileNameDirective } from './directives/fileNameDirective';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,9 @@ import { CookieService } from 'ngx-cookie-service';
     DocsComponent,
     AlertMessageComponent,
     PreviewDocsComponent,
-    ListDocsComponent
+    ListDocsComponent,
+    ReportModalComponent,
+    FileNameDirective
   ],
   imports: [
     BrowserModule,

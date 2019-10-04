@@ -2,27 +2,24 @@
   <app-report-list (reportFail)="reportFail = true"></app-report-list>
   <div class="col-md-12">
     <!-- <div class="pull-right report-btn" *ngIf="!reportFail"> -->
-    <button type="button" class="ohio-button large but-gap" (click)="nameDialogue=true;" >
-    <div class="pull-right report-btn" *ngIf="!reportFail">
-      <button type="button" class="ohio-button large but-gap" *ngIf="!isPublic" (click)="saveToProfile()" >
-        {{ 'ReportFields.SaveToProfile' | translate }}
-      </button>
-      <button type="button" class="ohio-button large but-gap" (click)="downloadPDF()">
-        {{ 'ReportFields.Download' | translate }}
-      </button>
-      <button type="button" class="ohio-button large but-gap secondary" (click)="clearAlignmentSearch()">
-        {{ 'ReportFields.Cancel' | translate }}
-      </button>
-    </div>
-    <div class="pull-right report-btn report-failed" *ngIf="reportFail">
-      <button type="button" class="ohio-button large but-gap secondary" (click)="clearAlignmentSearch()">
-        Go Back
-      </button>
-    </div>
-  <!-- </div> -->
-</div>
-
-<app-report-modal *ngIf="nameDialogue" (nameForParent)="saveToProfile($event)"></app-report-modal>
-
+    <!-- <button type="button" class="ohio-button large but-gap" (click)="nameDialogue=true;"></button> -->
+      <div class="pull-right report-btn" *ngIf="!reportFail">
+        <button type="button" class="ohio-button large but-gap" *ngIf="!isPublic" (click)="nameDialogue=true">
+          {{ 'ReportFields.SaveToProfile' | translate }}
+        </button>
+        <button type="button" class="ohio-button large but-gap" (click)="downloadPDF()">
+          {{ 'ReportFields.Download' | translate }}
+        </button>
+        <button type="button" class="ohio-button large but-gap secondary" (click)="clearAlignmentSearch()">
+          {{ 'ReportFields.Cancel' | translate }}
+        </button>
+      </div>
+      <div class="pull-right report-btn report-failed" *ngIf="reportFail">
+        <button type="button" class="ohio-button large but-gap secondary" (click)="clearAlignmentSearch()">
+          Go Back
+        </button>
+      </div>
+      <!-- </div> -->
+      <app-report-modal *ngIf="nameDialogue" (nameForParent)="saveToProfile($event)"></app-report-modal>
   </div>
 </div>
