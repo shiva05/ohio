@@ -80,11 +80,11 @@ export class ReportComponent {
       }
     });
   }
-  public saveToProfile(name): void {
+  public saveToProfile(fileName): void {
     this.store.select('advancedSearch').subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
         let objTemp =  data.alignmentSearchSelectedFilters.selectedAsSearchResults;
-        this.downloadPDFService.asSaveToProfile(objTemp, name)
+        this.downloadPDFService.asSaveToProfile(objTemp, fileName)
         .subscribe(x => {
 
         });
