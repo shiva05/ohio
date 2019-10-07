@@ -22,14 +22,13 @@ import { AuthEffectsService } from './effects/auth-effects';
 import { ClaimsEffectsService } from './effects/claims-effects';
 import { AuthService } from './services/auth.service';
 import { FlagService } from './services/flag.service';
-import { ClaimsService } from './services/claims.service';
 import { DocsService } from './services/docs.service';
 import { LoaderService } from '../app/services/loader.service';
-
 import { AppComponent } from './app.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { MainComponent } from './components/main/main.component';
 import { HeaderComponent } from './components/header/header.component';
+import { ClaimsService } from './services/claims.service';
 import { MenubarComponent } from './components/menubar/menubar.component';
 import { QuickSearchComponent } from './components/quick-search/quick-search.component';
 import { AlignmentSearchComponent } from './components/alignment-search/alignment-search.component';
@@ -63,8 +62,8 @@ import { DocsComponent } from './components/utilities/docs/docs.component';
 import { AlertMessageComponent } from './components/alert-message/alert-message.component';
 import { ListDocsComponent } from './components/utilities/docs/list-docs/list-docs.component';
 import { PreviewDocsComponent } from './components/utilities/docs/preview-docs/preview-docs.component';
-
 import { CookieService } from 'ngx-cookie-service';
+import { FileNameDirective } from './directives/fileNameDirective';
 
 @NgModule({
   declarations: [
@@ -97,7 +96,8 @@ import { CookieService } from 'ngx-cookie-service';
     AlertMessageComponent,
     PreviewDocsComponent,
     ListDocsComponent,
-    ReportModalComponent
+    ReportModalComponent,
+    FileNameDirective
   ],
   imports: [
     BrowserModule,

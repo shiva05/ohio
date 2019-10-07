@@ -89,7 +89,7 @@ export class CustomAccordionComponent implements OnInit {
 
   getAlignmentSearchResult() {
     this.store.select('advancedSearch').subscribe(data => {
-      if (data.alignmentSearchSelectedFilters) {
+       if (data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedCareers.length > 0 && data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0) {
 
         this.alignmentSearchSelectedFilters = data.alignmentSearchSelectedFilters;
         let careerfeilds = [];

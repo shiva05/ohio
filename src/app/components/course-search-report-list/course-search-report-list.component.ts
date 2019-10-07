@@ -20,8 +20,8 @@ export class CourseSearchReportListComponent implements OnInit {
   constructor(private store: Store<AppState>, private reportService: ReportService) { }
 
   ngOnInit() {
-    this.store.select('courseSearch').subscribe(data => { 
-      if (data.courseSearchSelectedFilters.selectedCourseSearchResults) {
+    this.store.select('courseSearch').subscribe(data => {
+      if (data.courseSearchSelectedFilters && data.courseSearchSelectedFilters.selectedCourseSearchResults ) {
         let objTemp = data.courseSearchSelectedFilters.selectedCourseSearchResults;
         this.reportService.getCourseSearchReportData(objTemp).subscribe(
           data => {

@@ -17,6 +17,7 @@ export class ReportModalComponent implements OnInit {
 
   sendToParent() {
     this.nameForParent.emit(this.PDFName);
+    this.closeModalBool.emit();
   }
 
   closeModal() {
