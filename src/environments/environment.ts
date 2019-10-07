@@ -17,7 +17,7 @@ const childWebSPAs = [
       Name: 'Standard by Design',
       WebServer: 'localhost',
       SpaServer: 'localhost:4200',
-      SystemKey: 20
+      SystemKey: 21
   }];
 
 const hostname = window.location.hostname;
