@@ -73,7 +73,7 @@ export class ReportComponent {
     });
   }
   public saveToProfile(name): void {
-    this.PDFName = name;
+    this.PDFName = name || 'untitled';
     console.log(this.PDFName); // TODO: THIS IS THE VARIABLE: this.PDFName
     this.store.select('advancedSearch').subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
