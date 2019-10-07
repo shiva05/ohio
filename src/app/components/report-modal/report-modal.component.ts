@@ -7,6 +7,7 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 })
 export class ReportModalComponent implements OnInit {
   @Output() nameForParent = new EventEmitter<any>();
+  @Output() closeModalBool = new EventEmitter<any>();
   PDFName: string = '';
 
   constructor() { }
@@ -16,6 +17,10 @@ export class ReportModalComponent implements OnInit {
 
   sendToParent() {
     this.nameForParent.emit(this.PDFName);
+    this.closeModalBool.emit();
   }
 
+  closeModal() {
+    this.closeModalBool.emit();
+  }
 }

@@ -19,6 +19,7 @@ export class CourseSearchReportComponent implements OnInit {
   nameDialogue: boolean = false;
   PDFName: string = '';
   isPublic: boolean = false;
+
   constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router) { }
 
   ngOnInit() {
@@ -81,11 +82,10 @@ export class CourseSearchReportComponent implements OnInit {
     this.rout.navigate(['/coursesearch']);
   }
   public saveToProfile(fileName: any): void {
-    console.log(this.PDFName); // TODO: THIS IS THE VARIABLE: ths.PDFName
     this.store.select('courseSearch').subscribe(data => {
       if (data.courseSearchSelectedFilters) {
         const objTemp = data.courseSearchSelectedFilters.selectedCourseSearchResults;
-        this.downloadPDFService.csSaveToProfile(objTemp ,fileName)
+        this.downloadPDFService.csSaveToProfile(objTemp, fileName)
         .subscribe(x => {
         });
       }
