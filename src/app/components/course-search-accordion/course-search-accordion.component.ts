@@ -67,8 +67,8 @@ export class CourseSearchAccordionComponent implements OnInit {
 
   getCourseSearchResult() {
     this.store.select('courseSearch').subscribe(data => {
-      if (data.courseSearchSelectedFilters) {
-        this.courseSearchSelectedFilters = data.courseSearchSelectedFilters;
+      if (data.courseSearchSelectedFilters && data.courseSearchSelectedFilters.selectedCareerPath.length > 0 && data.courseSearchSelectedFilters.selectedAcademicSubject.length > 0) {
+      this.courseSearchSelectedFilters = data.courseSearchSelectedFilters;
 
         let careerPathIds = [];
         data.courseSearchSelectedFilters.selectedCareerPath.forEach(element => {

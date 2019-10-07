@@ -2,7 +2,6 @@ import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { DownloadPDFService } from '../../services/download-pdf.service';
 import { Store } from '@ngrx/store';
 import { DatePipe } from '@angular/common';
-
 import { AppState } from './../../app.state';
 import { Router } from '@angular/router';
 
@@ -16,6 +15,8 @@ export class ReportComponent {
 
   @Output() onPageSelect = new EventEmitter<any>();
   reportFail: boolean = false;
+  nameDialogue: boolean = false;
+  PDFName: string = '';
   isPublic: boolean = false;
 
   constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router) { }
@@ -34,6 +35,10 @@ export class ReportComponent {
 
   clearAlignmentSearch() {
     this.rout.navigate(['/alignmentsearch']);
+  }
+
+  openNameDialogue() {
+    this.nameDialogue = true;
   }
 
   public downloadPDF(): void {
@@ -74,13 +79,13 @@ export class ReportComponent {
           });
       }
     });
-
   }
-  public saveToProfile(): void {
+  public saveToProfile(fineName: any): void {
+    console.log(this.PDFName); // TODO: THIS IS THE VARIABLE: this.PDFName
     this.store.select('advancedSearch').subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
         let objTemp =  data.alignmentSearchSelectedFilters.selectedAsSearchResults;
-        this.downloadPDFService.asSaveToProfile(objTemp)
+        this.downloadPDFService.asSaveToProfile(objTemp ,fineName)
         .subscribe(x => {
 
 

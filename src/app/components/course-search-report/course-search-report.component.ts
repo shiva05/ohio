@@ -16,6 +16,8 @@ export class CourseSearchReportComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
   reportFail: boolean = false;
+  nameDialogue: boolean = false;
+  PDFName: string = '';
   isPublic: boolean = false;
   constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router) { }
 
@@ -29,6 +31,10 @@ export class CourseSearchReportComponent implements OnInit {
 
   goToPage(org) {
     this.onPageSelect.emit(org);
+  }
+
+  openNameDialogue() {
+    this.nameDialogue = true;
   }
 
   public downloadPDF(): void {
@@ -55,7 +61,7 @@ export class CourseSearchReportComponent implements OnInit {
             const link = document.createElement('a');
             link.href = data;
 
-            let dataNow = this.datepipe.transform(new Date(), 'yyyy-MM-dd'); ;
+            let dataNow = this.datepipe.transform(new Date(), 'yyyy-MM-dd');
             link.download = 'Course search Report ' + dataNow + '.pdf'; // There isn't that much of a reason to even think about what I'm doing and instead just do it because there isn't a
             // this is necessary as link.click() does not work on the latest firefox
             link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
@@ -74,11 +80,12 @@ export class CourseSearchReportComponent implements OnInit {
   clearCourseSearch() {
     this.rout.navigate(['/coursesearch']);
   }
-  public saveToProfile(): void {
+  public saveToProfile(fileName: any): void {
+    console.log(this.PDFName); // TODO: THIS IS THE VARIABLE: ths.PDFName
     this.store.select('courseSearch').subscribe(data => {
       if (data.courseSearchSelectedFilters) {
         const objTemp = data.courseSearchSelectedFilters.selectedCourseSearchResults;
-        this.downloadPDFService.csSaveToProfile(objTemp)
+        this.downloadPDFService.csSaveToProfile(objTemp ,fileName)
         .subscribe(x => {
         });
       }

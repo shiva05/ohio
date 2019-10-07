@@ -40,7 +40,7 @@ export class ReportListComponent implements OnInit {
 
   ngOnInit() {
     this.store.select('advancedSearch').subscribe(data => {
-      if (data.alignmentSearchSelectedFilters) {
+      if (data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedAsSearchResults && data.alignmentSearchSelectedFilters.selectedAsSearchResults.CareerFiledIds.length > 0 && data.alignmentSearchSelectedFilters.selectedAsSearchResults.Subjects.length > 0) {
         let objTemp = data.alignmentSearchSelectedFilters.selectedAsSearchResults;
         this.reportService.getReportData(objTemp).subscribe(
           data => {
