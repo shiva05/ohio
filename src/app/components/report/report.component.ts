@@ -17,7 +17,7 @@ export class ReportComponent {
   @Output() onPageSelect = new EventEmitter<any>();
   reportFail: boolean = false;
   nameDialogue: boolean = false;
-  PDFName: string = '';
+  @Input() PDFName: string = '';
 
   constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router) { }
 
@@ -72,7 +72,8 @@ export class ReportComponent {
       }
     });
   }
-  public saveToProfile(): void {
+  public saveToProfile(name): void {
+    this.PDFName = name;
     console.log(this.PDFName); // TODO: THIS IS THE VARIABLE: this.PDFName
     this.store.select('advancedSearch').subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
