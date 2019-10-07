@@ -32,6 +32,7 @@ const environment = {
   PUBLIC_AUTH_API: apiServer + 'Auth/publictoken',
   systemKey : currentSpa.SystemKey,
   MENU_API: apiServer + 'Menu/menus',
+  Auth_Assets : apiServer +'Auth/assets',
   // CLAIMS_API :apiServer+'Auth/authclaims',
   safeUrl: '/assets/fake/fake-safe.html',
   FLAGS_GET_API: apiServer + 'Flag/flags',

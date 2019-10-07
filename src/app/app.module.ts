@@ -57,31 +57,13 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthOrchestration } from './services/auth-orchestration.service';
 import { InteropService } from 'src/app/services/interop.service';
 import { Reducers } from './reducers/index';
-
 import { UtilityComponent} from './components/utility/utility.component';
 import { UtilitynavComponent } from './components/utilitynav/utilitynav.component';
 import { DocsComponent } from './components/utilities/docs/docs.component';
-import { FlagsComponent } from './components/utilities/flags/flags.component';
-import { FlagsOverviewComponent } from './components/utilities/flags-overview/flags-overview.component';
-import { CommentsOverviewComponent } from './components/utilities/comments-overview/comments-overview.component';
-import { ContactsComponent } from './components/utilities/contacts/contacts.component';
-import { HistoryComponent } from './components/utilities/history/history.component';
-import { CommentComponent } from './components/utilities/comments/comment/comment.component';
-import { CommentsContainerComponent } from './components/utilities/comments/comments-container/comments-container.component';
 import { AlertMessageComponent } from './components/alert-message/alert-message.component';
-import { AddDocsComponent } from './components/utilities/docs/add-docs/add-docs.component';
-import { ImportDocsComponent } from './components/utilities/docs/import-docs/import-docs.component';
 import { ListDocsComponent } from './components/utilities/docs/list-docs/list-docs.component';
 import { PreviewDocsComponent } from './components/utilities/docs/preview-docs/preview-docs.component';
-import { FileDraggableComponent } from './components/utilities/docs/file-draggable/file-draggable.component';
 
-import { CardComponent } from './components/utilities/comments/card/card.component';
-import { CommenterComponent } from './components/utilities/comments/commenter/commenter.component';
-import { MessageEditorComponent } from './components/utilities/comments/message-editor/message-editor.component';
-import { NewSubjectComponent } from './components/utilities/comments/new-subject/new-subject.component';
-import { SubjectComponent } from './components/utilities/comments/subject/subject.component';
-import { NewCommentComponent } from './components/utilities/comments/new-comment/new-comment.component';
-import { HistoryDocsComponent } from './components/utilities/docs/history-docs/history-docs.component';
 import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
@@ -112,26 +94,9 @@ import { CookieService } from 'ngx-cookie-service';
     UtilityComponent,
     UtilitynavComponent,
     DocsComponent,
-    FlagsComponent,
-    FlagsOverviewComponent,
-    CommentsOverviewComponent,
-    ContactsComponent,
-    HistoryComponent,
-    CommentComponent,
-    CommentsContainerComponent,
     AlertMessageComponent,
-    AddDocsComponent,
-    ImportDocsComponent,
     PreviewDocsComponent,
     ListDocsComponent,
-    FileDraggableComponent,
-    CardComponent,
-    CommenterComponent,
-    MessageEditorComponent,
-    NewSubjectComponent,
-    SubjectComponent,
-    HistoryDocsComponent,
-    NewCommentComponent,
     ReportModalComponent
   ],
   imports: [
