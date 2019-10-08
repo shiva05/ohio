@@ -95,10 +95,10 @@ export class AppComponent implements OnInit {
           const isPublicUser = localStorage.getItem(environment.name + '_at') === 'Public';
           if (isPublicUser) {
             // Navigate to the login page for Public
-            // this.showPublicLogin();
+            this.showPublicLogin();
           } else {
             // Navigate to Safe Login Page
-            // this.showSafeLogin();
+             this.showSafeLogin();
           }
           return;
         } else {
