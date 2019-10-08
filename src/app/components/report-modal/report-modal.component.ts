@@ -16,6 +16,9 @@ export class ReportModalComponent implements OnInit {
   }
 
   sendToParent() {
+    if (this.PDFName.length > 499) {
+      this.PDFName = this.PDFName.substring(0, 499);
+    }
     this.nameForParent.emit(this.PDFName);
     this.closeModalBool.emit();
   }

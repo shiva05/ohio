@@ -11,7 +11,7 @@
                 <input [(ngModel)]="PDFName" type="text" fileNameRegex id="PDFNameInput" class="ohio-field-input" name="" value="">
             </div>
             <div class="modal-footer">
-                <button type="button" class="ohio-button" (click)="sendToParent()">Save to Profile</button>
+                <button type="button" [disabled]="PDFName.length < 4" class="ohio-button" (click)="sendToParent()">Save to Profile</button>
             </div>
         </div>
     </div>
