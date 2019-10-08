@@ -266,7 +266,7 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Strand Checkbox
   strandCheckBox(CareerFieldData, StrandData) {
     StrandData.IsChildPartiallySelected = false;
-    CareerFieldData.isSelected = CareerFieldData.Strand.every(function (itemChild: any) {
+    CareerFieldData.isSelected = CareerFieldData.Strand.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -298,12 +298,12 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Outcome Checkbox
   outcomeCheckBox(CareerFieldData, StrandData, OutcomeData) {
     // tslint:disable-next-line:only-arrow-functions
-    StrandData.isSelected = StrandData.Outcome.every(function (itemChild: any) {
+    StrandData.isSelected = StrandData.Outcome.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    CareerFieldData.isSelected = CareerFieldData.Strand.every(function (itemChild: any) {
+    CareerFieldData.isSelected = CareerFieldData.Strand.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -472,7 +472,7 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Level Checkbox
   levelCheckBox(parent, parentObj) {
     // tslint:disable-next-line:only-arrow-functions
-    parent.isSelected = parent.Level.every(function (itemChild: any) {
+    parent.isSelected = parent.Level.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -502,12 +502,12 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Child Level 1 Checkbox
   childLevel1CheckBox(career, strands, outcome) {
     // tslint:disable-next-line:only-arrow-functions
-    strands.isSelected = strands.ChildLevel.every(function (itemChild: any) {
+    strands.isSelected = strands.ChildLevel.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Level.every(function (itemChild: any) {
+    career.isSelected = career.Level.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -527,17 +527,17 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Child Level 2 Checkbox
   childLevel2CheckBox(career, strand, outcome) {
     // tslint:disable-next-line:only-arrow-functions
-    outcome.isSelected = outcome.ChildLevel.every(function (itemChild: any) {
+    outcome.isSelected = outcome.ChildLevel.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    strand.isSelected = strand.ChildLevel.every(function (itemChild: any) {
+    strand.isSelected = strand.ChildLevel.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Level.every(function (itemChild: any) {
+    career.isSelected = career.Level.every(function(itemChild: any) {
       return itemChild.isSelected === true;
     });
   }
@@ -713,7 +713,7 @@ export class CustomAccordionComponent implements OnInit {
 
   goBackToSearch() {
     this.store.dispatch({ type: AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS });
-    this.rout.navigate(['/AlignmentSearch']);
+    this.rout.navigate(['/alignmentsearch']);
   }
 
   onToggleClick(value) {
