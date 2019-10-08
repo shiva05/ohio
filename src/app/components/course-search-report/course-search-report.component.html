@@ -1,7 +1,7 @@
 <div class="reports">
   <app-course-search-report-list (reportFail)="reportFail = true"></app-course-search-report-list>
   <div class="col-md-12">
-    <!-- <div class="pull-right report-btn" *ngIf="!reportFail"> -->
+    <div class="pull-right report-btn" *ngIf="!reportFail">
       <button type="button" class="ohio-button large but-gap" *ngIf="!isPublic" (click)="nameDialogue=true;">
         {{ 'ReportFields.SaveToProfile' | translate }}
       </button>
