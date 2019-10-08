@@ -15,7 +15,7 @@ const apiServer = 'https://edu-dev-sbd-gateway.azurewebsites.net/api/v1/';
 const childWebSPAs = [
   {
       Name: 'Standard by Design',
-      WebServer: 'edu-dev-sbd.azurewebsites.net',
+    WebServer: 'localhost',
       SpaServer: 'localhost:4200',
       SystemKey: 21
   }];
