@@ -16,8 +16,16 @@ export class ReportModalComponent implements OnInit {
   }
 
   sendToParent() {
-    this.nameForParent.emit(this.PDFName);
-    this.closeModalBool.emit();
+    if (this.PDFName) {
+      if (this.PDFName.length > 499) {
+        this.PDFName = this.PDFName.substring(0, 499);
+      }
+      this.nameForParent.emit(this.PDFName);
+      this.closeModalBool.emit();
+    } else {
+      alert('The PDF file name cannot be blank.');
+    }
+
   }
 
   closeModal() {
