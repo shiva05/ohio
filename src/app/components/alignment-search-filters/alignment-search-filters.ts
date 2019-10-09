@@ -337,6 +337,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       finalSelectedObject: [],
     };
     this.store.dispatch({ type: AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS });
+    this.selectedKeyword = '';
     this.selectedCareer = [];
     this.selectedAcadamicSubjects = [];
     this.selectedStrands = [];
