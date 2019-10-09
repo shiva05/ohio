@@ -5,6 +5,10 @@ import { DatePipe } from '@angular/common';
 
 import { AppState } from './../../app.state';
 import { Router } from '@angular/router';
+import { UtilsContext } from '../../models/utils-context';
+import { DocsService } from '../../services/docs.service';
+import * as UtilsActions from '../../actions/utils-actions';
+import { take } from 'rxjs/internal/operators/take';
 
 @Component({
   selector: 'app-course-search-report',
@@ -19,8 +23,9 @@ export class CourseSearchReportComponent implements OnInit {
   nameDialogue: boolean = false;
   PDFName: string = '';
   isPublic: boolean = false;
+  context: UtilsContext;
 
-  constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router) { }
+  constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router,private docsService: DocsService) { }
 
   ngOnInit() {
     this.store.select('authState').subscribe((authState) => {
@@ -86,7 +91,23 @@ export class CourseSearchReportComponent implements OnInit {
       if (data.courseSearchSelectedFilters) {
         const objTemp = data.courseSearchSelectedFilters.selectedCourseSearchResults;
         this.downloadPDFService.csSaveToProfile(objTemp, fileName)
-        .subscribe(x => {
+        .subscribe(data => {
+          this.store.select('utilsState').pipe(take(1)).subscribe((utilityState) => {
+            if (utilityState && utilityState.utilityContext) {
+              this.context = utilityState.utilityContext;
+              if (utilityState.utilityContext !== null && utilityState.utilityContext.assetTemplateKey > 0 && utilityState.utilityContext.detailKey > 0
+                && utilityState.utilityContext.isDetailAsset != null && utilityState.utilityContext.isDetailAsset
+                && utilityState.utilityContext.moduleKey != null && utilityState.utilityContext.moduleKey > 0 ) {
+                  this.docsService.fetchDocCount(this.context).subscribe((docCount: number) => {
+                    if (docCount != null) {
+                      this.store.dispatch(new UtilsActions.UtilsSetDocCount(docCount));
+                    }
+                  },
+                    (error) =>
+                    this.store.dispatch(new UtilsActions.UtilsSetDocCount(0)));
+              }
+            }
+          });
         });
       }
     });

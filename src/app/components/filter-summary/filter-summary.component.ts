@@ -159,7 +159,7 @@ export class FilterSummaryComponent implements OnInit {
             }
         });
 
-        if (this.searchLable === 'alignmentSearchResults') {
+        if (this.searchLable === 'SearchAlignment') {
             this.store.select('advancedSearch').subscribe(data => {
                 if (data.alignmentSearchSelectedFilters) {
                     this.alignmentSearchResults = true;

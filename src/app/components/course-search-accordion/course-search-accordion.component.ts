@@ -99,7 +99,7 @@ export class CourseSearchAccordionComponent implements OnInit {
         });
 
         let obj = {
-          Keywords: '',
+          Keywords: data.courseSearchSelectedFilters && data.courseSearchSelectedFilters.selectedKeyword ? data.courseSearchSelectedFilters.selectedKeyword :'',
           CareerPathIds: careerPathIds,
           CourseIds: courseIds,
           Subjects: subjects,

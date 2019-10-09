@@ -155,7 +155,7 @@ export class UtilityComponent implements OnInit {
 
       },
         (error: HttpErrorResponse) =>
-        this.store.dispatch(new UtilsActions.UtilsSetDocCount(10)));
+        this.store.dispatch(new UtilsActions.UtilsSetDocCount(0)));
     }
 
   }

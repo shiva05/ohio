@@ -37,7 +37,6 @@ export class PreviewDocsComponent implements OnInit, AfterViewInit {
   ngOnInit() {
 
     if (this.docPreviewFlag) {
-       debugger
       const utilsContext = this.store.select(state => state.utilsState.utilityContext);
       utilsContext.subscribe((ctx) => {
         this.context = ctx;

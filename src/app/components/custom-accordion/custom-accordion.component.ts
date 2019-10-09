@@ -153,7 +153,7 @@ export class CustomAccordionComponent implements OnInit {
         });
 
         let obj = {
-          Keywords: '',
+          Keywords: data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedKeyword ? data.alignmentSearchSelectedFilters.selectedKeyword : '' ,
           CareerFiledIds: careerfeilds,
           StrandIds: strands,
           OutcomeIds: outcomes,

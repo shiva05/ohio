@@ -387,6 +387,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       this.showAlert();
     } else {
       this.searchObj = {
+        selectedKeyword: this.selectedKeyword,
         selectedCareers: this.selectedCareer,
         selectedStrands: this.selectedStrands,
         selectedOutcomes: this.selectedOutcome,

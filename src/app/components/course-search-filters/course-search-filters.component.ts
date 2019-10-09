@@ -19,7 +19,7 @@ export class CourseSearchFiltersComponent implements OnInit {
   courses: any = [];
   academicSubjects: any = [];
   academicSubjectCourse: any = [];
-
+  selectedKeyword: any = '';
   careerPathSettings: any = {};
   careerPathCourseSettings: any = {};
   academicSubjectsSettings: any = {};
@@ -180,6 +180,7 @@ export class CourseSearchFiltersComponent implements OnInit {
       this.showAlert();
     } else {
       this.searchObj = {
+        selectedKeyword:this.selectedKeyword,
         selectedCareerPath: this.selectedCareerPath,
         selectedCareerPathCourses: this.selectedCourses,
         selectedAcademicSubject: this.selectedAcadamicSubjects,
