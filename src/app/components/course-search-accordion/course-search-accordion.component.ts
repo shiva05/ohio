@@ -5,6 +5,7 @@ import { SearchResultService } from '../../services/search-result.service';
 import * as CourseSearchActions from './../../actions/course-search.actions';
 import { Router } from '@angular/router';
 import { _ } from 'underscore';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-course-search-accordion',
@@ -53,7 +54,7 @@ export class CourseSearchAccordionComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor(private store: Store<AppState>, private searchResultService: SearchResultService, private rout: Router) { }
+  constructor(private store: Store<AppState>, private searchResultService: SearchResultService, private rout: Router, private _shared: SharedService) { }
 
   ngOnInit() {
     this.getCourseSearchResult();
@@ -97,7 +98,7 @@ export class CourseSearchAccordionComponent implements OnInit {
 
           subjects.push(subject);
         });
-
+        this.careerPathToSubject = this._shared.toggleCareer;
         let obj = {
           Keywords: '',
           CareerPathIds: careerPathIds,
@@ -428,6 +429,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   onToggleClick() {
     this.careerPathToSubject = !this.careerPathToSubject;
     this.courseSearchReportPayload.CareerPathToSubject = this.careerPathToSubject;
+    this._shared.toggleCareer = this.careerPathToSubject;
     this.getCourseSearchResult();
   }
 }
