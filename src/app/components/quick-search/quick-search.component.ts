@@ -22,6 +22,7 @@ export class QuickSearchComponent implements OnInit {
   subjectDropdownSettings: any = {};
   selectedCareer: any = [];
   selectedAcadamicSubjects: any = [];
+  selectedKeyword :'';
   academicSubjects = [];
   strands = [];
   quickSearchSharedData = {
@@ -83,5 +84,6 @@ export class QuickSearchComponent implements OnInit {
   clearQuickSearch() {
     this.selectedCareer = [];
     this.selectedAcadamicSubjects = [];
+    this.selectedKeyword ='';
   }
 }

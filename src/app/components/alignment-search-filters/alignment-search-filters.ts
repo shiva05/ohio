@@ -401,7 +401,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   }
 
   search() {
-    if (this.selectedCareer.length < 1 && this.selectedAcademicItems.length < 1) {
+    if (this.selectedCareer.length < 1 || this.selectedAcademicItems.length < 1) {
       this.showAlert();
     } else {
       this.searchObj = {
