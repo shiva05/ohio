@@ -4,6 +4,7 @@ import { AppState } from 'src/app/app.state';
 import { SearchResultService } from '../../services/search-result.service';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 import { Router } from '@angular/router';
+import { SharedService } from '../../services/shared.service';
 import { _ } from 'underscore';
 
 @Component({
@@ -79,8 +80,8 @@ export class CustomAccordionComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor(private store: Store<AppState>, private searchResultService: SearchResultService, private rout: Router) {
-    this.cteToAcademic = true;
+  constructor(private store: Store<AppState>, private searchResultService: SearchResultService, private rout: Router, private _shared: SharedService) {
+   // this.cteToAcademic = true;
   }
 
   ngOnInit() {
@@ -151,7 +152,7 @@ export class CustomAccordionComponent implements OnInit {
           };
           subjects.push(subject);
         });
-
+        this.cteToAcademic = this._shared.toggleAlignment;
         let obj = {
           Keywords: '',
           CareerFiledIds: careerfeilds,
@@ -707,10 +708,6 @@ export class CustomAccordionComponent implements OnInit {
     }
   }
 
-  goToPage(org) {
-    this.onPageSelect.emit(org);
-  }
-
   goBackToSearch() {
     this.store.dispatch({ type: AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS });
     this.rout.navigate(['/alignmentsearch']);
@@ -719,6 +716,7 @@ export class CustomAccordionComponent implements OnInit {
   onToggleClick(value) {
     this.cteToAcademic = !this.cteToAcademic;
     this.reportPayload.CteToAcademic = this.cteToAcademic;
+    this._shared.toggleAlignment = this.cteToAcademic;
     this.getAlignmentSearchResult();
   }
 }

@@ -16,16 +16,4 @@ export class CourseSearchComponent implements OnInit {
   ngOnInit() {
   }
 
-  onPageSelect(org) {
-    this.showCsFilter = false;
-    this.showCsResults = false;
-    this.showCsReport = false;
-    if (org === 'Search') {
-      this.showCsFilter = true;
-    } else if (org === 'SearchResults') {
-      this.showCsResults = true;
-    } else if (org === 'CourseSearchReport') {
-      this.showCsReport = true;
-    }
-  }
 }

@@ -17,7 +17,4 @@ export class HomeComponent implements OnInit {
     this.isPublic = true;
   }
 
-  goToPage(org) {
-    this.onPageSelect.emit(org);
-  }
 }

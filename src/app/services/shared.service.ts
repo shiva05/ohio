@@ -8,7 +8,8 @@ export class SharedService {
   data: any = [];
   updateAlignmentSearch = false;
   updateCourseSearch = false;
-
+  toggleAlignment = true;
+  toggleCareer = true;
   constructor() { }
 
   careerPathSettings = {
