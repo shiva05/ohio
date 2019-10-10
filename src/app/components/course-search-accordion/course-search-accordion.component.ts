@@ -424,9 +424,6 @@ export class CourseSearchAccordionComponent implements OnInit {
     }
   }
 
-  goToPage(org) {
-    this.onPageSelect.emit(org);
-  }
 
   onToggleClick() {
     this.careerPathToSubject = !this.careerPathToSubject;

@@ -16,16 +16,4 @@ export class AlignmentSearchComponent implements OnInit {
   ngOnInit() {
   }
 
-  onPageSelect(org) {
-    this.showAsFilter = false;
-    this.showAsResults = false;
-    this.showAsReport = false;
-    if (org === 'Search') {
-      this.showAsFilter = true;
-    } else if (org === 'SearchResults') {
-      this.showAsResults = true;
-    } else if (org === 'Report') {
-      this.showAsReport = true;
-    }
-  }
 }

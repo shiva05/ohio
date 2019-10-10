@@ -41,33 +41,4 @@ export class MainComponent implements OnInit {
 
   }
 
-  onPageSelect(org) {
-    console.log(org);
-    this.showAdvancedSearch = false;
-    this.showSearchResults = false;
-    this.showReport = false;
-    this.showCourseReport = false;
-    this.showHomePage = false;
-    this.showAlignmentSearch = false;
-    this.showCourseSearch = false;
-    this.showExport = false;
-
-    if (org === 'Search') {
-      this.showAdvancedSearch = true;
-    } else if (org === 'SearchResults') {
-      this.showSearchResults = true;
-    } else if (org === 'Report') {
-      this.showReport = true;
-    } else if (org === 'Home') {
-      this.showHomePage = true;
-    } else if (org === 'SearchAlignment') {
-      this.showAlignmentSearch = true;
-    } else if (org === 'SearchCourse') {
-      this.showCourseSearch = true;
-    } else if (org === 'Export') {
-      this.showExport = true;
-    } else if (org === 'CourseReport') {
-      this.showCourseReport = true;
-    }
-  }
 }

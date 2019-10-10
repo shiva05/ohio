@@ -707,10 +707,6 @@ export class CustomAccordionComponent implements OnInit {
     }
   }
 
-  goToPage(org) {
-    this.onPageSelect.emit(org);
-  }
-
   goBackToSearch() {
     this.store.dispatch({ type: AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS });
     this.rout.navigate(['/alignmentsearch']);

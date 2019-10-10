@@ -191,7 +191,4 @@ export class CourseSearchFiltersComponent implements OnInit {
     }
   }
 
-  goToPage(org) {
-    this.onPageSelect.emit(org);
-  }
 }
