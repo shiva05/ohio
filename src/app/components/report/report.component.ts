@@ -39,7 +39,7 @@ export class ReportComponent {
   }
 
   clearAlignmentSearch() {
-    this.rout.navigate(['/alignmentsearch']);
+    this.rout.navigate(['/AlignmentSearchResults']);
   }
 
   openNameDialogue() {

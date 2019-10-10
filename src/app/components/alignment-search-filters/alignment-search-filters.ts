@@ -238,6 +238,11 @@ export class AlignmentSearchFiltersComponent implements OnInit {
 
   onCareerDeSelectAll() {
     this.strandsDropdown = [];
+    this.selectedStrands = [];
+    this.selectedOutcome = [];
+    this.outcomesDropdown = [];
+    this.competencyNumbers = [];
+    this.selectedCompetencyNumbers = []
   }
 
   onStrandSelectAll() {
@@ -249,6 +254,9 @@ export class AlignmentSearchFiltersComponent implements OnInit {
 
   onStrandDeSelectAll() {
     this.outcomesDropdown = [];
+    this.selectedOutcome = [];
+    this.competencyNumbers = [];
+    this.selectedCompetencyNumbers = []
   }
 
   onItemSelect(event) {
@@ -347,6 +355,15 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.strandsDropdown = [];
     this.outcomesDropdown = [];
     this.competencyNumbers = [];
+    this.academicSubjects.forEach((subject) => {
+      subject.Level.forEach((item) => {
+        item['SelectedItems'] = {}; // to maintain the individual selected list from the dropdowns.
+        item['DropdownList'] = []; // to set the data for the dropdowns of each item of a subject.
+        if (item.LevelNumber === 1) { // to bind the data for the 1st column dropdown list.
+          item['DropdownList'] = item.SubjectLevels;
+        }
+      });
+    });
   }
 
   onSubjectLevelsSelectAll(data) {

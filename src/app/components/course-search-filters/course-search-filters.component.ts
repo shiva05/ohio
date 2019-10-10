@@ -7,6 +7,7 @@ import { CourseSearchData } from './../../models/courseSearch.model';
 import * as CourseSearchActions from './../../actions/course-search.actions';
 import { Router } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
+import { _ } from 'underscore';
 
 @Component({
   selector: 'app-course-search-filters',
@@ -98,6 +99,9 @@ export class CourseSearchFiltersComponent implements OnInit {
   onCareerPathSelect(selectedPaths) {
     const data = selectedPaths;
     this.coursesDropdown = [];
+    let selectedCareerIds = [];
+    let SelectedCoursesIds = [];
+    var finalUpdatedSelectListIds: any = [];
     this.courses.forEach(course => {
       data.forEach(careerPath => {
         if (course.CareerPathId === careerPath.CareerPathId) {
@@ -105,6 +109,29 @@ export class CourseSearchFiltersComponent implements OnInit {
         }
       });
     });
+    this.coursesDropdown.forEach(item => {
+      selectedCareerIds.push(item.CourseId);
+    });
+    this.selectedCourses.forEach(item => {
+      SelectedCoursesIds.push(item.CourseId);
+    });
+    finalUpdatedSelectListIds = _.intersection(SelectedCoursesIds, selectedCareerIds);
+    this.selectedCourses = [];
+    if (finalUpdatedSelectListIds.length === 0) {
+      this.selectedCourses = [];
+    } else {
+      this.coursesDropdown.forEach(course => {
+        finalUpdatedSelectListIds.forEach(element => {
+          if (course.CourseId === element) {
+            this.selectedCourses.push(course);
+          }
+        })
+      });
+    }
+
+    // console.log(this.selectedCourses);
+
+
   }
 
   onCareerPathSelectAll() {
@@ -192,7 +219,4 @@ export class CourseSearchFiltersComponent implements OnInit {
     }
   }
 
-  goToPage(org) {
-    this.onPageSelect.emit(org);
-  }
 }

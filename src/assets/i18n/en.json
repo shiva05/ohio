@@ -12,7 +12,7 @@
         "Cluster": "Cluster",
         "StandardNumber": "Standard Number",
         "Search": "Search",
-        "Cancel": "Cancel",
+        "Clear": "Clear",
         "QuickSearch": "Quick Search"
     },
     "Header": {
@@ -36,7 +36,7 @@
         "Cluster": "Cluster",
         "StandardNumber": "Standard Number",
         "Search": "Search",
-        "Cancel": "Cancel"
+        "Clear": "Clear"
     },
     "FilterResults": {
         "CareerField": "Career Paths",
@@ -55,7 +55,7 @@
         "ToggleAlignments": "Toggle Alignments",
         "NoResultFound": "No Search Result Found",
         "Generate": "Generate",
-        "Cancel": "Cancel"
+        "Reset": "Reset"
     },
     "ReportFields": {
         "Results": "Results",
@@ -73,13 +73,14 @@
         "Generate": "Generate",
         "SaveToProfile": "Save to Profile",
         "Download": "Download",
-        "Cancel": "Cancel"
+        "Back": "Back",
+        "GoBack": "GoBack"
     },
     "Import": {
         "Import": "Import",
         "ChooseFile": "Choose a File",
         "Download": "Download",
-        "Cancel": "Cancel"
+        "Clear": "Clear"
     },
     "PageNotFound": {
         "ServerError": "Server Error",

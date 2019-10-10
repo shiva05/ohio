@@ -9,12 +9,12 @@
         {{ 'ReportFields.Download' | translate }}
       </button>
       <button type="button" (click)="clearCourseSearch()" class="ohio-button large but-gap  secondary">
-        {{ 'ReportFields.Cancel' | translate }}
+        {{ 'ReportFields.Back' | translate }}
       </button>
     </div>
     <div class="pull-right report-btn report-failed" *ngIf="reportFail">
-      <button type="button" class="ohio-button large but-gap secondary" (click)="clearAlignmentSearch()">
-        Go Back
+      <button type="button" class="ohio-button large but-gap secondary" (click)="clearCourseSearch()">
+        {{ 'ReportFields.GoBack' | translate }}
       </button>
     </div>
   </div>

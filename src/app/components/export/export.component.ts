@@ -25,9 +25,7 @@ export class ExportComponent implements OnInit {
     };
   }
 
-  goToPage(org) {
-    this.onPageSelect.emit(org);
-  }
+
 
   import() {
 
