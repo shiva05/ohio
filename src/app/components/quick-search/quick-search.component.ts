@@ -74,7 +74,7 @@ export class QuickSearchComponent implements OnInit {
   }
 
   sendSearch() {
-    this.quickSearchSharedData.KeyWords = this.keyword;
+    this.quickSearchSharedData.KeyWords = this.selectedKeyword;
     this.quickSearchSharedData.CareerFields = this.selectedCareer;
     this.quickSearchSharedData.AcademicSubjects = this.selectedAcadamicSubjects;
     localStorage.setItem('QuickSearchData', JSON.stringify(this.quickSearchSharedData));
