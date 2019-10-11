@@ -50,7 +50,7 @@ export class FilterSummaryComponent implements OnInit {
                     StrandIds: [],
                     OutcomeIds: [],
                     CompetencyIds: [],
-                    Subjects: [],
+                  Subjects: [],
                     CteToAcademic: true
                 };
 
@@ -74,6 +74,7 @@ export class FilterSummaryComponent implements OnInit {
                     });
                 }
                 this.searchObj = {
+                    selectedKeyword : (quickSearchData && quickSearchData['KeyWords']) ? quickSearchData['KeyWords'] :'',
                     selectedCareers: quickSearchData['CareerFields'],
                     selectedAcadamicSubjects: quickSearchData['AcademicSubjects']
                 };
