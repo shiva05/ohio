@@ -32,6 +32,11 @@ export class CourseSearchReportComponent implements OnInit {
 
   ngOnInit() {
     this.browserRefresh = browserRefresh;
+    window.addEventListener('beforeunload', (event) => {
+      alert("Refreshing will clear all of your search results.");
+      event.preventDefault();
+      event.returnValue = '';
+    });
     if(this.browserRefresh == true){
         this.rout.navigate(['/Home']);
     };

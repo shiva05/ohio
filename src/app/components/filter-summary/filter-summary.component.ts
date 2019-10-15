@@ -46,6 +46,11 @@ export class FilterSummaryComponent implements OnInit {
         this.shared.updateAlignmentSearch = false;
         this.shared.updateCourseSearch = false;
         this.browserRefresh = browserRefresh;
+        window.addEventListener('beforeunload', (event) => {
+            alert("Refreshing will clear all of your search results.");
+            event.preventDefault();
+            event.returnValue = '';
+          });
         if(this.browserRefresh == true){
             this.rout.navigate(['/Home']);
         };
@@ -93,7 +98,6 @@ export class FilterSummaryComponent implements OnInit {
         }
         this.store.select('advancedSearch').subscribe(data => {
             if (data.alignmentSearchSelectedFilters) {
-                console.log(util.inspect(data.alignmentSearchSelectedFilters, {showHidden: false, depth: null}));
                 let careerfields:any = [];
                 let strands:any = [];
                 let outcomes:any = [];
