@@ -157,9 +157,9 @@ export class AlignmentSearchFiltersComponent implements OnInit {
 
   onCareerSelect() {
     this.strandsDropdown = [];
-    let strandsId:any = [];
-    let selectedStrandId:any = [];
-    var finalUpdatedSelectListIds:any = [];
+    let strandsId: any = [];
+    let selectedStrandId: any = [];
+    let finalUpdatedSelectListIds: any = [];
     this.strands.forEach(eachStrand => {
       this.selectedCareer.forEach(eachCareer => {
         if (eachStrand.CareerFieldPk === eachCareer.CareerFieldId) {
@@ -186,7 +186,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
             this.selectedStrands.push(strand);
           }
         });
-        if (this.selectedOutcome.length > 0){
+        if (this.selectedOutcome.length > 0) {
           this.onStrandSelect();
         }
 
@@ -195,9 +195,9 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   }
 
   onStrandSelect() {
-    let outcomesId:any = [];
-    let selectedOutcomesId:any = [];
-    let finalUpdatedSelectListIds:any = [];
+    let outcomesId: any = [];
+    let selectedOutcomesId: any = [];
+    let finalUpdatedSelectListIds: any = [];
     this.outcomesDropdown = [];
     this.outcomes.forEach(eachOutcome => {
       this.selectedStrands.forEach(eachStrand => {
@@ -223,10 +223,9 @@ export class AlignmentSearchFiltersComponent implements OnInit {
           if (strand.OutcomePk === element) {
             this.selectedOutcome.push(strand);
           }
-        })
+        });
       });
     }
-
   }
 
   onCareerSelectAll() {

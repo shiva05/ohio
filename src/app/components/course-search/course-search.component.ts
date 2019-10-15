@@ -7,13 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class CourseSearchComponent implements OnInit {
-  showCsFilter = true;
-  showCsResults = false;
-  showCsReport = false;
-
   constructor() { }
 
   ngOnInit() {
   }
-
 }

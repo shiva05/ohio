@@ -8,12 +8,12 @@ import { SharedService } from '../../services/shared.service';
 import { _ } from 'underscore';
 
 @Component({
-  selector: 'custom-accordion',
-  templateUrl: './custom-accordion.component.html',
-  styleUrls: ['./custom-accordion.component.css']
+  selector: 'app-alignment-search-accordion',
+  templateUrl: './alignment-search-accordion.component.html',
+  styleUrls: ['./alignment-search-accordion.component.css']
 })
 
-export class CustomAccordionComponent implements OnInit {
+export class AlignmentSearchAccordionComponent implements OnInit {
   data: any;
   subjectToCareerData: any = [];
   accordionData: any;
@@ -81,7 +81,6 @@ export class CustomAccordionComponent implements OnInit {
   @Output() onPageSelect = new EventEmitter<any>();
 
   constructor(private store: Store<AppState>, private searchResultService: SearchResultService, private rout: Router, private _shared: SharedService) {
-   // this.cteToAcademic = true;
   }
 
   ngOnInit() {
@@ -90,7 +89,7 @@ export class CustomAccordionComponent implements OnInit {
 
   getAlignmentSearchResult() {
     this.store.select('advancedSearch').subscribe(data => {
-       if (data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedCareers.length > 0 && data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0) {
+      if (data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedCareers.length > 0 && data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0) {
 
         this.alignmentSearchSelectedFilters = data.alignmentSearchSelectedFilters;
         let careerfeilds = [];
@@ -154,7 +153,7 @@ export class CustomAccordionComponent implements OnInit {
         });
         this.cteToAcademic = this._shared.toggleAlignment;
         let obj = {
-          Keywords: data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedKeyword ? data.alignmentSearchSelectedFilters.selectedKeyword : '' ,
+          Keywords: data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedKeyword ? data.alignmentSearchSelectedFilters.selectedKeyword : '',
           CareerFiledIds: careerfeilds,
           StrandIds: strands,
           OutcomeIds: outcomes,
@@ -267,7 +266,7 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Strand Checkbox
   strandCheckBox(CareerFieldData, StrandData) {
     StrandData.IsChildPartiallySelected = false;
-    CareerFieldData.isSelected = CareerFieldData.Strand.every(function(itemChild: any) {
+    CareerFieldData.isSelected = CareerFieldData.Strand.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -299,12 +298,12 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Outcome Checkbox
   outcomeCheckBox(CareerFieldData, StrandData, OutcomeData) {
     // tslint:disable-next-line:only-arrow-functions
-    StrandData.isSelected = StrandData.Outcome.every(function(itemChild: any) {
+    StrandData.isSelected = StrandData.Outcome.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    CareerFieldData.isSelected = CareerFieldData.Strand.every(function(itemChild: any) {
+    CareerFieldData.isSelected = CareerFieldData.Strand.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -412,6 +411,7 @@ export class CustomAccordionComponent implements OnInit {
       }
     }
   }
+
   trackCareersStatus(CareerFieldData) {
     let carrerStatus = [];
     for (let career = 0; career < CareerFieldData.Strand.length; career++) {
@@ -473,7 +473,7 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Level Checkbox
   levelCheckBox(parent, parentObj) {
     // tslint:disable-next-line:only-arrow-functions
-    parent.isSelected = parent.Level.every(function(itemChild: any) {
+    parent.isSelected = parent.Level.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -503,12 +503,12 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Child Level 1 Checkbox
   childLevel1CheckBox(career, strands, outcome) {
     // tslint:disable-next-line:only-arrow-functions
-    strands.isSelected = strands.ChildLevel.every(function(itemChild: any) {
+    strands.isSelected = strands.ChildLevel.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Level.every(function(itemChild: any) {
+    career.isSelected = career.Level.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
@@ -528,17 +528,17 @@ export class CustomAccordionComponent implements OnInit {
   // Click event on Child Level 2 Checkbox
   childLevel2CheckBox(career, strand, outcome) {
     // tslint:disable-next-line:only-arrow-functions
-    outcome.isSelected = outcome.ChildLevel.every(function(itemChild: any) {
+    outcome.isSelected = outcome.ChildLevel.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    strand.isSelected = strand.ChildLevel.every(function(itemChild: any) {
+    strand.isSelected = strand.ChildLevel.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
 
     // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Level.every(function(itemChild: any) {
+    career.isSelected = career.Level.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
   }

@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor(  private store: Store<AppState>,private route: Router) { }
+  constructor(private store: Store<AppState>, private route: Router) { }
 
   ngOnInit() {
     this.store.select('authState').subscribe((authState) => {

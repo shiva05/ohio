@@ -61,7 +61,6 @@ export class CourseSearchAccordionComponent implements OnInit {
   }
 
   goBackToCourseSearch() {
-    // this.goToPage('SearchAlignment');
     this.store.dispatch({ type: CourseSearchActions.RESET_COURSE_SELECTED_FILTERS });
     this.rout.navigate(['/coursesearch']);
   }
@@ -69,7 +68,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   getCourseSearchResult() {
     this.store.select('courseSearch').subscribe(data => {
       if (data.courseSearchSelectedFilters && data.courseSearchSelectedFilters.selectedCareerPath.length > 0 && data.courseSearchSelectedFilters.selectedAcademicSubject.length > 0) {
-      this.courseSearchSelectedFilters = data.courseSearchSelectedFilters;
+        this.courseSearchSelectedFilters = data.courseSearchSelectedFilters;
 
         let careerPathIds = [];
         data.courseSearchSelectedFilters.selectedCareerPath.forEach(element => {
@@ -100,7 +99,7 @@ export class CourseSearchAccordionComponent implements OnInit {
         });
         this.careerPathToSubject = this._shared.toggleCareer;
         let obj = {
-          Keywords: data.courseSearchSelectedFilters && data.courseSearchSelectedFilters.selectedKeyword ? data.courseSearchSelectedFilters.selectedKeyword :'',
+          Keywords: data.courseSearchSelectedFilters && data.courseSearchSelectedFilters.selectedKeyword ? data.courseSearchSelectedFilters.selectedKeyword : '',
           CareerPathIds: careerPathIds,
           CourseIds: courseIds,
           Subjects: subjects,
@@ -144,7 +143,6 @@ export class CourseSearchAccordionComponent implements OnInit {
           });
       }
     });
-
   }
 
   findSubjectColor(subject) {
@@ -223,11 +221,11 @@ export class CourseSearchAccordionComponent implements OnInit {
         course.isSelected = false;
         career.IsChildPartiallySelected = true;
       } else if (competencyStatus.length === 1) {
-        if (competencyStatus[0] == true) {
+        if (competencyStatus[0] === true) {
           course.IsChildPartiallySelected = false;
           course.isSelected = true;
           career.IsChildPartiallySelected = true;
-        } else if (competencyStatus[0] == false) {
+        } else if (competencyStatus[0] === false) {
           course.IsChildPartiallySelected = false;
           course.isSelected = false;
         }
@@ -235,6 +233,7 @@ export class CourseSearchAccordionComponent implements OnInit {
     }
     this.trackCareersStatus(career);
   }
+
   trackCareersStatus(career) {
     let coursesPatialSelectedList = [];
     for (let sub = 0; sub < career.Courses.length; sub++) {
@@ -246,10 +245,10 @@ export class CourseSearchAccordionComponent implements OnInit {
         career.IsChildPartiallySelected = true;
         career.isSelected = false;
       } else if (coursesPatialSelectedList.length === 1) {
-        if (coursesPatialSelectedList[0] == true) {
+        if (coursesPatialSelectedList[0] === true) {
           career.IsChildPartiallySelected = true;
           career.isSelected = false;
-        } else if (coursesPatialSelectedList[0] == false) {
+        } else if (coursesPatialSelectedList[0] === false) {
           let coursesSelectedList = [];
           career.Courses.forEach((career) => {
             coursesSelectedList.push(career.isSelected);
@@ -259,10 +258,10 @@ export class CourseSearchAccordionComponent implements OnInit {
             career.IsChildPartiallySelected = true;
             career.isSelected = false;
           } else if (coursesSelectedList.length === 1) {
-            if (coursesSelectedList[0] == true) {
+            if (coursesSelectedList[0] === true) {
               career.IsChildPartiallySelected = false;
               career.isSelected = true;
-            } else if (coursesSelectedList[0] == false) {
+            } else if (coursesSelectedList[0] === false) {
               career.IsChildPartiallySelected = false;
               career.isSelected = false;
             }
@@ -349,7 +348,6 @@ export class CourseSearchAccordionComponent implements OnInit {
           this.Level1Ids = [];
           subject.SubjecToStandards.forEach(grade => {
             if (grade.isSelected) {
-              // Level1Value should be Course Name but its coming as Subject/Course Title need to change from API
               this.Level1Ids.push(grade.Level1Value);
             }
 
@@ -424,7 +422,6 @@ export class CourseSearchAccordionComponent implements OnInit {
       });
     }
   }
-
 
   onToggleClick() {
     this.careerPathToSubject = !this.careerPathToSubject;

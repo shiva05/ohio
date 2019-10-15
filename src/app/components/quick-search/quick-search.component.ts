@@ -22,7 +22,7 @@ export class QuickSearchComponent implements OnInit {
   subjectDropdownSettings: any = {};
   selectedCareer: any = [];
   selectedAcadamicSubjects: any = [];
-  selectedKeyword :'';
+  selectedKeyword: '';
   academicSubjects = [];
   strands = [];
   quickSearchSharedData = {
@@ -80,9 +80,10 @@ export class QuickSearchComponent implements OnInit {
     this.cookieService.set('Test', JSON.stringify(this.quickSearchSharedData));
     (window as any).open('http://edu-dev-sbd.azurewebsites.net/#/AlignmentSearchResults', '_blank');
   }
+
   clearQuickSearch() {
     this.selectedCareer = [];
     this.selectedAcadamicSubjects = [];
-    this.selectedKeyword ='';
+    this.selectedKeyword = '';
   }
 }
