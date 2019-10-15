@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 import { CookieService } from 'ngx-cookie-service';
+import util from 'util';
+import { browserRefresh } from '../../app.component';
+import { HomeComponent } from '../home/home.component';
 
 @Component({
     selector: 'filter-summary',
@@ -13,7 +16,9 @@ import { CookieService } from 'ngx-cookie-service';
 })
 
 export class FilterSummaryComponent implements OnInit {
-
+    //refresh start
+    public browserRefresh: boolean;
+    //refresh end
     @Input() FilterSummary;
     FilterSummaryKeys: any;
     panelExpanded: boolean = false;
@@ -40,6 +45,15 @@ export class FilterSummaryComponent implements OnInit {
         this.alignmentSearchResults = true;
         this.shared.updateAlignmentSearch = false;
         this.shared.updateCourseSearch = false;
+        this.browserRefresh = browserRefresh;
+        window.addEventListener('beforeunload', (event) => {
+            alert("Refreshing will clear all of your search results.");
+            event.preventDefault();
+            event.returnValue = '';
+          });
+        if(this.browserRefresh == true){
+            this.rout.navigate(['/Home']);
+        };
         if (this.cookieService.get('Test')) {
             this.cookieValue = this.cookieService.get('Test');
             let quickSearchData = JSON.parse(this.cookieValue);

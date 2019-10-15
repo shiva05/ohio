@@ -48,7 +48,6 @@ import { ReportModalComponent } from './components/report-modal/report-modal.com
 import { ExportComponent } from './components/export/export.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
-
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthOrchestration } from './services/auth-orchestration.service';

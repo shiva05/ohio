@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
@@ -7,16 +7,18 @@ import { AuthService } from './services/auth.service';
 import { AuthOrchestration } from './services/auth-orchestration.service';
 import * as AuthActions from './actions/auth-actions';
 import * as ClaimsActions from './actions/claims-actions';
-
+//Refresh
+import { Subscription } from 'rxjs';
 import { UtilsContext } from './models/utils-context';
 
 import { InteropService } from './services/interop.service';
-import { Router } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
 import { Utilities } from './models/util-nav-item';
 import { NavResize } from './actions/nav-actions';
 import * as UtilsActions from './actions/utils-actions';
 import { HttpClient } from '@angular/common/http';
 import { LoaderService } from './services/loader.service';
+export let browserRefresh = false;
 
 @Component({
   selector: 'app-root',
@@ -24,7 +26,10 @@ import { LoaderService } from './services/loader.service';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
   title = 'StandardsByDesignWeb';
   isLocal = false;
   appError = false;
@@ -37,12 +42,19 @@ export class AppComponent implements OnInit {
   mainLeft = 56;
   mainHeight = 1400;
   currentUtil: Utilities = Utilities.none;
-  constructor(private http: HttpClient, public router: Router, private store: Store<AppState>, public loaderService: LoaderService, private translate: TranslateService, private authService: AuthService, private interopService: InteropService, private authOrchestration: AuthOrchestration) {
+  subscription: Subscription;
+  constructor( private http: HttpClient, public router: Router, private store: Store<AppState>, public loaderService: LoaderService, private translate: TranslateService, private authService: AuthService, private interopService: InteropService, private authOrchestration: AuthOrchestration) {
     translate.setDefaultLang('en');
     window.onresize = () => {
       this.utilNav(this.currentUtil);
     };
-  }
+    //Refresh
+    this.subscription = router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        browserRefresh = !router.navigated;
+      }
+  });
+   }
 
   ngOnInit() {
 

@@ -9,6 +9,8 @@ import { UtilsContext } from '../../models/utils-context';
 import { DocsService } from '../../services/docs.service';
 import * as UtilsActions from '../../actions/utils-actions';
 import { take } from 'rxjs/internal/operators/take';
+import { browserRefresh } from '../../app.component';
+
 
 @Component({
   selector: 'app-course-search-report',
@@ -24,10 +26,20 @@ export class CourseSearchReportComponent implements OnInit {
   PDFName: string = '';
   isPublic: boolean = false;
   context: UtilsContext;
+  public browserRefresh: boolean;
 
   constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router, private docsService: DocsService) { }
 
   ngOnInit() {
+    this.browserRefresh = browserRefresh;
+    window.addEventListener('beforeunload', (event) => {
+      alert("Refreshing will clear all of your search results.");
+      event.preventDefault();
+      event.returnValue = '';
+    });
+    if(this.browserRefresh == true){
+        this.rout.navigate(['/Home']);
+    };
     this.store.select('authState').subscribe((authState) => {
       if (authState != null) {
         this.isPublic = authState.isPublic;
