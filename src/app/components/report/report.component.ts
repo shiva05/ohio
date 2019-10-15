@@ -8,6 +8,8 @@ import { UtilsContext } from '../../models/utils-context';
 import { DocsService } from '../../services/docs.service';
 import * as UtilsActions from '../../actions/utils-actions';
 import { take } from 'rxjs/internal/operators/take';
+import { browserRefresh } from '../../app.component';
+
 
 @Component({
   selector: 'report',
@@ -23,10 +25,17 @@ export class ReportComponent {
   PDFName: string = '';
   isPublic: boolean = false;
   context: UtilsContext;
+  //refresh start
+  public browserRefresh: boolean;
+  //refresh end
 
   constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router,private docsService: DocsService,) { }
 
   ngOnInit() {
+    this.browserRefresh = browserRefresh;
+    if(this.browserRefresh == true){
+        this.rout.navigate(['/Home']);
+    };
     this.store.select('authState').subscribe((authState) => {
       if (authState != null) {
         this.isPublic = authState.isPublic;

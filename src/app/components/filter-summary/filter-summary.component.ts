@@ -6,6 +6,10 @@ import { SharedService } from '../../services/shared.service';
 import { HttpClient } from '@angular/common/http';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 import { CookieService } from 'ngx-cookie-service';
+import util from 'util';
+//refresh
+import { browserRefresh } from '../../app.component';
+import { HomeComponent } from '../home/home.component';
 
 @Component({
     selector: 'filter-summary',
@@ -14,7 +18,9 @@ import { CookieService } from 'ngx-cookie-service';
 })
 
 export class FilterSummaryComponent implements OnInit {
-
+    //refresh start
+    public browserRefresh: boolean;
+    //refresh end
     @Input() FilterSummary;
     FilterSummaryKeys: any;
     panelExpanded: boolean = false;
@@ -40,6 +46,10 @@ export class FilterSummaryComponent implements OnInit {
         this.alignmentSearchResults = true;
         this.shared.updateAlignmentSearch = false;
         this.shared.updateCourseSearch = false;
+        this.browserRefresh = browserRefresh;
+        if(this.browserRefresh == true){
+            this.rout.navigate(['/Home']);
+        };
         if (this.cookieService.get('Test')) {
             this.cookieValue = this.cookieService.get('Test');
             let quickSearchData = JSON.parse(this.cookieValue);
@@ -84,6 +94,7 @@ export class FilterSummaryComponent implements OnInit {
         }
         this.store.select('advancedSearch').subscribe(data => {
             if (data.alignmentSearchSelectedFilters) {
+                console.log(util.inspect(data.alignmentSearchSelectedFilters, {showHidden: false, depth: null}));
                 let careerfields:any = [];
                 let strands:any = [];
                 let outcomes:any = [];
