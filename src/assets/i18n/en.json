@@ -2,9 +2,9 @@
     "SearchFields": {
         "Keywords": "Keywords",
         "CareerField": "Career Field",
-        "AcademicSubjects": "Academic Subjects",
-        "Strands": "Strands",
-        "Outcomes": "Outcomes",
+        "AcademicSubjects": "Academic Subject",
+        "Strands": "Strand",
+        "Outcomes": "Outcome",
         "CompetencyNumber": "Competency Number",
         "Alignment": "Alignment",
         "Courses": "Courses",

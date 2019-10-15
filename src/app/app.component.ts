@@ -58,6 +58,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+     // this is to fix the cache issue
+    localStorage.removeItem(environment.name + '_at');
+    localStorage.removeItem(environment.name + '_as');
+
     this.isLocal = environment.localhost;
     // this.titleService.setTitle(environment.title);
     const params = new URLSearchParams(window.location.search);
