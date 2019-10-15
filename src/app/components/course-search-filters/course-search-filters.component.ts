@@ -192,6 +192,7 @@ export class CourseSearchFiltersComponent implements OnInit {
     this.selectedCourses = [];
     this.coursesDropdown = [];
     this.selectedAcademicItems = [];
+    this.selectedKeyword ='';
   }
 
   showAlert(): void {

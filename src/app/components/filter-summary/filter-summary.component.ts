@@ -24,6 +24,7 @@ export class FilterSummaryComponent implements OnInit {
     searchObj: any;
 
     filterCareerPathData: any = [];
+    courseSearchKeywords : any ='';
     filterCareerPathCourseData: any = [];
     filterAcadamicSubjectData: any = [];
     filterAcadamicSubjectCourseData: any = [];
@@ -43,6 +44,7 @@ export class FilterSummaryComponent implements OnInit {
         if (this.cookieService.get('Test')) {
             this.cookieValue = this.cookieService.get('Test');
             let quickSearchData = JSON.parse(this.cookieValue);
+            console.log(quickSearchData);
             if (quickSearchData) {
                 this.FilterSummaryKeys = {
                     Keywords: '',
@@ -50,7 +52,7 @@ export class FilterSummaryComponent implements OnInit {
                     StrandIds: [],
                     OutcomeIds: [],
                     CompetencyIds: [],
-                  Subjects: [],
+                    Subjects: [],
                     CteToAcademic: true
                 };
 
@@ -84,11 +86,15 @@ export class FilterSummaryComponent implements OnInit {
         }
         this.store.select('advancedSearch').subscribe(data => {
             if (data.alignmentSearchSelectedFilters) {
+                let keyWords = '';
                 let careerfields:any = [];
                 let strands:any = [];
                 let outcomes:any = [];
                 let CompetencyIds:any = [];
                 let subjects:any = [];
+                if (data.alignmentSearchSelectedFilters.selectedKeyword) {
+                  keyWords = data.alignmentSearchSelectedFilters.selectedKeyword;
+                }
                 if (data.alignmentSearchSelectedFilters.selectedCareers) {
                     data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
                         careerfields.push(element.CareerFieldName);
@@ -147,7 +153,7 @@ export class FilterSummaryComponent implements OnInit {
                     });
                 }
                 let obj = {
-                    Keywords: '',
+                    Keywords: keyWords,
                     CareerFieldIds: careerfields,
                     StrandIds: strands,
                     OutcomeIds: outcomes,
@@ -189,6 +195,7 @@ export class FilterSummaryComponent implements OnInit {
     }
 
     formatSearchCourseData(source) {
+        this.courseSearchKeywords = source.selectedKeyword;
         this.filterCareerPathData = source.selectedCareerPath;
         this.filterCareerPathCourseData = source.selectedCareerPathCourses;
         this.filterAcadamicSubjectData = source.selectedAcademicSubject;

@@ -195,6 +195,7 @@ export class AppComponent implements OnInit {
   }
 
   showPublicLogin() {
+    console.log('show public login');
     this.store.dispatch(new AuthActions.ResetAuth({}));
     this.store.dispatch(new ClaimsActions.ResetClaims({}));
     window.location.href = `${window.location.protocol}//${window.location.host}`;

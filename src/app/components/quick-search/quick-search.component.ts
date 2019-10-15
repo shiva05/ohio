@@ -77,7 +77,6 @@ export class QuickSearchComponent implements OnInit {
     this.quickSearchSharedData.KeyWords = this.selectedKeyword;
     this.quickSearchSharedData.CareerFields = this.selectedCareer;
     this.quickSearchSharedData.AcademicSubjects = this.selectedAcadamicSubjects;
-    localStorage.setItem('QuickSearchData', JSON.stringify(this.quickSearchSharedData));
     this.cookieService.set('Test', JSON.stringify(this.quickSearchSharedData));
     (window as any).open('http://edu-dev-sbd.azurewebsites.net/#/AlignmentSearchResults', '_blank');
   }
