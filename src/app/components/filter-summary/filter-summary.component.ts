@@ -7,7 +7,6 @@ import { HttpClient } from '@angular/common/http';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 import { CookieService } from 'ngx-cookie-service';
 import util from 'util';
-//refresh
 import { browserRefresh } from '../../app.component';
 import { HomeComponent } from '../home/home.component';
 

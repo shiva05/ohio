@@ -25,9 +25,7 @@ export class ReportComponent {
   PDFName: string = '';
   isPublic: boolean = false;
   context: UtilsContext;
-  //refresh start
   public browserRefresh: boolean;
-  //refresh end
 
   constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router,private docsService: DocsService,) { }
 
