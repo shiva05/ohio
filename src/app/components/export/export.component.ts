@@ -24,10 +24,4 @@ export class ExportComponent implements OnInit {
       allowSearchFilter: true
     };
   }
-
-
-
-  import() {
-
-  }
 }

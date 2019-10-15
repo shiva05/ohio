@@ -9,17 +9,7 @@ import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 })
 
 export class MainComponent implements OnInit {
-  someParam: any;
-  someParamKid: any;
   loopNumber: any;
-  showAdvancedSearch = false;
-  showSearchResults = false;
-  showReport = false;
-  showHomePage = true;
-  showAlignmentSearch = false;
-  showCourseSearch = false;
-  showExport = false;
-  showCourseReport = false;
   iFrameSummonsSrc: SafeResourceUrl;
 
   constructor(private translate: TranslateService, private sanitizer: DomSanitizer) {
@@ -28,17 +18,6 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.iFrameSummonsSrc = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.madewithangular.com/categories/education/');
-    this.showAdvancedSearch = false;
-    this.showHomePage = true;
     this.loopNumber = 1;
   }
-
-  onItemSelect(item: any) {
-
-  }
-
-  onSelectAll(item: any) {
-
-  }
-
 }

@@ -6,8 +6,8 @@
             <div class="row">
                 <div class="form-group col-md-12 col-xs-12">
                     <label for="exampleFormControlInput1">{{ 'SearchFields.Keywords' | translate }}</label>
-                    <input type="search" class="form-control"  name="enterKeyword"
-                        id="exampleFormControlInput1" placeholder="Keywords . . ."  [(ngModel)]="selectedKeyword">
+                    <input type="search" class="form-control" name="enterKeyword" id="exampleFormControlInput1"
+                        placeholder="Keywords . . ." [(ngModel)]="selectedKeyword">
                 </div>
             </div>
             <!-- Dropdown row -->
@@ -28,10 +28,12 @@
             </div>
             <!-- Button Row -->
             <div class="row search-btn">
-                <div class="col-md-6 col-xs-6"> <button type="button" (click)="clearQuickSearch()" class="btn btn-outline-secondary">Clear</button>
+                <div class="col-md-6 col-xs-6"> <button type="button" (click)="clearQuickSearch()"
+                        class="btn btn-outline-secondary">Clear</button>
                 </div>
                 <div class="col-md-6 col-xs-6">
-                    <button type="button" class="btn btn-info" (click)="sendSearch()" [disabled]="selectedCareer.length == 0 || selectedAcadamicSubjects.length == 0">Search</button>
+                    <button type="button" class="btn btn-info" (click)="sendSearch()"
+                        [disabled]="selectedCareer.length == 0 || selectedAcadamicSubjects.length == 0">Search</button>
                 </div>
             </div>
         </form>

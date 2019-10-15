@@ -81,7 +81,6 @@ export class AlignmentSearchAccordionComponent implements OnInit {
   @Output() onPageSelect = new EventEmitter<any>();
 
   constructor(private store: Store<AppState>, private searchResultService: SearchResultService, private rout: Router, private _shared: SharedService) {
-    // this.cteToAcademic = true;
   }
 
   ngOnInit() {
@@ -412,6 +411,7 @@ export class AlignmentSearchAccordionComponent implements OnInit {
       }
     }
   }
+
   trackCareersStatus(CareerFieldData) {
     let carrerStatus = [];
     for (let career = 0; career < CareerFieldData.Strand.length; career++) {
@@ -719,5 +719,4 @@ export class AlignmentSearchAccordionComponent implements OnInit {
     this._shared.toggleAlignment = this.cteToAcademic;
     this.getAlignmentSearchResult();
   }
-
 }

@@ -6,8 +6,6 @@ import * as NavActions from '../../actions/nav-actions';
 import { Router } from '@angular/router';
 import { InteropService } from '../../services/interop.service';
 
-import { Utilities } from '../../models/util-nav-item';
-import * as UtilsActions from '../../actions/utils-actions';
 import * as _ from 'lodash';
 
 class UINavItem implements NavItem {
@@ -101,10 +99,9 @@ export class MenubarComponent implements OnInit {
 
 
     this.store.dispatch(new NavActions.NavSetMenuName(menuName));
-    debugger
-    if(url){
-      url = url.replace (/\//g, "");
-      url = url.replace (/#/g, "");
+    if (url) {
+      url = url.replace(/\//g, "");
+      url = url.replace(/#/g, "");
     }
     this.router.navigateByUrl(url);
 

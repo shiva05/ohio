@@ -2,16 +2,19 @@
     <div class="modal-dialog" role="document" style="display: flex;">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="reportModal" aria-label="Close" (click)="closeModal()">
+                <button type="button" class="close" data-dismiss="reportModal" aria-label="Close"
+                    (click)="closeModal()">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
             </div>
             <div class="modal-body">
                 <h2 class="modal-title" id="myModalLabel">File Name:</h2>
-                <input [(ngModel)]="PDFName" type="text" fileNameRegex id="PDFNameInput" class="ohio-field-input" name="" value="">
+                <input [(ngModel)]="PDFName" type="text" fileNameRegex id="PDFNameInput" class="ohio-field-input"
+                    name="" value="">
             </div>
             <div class="modal-footer">
-                <button type="button" [disabled]="PDFName.length < 4" class="ohio-button" (click)="sendToParent()">Save to Profile</button>
+                <button type="button" [disabled]="PDFName.length < 4" class="ohio-button" (click)="sendToParent()">Save
+                    to Profile</button>
             </div>
         </div>
     </div>

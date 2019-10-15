@@ -122,13 +122,15 @@
           <div class="search-filter-left">
             <div class="filter">
               <span class="filter-each">
-                  <span *ngIf="courseSearchKeywords">
-                      <label>Keyword: </label>
-                      <span class="badge badge-light">
-                        <span class="selectedElement">{{courseSearchKeywords}}</span>
-                      </span>
+                <span *ngIf="courseSearchKeywords">
+                  <label>Keyword: </label>
+                  <span class="badge badge-light">
+                    <span class="selectedElement">{{courseSearchKeywords}}</span>
                   </span>
-                  <span class="filter-divider"  *ngIf="courseSearchKeywords && filterCareerPathData &&  filterCareerPathData[0].CareerPathName" > | </span>
+                </span>
+                <span class="filter-divider"
+                  *ngIf="courseSearchKeywords && filterCareerPathData &&  filterCareerPathData[0].CareerPathName"> |
+                </span>
                 <span>
                   <label
                     *ngIf="filterCareerPathData &&  filterCareerPathData[0].CareerPathName">{{'CourseFields.CareerField' | translate}}:

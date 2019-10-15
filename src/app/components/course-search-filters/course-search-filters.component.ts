@@ -101,7 +101,7 @@ export class CourseSearchFiltersComponent implements OnInit {
     this.coursesDropdown = [];
     let selectedCareerIds = [];
     let SelectedCoursesIds = [];
-    var finalUpdatedSelectListIds: any = [];
+    let finalUpdatedSelectListIds: any = [];
     this.courses.forEach(course => {
       data.forEach(careerPath => {
         if (course.CareerPathId === careerPath.CareerPathId) {
@@ -125,13 +125,9 @@ export class CourseSearchFiltersComponent implements OnInit {
           if (course.CourseId === element) {
             this.selectedCourses.push(course);
           }
-        })
+        });
       });
     }
-
-    // console.log(this.selectedCourses);
-
-
   }
 
   onCareerPathSelectAll() {
@@ -143,9 +139,6 @@ export class CourseSearchFiltersComponent implements OnInit {
 
   onCareerPathDeSelectAll() {
     this.coursesDropdown = [];
-  }
-
-  getData(data) {
   }
 
   onSubjectSelect(event) {
@@ -192,7 +185,7 @@ export class CourseSearchFiltersComponent implements OnInit {
     this.selectedCourses = [];
     this.coursesDropdown = [];
     this.selectedAcademicItems = [];
-    this.selectedKeyword ='';
+    this.selectedKeyword = '';
   }
 
   showAlert(): void {
@@ -208,7 +201,7 @@ export class CourseSearchFiltersComponent implements OnInit {
       this.showAlert();
     } else {
       this.searchObj = {
-        selectedKeyword:this.selectedKeyword,
+        selectedKeyword: this.selectedKeyword,
         selectedCareerPath: this.selectedCareerPath,
         selectedCareerPathCourses: this.selectedCourses,
         selectedAcademicSubject: this.selectedAcadamicSubjects,
@@ -219,5 +212,4 @@ export class CourseSearchFiltersComponent implements OnInit {
       this.rout.navigate(['/CourseSearchResults']);
     }
   }
-
 }
