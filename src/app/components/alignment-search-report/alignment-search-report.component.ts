@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { DownloadPDFService } from '../../services/download-pdf.service';
 import { Store } from '@ngrx/store';
 import { DatePipe } from '@angular/common';
@@ -10,21 +10,22 @@ import * as UtilsActions from '../../actions/utils-actions';
 import { take } from 'rxjs/internal/operators/take';
 
 @Component({
-  selector: 'report',
-  templateUrl: './report.component.html',
-  styleUrls: ['./report.component.css']
+  selector: 'app-alignment-search-report',
+  templateUrl: './alignment-search-report.component.html',
+  styleUrls: ['./alignment-search-report.component.css']
 })
 
-export class ReportComponent {
+export class AlignmentSearchReportComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
+
   reportFail: boolean = false;
   nameDialogue: boolean = false;
   PDFName: string = '';
   isPublic: boolean = false;
   context: UtilsContext;
 
-  constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router,private docsService: DocsService,) { }
+  constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router, private docsService: DocsService, ) { }
 
   ngOnInit() {
     this.store.select('authState').subscribe((authState) => {
@@ -85,29 +86,30 @@ export class ReportComponent {
       }
     });
   }
+
   public saveToProfile(fileName): void {
     this.store.select('advancedSearch').subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
-        let objTemp =  data.alignmentSearchSelectedFilters.selectedAsSearchResults;
+        let objTemp = data.alignmentSearchSelectedFilters.selectedAsSearchResults;
         this.downloadPDFService.asSaveToProfile(objTemp, fileName)
-        .subscribe(data => {
-          this.store.select('utilsState').pipe(take(1)).subscribe((utilityState) => {
-            if (utilityState && utilityState.utilityContext) {
-              this.context = utilityState.utilityContext;
-              if (utilityState.utilityContext !== null && utilityState.utilityContext.assetTemplateKey > 0 && utilityState.utilityContext.detailKey > 0
-                && utilityState.utilityContext.isDetailAsset != null && utilityState.utilityContext.isDetailAsset
-                && utilityState.utilityContext.moduleKey != null && utilityState.utilityContext.moduleKey > 0 ) {
+          .subscribe(data => {
+            this.store.select('utilsState').pipe(take(1)).subscribe((utilityState) => {
+              if (utilityState && utilityState.utilityContext) {
+                this.context = utilityState.utilityContext;
+                if (utilityState.utilityContext !== null && utilityState.utilityContext.assetTemplateKey > 0 && utilityState.utilityContext.detailKey > 0
+                  && utilityState.utilityContext.isDetailAsset != null && utilityState.utilityContext.isDetailAsset
+                  && utilityState.utilityContext.moduleKey != null && utilityState.utilityContext.moduleKey > 0) {
                   this.docsService.fetchDocCount(this.context).subscribe((docCount: number) => {
                     if (docCount != null) {
                       this.store.dispatch(new UtilsActions.UtilsSetDocCount(docCount));
                     }
                   },
                     (error) =>
-                    this.store.dispatch(new UtilsActions.UtilsSetDocCount(0)));
+                      this.store.dispatch(new UtilsActions.UtilsSetDocCount(0)));
+                }
               }
-            }
+            });
           });
-        });
       }
     });
   }

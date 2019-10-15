@@ -5,12 +5,12 @@ import { AppState } from './../../app.state';
 import { ReportService } from '../../services/report.service';
 
 @Component({
-  selector: 'app-report-list',
-  templateUrl: './report-list.component.html',
-  styleUrls: ['./report-list.component.css']
+  selector: 'app-alignment-search-report-list',
+  templateUrl: './alignment-search-report-list.component.html',
+  styleUrls: ['./alignment-search-report-list.component.css']
 })
 
-export class ReportListComponent implements OnInit {
+export class AlignmentSearchReportListComponent implements OnInit {
   academicSubjectColorPallet: any = [
     {
       Subject: 'Math',
