@@ -15,10 +15,7 @@ export class AlertMessageComponent implements OnInit, OnChanges {
   toShow = false;
   constructor() { }
 
-  ngOnInit() {
-
-
-  }
+  ngOnInit() { }
 
   ngOnChanges() {
     const styleMap = {
@@ -35,6 +32,4 @@ export class AlertMessageComponent implements OnInit, OnChanges {
   toggle() {
     this.toShow = !this.toShow;
   }
-
-
 }

@@ -7,13 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AlignmentSearchComponent implements OnInit {
-  showAsFilter = true;
-  showAsResults = false;
-  showAsReport = false;
-
   constructor() { }
 
   ngOnInit() {
   }
-
 }

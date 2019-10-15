@@ -32,12 +32,12 @@ import { ClaimsService } from './services/claims.service';
 import { MenubarComponent } from './components/menubar/menubar.component';
 import { QuickSearchComponent } from './components/quick-search/quick-search.component';
 import { AlignmentSearchComponent } from './components/alignment-search/alignment-search.component';
+import { AlignmentSearchReportComponent } from './components/alignment-search-report/alignment-search-report.component';
+import { AlignmentSearchReportListComponent } from './components/alignment-search-report-list/alignment-search-report-list.component';
 import { FilterSummaryComponent } from './components/filter-summary/filter-summary.component';
+import { AlignmentSearchAccordionComponent } from './components/alignment-search-accordion/alignment-search-accordion.component';
 import { AlignmentSearchFiltersComponent } from './components/alignment-search-filters/alignment-search-filters';
-import { CustomAccordionComponent } from './components/custom-accordion/custom-accordion.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
-import { ReportComponent } from './components/report/report.component';
-import { ReportListComponent } from './components/report-list/report-list.component';
 import { CourseSearchComponent } from './components/course-search/course-search.component';
 import { CourseSearchFiltersComponent } from './components/course-search-filters/course-search-filters.component';
 import { CourseSearchAccordionComponent } from './components/course-search-accordion/course-search-accordion.component';
@@ -47,16 +47,13 @@ import { ReportModalComponent } from './components/report-modal/report-modal.com
 
 import { ExportComponent } from './components/export/export.component';
 import { HomeComponent } from './components/home/home.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { LoginComponent } from './components/login/login.component';
-import { MyAppComponent } from './components/my-app/my-app.component';
-
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthOrchestration } from './services/auth-orchestration.service';
 import { InteropService } from 'src/app/services/interop.service';
 import { Reducers } from './reducers/index';
-import { UtilityComponent} from './components/utility/utility.component';
+import { UtilityComponent } from './components/utility/utility.component';
 import { UtilitynavComponent } from './components/utilitynav/utilitynav.component';
 import { DocsComponent } from './components/utilities/docs/docs.component';
 import { AlertMessageComponent } from './components/alert-message/alert-message.component';
@@ -69,19 +66,17 @@ import { FileNameDirective } from './directives/fileNameDirective';
   declarations: [
     AppComponent,
     HeaderComponent,
-    CustomAccordionComponent,
     FilterSummaryComponent,
-    ReportComponent,
     AlignmentSearchComponent,
+    AlignmentSearchAccordionComponent,
+    AlignmentSearchReportComponent,
+    AlignmentSearchReportListComponent,
     CourseSearchComponent,
-    ReportListComponent,
     HomeComponent,
     ExportComponent,
     QuickSearchComponent,
     MainComponent,
     LoginComponent,
-    MyAppComponent,
-    PageNotFoundComponent,
     AlignmentSearchFiltersComponent,
     CourseSearchFiltersComponent,
     SearchResultsComponent,

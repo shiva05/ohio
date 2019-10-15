@@ -1,8 +1,8 @@
 <div class="main" *ngIf="!showReport">
     <filter-summary (onPageSelect)="onPageSelect($event)" [FilterSummary]="FilterSummary"></filter-summary>
     <div class="col-md-12">
-        <custom-accordion (onPageSelect)="onPageSelect($event)"></custom-accordion>
+        <app-alignment-search-accordion (onPageSelect)="onPageSelect($event)"></app-alignment-search-accordion>
     </div>
 </div>
 
-<report (onPageSelect)="onPageSelect($event)" *ngIf="showReport"></report>
+<app-alignment-search-report (onPageSelect)="onPageSelect($event)" *ngIf="showReport"></app-alignment-search-report>

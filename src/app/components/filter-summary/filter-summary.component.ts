@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { AppState } from './../../app.state';
 import { Router } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
-import { HttpClient } from '@angular/common/http';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 import { CookieService } from 'ngx-cookie-service';
 import util from 'util';
@@ -29,6 +28,7 @@ export class FilterSummaryComponent implements OnInit {
     searchObj: any;
 
     filterCareerPathData: any = [];
+    courseSearchKeywords: any = '';
     filterCareerPathCourseData: any = [];
     filterAcadamicSubjectData: any = [];
     filterAcadamicSubjectCourseData: any = [];
@@ -57,6 +57,7 @@ export class FilterSummaryComponent implements OnInit {
         if (this.cookieService.get('Test')) {
             this.cookieValue = this.cookieService.get('Test');
             let quickSearchData = JSON.parse(this.cookieValue);
+            console.log(quickSearchData);
             if (quickSearchData) {
                 this.FilterSummaryKeys = {
                     Keywords: '',
@@ -64,7 +65,7 @@ export class FilterSummaryComponent implements OnInit {
                     StrandIds: [],
                     OutcomeIds: [],
                     CompetencyIds: [],
-                  Subjects: [],
+                    Subjects: [],
                     CteToAcademic: true
                 };
 
@@ -88,7 +89,7 @@ export class FilterSummaryComponent implements OnInit {
                     });
                 }
                 this.searchObj = {
-                    selectedKeyword : (quickSearchData && quickSearchData['KeyWords']) ? quickSearchData['KeyWords'] :'',
+                    selectedKeyword: (quickSearchData && quickSearchData['KeyWords']) ? quickSearchData['KeyWords'] : '',
                     selectedCareers: quickSearchData['CareerFields'],
                     selectedAcadamicSubjects: quickSearchData['AcademicSubjects']
                 };
@@ -98,11 +99,15 @@ export class FilterSummaryComponent implements OnInit {
         }
         this.store.select('advancedSearch').subscribe(data => {
             if (data.alignmentSearchSelectedFilters) {
-                let careerfields:any = [];
-                let strands:any = [];
-                let outcomes:any = [];
-                let CompetencyIds:any = [];
-                let subjects:any = [];
+                let keyWords = '';
+                let careerfields: any = [];
+                let strands: any = [];
+                let outcomes: any = [];
+                let CompetencyIds: any = [];
+                let subjects: any = [];
+                if (data.alignmentSearchSelectedFilters.selectedKeyword) {
+                    keyWords = data.alignmentSearchSelectedFilters.selectedKeyword;
+                }
                 if (data.alignmentSearchSelectedFilters.selectedCareers) {
                     data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
                         careerfields.push(element.CareerFieldName);
@@ -125,7 +130,7 @@ export class FilterSummaryComponent implements OnInit {
                 }
                 if (data.alignmentSearchSelectedFilters.selectedAcadamicSubjects) {
                     data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
-                        let level1:any = [];
+                        let level1: any = [];
                         let level1Name = element.Level[0].LevelName;
                         if (element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length > 0) {
                             element.Level[0].SelectedItems.forEach(element => {
@@ -133,14 +138,14 @@ export class FilterSummaryComponent implements OnInit {
                             });
                         }
 
-                        let level2:any = [];
+                        let level2: any = [];
                         let level2Name = element.Level[1].LevelName;
                         if (element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length > 0) {
                             element.Level[1].SelectedItems.forEach(element => {
                                 level2.push(element.LevelValue1);
                             });
                         }
-                        let level3:any = [];
+                        let level3: any = [];
                         let level3Name = element.Level[2].LevelName;
                         if (element.Level[2] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length > 0) {
                             element.Level[2].SelectedItems.forEach(element => {
@@ -161,7 +166,7 @@ export class FilterSummaryComponent implements OnInit {
                     });
                 }
                 let obj = {
-                    Keywords: '',
+                    Keywords: keyWords,
                     CareerFieldIds: careerfields,
                     StrandIds: strands,
                     OutcomeIds: outcomes,
@@ -203,6 +208,7 @@ export class FilterSummaryComponent implements OnInit {
     }
 
     formatSearchCourseData(source) {
+        this.courseSearchKeywords = source.selectedKeyword;
         this.filterCareerPathData = source.selectedCareerPath;
         this.filterCareerPathCourseData = source.selectedCareerPathCourses;
         this.filterAcadamicSubjectData = source.selectedAcademicSubject;

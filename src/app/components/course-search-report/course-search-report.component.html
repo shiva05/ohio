@@ -19,5 +19,6 @@
     </div>
   </div>
 </div>
-<app-report-modal *ngIf="nameDialogue" (nameForParent)="saveToProfile($event)" (closeModalBool)="nameDialogue=false;"></app-report-modal>
 
+<app-report-modal *ngIf="nameDialogue" (nameForParent)="saveToProfile($event)" (closeModalBool)="nameDialogue=false;">
+</app-report-modal>

@@ -7,9 +7,7 @@ import { UtilsState } from './reducers/utils-reducer';
 export interface AppState {
   readonly metaData: MetaData;
   readonly qsMetaData: QsMetaData;
-  readonly   authState : AuthState;
-  readonly   claimsState : ClaimsState;
-  readonly utilsState: UtilsState,
-
-
+  readonly authState: AuthState;
+  readonly claimsState: ClaimsState;
+  readonly utilsState: UtilsState;
 }

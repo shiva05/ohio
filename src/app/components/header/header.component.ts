@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { AppState } from './../../app.state';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'header',
@@ -13,7 +14,7 @@ export class HeaderComponent implements OnInit {
 
   @Output() onPageSelect = new EventEmitter<any>();
 
-  constructor(  private store: Store<AppState>,) { }
+  constructor(private store: Store<AppState>, private route: Router) { }
 
   ngOnInit() {
     this.store.select('authState').subscribe((authState) => {
@@ -24,6 +25,6 @@ export class HeaderComponent implements OnInit {
   }
 
   goToPage(org) {
-    this.onPageSelect.emit(org);
+    this.route.navigate(['/']);
   }
 }

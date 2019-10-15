@@ -14,6 +14,7 @@ export class CourseSearchReportListComponent implements OnInit {
   results: any = [];
   reportListhResultData: any = [];
   localReportErr: boolean = false;
+
   @Output() reportFail = new EventEmitter<any>();
   @Output() onPageSelect = new EventEmitter<any>();
 
@@ -21,19 +22,17 @@ export class CourseSearchReportListComponent implements OnInit {
 
   ngOnInit() {
     this.store.select('courseSearch').subscribe(data => {
-      if (data.courseSearchSelectedFilters && data.courseSearchSelectedFilters.selectedCourseSearchResults ) {
+      if (data.courseSearchSelectedFilters && data.courseSearchSelectedFilters.selectedCourseSearchResults) {
         let objTemp = data.courseSearchSelectedFilters.selectedCourseSearchResults;
         this.reportService.getCourseSearchReportData(objTemp).subscribe(
-          data => {
-            this.reportListhResultData = data;
+          response => {
+            this.reportListhResultData = response;
           },
           err => {
-            console.log('Report FAILED');
             this.localReportErr = true;
             this.reportFail.emit();
           });
       } else {
-        console.log('Report FAILED');
         this.localReportErr = true;
         this.reportFail.emit();
       }

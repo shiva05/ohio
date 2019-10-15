@@ -8,23 +8,15 @@ import { AuthOrchestration } from './services/auth-orchestration.service';
 import * as AuthActions from './actions/auth-actions';
 import * as ClaimsActions from './actions/claims-actions';
 //Refresh
-import {Subscription} from 'rxjs';
+import { Subscription } from 'rxjs';
 import { UtilsContext } from './models/utils-context';
+
 import { InteropService } from './services/interop.service';
-import { InteropDataPacket } from './models/interop-datapacket';
 import { Router, NavigationStart } from '@angular/router';
 import { Utilities } from './models/util-nav-item';
 import { NavResize } from './actions/nav-actions';
 import * as UtilsActions from './actions/utils-actions';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpResponse,
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { LoaderService } from './services/loader.service';
 export let browserRefresh = false;
 
@@ -50,16 +42,8 @@ export class AppComponent implements OnInit, OnDestroy {
   mainLeft = 56;
   mainHeight = 1400;
   currentUtil: Utilities = Utilities.none;
-  //Refresh
   subscription: Subscription;
-  constructor(private http: HttpClient,
-              public router: Router,
-              private store: Store<AppState>,
-              public loaderService: LoaderService,
-              private translate: TranslateService,
-              private authService: AuthService,
-              private interopService: InteropService,
-              private authOrchestration: AuthOrchestration) {
+  constructor( private http: HttpClient, public router: Router, private store: Store<AppState>, public loaderService: LoaderService, private translate: TranslateService, private authService: AuthService, private interopService: InteropService, private authOrchestration: AuthOrchestration) {
     translate.setDefaultLang('en');
     window.onresize = () => {
       this.utilNav(this.currentUtil);
@@ -109,7 +93,7 @@ export class AppComponent implements OnInit, OnDestroy {
             this.showPublicLogin();
           } else {
             // Navigate to Safe Login Page
-             this.showSafeLogin();
+            this.showSafeLogin();
           }
           return;
         } else {
@@ -127,12 +111,10 @@ export class AppComponent implements OnInit, OnDestroy {
         const userType = authState.isPublic ? 'Public' : 'Internal';
         localStorage.setItem(environment.name + '_at', userType);
       }
-      // call this when they are all set
       if (authState.authJwt != null) {
         this.authOrchestration.handleClaims(authState.selectedOrg, authState.selectedAudience, authState.selectedApplication);
       }
 
-      // console.log('authState:', authState);
       if (authState && authState.error) {
         this.appError = true;
         this.errorMessage = authState.error.error;
@@ -145,8 +127,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.ready = true;
         if (this.ready) {
           let obj = {
-            assetTemplateKey:242710,
-            //e.g a case key
+            assetTemplateKey: 242710,
             detailKey: 1,
             moduleKey: 32,
             isDetailAsset: true
@@ -158,18 +139,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     const utilsContext = this.store.select(state => state.utilsState.utilityContext);
     utilsContext.subscribe((ctx) => {
-      // if (ctx !== null && ctx.detailKey > 0 && ctx.assetTemplateKey !== 154000) {
-      // if (ctx !== null && ctx.isDetailAsset && ctx.moduleKey) {
-      //   console.log('MENU SPA SUBSCRIBING TO CONTEXT CHANGE FROM CASE SPA - CHECKING DETAIL BOOLEAN', ctx.isDetailAsset);
-      //   console.log('MENU SPA SUBSCRIBING TO CONTEXT CHANGE FROM CASE SPA - CHECKING MODULE KEY', ctx.moduleKey);
-      // }
-
-      // if (ctx !== null && ctx.detailKey > 0 && ctx.isDetailAsset) {
-      //   this.currentAssetTemplateKey = ctx.assetTemplateKey;
-      // }
-      // else {
-      //   this.currentAssetTemplateKey = 0;
-      // }
     });
 
     this.store.select('utilsState').subscribe((utilityState) => {
@@ -184,21 +153,7 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     });
   }
-  // utilNav(util: Utilities) {
-  //   this.currentUtil = util;
-  //   const baseWidth = window.innerWidth - 75;
-  //   // define target widths for each utility
-  //   const targetWidth = {};
 
-  //   targetWidth[Utilities.Documents] = baseWidth * .5;
-  //   targetWidth[Utilities.Flags] = baseWidth * .3;
-  //   targetWidth[Utilities.contacts] = baseWidth * .4;
-  //   targetWidth[Utilities.history] = baseWidth * .2;
-  //   targetWidth[Utilities.Comments] = baseWidth * .4;
-
-  //   const width = (util !== Utilities.none) ? targetWidth[util] : 55;
-  //   this.setIframeWidth(width);
-  // }
   showSafeLogin() {
     this.store.dispatch(new AuthActions.ResetAuth({}));
     this.store.dispatch(new ClaimsActions.ResetClaims({}));
@@ -206,6 +161,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   showPublicLogin() {
+    console.log('show public login');
     this.store.dispatch(new AuthActions.ResetAuth({}));
     this.store.dispatch(new ClaimsActions.ResetClaims({}));
     window.location.href = `${window.location.protocol}//${window.location.host}`;
@@ -221,7 +177,6 @@ export class AppComponent implements OnInit, OnDestroy {
   utilNav(util: Utilities) {
     this.currentUtil = util;
     const baseWidth = window.innerWidth - 75;
-    // define target widths for each utility
     const targetWidth = {};
 
     targetWidth[Utilities.Documents] = baseWidth * .5;
