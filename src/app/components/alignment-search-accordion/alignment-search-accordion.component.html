@@ -6,7 +6,7 @@
   </div>
   <div *ngIf="!noResultFound">
     <div class="row search-results-head">
-  
+
       <div class="col-md-10 search-results-head-left">
         <h3>{{ 'SearchResults.SearchResults' | translate }}</h3>
         <p *ngIf="totalSearchResults"> Found {{totalSearchResults}} Alignments for your search criteria</p>
@@ -29,7 +29,7 @@
           </div>
         </div>
       </div>
-  
+
       <div class="search-accordion" *ngIf="!cteToAcademic">
         <div class="search-accordion-head">
           <div class="row">
@@ -41,13 +41,13 @@
           </div>
         </div>
       </div>
-  
+
       <div class="col-md-12 nopad" *ngIf="cteToAcademic">
         <ul class="list-group search-accordion">
           <li class="list-group-item search-accordion-each"
             [ngClass]="(careerField.isCareerFieldClosed) ? 'accordion-active' : ''"
             *ngFor="let careerField of searchResultDataArray; index as i">
-  
+
             <!-- Career Field -->
             <div class="row careerfield-each-inner" (click)="expandCollapseCareerField(careerField)">
               <div class="col-md-6">
@@ -63,7 +63,7 @@
                 </div>
                 <span class="level-one-title"> {{careerField.CareerFieldName}}</span>
               </div>
-  
+
               <div class="col-md-1 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
               <div class="col-md-3 color-gap" [style.color]="careerField.Color">{{careerField.AcademicSubjectName}}</div>
               <div class="col-md-1">
@@ -77,14 +77,14 @@
                 </span>
               </div>
             </div>
-  
+
             <!-- strands -->
             <div class="child-list" [hidden]="!careerField.isCareerFieldClosed">
               <ul class="list-group level-two">
                 <li class="level-two-inner" *ngFor="let strand of careerField.Strand; index as j">
                   <div class="strand-each-inner" (click)="expandCollapseStrand(strand)">
                     <div class="row">
-  
+
                       <div class="col-md-6">
                         <div class="accordion-label-strand">Strand</div>
                         <div class="accordion-checbox">
@@ -108,7 +108,7 @@
                           *ngIf="strand.Alignment">{{strand.Alignment}}</span>
                       </div>
                       <div class="col-md-1 accordion-down-arrow">
-  
+
                         <span *ngIf="strand.Outcome">
                           <i class="fas fa-chevron-up" *ngIf="strand.isStrandClosed;else isStrandClosed"></i>
                           <ng-template #isStrandClosed><i class="fas fa-chevron-down"></i></ng-template>
@@ -147,7 +147,7 @@
                                 *ngIf="outcome.Alignment">{{outcome.Alignment}}</span>
                             </div>
                             <div class="col-md-1 accordion-down-arrow">
-  
+
                               <span *ngIf="outcome.Competency">
                                 <i class="fas fa-chevron-up" *ngIf="outcome.isOutcomeClosed;else isOutcomeClosed"></i>
                                 <ng-template #isOutcomeClosed><i class="fas fa-chevron-down"></i></ng-template>
@@ -155,7 +155,7 @@
                             </div>
                           </div>
                         </div>
-  
+
                         <!-- Competency -->
                         <div class="child-list" [hidden]="!outcome.isOutcomeClosed" *ngIf="outcome.Competency">
                           <ul class="list-group level-three">
@@ -202,13 +202,13 @@
           </li>
         </ul>
       </div>
-  
+
       <div class="col-md-12 nopad" *ngIf="!cteToAcademic">
         <ul class="list-group search-accordion">
           <li class="list-group-item search-accordion-each"
             [ngClass]="(careerField.isSubjectFieldClosed) ? 'accordion-active' : ''"
             *ngFor="let careerField of subjectToCareerData; index as i">
-  
+
             <!-- Subject -->
             <div class="row careerfield-each-inner" (click)="expandCollapseSubjectField(careerField)">
               <div class="col-md-3">
@@ -222,11 +222,11 @@
                     <label for="careerFieldID_{{i}}"></label>
                   </span>
                 </div>
-                <span class="level-one-title"> {{careerField.SubjectName}}</span>
+                <span class="level-one-title"  [style.color]="careerField.Color"> {{careerField.SubjectName}}</span>
               </div>
-  
+
               <div class="col-md-1 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
-              <div class="col-md-6 color-gap" [style.color]="careerField.Color">{{careerField.CareerFieldName}}</div>
+              <div class="col-md-6 color-gap">{{careerField.CareerFieldName}}</div>
               <div class="col-md-1">
                 <span class="accordion-bubble" [style.background-color]="careerField.Color"
                   *ngIf="careerField.Alignment">{{careerField.Alignment}}</span>
@@ -238,14 +238,14 @@
                 </span>
               </div>
             </div>
-  
+
             <!-- strands -->
             <div class="child-list" [hidden]="!careerField.isSubjectFieldClosed">
               <ul class="list-group level-two">
                 <li class="level-two-inner" *ngFor="let strand of careerField.Level; index as j">
                   <div class="strand-each-inner" (click)="expandCollapseASStrand(strand)">
                     <div class="row">
-  
+
                       <div class="col-md-3">
                         <div class="accordion-label-strand">{{strand.LevelName}}</div>
                         <div class="accordion-checbox">
@@ -262,7 +262,7 @@
                         </span>
                       </div>
                       <div class="col-md-1"> &nbsp;</div>
-                      <div class="col-md-6 color-gap" [style.color]="careerField.Color"> {{strand.CareerFieldName}}</div>
+                      <div class="col-md-6 color-gap" > {{strand.CareerFieldName}}</div>
                       <div class="col-md-1">
                         <span class="accordion-bubble" [style.background-color]="careerField.Color"
                           *ngIf="strand.Alignment">{{strand.Alignment}}</span>
@@ -275,7 +275,7 @@
                       </div>
                     </div>
                   </div>
-  
+
                   <!-- Outcomes -->
                   <div class="child-list" [hidden]="!strand.isASStrandClosed">
                     <ul class="list-group level-two">
@@ -299,7 +299,7 @@
                               </span>
                             </div>
                             <div class="col-md-1"> &nbsp;</div>
-                            <div class="col-md-6 color-gap" [style.color]="careerField.Color">
+                            <div class="col-md-6 color-gap" >
                               {{outcome.CareerFieldName}}
                             </div>
                             <div class="col-md-1">
@@ -307,7 +307,7 @@
                                 *ngIf="outcome.Alignment">{{outcome.Alignment}}</span>
                             </div>
                             <div class="col-md-1 accordion-down-arrow">
-  
+
                               <span *ngIf="outcome.ChildLevel">
                                 <i class="fas fa-chevron-up" *ngIf="outcome.isOutcomeClosed;else isOutcomeClosed"></i>
                                 <ng-template #isOutcomeClosed><i class="fas fa-chevron-down"></i></ng-template>
@@ -315,7 +315,7 @@
                             </div>
                           </div>
                         </div>
-  
+
                         <!-- Competency -->
                         <div class="child-list" [hidden]="!outcome.isOutcomeClosed" *ngIf="outcome.ChildLevel">
                           <ul class="list-group level-three">
@@ -338,7 +338,7 @@
                                     </span>
                                   </div>
                                   <div class="col-md-1"> &nbsp;</div>
-                                  <div class="col-md-6 color-gap" [style.color]="careerField.Color">
+                                  <div class="col-md-6 color-gap">
                                     {{item.CareerFieldName}}
                                   </div>
                                   <div class="col-md-1">
@@ -372,7 +372,7 @@
       </button>
     </div>
   </div>
-  
+
   <div class="col-md-12 main" *ngIf="noResultFound">
     <h1>{{'SearchResults.NoResultFound' | translate}}</h1>
   </div>

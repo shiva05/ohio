@@ -13,18 +13,22 @@ import { ReportService } from '../../services/report.service';
 export class AlignmentSearchReportListComponent implements OnInit {
   academicSubjectColorPallet: any = [
     {
+      SubjectId :1,
       Subject: 'Math',
       Color: '#000000'
     },
     {
+      SubjectId :2,
       Subject: 'ELA',
       Color: '#5E8000'
     },
     {
+      SubjectId :3,
       Subject: 'Science',
       Color: '#BF181A'
     },
     {
+      SubjectId :4,
       Subject: 'Social',
       Color: '#0B5688'
     }
@@ -62,9 +66,9 @@ export class AlignmentSearchReportListComponent implements OnInit {
     });
   }
 
-  findSubjectColor(subject) {
+  findSubjectColor(SubjectId) {
     for (let i = 0; i < this.academicSubjectColorPallet.length; i++) {
-      if (this.academicSubjectColorPallet[i].Subject === subject) {
+      if (this.academicSubjectColorPallet[i].SubjectId === SubjectId) {
         return this.academicSubjectColorPallet[i].Color;
       }
     }

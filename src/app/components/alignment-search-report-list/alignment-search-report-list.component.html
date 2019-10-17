@@ -49,7 +49,7 @@
                             <span
                                 class="reports-content-each-left">{{ 'ReportFields.AcademicSubject' | translate }}</span>
                             <span class="reports-content-each-right" style="color:white"
-                                [style.background-color]="findSubjectColor(result.SubjectName)">{{result.SubjectName}}</span>
+                                [style.background-color]="findSubjectColor(result.SubjectId)">{{result.SubjectName}}</span>
                         </div>
                         <div class="reports-content-each">
                             <span class="reports-content-each-left">{{ result.DomainOrClusterTitle }}</span>
@@ -87,7 +87,7 @@
                             <span
                                 class="reports-content-each-left">{{ 'ReportFields.AcademicSubject' | translate }}</span>
                             <span class="reports-content-each-right" style="color:white"
-                                [style.background-color]="findSubjectColor(result.SubjectName)">{{result.SubjectName}}</span>
+                                [style.background-color]="findSubjectColor(result.SubjectId)">{{result.SubjectName}}</span>
                         </div>
                         <div class="reports-content-each">
                             <span class="reports-content-each-left">{{ result.GradeOrSubjectTitle }}</span>

@@ -51,18 +51,22 @@ export class AlignmentSearchAccordionComponent implements OnInit {
   };
   academicSubjectColorPallet: any = [
     {
+      SubjectId :1,
       Subject: 'Math',
       Color: '#000000'
     },
     {
-      Subject: 'ELA',
+      SubjectId :2,
+      Subject: 'English literature',
       Color: '#5E8000'
     },
     {
+      SubjectId :3,
       Subject: 'Science',
       Color: '#BF181A'
     },
     {
+      SubjectId :4,
       Subject: 'Social',
       Color: '#0B5688'
     }
@@ -221,7 +225,7 @@ export class AlignmentSearchAccordionComponent implements OnInit {
         this.totalSearchResults = this.totalSearchResults + element.Alignment;
       }
       this.academicSubjectColorPallet.forEach((item) => {
-        if (element.AcademicSubjectName === item.Subject) {
+        if (element.AcademicSubjectId === item.SubjectId) {
           element['Color'] = item.Color;
         }
       });
@@ -236,7 +240,7 @@ export class AlignmentSearchAccordionComponent implements OnInit {
         this.totalSearchResults = this.totalSearchResults + element.Alignment;
       }
       this.academicSubjectColorPallet.forEach((item) => {
-        if (element.SubjectName === item.Subject) {
+        if (element.SubjectId === item.SubjectId) {
           element['Color'] = item.Color;
         }
       });
