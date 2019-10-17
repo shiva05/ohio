@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-
+import { take } from 'rxjs/internal/operators/take';
 import { AppState } from './../../app.state';
 import { ReportService } from '../../services/report.service';
 
@@ -43,7 +43,7 @@ export class AlignmentSearchReportListComponent implements OnInit {
   constructor(private store: Store<AppState>, private reportService: ReportService) { }
 
   ngOnInit() {
-    this.store.select('advancedSearch').subscribe(data => {
+    this.store.select('advancedSearch').pipe(take(1)).subscribe(data => {
       if (data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedAsSearchResults && data.alignmentSearchSelectedFilters.selectedAsSearchResults.CareerFiledIds.length > 0 && data.alignmentSearchSelectedFilters.selectedAsSearchResults.Subjects.length > 0) {
         let objTemp = data.alignmentSearchSelectedFilters.selectedAsSearchResults;
         this.reportService.getReportData(objTemp).subscribe(

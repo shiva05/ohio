@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
+import { take } from 'rxjs/internal/operators/take';
 import { AppState } from './../../app.state';
 import { ReportService } from '../../services/report.service';
 
@@ -21,7 +22,7 @@ export class CourseSearchReportListComponent implements OnInit {
   constructor(private store: Store<AppState>, private reportService: ReportService) { }
 
   ngOnInit() {
-    this.store.select('courseSearch').subscribe(data => {
+    this.store.select('courseSearch').pipe(take(1)).subscribe(data => {
       if (data.courseSearchSelectedFilters && data.courseSearchSelectedFilters.selectedCourseSearchResults) {
         let objTemp = data.courseSearchSelectedFilters.selectedCourseSearchResults;
         this.reportService.getCourseSearchReportData(objTemp).subscribe(

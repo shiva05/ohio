@@ -6,6 +6,7 @@ import * as CourseSearchActions from './../../actions/course-search.actions';
 import { Router } from '@angular/router';
 import { _ } from 'underscore';
 import { SharedService } from '../../services/shared.service';
+import { take } from 'rxjs/internal/operators/take';
 
 @Component({
   selector: 'app-course-search-accordion',
@@ -70,7 +71,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   }
 
   getCourseSearchResult() {
-    this.store.select('courseSearch').subscribe(data => {
+    this.store.select('courseSearch').pipe(take(1)).subscribe(data => {
       if (data.courseSearchSelectedFilters && data.courseSearchSelectedFilters.selectedCareerPath.length > 0 && data.courseSearchSelectedFilters.selectedAcademicSubject.length > 0) {
         this.courseSearchSelectedFilters = data.courseSearchSelectedFilters;
 

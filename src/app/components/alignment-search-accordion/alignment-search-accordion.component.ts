@@ -6,6 +6,7 @@ import * as AdvancedSearchActions from './../../actions/advanced-search.actions'
 import { Router } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
 import { _ } from 'underscore';
+import { take } from 'rxjs/internal/operators/take';
 
 @Component({
   selector: 'app-alignment-search-accordion',
@@ -92,7 +93,7 @@ export class AlignmentSearchAccordionComponent implements OnInit {
   }
 
   getAlignmentSearchResult() {
-    this.store.select('advancedSearch').subscribe(data => {
+    this.store.select('advancedSearch').pipe(take(1)).subscribe(data => {
       if (data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedCareers.length > 0 && data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length > 0) {
 
         this.alignmentSearchSelectedFilters = data.alignmentSearchSelectedFilters;
