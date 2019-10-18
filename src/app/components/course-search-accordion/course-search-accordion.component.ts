@@ -36,22 +36,22 @@ export class CourseSearchAccordionComponent implements OnInit {
   };
   academicSubjectColorPallet: any = [
     {
-      SubjectId :1,
+      SubjectId: 1,
       Subject: 'Math',
       Color: '#000000'
     },
     {
-      SubjectId :2,
+      SubjectId: 2,
       Subject: 'ELA',
       Color: '#5E8000'
     },
     {
-      SubjectId :3,
+      SubjectId: 3,
       Subject: 'Science',
       Color: '#BF181A'
     },
     {
-      SubjectId :4,
+      SubjectId: 4,
       Subject: 'Social',
       Color: '#0B5688'
     }
@@ -102,7 +102,7 @@ export class CourseSearchAccordionComponent implements OnInit {
 
           subjects.push(subject);
         });
-        this.careerPathToSubject = this._shared.toggleCareer;
+        // this.careerPathToSubject = this._shared.toggleCareer;
         let obj = {
           Keywords: data.courseSearchSelectedFilters && data.courseSearchSelectedFilters.selectedKeyword ? data.courseSearchSelectedFilters.selectedKeyword : '',
           CareerPathIds: careerPathIds,
@@ -431,7 +431,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   onToggleClick() {
     this.careerPathToSubject = !this.careerPathToSubject;
     this.courseSearchReportPayload.CareerPathToSubject = this.careerPathToSubject;
-    this._shared.toggleCareer = this.careerPathToSubject;
+    // this._shared.toggleCareer = this.careerPathToSubject;
     this.getCourseSearchResult();
   }
 }

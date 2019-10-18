@@ -156,7 +156,7 @@ export class AlignmentSearchAccordionComponent implements OnInit {
           };
           subjects.push(subject);
         });
-        this.cteToAcademic = this._shared.toggleAlignment;
+        // this.cteToAcademic = this._shared.toggleAlignment;
         let obj = {
           Keywords: data.alignmentSearchSelectedFilters && data.alignmentSearchSelectedFilters.selectedKeyword ? data.alignmentSearchSelectedFilters.selectedKeyword : '',
           CareerFiledIds: careerfeilds,
@@ -721,7 +721,7 @@ export class AlignmentSearchAccordionComponent implements OnInit {
   onToggleClick(value) {
     this.cteToAcademic = !this.cteToAcademic;
     this.reportPayload.CteToAcademic = this.cteToAcademic;
-    this._shared.toggleAlignment = this.cteToAcademic;
+    // this._shared.toggleAlignment = this.cteToAcademic;
     this.getAlignmentSearchResult();
   }
 }
