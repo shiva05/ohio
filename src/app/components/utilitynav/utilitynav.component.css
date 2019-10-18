@@ -28,6 +28,6 @@ div,span,i {
 .utilitynav a {
     color:white;
 }
-#hoverhand:hover{
+.hoverhand:hover{
     cursor: pointer;
 }
