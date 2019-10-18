@@ -71,6 +71,9 @@
                 }
               ]
             }
+          },
+          "es5": {
+            "tsConfig": "tsconfig.es5.json"
           }
         },
         "serve": {
@@ -88,6 +91,9 @@
             "qa": {
               "browserTarget": "StandardsByDesignWeb:build:qa"
             }
+          },
+          "es5": {
+            "browserTarget": "StandardsByDesignWeb:build:es5"
           }
         },
         "extract-i18n": {
@@ -139,6 +145,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "StandardsByDesignWeb"
 }
