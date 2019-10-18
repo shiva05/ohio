@@ -10,11 +10,11 @@
     overflow: hidden;
 }
 .utility {
-    width: 715px;
+    width: 600px;
     position: absolute;
     top: 154px;
     left: 73px;
-    height: 500px;
+    height: 410px;
     z-index: 2;
     background: #f8f8f8;
     color: #555;
@@ -28,7 +28,7 @@
   display: table;
 }
 .close-slider {
-    color:#222; 
+    color:#222;
     font-size:20px;
     margin-right:2%;
     position: relative;
