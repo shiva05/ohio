@@ -25,6 +25,6 @@ export class HeaderComponent implements OnInit {
   }
 
   goToPage(org) {
-    this.route.navigate(['/']);
+    this.route.navigate(['/alignmentsearch']);
   }
 }

@@ -11,10 +11,11 @@ import { CourseSearchReportComponent } from './components/course-search-report/c
 import { AlignmentSearchReportComponent } from './components/alignment-search-report/alignment-search-report.component';
 
 const routes: Routes = [
-  {
-    path: '', component: MainComponent, children: [
-      { path: 'Home', component: HomeComponent }]
-  },
+  // {
+  //   path: '', component: MainComponent, children: [
+  //     { path: 'Home', component: HomeComponent }]
+  // },
+  { path: '', redirectTo: 'alignmentsearch', pathMatch: 'full' },
   { path: 'alignmentsearch', component: AlignmentSearchComponent },
   { path: 'AlignmentSearchResults', component: FilterSummaryComponent },
   { path: 'AlignmentSearchReport', component: AlignmentSearchReportComponent },
