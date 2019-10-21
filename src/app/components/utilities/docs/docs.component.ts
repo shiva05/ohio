@@ -122,7 +122,7 @@ export class DocsComponent implements OnInit {
       this.docsService.fetchDocFileByUrl(this.utilsContext, doc.docUrl).subscribe((file: Blob) => {
         this.docResponseType = file.type;
          const docBlob = new Blob([file], { type:   'application/pdf'  });
-         window.navigator.msSaveOrOpenBlob(docBlob, doc.docFileName);
+         window.navigator.msSaveOrOpenBlob(docBlob, doc.docFileName+'.pdf');
       });
     } else {
       // Other Browsers
