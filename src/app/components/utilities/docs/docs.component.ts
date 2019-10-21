@@ -4,6 +4,8 @@ import { DocsService } from '../../../services/docs.service';
 import { UtilsContext } from '../../../models/utils-context';
 import { AlertTypes } from '../../../models/alerts';
 
+import { HttpErrorResponse } from '@angular/common/http';
+
 enum DocsPanels {
   add = 'add',
   import = 'import',
@@ -118,15 +120,42 @@ export class DocsComponent implements OnInit {
     if (window.navigator && window.navigator.msSaveOrOpenBlob) {
       // IE - Do not show the preview
       this.docsService.fetchDocFileByUrl(this.utilsContext, doc.docUrl).subscribe((file: Blob) => {
-         const docBlob = new Blob([file], { type: this.docResponseType });
+        this.docResponseType = file.type;
+         const docBlob = new Blob([file], { type:   'application/pdf'  });
          window.navigator.msSaveOrOpenBlob(docBlob, doc.docFileName);
       });
     } else {
       // Other Browsers
-      this.showDocPanel(DocsPanels.preview, false);
-      setTimeout(() => {
-        this.showDocPanel(DocsPanels.preview, true);
-      }, 500);
+      // this.showDocPanel(DocsPanels.preview, false);
+      // setTimeout(() => {
+      //   this.showDocPanel(DocsPanels.preview, true);
+      // }, 500);
+      this.docsService.fetchDocFileByUrl(this.utilsContext,  doc.docUrl).subscribe((file: Blob) => {
+        let docName = '';
+
+        if (this.docName == null || this.docName === '') {
+          docName = 'Unknown.txt';
+        }
+
+        this.docResponseType = file.type;
+
+        const docBlob = new Blob([file], { type: this.docResponseType });
+
+        const fileUrl = window.URL.createObjectURL(docBlob);
+
+        // Download document logic
+        const downloadLink = document.createElement('a');
+        downloadLink.href = fileUrl;
+        downloadLink.download = this.docName;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+
+        // window.URL.revokeObjectURL(fileUrl);
+      },
+        (error: HttpErrorResponse) =>
+          console.log(`Error Status: ${JSON.stringify(error.status)};
+        Error Status Text: ${JSON.stringify(error.statusText)};
+        Error Msg: ${JSON.stringify(error.message)};`));
     }
   }
 

@@ -44,7 +44,7 @@
         <thead>
           <tr>
             <th>Doc Name</th>
-            <th>Doc Type</th>
+            <th>Download</th>
             <th>Date</th>
             <th>Info</th>
             <!-- <th >Status</th> -->
@@ -54,8 +54,9 @@
         <tbody>
           <ng-template ngFor let-doc [ngForOf]="docs" let-i="index">
             <tr>
-              <td><a title="{{doc.description}}" (click)="previewDoc(doc)">{{doc.docFileNameDecoded}}</a></td>
-              <td>{{doc.docTypeNameDecoded}}</td>
+              <td><a title="{{doc.description}}">{{doc.docFileNameDecoded}}</a></td>
+              <td><button class="ohio-button x-small" (click)="previewDoc(doc)"
+                title="Description, Document history"><i class="fas fa-download"></i></button></td>
               <td>{{doc.docUploadDate}}</td>
               <td><button class="ohio-button x-small" (click)="openHistory(i,doc.documentRelationInstanceKey)"
                   title="Description, Document history"><i class="fas fa-info"></i></button></td>
