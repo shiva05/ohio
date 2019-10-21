@@ -409,7 +409,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         selectedStrands: this.selectedStrands,
         selectedOutcomes: this.selectedOutcome,
         selectedCompetencies: this.selectedCompetencyNumbers,
-        selectedAcadamicSubjects: this.selectedAcadamicSubjects,
+        selectedAcadamicSubjects: this.selectedAcademicItems,
         finalSelectedObject: this.academicSubjects
       };
       localStorage.setItem('searchLable', 'SearchAlignment');

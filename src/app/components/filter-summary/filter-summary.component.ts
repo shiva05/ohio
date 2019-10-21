@@ -5,9 +5,7 @@ import { Router } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 import { CookieService } from 'ngx-cookie-service';
-import util from 'util';
 import { browserRefresh } from '../../app.component';
-import { HomeComponent } from '../home/home.component';
 
 @Component({
     selector: 'filter-summary',
@@ -50,8 +48,8 @@ export class FilterSummaryComponent implements OnInit {
             alert("Refreshing will clear all of your search results.");
             event.preventDefault();
             event.returnValue = '';
-          });
-        if(this.browserRefresh == true){
+        });
+        if (this.browserRefresh == true) {
             this.rout.navigate(['/Home']);
         };
         if (this.cookieService.get('Test')) {
