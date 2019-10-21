@@ -1,7 +1,10 @@
 <loading-spinner *ngIf="loaderService.isLoading | async"></loading-spinner>
 <div *ngIf="ready">
   <header *ngIf="!router.url.includes('app')"></header>
-  <div class="site-wrapper">
+  <div class="site-wrapper" *ngIf="!isPublic">
+    <router-outlet></router-outlet>
+  </div>
+  <div *ngIf="isPublic">
     <router-outlet></router-outlet>
   </div>
 </div>
