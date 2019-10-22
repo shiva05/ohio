@@ -139,6 +139,7 @@ export class CourseSearchFiltersComponent implements OnInit {
 
   onCareerPathDeSelectAll() {
     this.coursesDropdown = [];
+    this.selectedCourses = [];
   }
 
   onSubjectSelect(event) {
