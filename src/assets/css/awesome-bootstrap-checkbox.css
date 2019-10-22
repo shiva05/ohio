@@ -14,7 +14,7 @@
   width: 17px;
   height: 17px;
   left: 0;
-  margin-left: -20px;
+  margin-left: -18px;
   border: 1px solid #cccccc;
   border-radius: 3px;
   background-color: #fff;
@@ -22,19 +22,20 @@
   -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
   transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
 }
-.checkbox label::after {
-  display: inline-block;
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  left: 0;
-  top: 0;
-  margin-left: -20px;
-  padding-left: 3px;
-  padding-top: 1px;
-  font-size: 11px;
-  color: #555555;
-}
+  .checkbox label::after {
+    display: inline-block;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 0;
+    top: 0;
+    margin-left: -18px;
+    padding-left: 0;
+    padding-top: 1px;
+    font-size: 11px;
+    color: #555555;
+    text-align: center;
+  }
 .checkbox input[type="checkbox"],
 .checkbox input[type="radio"] {
   opacity: 0;
