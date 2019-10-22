@@ -15,7 +15,7 @@
     top: 154px;
     left: 73px;
     height: 410px;
-    z-index: 2;
+    z-index: 30;
     background: #f8f8f8;
     color: #555;
     animation: .4s ease-in-out 0s 1 slideInFromLeft;
