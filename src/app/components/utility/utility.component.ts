@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ElementRef} from '@angular/core';
 import { Utilities } from '../../models/util-nav-item';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers';
@@ -18,6 +18,9 @@ import { Permission } from '../../models/permission';
 import { forkJoin } from 'rxjs';
 
 @Component({
+  host: {
+    '(document:click)': 'onClick($event)',
+  },
   selector: 'app-utility',
   templateUrl: './utility.component.html',
   styleUrls: ['./utility.component.css']
@@ -65,7 +68,8 @@ export class UtilityComponent implements OnInit {
     private store: Store<AppState>,
     private flagService: FlagService,
     private docsService: DocsService,
-    private commentsSerice: CommentsService) { }
+    private commentsSerice: CommentsService,
+    private _eref: ElementRef) { }
   currentAssetTemplateKey: number;
   currentDetailKey: number;
 
@@ -138,7 +142,11 @@ export class UtilityComponent implements OnInit {
       this.clearDocStatusMessage(true);
     }
   }
-
+  onClick() {
+    if (!this._eref.nativeElement.contains(event.target)) {
+      this.showDocs = false;
+    }
+  }
   IsOverview() {
     if (this.context.assetTemplateKey === 154110) {
       return true;
