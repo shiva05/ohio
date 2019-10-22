@@ -368,17 +368,16 @@ border-color: #fff !important;
     max-width: calc(100% - 25px);
 }
 
-.checkbox-indeterminate input[type="checkbox"] + label::after{
-    content:"";
-    display: block;
-    content: "";
-    width: 10px;
-    height: 3px;
-    background-color: #555555;
-    border-radius: 2px;
-    margin-left: -16.5px;
-    margin-top: 7px;
-    color:#700017;
+.checkbox-indeterminate input[type="checkbox"] + label::after {
+  display: inline-block;
+  content: "";
+  width: 10px;
+  height: 3px;
+  background-color: #555555;
+  border-radius: 2px;
+  margin-left: -14px;
+  margin-top: 7px;
+  color: #700017;
 }
 
 .radio, .checkbox {

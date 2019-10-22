@@ -82,6 +82,32 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       this.clusters = this.metaData['clusters'];
       this.standardNumbers = this.metaData['standardNumbers'];
       this.competencyNumbers = data.competencies;
+      if (this.selectedOutcome.length > 0) {
+        let OutcomeIds: any = [];
+        let selectedOutcomeId: any = [];
+        let finalUpdatedSelectListIds: any = [];
+        this.competencyNumbers.forEach(competency => {
+          OutcomeIds.push(competency.CompetencyPk);
+        });
+        if (this.selectedCompetencyNumbers.length > 0) {
+          this.selectedCompetencyNumbers.forEach(outCome => {
+            selectedOutcomeId.push(outCome.CompetencyPk);
+          });
+        }
+        finalUpdatedSelectListIds = _.intersection(selectedOutcomeId, OutcomeIds);
+        if (finalUpdatedSelectListIds.length > 0) {
+          this.selectedCompetencyNumbers = [];
+          this.competencyNumbers.forEach(competency => {
+            finalUpdatedSelectListIds.forEach(outcomeId => {
+              if (outcomeId == competency.CompetencyPk) {
+                this.selectedCompetencyNumbers.push(competency);
+              }
+            })
+          });
+        } else if (finalUpdatedSelectListIds.length  === 0) {
+          this.selectedCompetencyNumbers = [];
+        }
+      }
       if (this.metaData['Subjects'] && data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length == 0 && this.selectedAcadamicSubjects.length == 0) {
         this.academicSubjects = this.metaData['Subjects'];
         this.academicSubjects.forEach((subject) => {
@@ -179,6 +205,8 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       this.selectedStrands = [];
       this.selectedOutcome = [];
       this.outcomesDropdown = [];
+      this.competencyNumbers = [];
+      this.selectedCompetencyNumbers = [];
     } else {
       this.strands.forEach(strand => {
         finalUpdatedSelectListIds.forEach(element => {
@@ -217,6 +245,8 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.selectedOutcome = [];
     if (finalUpdatedSelectListIds.length === 0) {
       this.selectedOutcome = [];
+      this.competencyNumbers = [];
+      this.selectedCompetencyNumbers = [];
     } else {
       this.outcomes.forEach(strand => {
         finalUpdatedSelectListIds.forEach(element => {
@@ -377,7 +407,12 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   }
 
   onOutcomeSelect() {
+    this.store.dispatch({ type: AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS });
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA, payload: this.selectedOutcome });
+    //need to change values
+    if (this.selectedOutcome.length === 0){
+      this.selectedCompetencyNumbers = [];
+    }
   }
 
   showAlert(): void {

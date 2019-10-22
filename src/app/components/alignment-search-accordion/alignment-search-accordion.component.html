@@ -1,378 +1,379 @@
 <div class="alert alert-danger" [class.visible]="isCSVisible">
-    At least 1 selected Competency is required.
-  </div>
-  <div class="alert alert-danger" [class.visible]="isASVisible">
-    At least 1 Standard Number is required.
-  </div>
-  <div *ngIf="!noResultFound">
-    <div class="row search-results-head">
+  At least 1 selected Competency is required.
+</div>
+<div class="alert alert-danger" [class.visible]="isASVisible">
+  At least 1 Standard Number is required.
+</div>
+<div *ngIf="!noResultFound">
+  <div class="row search-results-head">
 
-      <div class="col-md-10 search-results-head-left">
-        <h3>{{ 'SearchResults.SearchResults' | translate }}</h3>
-        <p *ngIf="totalSearchResults"> Found {{totalSearchResults}} Alignments for your search criteria</p>
-      </div>
-      <div class="col-md-2 search-results-head-right">
-        <button (click)="onToggleClick(cteToAcademic)">
-          {{ 'SearchResults.ToggleAlignments' | translate }} &nbsp; <i class="fa fa-exchange"></i>
-        </button>
+    <div class="col-md-10 search-results-head-left">
+      <h3>{{ 'SearchResults.SearchResults' | translate }}</h3>
+      <p *ngIf="totalSearchResults"> Found {{totalSearchResults}} Alignments for your search criteria</p>
+    </div>
+    <div class="col-md-2 search-results-head-right">
+      <button (click)="onToggleClick(cteToAcademic)">
+        {{ 'SearchResults.ToggleAlignments' | translate }} &nbsp; <i class="fa fa-exchange"></i>
+      </button>
+    </div>
+  </div>
+  <div class="search-results">
+    <div class="search-accordion" *ngIf="cteToAcademic">
+      <div class="search-accordion-head">
+        <div class="row">
+          <div class="col-md-6">{{ 'SearchResults.CareerFields' | translate }}</div>
+          <div class="col-md-1">&nbsp;</div>
+          <div class="col-md-3">{{ 'SearchResults.AcademicSubject' | translate }}</div>
+          <div class="col-md-1">{{ 'SearchResults.Alignment' | translate }}</div>
+          <div class="col-md-1">&nbsp;</div>
+        </div>
       </div>
     </div>
-    <div class="search-results">
-      <div class="search-accordion" *ngIf="cteToAcademic">
-        <div class="search-accordion-head">
-          <div class="row">
-            <div class="col-md-6">{{ 'SearchResults.CareerFields' | translate }}</div>
-            <div class="col-md-1">&nbsp;</div>
-            <div class="col-md-3">{{ 'SearchResults.AcademicSubject' | translate }}</div>
-            <div class="col-md-1">{{ 'SearchResults.Alignment' | translate }}</div>
-            <div class="col-md-1">&nbsp;</div>
-          </div>
+
+    <div class="search-accordion" *ngIf="!cteToAcademic">
+      <div class="search-accordion-head">
+        <div class="row">
+          <div class="col-md-3">{{ 'SearchResults.AcademicSubject' | translate }}</div>
+          <div class="col-md-1">&nbsp;</div>
+          <div class="col-md-6">{{ 'SearchResults.CareerFields' | translate }}</div>
+          <div class="col-md-1">{{ 'SearchResults.Alignment' | translate }}</div>
+          <div class="col-md-1">&nbsp;</div>
         </div>
       </div>
+    </div>
 
-      <div class="search-accordion" *ngIf="!cteToAcademic">
-        <div class="search-accordion-head">
-          <div class="row">
-            <div class="col-md-3">{{ 'SearchResults.AcademicSubject' | translate }}</div>
-            <div class="col-md-1">&nbsp;</div>
-            <div class="col-md-6">{{ 'SearchResults.CareerFields' | translate }}</div>
-            <div class="col-md-1">{{ 'SearchResults.Alignment' | translate }}</div>
-            <div class="col-md-1">&nbsp;</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-12 nopad" *ngIf="cteToAcademic">
-        <ul class="list-group search-accordion">
-          <li class="list-group-item search-accordion-each"
+    <div class="col-md-12 nopad" *ngIf="cteToAcademic">
+      <ul class="list-group search-accordion">
+        <li class="list-group-item search-accordion-each"
             [ngClass]="(careerField.isCareerFieldClosed) ? 'accordion-active' : ''"
             *ngFor="let careerField of searchResultDataArray; index as i">
 
-            <!-- Career Field -->
-            <div class="row careerfield-each-inner" (click)="expandCollapseCareerField(careerField)">
-              <div class="col-md-6">
-                <div class="accordion-label-career">Career Field</div>
-                <div class="accordion-checbox ">
-                  <span class="ohio-checkbox checkbox checkbox-success"
-                    [ngClass]="careerField.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
-                    <input type="checkbox" class="ohio-checkbox-el" id="careerFieldID_{{i}}"
-                      [(ngModel)]="careerField.isSelected" name="list_name" value="{{careerField.id}}"
-                      (ngModelChange)="careerFieldCheckBox(careerField);" (click)="$event.stopPropagation()" />
-                    <label for="careerFieldID_{{i}}"></label>
-                  </span>
-                </div>
-                <span class="level-one-title"> {{careerField.CareerFieldName}}</span>
-              </div>
-
-              <div class="col-md-1 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
-              <div class="col-md-3 color-gap" [style.color]="careerField.Color">{{careerField.AcademicSubjectName}}</div>
-              <div class="col-md-1">
-                <span class="accordion-bubble" [style.background-color]="careerField.Color"
-                  *ngIf="careerField.Alignment">{{careerField.Alignment}}</span>
-              </div>
-              <div class="col-md-1 accordion-down-arrow">
-                <span>
-                  <i class="fas fa-chevron-up" *ngIf="careerField.isCareerFieldClosed;else isCollapsed"></i>
-                  <ng-template #isCollapsed><i class="fas fa-chevron-down"></i></ng-template>
+          <!-- Career Field -->
+          <div class="row careerfield-each-inner" (click)="expandCollapseCareerField(careerField)">
+            <div class="col-md-6">
+              <div class="accordion-label-career">Career Field</div>
+              <div class="accordion-checbox ">
+                <span class="ohio-checkbox checkbox checkbox-success"
+                      [ngClass]="careerField.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
+                  <input type="checkbox" class="ohio-checkbox-el" id="careerFieldID_{{i}}"
+                         [(ngModel)]="careerField.isSelected" name="list_name" value="{{careerField.id}}"
+                         (ngModelChange)="careerFieldCheckBox(careerField);" (click)="$event.stopPropagation()" />
+                  <label for="careerFieldID_{{i}}"></label>
                 </span>
               </div>
+              <span class="level-one-title"> {{careerField.CareerFieldName}}</span>
             </div>
 
-            <!-- strands -->
-            <div class="child-list" [hidden]="!careerField.isCareerFieldClosed">
-              <ul class="list-group level-two">
-                <li class="level-two-inner" *ngFor="let strand of careerField.Strand; index as j">
-                  <div class="strand-each-inner" (click)="expandCollapseStrand(strand)">
-                    <div class="row">
+            <div class="col-md-1 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
+            <div class="col-md-3 color-gap" [style.color]="careerField.Color">{{careerField.AcademicSubjectName}}</div>
+            <div class="col-md-1">
+              <span class="accordion-bubble" [style.background-color]="careerField.Color"
+                    *ngIf="careerField.Alignment">{{careerField.Alignment}}</span>
+            </div>
+            <div class="col-md-1 accordion-down-arrow">
+              <span>
+                <i class="fas fa-chevron-up" *ngIf="careerField.isCareerFieldClosed;else isCollapsed"></i>
+                <ng-template #isCollapsed><i class="fas fa-chevron-down"></i></ng-template>
+              </span>
+            </div>
+          </div>
 
-                      <div class="col-md-6">
-                        <div class="accordion-label-strand">Strand</div>
-                        <div class="accordion-checbox">
-                          <span class="ohio-checkbox checkbox checkbox-success"
-                            [ngClass]="strand.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
-                            <input type="checkbox" class="ohio-checkbox-el" id="strandID_{{j}}"
-                              [(ngModel)]="strand.isSelected" name="list_name_child" value="{{strand.id}}"
-                              (ngModelChange)="strandCheckBox(careerField, strand)" (click)="$event.stopPropagation()" />
-                            <label for="strandID_{{j}}"></label>
-                          </span>
-                        </div>
-                        <span class="level-two-title">
-                          {{strand.StrandName}}
+          <!-- strands -->
+          <div class="child-list" [hidden]="!careerField.isCareerFieldClosed">
+            <ul class="list-group level-two">
+              <li class="level-two-inner" *ngFor="let strand of careerField.Strand; index as j">
+                <div class="strand-each-inner" (click)="expandCollapseStrand(strand)">
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="accordion-label-strand">Strand</div>
+                      <div class="accordion-checbox">
+                        <span class="ohio-checkbox checkbox checkbox-success"
+                              [ngClass]="strand.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
+                          <input type="checkbox" class="ohio-checkbox-el" id="strandID_{{j}}{{i}}"
+                                 [(ngModel)]="strand.isSelected" name="list_name_child" value="{{strand.id}}"
+                                 (ngModelChange)="strandCheckBox(careerField, strand)" (click)="$event.stopPropagation()" />
+                          <label for="strandID_{{j}}{{i}}"></label>
                         </span>
                       </div>
-                      <div class="col-md-1"> &nbsp;</div>
-                      <div class="col-md-3 color-gap" [style.color]="careerField.Color"> {{strand.AcademicSubjectName}}
-                      </div>
-                      <div class="col-md-1">
-                        <span class="accordion-bubble" [style.background-color]="careerField.Color"
-                          *ngIf="strand.Alignment">{{strand.Alignment}}</span>
-                      </div>
-                      <div class="col-md-1 accordion-down-arrow">
+                      <span class="level-two-title">
+                        {{strand.StrandName}}
+                      </span>
+                    </div>
+                    <div class="col-md-1"> &nbsp;</div>
+                    <div class="col-md-3 color-gap" [style.color]="careerField.Color">
+                      {{strand.AcademicSubjectName}}
+                    </div>
+                    <div class="col-md-1">
+                      <span class="accordion-bubble" [style.background-color]="careerField.Color"
+                            *ngIf="strand.Alignment">{{strand.Alignment}}</span>
+                    </div>
+                    <div class="col-md-1 accordion-down-arrow">
 
-                        <span *ngIf="strand.Outcome">
-                          <i class="fas fa-chevron-up" *ngIf="strand.isStrandClosed;else isStrandClosed"></i>
-                          <ng-template #isStrandClosed><i class="fas fa-chevron-down"></i></ng-template>
-                        </span>
-                      </div>
+                      <span *ngIf="strand.Outcome">
+                        <i class="fas fa-chevron-up" *ngIf="strand.isStrandClosed;else isStrandClosed"></i>
+                        <ng-template #isStrandClosed><i class="fas fa-chevron-down"></i></ng-template>
+                      </span>
                     </div>
                   </div>
-                  <!-- Outcomes -->
-                  <div class="child-list" [hidden]="!strand.isStrandClosed">
-                    <ul class="list-group level-two">
-                      <li class="level-two-inner" *ngFor="let outcome of strand.Outcome; index as k">
-                        <div class="outcome-each-inner" (click)="expandCollapseOutcome(outcome)">
-                          <div class="row">
-                            <div class="col-md-6">
-                              <div class="accordion-label-outcome">Outcome</div>
-                              <div class="accordion-checbox">
-                                <span class="ohio-checkbox checkbox checkbox-success"
-                                  [ngClass]="outcome.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
-                                  <input type="checkbox" class="ohio-checkbox-el" id="outcomeID_{{k}}"
-                                    [(ngModel)]="outcome.isSelected" name="list_name_child" value="{{outcome.id}}"
-                                    (ngModelChange)="outcomeCheckBox(careerField, strand, outcome)"
-                                    (click)="$event.stopPropagation()" />
-                                  <label for="outcomeID_{{k}}"></label>
-                                </span>
-                              </div>
-                              <span class="level-two-title">
-                                {{outcome.OutcomeName}}
+                </div>
+                <!-- Outcomes -->
+                <div class="child-list" [hidden]="!strand.isStrandClosed">
+                  <ul class="list-group level-two">
+                    <li class="level-two-inner" *ngFor="let outcome of strand.Outcome; index as k">
+                      <div class="outcome-each-inner" (click)="expandCollapseOutcome(outcome)">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="accordion-label-outcome">Outcome</div>
+                            <div class="accordion-checbox">
+                              <span class="ohio-checkbox checkbox checkbox-success"
+                                    [ngClass]="outcome.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
+                                <input type="checkbox" class="ohio-checkbox-el" id="outcomeID_{{k}}{{j}}{{i}}"
+                                       [(ngModel)]="outcome.isSelected" name="list_name_child" value="{{outcome.id}}"
+                                       (ngModelChange)="outcomeCheckBox(careerField, strand, outcome)"
+                                       (click)="$event.stopPropagation()" />
+                                <label for="outcomeID_{{k}}{{j}}{{i}}"></label>
                               </span>
                             </div>
-                            <div class="col-md-1"> &nbsp;</div>
-                            <div class="col-md-3 color-gap" [style.color]="careerField.Color">
-                              {{outcome.AcademicSubjectName}}
-                            </div>
-                            <div class="col-md-1">
-                              <span class="accordion-bubble" [style.background-color]="careerField.Color"
-                                *ngIf="outcome.Alignment">{{outcome.Alignment}}</span>
-                            </div>
-                            <div class="col-md-1 accordion-down-arrow">
+                            <span class="level-two-title">
+                              {{outcome.OutcomeName}}
+                            </span>
+                          </div>
+                          <div class="col-md-1"> &nbsp;</div>
+                          <div class="col-md-3 color-gap" [style.color]="careerField.Color">
+                            {{outcome.AcademicSubjectName}}
+                          </div>
+                          <div class="col-md-1">
+                            <span class="accordion-bubble" [style.background-color]="careerField.Color"
+                                  *ngIf="outcome.Alignment">{{outcome.Alignment}}</span>
+                          </div>
+                          <div class="col-md-1 accordion-down-arrow">
 
-                              <span *ngIf="outcome.Competency">
-                                <i class="fas fa-chevron-up" *ngIf="outcome.isOutcomeClosed;else isOutcomeClosed"></i>
-                                <ng-template #isOutcomeClosed><i class="fas fa-chevron-down"></i></ng-template>
-                              </span>
-                            </div>
+                            <span *ngIf="outcome.Competency">
+                              <i class="fas fa-chevron-up" *ngIf="outcome.isOutcomeClosed;else isOutcomeClosed"></i>
+                              <ng-template #isOutcomeClosed><i class="fas fa-chevron-down"></i></ng-template>
+                            </span>
                           </div>
                         </div>
+                      </div>
 
-                        <!-- Competency -->
-                        <div class="child-list" [hidden]="!outcome.isOutcomeClosed" *ngIf="outcome.Competency">
-                          <ul class="list-group level-three">
-                            <li class="list-group-item level-three" *ngFor="let item of outcome.Competency; index as l">
-                              <div class="competency-each-inner">
-                                <div class="row">
-                                  <div class="col-md-6">
-                                    <div class="accordion-label-competency">Competency</div>
-                                    <div class="accordion-checbox">
-                                      <span class="ohio-checkbox checkbox checkbox-success">
-                                        <input type="checkbox" class="ohio-checkbox-el" id="competencyID_{{l}}"
-                                          [(ngModel)]="item.isSelected" name="list_name_child" value="{{item.id}}"
-                                          (ngModelChange)="competencyCheckBox(careerField, strand, outcome)"
-                                          (click)="$event.stopPropagation()" />
-                                        <label for="competencyID_{{l}}"></label>
-                                      </span>
-                                    </div>
-                                    <span class="level-three-title">
-                                      {{item.CompetencyName}}
+                      <!-- Competency -->
+                      <div class="child-list" [hidden]="!outcome.isOutcomeClosed" *ngIf="outcome.Competency">
+                        <ul class="list-group level-three">
+                          <li class="list-group-item level-three" *ngFor="let item of outcome.Competency; index as l">
+                            <div class="competency-each-inner">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="accordion-label-competency">Competency</div>
+                                  <div class="accordion-checbox">
+                                    <span class="ohio-checkbox checkbox checkbox-success">
+                                      <input type="checkbox" class="ohio-checkbox-el" id="competencyID_{{l}}{{k}}{{j}}{{i}}"
+                                             [(ngModel)]="item.isSelected" name="list_name_child" value="{{item.id}}"
+                                             (ngModelChange)="competencyCheckBox(careerField, strand, outcome)"
+                                             (click)="$event.stopPropagation()" />
+                                      <label for="competencyID_{{l}}{{k}}{{j}}{{i}}"></label>
                                     </span>
                                   </div>
-                                  <div class="col-md-1"> &nbsp;</div>
-                                  <div class="col-md-3 color-gap" [style.color]="careerField.Color">
-                                    {{item.AcademicSubjectName}}
-                                  </div>
-                                  <div class="col-md-1">
-                                    <span class="accordion-bubble" [style.background-color]="careerField.Color"
-                                      *ngIf="item.Alignment">{{item.Alignment}}</span>
-                                  </div>
-                                  <div class="col-md-1">
-                                    &nbsp;
-                                  </div>
+                                  <span class="level-three-title">
+                                    {{item.CompetencyName}}
+                                  </span>
+                                </div>
+                                <div class="col-md-1"> &nbsp;</div>
+                                <div class="col-md-3 color-gap" [style.color]="careerField.Color">
+                                  {{item.AcademicSubjectName}}
+                                </div>
+                                <div class="col-md-1">
+                                  <span class="accordion-bubble" [style.background-color]="careerField.Color"
+                                        *ngIf="item.Alignment">{{item.Alignment}}</span>
+                                </div>
+                                <div class="col-md-1">
+                                  &nbsp;
                                 </div>
                               </div>
-                            </li>
-                          </ul>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
 
-      <div class="col-md-12 nopad" *ngIf="!cteToAcademic">
-        <ul class="list-group search-accordion">
-          <li class="list-group-item search-accordion-each"
+    <div class="col-md-12 nopad" *ngIf="!cteToAcademic">
+      <ul class="list-group search-accordion">
+        <li class="list-group-item search-accordion-each"
             [ngClass]="(careerField.isSubjectFieldClosed) ? 'accordion-active' : ''"
             *ngFor="let careerField of subjectToCareerData; index as i">
 
-            <!-- Subject -->
-            <div class="row careerfield-each-inner" (click)="expandCollapseSubjectField(careerField)">
-              <div class="col-md-3">
-                <div class="accordion-label-career">Subject</div>
-                <div class="accordion-checbox ">
-                  <span class="ohio-checkbox checkbox checkbox-success"
-                    [ngClass]="careerField.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
-                    <input type="checkbox" class="ohio-checkbox-el" id="careerFieldID_{{i}}"
-                      [(ngModel)]="careerField.isSelected" name="list_name" value="{{careerField.id}}"
-                      (ngModelChange)="subjectCheckBox(careerField)" (click)="$event.stopPropagation()" />
-                    <label for="careerFieldID_{{i}}"></label>
-                  </span>
-                </div>
-                <span class="level-one-title"  [style.color]="careerField.Color"> {{careerField.SubjectName}}</span>
-              </div>
-
-              <div class="col-md-1 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
-              <div class="col-md-6 color-gap">{{careerField.CareerFieldName}}</div>
-              <div class="col-md-1">
-                <span class="accordion-bubble" [style.background-color]="careerField.Color"
-                  *ngIf="careerField.Alignment">{{careerField.Alignment}}</span>
-              </div>
-              <div class="col-md-1 accordion-down-arrow">
-                <span>
-                  <i class="fas fa-chevron-up" *ngIf="careerField.isSubjectFieldClosed;else isCollapsed"></i>
-                  <ng-template #isCollapsed><i class="fas fa-chevron-down"></i></ng-template>
+          <!-- Subject -->
+          <div class="row careerfield-each-inner" (click)="expandCollapseSubjectField(careerField)">
+            <div class="col-md-3">
+              <div class="accordion-label-career">Subject</div>
+              <div class="accordion-checbox ">
+                <span class="ohio-checkbox checkbox checkbox-success"
+                      [ngClass]="careerField.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
+                  <input type="checkbox" class="ohio-checkbox-el" id="careerFieldID_{{i}}"
+                         [(ngModel)]="careerField.isSelected" name="list_name" value="{{careerField.id}}"
+                         (ngModelChange)="subjectCheckBox(careerField)" (click)="$event.stopPropagation()" />
+                  <label for="careerFieldID_{{i}}"></label>
                 </span>
               </div>
+              <span class="level-one-title" [style.color]="careerField.Color"> {{careerField.SubjectName}}</span>
             </div>
 
-            <!-- strands -->
-            <div class="child-list" [hidden]="!careerField.isSubjectFieldClosed">
-              <ul class="list-group level-two">
-                <li class="level-two-inner" *ngFor="let strand of careerField.Level; index as j">
-                  <div class="strand-each-inner" (click)="expandCollapseASStrand(strand)">
-                    <div class="row">
+            <div class="col-md-1 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
+            <div class="col-md-6 color-gap">{{careerField.CareerFieldName}}</div>
+            <div class="col-md-1">
+              <span class="accordion-bubble" [style.background-color]="careerField.Color"
+                    *ngIf="careerField.Alignment">{{careerField.Alignment}}</span>
+            </div>
+            <div class="col-md-1 accordion-down-arrow">
+              <span>
+                <i class="fas fa-chevron-up" *ngIf="careerField.isSubjectFieldClosed;else isCollapsed"></i>
+                <ng-template #isCollapsed><i class="fas fa-chevron-down"></i></ng-template>
+              </span>
+            </div>
+          </div>
 
-                      <div class="col-md-3">
-                        <div class="accordion-label-strand">{{strand.LevelName}}</div>
-                        <div class="accordion-checbox">
-                          <span class="ohio-checkbox checkbox checkbox-success"
-                            [ngClass]="strand.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
-                            <input type="checkbox" class="ohio-checkbox-el" id="strandID_{{j}}"
-                              [(ngModel)]="strand.isSelected" name="list_name_child" value="{{strand.LevelId}}"
-                              (ngModelChange)="levelCheckBox(careerField, strand)" (click)="$event.stopPropagation()" />
-                            <label for="strandID_{{j}}"></label>
-                          </span>
-                        </div>
-                        <span class="level-two-title">
-                          {{strand.LevelValue1}}
+          <!-- strands -->
+          <div class="child-list" [hidden]="!careerField.isSubjectFieldClosed">
+            <ul class="list-group level-two">
+              <li class="level-two-inner" *ngFor="let strand of careerField.Level; index as j">
+                <div class="strand-each-inner" (click)="expandCollapseASStrand(strand)">
+                  <div class="row">
+
+                    <div class="col-md-3">
+                      <div class="accordion-label-strand">{{strand.LevelName}}</div>
+                      <div class="accordion-checbox">
+                        <span class="ohio-checkbox checkbox checkbox-success"
+                              [ngClass]="strand.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
+                          <input type="checkbox" class="ohio-checkbox-el" id="strandID_{{j}}{{i}}"
+                                 [(ngModel)]="strand.isSelected" name="list_name_child" value="{{strand.LevelId}}"
+                                 (ngModelChange)="levelCheckBox(careerField, strand)" (click)="$event.stopPropagation()" />
+                          <label for="strandID_{{j}}{{i}}"></label>
                         </span>
                       </div>
-                      <div class="col-md-1"> &nbsp;</div>
-                      <div class="col-md-6 color-gap" > {{strand.CareerFieldName}}</div>
-                      <div class="col-md-1">
-                        <span class="accordion-bubble" [style.background-color]="careerField.Color"
-                          *ngIf="strand.Alignment">{{strand.Alignment}}</span>
-                      </div>
-                      <div class="col-md-1 accordion-down-arrow">
-                        <span *ngIf="strand.ChildLevel">
-                          <i class="fas fa-chevron-up" *ngIf="strand.isASStrandClosed;else isASStrandClosed"></i>
-                          <ng-template #isASStrandClosed><i class="fas fa-chevron-down"></i></ng-template>
-                        </span>
-                      </div>
+                      <span class="level-two-title">
+                        {{strand.LevelValue1}}
+                      </span>
+                    </div>
+                    <div class="col-md-1"> &nbsp;</div>
+                    <div class="col-md-6 color-gap"> {{strand.CareerFieldName}}</div>
+                    <div class="col-md-1">
+                      <span class="accordion-bubble" [style.background-color]="careerField.Color"
+                            *ngIf="strand.Alignment">{{strand.Alignment}}</span>
+                    </div>
+                    <div class="col-md-1 accordion-down-arrow">
+                      <span *ngIf="strand.ChildLevel">
+                        <i class="fas fa-chevron-up" *ngIf="strand.isASStrandClosed;else isASStrandClosed"></i>
+                        <ng-template #isASStrandClosed><i class="fas fa-chevron-down"></i></ng-template>
+                      </span>
                     </div>
                   </div>
+                </div>
 
-                  <!-- Outcomes -->
-                  <div class="child-list" [hidden]="!strand.isASStrandClosed">
-                    <ul class="list-group level-two">
-                      <li class="level-two-inner" *ngFor="let outcome of strand.ChildLevel; index as k">
-                        <div class="outcome-each-inner" (click)="expandCollapseASOutcome(outcome)">
-                          <div class="row">
-                            <div class="col-md-3">
-                              <div class="accordion-label-outcome">{{outcome.LevelName}}</div>
-                              <div class="accordion-checbox">
-                                <span class="ohio-checkbox checkbox checkbox-success"
-                                  [ngClass]="outcome.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
-                                  <input type="checkbox" class="ohio-checkbox-el" id="outcomeID_{{k}}"
-                                    [(ngModel)]="outcome.isSelected" name="list_name_child" value="{{outcome.LevelId}}"
-                                    (ngModelChange)="childLevel1CheckBox(careerField, strand, outcome)"
-                                    (click)="$event.stopPropagation()" />
-                                  <label for="outcomeID_{{k}}"></label>
-                                </span>
-                              </div>
-                              <span class="level-two-title">
-                                {{outcome.LevelValue2}}
+                <!-- Outcomes -->
+                <div class="child-list" [hidden]="!strand.isASStrandClosed">
+                  <ul class="list-group level-two">
+                    <li class="level-two-inner" *ngFor="let outcome of strand.ChildLevel; index as k">
+                      <div class="outcome-each-inner" (click)="expandCollapseASOutcome(outcome)">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <div class="accordion-label-outcome">{{outcome.LevelName}}</div>
+                            <div class="accordion-checbox">
+                              <span class="ohio-checkbox checkbox checkbox-success"
+                                    [ngClass]="outcome.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
+                                <input type="checkbox" class="ohio-checkbox-el" id="outcomeID_{{k}}{{j}}{{i}}"
+                                       [(ngModel)]="outcome.isSelected" name="list_name_child" value="{{outcome.LevelId}}"
+                                       (ngModelChange)="childLevel1CheckBox(careerField, strand, outcome)"
+                                       (click)="$event.stopPropagation()" />
+                                <label for="outcomeID_{{k}}{{j}}{{i}}"></label>
                               </span>
                             </div>
-                            <div class="col-md-1"> &nbsp;</div>
-                            <div class="col-md-6 color-gap" >
-                              {{outcome.CareerFieldName}}
-                            </div>
-                            <div class="col-md-1">
-                              <span class="accordion-bubble" [style.background-color]="careerField.Color"
-                                *ngIf="outcome.Alignment">{{outcome.Alignment}}</span>
-                            </div>
-                            <div class="col-md-1 accordion-down-arrow">
+                            <span class="level-two-title">
+                              {{outcome.LevelValue2}}
+                            </span>
+                          </div>
+                          <div class="col-md-1"> &nbsp;</div>
+                          <div class="col-md-6 color-gap">
+                            {{outcome.CareerFieldName}}
+                          </div>
+                          <div class="col-md-1">
+                            <span class="accordion-bubble" [style.background-color]="careerField.Color"
+                                  *ngIf="outcome.Alignment">{{outcome.Alignment}}</span>
+                          </div>
+                          <div class="col-md-1 accordion-down-arrow">
 
-                              <span *ngIf="outcome.ChildLevel">
-                                <i class="fas fa-chevron-up" *ngIf="outcome.isOutcomeClosed;else isOutcomeClosed"></i>
-                                <ng-template #isOutcomeClosed><i class="fas fa-chevron-down"></i></ng-template>
-                              </span>
-                            </div>
+                            <span *ngIf="outcome.ChildLevel">
+                              <i class="fas fa-chevron-up" *ngIf="outcome.isOutcomeClosed;else isOutcomeClosed"></i>
+                              <ng-template #isOutcomeClosed><i class="fas fa-chevron-down"></i></ng-template>
+                            </span>
                           </div>
                         </div>
+                      </div>
 
-                        <!-- Competency -->
-                        <div class="child-list" [hidden]="!outcome.isOutcomeClosed" *ngIf="outcome.ChildLevel">
-                          <ul class="list-group level-three">
-                            <li class="list-group-item level-three" *ngFor="let item of outcome.ChildLevel; index as l">
-                              <div class="competency-each-inner">
-                                <div class="row">
-                                  <div class="col-md-3">
-                                    <div class="accordion-label-competency">{{item.LevelName}}</div>
-                                    <div class="accordion-checbox">
-                                      <span class="ohio-checkbox checkbox checkbox-success">
-                                        <input type="checkbox" class="ohio-checkbox-el" id="competencyID_{{l}}"
-                                          [(ngModel)]="item.isSelected" name="list_name_child" value="{{item.LevelId}}"
-                                          (ngModelChange)="childLevel2CheckBox(careerField, strand, outcome)"
-                                          (click)="$event.stopPropagation()" />
-                                        <label for="competencyID_{{l}}"></label>
-                                      </span>
-                                    </div>
-                                    <span class="level-three-title">
-                                      {{item.LevelValue3}}
+                      <!-- Competency -->
+                      <div class="child-list" [hidden]="!outcome.isOutcomeClosed" *ngIf="outcome.ChildLevel">
+                        <ul class="list-group level-three">
+                          <li class="list-group-item level-three" *ngFor="let item of outcome.ChildLevel; index as l">
+                            <div class="competency-each-inner">
+                              <div class="row">
+                                <div class="col-md-3">
+                                  <div class="accordion-label-competency">{{item.LevelName}}</div>
+                                  <div class="accordion-checbox">
+                                    <span class="ohio-checkbox checkbox checkbox-success">
+                                      <input type="checkbox" class="ohio-checkbox-el" id="competencyID_{{l}}{{k}}{{j}}{{i}}"
+                                             [(ngModel)]="item.isSelected" name="list_name_child" value="{{item.LevelId}}"
+                                             (ngModelChange)="childLevel2CheckBox(careerField, strand, outcome)"
+                                             (click)="$event.stopPropagation()" />
+                                      <label for="competencyID_{{l}}{{k}}{{j}}{{i}}"></label>
                                     </span>
                                   </div>
-                                  <div class="col-md-1"> &nbsp;</div>
-                                  <div class="col-md-6 color-gap">
-                                    {{item.CareerFieldName}}
-                                  </div>
-                                  <div class="col-md-1">
-                                    <span class="accordion-bubble" [style.background-color]="careerField.Color"
-                                      *ngIf="item.Alignment">{{item.Alignment}}</span>
-                                  </div>
-                                  <div class="col-md-1">
-                                    &nbsp;
-                                  </div>
+                                  <span class="level-three-title">
+                                    {{item.LevelValue3}}
+                                  </span>
+                                </div>
+                                <div class="col-md-1"> &nbsp;</div>
+                                <div class="col-md-6 color-gap">
+                                  {{item.CareerFieldName}}
+                                </div>
+                                <div class="col-md-1">
+                                  <span class="accordion-bubble" [style.background-color]="careerField.Color"
+                                        *ngIf="item.Alignment">{{item.Alignment}}</span>
+                                </div>
+                                <div class="col-md-1">
+                                  &nbsp;
                                 </div>
                               </div>
-                            </li>
-                          </ul>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="pull-right accordion-btn">
-      <button type="button" class="ohio-button large but-gap" (click)="getSelect()">
-        {{'SearchResults.Generate' | translate}}
-      </button>
-      <button type="button" class="ohio-button large but-gap  secondary" (click)="goBackToSearch()">
-        {{'SearchResults.Reset' | translate}}
-      </button>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
+  <div class="pull-right accordion-btn">
+    <button type="button" class="ohio-button large but-gap" (click)="getSelect()">
+      {{'SearchResults.Generate' | translate}}
+    </button>
+    <button type="button" class="ohio-button large but-gap  secondary" (click)="goBackToSearch()">
+      {{'SearchResults.Reset' | translate}}
+    </button>
+  </div>
+</div>
 
-  <div class="col-md-12 main" *ngIf="noResultFound">
-    <h1>{{'SearchResults.NoResultFound' | translate}}</h1>
-  </div>
+<div class="col-md-12 main" *ngIf="noResultFound">
+  <h1>{{'SearchResults.NoResultFound' | translate}}</h1>
+</div>

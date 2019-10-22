@@ -173,6 +173,7 @@ export class CourseSearchAccordionComponent implements OnInit {
     obj.IsChildPartiallySelected = false;
     for (let i = 0; i < obj.Courses.length; i++) {
       obj.Courses[i].isSelected = obj.isSelected;
+      obj.Courses[i].IsChildPartiallySelected = false;
       if (obj.Courses[i].Competencies) {
         for (let j = 0; j < obj.Courses[i].Competencies.length; j++) {
           obj.Courses[i].Competencies[j].isSelected = obj.isSelected;

@@ -10260,7 +10260,7 @@ ol.ohio-list {
 .ohio-checkbox.checkbox label {
   font-weight: inherit;
   line-height: 1.1;
-  padding-left: 5px; }
+  padding-left: 0px; }
   .ohio-checkbox.checkbox label::before {
     border-color: #A1A1A1;
     width: 18px;
@@ -14385,4 +14385,3 @@ a.ohio-carousel-icons-icons-item__container:focus,
       font-size: 1.4rem;
       padding: 3px 17px; } }
 
-    
