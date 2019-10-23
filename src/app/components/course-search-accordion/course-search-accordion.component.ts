@@ -113,6 +113,7 @@ export class CourseSearchAccordionComponent implements OnInit {
 
         this.searchResultService.getCourseSearchResult(obj).subscribe(
           (data: any) => {
+            this.totalSearchResults = 0;
             if (this.careerPathToSubject) {
               this.careerPathToSubjectData = data.CareerPathToAcademicSubjects;
 
