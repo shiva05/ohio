@@ -331,13 +331,13 @@ export class CourseSearchAccordionComponent implements OnInit {
     if (!this.isSelectedValidation) {
       if (this.careerPathToSubject) {
         this.careerPathToSubjectData.forEach(careerPath => {
-          if (careerPath.isSelected) {
+          if (careerPath.isSelected === true || careerPath.IsChildPartiallySelected === true) {
             this.courseSearchReportPayload.CareerPathIds.push(careerPath.CareerPathId);
             this.courseSearchReportPayload.Subjects.push({ SubjectId: careerPath.SubjectId });
           }
 
           careerPath.Courses.forEach(course => {
-            if (course.isSelected) {
+            if (course.isSelected === true || course.IsChildPartiallySelected === true) {
               this.courseSearchReportPayload.CourseIds.push(course.CourseId);
             }
 

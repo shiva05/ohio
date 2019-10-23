@@ -204,6 +204,26 @@ export class AlignmentSearchAccordionComponent implements OnInit {
             } else {
               if (this.searchResultData.Subject.length > 0) {
                 this.subjectToCareerData = this.searchResultData.Subject;
+                this.subjectToCareerData[0]['IsChildPartiallySelected'] = false;
+                this.subjectToCareerData[0]['isSelected'] = false;
+                if (this.subjectToCareerData[0].Level.length > 0) {
+                  this.subjectToCareerData[0].Level.forEach(element => {
+                  element['IsChildPartiallySelected'] = false;
+                  element['isSelected'] = false;
+                  if (element['ChildLevel'].length > 0) {
+                    element['ChildLevel'].forEach(child1 => {
+                      child1['IsChildPartiallySelected'] = false;
+                      child1['isSelected'] = false;
+                      if (child1['ChildLevel'].length > 0) {
+                        child1['ChildLevel'].forEach(child2 => {
+                          child2['isSelected'] = false;
+                        });
+                      }
+                    })
+                  }
+                });
+              }
+                console.log(this.subjectToCareerData);
                 this.noResultFound = false;
                 this.formatAlignmentSearchData();
               } else {
@@ -457,18 +477,24 @@ export class AlignmentSearchAccordionComponent implements OnInit {
 
   // Click event on Subject
   subjectCheckBox(parentObj) {
+    parentObj.IsChildPartiallySelected = false;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < parentObj.Level.length; i++) {
       parentObj.Level[i].isSelected = parentObj.isSelected;
+      parentObj.Level[i].IsChildPartiallySelected = false;
       if (parentObj.Level[i].ChildLevel) {
         // tslint:disable-next-line:prefer-for-of
         for (let j = 0; j < parentObj.Level[i].ChildLevel.length; j++) {
           parentObj.Level[i].ChildLevel[j].isSelected = parentObj.isSelected;
-
+          parentObj.Level[i].ChildLevel[j].IsChildPartiallySelected = false;
           if (parentObj.Level[i].ChildLevel[j].ChildLevel) {
             // tslint:disable-next-line:prefer-for-of
             for (let k = 0; k < parentObj.Level[i].ChildLevel[j].ChildLevel.length; k++) {
               parentObj.Level[i].ChildLevel[j].ChildLevel[k].isSelected = parentObj.isSelected;
+              parentObj.Level[i].ChildLevel[j].ChildLevel[k].IsChildPartiallySelected = false;
+              parentObj.Level[i].ChildLevel[j].ChildLevel[k].Competency.forEach(element => {
+                element.isSelected = false;
+              });
             }
           }
         }
@@ -478,11 +504,11 @@ export class AlignmentSearchAccordionComponent implements OnInit {
 
   // Click event on Level Checkbox
   levelCheckBox(parent, parentObj) {
+    parentObj.IsChildPartiallySelected = false;
     // tslint:disable-next-line:only-arrow-functions
     parent.isSelected = parent.Level.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
-
     if (parentObj.ChildLevel) {
       if (parentObj.isSelected) {
         parentObj.ChildLevel.forEach(item => {
@@ -504,19 +530,23 @@ export class AlignmentSearchAccordionComponent implements OnInit {
         });
       }
     }
+    this.setParentLevelStatus(parent, parentObj);
   }
+
+
 
   // Click event on Child Level 1 Checkbox
   childLevel1CheckBox(career, strands, outcome) {
+    outcome.isSelected = !outcome.isSelected;
     // tslint:disable-next-line:only-arrow-functions
-    strands.isSelected = strands.ChildLevel.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
-    });
+    //strands.isSelected = strands.ChildLevel.every(function (itemChild: any) {
+    //  return itemChild.isSelected === true;
+    //});
 
-    // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Level.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
-    });
+    //// tslint:disable-next-line:only-arrow-functions
+    //career.isSelected = career.Level.every(function (itemChild: any) {
+    //  return itemChild.isSelected === true;
+    //});
 
     if (outcome.ChildLevel) {
       if (outcome.isSelected) {
@@ -529,26 +559,106 @@ export class AlignmentSearchAccordionComponent implements OnInit {
         });
       }
     }
+    this.trackChildStatus(career, strands, outcome);
   }
+  trackChildStatus(newParent, newChild, newSubchild) {
+    newSubchild.IsChildPartiallySelected = false;
+    let childStatus: any = [];
+    newSubchild.ChildLevel.forEach(subchild => {
+      subchild.IsChildPartiallySelected = false;
+    });
+    newChild.ChildLevel.forEach(element => {
+      childStatus.push(element.isSelected);
+    });
 
+    childStatus = _.uniq(childStatus);
+    if (childStatus.length > 1) {
+      newChild.IsChildPartiallySelected = true;
+      newChild.isSelected = false;
+    } else if (childStatus.length === 1) {
+      if (childStatus[0] === true) {
+        newChild.IsChildPartiallySelected = false;
+        newChild.isSelected = true;
+      } else if (childStatus[0] === false) {
+        newChild.IsChildPartiallySelected = false;
+        newChild.isSelected = false;
+      }
+    }
+    this.setParentLevelStatus(newParent, newChild);
+  }
   // Click event on Child Level 2 Checkbox
-  childLevel2CheckBox(career, strand, outcome) {
+  childLevel2CheckBox(careerField, strand, outcome) {
     // tslint:disable-next-line:only-arrow-functions
-    outcome.isSelected = outcome.ChildLevel.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
-    });
+    //outcome.isSelected = outcome.ChildLevel.every(function (itemChild: any) {
+    //  return itemChild.isSelected === true;
+    //});
 
-    // tslint:disable-next-line:only-arrow-functions
-    strand.isSelected = strand.ChildLevel.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
-    });
+    //// tslint:disable-next-line:only-arrow-functions
+    //strand.isSelected = strand.ChildLevel.every(function (itemChild: any) {
+    //  return itemChild.isSelected === true;
+    //});
 
-    // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Level.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
-    });
+    //// tslint:disable-next-line:only-arrow-functions
+    //career.isSelected = career.Level.every(function (itemChild: any) {
+    //  return itemChild.isSelected === true;
+    //});
+    this.trackCheckboxStatus(careerField, strand, outcome);
+  
   }
-
+  trackCheckboxStatus(parent, child, subchild) {
+    let subchildStatus:any = [];
+    subchild.ChildLevel.forEach(element => {
+      subchildStatus.push(element.isSelected);
+    });
+    subchildStatus = _.uniq(subchildStatus);
+    if (subchildStatus.length > 1) {
+      subchild.IsChildPartiallySelected = true;
+      subchild.isSelected = false;
+    } else if (subchildStatus.length === 1) {
+      if (subchildStatus[0] === true) {
+        subchild.IsChildPartiallySelected = false;
+        subchild.isSelected = true;
+      } else if (subchildStatus[0] === false) {
+        subchild.IsChildPartiallySelected = false;
+        subchild.isSelected = false;
+      }
+    }
+    this.setParentLevelStatus(parent, child);
+  }
+  setParentLevelStatus(level1, level2) {
+    let parentLevelStatus: any = [];
+    let partialCheckStatusOdChild: any = [];
+    level1.Level.forEach(element => {
+      parentLevelStatus.push(element.isSelected);
+    })
+    level1.Level.forEach(level => {
+      partialCheckStatusOdChild.push(level.IsChildPartiallySelected);
+    });
+    partialCheckStatusOdChild = _.uniq(partialCheckStatusOdChild);
+    parentLevelStatus = _.uniq(parentLevelStatus);
+    if (parentLevelStatus.length > 1) {
+      level1.isSelected = false;
+      level1.IsChildPartiallySelected = true;
+    } else if (parentLevelStatus.length === 1) {
+      if (parentLevelStatus[0] === true) {
+        level1.isSelected = true;
+        level1.IsChildPartiallySelected = false;
+      } else if (parentLevelStatus[0] === false) {
+        if (partialCheckStatusOdChild.length > 1) {
+          level1.isSelected = false;
+          level1.IsChildPartiallySelected = true;
+        } else if (partialCheckStatusOdChild.length === 1) {
+          if (partialCheckStatusOdChild[0] === true) {
+            level1.isSelected = false;
+            level1.IsChildPartiallySelected = true;
+          } else if (partialCheckStatusOdChild[0] === false){
+            level1.isSelected = false;
+            level1.IsChildPartiallySelected = false;
+          }
+        }
+      }
+    }
+  }
   // Expand/Collapse event on Career Field
   expandCollapseCareerField(obj) {
     obj.isCareerFieldClosed = !obj.isCareerFieldClosed;
@@ -596,20 +706,18 @@ export class AlignmentSearchAccordionComponent implements OnInit {
 
       if (this.cteToAcademic) {
         this.searchResultDataArray.forEach(careerField => {
-          this.reportPayload.Subjects.push({ SubjectId: careerField.AcademicSubjectId });
-
-          if (careerField.isSelected) {
+          if (careerField.isSelected === true || careerField.IsChildPartiallySelected === true) {
+            this.reportPayload.Subjects.push({ SubjectId: careerField.AcademicSubjectId });
             this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
-          }
+          }          
           careerField.Strand.forEach(stand => {
-            if (stand.isSelected) {
+            if (stand.isSelected === true || stand.IsChildPartiallySelected === true) {
               this.reportPayload.StrandIds.push(stand.StrandPk);
             }
             stand.Outcome.forEach(outcome => {
-              if (outcome.isSelected) {
+              if (outcome.isSelected === true || outcome.IsChildPartiallySelected === true) {
                 this.reportPayload.OutcomeIds.push(outcome.OutcomePk);
               }
-
               outcome.Competency.forEach(competency => {
                 if (competency.isSelected) {
                   this.reportPayload.CompetencyIds.push(competency.CompetencyPk);
