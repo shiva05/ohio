@@ -38,7 +38,7 @@ export class AlignmentSearchReportComponent implements OnInit {
       event.returnValue = '';
     });
     if(this.browserRefresh == true){
-        this.rout.navigate(['/Home']);
+        this.rout.navigate(['']);
     };
     this.store.select('authState').subscribe((authState) => {
       if (authState != null) {
