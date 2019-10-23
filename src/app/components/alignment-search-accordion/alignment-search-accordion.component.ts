@@ -606,10 +606,12 @@ export class AlignmentSearchAccordionComponent implements OnInit {
   
   }
   trackCheckboxStatus(parent, child, subchild) {
-    let subchildStatus:any = [];
+    let subchildStatus: any = [];
+    let parentStatusCheck: any = [];
     subchild.ChildLevel.forEach(element => {
       subchildStatus.push(element.isSelected);
     });
+   
     subchildStatus = _.uniq(subchildStatus);
     if (subchildStatus.length > 1) {
       subchild.IsChildPartiallySelected = true;
@@ -623,6 +625,23 @@ export class AlignmentSearchAccordionComponent implements OnInit {
         subchild.isSelected = false;
       }
     }
+    child.ChildLevel.forEach(set => {
+      parentStatusCheck.push(set.IsChildPartiallySelected);
+    });
+    parentStatusCheck = _.uniq(parentStatusCheck);
+    if (parentStatusCheck.length > 1) {
+      child.IsChildPartiallySelected = true;
+      child.isSelected = false;
+    } else if (parentStatusCheck.length === 1) {
+      if (parentStatusCheck[0] === true) {
+        child.IsChildPartiallySelected = true;
+        child.isSelected = false;
+      } else if (parentStatusCheck[0] === false) {
+        child.IsChildPartiallySelected = false;
+        child.isSelected = false;
+      }
+    }
+   
     this.setParentLevelStatus(parent, child);
   }
   setParentLevelStatus(level1, level2) {
