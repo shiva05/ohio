@@ -52,22 +52,22 @@ export class AlignmentSearchAccordionComponent implements OnInit {
   };
   academicSubjectColorPallet: any = [
     {
-      SubjectId :1,
+      SubjectId: 1,
       Subject: 'Math',
       Color: '#000000'
     },
     {
-      SubjectId :2,
+      SubjectId: 2,
       Subject: 'English literature',
       Color: '#5E8000'
     },
     {
-      SubjectId :3,
+      SubjectId: 3,
       Subject: 'Science',
       Color: '#BF181A'
     },
     {
-      SubjectId :4,
+      SubjectId: 4,
       Subject: 'Social',
       Color: '#0B5688'
     }
@@ -221,6 +221,7 @@ export class AlignmentSearchAccordionComponent implements OnInit {
 
   formatSearchResultDataArray() {
     // add color pallets here AcademicSubject
+    this.totalSearchResults = 0;
     this.searchResultDataArray.forEach(element => {
       if (element.Alignment) {
         this.totalSearchResults = this.totalSearchResults + element.Alignment;
