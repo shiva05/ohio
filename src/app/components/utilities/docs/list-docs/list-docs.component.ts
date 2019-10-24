@@ -21,7 +21,6 @@ export class ListDocsComponent implements OnInit, OnChanges {
   @Output() doLoadDocs = new EventEmitter<any>();
 
   docs = [];
-  data: any = [];
   // disableDelete: boolean = false;
   showHist = [];
   displayHist = false;
@@ -123,10 +122,6 @@ export class ListDocsComponent implements OnInit, OnChanges {
     } else {
       return false;
     }
-  }
-
-  formatDescription(data) {
-    this.data = data.split('|');
   }
 }
 
