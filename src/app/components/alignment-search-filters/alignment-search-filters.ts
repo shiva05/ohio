@@ -199,8 +199,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.selectedStrands.forEach(element => {
       selectedStrandId.push(element.StrandPk);
     });
-    finalUpdatedSelectListIds = _.intersection(selectedStrandId, strandsId);
-    this.selectedStrands = [];
+    finalUpdatedSelectListIds = _.intersection(selectedStrandId, strandsId);   
     if (finalUpdatedSelectListIds.length === 0) {
       this.selectedStrands = [];
       this.selectedOutcome = [];
@@ -208,17 +207,17 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       this.competencyNumbers = [];
       this.selectedCompetencyNumbers = [];
     } else {
-      this.strands.forEach(strand => {
+      this.selectedStrands = [];
+      this.strands.forEach(strand => { 
         finalUpdatedSelectListIds.forEach(element => {
           if (strand.StrandPk === element) {
             this.selectedStrands.push(strand);
           }
         });
-        if (this.selectedOutcome.length > 0) {
-          this.onStrandSelect();
-        }
-
       });
+      if (this.selectedOutcome.length > 0) {
+        this.onStrandSelect();
+      }
     }
   }
 
@@ -241,13 +240,13 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.selectedOutcome.forEach(element => {
       selectedOutcomesId.push(element.OutcomePk);
     });
-    finalUpdatedSelectListIds = _.intersection(selectedOutcomesId, outcomesId);
-    this.selectedOutcome = [];
+    finalUpdatedSelectListIds = _.intersection(selectedOutcomesId, outcomesId);  
     if (finalUpdatedSelectListIds.length === 0) {
       this.selectedOutcome = [];
       this.competencyNumbers = [];
       this.selectedCompetencyNumbers = [];
-    } else {
+    } else if (finalUpdatedSelectListIds.length > 0) {
+       this.selectedOutcome = [];
       this.outcomes.forEach(strand => {
         finalUpdatedSelectListIds.forEach(element => {
           if (strand.OutcomePk === element) {
@@ -256,6 +255,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         });
       });
     }
+  
   }
 
   onCareerSelectAll() {
@@ -276,9 +276,23 @@ export class AlignmentSearchFiltersComponent implements OnInit {
 
   onStrandSelectAll() {
     this.outcomesDropdown = [];
-    this.outcomes.forEach(eachOutcome => {
-      this.outcomesDropdown.push(eachOutcome);
-    });
+    let strandIds: any = [];
+    let selectedStrandId: any = [];
+    let finalUpdatedSelectListIds: any = [];
+    this.strandsDropdown.forEach(strand => {
+        selectedStrandId.push(strand.StrandPk);
+      });
+      this.outcomes.forEach(eachOutcome => {
+        strandIds.push(eachOutcome.StrandPk);
+      });
+      finalUpdatedSelectListIds = _.intersection(selectedStrandId, strandIds);
+      this.outcomes.forEach(element => {
+        finalUpdatedSelectListIds.forEach(outcome => {
+          if (element.StrandPk === outcome) {
+            this.outcomesDropdown.push(element);
+          }
+        });
+      });
   }
 
   onStrandDeSelectAll() {

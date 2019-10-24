@@ -290,8 +290,8 @@
                                     [ngClass]="outcome.IsChildPartiallySelected ? 'checkbox-indeterminate' : ''">
                                 <input type="checkbox" class="ohio-checkbox-el" id="outcomeID_{{k}}{{j}}{{i}}"
                                        [(ngModel)]="outcome.isSelected" name="list_name_child" value="{{outcome.LevelId}}"
-                                       (ngModelChange)="childLevel1CheckBox(careerField, strand, outcome)"
-                                       (click)="$event.stopPropagation()" />
+                                      
+                                       (click)="childLevel1CheckBox(careerField, strand, outcome); $event.stopPropagation()" />
                                 <label for="outcomeID_{{k}}{{j}}{{i}}"></label>
                               </span>
                             </div>
