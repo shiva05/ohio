@@ -786,23 +786,23 @@ export class AlignmentSearchAccordionComponent implements OnInit {
         });
       } else {
         this.subjectToCareerData.forEach(careerField => {
-          if (careerField.isSelected) {
+          if (careerField.isSelected === true || careerField.IsChildPartiallySelected === true) {
             this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
           }
 
-          this.Level1Ids = [];
+         
           careerField.Level.forEach(level => {
-            if (level.isSelected) {
+            if (level.isSelected === true || level.IsChildPartiallySelected === true) {
               this.Level1Ids.push(level.LevelValue1);
             }
 
-            this.Level2Ids = [];
+           
             level.ChildLevel.forEach(childLevel1 => {
-              if (childLevel1.isSelected) {
+              if (childLevel1.isSelected === true || childLevel1.IsChildPartiallySelected === true) {
                 this.Level2Ids.push(childLevel1.LevelValue2);
               }
 
-              this.Level3Ids = [];
+             
               childLevel1.ChildLevel.forEach(childLevel2 => {
                 if (childLevel2.isSelected) {
                   this.Level3Ids.push(childLevel2.LevelValue3);
