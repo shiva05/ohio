@@ -198,7 +198,7 @@ export class CourseSearchFiltersComponent implements OnInit {
   }
 
   search() {
-    if (this.selectedCareerPath.length < 1 && this.selectedAcademicItems.length < 1) {
+    if (this.selectedCareerPath.length < 1 || this.selectedAcademicItems.length < 1) {
       this.showAlert();
     } else {
       this.searchObj = {

@@ -1,10 +1,6 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { Docs, DocumentHistory, Permission } from '../../../../models/docs';
-import { AlertTypes } from '../../../../models/alerts';
-import { ErrorMessages } from '../../../../models/error-messages';
 import { DocsService } from '../../../../services/docs.service';
-import { HttpErrorResponse } from '@angular/common/http';
-
 
 @Component({
   selector: 'app-list-docs',
@@ -98,18 +94,12 @@ export class ListDocsComponent implements OnInit, OnChanges {
   }
 
   deleteDocs() {
-    // console.log('list-docs.deleteDocs() docs = ', this.docs);
     const docsKeysToDelete = this.docs.filter((doc) => {
       return doc.todelete;
     }).map((doc) => {
       return { documentKey: doc.docKey, docTypeKey: doc.docTypeKey };
     });
-    // console.log('list-docs.deleteDocs() docsKeysToDelete = ', docsKeysToDelete);
     this.doDeleteDocs.emit(docsKeysToDelete);
-
-    // // TODO: Add BFF delete to handle multiple keys in parameter list
-
-    // Close UI message section for deleting documents
     this.hideDeleteDocMessages();
   }
 
@@ -121,18 +111,9 @@ export class ListDocsComponent implements OnInit, OnChanges {
     }
   }
 
-    showHistory(index: number) {
-      // Get document history
-      // this.fetchDocHistory(documentRelationInstanceKey);
-
-      // Set the document description
-
-      // Show history panel
-      return this.showHist[index];
-      // this.displayHist = !this.displayHist;
-    }
-
-
+  showHistory(index: number) {
+    return this.showHist[index];
+  }
 
   canDelete() {
     const docsAllowedToDelete = this.docsList.filter(x => x.permission.delete === true);
