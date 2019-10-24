@@ -310,6 +310,18 @@ export class AlignmentSearchFiltersComponent implements OnInit {
 
   OnItemDeSelect(event) {
     this.selectedAcademicItems = this.selectedAcadamicSubjects;
+    let count = 1;
+    this.academicSubjects.forEach((element) => {
+      if (element.SubjectId === event.SubjectId) {
+        element.Level.forEach(level => {
+          level.SelectedItems = [];
+          if (count > 1) {
+            level.DropdownList = [];
+          }
+          count++;
+        });
+      }
+    });
     this.selectListCreation();
   }
 
@@ -322,6 +334,11 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   onDeSelectAll(event) {
     this.selectedAcademicItems = [];
     this.selectedAcadamicSubjects = [];
+    this.academicSubjects.forEach((element) => {
+      element.Level.forEach(level => {
+        level.SelectedItems = [];
+      });
+    });
   }
 
   selectListCreation() {
