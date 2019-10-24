@@ -141,6 +141,7 @@ export class CourseSearchAccordionComponent implements OnInit {
                   }
                 });
                 this.noCourseResultFound = false;
+                this.totalSearchResults = this.subjectToCareerPathData[0].AlignmentCount;
               } else {
                 this.noCourseResultFound = true;
               }
