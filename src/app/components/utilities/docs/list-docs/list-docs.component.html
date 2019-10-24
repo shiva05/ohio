@@ -59,7 +59,7 @@
                     class="fas fa-download"></i></button></td>
               <td>{{doc.docUploadDate}}</td>
               <td><button class="ohio-button x-small"
-                  (click)="openHistory(i,doc.documentRelationInstanceKey); formatDescription(doc.description)"
+                  (click)="openHistory(i,doc.documentRelationInstanceKey);"
                   title="Description, Document history"><i class="fas fa-info"></i></button></td>
               <!-- <td >{{doc.status}}</td> -->
               <td>
@@ -72,7 +72,7 @@
                 <div class="clearfix docs-detail-card">
                   <div style=margin:5px;>
                     <div>Document Description</div>
-                    <p class="content_med" *ngFor="let item of data">{{item}}</p>
+                    <p class="content_med" *ngFor="let item of doc.description.split('|')">{{item}}</p>
                     <hr class="form">
                   </div>
                   <div style=margin:5px;>
