@@ -423,7 +423,7 @@ export class CourseSearchAccordionComponent implements OnInit {
             });
           });
         });
-        if (this.courseSearchReportPayload['CompetencyIds'].length > 10) {
+        if (this.courseSearchReportPayload['CompetencyIds'].length > 4) {
           this.checkForConformation();
         } else {
           this.generateReports();
@@ -455,7 +455,7 @@ export class CourseSearchAccordionComponent implements OnInit {
             });
           }
         });
-        if (this.courseSearchReportPayload['Subjects'][0]['Level2Ids'].length > 10) {
+        if (this.courseSearchReportPayload['Subjects'][0]['Level2Ids'].length > 4) {
           this.checkForConformation();
         } else {
           this.generateReports();
