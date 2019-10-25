@@ -35,6 +35,7 @@ export class AlignmentSearchAccordionComponent implements OnInit {
   Level1Ids: any = [];
   Level2Ids: any = [];
   Level3Ids: any = [];
+  conformationPopup: boolean;
   reportPayload = {
     Keywords: '',
     CareerFiledIds: [],
@@ -784,6 +785,11 @@ export class AlignmentSearchAccordionComponent implements OnInit {
             });
           });
         });
+        if (this.reportPayload['CompetencyIds'].length > 10) {
+          this.checkForConformation();
+        } else {
+          this.generateReports();
+        }
       } else {
         this.subjectToCareerData.forEach(careerField => {
           if (careerField.isSelected === true || careerField.IsChildPartiallySelected === true) {
@@ -818,11 +824,14 @@ export class AlignmentSearchAccordionComponent implements OnInit {
             Level3Ids: this.Level3Ids
           });
         });
+        if (this.reportPayload['Subjects'][0]['Level3Ids'].length > 10) {
+          this.checkForConformation();
+        } else {
+          this.generateReports();
+        }
       }
-
-      this.rout.navigate(['/AlignmentSearchReport']);
-      this.alignmentSearchSelectedFilters['selectedAsSearchResults'] = this.reportPayload;
-      this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.alignmentSearchSelectedFilters });
+     
+     
     } else {
       if (this.cteToAcademic) {
         this.isASVisible = false;
@@ -834,6 +843,19 @@ export class AlignmentSearchAccordionComponent implements OnInit {
         setTimeout(() => this.isASVisible = false, 4000);
       }
     }
+  }
+
+  checkForConformation() {
+    this.conformationPopup = true;
+  }
+  cancelReports() {
+    this.conformationPopup = false;
+  }
+  generateReports() {
+    this.rout.navigate(['/AlignmentSearchReport']);
+    this.alignmentSearchSelectedFilters['selectedAsSearchResults'] = this.reportPayload;
+    this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.alignmentSearchSelectedFilters });
+    this.conformationPopup = false;
   }
 
   isSelectedValidate() {

@@ -110,3 +110,55 @@
   opacity: 1;
   transform: translateY(1.25rem);
 }
+
+.conformation {
+  display: block;
+  overflow: hidden;
+  position: fixed;
+  z-index: 99999;
+  top: calc(50% - 125px);
+  left: calc(50% - 300px);
+  background: #fff;
+  width: 600px;
+  height: 250px;
+  border: 2px solid #ddd;
+}
+.conformation .model-body .content {
+  display: block;
+  overflow: hidden;
+  padding: 30px;
+}
+  .conformation .model-body {
+   padding: 0px;
+  }
+    .conformation .model-body .title {
+      font-size: 28px;
+      padding: 10px 15px 10px;
+      border-bottom: 1px solid #ddd;
+      line-height: 30px;
+    }
+    .conformation .model-body .content {
+        padding: 25px 30px;
+    }
+      .conformation .model-body .content p {
+        font-size: 20px;
+        margin-bottom: 30px;
+        line-height: 32px;
+      }
+.overlay{
+  background: rgba(0, 0, 0, 0.5803921568627451);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 18px;
+}
+.text-right {
+  text-align:right;
+}
