@@ -159,3 +159,6 @@
   top: 10px;
   font-size: 18px;
 }
+.text-right {
+  text-align:right;
+}

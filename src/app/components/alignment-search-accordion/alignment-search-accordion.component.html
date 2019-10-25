@@ -387,8 +387,10 @@
       <div class="title">Confirm</div>
       <div class="content">
         <p>Your selections will generate a big report, would you still like to proceed with generating the report?</p>
-        <button type="button" class="ohio-button large but-gap" name="continue" (click)="generateReports()">Continue</button>
-        <button type="button" class="ohio-button large but-gap  secondary" name="continue" (click)="cancelReports()">Cancel</button>
+        <div class="text-right">
+          <button type="button" class="ohio-button large but-gap" name="continue" (click)="generateReports()">Continue</button>
+          <button type="button" class="ohio-button large but-gap  secondary" name="continue" (click)="cancelReports()">Cancel</button>
+        </div>
       </div>
     </div>
   </div>
