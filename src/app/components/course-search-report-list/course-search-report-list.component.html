@@ -1,83 +1,92 @@
 <div class="course-search-results" *ngIf="!localReportErr">
-  <h1>Results</h1>
-  <div class="course-wrap" *ngFor="let result of reportListhResultData.CareerpathToAcademicsubject">
-    <h3 class="sortedTypeHeader">{{result.CteCourseName}} <i class="fas fa-arrows-alt-h">
-        {{result.AcademicCourseName}}</i></h3>
-    <div class="item">
-      <div class="title"><span>CTE Course</span></div>
-      <div class="title"> <span>Academic Course</span></div>
-    </div>
-    <div class="item">
-      <div class="title"> <span>{{result.CteCourseName}}</span></div>
-      <div class="title"> <span>{{result.AcademicCourseName}}</span></div>
-    </div>
-    <div class="item" *ngFor="let competency of result.Competencies">
-
-      <div class="description">
-        <div class="compared-title">Competencies: </div>
-        <br>
-        {{competency.CompetencyDesc}}
+    <ng-container *ngIf="reportListhResultData.CareerpathToAcademicsubject.length > 0">
+      <h1>Results</h1>
+      <div class="course-wrap" *ngFor="let result of reportListhResultData.CareerpathToAcademicsubject">
+        <h3 class="sortedTypeHeader">{{result.CteCourseName}} <i class="fas fa-arrows-alt-h">
+            {{result.AcademicCourseName}}</i></h3>
+        <div class="item">
+          <div class="title"><span>CTE Courses</span></div>
+          <div class="title"> <span>Academic Course</span></div>
+        </div>
+        <div class="item">
+          <div class="title"> <span>{{result.CteCourseName}}</span></div>
+          <div class="title"> <span>{{result.AcademicCourseName}}</span></div>
+        </div>
+        <div class="item" *ngFor="let competency of result.Competencies">
+  
+          <div class="description">
+            <div class="compared-title">Competencies: </div>
+            <br>
+            {{competency.CompetencyDesc}}
+          </div>
+          <div class="description">
+            <div class="compared-title">Standards: </div>
+            <br>
+            <div *ngFor="let std of competency.Standards"><span class="prefix">A</span>{{std.StandardDesc}}</div>
+          </div>
+        </div>
+  
+        <div class="no-alignment col-md-6">
+          <h4>Non-Aligned Competencies</h4>
+          <ul>
+            <li *ngFor="let na of result.NoAlignmentCompetencies"> <span class="list">{{na}}</span></li>
+          </ul>
+        </div>
+  
+        <div class="no-alignment col-md-6">
+          <h4>Non-Aligned Standards</h4>
+          <ul>
+            <li *ngFor="let na of result.NoAlignmentStandards"> <span class="list">{{na}}</span></li>
+          </ul>
+        </div>
       </div>
-      <div class="description">
-        <div class="compared-title">Standards: </div>
-        <br>
-        <div *ngFor="let std of competency.Standards"><span class="prefix">A</span>{{std.StandardDesc}}</div>
+    </ng-container>
+    <ng-container *ngIf="reportListhResultData.AcademicsubjectToCareerpath.length > 0">
+      <h1>Results</h1>
+      <div class="course-wrap" *ngFor="let result of reportListhResultData.AcademicsubjectToCareerpath">
+        <h3 class="sortedTypeHeader">{{result.AcademicCourseName}} <i class="fas fa-arrows-alt-h">
+            {{result.CteCourseName}}</i></h3>
+        <div class="item">
+          <div class="title"> <span>Academic Course</span></div>
+          <div class="description"> <span>{{result.AcademicCourseName}}</span></div>
+        </div>
+        <div class="item">
+          <div class="title"> <span>CTE Course</span></div>
+          <div class="description"> <span>{{result.CteCourseName}}</span></div>
+        </div>
+        <div class="item" *ngFor="let standard of result.Standards">
+          <div class="title"> <span>{{standard.StandardDesc}} </span></div>
+          <div class="description">
+            <ul>
+              <li *ngFor="let cpt of standard.Competencies"> {{cpt.Competency}}</li>
+            </ul>
+          </div>
+        </div>
+  
+        <div class="no-alignment col-md-6">
+          <h4>Non-Aligned Standards</h4>
+          <ul>
+            <li *ngFor="let na of result.NoAlignmentStandards"> <span class="prefix">A</span> <span
+                class="list">{{na}}</span></li>
+          </ul>
+        </div>
+  
+        <div class="no-alignment col-md-6">
+          <h4>Non-Aligned Competencies</h4>
+          <ul>
+            <li *ngFor="let na of result.NoAlignmentCompetencies"> <span class="prefix">A</span> <span
+                class="list">{{na}}</span></li>
+          </ul>
+        </div>
       </div>
-    </div>
-
-    <div class="no-alignment col-md-6">
-      <h4>Non-Aligned Competencies</h4>
-      <ul>
-        <li *ngFor="let na of result.NoAlignmentCompetencies"> <span class="list">{{na}}</span></li>
-      </ul>
-    </div>
-
-    <div class="no-alignment col-md-6">
-      <h4>Non-Aligned Standards</h4>
-      <ul>
-        <li *ngFor="let na of result.NoAlignmentStandards"> <span class="list">{{na}}</span></li>
-      </ul>
-    </div>
+    </ng-container>
   </div>
-
-  <div class="course-wrap" *ngFor="let result of reportListhResultData.AcademicsubjectToCareerpath">
-    <h3 class="sortedTypeHeader">{{result.AcademicCourseName}} <i class="fas fa-arrows-alt-h">
-        {{result.CteCourseName}}</i></h3>
-    <div class="item">
-      <div class="title"> <span>Academic Course</span></div>
-      <div class="description"> <span>{{result.AcademicCourseName}}</span></div>
-    </div>
-    <div class="item">
-      <div class="title"> <span>CTE Course</span></div>
-      <div class="description"> <span>{{result.CteCourseName}}</span></div>
-    </div>
-    <div class="item" *ngFor="let standard of result.Standards">
-      <div class="title"> <span>{{standard.StandardDesc}} </span></div>
-      <div class="description">
-        <ul>
-          <li *ngFor="let cpt of standard.Competencies"> {{cpt.Competency}}</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="no-alignment col-md-6">
-      <h4>Non-Aligned Standards</h4>
-      <ul>
-        <li *ngFor="let na of result.NoAlignmentStandards"> <span class="prefix">A</span> <span
-            class="list">{{na}}</span></li>
-      </ul>
-    </div>
-
-    <div class="no-alignment col-md-6">
-      <h4>Non-Aligned Competencies</h4>
-      <ul>
-        <li *ngFor="let na of result.NoAlignmentCompetencies"> <span class="prefix">A</span> <span
-            class="list">{{na}}</span></li>
-      </ul>
-    </div>
+  
+  <div class="col-md-12 report-fails"
+    *ngIf="reportListhResultData.CareerpathToAcademicsubject.length == 0 && reportListhResultData.AcademicsubjectToCareerpath.length == 0">
+    Unfortunately, your report could not be generated.
   </div>
-</div>
-
-<div class="col-md-12 report-fail" *ngIf="localReportErr">
-  Unfortunately, your report could not be generated. Please try again later.
-</div>
+  
+  <div class=" col-md-12 report-fail" *ngIf="localReportErr">
+    Unfortunately, your report could not be generated. Please try again later.
+  </div>

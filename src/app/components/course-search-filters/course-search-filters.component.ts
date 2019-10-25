@@ -76,6 +76,7 @@ export class CourseSearchFiltersComponent implements OnInit {
       }
 
       if (data.courseSearchSelectedFilters) {
+        this.selectedKeyword = data.courseSearchSelectedFilters.selectedKeyword;
         if (data.courseSearchSelectedFilters.selectedCareerPath.length > 0) {
           this.selectedCareerPath = data.courseSearchSelectedFilters.selectedCareerPath;
           this.onCareerPathSelect(this.selectedCareerPath);
@@ -139,6 +140,7 @@ export class CourseSearchFiltersComponent implements OnInit {
 
   onCareerPathDeSelectAll() {
     this.coursesDropdown = [];
+    this.selectedCourses = [];
   }
 
   onSubjectSelect(event) {
@@ -197,7 +199,7 @@ export class CourseSearchFiltersComponent implements OnInit {
   }
 
   search() {
-    if (this.selectedCareerPath.length < 1 && this.selectedAcademicItems.length < 1) {
+    if (this.selectedCareerPath.length < 1 || this.selectedAcademicItems.length < 1) {
       this.showAlert();
     } else {
       this.searchObj = {

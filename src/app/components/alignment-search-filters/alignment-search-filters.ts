@@ -24,7 +24,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   standardNumbers: any = [];
   strandsDropdown: any = [];
   outcomesDropdown: any = [];
-  selectedKeyword: any;
+  selectedKeyword: any = '';
   selectedCareer: any = [];
   selectedAcadamicSubjects: any = [];
   selectedStrands: any = [];
@@ -104,7 +104,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
               }
             })
           });
-        } else if (finalUpdatedSelectListIds.length  === 0) {
+        } else if (finalUpdatedSelectListIds.length === 0) {
           this.selectedCompetencyNumbers = [];
         }
       }
@@ -121,6 +121,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         });
       }
       if (data.alignmentSearchSelectedFilters) {
+        this.selectedKeyword = data.alignmentSearchSelectedFilters.selectedKeyword;
         if (data.alignmentSearchSelectedFilters.selectedCareers) {
           if (data.alignmentSearchSelectedFilters.selectedCareers.length > 0) {
             this.selectedCareer = data.alignmentSearchSelectedFilters.selectedCareers;
@@ -200,7 +201,6 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       selectedStrandId.push(element.StrandPk);
     });
     finalUpdatedSelectListIds = _.intersection(selectedStrandId, strandsId);
-    this.selectedStrands = [];
     if (finalUpdatedSelectListIds.length === 0) {
       this.selectedStrands = [];
       this.selectedOutcome = [];
@@ -208,17 +208,17 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       this.competencyNumbers = [];
       this.selectedCompetencyNumbers = [];
     } else {
+      this.selectedStrands = [];
       this.strands.forEach(strand => {
         finalUpdatedSelectListIds.forEach(element => {
           if (strand.StrandPk === element) {
             this.selectedStrands.push(strand);
           }
         });
-        if (this.selectedOutcome.length > 0) {
-          this.onStrandSelect();
-        }
-
       });
+      if (this.selectedOutcome.length > 0) {
+        this.onStrandSelect();
+      }
     }
   }
 
@@ -242,12 +242,12 @@ export class AlignmentSearchFiltersComponent implements OnInit {
       selectedOutcomesId.push(element.OutcomePk);
     });
     finalUpdatedSelectListIds = _.intersection(selectedOutcomesId, outcomesId);
-    this.selectedOutcome = [];
     if (finalUpdatedSelectListIds.length === 0) {
       this.selectedOutcome = [];
       this.competencyNumbers = [];
       this.selectedCompetencyNumbers = [];
-    } else {
+    } else if (finalUpdatedSelectListIds.length > 0) {
+      this.selectedOutcome = [];
       this.outcomes.forEach(strand => {
         finalUpdatedSelectListIds.forEach(element => {
           if (strand.OutcomePk === element) {
@@ -256,6 +256,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         });
       });
     }
+
   }
 
   onCareerSelectAll() {
@@ -276,8 +277,22 @@ export class AlignmentSearchFiltersComponent implements OnInit {
 
   onStrandSelectAll() {
     this.outcomesDropdown = [];
+    let strandIds: any = [];
+    let selectedStrandId: any = [];
+    let finalUpdatedSelectListIds: any = [];
+    this.strandsDropdown.forEach(strand => {
+      selectedStrandId.push(strand.StrandPk);
+    });
     this.outcomes.forEach(eachOutcome => {
-      this.outcomesDropdown.push(eachOutcome);
+      strandIds.push(eachOutcome.StrandPk);
+    });
+    finalUpdatedSelectListIds = _.intersection(selectedStrandId, strandIds);
+    this.outcomes.forEach(element => {
+      finalUpdatedSelectListIds.forEach(outcome => {
+        if (element.StrandPk === outcome) {
+          this.outcomesDropdown.push(element);
+        }
+      });
     });
   }
 
@@ -295,6 +310,18 @@ export class AlignmentSearchFiltersComponent implements OnInit {
 
   OnItemDeSelect(event) {
     this.selectedAcademicItems = this.selectedAcadamicSubjects;
+    let count = 1;
+    this.academicSubjects.forEach((element) => {
+      if (element.SubjectId === event.SubjectId) {
+        element.Level.forEach(level => {
+          level.SelectedItems = [];
+          if (count > 1) {
+            level.DropdownList = [];
+          }
+          count++;
+        });
+      }
+    });
     this.selectListCreation();
   }
 
@@ -307,6 +334,11 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   onDeSelectAll(event) {
     this.selectedAcademicItems = [];
     this.selectedAcadamicSubjects = [];
+    this.academicSubjects.forEach((element) => {
+      element.Level.forEach(level => {
+        level.SelectedItems = [];
+      });
+    });
   }
 
   selectListCreation() {
@@ -410,7 +442,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
     this.store.dispatch({ type: AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS });
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA, payload: this.selectedOutcome });
     //need to change values
-    if (this.selectedOutcome.length === 0){
+    if (this.selectedOutcome.length === 0) {
       this.selectedCompetencyNumbers = [];
     }
   }

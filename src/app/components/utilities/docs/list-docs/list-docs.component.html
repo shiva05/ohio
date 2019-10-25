@@ -54,11 +54,12 @@
         <tbody>
           <ng-template ngFor let-doc [ngForOf]="docs" let-i="index">
             <tr>
-              <td><a title="{{doc.description}}">{{doc.docFileNameDecoded}}</a></td>
-              <td><button class="ohio-button x-small" (click)="previewDoc(doc)"
-                title="Description, Document history"><i class="fas fa-download"></i></button></td>
+              <td title="{{doc.description}}">{{doc.docFileNameDecoded}}</td>
+              <td><button class="ohio-button x-small" (click)="previewDoc(doc)" title="Description, Document history"><i
+                    class="fas fa-download"></i></button></td>
               <td>{{doc.docUploadDate}}</td>
-              <td><button class="ohio-button x-small" (click)="openHistory(i,doc.documentRelationInstanceKey)"
+              <td><button class="ohio-button x-small"
+                  (click)="openHistory(i,doc.documentRelationInstanceKey)"
                   title="Description, Document history"><i class="fas fa-info"></i></button></td>
               <!-- <td >{{doc.status}}</td> -->
               <td>
@@ -71,7 +72,7 @@
                 <div class="clearfix docs-detail-card">
                   <div style=margin:5px;>
                     <div>Document Description</div>
-                    <p class="content_med">{{doc.description}}</p>
+                    <p class="content_med" *ngFor="let item of doc.description.split('|')">{{item}}</p>
                     <hr class="form">
                   </div>
                   <div style=margin:5px;>

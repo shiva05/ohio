@@ -35,6 +35,7 @@ export class AlignmentSearchAccordionComponent implements OnInit {
   Level1Ids: any = [];
   Level2Ids: any = [];
   Level3Ids: any = [];
+  conformationPopup: boolean;
   reportPayload = {
     Keywords: '',
     CareerFiledIds: [],
@@ -52,22 +53,22 @@ export class AlignmentSearchAccordionComponent implements OnInit {
   };
   academicSubjectColorPallet: any = [
     {
-      SubjectId :1,
+      SubjectId: 1,
       Subject: 'Math',
       Color: '#000000'
     },
     {
-      SubjectId :2,
+      SubjectId: 2,
       Subject: 'English literature',
       Color: '#5E8000'
     },
     {
-      SubjectId :3,
+      SubjectId: 3,
       Subject: 'Science',
       Color: '#BF181A'
     },
     {
-      SubjectId :4,
+      SubjectId: 4,
       Subject: 'Social',
       Color: '#0B5688'
     }
@@ -204,6 +205,26 @@ export class AlignmentSearchAccordionComponent implements OnInit {
             } else {
               if (this.searchResultData.Subject.length > 0) {
                 this.subjectToCareerData = this.searchResultData.Subject;
+                this.subjectToCareerData[0]['IsChildPartiallySelected'] = false;
+                this.subjectToCareerData[0]['isSelected'] = false;
+                if (this.subjectToCareerData[0].Level.length > 0) {
+                  this.subjectToCareerData[0].Level.forEach(element => {
+                  element['IsChildPartiallySelected'] = false;
+                  element['isSelected'] = false;
+                  if (element['ChildLevel'].length > 0) {
+                    element['ChildLevel'].forEach(child1 => {
+                      child1['IsChildPartiallySelected'] = false;
+                      child1['isSelected'] = false;
+                      if (child1['ChildLevel'].length > 0) {
+                        child1['ChildLevel'].forEach(child2 => {
+                          child2['isSelected'] = false;
+                        });
+                      }
+                    })
+                  }
+                });
+              }
+                console.log(this.subjectToCareerData);
                 this.noResultFound = false;
                 this.formatAlignmentSearchData();
               } else {
@@ -221,6 +242,7 @@ export class AlignmentSearchAccordionComponent implements OnInit {
 
   formatSearchResultDataArray() {
     // add color pallets here AcademicSubject
+    this.totalSearchResults = 0;
     this.searchResultDataArray.forEach(element => {
       if (element.Alignment) {
         this.totalSearchResults = this.totalSearchResults + element.Alignment;
@@ -456,18 +478,24 @@ export class AlignmentSearchAccordionComponent implements OnInit {
 
   // Click event on Subject
   subjectCheckBox(parentObj) {
+    parentObj.IsChildPartiallySelected = false;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < parentObj.Level.length; i++) {
       parentObj.Level[i].isSelected = parentObj.isSelected;
+      parentObj.Level[i].IsChildPartiallySelected = false;
       if (parentObj.Level[i].ChildLevel) {
         // tslint:disable-next-line:prefer-for-of
         for (let j = 0; j < parentObj.Level[i].ChildLevel.length; j++) {
           parentObj.Level[i].ChildLevel[j].isSelected = parentObj.isSelected;
-
+          parentObj.Level[i].ChildLevel[j].IsChildPartiallySelected = false;
           if (parentObj.Level[i].ChildLevel[j].ChildLevel) {
             // tslint:disable-next-line:prefer-for-of
             for (let k = 0; k < parentObj.Level[i].ChildLevel[j].ChildLevel.length; k++) {
               parentObj.Level[i].ChildLevel[j].ChildLevel[k].isSelected = parentObj.isSelected;
+              parentObj.Level[i].ChildLevel[j].ChildLevel[k].IsChildPartiallySelected = false;
+              parentObj.Level[i].ChildLevel[j].ChildLevel[k].Competency.forEach(element => {
+                element.isSelected = false;
+              });
             }
           }
         }
@@ -477,11 +505,14 @@ export class AlignmentSearchAccordionComponent implements OnInit {
 
   // Click event on Level Checkbox
   levelCheckBox(parent, parentObj) {
+    parentObj.IsChildPartiallySelected = false;
     // tslint:disable-next-line:only-arrow-functions
     parent.isSelected = parent.Level.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
-
+    parentObj.ChildLevel.forEach(item => {
+      item.IsChildPartiallySelected = false;
+    });
     if (parentObj.ChildLevel) {
       if (parentObj.isSelected) {
         parentObj.ChildLevel.forEach(item => {
@@ -503,19 +534,23 @@ export class AlignmentSearchAccordionComponent implements OnInit {
         });
       }
     }
+    this.setParentLevelStatus(parent, parentObj);
   }
+
+
 
   // Click event on Child Level 1 Checkbox
   childLevel1CheckBox(career, strands, outcome) {
+    outcome.isSelected = !outcome.isSelected;
     // tslint:disable-next-line:only-arrow-functions
-    strands.isSelected = strands.ChildLevel.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
-    });
+    //strands.isSelected = strands.ChildLevel.every(function (itemChild: any) {
+    //  return itemChild.isSelected === true;
+    //});
 
-    // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Level.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
-    });
+    //// tslint:disable-next-line:only-arrow-functions
+    //career.isSelected = career.Level.every(function (itemChild: any) {
+    //  return itemChild.isSelected === true;
+    //});
 
     if (outcome.ChildLevel) {
       if (outcome.isSelected) {
@@ -528,26 +563,161 @@ export class AlignmentSearchAccordionComponent implements OnInit {
         });
       }
     }
+    this.trackChildStatus(career, strands, outcome);
   }
+  trackChildStatus(newParent, newChild, newSubchild) {
+    newSubchild.IsChildPartiallySelected = false;
+    let childStatus: any = [];
+    newSubchild.ChildLevel.forEach(subchild => {
+      subchild.IsChildPartiallySelected = false;
+    });
+    newChild.ChildLevel.forEach(element => {
+      childStatus.push(element.isSelected);
+    });
 
+    childStatus = _.uniq(childStatus);
+    if (childStatus.length > 1) {
+      newChild.IsChildPartiallySelected = true;
+      newChild.isSelected = false;
+    } else if (childStatus.length === 1) {
+      if (childStatus[0] === true) {
+        newChild.IsChildPartiallySelected = false;
+        newChild.isSelected = true;
+      } else if (childStatus[0] === false) {
+        newChild.IsChildPartiallySelected = false;
+        newChild.isSelected = false;
+      }
+    }
+    this.setParentLevelStatus(newParent, newChild);
+
+  }
   // Click event on Child Level 2 Checkbox
-  childLevel2CheckBox(career, strand, outcome) {
+  childLevel2CheckBox(careerField, strand, outcome) {
     // tslint:disable-next-line:only-arrow-functions
-    outcome.isSelected = outcome.ChildLevel.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
-    });
+    //outcome.isSelected = outcome.ChildLevel.every(function (itemChild: any) {
+    //  return itemChild.isSelected === true;
+    //});
 
-    // tslint:disable-next-line:only-arrow-functions
-    strand.isSelected = strand.ChildLevel.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
-    });
+    //// tslint:disable-next-line:only-arrow-functions
+    //strand.isSelected = strand.ChildLevel.every(function (itemChild: any) {
+    //  return itemChild.isSelected === true;
+    //});
 
-    // tslint:disable-next-line:only-arrow-functions
-    career.isSelected = career.Level.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
-    });
+    //// tslint:disable-next-line:only-arrow-functions
+    //career.isSelected = career.Level.every(function (itemChild: any) {
+    //  return itemChild.isSelected === true;
+    //});
+    this.trackCheckboxStatus(careerField, strand, outcome);
+  
   }
+  trackCheckboxStatus(parent, child, subchild) {
+    let subchildStatus: any = [];
+    let parentStatusCheck: any = [];
+    subchild.ChildLevel.forEach(element => {
+      subchildStatus.push(element.isSelected);
+    });
+   
+    subchildStatus = _.uniq(subchildStatus);
+    if (subchildStatus.length > 1) {
+      subchild.IsChildPartiallySelected = true;
+      subchild.isSelected = false;
+    } else if (subchildStatus.length === 1) {
+      if (subchildStatus[0] === true) {
+        subchild.IsChildPartiallySelected = false;
+        subchild.isSelected = true;
+      } else if (subchildStatus[0] === false) {
+        subchild.IsChildPartiallySelected = false;
+        subchild.isSelected = false;
+      }
+    }
+    child.ChildLevel.forEach(set => {
+      parentStatusCheck.push(set.IsChildPartiallySelected);
+    });
+    parentStatusCheck = _.uniq(parentStatusCheck);
+    if (parentStatusCheck.length > 1) {
+      child.IsChildPartiallySelected = true;
+      child.isSelected = false;
+    } else if (parentStatusCheck.length === 1) {
+      if (parentStatusCheck[0] === true) {
+        child.IsChildPartiallySelected = true;
+        child.isSelected = false;
+      } else if (parentStatusCheck[0] === false) {
+        child.IsChildPartiallySelected = false;
+        child.isSelected = false;
+      }
+    }
+   
+    this.setParentLevelStatus(parent, child);
+  }
+  setParentLevelStatus(level1, level2) {
+    let childLevelStatus: any = [];
+    let childLevelpartialStatus: any = [];
+    level2.ChildLevel.forEach(item => {
+      childLevelStatus.push(item.isSelected);
+    });
+    level2.ChildLevel.forEach(child => {
+      childLevelpartialStatus.push(child.IsChildPartiallySelected);
+    });
+    childLevelpartialStatus = _.uniq(childLevelpartialStatus);
+    childLevelStatus = _.uniq(childLevelStatus);
+    if (childLevelStatus.length > 1) {
+      level2.childLevelpartialStatus = true;
+    } else if (childLevelStatus.length === 1) {
+      if (childLevelStatus[0] === true) {
+        level2.childLevelpartialStatus = false;
+        level2.isSelected = true;;
+      } else if (childLevelStatus[0] === false) {
+        level2.childLevelpartialStatus = false;
+        level2.isSelected = false;
 
+        if (childLevelpartialStatus.length > 1) {
+          level2.childLevelpartialStatus = true;
+          level2.isSelected = false;
+        } else if (childLevelpartialStatus.length == 1) {
+          if (childLevelpartialStatus[0] === true) {
+            level2.childLevelpartialStatus = true;
+            level2.isSelected = false;
+          } else if (childLevelpartialStatus[0] === false) {
+            level2.childLevelpartialStatus = false;
+            level2.isSelected = false;
+          }
+        }
+      }
+    }
+
+    let parentLevelStatus: any = [];
+    let partialCheckStatusOdChild: any = [];
+    level1.Level.forEach(element => {
+      parentLevelStatus.push(element.isSelected);
+    })
+    level1.Level.forEach(level => {
+      partialCheckStatusOdChild.push(level.IsChildPartiallySelected);
+    });
+    partialCheckStatusOdChild = _.uniq(partialCheckStatusOdChild);
+    parentLevelStatus = _.uniq(parentLevelStatus);
+    if (parentLevelStatus.length > 1) {
+      level1.isSelected = false;
+      level1.IsChildPartiallySelected = true;
+    } else if (parentLevelStatus.length === 1) {
+      if (parentLevelStatus[0] === true) {
+        level1.isSelected = true;
+        level1.IsChildPartiallySelected = false;
+      } else if (parentLevelStatus[0] === false) {
+        if (partialCheckStatusOdChild.length > 1) {
+          level1.isSelected = false;
+          level1.IsChildPartiallySelected = true;
+        } else if (partialCheckStatusOdChild.length === 1) {
+          if (partialCheckStatusOdChild[0] === true) {
+            level1.isSelected = false;
+            level1.IsChildPartiallySelected = true;
+          } else if (partialCheckStatusOdChild[0] === false){
+            level1.isSelected = false;
+            level1.IsChildPartiallySelected = false;
+          }
+        }
+      }
+    }
+  }
   // Expand/Collapse event on Career Field
   expandCollapseCareerField(obj) {
     obj.isCareerFieldClosed = !obj.isCareerFieldClosed;
@@ -595,20 +765,18 @@ export class AlignmentSearchAccordionComponent implements OnInit {
 
       if (this.cteToAcademic) {
         this.searchResultDataArray.forEach(careerField => {
-          this.reportPayload.Subjects.push({ SubjectId: careerField.AcademicSubjectId });
-
-          if (careerField.isSelected) {
+          if (careerField.isSelected === true || careerField.IsChildPartiallySelected === true) {
+            this.reportPayload.Subjects.push({ SubjectId: careerField.AcademicSubjectId });
             this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
-          }
+          }          
           careerField.Strand.forEach(stand => {
-            if (stand.isSelected) {
+            if (stand.isSelected === true || stand.IsChildPartiallySelected === true) {
               this.reportPayload.StrandIds.push(stand.StrandPk);
             }
             stand.Outcome.forEach(outcome => {
-              if (outcome.isSelected) {
+              if (outcome.isSelected === true || outcome.IsChildPartiallySelected === true) {
                 this.reportPayload.OutcomeIds.push(outcome.OutcomePk);
               }
-
               outcome.Competency.forEach(competency => {
                 if (competency.isSelected) {
                   this.reportPayload.CompetencyIds.push(competency.CompetencyPk);
@@ -617,25 +785,30 @@ export class AlignmentSearchAccordionComponent implements OnInit {
             });
           });
         });
+        if (this.reportPayload['CompetencyIds'].length > 10) {
+          this.checkForConformation();
+        } else {
+          this.generateReports();
+        }
       } else {
         this.subjectToCareerData.forEach(careerField => {
-          if (careerField.isSelected) {
+          if (careerField.isSelected === true || careerField.IsChildPartiallySelected === true) {
             this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
           }
 
-          this.Level1Ids = [];
+         
           careerField.Level.forEach(level => {
-            if (level.isSelected) {
+            if (level.isSelected === true || level.IsChildPartiallySelected === true) {
               this.Level1Ids.push(level.LevelValue1);
             }
 
-            this.Level2Ids = [];
+           
             level.ChildLevel.forEach(childLevel1 => {
-              if (childLevel1.isSelected) {
+              if (childLevel1.isSelected === true || childLevel1.IsChildPartiallySelected === true) {
                 this.Level2Ids.push(childLevel1.LevelValue2);
               }
 
-              this.Level3Ids = [];
+             
               childLevel1.ChildLevel.forEach(childLevel2 => {
                 if (childLevel2.isSelected) {
                   this.Level3Ids.push(childLevel2.LevelValue3);
@@ -651,11 +824,14 @@ export class AlignmentSearchAccordionComponent implements OnInit {
             Level3Ids: this.Level3Ids
           });
         });
+        if (this.reportPayload['Subjects'][0]['Level3Ids'].length > 10) {
+          this.checkForConformation();
+        } else {
+          this.generateReports();
+        }
       }
-
-      this.rout.navigate(['/AlignmentSearchReport']);
-      this.alignmentSearchSelectedFilters['selectedAsSearchResults'] = this.reportPayload;
-      this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.alignmentSearchSelectedFilters });
+     
+     
     } else {
       if (this.cteToAcademic) {
         this.isASVisible = false;
@@ -667,6 +843,19 @@ export class AlignmentSearchAccordionComponent implements OnInit {
         setTimeout(() => this.isASVisible = false, 4000);
       }
     }
+  }
+
+  checkForConformation() {
+    this.conformationPopup = true;
+  }
+  cancelReports() {
+    this.conformationPopup = false;
+  }
+  generateReports() {
+    this.rout.navigate(['/AlignmentSearchReport']);
+    this.alignmentSearchSelectedFilters['selectedAsSearchResults'] = this.reportPayload;
+    this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.alignmentSearchSelectedFilters });
+    this.conformationPopup = false;
   }
 
   isSelectedValidate() {

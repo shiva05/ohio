@@ -50,7 +50,7 @@ export class FilterSummaryComponent implements OnInit {
             event.returnValue = '';
         });
         if (this.browserRefresh == true) {
-            this.rout.navigate(['/Home']);
+            this.rout.navigate(['']);
         };
         if (this.cookieService.get('Test')) {
             this.cookieValue = this.cookieService.get('Test');

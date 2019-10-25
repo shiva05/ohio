@@ -26,7 +26,7 @@
     "CourseFields": {
         "Keywords": "Course / Title",
         "CareerField": "Career Pathway",
-        "AcademicSubjects": "Academic Subjects",
+        "AcademicSubjects": "Academic Subject",
         "Strands": "Course #",
         "Outcomes": "Courses #",
         "CompetencyNumber": "Competency Number",
@@ -74,7 +74,7 @@
         "SaveToProfile": "Save to Profile",
         "Download": "Download",
         "Back": "Back",
-        "GoBack": "GoBack"
+        "GoBack": "Go Back"
     },
     "Import": {
         "Import": "Import",
