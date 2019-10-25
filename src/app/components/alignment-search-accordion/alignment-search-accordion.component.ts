@@ -509,6 +509,9 @@ export class AlignmentSearchAccordionComponent implements OnInit {
     parent.isSelected = parent.Level.every(function (itemChild: any) {
       return itemChild.isSelected === true;
     });
+    parentObj.ChildLevel.forEach(item => {
+      item.IsChildPartiallySelected = false;
+    });
     if (parentObj.ChildLevel) {
       if (parentObj.isSelected) {
         parentObj.ChildLevel.forEach(item => {
@@ -585,6 +588,7 @@ export class AlignmentSearchAccordionComponent implements OnInit {
       }
     }
     this.setParentLevelStatus(newParent, newChild);
+
   }
   // Click event on Child Level 2 Checkbox
   childLevel2CheckBox(careerField, strand, outcome) {
@@ -645,6 +649,41 @@ export class AlignmentSearchAccordionComponent implements OnInit {
     this.setParentLevelStatus(parent, child);
   }
   setParentLevelStatus(level1, level2) {
+    let childLevelStatus: any = [];
+    let childLevelpartialStatus: any = [];
+    level2.ChildLevel.forEach(item => {
+      childLevelStatus.push(item.isSelected);
+    });
+    level2.ChildLevel.forEach(child => {
+      childLevelpartialStatus.push(child.IsChildPartiallySelected);
+    });
+    childLevelpartialStatus = _.uniq(childLevelpartialStatus);
+    childLevelStatus = _.uniq(childLevelStatus);
+    if (childLevelStatus.length > 1) {
+      level2.childLevelpartialStatus = true;
+    } else if (childLevelStatus.length === 1) {
+      if (childLevelStatus[0] === true) {
+        level2.childLevelpartialStatus = false;
+        level2.isSelected = true;;
+      } else if (childLevelStatus[0] === false) {
+        level2.childLevelpartialStatus = false;
+        level2.isSelected = false;
+
+        if (childLevelpartialStatus.length > 1) {
+          level2.childLevelpartialStatus = true;
+          level2.isSelected = false;
+        } else if (childLevelpartialStatus.length == 1) {
+          if (childLevelpartialStatus[0] === true) {
+            level2.childLevelpartialStatus = true;
+            level2.isSelected = false;
+          } else if (childLevelpartialStatus[0] === false) {
+            level2.childLevelpartialStatus = false;
+            level2.isSelected = false;
+          }
+        }
+      }
+    }
+
     let parentLevelStatus: any = [];
     let partialCheckStatusOdChild: any = [];
     level1.Level.forEach(element => {
@@ -747,23 +786,23 @@ export class AlignmentSearchAccordionComponent implements OnInit {
         });
       } else {
         this.subjectToCareerData.forEach(careerField => {
-          if (careerField.isSelected) {
+          if (careerField.isSelected === true || careerField.IsChildPartiallySelected === true) {
             this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
           }
 
-          this.Level1Ids = [];
+         
           careerField.Level.forEach(level => {
-            if (level.isSelected) {
+            if (level.isSelected === true || level.IsChildPartiallySelected === true) {
               this.Level1Ids.push(level.LevelValue1);
             }
 
-            this.Level2Ids = [];
+           
             level.ChildLevel.forEach(childLevel1 => {
-              if (childLevel1.isSelected) {
+              if (childLevel1.isSelected === true || childLevel1.IsChildPartiallySelected === true) {
                 this.Level2Ids.push(childLevel1.LevelValue2);
               }
 
-              this.Level3Ids = [];
+             
               childLevel1.ChildLevel.forEach(childLevel2 => {
                 if (childLevel2.isSelected) {
                   this.Level3Ids.push(childLevel2.LevelValue3);

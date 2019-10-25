@@ -125,7 +125,23 @@ export class CourseSearchAccordionComponent implements OnInit {
             } else {
               this.subjectToCareerPathData = data.AcademicSubjectToCareePaths;
               if (this.subjectToCareerPathData.length > 0) {
+                this.subjectToCareerPathData.forEach(element => {
+                  element['IsChildPartiallySelected'] = false;
+                  element['isSelected'] = false;
+                  if (element.SubjecToStandards.length > 0) {
+                    element.SubjecToStandards.forEach(item => {
+                      item['IsChildPartiallySelected'] = false;
+                      item['isSelected'] = false;
+                      if (item.Standards.length > 0) {
+                        item.Standards.forEach(child => {
+                          child['isSelected'] = false;
+                        });
+                      }
+                    });
+                  }
+                });
                 this.noCourseResultFound = false;
+                this.totalSearchResults = this.subjectToCareerPathData[0].AlignmentCount;
               } else {
                 this.noCourseResultFound = true;
               }
@@ -288,14 +304,18 @@ export class CourseSearchAccordionComponent implements OnInit {
         }
       }
     }
+    obj.IsChildPartiallySelected = false;
+    obj.SubjecToStandards.forEach(element => {
+      element.IsChildPartiallySelected = false;
+    })
   }
 
   // Click event on Grade Checkbox
   gradeCheckBox(career, course) {
-    career.isSelected = career.SubjecToStandards.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
-    });
-
+    //career.isSelected = career.SubjecToStandards.every(function (itemChild: any) {
+    //  return itemChild.isSelected === true;
+    //});
+    course.IsChildPartiallySelected = false;
     if (course.Standards) {
       if (course.isSelected) {
         course.Standards.forEach(item => {
@@ -307,17 +327,69 @@ export class CourseSearchAccordionComponent implements OnInit {
         });
       }
     }
+    this.trackStrandsStatus(career);
   }
 
   // Click event on Standard Checkbox
   standardCheckBox(career, course) {
-    course.isSelected = course.Standards.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
-    });
+    //course.isSelected = course.Standards.every(function (itemChild: any) {
+    //  return itemChild.isSelected === true;
+    //});
 
-    career.isSelected = career.SubjecToStandards.every(function (itemChild: any) {
-      return itemChild.isSelected === true;
+    //career.isSelected = career.SubjecToStandards.every(function (itemChild: any) {
+    //  return itemChild.isSelected === true;
+    //});
+    let courseStatus: any = [];
+    
+    course.Standards.forEach(strand => {
+      courseStatus.push(strand.isSelected);
     });
+    courseStatus = _.uniq(courseStatus);
+    if (courseStatus.length > 1) {
+      course.IsChildPartiallySelected = true;
+      course.isSelected = false;
+    } else if (courseStatus.length === 1) {
+      if (courseStatus[0] === true) {
+        course.IsChildPartiallySelected = false;
+        course.isSelected = true;
+      } else if (courseStatus[0] === false) {
+        course.IsChildPartiallySelected = false;
+        course.isSelected = false;
+      }
+    }
+    this.trackStrandsStatus(career);
+  }
+
+  trackStrandsStatus(parent) {
+    let strandsStatus: any = [];
+    let strandsPartialStatus: any = [];
+    parent.SubjecToStandards.forEach(element => {
+      strandsStatus.push(element.isSelected);
+      strandsPartialStatus.push(element.IsChildPartiallySelected);
+    });
+    strandsStatus = _.uniq(strandsStatus);
+    strandsPartialStatus = _.uniq(strandsPartialStatus);
+    if (strandsStatus.length > 1) {
+      parent.IsChildPartiallySelected = true;
+      parent.isSelected = false;
+    } else if (strandsStatus.length === 1) {
+      if (strandsStatus[0] === true) {
+        parent.IsChildPartiallySelected = false;
+        parent.isSelected = true;
+      } else if (strandsStatus[0] === false) {
+        parent.isSelected = false;
+        if (strandsPartialStatus.length > 1) {
+          parent.IsChildPartiallySelected = true;
+        } else if (strandsPartialStatus.length === 1) {
+          if (strandsPartialStatus[0] === true) {
+            parent.IsChildPartiallySelected = true;
+          } else if (strandsPartialStatus[0] === false) {
+            parent.IsChildPartiallySelected = false;
+          }
+        }
+      }
+
+    }
   }
 
   getCourseSearchReport(obj) {
@@ -350,15 +422,14 @@ export class CourseSearchAccordionComponent implements OnInit {
           });
         });
       } else {
-        this.subjectToCareerPathData.forEach(subject => {
-
-          this.Level1Ids = [];
+        this.Level1Ids = [];
+        this.Level2Ids = [];
+        this.subjectToCareerPathData.forEach(subject => {          
           subject.SubjecToStandards.forEach(grade => {
-            if (grade.isSelected) {
+            if (grade.isSelected === true || grade.IsChildPartiallySelected === true ) {
               this.Level1Ids.push(grade.Level1Value);
             }
 
-            this.Level2Ids = [];
             grade.Standards.forEach(standard => {
               if (standard.isSelected) {
                 this.Level2Ids.push(standard.StandardDesc);
@@ -366,7 +437,7 @@ export class CourseSearchAccordionComponent implements OnInit {
             });
           });
 
-          if (subject.isSelected) {
+          if (subject.isSelected === true || subject.IsChildPartiallySelected === true ) {
             this.courseSearchReportPayload.CareerPathIds.push(subject.CareerPathId);
 
             this.courseSearchReportPayload.Subjects.push({
