@@ -26,6 +26,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   isCSVisible: boolean = false;
   isASVisible: boolean = false;
   isSelectedValidation: boolean = false;
+  conformationPopup: boolean;
   courseSearchReportPayload = {
     Keywords: '',
     CareerPathIds: [],
@@ -397,6 +398,7 @@ export class CourseSearchAccordionComponent implements OnInit {
     this.courseSearchReportPayload.CareerPathIds = [];
     this.courseSearchReportPayload.CourseIds = [];
     this.courseSearchReportPayload.Subjects = [];
+    this.courseSearchReportPayload.CompetencyIds = [];
     this.courseSearchReportPayload.CareerPathToSubject = this.careerPathToSubject;
 
     this.isSelectedValidate();
@@ -421,7 +423,13 @@ export class CourseSearchAccordionComponent implements OnInit {
             });
           });
         });
+        if (this.courseSearchReportPayload['CompetencyIds'].length > 10) {
+          this.checkForConformation();
+        } else {
+          this.generateReports();
+        }
       } else {
+        this.courseSearchReportPayload.CompetencyIds = [];
         this.Level1Ids = [];
         this.Level2Ids = [];
         this.subjectToCareerPathData.forEach(subject => {          
@@ -447,10 +455,15 @@ export class CourseSearchAccordionComponent implements OnInit {
             });
           }
         });
+        if (this.courseSearchReportPayload['Subjects'][0]['Level2Ids'].length > 10) {
+          this.checkForConformation();
+        } else {
+          this.generateReports();
+        }
       }
-      this.rout.navigate(['/CourseSearchReport']);
-      this.courseSearchSelectedFilters['selectedCourseSearchResults'] = this.courseSearchReportPayload;
-      this.store.dispatch({ type: CourseSearchActions.SAVE_CS_SELECTED_FILTERS, payload: this.courseSearchSelectedFilters });
+      //this.rout.navigate(['/CourseSearchReport']);
+      //this.courseSearchSelectedFilters['selectedCourseSearchResults'] = this.courseSearchReportPayload;
+      //this.store.dispatch({ type: CourseSearchActions.SAVE_CS_SELECTED_FILTERS, payload: this.courseSearchSelectedFilters });
     } else {
       if (this.careerPathToSubject) {
         this.isASVisible = false;
@@ -463,6 +476,20 @@ export class CourseSearchAccordionComponent implements OnInit {
       }
     }
   }
+
+  checkForConformation() {
+    this.conformationPopup = true;
+  }
+  cancelReports() {
+    this.conformationPopup = false;
+  }
+  generateReports() {
+    this.rout.navigate(['/CourseSearchReport']);
+    this.courseSearchSelectedFilters['selectedCourseSearchResults'] = this.courseSearchReportPayload;
+    this.store.dispatch({ type: CourseSearchActions.SAVE_CS_SELECTED_FILTERS, payload: this.courseSearchSelectedFilters });
+    this.conformationPopup = false;
+  }
+
 
   isSelectedValidate() {
     this.isSelectedValidation = true;
