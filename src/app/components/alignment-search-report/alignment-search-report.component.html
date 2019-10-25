@@ -1,5 +1,4 @@
 <div class="reports">
-    <app-alignment-search-report-list (reportFail)="reportFail = true"></app-alignment-search-report-list>
     <div class="col-md-12">
         <div class="pull-right report-btn" *ngIf="!reportFail">
             <button type="button" *ngIf="!isPublic" class="ohio-button large but-gap" (click)="nameDialogue=true;">
@@ -18,6 +17,7 @@
             </button>
         </div>
     </div>
+    <app-alignment-search-report-list (reportFail)="reportFail = true"></app-alignment-search-report-list>
 </div>
 
 <app-report-modal *ngIf="nameDialogue" (nameForParent)="saveToProfile($event)" (closeModalBool)="nameDialogue=false;">

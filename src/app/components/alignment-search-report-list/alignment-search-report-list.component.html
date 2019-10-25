@@ -1,5 +1,6 @@
 <div *ngIf="!localReportErr">
-    <div class="col-md-12">
+    <div class="col-md-12"
+        *ngIf="reportListhResultData.Competencies.length > 0 || reportListhResultData.Standards.length > 0">
         <div class="row reports-head">
             <div class="reports-head-left col-md-3">
                 <h1>{{ 'ReportFields.Results' | translate }}</h1>
@@ -137,6 +138,11 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="col-md-12 report-fail"
+        *ngIf="reportListhResultData.Competencies.length == 0 && reportListhResultData.Standards.length == 0">
+        Unfortunately, your report could not be generated.
     </div>
 </div>
 

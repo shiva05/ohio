@@ -76,6 +76,7 @@ export class CourseSearchFiltersComponent implements OnInit {
       }
 
       if (data.courseSearchSelectedFilters) {
+        this.selectedKeyword = data.courseSearchSelectedFilters.selectedKeyword;
         if (data.courseSearchSelectedFilters.selectedCareerPath.length > 0) {
           this.selectedCareerPath = data.courseSearchSelectedFilters.selectedCareerPath;
           this.onCareerPathSelect(this.selectedCareerPath);
