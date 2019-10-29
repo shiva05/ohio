@@ -541,7 +541,7 @@ export class AlignmentSearchAccordionComponent implements OnInit {
 
   // Click event on Child Level 1 Checkbox
   childLevel1CheckBox(career, strands, outcome) {
-    outcome.isSelected = !outcome.isSelected;
+   // outcome.isSelected = !outcome.isSelected;
     // tslint:disable-next-line:only-arrow-functions
     //strands.isSelected = strands.ChildLevel.every(function (itemChild: any) {
     //  return itemChild.isSelected === true;
