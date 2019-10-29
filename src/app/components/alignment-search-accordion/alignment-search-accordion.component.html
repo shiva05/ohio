@@ -21,9 +21,9 @@
     <div class="search-accordion" *ngIf="cteToAcademic">
       <div class="search-accordion-head">
         <div class="row">
-          <div class="col-md-6">{{ 'SearchResults.CareerFields' | translate }}</div>
-          <div class="col-md-1">&nbsp;</div>
-          <div class="col-md-3">{{ 'SearchResults.AcademicSubject' | translate }}</div>
+          <div class="col-md-4">{{ 'SearchResults.CareerFields' | translate }}</div>
+          <div class="col-md-2">&nbsp;</div>
+          <div class="col-md-4">{{ 'SearchResults.AcademicSubject' | translate }}</div>
           <div class="col-md-1">{{ 'SearchResults.Alignment' | translate }}</div>
           <div class="col-md-1">&nbsp;</div>
         </div>
@@ -33,9 +33,9 @@
     <div class="search-accordion" *ngIf="!cteToAcademic">
       <div class="search-accordion-head">
         <div class="row">
-          <div class="col-md-3">{{ 'SearchResults.AcademicSubject' | translate }}</div>
-          <div class="col-md-1">&nbsp;</div>
-          <div class="col-md-6">{{ 'SearchResults.CareerFields' | translate }}</div>
+          <div class="col-md-4">{{ 'SearchResults.AcademicSubject' | translate }}</div>
+          <div class="col-md-2">&nbsp;</div>
+          <div class="col-md-4">{{ 'SearchResults.CareerFields' | translate }}</div>
           <div class="col-md-1">{{ 'SearchResults.Alignment' | translate }}</div>
           <div class="col-md-1">&nbsp;</div>
         </div>
@@ -50,7 +50,7 @@
 
           <!-- Career Field -->
           <div class="row careerfield-each-inner" (click)="expandCollapseCareerField(careerField)">
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="accordion-label-career">Career Field</div>
               <div class="accordion-checbox ">
                 <span class="ohio-checkbox checkbox checkbox-success"
@@ -64,8 +64,8 @@
               <span class="level-one-title"> {{careerField.CareerFieldName}}</span>
             </div>
 
-            <div class="col-md-1 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
-            <div class="col-md-3 color-gap" [style.color]="careerField.Color">{{careerField.AcademicSubjectName}}</div>
+            <div class="col-md-2 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
+            <div class="col-md-4 color-gap" [style.color]="careerField.Color">{{careerField.AcademicSubjectName}}</div>
             <div class="col-md-1">
               <span class="accordion-bubble" [style.background-color]="careerField.Color"
                     *ngIf="careerField.Alignment">{{careerField.Alignment}}</span>
@@ -85,7 +85,7 @@
                 <div class="strand-each-inner" (click)="expandCollapseStrand(strand)">
                   <div class="row">
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="accordion-label-strand">Strand</div>
                       <div class="accordion-checbox">
                         <span class="ohio-checkbox checkbox checkbox-success"
@@ -100,8 +100,8 @@
                         {{strand.StrandName}}
                       </span>
                     </div>
-                    <div class="col-md-1"> &nbsp;</div>
-                    <div class="col-md-3 color-gap" [style.color]="careerField.Color">
+                    <div class="col-md-2"> &nbsp;</div>
+                    <div class="col-md-4 color-gap" [style.color]="careerField.Color">
                       {{strand.AcademicSubjectName}}
                     </div>
                     <div class="col-md-1">
@@ -123,7 +123,7 @@
                     <li class="level-two-inner" *ngFor="let outcome of strand.Outcome; index as k">
                       <div class="outcome-each-inner" (click)="expandCollapseOutcome(outcome)">
                         <div class="row">
-                          <div class="col-md-6">
+                          <div class="col-md-4">
                             <div class="accordion-label-outcome">Outcome</div>
                             <div class="accordion-checbox">
                               <span class="ohio-checkbox checkbox checkbox-success"
@@ -139,8 +139,8 @@
                               {{outcome.OutcomeName}}
                             </span>
                           </div>
-                          <div class="col-md-1"> &nbsp;</div>
-                          <div class="col-md-3 color-gap" [style.color]="careerField.Color">
+                          <div class="col-md-2"> &nbsp;</div>
+                          <div class="col-md-4 color-gap" [style.color]="careerField.Color">
                             {{outcome.AcademicSubjectName}}
                           </div>
                           <div class="col-md-1">
@@ -163,7 +163,7 @@
                           <li class="list-group-item level-three" *ngFor="let item of outcome.Competency; index as l">
                             <div class="competency-each-inner">
                               <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                   <div class="accordion-label-competency">Competency</div>
                                   <div class="accordion-checbox">
                                     <span class="ohio-checkbox checkbox checkbox-success">
@@ -178,8 +178,8 @@
                                     {{item.CompetencyName}}
                                   </span>
                                 </div>
-                                <div class="col-md-1"> &nbsp;</div>
-                                <div class="col-md-3 color-gap" [style.color]="careerField.Color">
+                                <div class="col-md-2"> &nbsp;</div>
+                                <div class="col-md-4 color-gap" [style.color]="careerField.Color">
                                   {{item.AcademicSubjectName}}
                                 </div>
                                 <div class="col-md-1">
@@ -212,7 +212,7 @@
 
           <!-- Subject -->
           <div class="row careerfield-each-inner" (click)="expandCollapseSubjectField(careerField)">
-            <div class="col-md-3">
+            <div class="col-md-4">
               <div class="accordion-label-career">Subject</div>
               <div class="accordion-checbox ">
                 <span class="ohio-checkbox checkbox checkbox-success"
@@ -226,8 +226,8 @@
               <span class="level-one-title" [style.color]="careerField.Color"> {{careerField.SubjectName}}</span>
             </div>
 
-            <div class="col-md-1 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
-            <div class="col-md-6 color-gap">{{careerField.CareerFieldName}}</div>
+            <div class="col-md-2 search-right-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
+            <div class="col-md-4 color-gap">{{careerField.CareerFieldName}}</div>
             <div class="col-md-1">
               <span class="accordion-bubble" [style.background-color]="careerField.Color"
                     *ngIf="careerField.Alignment">{{careerField.Alignment}}</span>
@@ -247,7 +247,7 @@
                 <div class="strand-each-inner" (click)="expandCollapseASStrand(strand)">
                   <div class="row">
 
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                       <div class="accordion-label-strand">{{strand.LevelName}}</div>
                       <div class="accordion-checbox">
                         <span class="ohio-checkbox checkbox checkbox-success"
@@ -262,8 +262,8 @@
                         {{strand.LevelValue1}}
                       </span>
                     </div>
-                    <div class="col-md-1"> &nbsp;</div>
-                    <div class="col-md-6 color-gap"> {{strand.CareerFieldName}}</div>
+                    <div class="col-md-2"> &nbsp;</div>
+                    <div class="col-md-4 color-gap"> {{strand.CareerFieldName}}</div>
                     <div class="col-md-1">
                       <span class="accordion-bubble" [style.background-color]="careerField.Color"
                             *ngIf="strand.Alignment">{{strand.Alignment}}</span>
@@ -283,7 +283,7 @@
                     <li class="level-two-inner" *ngFor="let outcome of strand.ChildLevel; index as k">
                       <div class="outcome-each-inner" (click)="expandCollapseASOutcome(outcome)">
                         <div class="row">
-                          <div class="col-md-3">
+                          <div class="col-md-4">
                             <div class="accordion-label-outcome">{{outcome.LevelName}}</div>
                             <div class="accordion-checbox">
                               <span class="ohio-checkbox checkbox checkbox-success"
@@ -299,8 +299,8 @@
                               {{outcome.LevelValue2}}
                             </span>
                           </div>
-                          <div class="col-md-1"> &nbsp;</div>
-                          <div class="col-md-6 color-gap">
+                          <div class="col-md-2"> &nbsp;</div>
+                          <div class="col-md-4 color-gap">
                             {{outcome.CareerFieldName}}
                           </div>
                           <div class="col-md-1">
@@ -323,7 +323,7 @@
                           <li class="list-group-item level-three" *ngFor="let item of outcome.ChildLevel; index as l">
                             <div class="competency-each-inner">
                               <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                   <div class="accordion-label-competency">{{item.LevelName}}</div>
                                   <div class="accordion-checbox">
                                     <span class="ohio-checkbox checkbox checkbox-success">
@@ -338,8 +338,8 @@
                                     {{item.LevelValue3}}
                                   </span>
                                 </div>
-                                <div class="col-md-1"> &nbsp;</div>
-                                <div class="col-md-6 color-gap">
+                                <div class="col-md-2"> &nbsp;</div>
+                                <div class="col-md-4 color-gap">
                                   {{item.CareerFieldName}}
                                 </div>
                                 <div class="col-md-1">

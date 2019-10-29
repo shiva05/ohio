@@ -22,9 +22,9 @@
     <div class="search-accordion" *ngIf="careerPathToSubject">
       <div class="search-accordion-head">
         <div class="row">
-          <div class="col-md-5">{{ 'CourseFields.CareerField' | translate }}</div>
+          <div class="col-md-4">{{ 'CourseFields.CareerField' | translate }}</div>
           <div class="col-md-2">&nbsp;</div>
-          <div class="col-md-3">{{ 'CourseFields.AcademicSubjects' | translate }}</div>
+          <div class="col-md-4">{{ 'CourseFields.AcademicSubjects' | translate }}</div>
           <div class="col-md-1">{{ 'CourseFields.Alignment' | translate }}</div>
           <div class="col-md-1">&nbsp;</div>
         </div>
@@ -34,9 +34,9 @@
     <div class="search-accordion" *ngIf="!careerPathToSubject">
       <div class="search-accordion-head">
         <div class="row">
-          <div class="col-md-3">{{ 'CourseFields.AcademicSubjects' | translate }}</div>
+          <div class="col-md-4">{{ 'CourseFields.AcademicSubjects' | translate }}</div>
           <div class="col-md-2">&nbsp;</div>
-          <div class="col-md-5">{{ 'CourseFields.CareerField' | translate }}</div>
+          <div class="col-md-4">{{ 'CourseFields.CareerField' | translate }}</div>
           <div class="col-md-1">{{ 'CourseFields.Alignment' | translate }}</div>
           <div class="col-md-1">&nbsp;</div>
         </div>
@@ -52,7 +52,7 @@
           <!-- Career Path -->
           <div class="careerfield-each-inner" (click)="expandCollapseCareerPath(careerPath)">
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-4">
                 <div class="accordion-label-career">Career Path</div>
                 <div class="accordion-checbox ">
                   <span class="ohio-checkbox checkbox checkbox-success"
@@ -72,7 +72,7 @@
                 <i class="fa fa-long-arrow-right"
                    aria-hidden="true"></i>
               </div>
-              <div class="col-md-3 color-gap" [style.color]="findSubjectColor(careerPath.SubjectId)">
+              <div class="col-md-4 color-gap" [style.color]="findSubjectColor(careerPath.SubjectId)">
                 {{careerPath.SubjectName}}
               </div>
               <div class="col-md-1">
@@ -96,7 +96,7 @@
               <li class="level-two-inner" *ngFor="let course of careerPath.Courses; index as j">
                 <div class="strand-each-inner" (click)="expandCollapseCourse(course)">
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="accordion-label-courses">Courses</div>
                       <div class="accordion-checbox">
                         <span class="ohio-checkbox checkbox checkbox-success"
@@ -113,8 +113,8 @@
                         {{course.CourseName}}
                       </span>
                     </div>
-                    <div class="col-md-1"> &nbsp;</div>
-                    <div class="col-md-3" [style.color]="findSubjectColor(careerPath.SubjectId)">
+                    <div class="col-md-2"> &nbsp;</div>
+                    <div class="col-md-4" [style.color]="findSubjectColor(careerPath.SubjectId)">
                       {{course.SubjectName}}
                     </div>
                     <div class="col-md-1">
@@ -141,7 +141,7 @@
                         *ngFor="let competency of course.Competencies; index as k">
                       <div class="outcome-each-inner">
                         <div class="row">
-                          <div class="col-md-6">
+                          <div class="col-md-4">
                             <div class="accordion-label-competencies">Competencies</div>
                             <div class="accordion-checbox">
                               <span class="ohio-checkbox checkbox checkbox-success"
@@ -159,8 +159,8 @@
                               {{competency.Competency}}
                             </span>
                           </div>
-                          <div class="col-md-1"> &nbsp;</div>
-                          <div class="col-md-3"
+                          <div class="col-md-2"> &nbsp;</div>
+                          <div class="col-md-4"
                                [style.color]="findSubjectColor(careerPath.SubjectId)">
                             {{course.SubjectName}}
                           </div>
@@ -193,7 +193,7 @@
           <!-- Subject -->
           <div class="careerfield-each-inner" (click)="expandCollapseCareerPath(subject)">
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <div class="accordion-label-subject">Subject</div>
                 <div class="accordion-checbox ">
                   <span class="ohio-checkbox checkbox checkbox-success"
@@ -214,7 +214,7 @@
                 <i class="fa fa-long-arrow-right"
                    aria-hidden="true"></i>
               </div>
-              <div class="col-md-5">{{subject.CareerPathName}}</div>
+              <div class="col-md-4">{{subject.CareerPathName}}</div>
               <div class="col-md-1">
                 <span class="accordion-bubble" style="color:white"
                       [style.background-color]="findSubjectColor(subject.SubjectId)"
@@ -236,7 +236,7 @@
               <li class="level-two-inner" *ngFor="let course of subject.SubjecToStandards; index as j">
                 <div class="strand-each-inner" (click)="expandCollapseCourse(course)">
                   <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                       <div class="accordion-label-subject">Course</div>
                       <div class="accordion-checbox">
                         <span class="ohio-checkbox checkbox checkbox-success"
@@ -254,7 +254,7 @@
                       </span>
                     </div>
                     <div class="col-md-2"> &nbsp;</div>
-                    <div class="col-md-5">{{subject.CareerPathName}} </div>
+                    <div class="col-md-4">{{subject.CareerPathName}} </div>
                     <div class="col-md-1">
                       <span class="accordion-bubble" style="color:white"
                             [style.background-color]="findSubjectColor(subject.SubjectId)"
@@ -279,7 +279,7 @@
                         *ngFor="let standard of course.Standards; index as k">
                       <div class="outcome-each-inner">
                         <div class="row">
-                          <div class="col-md-3">
+                          <div class="col-md-4">
                             <div class="accordion-label-standard">Standard</div>
                             <div class="accordion-checbox">
                               <span class="ohio-checkbox checkbox checkbox-success"
@@ -298,7 +298,7 @@
                             </span>
                           </div>
                           <div class="col-md-2"> &nbsp;</div>
-                          <div class="col-md-5">{{subject.CareerPathName}} </div>
+                          <div class="col-md-4">{{subject.CareerPathName}} </div>
                           <div class="col-md-1">
                             <span class="accordion-bubble"
                                   style="color:white"
