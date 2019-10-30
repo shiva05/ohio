@@ -140,9 +140,17 @@ export class CourseSearchAccordionComponent implements OnInit {
                       }
                     });
                   }
+                  if (this.subjectToCareerPathData.length === 1) {
+                    element['isCareerPathClosed'] = true;
+                    if (element.SubjecToStandards.length === 1) {
+                      element.SubjecToStandards[0]['isCourseClosed'] = true;
+                    }
+                  }
                 });
                 this.noCourseResultFound = false;
                 this.totalSearchResults = this.subjectToCareerPathData[0].AlignmentCount;
+               
+
               } else {
                 this.noCourseResultFound = true;
               }
@@ -162,6 +170,12 @@ export class CourseSearchAccordionComponent implements OnInit {
                 });
               }
               this.totalSearchResults += element.AlignmentCount;
+              if (this.careerPathToSubjectData.length === 1) {
+                element['isCareerPathClosed'] = true;
+                if (element.Courses.length === 1) {
+                  element.Courses[0]['isCourseClosed'] = true;
+                }
+                }
             });
           });
       }

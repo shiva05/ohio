@@ -198,6 +198,18 @@ export class AlignmentSearchAccordionComponent implements OnInit {
                   this.searchResultDataArray.push(element);
                   this.noResultFound = false;
                 });
+
+                this.searchResultData.CareerField.forEach(career => {
+                  if (this.searchResultData.CareerField.length === 1) {
+                    career['isCareerFieldClosed'] = true;
+                    if (career.Strand.length === 1) {
+                      career.Strand[0]['isStrandClosed'] = true;
+                      if (career.Strand[0].Outcome.length === 1) {
+                        career.Strand[0].Outcome[0]['isOutcomeClosed'] = true;
+                      }
+                    }
+                  }
+                });
                 this.formatSearchResultDataArray();
               } else {
                 this.noResultFound = true;
@@ -224,9 +236,20 @@ export class AlignmentSearchAccordionComponent implements OnInit {
                   }
                 });
               }
-                console.log(this.subjectToCareerData);
+              //  console.log(this.subjectToCareerData);
                 this.noResultFound = false;
                 this.formatAlignmentSearchData();
+                if (this.searchResultData.Subject.length === 1) {
+                  var subject = this.searchResultData.Subject[0];
+                  subject['isSubjectFieldClosed'] = true;
+                  if (subject.Level.length === 1) {
+                    subject.Level[0]['isASStrandClosed'] = true;
+                    if (subject.Level[0].ChildLevel.length === 1) {
+                      subject.Level[0].ChildLevel[0]['isOutcomeClosed'] = true;
+                    }
+                  }
+                }
+
               } else {
                 this.noResultFound = true;
               }
