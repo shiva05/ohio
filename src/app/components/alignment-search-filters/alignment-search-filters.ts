@@ -121,7 +121,12 @@ export class AlignmentSearchFiltersComponent implements OnInit {
         });
       }
       if (data.alignmentSearchSelectedFilters) {
-        this.selectedKeyword = data.alignmentSearchSelectedFilters.selectedKeyword;
+        if (data.alignmentSearchSelectedFilters.selectedKeyword) {
+          this.selectedKeyword = data.alignmentSearchSelectedFilters.selectedKeyword;
+        } else {
+          this.selectedKeyword = this.selectedKeyword;
+        }
+
         if (data.alignmentSearchSelectedFilters.selectedCareers) {
           if (data.alignmentSearchSelectedFilters.selectedCareers.length > 0) {
             this.selectedCareer = data.alignmentSearchSelectedFilters.selectedCareers;
@@ -441,7 +446,7 @@ export class AlignmentSearchFiltersComponent implements OnInit {
   onOutcomeSelect() {
     this.store.dispatch({ type: AdvancedSearchActions.RESET_ALIGNMENTSEARCH_FILTERS });
     this.store.dispatch({ type: AdvancedSearchActions.LOAD_COMPETENCY_DATA, payload: this.selectedOutcome });
-    //need to change values
+    // need to change values
     if (this.selectedOutcome.length === 0) {
       this.selectedCompetencyNumbers = [];
     }

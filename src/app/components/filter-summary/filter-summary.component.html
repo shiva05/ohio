@@ -8,12 +8,15 @@
         <div class="search-filter">
           <div class="search-filter-left">
             <div class="filter">
-              <span class="filter-each" *ngIf="FilterSummaryKeys.Keywords">
-                <label>Keyword: </label>
-                <span class="badge badge-light">
-                  <span class="selectedElement">{{FilterSummaryKeys.Keywords}}</span>
+              <div *ngIf="FilterSummaryKeys.Keywords">
+                <span class="filter-each">
+                  <label>Keyword: </label>
+                  <span class="badge badge-light">
+                    <span class="selectedElement">{{FilterSummaryKeys.Keywords}}</span>
+                  </span>
                 </span>
-              </span>
+                <hr>
+              </div>
               <span class="filter-each">
                 <span *ngIf="FilterSummaryKeys.CareerFieldIds.length >0">
                   <label>Career Field: </label>
@@ -122,15 +125,15 @@
           <div class="search-filter-left">
             <div class="filter">
               <span class="filter-each">
-                <span *ngIf="courseSearchKeywords">
-                  <label>Keyword: </label>
-                  <span class="badge badge-light">
-                    <span class="selectedElement">{{courseSearchKeywords}}</span>
+                <div *ngIf="courseSearchKeywords">
+                  <span>
+                    <label>Keyword: </label>
+                    <span class="badge badge-light">
+                      <span class="selectedElement">{{courseSearchKeywords}}</span>
+                    </span>
                   </span>
-                </span>
-                <span class="filter-divider"
-                  *ngIf="courseSearchKeywords && filterCareerPathData &&  filterCareerPathData[0].CareerPathName"> |
-                </span>
+                  <hr>
+                </div>                
                 <span>
                   <label
                     *ngIf="filterCareerPathData &&  filterCareerPathData[0].CareerPathName">{{'CourseFields.CareerField' | translate}}:
