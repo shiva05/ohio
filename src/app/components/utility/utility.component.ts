@@ -1,4 +1,4 @@
-import { Component, OnInit ,ElementRef} from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Utilities } from '../../models/util-nav-item';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers';
@@ -18,9 +18,9 @@ import { Permission } from '../../models/permission';
 import { forkJoin } from 'rxjs';
 
 @Component({
-  host: {
-    '(document:click)': 'onClick($event)',
-  },
+  // host: {
+  //   '(document:click)': 'onClick($event)',
+  // },
   selector: 'app-utility',
   templateUrl: './utility.component.html',
   styleUrls: ['./utility.component.css']
@@ -58,20 +58,20 @@ export class UtilityComponent implements OnInit {
   hideDocMessages = false;
   canSee: boolean = true;
 
+  currentAssetTemplateKey: number;
+  currentDetailKey: number;
+
   show(e: any) {
     this.canSee = true;
   }
+
   hide(e: any) {
     this.canSee = false;
   }
-  constructor(
-    private store: Store<AppState>,
-    private flagService: FlagService,
-    private docsService: DocsService,
-    private commentsSerice: CommentsService,
-    private _eref: ElementRef) { }
-  currentAssetTemplateKey: number;
-  currentDetailKey: number;
+
+  constructor(private store: Store<AppState>, private flagService: FlagService, private docsService: DocsService, private commentsSerice: CommentsService, private _eref: ElementRef) {
+
+  }
 
   ngOnInit() {
     const hideDeleteDocStatus = true;
@@ -142,11 +142,6 @@ export class UtilityComponent implements OnInit {
       this.clearDocStatusMessage(true);
     }
   }
-  onClick() {
-    if (!this._eref.nativeElement.contains(event.target)) {
-      this.showDocs = false;
-    }
-  }
   IsOverview() {
     if (this.context.assetTemplateKey === 154110) {
       return true;
@@ -163,7 +158,7 @@ export class UtilityComponent implements OnInit {
 
       },
         (error: HttpErrorResponse) =>
-        this.store.dispatch(new UtilsActions.UtilsSetDocCount(0)));
+          this.store.dispatch(new UtilsActions.UtilsSetDocCount(0)));
     }
 
   }
@@ -194,7 +189,7 @@ export class UtilityComponent implements OnInit {
     const docBaseViewUrl = environment.DOCS_GET_DOC_FILE_API;
 
     // Get permissions first
-    //this.loadDocComponentPermissions();
+    // this.loadDocComponentPermissions();
 
 
 
@@ -220,7 +215,7 @@ export class UtilityComponent implements OnInit {
 
     },
       (error: HttpErrorResponse) =>
-      console.log(`Error Status: ${JSON.stringify(error.status)};
+        console.log(`Error Status: ${JSON.stringify(error.status)};
       Error Status Text: ${JSON.stringify(error.statusText)};
       Error Msg: ${JSON.stringify(error.message)};`));
   }

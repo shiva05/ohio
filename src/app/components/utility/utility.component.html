@@ -4,10 +4,11 @@
   <app-utilitynav (doUtilNav)="utilNav($event)"></app-utilitynav>
 
   <div class="utility clearfix" id="utils-docs" *ngIf="showDocs && !hideUtilityDivs">
+    <div class="overlay" (click)="utilNav('Documents')"></div>
     <button (click)="utilNav('Documents')" _ngcontent-c15="" aria-label="Close" class="close close-slider pull-right"
       type="button">
       <span _ngcontent-c15="" aria-hidden="true"><i class="fas fa-times"></i></span>
-    </button>
+    </button>    
     <utils-docs (doLoadImportDocs)="loadImportDocs($event)" (doLoadDocs)="loadDocs($event)"
       (doImportDocs)="importDocs($event)" (doDeleteDocs)="removeDocs($event)" [docs]="docsResults"
       [importDocs]="importDocsResults" [utilsContext]="context">
