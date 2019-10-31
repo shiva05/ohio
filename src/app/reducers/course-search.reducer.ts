@@ -1,10 +1,12 @@
 import * as CourseSearchActions from '../actions/course-search.actions';
 import { AcademicSubject } from '../models/academic-subject.model';
+import { Career } from './../models/career.model';
 import { CareerPath } from '../models/careerPath.model';
 import { CareerPathCourses } from '../models/careerPathCourses.model';
 import { AcademicSubjectCourses } from '../models/academic-subject-course.model';
 
 export interface CourseSearchData {
+  careers: Career[];
   careerPaths: CareerPath[];
   careerPathCourses: CareerPathCourses[];
   academicSubjects: AcademicSubject[];
@@ -12,6 +14,7 @@ export interface CourseSearchData {
 }
 
 export interface CourseSearchSelectedFilters {
+  selectedCareers: Career[];
   selectedCareerPath: CareerPath[];
   selectedCareerPathCourses: CareerPathCourses[];
   selectedAcademicSubject: AcademicSubject[];
@@ -29,12 +32,14 @@ export interface SelectedAcademicSubject {
 
 const initialState: CourseSearch = {
   courseSearchData: {
+    careers: [],
     careerPaths: [],
     careerPathCourses: [],
     academicSubjects: [],
     academicSubjectCourses: []
   },
   courseSearchSelectedFilters: {
+    selectedCareers: [],
     selectedCareerPath: [],
     selectedCareerPathCourses: [],
     selectedAcademicSubject: [],
@@ -63,6 +68,7 @@ export function courseSearchReducer(state = initialState, Action: CourseSearchAc
       return {
         ...state,
         courseSearchSelectedFilters: {
+          selectedCareers: [],
           selectedCareerPath: [],
           selectedCareerPathCourses: [],
           selectedAcademicSubject: [],

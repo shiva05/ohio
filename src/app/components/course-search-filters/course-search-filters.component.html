@@ -1,5 +1,5 @@
 <div class="alert alert-danger" [class.visible]="isVisible">
-    At least 1 Career Path and 1 Academic Subject required.
+    At least 1 Career Field and 1 Academic Subject required.
 </div>
 
 <div class="col-md-12">
@@ -8,13 +8,13 @@
         <div class="row">
             <div class="col-md-6">
                 <label class="ohio-field-status" for="field-example-8">
-                  <span class="ohio-field-label">{{ 'CourseFields.Keywords' | translate }}</span>
-                  <div class="input-group customsearch">
-                    <input type="search" class="ohio-field-input" id="keywordInput" [(ngModel)]="selectedKeyword">
-                    <span class="input-group-addon">
-                      <i class="fa fa-search" aria-hidden="true"></i>
-                    </span>
-                  </div>
+                    <span class="ohio-field-label">{{ 'CourseFields.Keywords' | translate }}</span>
+                    <div class="input-group customsearch">
+                        <input type="search" class="ohio-field-input" id="keywordInput" [(ngModel)]="selectedKeyword">
+                        <span class="input-group-addon">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </span>
+                    </div>
                 </label>
             </div>
         </div>
@@ -23,10 +23,10 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <label>{{ 'CourseFields.CareerField' | translate }}</label>
-                <ng-multiselect-dropdown [ngClass]="" [data]="careerPath" [(ngModel)]="selectedCareerPath"
-                    [settings]="careerPathSettings" (onSelect)="onCareerPathSelect(selectedCareerPath)"
-                    (onDeSelect)="onCareerPathSelect(selectedCareerPath)" (onSelectAll)="onCareerPathSelectAll()"
-                    (onDeSelectAll)="onCareerPathDeSelectAll()">
+                <ng-multiselect-dropdown [ngClass]="" [data]="careers" [(ngModel)]="selectedCareer"
+                    [settings]="careerFieldDropdownSettings" (onSelect)="onCareerSelect()"
+                    (onDeSelect)="onCareerSelect()" (onSelectAll)="onCareerSelectAll()"
+                    (onDeSelectAll)="onCareerDeSelectAll()">
                 </ng-multiselect-dropdown>
             </div>
             <div class="form-group col-md-6">
@@ -37,36 +37,38 @@
                     (onDeSelectAll)="onSubjectDeSelectAll($event)">
                 </ng-multiselect-dropdown>
             </div>
-        </div>
-
-        <div class="row">
             <div class="col-md-6">
-                <div class="row" *ngIf="coursesDropdown.length > 0">
-                    <div class="form-group col-md-6">
+                <div class="row">
+                    <div class="form-group col-md-6" *ngIf="selectedCareer.length > 0">
+                        <label>{{ 'CourseFields.CareerPathway' | translate }}</label>
+                        <ng-multiselect-dropdown [ngClass]="" [data]="careerPathDropdown" [(ngModel)]="selectedCareerPath"
+                            [settings]="careerPathSettings" (onSelect)="onCareerPathSelect(selectedCareerPath)"
+                            (onDeSelect)="onCareerPathSelect(selectedCareerPath)"
+                            (onSelectAll)="onCareerPathSelectAll()" (onDeSelectAll)="onCareerPathDeSelectAll()">
+                        </ng-multiselect-dropdown>
+                    </div>
+                    <div class="form-group col-md-6" *ngIf="selectedCareerPath.length > 0">
                         <label>{{ 'CourseFields.Courses' | translate }}</label>
                         <ng-multiselect-dropdown [ngClass]="" [data]="coursesDropdown" [(ngModel)]="selectedCourses"
                             [settings]="careerPathCourseSettings">
                         </ng-multiselect-dropdown>
                     </div>
                 </div>
-                <!-- End Dropdown Row -->
             </div>
-
             <div class="col-md-6">
-
-                <div class="form-group dynamic-academics" *ngFor="let item of selectedAcademicItems;let i = index;">
-                    <h3 (click)="getData(item)">{{item.SubjectName}}</h3>
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label>{{item.LevelName}}</label>
-                            <ng-multiselect-dropdown [ngClass]="" [data]="item.GradeSubjects"
-                                [(ngModel)]="item.SelectedItems" [settings]="subjectsDefaultSettings">
-                            </ng-multiselect-dropdown>
+                    <div class="form-group dynamic-academics" *ngFor="let item of selectedAcademicItems;let i = index;">
+                        <h3 (click)="getData(item)">{{item.SubjectName}}</h3>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label>{{item.LevelName}}</label>
+                                <ng-multiselect-dropdown [ngClass]="" [data]="item.GradeSubjects"
+                                    [(ngModel)]="item.SelectedItems" [settings]="subjectsDefaultSettings">
+                                </ng-multiselect-dropdown>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+        </div>       
 
         <!-- Button Row -->
         <div class="row">

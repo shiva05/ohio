@@ -25,7 +25,8 @@
     },
     "CourseFields": {
         "Keywords": "Course / Title",
-        "CareerField": "Career Pathway",
+        "CareerField": "Career Field",
+        "CareerPathway": "Career Pathway",
         "AcademicSubjects": "Academic Subject",
         "Strands": "Course #",
         "Outcomes": "Courses #",

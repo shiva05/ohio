@@ -16,16 +16,19 @@ import { _ } from 'underscore';
 })
 
 export class CourseSearchFiltersComponent implements OnInit {
+  careers: any = [];
   careerPath: any = [];
   courses: any = [];
   academicSubjects: any = [];
   academicSubjectCourse: any = [];
   selectedKeyword: any = '';
+  careerFieldDropdownSettings: any = {};
   careerPathSettings: any = {};
   careerPathCourseSettings: any = {};
   academicSubjectsSettings: any = {};
   academicSubjectCourseSettings: any = [];
   subjectsDefaultSettings: any = {};
+  selectedCareer: any = [];
   selectedCareerPath: any = [];
   selectedCourses: any = [];
   selectedAcadamicSubjects: any = [];
@@ -36,6 +39,7 @@ export class CourseSearchFiltersComponent implements OnInit {
   selectedSocialCourses: any = [];
 
   searchObj: any;
+  careerPathDropdown: any = [];
   coursesDropdown: any = [];
   courseSearchData: Observable<CourseSearchData>;
 
@@ -50,6 +54,7 @@ export class CourseSearchFiltersComponent implements OnInit {
   @Output() onPageSelect = new EventEmitter<any>();
 
   ngOnInit() {
+    this.careerFieldDropdownSettings = this.shared.careerFieldDropdownSettings;
     this.careerPathSettings = this.shared.careerPathSettings;
     this.careerPathCourseSettings = this.shared.careerPathCourseSettings;
     this.academicSubjectsSettings = this.shared.academicSubjectsSettings;
@@ -58,6 +63,7 @@ export class CourseSearchFiltersComponent implements OnInit {
 
     this.store.select('courseSearch').subscribe(data => {
       this.courseSearchData = data.courseSearchData;
+      this.careers = this.courseSearchData['CareerFields'];
       this.careerPath = this.courseSearchData['CareerPath'];
       this.courses = this.courseSearchData['CareerPathCourses'];
       this.academicSubjects = this.courseSearchData['Subjects'];
@@ -77,6 +83,10 @@ export class CourseSearchFiltersComponent implements OnInit {
 
       if (data.courseSearchSelectedFilters) {
         this.selectedKeyword = data.courseSearchSelectedFilters.selectedKeyword;
+        if (data.courseSearchSelectedFilters.selectedCareers.length > 0) {
+          this.selectedCareer = data.courseSearchSelectedFilters.selectedCareers;
+          this.onCareerFieldSelect(this.selectedCareer);
+        }
         if (data.courseSearchSelectedFilters.selectedCareerPath.length > 0) {
           this.selectedCareerPath = data.courseSearchSelectedFilters.selectedCareerPath;
           this.onCareerPathSelect(this.selectedCareerPath);
@@ -95,6 +105,30 @@ export class CourseSearchFiltersComponent implements OnInit {
     if (!this.shared.updateCourseSearch) {
       this.clearSearch();
     }
+  }
+
+  onCareerFieldSelect(selectedCareer) {
+    const data = selectedCareer;
+    this.careerPathDropdown = [];
+
+    this.careers.forEach(career => {
+      data.forEach(careerPath => {
+        if (career.CareerPathId === careerPath.CareerPathId) {
+          this.careerPathDropdown.push(career);
+        }
+      });
+    });
+  }
+
+  onCareerSelect() {
+    this.careerPathDropdown = [];
+    this.careerPath.forEach(careerPath => {
+      this.selectedCareer.forEach(career => {
+        if (career.CareerFieldId === careerPath.CareerFieldId) {
+          this.careerPathDropdown.push(careerPath);
+        }
+      });
+    });
   }
 
   onCareerPathSelect(selectedPaths) {
@@ -176,12 +210,14 @@ export class CourseSearchFiltersComponent implements OnInit {
 
   clearSearch() {
     this.searchObj = {
+      selectedCareers: [],
       selectedCareerPath: [],
       selectedCareerPathCourses: [],
       selectedAcademicSubject: [],
       selectedAcademicSubjectCourses: []
     };
     this.store.dispatch({ type: CourseSearchActions.RESET_COURSE_SELECTED_FILTERS });
+    this.selectedCareer = [];
     this.selectedCareerPath = [];
     this.selectedAcadamicSubjects = [];
     this.selectedCourses = [];
@@ -199,11 +235,12 @@ export class CourseSearchFiltersComponent implements OnInit {
   }
 
   search() {
-    if (this.selectedCareerPath.length < 1 || this.selectedAcademicItems.length < 1) {
+    if (this.selectedCareer.length < 1 || this.selectedAcademicItems.length < 1) {
       this.showAlert();
     } else {
       this.searchObj = {
         selectedKeyword: this.selectedKeyword,
+        selectedCareers: this.selectedCareer,
         selectedCareerPath: this.selectedCareerPath,
         selectedCareerPathCourses: this.selectedCourses,
         selectedAcademicSubject: this.selectedAcadamicSubjects,
