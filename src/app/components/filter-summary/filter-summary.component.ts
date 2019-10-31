@@ -25,6 +25,7 @@ export class FilterSummaryComponent implements OnInit {
     courseSearchResults: any;
     searchObj: any;
 
+    filterCareerFieldData: any = [];
     filterCareerPathData: any = [];
     courseSearchKeywords: any = '';
     filterCareerPathCourseData: any = [];
@@ -207,6 +208,7 @@ export class FilterSummaryComponent implements OnInit {
 
     formatSearchCourseData(source) {
         this.courseSearchKeywords = source.selectedKeyword;
+        this.filterCareerFieldData = source.selectedCareers;
         this.filterCareerPathData = source.selectedCareerPath;
         this.filterCareerPathCourseData = source.selectedCareerPathCourses;
         this.filterAcadamicSubjectData = source.selectedAcademicSubject;

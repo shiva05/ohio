@@ -29,6 +29,7 @@ export class CourseSearchAccordionComponent implements OnInit {
   conformationPopup: boolean;
   courseSearchReportPayload = {
     Keywords: '',
+    CareerFieldIds: [],
     CareerPathIds: [],
     CourseIds: [],
     CompetencyIds: [],
@@ -73,8 +74,13 @@ export class CourseSearchAccordionComponent implements OnInit {
 
   getCourseSearchResult() {
     this.store.select('courseSearch').pipe(take(1)).subscribe(data => {
-      if (data.courseSearchSelectedFilters && data.courseSearchSelectedFilters.selectedCareerPath.length > 0 && data.courseSearchSelectedFilters.selectedAcademicSubject.length > 0) {
+      if (data.courseSearchSelectedFilters && data.courseSearchSelectedFilters.selectedCareers.length > 0 && data.courseSearchSelectedFilters.selectedAcademicSubject.length > 0) {
         this.courseSearchSelectedFilters = data.courseSearchSelectedFilters;
+
+        let careerFieldIds = [];
+        data.courseSearchSelectedFilters.selectedCareers.forEach(element => {
+          careerFieldIds.push(element.CareerFieldId);
+        });
 
         let careerPathIds = [];
         data.courseSearchSelectedFilters.selectedCareerPath.forEach(element => {
@@ -106,6 +112,7 @@ export class CourseSearchAccordionComponent implements OnInit {
         // this.careerPathToSubject = this._shared.toggleCareer;
         let obj = {
           Keywords: data.courseSearchSelectedFilters && data.courseSearchSelectedFilters.selectedKeyword ? data.courseSearchSelectedFilters.selectedKeyword : '',
+          CareerFieldIds: careerFieldIds,
           CareerPathIds: careerPathIds,
           CourseIds: courseIds,
           Subjects: subjects,

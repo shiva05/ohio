@@ -133,10 +133,22 @@
                     </span>
                   </span>
                   <hr>
-                </div>                
-                <span>
+                </div>
+                <div *ngIf="filterCareerFieldData">
+                  <span>
+                    <label
+                      *ngIf="filterCareerFieldData &&  filterCareerFieldData[0].CareerFieldName">{{'CourseFields.CareerField' | translate}}:</label>
+                    <span class="badge badge-light">
+                      <span class="selectedElement">{{filterCareerFieldData[0].CareerFieldName}}</span>
+                      <span class="additionalElements" *ngIf="filterCareerFieldData.length > 1">
+                        +{{filterCareerFieldData.length - 1}} </span>
+                    </span>
+                  </span>
+                </div>
+                <span *ngIf="filterCareerPathData.length > 0">
+                  <hr>
                   <label
-                    *ngIf="filterCareerPathData &&  filterCareerPathData[0].CareerPathName">{{'CourseFields.CareerField' | translate}}:
+                    *ngIf="filterCareerPathData &&  filterCareerPathData[0].CareerPathName">{{'CourseFields.CareerPathway' | translate}}:
                   </label>
                   <span class="badge badge-light"
                     *ngIf="filterCareerPathData &&  filterCareerPathData[0].CareerPathName">
@@ -147,7 +159,7 @@
                   <span class="filter-divider"
                     *ngIf="filterCareerPathCourseData[0] && filterCareerPathCourseData[0].CourseName"> | </span>
                 </span>
-                <span>
+                <span *ngIf="filterCareerPathCourseData.length > 0">
                   <label
                     *ngIf="filterCareerPathCourseData[0] && filterCareerPathCourseData[0].CourseName">{{'CourseFields.Courses' | translate}}:
                   </label>
