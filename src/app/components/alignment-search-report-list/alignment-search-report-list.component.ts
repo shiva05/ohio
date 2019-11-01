@@ -13,22 +13,22 @@ import { ReportService } from '../../services/report.service';
 export class AlignmentSearchReportListComponent implements OnInit {
   academicSubjectColorPallet: any = [
     {
-      SubjectId :1,
+      SubjectId: 1,
       Subject: 'Math',
       Color: '#000000'
     },
     {
-      SubjectId :2,
+      SubjectId: 2,
       Subject: 'ELA',
       Color: '#5E8000'
     },
     {
-      SubjectId :3,
+      SubjectId: 3,
       Subject: 'Science',
       Color: '#BF181A'
     },
     {
-      SubjectId :4,
+      SubjectId: 4,
       Subject: 'Social',
       Color: '#0B5688'
     }
@@ -49,6 +49,10 @@ export class AlignmentSearchReportListComponent implements OnInit {
         this.reportService.getReportData(objTemp).subscribe(
           data => {
             this.reportListhResultData = data;
+            if (this.reportListhResultData.Competencies.length === 0 && this.reportListhResultData.Standards.length === 0) {
+              this.localReportErr = true;
+              this.reportFail.emit();
+            }
             this.reportListhResultData.Competencies.forEach((element) => {
               this.academicSubjectColorPallet.forEach((item) => {
                 if (element.AcademicSubject === item.Subject) {
@@ -62,6 +66,9 @@ export class AlignmentSearchReportListComponent implements OnInit {
             this.localReportErr = true;
             this.reportFail.emit();
           });
+      } else {
+        this.localReportErr = true;
+        this.reportFail.emit();
       }
     });
   }
