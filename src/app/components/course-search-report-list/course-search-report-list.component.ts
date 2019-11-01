@@ -28,6 +28,10 @@ export class CourseSearchReportListComponent implements OnInit {
         this.reportService.getCourseSearchReportData(objTemp).subscribe(
           response => {
             this.reportListhResultData = response;
+            if (this.reportListhResultData.CareerpathToAcademicsubject.length === 0 && this.reportListhResultData.AcademicsubjectToCareerpath.length === 0) {
+              this.localReportErr = true;
+              this.reportFail.emit();
+            }
           },
           err => {
             this.localReportErr = true;
