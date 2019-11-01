@@ -24,9 +24,9 @@
             <div class="form-group col-md-6">
                 <label>{{ 'CourseFields.CareerField' | translate }}</label>
                 <ng-multiselect-dropdown [ngClass]="" [data]="careers" [(ngModel)]="selectedCareer"
-                    [settings]="careerFieldDropdownSettings" (onSelect)="onCareerSelect()"
-                    (onDeSelect)="onCareerSelect()" (onSelectAll)="onCareerSelectAll()"
-                    (onDeSelectAll)="onCareerDeSelectAll()">
+                    [settings]="careerFieldDropdownSettings" (onSelect)="onCareerFieldSelect(selectedCareer)"
+                    (onDeSelect)="onCareerFieldSelect(selectedCareer)" (onSelectAll)="onCareerFieldSelectAll(selectedCareer)"
+                    (onDeSelectAll)="onCareerFieldDeSelectAll(selectedCareer)">
                 </ng-multiselect-dropdown>
             </div>
             <div class="form-group col-md-6">
@@ -39,7 +39,7 @@
             </div>
             <div class="col-md-6">
                 <div class="row">
-                    <div class="form-group col-md-6" *ngIf="selectedCareer.length > 0">
+                    <div class="form-group col-md-6" *ngIf="careerPathDropdown.length > 0">
                         <label>{{ 'CourseFields.CareerPathway' | translate }}</label>
                         <ng-multiselect-dropdown [ngClass]="" [data]="careerPathDropdown" [(ngModel)]="selectedCareerPath"
                             [settings]="careerPathSettings" (onSelect)="onCareerPathSelect(selectedCareerPath)"
@@ -47,7 +47,7 @@
                             (onSelectAll)="onCareerPathSelectAll()" (onDeSelectAll)="onCareerPathDeSelectAll()">
                         </ng-multiselect-dropdown>
                     </div>
-                    <div class="form-group col-md-6" *ngIf="selectedCareerPath.length > 0">
+                    <div class="form-group col-md-6" *ngIf="coursesDropdown.length > 0">
                         <label>{{ 'CourseFields.Courses' | translate }}</label>
                         <ng-multiselect-dropdown [ngClass]="" [data]="coursesDropdown" [(ngModel)]="selectedCourses"
                             [settings]="careerPathCourseSettings">

@@ -110,25 +110,55 @@ export class CourseSearchFiltersComponent implements OnInit {
   onCareerFieldSelect(selectedCareer) {
     const data = selectedCareer;
     this.careerPathDropdown = [];
+    let selectedCareerFieldIds = [];
+    let SelectedCareerPathIds = [];
+    let finalUpdatedSelectListIds: any = [];
 
-    this.careers.forEach(career => {
-      data.forEach(careerPath => {
-        if (career.CareerPathId === careerPath.CareerPathId) {
-          this.careerPathDropdown.push(career);
-        }
-      });
-    });
-  }
-
-  onCareerSelect() {
-    this.careerPathDropdown = [];
     this.careerPath.forEach(careerPath => {
-      this.selectedCareer.forEach(career => {
+      data.forEach(career => {
         if (career.CareerFieldId === careerPath.CareerFieldId) {
           this.careerPathDropdown.push(careerPath);
         }
       });
     });
+
+    this.careerPathDropdown.forEach(career => {
+      SelectedCareerPathIds.push(career.CareerPathId);
+    });
+
+    this.selectedCareerPath.forEach(element => {
+      selectedCareerFieldIds.push(element.CareerPathId);
+    });
+    finalUpdatedSelectListIds = _.intersection(SelectedCareerPathIds, selectedCareerFieldIds);
+
+    if (finalUpdatedSelectListIds.length === 0) {
+      this.selectedCareerPath = [];
+      this.selectedCourses = [];
+      this.coursesDropdown = [];
+    } else {
+      this.selectedCareerPath = [];
+      this.careerPathDropdown.forEach(careerPath => {
+        finalUpdatedSelectListIds.forEach(element => {
+          if (careerPath.CareerPathId === element) {
+            this.selectedCareerPath.push(careerPath);
+          }
+        });
+      });
+    }
+  }
+
+  onCareerFieldSelectAll() {
+    this.careerPathDropdown = [];
+    this.careerPath.forEach(careerPath => {
+      this.careerPathDropdown.push(careerPath);
+    });
+  }
+
+  onCareerFieldDeSelectAll() {
+    this.careerPathDropdown = [];
+    this.selectedCareerPath = [];
+    this.coursesDropdown = [];
+    this.selectedCourses = [];
   }
 
   onCareerPathSelect(selectedPaths) {
