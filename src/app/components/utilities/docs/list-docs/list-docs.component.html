@@ -1,5 +1,5 @@
 <div class="doc-wrapper">
-  <div *ngIf="canDelete()" class="margin-seperator-top table-title">
+  <div *ngIf="!displayDeleteConfirm" class="margin-seperator-top table-title">
     <div class="sub-title-content no-underline doc-list"> Document List</div>
     <button style="margin-bottom:5px;" class="ohio-button x-small doc-delete-placement doc-buttons-margin"
       (click)="confirmDeleteDocs()" *ngIf="docs?.length">
@@ -7,12 +7,7 @@
       &nbsp;
       Delete Document(s)
     </button>
-  </div>
-  <!-- <div *ngIf="alertMsg">
-    <div>
-      <app-alert-message type="{{alertType}}" message="{{alertMsg}}"></app-alert-message>
-    </div>
-  </div> -->
+  </div>  
   <div *ngIf="displayDeleteConfirm">
     <div class="ohio-alert alert alert-warning alert-dismissible delete-doc-message" role="alert">
       Are you sure you would like to delete {{ docDeleteCount }} document(s) from the list?

@@ -82,13 +82,9 @@ export class ListDocsComponent implements OnInit, OnChanges {
       this.displayDeleteConfirm = false;
       this.displayDeleteZero = true;
     }
-
-    // this.alertMsg = '';
   }
 
   hideDeleteDocMessages() {
-    console.log('list-docs.hideDeleteDocMessages()');
-
     this.displayDeleteConfirm = false;
     this.displayDeleteZero = false;
   }
@@ -115,13 +111,13 @@ export class ListDocsComponent implements OnInit, OnChanges {
     return this.showHist[index];
   }
 
-  canDelete() {
-    const docsAllowedToDelete = this.docsList.filter(x => x.permission.delete === true);
-    if (docsAllowedToDelete != null && docsAllowedToDelete.length > 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // canDelete() {
+  //   const docsAllowedToDelete = this.docsList.filter(x => x.permission.delete === true);
+  //   if (docsAllowedToDelete != null && docsAllowedToDelete.length > 0) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 }
 
