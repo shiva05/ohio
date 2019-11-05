@@ -329,14 +329,11 @@ export class CourseSearchAccordionComponent implements OnInit {
     obj.IsChildPartiallySelected = false;
     obj.SubjecToStandards.forEach(element => {
       element.IsChildPartiallySelected = false;
-    })
+    });
   }
 
   // Click event on Grade Checkbox
   gradeCheckBox(career, course) {
-    //career.isSelected = career.SubjecToStandards.every(function (itemChild: any) {
-    //  return itemChild.isSelected === true;
-    //});
     course.IsChildPartiallySelected = false;
     if (course.Standards) {
       if (course.isSelected) {
@@ -354,13 +351,6 @@ export class CourseSearchAccordionComponent implements OnInit {
 
   // Click event on Standard Checkbox
   standardCheckBox(career, course) {
-    //course.isSelected = course.Standards.every(function (itemChild: any) {
-    //  return itemChild.isSelected === true;
-    //});
-
-    //career.isSelected = career.SubjecToStandards.every(function (itemChild: any) {
-    //  return itemChild.isSelected === true;
-    //});
     let courseStatus: any = [];
 
     course.Standards.forEach(strand => {
@@ -416,6 +406,7 @@ export class CourseSearchAccordionComponent implements OnInit {
 
   getCourseSearchReport(obj) {
     this.courseSearchReportPayload.Keywords = '';
+    this.courseSearchReportPayload.CareerFieldIds = [];
     this.courseSearchReportPayload.CareerPathIds = [];
     this.courseSearchReportPayload.CourseIds = [];
     this.courseSearchReportPayload.Subjects = [];
@@ -429,6 +420,7 @@ export class CourseSearchAccordionComponent implements OnInit {
         this.careerPathToSubjectData.forEach(careerPath => {
           if (careerPath.isSelected === true || careerPath.IsChildPartiallySelected === true) {
             this.courseSearchReportPayload.CareerPathIds.push(careerPath.CareerPathId);
+            this.courseSearchReportPayload.CareerFieldIds.push(careerPath.CareerFieldId);
             this.courseSearchReportPayload.Subjects.push({ SubjectId: careerPath.SubjectId });
           }
 
@@ -468,7 +460,7 @@ export class CourseSearchAccordionComponent implements OnInit {
 
           if (subject.isSelected === true || subject.IsChildPartiallySelected === true) {
             this.courseSearchReportPayload.CareerPathIds.push(subject.CareerPathId);
-
+            this.courseSearchReportPayload.CareerFieldIds.push(subject.CareerFieldId);
             this.courseSearchReportPayload.Subjects.push({
               SubjectId: subject.SubjectId,
               Level1Ids: this.Level1Ids,
@@ -482,9 +474,6 @@ export class CourseSearchAccordionComponent implements OnInit {
           this.generateReports();
         }
       }
-      //this.rout.navigate(['/CourseSearchReport']);
-      //this.courseSearchSelectedFilters['selectedCourseSearchResults'] = this.courseSearchReportPayload;
-      //this.store.dispatch({ type: CourseSearchActions.SAVE_CS_SELECTED_FILTERS, payload: this.courseSearchSelectedFilters });
     } else {
       if (this.careerPathToSubject) {
         this.isASVisible = false;
@@ -501,16 +490,17 @@ export class CourseSearchAccordionComponent implements OnInit {
   checkForConformation() {
     this.conformationPopup = true;
   }
+
   cancelReports() {
     this.conformationPopup = false;
   }
+
   generateReports() {
     this.rout.navigate(['/CourseSearchReport']);
     this.courseSearchSelectedFilters['selectedCourseSearchResults'] = this.courseSearchReportPayload;
     this.store.dispatch({ type: CourseSearchActions.SAVE_CS_SELECTED_FILTERS, payload: this.courseSearchSelectedFilters });
     this.conformationPopup = false;
   }
-
 
   isSelectedValidate() {
     this.isSelectedValidation = true;
