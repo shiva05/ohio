@@ -9,7 +9,7 @@ import { DocsService } from '../../services/docs.service';
 import * as UtilsActions from '../../actions/utils-actions';
 import { take } from 'rxjs/internal/operators/take';
 import { browserRefresh } from '../../app.component';
-
+import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 
 @Component({
   selector: 'app-alignment-search-report',
@@ -27,6 +27,7 @@ export class AlignmentSearchReportComponent implements OnInit {
   isPublic: boolean = false;
   context: UtilsContext;
   public browserRefresh: boolean;
+  alignmentSearchSelectedFilters: {};
 
   constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router, private docsService: DocsService, ) { }
 
@@ -37,13 +38,17 @@ export class AlignmentSearchReportComponent implements OnInit {
       event.preventDefault();
       event.returnValue = '';
     });
-    if(this.browserRefresh == true){
-        this.rout.navigate(['']);
-    };
+    if (this.browserRefresh === true) {
+      this.rout.navigate(['']);
+    }
     this.store.select('authState').subscribe((authState) => {
       if (authState != null) {
         this.isPublic = authState.isPublic;
       }
+    });
+
+    this.store.select('advancedSearch').pipe(take(1)).subscribe(data => {
+      this.alignmentSearchSelectedFilters = data.alignmentSearchSelectedFilters;
     });
   }
 
@@ -52,6 +57,8 @@ export class AlignmentSearchReportComponent implements OnInit {
   }
 
   clearAlignmentSearch() {
+    delete this.alignmentSearchSelectedFilters['selectedAsSearchResults'];
+    this.store.dispatch({ type: AdvancedSearchActions.SAVE_AS_SELECTED_FILTERS, payload: this.alignmentSearchSelectedFilters });
     this.rout.navigate(['/AlignmentSearchResults']);
   }
 

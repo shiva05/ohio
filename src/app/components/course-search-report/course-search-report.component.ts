@@ -10,7 +10,7 @@ import { DocsService } from '../../services/docs.service';
 import * as UtilsActions from '../../actions/utils-actions';
 import { take } from 'rxjs/internal/operators/take';
 import { browserRefresh } from '../../app.component';
-
+import * as CourseSearchActions from './../../actions/course-search.actions';
 
 @Component({
   selector: 'app-course-search-report',
@@ -27,6 +27,7 @@ export class CourseSearchReportComponent implements OnInit {
   isPublic: boolean = false;
   context: UtilsContext;
   public browserRefresh: boolean;
+  courseSearchSelectedFilters: {};
 
   constructor(private downloadPDFService: DownloadPDFService, private store: Store<AppState>, public datepipe: DatePipe, private rout: Router, private docsService: DocsService) { }
 
@@ -37,13 +38,17 @@ export class CourseSearchReportComponent implements OnInit {
       event.preventDefault();
       event.returnValue = '';
     });
-    if(this.browserRefresh == true){
-        this.rout.navigate(['']);
-    };
+    if (this.browserRefresh === true) {
+      this.rout.navigate(['']);
+    }
     this.store.select('authState').subscribe((authState) => {
       if (authState != null) {
         this.isPublic = authState.isPublic;
       }
+    });
+
+    this.store.select('courseSearch').pipe(take(1)).subscribe(data => {
+      this.courseSearchSelectedFilters = data.courseSearchSelectedFilters;
     });
   }
 
@@ -96,6 +101,8 @@ export class CourseSearchReportComponent implements OnInit {
   }
 
   clearCourseSearch() {
+    delete this.courseSearchSelectedFilters['selectedCourseSearchResults'];
+    this.store.dispatch({ type: CourseSearchActions.SAVE_CS_SELECTED_FILTERS, payload: this.courseSearchSelectedFilters });
     this.rout.navigate(['/CourseSearchResults']);
   }
 
