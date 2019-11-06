@@ -67,7 +67,7 @@ export class AlignmentSearchReportComponent implements OnInit {
   }
 
   public downloadPDF(): void {
-    this.store.select('advancedSearch').subscribe(data => {
+    this.store.select('advancedSearch').pipe(take(1)).subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
         let objTemp = data.alignmentSearchSelectedFilters.selectedAsSearchResults;
         this.downloadPDFService.getPDF(objTemp)
@@ -107,7 +107,7 @@ export class AlignmentSearchReportComponent implements OnInit {
   }
 
   public saveToProfile(fileName): void {
-    this.store.select('advancedSearch').subscribe(data => {
+    this.store.select('advancedSearch').pipe(take(1)).subscribe(data => {
       if (data.alignmentSearchSelectedFilters) {
         let objTemp = data.alignmentSearchSelectedFilters.selectedAsSearchResults;
         this.downloadPDFService.asSaveToProfile(objTemp, fileName)

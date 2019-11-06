@@ -61,7 +61,7 @@ export class CourseSearchReportComponent implements OnInit {
   }
 
   public downloadPDF(): void {
-    this.store.select('courseSearch').subscribe(data => {
+    this.store.select('courseSearch').pipe(take(1)).subscribe(data => {
       if (data.courseSearchSelectedFilters) {
         const objTemp = data.courseSearchSelectedFilters.selectedCourseSearchResults;
         this.downloadPDFService.getCoursePDF(objTemp)
@@ -107,7 +107,7 @@ export class CourseSearchReportComponent implements OnInit {
   }
 
   public saveToProfile(fileName: any): void {
-    this.store.select('courseSearch').subscribe(data => {
+    this.store.select('courseSearch').pipe(take(1)).subscribe(data => {
       if (data.courseSearchSelectedFilters) {
         const objTemp = data.courseSearchSelectedFilters.selectedCourseSearchResults;
         this.downloadPDFService.csSaveToProfile(objTemp, fileName)
