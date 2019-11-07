@@ -1,10 +1,10 @@
 <nav id="ohio-main-nav" class="" role="tablist" aria-multiselectable="false" style="margin-bottom:15px;">
-    <div class="ohio-main-nav-panel panel dropdown" style="position:absolute;">
+    <div class="ohio-main-nav-panel panel dropdown" style="position:absolute;" *ngIf="!isPublic">
         <a class="ohio-main-nav-link" (click)="openUtils()">
             <i class="fa fa-bars"></i>
         </a>
     </div>
-    <div class="ohio-main-nav-container">
+    <div class="" [ngClass]="isPublic ? '' : 'ohio-main-nav-container'" >
         <div class="ohio-main-nav-panel panel dropdown" *ngFor="let navItem of links; let i = index;"
             (mouseenter)="showSub(i,true)" (mouseleave)="showSub(i,false)"
             [ngClass]="{'active': navItem.selected, 'open': navItem.subHidden}">
