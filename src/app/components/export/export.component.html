@@ -1,36 +1,120 @@
 <div class="home main row container">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <h1>SBD Data Import</h1>
 
         <p id="demo"></p>
 
         <!-- export Dropdown -->
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-12" hidden>
             <label>{{'Import.Import' | translate}}</label>
             <ng-multiselect-dropdown [ngClass]="" [settings]="dropdownSettings">
             </ng-multiselect-dropdown>
         </div>
 
         <!-- export input -->
-        <div class="col-md-12">
-            <label class="ohio-upload-single input-group" for="excel-upload">
-                <input [(ngModel)]="uploadedFile" type="file" class="ohio-upload-single-file" id="excel-upload"
-                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-                <span class="ohio-upload-single-label form-control">{{'Import.ChooseFile' | translate}}</span>
+        <div class="col-sm-12 fileuploads">
+          <div class="item">
+            <div class="category">English Language Arts</div>
+            <div class="upload">
+              <label class="ohio-upload-single input-group" [ngClass]="{'error': ELA_uploadedFileName === 'Choose File' && fileMissing}">
+                <input type="file"  class="ohio-upload-single-file" id="excel-upload" (change)="getFileUploaded($event, 1184)"
+                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" placeholder="Choose File">
+                <span class="ohio-upload-single-label form-control">{{ELA_uploadedFileName}}</span>
                 <span class="input-group-btn">
-                    <span class="ohio-upload-single-btn btn" type="button" for="excel-upload">
-                        <i class="fa fa-paperclip" aria-hidden="true"></i>
-                    </span>
+                  <span class="ohio-upload-single-btn btn" type="button">
+                    <i class="fa fa-paperclip" aria-hidden="true"></i>
+                  </span>
                 </span>
-            </label>
+              </label>
+            </div>
+          </div>
+          <div class="item">
+            <div class="category">Math</div>
+            <div class="upload">
+              <label class="ohio-upload-single input-group" [ngClass]="{'error': Math_uploadedFileName === 'Choose File' && fileMissing}">
+                <input type="file" class="ohio-upload-single-file" (change)="getFileUploaded($event, 1185)"
+                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                <span class="ohio-upload-single-label form-control">{{Math_uploadedFileName}}</span>
+                <span class="input-group-btn">
+                  <span class="ohio-upload-single-btn btn" type="button">
+                    <i class="fa fa-paperclip" aria-hidden="true"></i>
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="item">
+            <div class="category">Science</div>
+            <div class="upload">
+              <label class="ohio-upload-single input-group" [ngClass]="{'error': Science_uploadedFileName === 'Choose File' && fileMissing}">
+                <input  type="file" class="ohio-upload-single-file" (change)="getFileUploaded($event, 1186)"
+                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                <span class="ohio-upload-single-label form-control">{{Science_uploadedFileName}}</span>
+                <span class="input-group-btn">
+                  <span class="ohio-upload-single-btn btn" type="button">
+                    <i class="fa fa-paperclip" aria-hidden="true"></i>
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="item">
+            <div class="category">Social Studies</div>
+            <div class="upload">
+              <label class="ohio-upload-single input-group" [ngClass]="{'error': Social_uploadedFileName === 'Choose File' && fileMissing}">
+                <input  type="file" class="ohio-upload-single-file" (change)="getFileUploaded($event, 1187)"
+                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                <span class="ohio-upload-single-label form-control">{{Social_uploadedFileName}}</span>
+                <span class="input-group-btn">
+                  <span class="ohio-upload-single-btn btn" type="button">
+                    <i class="fa fa-paperclip" aria-hidden="true"></i>
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="item">
+            <div class="category">Course Content</div>
+            <div class="upload">
+              <label class="ohio-upload-single input-group" [ngClass]="{'error': Course_uploadedFileName === 'Choose File' && fileMissing}">
+                <input type="file" class="ohio-upload-single-file" (change)="getFileUploaded($event, 1188)"
+                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                <span class="ohio-upload-single-label form-control">{{Course_uploadedFileName}}</span>
+                <span class="input-group-btn">
+                  <span class="ohio-upload-single-btn btn" type="button">
+                    <i class="fa fa-paperclip" aria-hidden="true"></i>
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="item">
+            <div class="category">General Information</div>
+            <div class="upload">
+              <label class="ohio-upload-single input-group" [ngClass]="{'error': General_uploadedFileName === 'Choose File' && fileMissing}">
+                <input type="file" class="ohio-upload-single-file" (change)="getFileUploaded($event, 1189)"
+                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                <span class="ohio-upload-single-label form-control">{{General_uploadedFileName}}</span>
+                <span class="input-group-btn">
+                  <span class="ohio-upload-single-btn btn" type="button">
+                    <i class="fa fa-paperclip" aria-hidden="true"></i>
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+
+
+
         </div>
 
         <!-- Button Row -->
         <div class="col-md-12">
-            <div class="pull-right import-btn">
-                <button type="button" class="ohio-button large but-gap">{{'Import.Import' | translate}}</button>
+            <div class="import-btn">
+                <button type="button" class="ohio-button large but-gap" (click)="submitUploadedFiles()">{{'Import.Import' | translate}}</button>
                 <button type="button"
-                    class="ohio-button large but-gap secondary">{{'Import.Clear' | translate}}</button>
+                    class="ohio-button large but-gap secondary" (click)="clearSelectedFiles()">{{'Import.Clear' | translate}}</button>
             </div>
         </div>
     </div>
