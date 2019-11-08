@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { _ } from 'underscore';
 import { UploadFileService } from '../../services/upload-file.service';
+import { Store } from '@ngrx/store';
+import { take } from 'rxjs/internal/operators/take';
+import { AppState } from './../../app.state';
 
 @Component({
   selector: 'app-export',
@@ -23,9 +26,11 @@ export class ExportComponent implements OnInit {
   Science_uploadedFileName: any = 'Choose File';
   Course_uploadedFileName: any = 'Choose File';
   General_uploadedFileName: any = 'Choose File';
+  utilsContext: any;
+
 
   fileList: any = [];
-  constructor(public uploadFileService: UploadFileService) { }
+  constructor(public uploadFileService: UploadFileService, private store: Store<AppState>) { }
 
   @Output() onPageSelect = new EventEmitter<any>();
 
@@ -39,6 +44,9 @@ export class ExportComponent implements OnInit {
     //  itemsShowLimit: 1,
     //  allowSearchFilter: true
     //};
+    this.store.select('utilsState').subscribe((utilityState) => {
+      this.utilsContext = utilityState.utilityContext;
+    });
   }
 
   getFileUploaded(event, id) {
@@ -90,7 +98,7 @@ export class ExportComponent implements OnInit {
   submitUploadedFiles() {
     this.fileMissing = true;
     if (this.fileList.length == 6) {
-      this.uploadFileService.SubmitFiles(this.fileList).subscribe(res => {
+      this.uploadFileService.SubmitFiles(this.fileList, this.utilsContext).subscribe(res => {
         console.log('success');
       });
     }
