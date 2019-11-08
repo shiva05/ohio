@@ -6,6 +6,7 @@ import { SharedService } from '../../services/shared.service';
 import * as AdvancedSearchActions from './../../actions/advanced-search.actions';
 import { CookieService } from 'ngx-cookie-service';
 import { browserRefresh } from '../../app.component';
+import { take } from 'rxjs/internal/operators/take';
 
 @Component({
     selector: 'filter-summary',
@@ -14,9 +15,9 @@ import { browserRefresh } from '../../app.component';
 })
 
 export class FilterSummaryComponent implements OnInit {
-    //refresh start
+    // refresh start
     public browserRefresh: boolean;
-    //refresh end
+    // refresh end
     @Input() FilterSummary;
     FilterSummaryKeys: any;
     panelExpanded: boolean = false;
@@ -50,9 +51,11 @@ export class FilterSummaryComponent implements OnInit {
             event.preventDefault();
             event.returnValue = '';
         });
-        if (this.browserRefresh == true) {
+
+        if (this.browserRefresh === true) {
             this.rout.navigate(['']);
-        };
+        }
+
         if (this.cookieService.get('Test')) {
             this.cookieValue = this.cookieService.get('Test');
             let quickSearchData = JSON.parse(this.cookieValue);
@@ -96,103 +99,106 @@ export class FilterSummaryComponent implements OnInit {
                 this.cookieService.delete('Test');
             }
         }
-        this.store.select('advancedSearch').subscribe(data => {
-            if (data.alignmentSearchSelectedFilters) {
-                let keyWords = '';
-                let careerfields: any = [];
-                let strands: any = [];
-                let outcomes: any = [];
-                let CompetencyIds: any = [];
-                let subjects: any = [];
-                if (data.alignmentSearchSelectedFilters.selectedKeyword) {
-                    keyWords = data.alignmentSearchSelectedFilters.selectedKeyword;
-                }
-                if (data.alignmentSearchSelectedFilters.selectedCareers) {
-                    data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
-                        careerfields.push(element.CareerFieldName);
-                    });
-                }
-                if (data.alignmentSearchSelectedFilters.selectedStrand) {
-                    data.alignmentSearchSelectedFilters.selectedStrands.forEach(element => {
-                        strands.push(element.StrandName);
-                    });
-                }
-                if (data.alignmentSearchSelectedFilters.selectedOutcomes) {
-                    data.alignmentSearchSelectedFilters.selectedOutcomes.forEach(element => {
-                        outcomes.push(element.OutcomeName);
-                    });
-                }
-                if (data.alignmentSearchSelectedFilters.selectedCompetencies) {
-                    data.alignmentSearchSelectedFilters.selectedCompetencies.forEach(element => {
-                        CompetencyIds.push(element.CompetencyName);
-                    });
-                }
-                if (data.alignmentSearchSelectedFilters.selectedAcadamicSubjects) {
-                    data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
-                        let level1: any = [];
-                        let level1Name = element.Level[0].LevelName;
-                        if (element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length > 0) {
-                            element.Level[0].SelectedItems.forEach(element => {
-                                level1.push(element.LevelValue1);
-                            });
-                        }
 
-                        let level2: any = [];
-                        let level2Name = element.Level[1].LevelName;
-                        if (element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length > 0) {
-                            element.Level[1].SelectedItems.forEach(element => {
-                                level2.push(element.LevelValue1);
+        if (this.searchLable !== null) {
+            if (this.searchLable === 'SearchAlignment') {
+                this.store.select('advancedSearch').pipe(take(1)).subscribe(data => {
+                    if (data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.length !== 0 || data.alignmentSearchSelectedFilters.selectedCareers.length !== 0) {
+                        this.alignmentSearchResults = true;
+                        this.courseSearchResults = false;
+                        let keyWords = '';
+                        let careerfields: any = [];
+                        let strands: any = [];
+                        let outcomes: any = [];
+                        let CompetencyIds: any = [];
+                        let subjects: any = [];
+                        if (data.alignmentSearchSelectedFilters.selectedKeyword) {
+                            keyWords = data.alignmentSearchSelectedFilters.selectedKeyword;
+                        }
+                        if (data.alignmentSearchSelectedFilters.selectedCareers) {
+                            data.alignmentSearchSelectedFilters.selectedCareers.forEach(element => {
+                                careerfields.push(element.CareerFieldName);
                             });
                         }
-                        let level3: any = [];
-                        let level3Name = element.Level[2].LevelName;
-                        if (element.Level[2] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length > 0) {
-                            element.Level[2].SelectedItems.forEach(element => {
-                                level3.push(element.LevelValue1);
+                        if (data.alignmentSearchSelectedFilters.selectedStrand) {
+                            data.alignmentSearchSelectedFilters.selectedStrands.forEach(element => {
+                                strands.push(element.StrandName);
                             });
                         }
-                        let subject = {
-                            SubjectId: element.SubjectId,
-                            SubjectName: element.SubjectName,
-                            Level1Ids: level1,
-                            level1Name,
-                            Level2Ids: level2,
-                            level2Name,
-                            Level3Ids: level3,
-                            level3Name
+                        if (data.alignmentSearchSelectedFilters.selectedOutcomes) {
+                            data.alignmentSearchSelectedFilters.selectedOutcomes.forEach(element => {
+                                outcomes.push(element.OutcomeName);
+                            });
+                        }
+                        if (data.alignmentSearchSelectedFilters.selectedCompetencies) {
+                            data.alignmentSearchSelectedFilters.selectedCompetencies.forEach(element => {
+                                CompetencyIds.push(element.CompetencyName);
+                            });
+                        }
+                        if (data.alignmentSearchSelectedFilters.selectedAcadamicSubjects) {
+                            data.alignmentSearchSelectedFilters.selectedAcadamicSubjects.forEach(element => {
+                                let level1: any = [];
+                                let level1Name = element.Level[0].LevelName;
+                                if (element.Level[0] && element.Level[0].SelectedItems && element.Level[0].SelectedItems.length > 0) {
+                                    element.Level[0].SelectedItems.forEach(element => {
+                                        level1.push(element.LevelValue1);
+                                    });
+                                }
+
+                                let level2: any = [];
+                                let level2Name = element.Level[1].LevelName;
+                                if (element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length > 0) {
+                                    element.Level[1].SelectedItems.forEach(element => {
+                                        level2.push(element.LevelValue1);
+                                    });
+                                }
+                                let level3: any = [];
+                                let level3Name = element.Level[2].LevelName;
+                                if (element.Level[2] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length > 0) {
+                                    element.Level[2].SelectedItems.forEach(element => {
+                                        level3.push(element.LevelValue1);
+                                    });
+                                }
+                                let subject = {
+                                    SubjectId: element.SubjectId,
+                                    SubjectName: element.SubjectName,
+                                    Level1Ids: level1,
+                                    level1Name,
+                                    Level2Ids: level2,
+                                    level2Name,
+                                    Level3Ids: level3,
+                                    level3Name
+                                };
+                                subjects.push(subject);
+                            });
+                        }
+                        let obj = {
+                            Keywords: keyWords,
+                            CareerFieldIds: careerfields,
+                            StrandIds: strands,
+                            OutcomeIds: outcomes,
+                            CompetencyIds,
+                            Subjects: subjects,
+                            CteToAcademic: true
                         };
-                        subjects.push(subject);
-                    });
-                }
-                let obj = {
-                    Keywords: keyWords,
-                    CareerFieldIds: careerfields,
-                    StrandIds: strands,
-                    OutcomeIds: outcomes,
-                    CompetencyIds,
-                    Subjects: subjects,
-                    CteToAcademic: true
-                };
-                this.FilterSummaryKeys = obj;
-
+                        this.FilterSummaryKeys = obj;
+                    } else {
+                        this.rout.navigate(['']);
+                    }
+                });
+            } else {
+                this.store.select('courseSearch').pipe(take(1)).subscribe(data => {
+                    if (data.courseSearchSelectedFilters.selectedAcademicSubject.length !== 0 || data.courseSearchSelectedFilters.selectedCareers.length !== 0) {
+                        this.formatSearchCourseData(data.courseSearchSelectedFilters);
+                        this.alignmentSearchResults = false;
+                        this.courseSearchResults = true;
+                    } else {
+                        this.rout.navigate(['']);
+                    }
+                });
             }
-        });
-
-        if (this.searchLable === 'SearchAlignment') {
-            this.store.select('advancedSearch').subscribe(data => {
-                if (data.alignmentSearchSelectedFilters) {
-                    this.alignmentSearchResults = true;
-                    this.courseSearchResults = false;
-                }
-            });
         } else {
-            this.store.select('courseSearch').subscribe(data => {
-                if (data.courseSearchSelectedFilters.selectedAcademicSubject.length != 0 || data.courseSearchSelectedFilters.selectedAcademicSubjectCourses.length != 0 || data.courseSearchSelectedFilters.selectedCareerPath.length != 0 || data.courseSearchSelectedFilters.selectedCareerPathCourses.length != 0) {
-                    this.formatSearchCourseData(data.courseSearchSelectedFilters);
-                    this.alignmentSearchResults = false;
-                    this.courseSearchResults = true;
-                }
-            });
+            this.rout.navigate(['']);
         }
     }
 

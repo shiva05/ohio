@@ -49,6 +49,11 @@ export class AlignmentSearchReportComponent implements OnInit {
 
     this.store.select('advancedSearch').pipe(take(1)).subscribe(data => {
       this.alignmentSearchSelectedFilters = data.alignmentSearchSelectedFilters;
+      let validateLength = Object.keys(data.alignmentSearchSelectedFilters.selectedAsSearchResults).length === 0;
+
+      if (validateLength) {
+        this.rout.navigate(['/alignmentsearch']);
+      }
     });
   }
 
