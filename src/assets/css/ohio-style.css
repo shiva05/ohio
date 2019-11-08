@@ -13778,12 +13778,19 @@ a.ohio-carousel-icons-icons-item__container:focus,
   z-index: -1; }
 
 .ohio-upload-single-file {
-  width: 0.1px;
-  height: 0.1px;
+  /* width: 0.1px; */
+  /* height: 0.1px; */
   opacity: 0;
-  overflow: hidden;
+  /* overflow: hidden; */
   position: absolute;
-  z-index: -1; }
+  z-index: 3;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: #000;
+  cursor: pointer;
+}
 
 .ohio-upload-single-btn {
   background-color: #700017;
