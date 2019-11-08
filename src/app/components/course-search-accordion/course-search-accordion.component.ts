@@ -185,6 +185,8 @@ export class CourseSearchAccordionComponent implements OnInit {
               this.totalSearchResults += element.AlignmentCount;
             });
           });
+      } else {
+        this.rout.navigate(['/coursesearch']);
       }
     });
   }

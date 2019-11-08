@@ -221,22 +221,22 @@ export class AlignmentSearchAccordionComponent implements OnInit {
                 this.subjectToCareerData[0]['isSelected'] = false;
                 if (this.subjectToCareerData[0].Level.length > 0) {
                   this.subjectToCareerData[0].Level.forEach(element => {
-                  element['IsChildPartiallySelected'] = false;
-                  element['isSelected'] = false;
-                  if (element['ChildLevel'].length > 0) {
-                    element['ChildLevel'].forEach(child1 => {
-                      child1['IsChildPartiallySelected'] = false;
-                      child1['isSelected'] = false;
-                      if (child1['ChildLevel'].length > 0) {
-                        child1['ChildLevel'].forEach(child2 => {
-                          child2['isSelected'] = false;
-                        });
-                      }
-                    })
-                  }
-                });
-              }
-              //  console.log(this.subjectToCareerData);
+                    element['IsChildPartiallySelected'] = false;
+                    element['isSelected'] = false;
+                    if (element['ChildLevel'].length > 0) {
+                      element['ChildLevel'].forEach(child1 => {
+                        child1['IsChildPartiallySelected'] = false;
+                        child1['isSelected'] = false;
+                        if (child1['ChildLevel'].length > 0) {
+                          child1['ChildLevel'].forEach(child2 => {
+                            child2['isSelected'] = false;
+                          });
+                        }
+                      })
+                    }
+                  });
+                }
+                //  console.log(this.subjectToCareerData);
                 this.noResultFound = false;
                 this.formatAlignmentSearchData();
                 if (this.searchResultData.Subject.length === 1) {
@@ -564,7 +564,7 @@ export class AlignmentSearchAccordionComponent implements OnInit {
 
   // Click event on Child Level 1 Checkbox
   childLevel1CheckBox(career, strands, outcome) {
-   // outcome.isSelected = !outcome.isSelected;
+    // outcome.isSelected = !outcome.isSelected;
     // tslint:disable-next-line:only-arrow-functions
     //strands.isSelected = strands.ChildLevel.every(function (itemChild: any) {
     //  return itemChild.isSelected === true;
@@ -631,7 +631,7 @@ export class AlignmentSearchAccordionComponent implements OnInit {
     //  return itemChild.isSelected === true;
     //});
     this.trackCheckboxStatus(careerField, strand, outcome);
-  
+
   }
   trackCheckboxStatus(parent, child, subchild) {
     let subchildStatus: any = [];
@@ -639,7 +639,7 @@ export class AlignmentSearchAccordionComponent implements OnInit {
     subchild.ChildLevel.forEach(element => {
       subchildStatus.push(element.isSelected);
     });
-   
+
     subchildStatus = _.uniq(subchildStatus);
     if (subchildStatus.length > 1) {
       subchild.IsChildPartiallySelected = true;
@@ -669,7 +669,7 @@ export class AlignmentSearchAccordionComponent implements OnInit {
         child.isSelected = false;
       }
     }
-   
+
     this.setParentLevelStatus(parent, child);
   }
   setParentLevelStatus(level1, level2) {
@@ -733,7 +733,7 @@ export class AlignmentSearchAccordionComponent implements OnInit {
           if (partialCheckStatusOdChild[0] === true) {
             level1.isSelected = false;
             level1.IsChildPartiallySelected = true;
-          } else if (partialCheckStatusOdChild[0] === false){
+          } else if (partialCheckStatusOdChild[0] === false) {
             level1.isSelected = false;
             level1.IsChildPartiallySelected = false;
           }
@@ -791,7 +791,7 @@ export class AlignmentSearchAccordionComponent implements OnInit {
           if (careerField.isSelected === true || careerField.IsChildPartiallySelected === true) {
             this.reportPayload.Subjects.push({ SubjectId: careerField.AcademicSubjectId });
             this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
-          }          
+          }
           careerField.Strand.forEach(stand => {
             if (stand.isSelected === true || stand.IsChildPartiallySelected === true) {
               this.reportPayload.StrandIds.push(stand.StrandPk);
@@ -819,19 +819,19 @@ export class AlignmentSearchAccordionComponent implements OnInit {
             this.reportPayload.CareerFiledIds.push(careerField.CareerFieldId);
           }
 
-         
+
           careerField.Level.forEach(level => {
             if (level.isSelected === true || level.IsChildPartiallySelected === true) {
               this.Level1Ids.push(level.LevelValue1);
             }
 
-           
+
             level.ChildLevel.forEach(childLevel1 => {
               if (childLevel1.isSelected === true || childLevel1.IsChildPartiallySelected === true) {
                 this.Level2Ids.push(childLevel1.LevelValue2);
               }
 
-             
+
               childLevel1.ChildLevel.forEach(childLevel2 => {
                 if (childLevel2.isSelected) {
                   this.Level3Ids.push(childLevel2.LevelValue3);
@@ -853,8 +853,8 @@ export class AlignmentSearchAccordionComponent implements OnInit {
           this.generateReports();
         }
       }
-     
-     
+
+
     } else {
       if (this.cteToAcademic) {
         this.isASVisible = false;

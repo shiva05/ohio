@@ -4,12 +4,12 @@
             <i class="fa fa-bars"></i>
         </a>
     </div>
-    <div class="" [ngClass]="isPublic ? '' : 'ohio-main-nav-container'" >
+    <div class="" [ngClass]="isPublic ? '' : 'ohio-main-nav-container'">
         <div class="ohio-main-nav-panel panel dropdown" *ngFor="let navItem of links; let i = index;"
             (mouseenter)="showSub(i,true)" (mouseleave)="showSub(i,false)"
             [ngClass]="{'active': navItem.selected, 'open': navItem.subHidden}">
-            <a href="javascript:void(0)" class="ohio-main-nav-link" routerLinkActive="active"
-                (click)="navigate(navItem.originalUrl, navItem.label, navItem.children.length > 0 ? true: false)">{{navItem.label}}
+            <a href="javascript:void(0)" class="ohio-main-nav-link" routerLinkActive="active">{{navItem.label}}
+                <!-- (click)="navigate(navItem.originalUrl, navItem.label, navItem.children.length > 0 ? true: false)" -->
                 <i *ngIf="navItem.children.length>0" class="ohio-accordion-caret fa fa-chevron-down"
                     aria-hidden="true"></i>
             </a>

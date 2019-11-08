@@ -38,6 +38,7 @@ export class CourseSearchReportComponent implements OnInit {
       event.preventDefault();
       event.returnValue = '';
     });
+
     if (this.browserRefresh === true) {
       this.rout.navigate(['']);
     }
@@ -49,6 +50,11 @@ export class CourseSearchReportComponent implements OnInit {
 
     this.store.select('courseSearch').pipe(take(1)).subscribe(data => {
       this.courseSearchSelectedFilters = data.courseSearchSelectedFilters;
+      // let validateLength = Object.keys(data.courseSearchSelectedFilters.selectedCourseSearchResults).length === 0;
+
+      if (!data.courseSearchSelectedFilters.selectedCourseSearchResults) {
+        this.rout.navigate(['/alignmentsearch']);
+      }
     });
   }
 
