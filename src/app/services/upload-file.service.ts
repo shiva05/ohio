@@ -19,6 +19,6 @@ export class UploadFileService {
     formData.append(data[3].id, data[3], data[3].name);
     formData.append(data[4].id, data[4], data[4].name);
     formData.append(data[5].id, data[5], data[5].name);
-    return this.http.post(environment.uploadFiles + '?moduleKey=32&assetTemplateKey=242710&detailKey=1',formData ,);
+    return this.http.post(environment.UPLOADFILES + '?moduleKey=32&assetTemplateKey=242710&detailKey=1',formData ,);
   }
 }

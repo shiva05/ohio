@@ -47,6 +47,6 @@ export const api = function(serverUrl) {
     COMMENT_SUBJECTS: serverUrl + 'Comment/subjects',
     COMMENT_SUBJECTS_COUNT: serverUrl + 'Comment/subjects/count',
     COMMENT_COMMENTS: serverUrl + 'Comment/subjects/{subjectKey}/comments',
-    uploadFiles: `${serverUrl}Document/documents/uploadDataFeedFile`,
+    UPLOADFILES: `${serverUrl}Document/documents/uploadDataFeedFile`,
     };
 };

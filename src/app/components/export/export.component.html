@@ -1,3 +1,12 @@
+<div class="alert alert-warning" [class.visible]="isVisible">
+  {{statusMessage}}
+</div>
+<div class="alert alert-success" [class.visible]="success">
+  {{statusMessage}}
+</div>
+<div class="alert alert-danger">
+  {{statusMessage}}
+</div>
 <div class="home main row container">
     <div class="col-md-12">
         <h1>SBD Data Import</h1>
@@ -102,15 +111,15 @@
                 </span>
               </label>
             </div>
-          </div> -->
+          </div> 
         </div>
 
         <!-- Button Row -->
         <div class="col-md-12">
             <div class="import-btn">
-                <button type="button" class="ohio-button large but-gap" (click)="submitUploadedFiles()">{{'Import.Import' | translate}}</button>
+                <button type="button" class="ohio-button large but-gap" (click)="submitUploadedFiles()" [disabled]="importDataRequested">{{'Import.Import' | translate}}</button>
                 <button type="button"
-                    class="ohio-button large but-gap secondary" (click)="clearSelectedFiles()">{{'Import.Clear' | translate}}</button>
+                    class="ohio-button large but-gap secondary" (click)="clearSelectedFiles()" [disabled]="importDataRequested">{{'Import.Clear' | translate}}</button>
             </div>
         </div>
     </div>

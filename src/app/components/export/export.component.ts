@@ -4,6 +4,7 @@ import { UploadFileService } from '../../services/upload-file.service';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs/internal/operators/take';
 import { AppState } from './../../app.state';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-export',
@@ -33,10 +34,17 @@ export class ExportComponent implements OnInit {
   Course_uploadedFileName: any = 'Choose File';
   General_uploadedFileName: any = 'Choose File';
   utilsContext: any;
-
-
+  importDataRequested = false;
+  isVisible = false;
+  subscription: Subscription;
+  importStatus : any = ['please wait', 'we are processign the import', 'please wait for some more time', 'Please wait for some more time, Thank you for your patience.']
+  importStatusMessageCount = 0;
   fileList: any = [];
-  constructor(public uploadFileService: UploadFileService, private store: Store<AppState>) { }
+  statusMessage: string;
+  success: boolean;
+  error: boolean;
+  constructor(public uploadFileService: UploadFileService, private store: Store<AppState>) {
+  }
 
   @Output() onPageSelect = new EventEmitter<any>();
 
@@ -53,8 +61,30 @@ export class ExportComponent implements OnInit {
     this.store.select('utilsState').subscribe((utilityState) => {
       this.utilsContext = utilityState.utilityContext;
     });
+    
+  }
+  showAlert(): void {
+    if (this.isVisible) {
+      return;
+    }
+    this.isVisible = true;
+    setTimeout(() => this.isVisible = false, 4000);
+  }
+  showSuccessAlert(): void {
+    if (this.success) {
+      return;
+    }
+    this.success = true;
+    setTimeout(() => this.success = false, 4000);
   }
 
+  showErrorMessage(): void {
+    if (this.error) {
+      return;
+    }
+    this.error = true;
+    setTimeout(() => this.error = false, 6000);
+  }
   getFileUploaded(files: FileList,id) {
 
     // this.fileObject = {
@@ -113,12 +143,38 @@ export class ExportComponent implements OnInit {
     // }
   // console.log(this.fileList);
   }
-
+  opensnack(text) {
+    this.statusMessage = text;
+    this.showAlert();
+    if (this.importStatusMessageCount < this.importStatus.length - 1){
+      this.importStatusMessageCount = this.importStatusMessageCount + 1;
+    } else {
+      this.importStatusMessageCount = this.importStatus.length - 1;
+    }
+  }
   submitUploadedFiles() {
-    var filearray =[this.file1ToUpload,this.file2ToUpload,this.file3ToUpload,this.file4ToUpload,this.file5ToUpload,this.file6ToUpload]
-    this.uploadFileService.SubmitFiles(filearray).subscribe(res => {
-           console.log('success');
-       });
+    let source = interval(10000);
+    var filearray = [this.file1ToUpload, this.file2ToUpload, this.file3ToUpload, this.file4ToUpload, this.file5ToUpload, this.file6ToUpload]
+    if (this.file1ToUpload === null || this.file2ToUpload === null || this.file3ToUpload === null || this.file4ToUpload === null || this.file5ToUpload === null || this.file6ToUpload === null){
+
+      this.statusMessage = 'Please select all six files to proceed with import.';
+      this.showAlert();
+    } else {
+      this.subscription = source.subscribe(val => this.opensnack(this.importStatus[this.importStatusMessageCount]));
+      this.importDataRequested = true;
+      this.uploadFileService.SubmitFiles(filearray).subscribe(res => {
+        this.subscription.unsubscribe();
+        this.statusMessage = 'Your import process is successfully complete.';
+        this.showSuccessAlert();
+      //  console.log('success');
+        //Your import process is successfully complete
+      }, err => {
+        this.statusMessage = 'Something went wrong, please try again';
+        this.importDataRequested = false;
+        this.showErrorMessage();
+        this.subscription.unsubscribe();
+      });
+    }
    // this.fileMissing = true;
     // if (this.fileList.length == 6) {
     //   this.uploadFileService.SubmitFiles(this.fileList, this.utilsContext).subscribe(res => {

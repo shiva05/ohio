@@ -21,7 +21,8 @@
   .fileuploads .item .category {
     width: 250px;
     float: left;
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 600;
     margin-top: 6px;
     margin-right: 30px;
   }
@@ -38,3 +39,27 @@
       .fileuploads .item .upload label.error {
           border:1px solid red;
       }
+.ohio-upload-single-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 261px;
+}
+.alert {
+  position: fixed;
+  top: 120px;
+  right: calc(50% - 250px);
+  border-radius: 0.25rem;
+  padding: 2rem;
+  box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease-in-out;
+  opacity: 0;
+  z-index: 99999;
+  width: 500px;
+  text-align:center;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(1.25rem);
+}
