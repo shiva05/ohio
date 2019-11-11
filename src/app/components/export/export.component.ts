@@ -159,8 +159,7 @@ export class ExportComponent implements OnInit {
   submitUploadedFiles() {
     let source = interval(10000);
     var filearray = [this.file1ToUpload, this.file2ToUpload, this.file3ToUpload, this.file4ToUpload, this.file5ToUpload, this.file6ToUpload]
-    if (this.file1ToUpload === null || this.file2ToUpload === null || this.file3ToUpload === null || this.file4ToUpload === null || this.file5ToUpload === null || this.file6ToUpload === null) {
-
+    if (this.ELA_uploadedFileName === 'Choose File' || this.Math_uploadedFileName === 'Choose File' || this.Social_uploadedFileName === 'Choose File' || this.Science_uploadedFileName === 'Choose File' || this.Course_uploadedFileName === 'Choose File' ||  this.General_uploadedFileName === 'Choose File') {
       this.statusMessage = 'Please select all six files to proceed with import.';
       this.showAlert();
     } else {
