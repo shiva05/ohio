@@ -251,6 +251,7 @@ export class CourseSearchFiltersComponent implements OnInit {
     this.selectedCareerPath = [];
     this.selectedAcadamicSubjects = [];
     this.selectedCourses = [];
+    this.careerPathDropdown = [];
     this.coursesDropdown = [];
     this.selectedAcademicItems = [];
     this.selectedKeyword = '';
