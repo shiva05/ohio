@@ -2,9 +2,9 @@ import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { _ } from 'underscore';
 import { UploadFileService } from '../../services/upload-file.service';
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs/internal/operators/take';
 import { AppState } from './../../app.state';
 import { interval, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-export',
@@ -27,39 +27,41 @@ export class ExportComponent implements OnInit {
     'DataFileName': '',
     'File': []
   };
+
   ELA_uploadedFileName: any = 'Choose File';
   Math_uploadedFileName: any = 'Choose File';
   Social_uploadedFileName: any = 'Choose File';
   Science_uploadedFileName: any = 'Choose File';
   Course_uploadedFileName: any = 'Choose File';
   General_uploadedFileName: any = 'Choose File';
-  utilsContext: any;
+
   importDataRequested = false;
   isVisible = false;
   subscription: Subscription;
-  importStatus: any = ['Please wait', 'We are processign the import', 'Please wait for some more time', 'Please wait for some more time, Thank you for your patience.']
+  importStatus: any = ['Please wait', 'We are processing the import', 'Please wait for some more time', 'Please wait for some more time, Thank you for your patience.']
   importStatusMessageCount = 0;
   fileList: any = [];
   statusMessage: string;
   success: boolean;
   error: boolean;
-  constructor(public uploadFileService: UploadFileService, private store: Store<AppState>) {
+  isPublic = false;
+
+  constructor(public uploadFileService: UploadFileService, private store: Store<AppState>, private route: Router) {
   }
 
   @Output() onPageSelect = new EventEmitter<any>();
 
   ngOnInit() {
     this.fileList = [];
-    // this.dropdownSettings = {
-    //  singleSelection: false,
-    //  idField: 'item_id', textField: 'item_text',
-    //  selectAllText: 'Select All',
-    //  unSelectAllText: 'Unselect All',
-    //  itemsShowLimit: 1,
-    //  allowSearchFilter: true
-    // };
-    this.store.select('utilsState').subscribe((utilityState) => {
-      this.utilsContext = utilityState.utilityContext;
+
+    this.store.select('authState').subscribe((authState) => {
+      if (authState != null) {
+        this.isPublic = authState.isPublic;
+
+        if (this.isPublic) {
+          this.route.navigate(['/alignmentsearch']);
+        }
+      }
     });
   }
 
@@ -88,18 +90,6 @@ export class ExportComponent implements OnInit {
   }
 
   getFileUploaded(files: FileList, id) {
-
-    // this.fileObject = {
-    //   'DataFileTypeId': 0,
-    //   'DataFileName': '',
-    //   'File': []
-    // };
-    // var duplicate = [];
-    // duplicate = _.where(this.fileList, { DataFileTypeId: id });
-    // this.fileObject.DataFileTypeId = id;
-    // this.fileObject.DataFileName = event.target.files[0].name;
-    // this.fileObject.File = event.target.files[0];
-
     switch (id) {
       case 1184:
         this.file1ToUpload = files.item(0);
@@ -132,18 +122,6 @@ export class ExportComponent implements OnInit {
         this.General_uploadedFileName = this.file6ToUpload.name;
         break;
     }
-
-    // if (duplicate.length > 0) {
-    //   this.fileList.forEach(element => {
-    //     if (element.DataFileTypeId == id) {
-    //       element.DataFileName = event.target.files[0].name;
-    //       element.File = event.target.files[0];
-    //     }
-    //   });
-    // } else {
-    //   this.fileList.push(this.fileObject);
-    // }
-    // console.log(this.fileList);
   }
 
   opensnack(text) {
@@ -159,7 +137,7 @@ export class ExportComponent implements OnInit {
   submitUploadedFiles() {
     let source = interval(10000);
     var filearray = [this.file1ToUpload, this.file2ToUpload, this.file3ToUpload, this.file4ToUpload, this.file5ToUpload, this.file6ToUpload]
-    if (this.ELA_uploadedFileName === 'Choose File' || this.Math_uploadedFileName === 'Choose File' || this.Social_uploadedFileName === 'Choose File' || this.Science_uploadedFileName === 'Choose File' || this.Course_uploadedFileName === 'Choose File' ||  this.General_uploadedFileName === 'Choose File') {
+    if (this.ELA_uploadedFileName === 'Choose File' || this.Math_uploadedFileName === 'Choose File' || this.Social_uploadedFileName === 'Choose File' || this.Science_uploadedFileName === 'Choose File' || this.Course_uploadedFileName === 'Choose File' || this.General_uploadedFileName === 'Choose File') {
       this.statusMessage = 'Please select all six files to proceed with import.';
       this.showAlert();
     } else {
@@ -169,6 +147,7 @@ export class ExportComponent implements OnInit {
         this.subscription.unsubscribe();
         this.statusMessage = 'Your import process is successfully complete.';
         this.showSuccessAlert();
+        this.clearSelectedFiles();
       }, err => {
         this.statusMessage = 'Something went wrong, please try again';
         this.importDataRequested = false;
@@ -176,13 +155,6 @@ export class ExportComponent implements OnInit {
         this.subscription.unsubscribe();
       });
     }
-    // this.fileMissing = true;
-    // if (this.fileList.length == 6) {
-    //   this.uploadFileService.SubmitFiles(this.fileList, this.utilsContext).subscribe(res => {
-    //     console.log('success');
-    //   });
-    // }
-    // console.log('submited');
   }
 
   clearSelectedFiles() {
