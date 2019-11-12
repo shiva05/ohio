@@ -1,15 +1,5 @@
 <div class="utilityActive" [style.width]="hasUtils() ? '55px': '0px'">
-  <div class="hoverhand"><span (click)="utilNav('Documents')"><i class="far fa-file-alt fa-2x" title="Documents"></i>
+  <div class="hoverhand"><span (click)="utilNav('Documents')">
+      <i class="far fa-file-alt fa-2x" title="Documents"></i>
     </span><br>{{docsCount}}</div>
-  <!-- <div *ngIf="isUtil('contacts')"><span (click)="utilNav('contacts')"><i class="far fa-address-book fa-2x"></i> </span><br></div>
-  <div *ngIf="isUtil('Flags')"><span (click)="utilNav('Flags')"><i class="far fa-flag fa-2x"></i> </span><br>{{flagCount}}</div>
-  <div *ngIf="isUtil('history')"><span (click)="utilNav('history')"><i class="fas fa-heading fa-2x"></i> </span></div> -->
-  <!-- <div *ngIf="isUtil('Comments')">
-    <a [clickAndEnter]="utilNav.bind(this)" [clickEnterArgs]="['Comments']" href="javascript:void(0)"><i class="fas fa-comment fa-2x"></i></a>
-    <br>
-    {{commentsCount}}
-  </div> -->
-  <!-- New loader animation for utility nav -->
-  <!-- <app-loader-utility-nav></app-loader-utility-nav> -->
 </div>
-
