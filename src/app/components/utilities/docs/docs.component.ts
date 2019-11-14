@@ -88,7 +88,6 @@ export class DocsComponent implements OnInit {
   }
 
   deleteDocs(docKeys) {
-    // console.log('doc keys', docKeys);
     this.doDeleteDocs.emit(docKeys);
   }
 
@@ -121,8 +120,8 @@ export class DocsComponent implements OnInit {
       // IE - Do not show the preview
       this.docsService.fetchDocFileByUrl(this.utilsContext, doc.docUrl).subscribe((file: Blob) => {
         this.docResponseType = file.type;
-         const docBlob = new Blob([file], { type:   'application/pdf'  });
-         window.navigator.msSaveOrOpenBlob(docBlob, doc.docFileName+'.pdf');
+        const docBlob = new Blob([file], { type: 'application/pdf' });
+        window.navigator.msSaveOrOpenBlob(docBlob, doc.docFileName + '.pdf');
       });
     } else {
       // Other Browsers
@@ -130,7 +129,7 @@ export class DocsComponent implements OnInit {
       // setTimeout(() => {
       //   this.showDocPanel(DocsPanels.preview, true);
       // }, 500);
-      this.docsService.fetchDocFileByUrl(this.utilsContext,  doc.docUrl).subscribe((file: Blob) => {
+      this.docsService.fetchDocFileByUrl(this.utilsContext, doc.docUrl).subscribe((file: Blob) => {
         let docName = '';
 
         if (this.docName == null || this.docName === '') {

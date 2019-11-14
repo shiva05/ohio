@@ -7,7 +7,7 @@
       &nbsp;
       Delete Document(s)
     </button>
-  </div>  
+  </div>
   <div *ngIf="displayDeleteConfirm">
     <div class="ohio-alert alert alert-warning alert-dismissible delete-doc-message" role="alert">
       Are you sure you would like to delete {{ docDeleteCount }} document(s) from the list?
@@ -53,13 +53,14 @@
               <td><button class="ohio-button x-small" (click)="previewDoc(doc)" title="Description, Document history"><i
                     class="fas fa-download"></i></button></td>
               <td>{{doc.docUploadDate}}</td>
-              <td><button class="ohio-button x-small"
-                  (click)="openHistory(i,doc.documentRelationInstanceKey)"
+              <td><button class="ohio-button x-small" (click)="openHistory(i,doc.documentRelationInstanceKey)"
                   title="Description, Document history"><i class="fas fa-info"></i></button></td>
               <!-- <td >{{doc.status}}</td> -->
               <td>
-                <div *ngIf="doc.permission?.delete" class="ohio-checkbox"><input type="checkbox"
-                    class="ohio-checkbox-el" [(ngModel)]="doc.todelete"></div>
+                <div *ngIf="doc.permission?.delete" class="ohio-checkbox">
+                  <input type="checkbox" class="ohio-checkbox-el" (change)="confirmDeleteDocs()"
+                    [(ngModel)]="doc.todelete">
+                </div>
               </td>
             </tr>
             <tr *ngIf="showHistory(i)">

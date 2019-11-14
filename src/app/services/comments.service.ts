@@ -56,7 +56,6 @@ export class CommentsService {
     const uri = environment.COMMENT_COMMENTS.replace('{subjectKey}', subject.subjectKey.toString());
     const comment = subject.comments[0];
     this.setOwner(comment, context);
-    console.log("ADD COMMENT API CALL: ", comment);
     return this.http.post(uri, Object.assign(comment, this.getCommonParameters(context)));
   }
 
@@ -64,7 +63,6 @@ export class CommentsService {
     const uri = environment.COMMENT_COMMENTS.replace('{subjectKey}', subject.subjectKey.toString());
     const comment = subject.comments[0];
     this.setOwner(comment, context);
-    console.log("UDPATE COMMENT API CALL: ", comment);
     return this.http.put(uri, Object.assign(comment, this.getCommonParameters(context)));
   }
 }

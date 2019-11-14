@@ -43,7 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
   mainHeight = 1400;
   currentUtil: Utilities = Utilities.none;
   subscription: Subscription;
-  constructor( private http: HttpClient, public router: Router, private store: Store<AppState>, public loaderService: LoaderService, private translate: TranslateService, private authService: AuthService, private interopService: InteropService, private authOrchestration: AuthOrchestration) {
+  constructor(private http: HttpClient, public router: Router, private store: Store<AppState>, public loaderService: LoaderService, private translate: TranslateService, private authService: AuthService, private interopService: InteropService, private authOrchestration: AuthOrchestration) {
     translate.setDefaultLang('en');
     window.onresize = () => {
       this.utilNav(this.currentUtil);
@@ -53,12 +53,12 @@ export class AppComponent implements OnInit, OnDestroy {
       if (event instanceof NavigationStart) {
         browserRefresh = !router.navigated;
       }
-  });
-   }
+    });
+  }
 
   ngOnInit() {
 
-     // this is to fix the cache issue
+    // this is to fix the cache issue
     // localStorage.removeItem(environment.name + '_at');
     // localStorage.removeItem(environment.name + '_as');
 
@@ -165,7 +165,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   showPublicLogin() {
-    console.log('show public login');
     this.store.dispatch(new AuthActions.ResetAuth({}));
     this.store.dispatch(new ClaimsActions.ResetClaims({}));
     window.location.href = `${window.location.protocol}//${window.location.host}`;

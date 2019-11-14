@@ -37,11 +37,9 @@ export class AuthService {
 
         if (expiryDate < currentDt) {
           expired = true;
-          console.log('Token expired; Get new Token');
         }
       }
     }
-
     return expired;
   }
 }

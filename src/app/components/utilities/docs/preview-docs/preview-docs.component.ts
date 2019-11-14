@@ -30,8 +30,8 @@ export class PreviewDocsComponent implements OnInit, AfterViewInit {
   objUrl: any;
   embedUrl: any;
 
-  docStatusUpdate: DocumentStatusUpdate = { currentStatus: '', documentStatuses: [], authorizedToUpdate: false};
-  updateDocStatusModel: UpdateDocumentStatus = {documentRelationInstanceKey: null, documentStatusKey: null};
+  docStatusUpdate: DocumentStatusUpdate = { currentStatus: '', documentStatuses: [], authorizedToUpdate: false };
+  updateDocStatusModel: UpdateDocumentStatus = { documentRelationInstanceKey: null, documentStatusKey: null };
   constructor(private docService: DocsService, private store: Store<AppState>) { }
 
   ngOnInit() {
@@ -52,8 +52,8 @@ export class PreviewDocsComponent implements OnInit, AfterViewInit {
         const docBlob = new Blob([file], { type: this.docResponseType });
         const fileUrl = window.URL.createObjectURL(docBlob);
 
-         this.objUrl = fileUrl;
-         this.embedUrl = fileUrl;
+        this.objUrl = fileUrl;
+        this.embedUrl = fileUrl;
 
         // Get document statuses
         //this.fetchDocStatuses();
@@ -66,7 +66,6 @@ export class PreviewDocsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // console.log('preview-docs.ngAfterViewInit()');
   }
 
   onDownloadDoc() {
@@ -107,8 +106,6 @@ export class PreviewDocsComponent implements OnInit, AfterViewInit {
   }
 
   updateDocumentStatus(documentStatusKey: number) {
-    console.log(documentStatusKey);
-    console.log(this.docRelationInstanceId);
     this.updateDocStatusModel.documentStatusKey = documentStatusKey;
     this.updateDocStatusModel.documentRelationInstanceKey = this.docRelationInstanceId;
 
@@ -125,10 +122,10 @@ export class PreviewDocsComponent implements OnInit, AfterViewInit {
       this.docStatusUpdate.documentStatuses = docStatusUpdate.documentStatuses.filter(status => status.documentStatusSelected !== true);
       this.docStatusUpdate.authorizedToUpdate = docStatusUpdate.authorizedToUpdate;
       this.docStatusUpdate.currentStatus
-              = docStatusUpdate.documentStatuses.find(status => status.documentStatusSelected === true).documentStatusName;
+        = docStatusUpdate.documentStatuses.find(status => status.documentStatusSelected === true).documentStatusName;
     },
-    (error: HttpErrorResponse) =>
-      console.log(`Error Status: ${JSON.stringify(error.status)};
+      (error: HttpErrorResponse) =>
+        console.log(`Error Status: ${JSON.stringify(error.status)};
     Error Status Text: ${JSON.stringify(error.statusText)};
     Error Msg: ${JSON.stringify(error.message)};`));
   }
