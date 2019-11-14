@@ -62,7 +62,6 @@ export class AlignmentSearchReportListComponent implements OnInit {
             });
           },
           err => {
-            console.log('Report FAILED');
             this.localReportErr = true;
             this.reportFail.emit();
           });

@@ -53,7 +53,6 @@ export class UtilitynavComponent implements OnInit {
   }
 
   hasUtils() {
-    console.log(this.doUtilNav);
     if (this.utilities !== null) {
       return (this.utilities && this.utilities.length >= 0);
     }

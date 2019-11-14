@@ -20,7 +20,6 @@ export class InteropService {
 
     // target - a window object, message anything
     publish(message: any) {
-        console.log('IN MENU SPA InteropService, PUBLISHING MSG TO CHILD SPA', message, new Date().toLocaleString());
         if (this.iframe && this.iframe.contentWindow) {
             this.iframe.contentWindow.postMessage(JSON.stringify(message), '*');
         }

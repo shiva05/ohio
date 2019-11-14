@@ -79,8 +79,6 @@ export class UtilityComponent implements OnInit {
     const utilsContext = this.store.select(state => state.utilsState.utilityContext);
 
     utilsContext.subscribe((ctx) => {
-      console.log('UtilityComponent ngOnInit() state.utilsState.utilityContext', ctx);
-
       this.context = ctx;
 
       if (ctx !== null && ctx.assetTemplateKey > 0 && ctx.detailKey > 0
@@ -112,10 +110,8 @@ export class UtilityComponent implements OnInit {
         this.showComments = false;
         this.showHistory = false;
         this.showContacts = false;
-        console.log('HideUtility: Utility Options Subscribe to UtilityState: ' + utilityState.activeUtility);
       } else {
         this.hideUtilityDivs = false;
-        console.log('Utility Options Subscribe to UtilityState: ' + utilityState.activeUtility);
       }
     });
   }

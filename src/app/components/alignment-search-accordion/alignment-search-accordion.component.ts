@@ -236,7 +236,6 @@ export class AlignmentSearchAccordionComponent implements OnInit {
                     }
                   });
                 }
-                //  console.log(this.subjectToCareerData);
                 this.noResultFound = false;
                 this.formatAlignmentSearchData();
                 if (this.searchResultData.Subject.length === 1) {
