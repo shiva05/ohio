@@ -144,20 +144,24 @@ export class FilterSummaryComponent implements OnInit {
                                         level1.push(element.LevelValue1);
                                     });
                                 }
-
                                 let level2: any = [];
                                 let level2Name = element.Level[1].LevelName;
-                                if (element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length > 0) {
+                                if (element.Level.length >= 2) {
+                                  if (element.Level[1] && element.Level[1].SelectedItems && element.Level[1].SelectedItems.length > 0) {
                                     element.Level[1].SelectedItems.forEach(element => {
-                                        level2.push(element.LevelValue1);
+                                      level2.push(element.LevelValue1);
                                     });
+                                  }
                                 }
                                 let level3: any = [];
-                                let level3Name = element.Level[2].LevelName;
-                                if (element.Level[2] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length > 0) {
+                                let level3Name = [];
+                                if (element.Level.length > 2) {                                 
+                                  level3Name = element.Level[2].LevelName;
+                                  if (element.Level[2] && element.Level[2].SelectedItems && element.Level[2].SelectedItems.length > 0) {
                                     element.Level[2].SelectedItems.forEach(element => {
-                                        level3.push(element.LevelValue1);
+                                      level3.push(element.LevelValue1);
                                     });
+                                  }
                                 }
                                 let subject = {
                                     SubjectId: element.SubjectId,
